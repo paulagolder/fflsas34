@@ -1,14 +1,14 @@
 <?php
 // src/Controller/SearchController.php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use App\Service\MyLibrary;
+use AppBundle\Service\MyLibrary;
 
 
 class SearchController extends Controller
@@ -49,7 +49,7 @@ class SearchController extends Controller
         $pfield = "%".$pfield."%";
     
         $i=0;
-        $people = $this->getDoctrine()->getRepository("App:Person")->findSearch($pfield);
+        $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findSearch($pfield);
         $results = array();
         foreach($people as $key => $person)
         {
@@ -58,7 +58,7 @@ class SearchController extends Controller
           $results['people'][$pid]['link'] ="/".$this->lang."/person/".$pid;
         }
         
-        $contents = $this->getDoctrine()->getRepository("App:Content")->findSearch($pfield);
+        $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
         $results = array();
         foreach($contents as $key => $content)
         {
@@ -67,7 +67,7 @@ class SearchController extends Controller
           $results['content'][$cid]['link'] ="/".$this->lang."/contentid/".$cid;
         }
         
-         $ref_ar = $this->getDoctrine()->getRepository("App:Text")->findTexts($pfield);
+         $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findTexts($pfield);
          foreach($ref_ar as $key => $oref_ar)
          {
            $obtype = $key;
@@ -78,7 +78,7 @@ class SearchController extends Controller
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
-                      $person = $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
+                      $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
                       $results['people'][$pid]['label'] = $person->getFullname();
                       $results['people'][$pid]['link'] ="/".$this->lang."/person/".$pid;
                  }
@@ -87,7 +87,7 @@ class SearchController extends Controller
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
-                      $event = $this->getDoctrine()->getRepository("App:Event")->findOne($pid);
+                      $event = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($pid);
                       $results['events'][$pid]['label'] = $event->getLabel();
                       $results['events'][$pid]['link'] ="/".$this->lang."/event/".$pid;
                  }
@@ -96,7 +96,7 @@ class SearchController extends Controller
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
-                      $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('image',$pid);
+                      $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$pid);
                       $results['images'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang);
                        $results['images'][$pid]['link'] ="/".$this->lang."/image/".$pid;
                  }
@@ -105,7 +105,7 @@ class SearchController extends Controller
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
-                      $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('content',$pid);
+                      $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$pid);
                       $results['content'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang);
                       $results['content'][$pid]['link'] ="/".$this->lang."/contentid/".$pid;
                  }
@@ -114,7 +114,7 @@ class SearchController extends Controller
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
-                      $location =   $this->getDoctrine()->getRepository("App:Location")->findOne($pid);
+                      $location =   $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($pid);
                       if($location != null)
                       {
                       $results['locations'][$pid]['label'] = $location->getName();

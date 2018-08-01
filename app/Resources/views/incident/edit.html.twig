@@ -1,0 +1,74 @@
+{# templates/registration/register.html.twig #}
+
+
+{% import 'macros.twig' as m %}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('incidents_p/editone.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block js %}
+ {{ parent() }}
+  <script type="text/javascript">
+  
+     function seltype(eid)
+     {
+       document.getElementById('incident_form_itypeid').value = eid;
+     }
+     function clicklocation(lid)
+     {
+      document.getElementById('incident_form_locid').value = lid;
+     }
+     
+   </script>
+{%endblock%}
+
+
+{% block middle %}
+
+<div id="editincident"  >
+<div class="heading">
+ <div class="label" > {{'edit.incident' |trans }} </div>
+ <div class="title" >{{personname}} : {{eventlabel}} </div>
+ <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+</div>
+
+<div  class="adminform" >
+{{ form_start(form) }}
+
+    {{ form_row(form.personid)}}
+    {{ form_row(form.eventid) }}
+      {{ form_row(form.itypeid) }}
+     
+      <div class="itypelist" >
+        <select id="itypelist" onchange="seltype(this.value)" >
+         {% for itype in itypes%} 
+           {% if (itype.itypeid ) == itypeid %}
+             <option value = "{{itype.itypeid}}" selected >{{itype.label}}</option>
+           {% else %}
+             <option value = "{{itype.itypeid}}">{{itype.label}}</option>
+         {% endif %}
+     {% endfor %}
+    </select>
+    </div>
+    {{ form_row(form.namerecorded)   }}
+    {{ form_row(form.rank) }}
+      {{ form_row(form.locid) }}
+    {{ form_row(form.role) }}
+    {{ form_row(form.sdate) }}
+    {{ form_row(form.edate) }}
+     {{ form_row(form.sequence) }}
+     
+    <button type="submit">Register!</button>
+{{ form_end(form) }}
+</div>
+</div>
+{% endblock %}
+
+
+{% block right %}
+   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+{% endblock%}
+

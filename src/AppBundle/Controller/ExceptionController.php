@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;

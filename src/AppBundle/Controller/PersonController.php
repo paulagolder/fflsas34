@@ -1,6 +1,6 @@
 <?php
 // src/Controller/PersonController.php
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,13 +15,13 @@ use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
 
 use App\Forms\PersonFormType;
-use App\Entity\Person;
-use App\Entity\Location;
-use App\Entity\Event;
-use App\Entity\Text;
-use App\Service\MyLibrary;
-use App\MyClasses\eventTree;
-use App\MyClasses\eventTreeNode;
+use AppBundle\Entity\Person;
+use AppBundle\Entity\Location;
+use AppBundle\Entity\Event;
+use AppBundle\Entity\Text;
+use AppBundle\Service\MyLibrary;
+use AppBundle\MyClasses\eventTree;
+use AppBundle\MyClasses\eventTreeNode;
 
 
 class PersonController extends Controller
@@ -56,7 +56,7 @@ class PersonController extends Controller
     public function Showall()
     {
        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $people = $this->getDoctrine()->getRepository("App:Person")->findAll();
+        $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
         if (!$people) {
             return $this->render('person/showall.html.twig', [ 'message' =>  'People not Found',]);
         }        
@@ -77,7 +77,7 @@ class PersonController extends Controller
     public function Showsidebar()
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $people = $this->getDoctrine()->getRepository("App:Person")->findAll();
+        $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
         
         if (!$people) {
             return $this->render('person/showsidebar.html.twig', [ 'message' =>  'People not Found',]);
@@ -99,25 +99,25 @@ class PersonController extends Controller
     {
         $lib =  $this->mylib ;
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $person = $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
+        $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
         $person->link = "/".$this->lang."/person/".$person->getPersonid();
         if (!$person) 
         {
             return $this->render('person/showone.html.twig', [ 'lang'=>$this->lang,  'message' =>  'Person '.$pid.' not Found',]);
         }
         
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("person",$pid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",$pid);
         $textcomment = $lib->selectText($text_ar,"comment",$this->lang);
        
         
-        $participations = $this->getDoctrine()->getRepository("App:Participant")->findParticipations($pid);
+        $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipations($pid);
         $pevents = array();
         
         $i=0;
         foreach($participations as $participation)
         {
            $ppid = $participation->getEventid();
-           $pevents[$i] = $this->getDoctrine()->getRepository("App:Event")->findOne($ppid);
+           $pevents[$i] = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ppid);
             $parents= $pevents[$i]->ancestors;
             if(count($parents))
             {
@@ -125,41 +125,41 @@ class PersonController extends Controller
                for($ip=0; $ip<$l;$ip++)
                {
                  $psid = $parents[$ip]->getEventid();
-                 $ptext_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$psid);
+                 $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$psid);
                  //echo("=+=+=".$this->lang);
                  $parents[$ip]->title= $lib->selectText( $ptext_ar,"title",$this->lang);
                  $parents[$ip]->link = "/".$this->lang."/event/".$psid;
                }
             $pevents[$i]->ancestors =$parents;
           }
-           $etexts_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$ppid);
+           $etexts_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$ppid);
            $pevents[$i]->title = $this->mylib->selectText($etexts_ar,'title',$this->lang);
           if(   $pevents[$i]->title ==null) $pevents[$i]->title = "pas trouver";
             $pevents[$i]->link = "/".$this->lang."/event/".$ppid;
            $i++;
         }
-        $topevent =  $this->getDoctrine()->getRepository("App:Event")->findTop();
+        $topevent =  $this->getDoctrine()->getRepository("AppBundle:Event")->findTop();
         $topevent->title = " TOP ".  $topevent->getLabel();
         $topevent->link = "/".$this->lang."/event/".$topevent->getEventid();
         $evt = new eventTree($topevent);
         $evt->buildTree($pevents);
-        $ref_ar = $this->getDoctrine()->getRepository("App:Imageref")->findGroup("person",$pid);
+        $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("person",$pid);
         $images= array();
         $i=0;
         foreach($ref_ar as $key => $ref)
         {
            $imageid = $ref_ar[$key]['imageid'];
-           $image = $this->getDoctrine()->getRepository("App:Image")->findOne($imageid);
+           $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
            if($image)
            {
-           $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("image",$imageid);
+           $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
            $images[$i]['fullpath']= $image->fullpath;
            $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
            $images[$i]['link'] = "/".$this->lang."/image/".$imageid;
            $i++;
            }
         }
-        $incidents =  $this->getDoctrine()->getRepository("App:Incident")->seekByPerson($pid);
+        $incidents =  $this->getDoctrine()->getRepository("AppBundle:Incident")->seekByPerson($pid);
         foreach( $incidents as $key=>$incident )
         {
            $incidents[$key]['label'] = $this->formatIncident($incident);
@@ -167,7 +167,7 @@ class PersonController extends Controller
         }
         $mess = '';
         
-        $refs = $this->getDoctrine()->getRepository("App:Linkref")->findGroup("person",$pid);
+        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
         
         return $this->render('person/showone.html.twig', 
                    [ 'lang' => $this->lang,
@@ -188,7 +188,7 @@ class PersonController extends Controller
       {
          $at = $this->translator->trans('at.place');
          $lid = $incident['locid'];
-         $location =   $this->getDoctrine()->getRepository("App:Location")->findOne($lid);
+         $location =   $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($lid);
          $text .= " $at ". $location->getName();
       }
       elseif( $incident['location']!= "")

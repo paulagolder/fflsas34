@@ -1,6 +1,6 @@
 <?php
 // src/Controller/AdminPersonController.php
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,12 +13,12 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 use App\Forms\PersonForm;
-use App\Entity\person;
-use App\Entity\Imageref;
-use App\Entity\Linkref;
-use App\Entity\event;
-use App\Entity\Participant;
-use App\Service\MyLibrary;
+use AppBundle\Entity\person;
+use AppBundle\Entity\Imageref;
+use AppBundle\Entity\Linkref;
+use AppBundle\Entity\event;
+use AppBundle\Entity\Participant;
+use AppBundle\Service\MyLibrary;
 use App\MyClasses\eventTree;
 use App\MyClasses\eventTreeNode;
 
@@ -51,22 +51,22 @@ class AdminPersonController extends Controller
     {
         $lib =  $this->mylib ;
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $person = $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
+        $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
         
         if (!$person) 
         {
             return $this->render('person/showone.html.twig', [ 'lang'=>$this->lang,  'message' =>  'Person '.$pid.' not Found',]);
         }
         $person->link = "/".$this->lang."/person/".$person->getPersonid();
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("person",$pid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",$pid);
         $textcomment = $lib->selectText($text_ar,"comment",$this->lang);
         
         
-        $participations = $this->getDoctrine()->getRepository("App:Participant")->findParticipations($pid);
+        $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipations($pid);
         
         
         $i=0;
-        $incidents =  $this->getDoctrine()->getRepository("App:Incident")->seekByPerson($pid);
+        $incidents =  $this->getDoctrine()->getRepository("AppBundle:Incident")->seekByPerson($pid);
         $participation_ar = array();
         foreach($participations as $participation)
         {
@@ -93,7 +93,7 @@ class AdminPersonController extends Controller
             $participation_ar[$i]['eventid']= $participation->getEventid();
              $participation_ar[$i]['link']= "/admin/participant/".$participation->getparticipationid();
             $label ="";
-            $pevents = $this->getDoctrine()->getRepository("App:Event")->findOne($ppid);
+            $pevents = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ppid);
             
             $parents= $pevents->ancestors;
             if(count($parents))
@@ -102,28 +102,28 @@ class AdminPersonController extends Controller
                 for($ip=0; $ip<$l && $ip< 1;$ip++)
                 {
                     $psid = $parents[$ip]->getEventid();
-                    $ptext_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$psid);
+                    $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$psid);
                     $label .= $lib->selectText( $ptext_ar,"title",$this->lang).":";
                 }
                 
             }
-            $etexts_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$ppid);
+            $etexts_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$ppid);
             $label = $this->mylib->selectText($etexts_ar,'title',$this->lang)." : ".$label;
             $participation_ar[$i]['label'] =$label;
             $i++;
         }
         
         
-        $ref_ar = $this->getDoctrine()->getRepository("App:Imageref")->findGroup("person",$pid);
+        $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("person",$pid);
         $images= array();
         $i=0;
         foreach($ref_ar as $key => $ref)
         {
             $imageid = $ref_ar[$key]['imageid'];
-            $image = $this->getDoctrine()->getRepository("App:Image")->findOne($imageid);
+            $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
             if($image )
             {
-            $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("image",$imageid);
+            $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
             $images[$i]['imageid']= $imageid;
             $images[$i]['fullpath']= $image->getFullpath();
             $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
@@ -134,7 +134,7 @@ class AdminPersonController extends Controller
         
         $mess = '';
         
-        $refs = $this->getDoctrine()->getRepository("App:Linkref")->findGroup("person",$pid);
+        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
         #$session = $this->requestStack->getCurrentRequest()->getSession();
        # $imagelist = $session->get('imageList');
         
@@ -213,7 +213,7 @@ class AdminPersonController extends Controller
     
     public function addbookmark($pid)
     {
-        $person =  $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
+        $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $plist = $session->get('personList');
         if($plist == null)
@@ -260,7 +260,7 @@ class AdminPersonController extends Controller
     
     public function removeimage($pid,$iid)
     {
-        $this->getDoctrine()->getRepository("App:Imageref")->delete('person',$pid,$iid);
+        $this->getDoctrine()->getRepository("AppBundle:Imageref")->delete('person',$pid,$iid);
         return $this->redirect("/admin/person/".$pid);
     }
     
@@ -270,7 +270,7 @@ class AdminPersonController extends Controller
     
     public function addevent($pid,$eid)
     {
-        $participations =  $this->getDoctrine()->getRepository("App:Participant")->findParticipationsbyEntityPerson($eid, $pid);
+        $participations =  $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipationsbyEntityPerson($eid, $pid);
         if(count($participations)<1)
         {
         $part = new Participants();
@@ -288,7 +288,7 @@ class AdminPersonController extends Controller
     public function deleteAction($pid,$partid)
     {
         
-        $this->getDoctrine()->getRepository("App:Participant")->deleteOne($partid);
+        $this->getDoctrine()->getRepository("AppBundle:Participant")->deleteOne($partid);
         return $this->redirect("/admin/person/".$pid);
     }
 }

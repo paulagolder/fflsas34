@@ -1,0 +1,13 @@
+
+
+
+div#editcontent div.maintext
+{
+    width: 500px;
+    height: 100px;
+    background-color: #eee;
+    overflow: scroll;
+    
+}
+
+div.maintext

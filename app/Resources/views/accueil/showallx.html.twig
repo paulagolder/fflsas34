@@ -1,0 +1,22 @@
+{# templates/accueil/showall.html.twig #}
+
+   {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  
+   <link href="{{ asset('css/accueil_css/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block middle %}
+  <div class="accueil">
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+   
+    <h1>{% trans %}bienvenue.page{% endtrans %}</h1> 
+    
+
+
+  </div>
+{% endblock %}

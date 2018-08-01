@@ -1,0 +1,139 @@
+{# templates/person/showone.html.twig #}
+
+
+{% import 'macros.twig' as m %}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   <link href="{{ asset('person_css/editone.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block js %}
+ {{ parent() }}
+ <script>
+  
+     function clickevent(eid)
+     {
+        window.location.href = '/admin/person/addevent/{{person.personid}}/'+eid;
+     }
+     function clickimage(iid)
+     {
+        window.location.href = '/admin/person/addimage/{{person.personid}}/'+iid;
+     }
+     function clickcontent(cid)
+     {
+        window.location.href = '/admin/person/addcontent/{{person.personid}}/'+cid;
+     }
+     
+   </script>
+{%endblock%}
+
+
+
+{% block middle %}
+<div id="editperson">
+    <div class="newperson" >
+        <div class="editbutton" ><a href = "/admin/person/detail/0" >{%trans%}new.person{% endtrans %}</a></div>
+    </div>
+    <div class="person" >
+        {% if message %}
+           <h1> {{message}}</h1>
+        {% endif %}
+        
+        {% if person is defined %}
+        {% if person %}
+          <div class="heading" >
+            <div class="label">  {{ 'person.a.editer' | trans }} : </div>
+            <div class="title">   {{ person.fullname}} </div>
+            <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {%trans%}edit.person{% endtrans %}</a></div>
+
+            <div class="returnbutton"> <a href = "{{returnlink}}" >{% trans %} retour {% endtrans%} </a></div>
+          </div>
+        {% endif %}
+            
+        
+            <div class="imagegroup" >
+            <div class="images">
+                {% for image in images %}
+                <div class="image">
+                    <div class="imageimage" ><a href="{{image.link}}" ><img src="{{image.fullpath}}" /></a></div>
+                <div class="imagelabel" >{{image.title}}</div>
+                    <div class="imagedelete deletebutton" ><a href="/admin/person/removeimage/{{person.personid}}/{{image.imageid}}">{%trans%}delete{%endtrans%}</a></div>
+                </div>
+                {% endfor %}
+                </div>
+            </div>
+        
+            
+            
+        <div class="refgroup" >
+        <div class="label"> {{'liens'|trans}}</div>
+         <div class="editbutton" ><a  href="/admin/linkref/editperson/{{person.personid}}">{%trans%}ref.edit{%endtrans%}</a></div>
+           {% for ref in refs %}
+            <div class="ref">
+               <div class="refref" ><a href="{{ref.link}}">{{ref.label}}</a></div>
+            </div>
+           {% endfor %}
+        </div>
+            
+        {% if text  %}
+           <div class="textpanel" >
+             <div class="label"> {{'texts'|trans}}</div>
+                
+                <div class="text" >
+                    {{ text | raw }}
+                </div>
+                <div class="edit editbutton">
+                   <a href = "/admin/text/person/{{person.personid}}"   > {%trans%}edit.text{% endtrans %}</a>
+                </div>
+          
+            </div>
+        {%else%}
+            <div  class="notext" >
+                <span class="label" > {% trans %} no.text {% endtrans %} </span>
+                <a href = "/admin/text/person/{{person.personid}}" class="editbutton"  > {%trans%}add.text{% endtrans %}</a>
+            </div>
+        {% endif %}
+            
+            
+         
+        {% if participants %}
+          <div class="participants" >
+          <div class="heading" > 
+             <div class= 'label'>
+                 {%trans%}participated.in.events{%endtrans%}
+              </div>
+              </div>
+                <div class="participantlist" >
+                {% for participant in participants %}
+                    <div class="participant" >
+                     <div > {{ participant.label}}</div>
+                      <div class="particiantedit editbutton" ><a href="{{participant.link}}">{%trans%}edit{%endtrans%}</a>
+                    </div>
+                    {% if(not participant.incidents )%}    
+                    <div class="particiantdelete deletebutton" ><a href="/admin/person/delete/{{person.personid}}/{{participant.id}}">{%trans%}delete{%endtrans%}</a>
+                    </div>
+                    {% endif%}
+                    </div>
+                    {% for incident in participant.incidents %}
+                       <div class="incident" >{{ incident.label}}</div>
+                    {% endfor %}
+                {% endfor %}
+                </div>
+          </div>
+        {% else %}
+            <div  class="noparticipants" > 
+                <a href = "/admin/person/addtoparticipants/{{person.personid}}" class="editbutton"  > {%trans%}add.participation{%endtrans%}</a>
+            </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+        
+{% endblock %}
+
+
+{% block right %}
+   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+{% endblock%}

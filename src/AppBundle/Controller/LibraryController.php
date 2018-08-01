@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Entity\event;
-use App\Entity\person;
+use AppBundle\Entity\event;
+use AppBundle\Entity\person;
 
 class LibraryController extends Controller
 {

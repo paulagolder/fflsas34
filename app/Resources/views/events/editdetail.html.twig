@@ -1,0 +1,50 @@
+{# templates/event/editdetail.html.twig #}
+
+
+{% import 'macros.twig' as m %}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('event_css/edit.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block js %}
+ {{ parent() }}
+ <script>
+  
+     function clicklocation(l)
+     {
+      document.getElementById("event_form_locid").value=l; 
+     }
+   </script>
+{%endblock%}
+
+{% block middle %}
+
+<div id="editevent"  >
+<div class="heading">
+ <div class="label" > {%trans%}edit.event{% endtrans%}</div>
+ <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+</div>
+<div  class="adminform" >
+{{ form_start(form) }}
+
+    {{ form_row(form.label) }}
+    {{ form_row(form.parent) }}
+    {{ form_row(form.locid) }}
+    {{ form_row(form.startdate) }}
+    {{ form_row(form.enddate) }}
+
+    <button type="submit">Register!</button>
+{{ form_end(form) }}
+</div>
+
+</div>
+{% endblock %}
+
+{% block right %}
+
+           {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+           
+{% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 use App\Forms\LocationForm;
 
-use App\Service\MyLibrary;
-use App\Entity\Location;
+use AppBundle\Service\MyLibrary;
+use AppBundle\Entity\Location;
 
 class LocationController extends Controller
 {
@@ -43,7 +43,7 @@ class LocationController extends Controller
    public function Showall()
    {
       $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-      $Locations = $this->getDoctrine()->getRepository("App:Location")->findAll();
+      $Locations = $this->getDoctrine()->getRepository("AppBundle:Location")->findAll();
       if (!$Locations) {
          return $this->render('Location/showall.html.twig', 
          [ 
@@ -64,13 +64,13 @@ class LocationController extends Controller
 
    public function Showtop()
      {
-         $world  = $this->getDoctrine()->getRepository("App:Location")->findTop();
+         $world  = $this->getDoctrine()->getRepository("AppBundle:Location")->findTop();
          return $this->Showone($world->getLocid());
      }
    
     public function Edittop()
      {
-         $world  = $this->getDoctrine()->getRepository("App:Location")->findTop();
+         $world  = $this->getDoctrine()->getRepository("AppBundle:Location")->findTop();
          return $this->Editone($world->getLocid());
      }
    
@@ -79,14 +79,14 @@ class LocationController extends Controller
     public function Showone($lid)
      {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-         $location = $this->getDoctrine()->getRepository("App:Location")->findOne($lid);
+         $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($lid);
          if (!$location) 
          {
              return $this->render('location/showone.html.twig', [ 'message' =>  'location '+$lid+' not Found',]);
          }
      
      
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("location",$lid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("location",$lid);
         
         $parents= $location->ancestors;
         if(count($parents))
@@ -125,16 +125,16 @@ class LocationController extends Controller
         else  $textcomment = null;
         
         $map = null;
-        $eventlocs=$this->getDoctrine()->getRepository("App:Event")->findLocations($lid);
+        $eventlocs=$this->getDoctrine()->getRepository("AppBundle:Event")->findLocations($lid);
         foreach( $eventlocs as $key =>$event )
         {
          $event->link = "/".$this->lang."/event/".$event->getEventid();
         }
-        $incidentlocs=$this->getDoctrine()->getRepository("App:Incident")->findLocations($lid);
+        $incidentlocs=$this->getDoctrine()->getRepository("AppBundle:Incident")->findLocations($lid);
         foreach( $incidentlocs as $key =>$incident )
         {
          $incident->link = "/".$this->lang."/person/".$incident->getPersonid();
-         $incident->label= $this->getDoctrine()->getRepository("App:Person")->getLabel($incident->getPersonid());
+         $incident->label= $this->getDoctrine()->getRepository("AppBundle:Person")->getLabel($incident->getPersonid());
         }
         return $this->render('location/showone.html.twig', 
              [ 
@@ -154,14 +154,14 @@ class LocationController extends Controller
      {
   
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-         $location = $this->getDoctrine()->getRepository("App:Location")->findOne($lid);
+         $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($lid);
          if (!$location) 
          {
              return $this->render('location/editone.html.twig', [ 'message' =>  'location '+$lid+' not Found',]);
          }
      
      
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("location",$lid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("location",$lid);
         
         $parents= $location->ancestors;
         if(count($parents))
@@ -291,7 +291,7 @@ class LocationController extends Controller
     
       public function addbookmark($lid)
     {
-        $location =  $this->getDoctrine()->getRepository("App:Location")->findOne($lid);
+        $location =  $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($lid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $llist = $session->get('locationList');
         if($llist == null)

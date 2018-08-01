@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 
 
@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Bundle\SwiftmailerBundle\Swift_SmtpTransport;
 
-use App\Entity\Contact;
+use AppBundle\Entity\Contact;
 
 class ContactController extends Controller
 { 

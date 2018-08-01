@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Controller;
-use App\Entity\IncidentType;
+namespace AppBundle\Controller;
+use AppBundle\Entity\IncidentType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 

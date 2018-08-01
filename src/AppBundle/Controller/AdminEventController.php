@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -8,12 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 use App\Forms\EventFormType;
-use App\Service\MyLibrary;
-use App\Entity\event;
-use App\Entity\person;
-use App\Entity\Imageref;
-use App\Entity\Linkref;
-use App\Entity\Participant;
+use AppBundle\Service\MyLibrary;
+use AppBundle\Entity\event;
+use AppBundle\Entity\person;
+use AppBundle\Entity\Imageref;
+use AppBundle\Entity\Linkref;
+use AppBundle\Entity\Participant;
 
 
 class AdminEventController extends Controller
@@ -42,7 +42,7 @@ class AdminEventController extends Controller
      public function Showall()
      {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-         $Events = $this->getDoctrine()->getRepository("App:Event")->findAll();
+         $Events = $this->getDoctrine()->getRepository("AppBundle:Event")->findAll();
      if (!$Events) 
      {
          return $this->render('events/showall.html.twig', [ 'message' =>  'Events not Found',]);
@@ -62,7 +62,7 @@ class AdminEventController extends Controller
      {
          $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
          $lib = $this->mylib;
-         $event = $this->getDoctrine()->getRepository("App:Event")->findOne($eid);
+         $event = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
          
          if (!$event) 
          {
@@ -73,7 +73,7 @@ class AdminEventController extends Controller
             ]);
          }
      
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$eid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$eid);
         $event->title = $lib->selectText($text_ar, "title",$this->lang);
        
         $parents= $event->ancestors;
@@ -83,7 +83,7 @@ class AdminEventController extends Controller
             for($i=0; $i<$l;$i++)
             {
               $pid = $parents[$i]->getEventid();
-              $ptext_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$pid);
+              $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$pid);
               $parents[$i]->title = $lib->selectText( $ptext_ar,"title",$this->lang);
               $url = "/admin/event/".$pid;
               $parents[$i]->link =  $url ;
@@ -113,12 +113,12 @@ class AdminEventController extends Controller
            {
           
              $pid = $children[$i]['id'];
-             $child =  $this->getDoctrine()->getRepository("App:Event")->findOne($pid);
+             $child =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($pid);
         
              $children[$i]['startdate'] = $child->getStartdate();
                $children[$i]['fstartdate'] = $lib->formatdate($child->getStartdate(),$this->lang);
                  
-             $ptext_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$pid);
+             $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$pid);
       
              $children[$i]['title'] =  $this->mylib->selectText($ptext_ar, "title", $this->lang );
           
@@ -134,7 +134,7 @@ class AdminEventController extends Controller
         }
         
         // this is a fix because title gets changed  and I cannot find out why 
-              $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$eid);
+              $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$eid);
         $texttitle = $lib->selectText($text_ar, "title",$this->lang);
         $event->title = $texttitle;
          if($event->title == "")
@@ -144,7 +144,7 @@ class AdminEventController extends Controller
       
         $textcomment =  $lib->selectText($text_ar, "comment",$this->lang);
         
-         $ref_ar = $this->getDoctrine()->getRepository("App:Imageref")->findGroup("event",$eid);
+         $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("event",$eid);
         $images= array();
         $i=0;
         foreach($ref_ar as $key => $ref)
@@ -152,14 +152,14 @@ class AdminEventController extends Controller
            $imageid = $ref_ar[$key]['imageid'];
            $images[$i]['imageid']= $imageid;
            $images[$i]['refid']= $ref_ar[$key]['id'];
-           $image = $this->getDoctrine()->getRepository("App:Image")->findOne($imageid);
-           $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("image",$imageid);
+           $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+           $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
            $images[$i]['fullpath']= $image->fullpath;
            $images[$i]['title'] = $this->mylib ->selectText($text_ar,'title',$this->lang);
            $images[$i]['link'] = "/admin/image/".$imageid;
            $i++;
         }
-        $participations = $this->getDoctrine()->getRepository("App:Participant")->findParticipants($eid);
+        $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipants($eid);
         $participants = array();
         foreach($participations as $key=>$aparticipant)
         {
@@ -169,12 +169,12 @@ class AdminEventController extends Controller
        
        if($event->getLocid())
        {
-         $location = $this->getDoctrine()->getRepository("App:Location")->findOne($event->getLocid());
+         $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($event->getLocid());
          $event->location['name'] = $location->getName();
          $event->location['link'] = "/admin/location/".$location->getLocid();
        }
         
-        $linkrefs =$this->getDoctrine()->getRepository("App:Linkref")->findGroup('event',$eid);
+        $linkrefs =$this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
         
         return $this->render('events/editone.html.twig', [ 
              'lang' => $this->lang,
@@ -200,7 +200,7 @@ class AdminEventController extends Controller
      public function Showtop()
      {
          $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-         $topevent  = $this->getDoctrine()->getRepository("App:Event")->findTop();
+         $topevent  = $this->getDoctrine()->getRepository("AppBundle:Event")->findTop();
          return $this->Editparticipants($topevent->getEventId());
      }
     
@@ -244,7 +244,7 @@ class AdminEventController extends Controller
    
     public function addbookmark($eid)
     {
-        $event =  $this->getDoctrine()->getRepository("App:Event")->findOne($eid);
+        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $elist = $session->get('eventList');
         if($elist == null)
@@ -268,7 +268,7 @@ class AdminEventController extends Controller
      
      public function addimage($eid,$iid)
     {
-        $imageref =  $this->getDoctrine()->getRepository("App:Imageref")->findMatch("event",$eid,$iid);
+        $imageref =  $this->getDoctrine()->getRepository("AppBundle:Imageref")->findMatch("event",$eid,$iid);
         if(!$imageref)
         {
         $em = $this->getDoctrine()->getManager();
@@ -303,7 +303,7 @@ class AdminEventController extends Controller
         $user = $this->getUser();
         $time = new \DateTime();
         $em = $this->getDoctrine()->getManager();
-        $participations =  $this->getDoctrine()->getRepository("App:Participant")->findParticipationsbyEntityPerson($eid,$pid);
+        $participations =  $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipationsbyEntityPerson($eid,$pid);
        if(!count($participations)>0)
        {
         $newp = new Participants();
@@ -324,7 +324,7 @@ class AdminEventController extends Controller
        $user = $this->getUser();
         $time = new \DateTime();
         $em = $this->getDoctrine()->getManager();
-        $event =  $this->getDoctrine()->getRepository("App:Event")->findOne($eid);
+        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
         $event->setLocid((int)$lid);
          $event->setContributor($user->getUsername());
          $event->setUpdateDt($time);
@@ -338,7 +338,7 @@ class AdminEventController extends Controller
     
       public function removeimageref($eid,$irid)
     {
-     $image = $this->getDoctrine()->getRepository("App:Imageref")->findOne($irid);
+     $image = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findOne($irid);
      $em = $this->getDoctrine()->getManager();
       $em->remove($image);
      $em->flush();

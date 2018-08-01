@@ -1,7 +1,7 @@
 <?php
 
 // src/Controller/RegistrationController.php
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 
 
@@ -15,8 +15,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 use App\Forms\UserType;
-use App\Entity\User;
-use App\Service\MyLibrary;
+use AppBundle\Entity\User;
+use AppBundle\Service\MyLibrary;
 
 
 class RegistrationController extends Controller

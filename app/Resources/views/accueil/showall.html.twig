@@ -1,0 +1,42 @@
+{# templates/accuiel/showall.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/accueil_css/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block myheader %} {{ parent() }}{% endblock %}
+
+
+{% block middle %}
+  <div class="accueil">
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+
+   
+     <h1>{% trans %}bienvenue.page{% endtrans %}</h1> 
+    
+     
+     {% if texts  %}  
+      <div class="text" >
+        {% if texts[lang] is defined %}    
+            {{ texts[lang] | raw }}
+        {% elseif  texts.FR is defined %};     
+            {{ texts["FR"] | raw }}
+        {% elseif texts.EN is defined %};     
+            {{ texts["EN"] | raw }}
+        {% endif %}
+     </div>
+   {% endif %}
+    {% if counts  %} 
+    <div class="counts" >
+    {% for count in counts %}
+     <div class="count" > {% trans %}compte.de{% endtrans %} {{count.label | trans}}   = {{ count.number}}</div>
+     {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+{% endblock %}

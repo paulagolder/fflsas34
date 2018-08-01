@@ -1,0 +1,11 @@
+
+module my-cupsd 1.0;
+
+require {
+	type httpd_sys_rw_content_t;
+	type cupsd_t;
+	class dir search;
+}
+
+#============= cupsd_t ==============
+allow cupsd_t httpd_sys_rw_content_t:dir search;

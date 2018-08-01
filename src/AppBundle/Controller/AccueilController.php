@@ -1,6 +1,6 @@
 <?php
 // src/Controller/AcueilController.php
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -18,9 +18,9 @@ use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
 
-use App\Entity\person;
-use App\Entity\event;
-use App\Service\MyLibrary;
+use AppBundle\Entity\person;
+use AppBundle\Entity\event;
+use AppBundle\Service\MyLibrary;
 
 
 class AccueilController  extends Controller
@@ -68,15 +68,15 @@ class AccueilController  extends Controller
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $mess= "";
         $heading= "Welcome";
-        $texts = $this->getDoctrine()->getRepository("App:Text")->findGroup("accueil",1);
+        $texts = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("accueil",1);
         $counts = array();
         
         $counts[0]["label"] ="hommes";
-        $counts[0]["number"] =   count($this->getDoctrine()->getRepository("App:Person")->findAll());
+        $counts[0]["number"] =   count($this->getDoctrine()->getRepository("AppBundle:Person")->findAll());
         $counts[1]["label"] ="evenements";
-        $counts[1]["number"] =   count($this->getDoctrine()->getRepository("App:Event")->findAll());
+        $counts[1]["number"] =   count($this->getDoctrine()->getRepository("AppBundle:Event")->findAll());
         $counts[2]["label"] ="images";
-        $counts[2]["number"] =   count($this->getDoctrine()->getRepository("App:Image")->findAll());
+        $counts[2]["number"] =   count($this->getDoctrine()->getRepository("AppBundle:Image")->findAll());
         
  
         return $this->render('accueil/showall.html.twig', 

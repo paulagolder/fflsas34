@@ -1,0 +1,20 @@
+{# templates/registration/register.html.twig #}
+
+
+{% import 'macros.twig' as m %}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/person_css/showone.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+
+{% block middle %}
+<div>username:{{username}}</div>
+<div>plainpassword:{{plainpassword}}</div>
+<div>haspassword:{{hashpassword}}</div>
+<div>isvalid:{{isvalid}}</div>
+{% endblock %}

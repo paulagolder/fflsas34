@@ -1,6 +1,6 @@
 <?php
 // src/Controller/AcueilController.php
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -17,9 +17,9 @@ use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-use App\Entity\person;
-use App\Entity\event;
-use App\Service\MyLibrary;
+use AppBundle\Entity\person;
+use AppBundle\Entity\event;
+use AppBundle\Service\MyLibrary;
 
 
 class BookmarksController  extends Controller

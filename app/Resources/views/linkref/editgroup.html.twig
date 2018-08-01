@@ -1,0 +1,51 @@
+{# templates/linkrefs/editgroup.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('linkrefs_css/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block js %}
+ {{ parent() }}
+ <script>
+     function clicklocation(lid)
+     {
+      window.location.href = '/admin/event/setlocation/{{objid}}/'+lid;
+     }
+     
+     function clickperson(pid)
+     {
+        window.location.href = '/admin/image/addref/person/'+pid+'/{{objid}}';
+     }
+ </script>
+{% endblock %}
+
+
+
+
+{% block middle %}
+ <div id="linkrefs">
+   {% if message %}
+     <h1> {{"edit.links.for" |trans}}{{objecttype| trans}} {{objectlabel}} </h1>
+   {% else %}
+    <div class="heading" >{{label}}</div> 
+   <div>  <a class="editbutton" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/0 " > {{ 'add.new.linkref' | trans }}</a></div>
+   {% if refs %}
+   <div class="reflist">
+         {% for ref in refs %}
+            <div ><a href="{{ref.link}}" >{{ ref.label}}</a>
+            <a class="editicon" href= "/admin/linkref/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'edit' | trans}}</a>
+              <a class="editicon" href= "/admin/linkref/delete/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'delete' | trans}}</a>
+            </div>
+         {% endfor %}
+     </div>
+     {%endif%}
+  {% endif %}
+  </div>
+{% endblock %}
+
+
+{% block right %}
+   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+{% endblock%}

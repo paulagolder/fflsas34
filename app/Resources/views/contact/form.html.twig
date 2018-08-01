@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('contact_css/contact.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+
+<div id="contactform">
+       <div class="row">
+       
+               <div class=heading>{{'contact.us' | trans}}</div>
+
+                   {{form_start(form)}}
+                   {{form_widget(form)}}
+                   {{form_end(form)}}
+
+           </div>
+       
+</div>
+
+{% endblock %}

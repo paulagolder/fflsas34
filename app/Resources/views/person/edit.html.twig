@@ -1,0 +1,32 @@
+{# templates/registration/register.html.twig #}
+
+
+{% import 'macros.twig' as m %}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('person_css/editone.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+
+{% block middle %}
+
+<div id="newperson"  >
+ <div class="formheading" > {%trans%}edit.person{% endtrans%}</div>
+
+<div  class="adminform" >
+{{ form_start(form) }}
+
+    {{ form_row(form.surname) }}
+    {{ form_row(form.forename) }}
+    {{ form_row(form.alias) }}
+
+    <button type="submit">Register!</button>
+{{ form_end(form) }}
+</div>
+ <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{# templates/person/showone.html.twig #}
+
+{% import 'macros.twig' as m %}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('css/person_css/showone.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+<div id="person" >
+    {% if message %}
+    <h1> {{message}}</h1>
+    {% endif %}
+    
+    {% if person is defined %}
+    {% if person %}
+    <div  class="heading">
+        <div class="title" >{{ person.fullname}} </div>
+        {% if is_granted('ROLE_ADMIN') %} 
+        <div  >
+            <a class="editbutton" href = "/admin/person/{{person.personid}}" >edit.person</a>
+            <a class="editbutton" href = "/admin/person/addbookmark/{{person.personid}}" >bookmark.person</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    {% if images %}
+    <div class="imagegroup" >
+        {% for image in images %}
+        <div class="image">
+            <div class="imageimage" ><a href="{{image.link}}"><img src="{{image.fullpath}}" /></a></div>
+            <div class="imagelabel"> {{image.title}} </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="refgroup" >
+        {% if refs %}
+        <div class="reflabel">{{'liens' | trans }} : </div>
+        {% for ref in refs %}
+        <div class="ref" ><a href="{{ref.link}}"> {{ref.label}}</a></div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    
+    {% if text  %}
+    <div class="text" >
+        {{ text | raw }}
+    </div>
+    {% endif %}
+    
+    {% if eventtree %}
+    <div class="eventtree" >
+        {{ m.tree(eventtree.topNode, incidents) }} 
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

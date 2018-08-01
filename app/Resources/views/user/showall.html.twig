@@ -1,0 +1,35 @@
+{# templates/person/showall.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/user_css/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+  <div class="fusers">
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+
+   {% if fusers %}
+     <h1>{{heading | trans}} ({{ fusers | length }} )</h1> 
+     <div class="fuserlist">
+     <nav>
+       <ul>
+         {% for fuser in fusers %}
+            <li><a href="{{fuser.link}}" >{{fuser.username}} </a></li>
+         {% endfor %}
+      </ul>
+     </nav>
+     </div>
+  {% endif %}
+  </div>
+{% endblock %}
+
+
+
+{% block left%}
+ 
+{% endblock %}

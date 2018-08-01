@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\File;
 
-use App\Entity\Imageref;
-use App\Entity\Image;
-use App\Service\MyLibrary;
+use AppBundle\Entity\Imageref;
+use AppBundle\Entity\Image;
+use AppBundle\Service\MyLibrary;
 use App\Forms\ImageForm;
 
 class ImageController extends Controller
@@ -38,7 +38,7 @@ class ImageController extends Controller
     public function Showall()
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $images = $this->getDoctrine()->getRepository("App:Image")->findAll();
+        $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findAll();
         
         if (!$images) {
             return $this->render('images/showall.html.twig', [ 'message' =>  'Images not Found',]);
@@ -55,16 +55,16 @@ class ImageController extends Controller
     
     public function Showone($iid)
     {
-        $image = $this->getDoctrine()->getRepository("App:Image")->findOne($iid);
+        $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($iid);
         if (!$image) 
         {
             return $this->render('images/showone.html.twig', [ 'message' =>  'Image '.$iid.' not Found',]);
         }
         
-        $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('image',$iid);
+        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$iid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
-        $refs_ar =  $this->getDoctrine()->getRepository("App:Imageref")->findAllGroups($iid);
+        $refs_ar =  $this->getDoctrine()->getRepository("AppBundle:Imageref")->findAllGroups($iid);
         foreach( $refs_ar as $key=> $refg_ar)
         {
             if($key=="person")
@@ -72,7 +72,7 @@ class ImageController extends Controller
                 foreach($refg_ar as $pkey=> $ref_ar)
                 {
                     #echo ("person ".$pkey);
-                    $person =   $this->getDoctrine()->getRepository("App:Person")->findOne($pkey);
+                    $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pkey);
                     $refs_ar[$key][$pkey]['label'] = $person->getFullname();
                     $refs_ar[$key][$pkey]['link'] = "/".$this->lang."/person/".$person->getPersonid();
                 }
@@ -81,8 +81,8 @@ class ImageController extends Controller
             {
                 foreach($refg_ar as $ekey=> $ref_ar)
                 {
-                    $event =   $this->getDoctrine()->getRepository("App:Event")->findOne($ekey);
-                    $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('event',$ekey);
+                    $event =   $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ekey);
+                    $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('event',$ekey);
                     $title = $this->mylib->selectText($text_ar,'title',$this->lang);
                     $refs_ar[$key][$ekey]['label'] = $title;
                     $refs_ar[$key][$ekey]['link'] = "/".$this->lang."/event/".$event->getEventid();
@@ -92,7 +92,7 @@ class ImageController extends Controller
             {
                 foreach($refg_ar as $ikey=> $ref_ar)
                 {
-                    $image =   $this->getDoctrine()->getRepository("App:Image")->findOne($ikey);
+                    $image =   $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($ikey);
                     $refs_ar[$key][$ikey]['label'] = $image->title;
                     $refs_ar[$key][$ikey]['link'] = "/".$this->lang."/image/".$image->getImageid();
                 }
@@ -114,7 +114,7 @@ class ImageController extends Controller
     
     public function Editone($iid)
     {
-        $image = $this->getDoctrine()->getRepository("App:Image")->findOne($iid);
+        $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($iid);
         if (!$image) 
         {
             return $this->render('images/editone.html.twig', [ 
@@ -130,9 +130,9 @@ class ImageController extends Controller
         }else{
             $image->setFullpath($this->getParameter('new_images_folder').$image->getPath());
         }
-        $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('image',$iid);
+        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$iid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
-        $refs_ar =  $this->getDoctrine()->getRepository("App:Imageref")->findAllGroups($iid);
+        $refs_ar =  $this->getDoctrine()->getRepository("AppBundle:Imageref")->findAllGroups($iid);
         foreach( $refs_ar as $key=> $refg_ar)
         {
             #echo ($key);
@@ -141,7 +141,7 @@ class ImageController extends Controller
                 foreach($refg_ar as $pkey=> $ref_ar)
                 {
                     #echo ("person ".$pkey);
-                    $person =   $this->getDoctrine()->getRepository("App:Person")->findOne($pkey);
+                    $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pkey);
                     $refs_ar[$key][$pkey]['label'] = $person->getFullname();
                     $refs_ar[$key][$pkey]['link'] = "/admin/person/".$person->getPersonid();
                 }
@@ -152,7 +152,7 @@ class ImageController extends Controller
                 foreach($refg_ar as $ekey=> $ref_ar)
                 {
                     # echo ("event ".$ekey);
-                    $event =   $this->getDoctrine()->getRepository("App:Event")->findOne($ekey);
+                    $event =   $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ekey);
                     $refs_ar[$key][$ekey]['label'] = $event->title;
                     $refs_ar[$key][$ekey]['link'] = "/admin/event/".$event->getEventid();
                 }
@@ -180,13 +180,13 @@ class ImageController extends Controller
         
         if (!$pfield) 
         {
-            $images = $this->getDoctrine()->getRepository("App:Image")->findAll();
+            $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findAll();
             $heading =  'trouver.tout';
         }
         else
         {
             $pfield = "%".$pfield."%";
-            $images = $this->getDoctrine()->getRepository("App:Image")->findSearch($pfield);
+            $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findSearch($pfield);
             $heading =  'trouver.avec';
         }
         
@@ -218,7 +218,7 @@ class ImageController extends Controller
     
     public function addBookmark($iid)
     {
-        $image =  $this->getDoctrine()->getRepository("App:Image")->findOne($iid);
+        $image =  $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($iid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('imageList');
         if($ilist == null)

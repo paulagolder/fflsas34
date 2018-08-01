@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-use App\Entity\person;
-use App\Entity\Participant;
-use App\Service\MyLibrary;
+use AppBundle\Entity\person;
+use AppBundle\Entity\Participant;
+use AppBundle\Service\MyLibrary;
 use App\Forms\ParticipantForm;
 
 
@@ -33,7 +33,7 @@ class ParticipantController extends Controller
     
     public function Showall()
     {
-        $participations = $this->getDoctrine()->getRepository("App:Participant")->findAll();
+        $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findAll();
         
         if (!$participations) {
             return $this->render('participants/showall.html.twig', [ 'message' =>  'participations not Found',]);
@@ -48,7 +48,7 @@ class ParticipantController extends Controller
     
     public function Showone($pid)
     {
-        $participant = $this->getDoctrine()->getRepository("App:Participant")->findOne($pid);
+        $participant = $this->getDoctrine()->getRepository("AppBundle:Participant")->findOne($pid);
         if (!$participant) 
         {
             return $this->render('participants/showone.html.twig', [ 'message' =>  'participant '.$pid.' not Found',]);
@@ -88,9 +88,9 @@ class ParticipantController extends Controller
    
          $pid = $form["personid"]->getData();
          $eid = $form["eventid"]->getData();
-         $incidents=   $this->getDoctrine()->getRepository("App:Incident")->findbyParticipation($eid,$pid);
-         $person =   $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
-         $event =   $this->getDoctrine()->getRepository("App:Event")->findOne($eid);
+         $incidents=   $this->getDoctrine()->getRepository("AppBundle:Incident")->findbyParticipation($eid,$pid);
+         $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
+         $event =   $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
              return $this->render('participants/edit.html.twig', array(
             'form' => $form->createView(),
             'eventlabel'=>$event->getLabel(),

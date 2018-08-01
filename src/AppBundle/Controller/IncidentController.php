@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-use App\Service\MyLibrary;
-use App\Entity\Incident;
-use App\Entity\IncidentType;
-use App\Entity\person;
-use App\Entity\event;
+use AppBundle\Service\MyLibrary;
+use AppBundle\Entity\Incident;
+use AppBundle\Entity\IncidentType;
+use AppBundle\Entity\person;
+use AppBundle\Entity\event;
 use App\Forms\IncidentFormType;
 
 class IncidentController extends Controller
@@ -42,7 +42,7 @@ class IncidentController extends Controller
      {
          $lib =  $this->mylib ;
          $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-         $incidents = $this->getDoctrine()->getRepository("App:Incident")->findAll();
+         $incidents = $this->getDoctrine()->getRepository("AppBundle:Incident")->findAll();
         if (!$incidents ) 
         {
             return $this->render('incident/showall.html.twig', [ 'message' =>  'Incidents not Found',]);
@@ -50,11 +50,11 @@ class IncidentController extends Controller
         foreach($incidents as $key =>$incident)
         {
             $personid = $incident['personid'];
-            $person =  $this->getDoctrine()->getRepository("App:Person")->findOne($personid);
+            $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($personid);
             $personname = Person::fullname($person);;
             $eventid = $incident['eventid'];
-           # $test_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("title",$eventid,$this->lang);
-              $etext_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$eventid);
+           # $test_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("title",$eventid,$this->lang);
+              $etext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$eventid);
                  $etitle= $lib->selectText( $etext_ar,"title",$this->lang);
             $incidents[$key]['label'] = $personname.":".$etitle.":".$incident['typename'];
              $incidents[$key]['link'] ="/admin/incidents/".$incident['incidentid'];
@@ -73,7 +73,7 @@ class IncidentController extends Controller
        public function Showone($inid)
      {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-         $incident = $this->getDoctrine()->getRepository("App:Incident")->findOne($inid);
+         $incident = $this->getDoctrine()->getRepository("AppBundle:Incident")->findOne($inid);
         if (!$incident ) 
         {
             return $this->render('incident/showone.html.twig', 
@@ -90,10 +90,10 @@ class IncidentController extends Controller
         {
           $incident['sdate'] = "";
         }
-        $person =  $this->getDoctrine()->getRepository("App:Person")->findOne($incident['personid']);
-        $event =  $this->getDoctrine()->getRepository("App:Event")->findOne($incident['eventid']);
-        $itype = $this->getDoctrine()->getRepository("App:IncidentType")->findOne($incident['itypeid']);
-        $location = $this->getDoctrine()->getRepository("App:Location")->findOne($incident['locid']);
+        $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($incident['personid']);
+        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($incident['eventid']);
+        $itype = $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findOne($incident['itypeid']);
+        $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($incident['locid']);
         $label = $itype->getLabel();
         return $this->render('incident/showone.html.twig', 
                 [ 
@@ -139,10 +139,10 @@ class IncidentController extends Controller
         }
          $pid = $form["personid"]->getData();
          $eid = $form["eventid"]->getData();
-         $person =   $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
-         $event =   $this->getDoctrine()->getRepository("App:Event")->findOne($eid);
-         $incidenttypes =   $this->getDoctrine()->getRepository("App:IncidentType")->findAll();
-         $participations =  $this->getDoctrine()->getRepository("App:Participant")->findParticipationsbyEntityPerson($eid,$pid);
+         $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
+         $event =   $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
+         $incidenttypes =   $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findAll();
+         $participations =  $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipationsbyEntityPerson($eid,$pid);
         return $this->render('incident/edit.html.twig', array(
             'form' => $form->createView(),
             'eventlabel'=>$event->getLabel(),
@@ -180,9 +180,9 @@ class IncidentController extends Controller
         }
          $pid = $form["personid"]->getData();
          $eid = $form["eventid"]->getData();
-         $person =   $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
-         $event =   $this->getDoctrine()->getRepository("App:Event")->findOne($eid);
-         $incidenttypes =   $this->getDoctrine()->getRepository("App:IncidentType")->findAll();
+         $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
+         $event =   $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
+         $incidenttypes =   $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findAll();
         return $this->render('incident/edit.html.twig', array(
             'form' => $form->createView(),
             'eventlabel'=>$event->getLabel(),

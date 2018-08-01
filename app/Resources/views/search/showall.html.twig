@@ -1,0 +1,45 @@
+{# templates/event/showall.html.twig #}
+
+{% extends 'base.html.twig' %}
+ {% set locale =  app.request.getLocale() | lower %}
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('results_p/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block myheader %} {{ parent() }}{% endblock %}
+
+
+{% block middle %}
+  
+   {% if message %}
+     <h1> {{message | trans }}</h1>
+   {% endif %}
+
+   <form  action="/{{locale}}/search/all">
+   <div class="heading">
+    <div class="label" > {{ 'entrez.chercher' | trans }}</div>
+   <input type="text" name="searchfield">
+   <input type="submit" value="{{ 'chercher' | trans }}" >
+   </form>
+   </div>
+   {% if results is defined  %}
+     {% if results %}
+       <div class="heading">{{'search.results' | trans}} {{searchkey}}</div> 
+       {% for key, group in results %}
+       {%if ( group | length ) > 20 %}
+        <div> {{'found.too.many' | trans}} {{key |trans}} ( {{group | length}} )</div>
+       {% else %}
+         <div> {{'found' | trans}} {{key |trans}}</div>
+           <ul>
+             {% for subject in group %}
+               <li><a href="{{subject.link}}" >{{ subject.label}}</a> </li>
+             {% endfor %}
+           </ul>
+           {% endif %}
+       {% endfor %}
+  {% endif %}
+  {% endif %}
+  
+  
+{% endblock %}

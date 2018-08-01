@@ -1,0 +1,46 @@
+{# templates/contents/adminsearch.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/content_css/searchall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+  <div id="content">
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+  <form  action="/admin/content/search">
+  <div class="heading">
+   <div class="label"> {{ 'entrez.chercher' | trans }}</div>
+   <input type="text" name="searchfield">
+   <input type="submit" value="{{ 'chercher' | trans }}" >
+   </div>
+   </form>
+   <div class="newcontent"><a class="editbutton" href ="/admin/content/edit/0">{{'new.content' | trans}}</a></div>
+   {% if contents is defined %}
+     <div class="heading">
+     <div class="label">{{heading | trans}}</div> 
+     <div class="title">{{searchfield}}</div> 
+     </div>
+     <div class="contentlist" >
+       <div >
+         {% for content in contents  %}
+            <div class="content" ><a href="{{content.link}}" >{{content.title}}</a> <a class="editbutton" href="/admin/content/{{content.subjectid}}">{{'edit.content' |trans}}</a></div>
+         {% endfor %}
+      </div>
+     </div>
+  {% endif %}
+  </div>
+{% endblock %}
+
+
+{% block right %}
+
+
+
+   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+
+{% endblock%}

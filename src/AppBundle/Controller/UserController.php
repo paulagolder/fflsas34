@@ -1,7 +1,7 @@
 <?php
 
 // src/Controller/RegistrationController.php
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 
 
@@ -15,9 +15,9 @@ use Symfony\Component\Security\Core\Encoder;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-use App\Entity\User;
-use App\Forms\OldUserType;
-use App\Service\MyLibrary;
+use AppBundle\Entity\User;
+use App\Form\OldUserType;
+use AppBundle\Service\MyLibrary;
 
 
 class UserController extends Controller
@@ -41,7 +41,7 @@ class UserController extends Controller
     public function Showall()
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $fusers = $this->getDoctrine()->getRepository("App:User")->findAll();
+        $fusers = $this->getDoctrine()->getRepository("AppBundle:User")->findAll();
         if (!$fusers) {
             return $this->render('person/showall.html.twig', [ 'message' =>  'People not Found',]);
         }        
@@ -63,7 +63,7 @@ class UserController extends Controller
     {
         
         $request = $this->requestStack->getCurrentRequest();
-        $fuser = $this->getDoctrine()->getRepository('App:User')->findOne($uid);
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $encoder = $this->encoderFactory->getEncoder($fuser);
         $tpass= $fuser->getEmail();
         

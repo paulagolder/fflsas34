@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-use App\Entity\event;
-use App\Entity\Text;
-use App\Entity\person;
-use App\Service\MyLibrary;
+use AppBundle\Entity\event;
+use AppBundle\Entity\Text;
+use AppBundle\Entity\person;
+use AppBundle\Service\MyLibrary;
 use App\Forms\TextForm;
 
 class TextController extends Controller
@@ -36,7 +36,7 @@ class TextController extends Controller
     
     public function Showall()
     {
-        $Texts = $this->getDoctrine()->getRepository("App:Text")->findAll();
+        $Texts = $this->getDoctrine()->getRepository("AppBundle:Text")->findAll();
         if (!$Texts) {
             return $this->render('text/showall.html.twig', [ 'message' =>  'Texts not Found',]);
         }
@@ -48,7 +48,7 @@ class TextController extends Controller
     
     public function Showgroup()
     {
-        $Texts = $this->getDoctrine()->getRepository("App:Text")->findGroup("person",674);
+        $Texts = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",674);
         if (!$Texts) {
             return $this->render('text/showall.html.twig', [ 'message' =>  'Texts not Found',]);
         }
@@ -58,9 +58,9 @@ class TextController extends Controller
     
     public function editperson($pid)
     {
-        $person = $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
+        $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
         $personname = $person->getFullname();
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("person",$pid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",$pid);
         
 
         return $this->render('text/editdetail.html.twig', [ 
@@ -78,9 +78,9 @@ class TextController extends Controller
     
     public function editevent($eid)
     {
-        $event = $this->getDoctrine()->getRepository("App:Event")->findOne($eid);
+        $event = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
         $label = $event->getLabel();
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("event",$eid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$eid);
         
         return $this->render('text/editdetail.html.twig', [ 
         'message' =>  '',
@@ -98,9 +98,9 @@ class TextController extends Controller
     
     public function editimage($iid)
     {
-        $image = $this->getDoctrine()->getRepository("App:Image")->findOne($iid);
+        $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($iid);
         $imagename = $image->getName();
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("image",$iid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$iid);
         
         return $this->render('text/editdetail.html.twig', [ 
         'message' =>  '',
@@ -118,9 +118,9 @@ class TextController extends Controller
     
     public function editreflink($rfid)
     {
-        $ref = $this->getDoctrine()->getRepository("App:reflink")->findOne($rfid);
+        $ref = $this->getDoctrine()->getRepository("AppBundle:reflink")->findOne($rfid);
         $refname = $ref->getName();
-        $text_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup("reflink",$rfid);
+        $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("reflink",$rfid);
         
         return $this->render('text/editdetail.html.twig', [ 
         'message' =>  '','heading' =>  'edit.texts',
@@ -164,7 +164,7 @@ class TextController extends Controller
      
         
         $request = $this->requestStack->getCurrentRequest();
-        $text = $this->getDoctrine()->getRepository('App:Text')->findOne($objecttype, $objid,$attribute,$language);
+        $text = $this->getDoctrine()->getRepository('AppBundle:Text')->findOne($objecttype, $objid,$attribute,$language);
         if($text==null)
         {
             $text = new Texts();

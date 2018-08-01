@@ -1,0 +1,29 @@
+{# templates/contact/contact.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('participants/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block myheader %} {{ parent() }}{% endblock %}
+
+
+{% block middle %}
+  
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+   <h1>{%trans%}edit.participations{%endtrans%} {{fullname}}</h1> 
+   {% if participations %}
+     <h1>{{heading}}</h1> 
+     <nav>
+       <ul>
+         {% for participation in participations  %}
+            <li><a href="{{ participation.link}}" >{{ participation.label}}</a> </li>
+         {% endfor %}
+      </ul>
+     </nav>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+
+div#content
+{
+    background-color: #8093b7;
+}
+
+
+
+div#contentedit div.heading
+{
+    display:flex;
+}
+
+ div#contentedit form div
+{
+    xdisplay:flex;
+}
+
+ div#contentedit form div label.required
+ {
+     color:yellow;
+     width :5em;
+ }
+
+html body div#page div.mypage div#middle div#contentedit div.sub;link

@@ -1,3 +1,492 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+
+# config/routing.yml
+
+index:
+   path: /
+   controller: AppBundle\Controller\AccueilController::Showall
+
+   
+index_en:
+   path: /en/accueil
+   controller: AppBundle\Controller\AccueilController::ShowEnglish
+   
+index_fr:
+   path: /fr/accueil
+   controller: AppBundle\Controller\AccueilController::ShowFrench
+   
+   
+
+   
+login:
+    path: /{_locale}/login
+    controller:  AppBundle\Controller\SecurityController::login
+    requirements:
+        _locale: en|fr|FR|EN
+        
+logout:
+    path: /logout
+    #controller:  AppBundle\Controller\SecurityController::logoutAction      
+            
+logout_en:
+    path: /{_locale}/logout
+    requirements:
+        _locale: en|fr|FR|EN                  
+            
+login_check:
+    path: /{_locale}/login_check
+    controller:  AppBundle\Controller\SecurityController::loginCheckAction
+    requirements:
+           _locale: en|fr|FR|EN
+    
+register:
+    path: /{_locale}/register
+    controller:  AppBundle\Controller\RegistrationController::register    
+    requirements:
+        _locale: en|fr|FR|EN
+   
+contact_mail:
+    path: /{_locale}/mailto
+    controller: AppBundle\Controller\ContactController:create
+    requirements:
+        _locale: en|fr|FR|EN
+        
+#=============================users==================
+
+
+users_showall:
+    path: /admin/users
+    controller:  AppBundle\Controller\UserController:showAll
+    
+    
+users_editone:
+    path: /admin/user/{uid}
+    controller:  AppBundle\Controller\UserController:editone
+
+        
+#=========================search===============
+    
+search_all:    
+     path: /{_locale}/search/all
+     controller:  AppBundle\Controller\SearchController::ShowAll
+     requirements:
+        _locale: en|fr|FR|EN
+        
+#==================bookmark
+
+bookmarkdelete:
+     path: /admin/bookmark/delete/{blt}/{key}
+     controller:  AppBundle\Controller\BookmarksController::delete
+     
+admin_bookmark_edit:
+     path: /admin/bookmark/edit
+     controller:  AppBundle\Controller\BookmarksController::Edit     
+
+#===================== Person edit      
+        
+ 
+Person_new:
+    path: /admin/person/register
+    controller: AppBundle\Controller\AdminPersonController::register  
+
+admin_Person_edit_detail:
+    path: /admin/person/detail/{pid}
+    controller: AppBundle\Controller\AdminPersonController::edit 
+    
+admin_Person_one:
+    path: /admin/person/{pid}
+    controller: AppBundle\Controller\AdminPersonController::Editone
+    
+    
+admin_Person_addevent:
+# create a participation 
+    path: /admin/person/addevent/{pid}/{eid}
+    controller: AppBundle\Controller\AdminPersonController::addevent    
+    
+admin_Person_addimage:
+    path: /admin/person/addimage/{pid}/{iid}
+    controller: AppBundle\Controller\AdminPersonController::addimage   
+    
+    
+admin_Person_addcontent:
+    path: /admin/person/addcontent/{pid}/{cid}
+    controller: AppBundle\Controller\AdminPersonController::addcontent     
+
+    
+admin_Person_removeimage:
+    path: /admin/person/removeimage/{pid}/{iid}
+    controller: AppBundle\Controller\AdminPersonController::removeimage   
+    
+    
+admin_Person_bookmark:
+    path: /admin/person/addbookmark/{pid}
+    controller: AppBundle\Controller\AdminPersonController::addbookmark
+   
+removeparticipation:
+    path: /admin/person/delete/{pid}/{partid}
+   # controller: AppBundle\Controller\AdminPersonController::delete
+    defaults: { _controller: AppBundle\Controller\AdminPersonController::deleteAction}
+    requirements:
+        partid:  \d+
+
+#===================== Person routes  
+        
+Person_all_locale:
+    path: /{_locale}/person/all
+    controller:  AppBundle\Controller\PersonController::Showall
+    requirements:
+        _locale: en|fr|FR|EN
+        
+Person_one_locale:
+    path: /{_locale}/person/{pid}
+    controller:  AppBundle\Controller\PersonController::Showone
+    requirements:
+        _locale: en|fr|FR|EN
+        
+
+    
+    
+#===================participants 
+    
+participants_all:
+     path: /{_locale}/participant/all 
+     controller:  AppBundle\Controller\ParticipantController::Showall
+     requirements:
+        _locale: en|fr|FR|EN
+     
+participants_one:
+     path: /{_locale}/participant/{pid}
+     controller:  AppBundle\Controller\ParticipantController::Showone
+     requirements:
+        _locale: en|fr|FR|EN
+     
+admin_participants_editone:
+    path: /admin/participant/detail/{ptid}
+    controller:  AppBundle\Controller\ParticipantController::edit   
+     
+admin_participants_edit:
+    path: /admin/participant/{ptid}
+    controller:  AppBundle\Controller\ParticipantController::edit   
+    
+admin_participant_person:
+     path: /admin/participations/editperson/{pid}
+     controller:  AppBundle\Controller\ParticipantController::EditPerson
+
+participants_add_person:
+    path: /admin/participant/add/{eid}/{pid}
+    controller:  AppBundle\Controller\ParticipantController::addparticipant
+    
+
+    
+    
+#===================texts
+    
+texts_all:
+    path: /text/all
+    controller:  AppBundle\Controller\TextController::Showall    
+    
+texts_group:
+    path: /text/group
+    controller:  AppBundle\Controller\TextController::Showgroup  
+   
+admin_text_edit:
+   path : /admin/text/{objecttype}/{objid}/{attribute}/{language}
+   controller:  AppBundle\Controller\TextController::editone   
+   
+   
+text_person_admin:
+   path : /admin/text/person/{pid}
+   controller:  AppBundle\Controller\TextController::editperson   
+   
+admin_text_event:
+   path : /admin/text/event/{eid}
+   controller:  AppBundle\Controller\TextController::editevent   
+    
+admin_text_image:
+    path: /admin/text/image/{iid}   
+    controller:  AppBundle\Controller\TextController::editimage   
+    
+admin_text_reflink:
+    path: /admin/text/reflink/{rfid}   
+    controller:  AppBundle\Controller\TextController::editreflink 
+    
+
+   
+texts_edit_group:
+   path : /admin/text/{objecttype}/{objid}
+   controller:  AppBundle\Controller\TextController::editgroup  
+
+#==============================images=====================
+   
+admin_images_asearch:
+    path : /admin/image/search 
+    controller:  AppBundle\Controller\ImageController::Adminsearch      
+   
+images_all:
+    path : /{_locale}/image/all 
+    controller:  AppBundle\Controller\ImageController::Showall
+    requirements:
+        _locale: en|fr|FR|EN
+        
+images_one:
+    path : /{_locale}/image/{iid}
+    controller:  AppBundle\Controller\ImageController::Showone
+    requirements:
+        _locale: en|fr|EN|FR
+        
+        
+admin_images_addbookmark:
+    path:   /admin/image/addBookmark/{iid}
+    controller:  AppBundle\Controller\ImageController::addbookmark
+                   
+admin_images_addref:
+    path:   /admin/image/addref/{otype}/{oid}/{iid}
+    controller:  AppBundle\Controller\ImageController::addref
+    
+    
+    
+        
+admin_images_showone:
+    path: /admin/image/{iid}
+    controller:  AppBundle\Controller\ImageController::editone
+           
+         
+           
+        
+admin_images_edit:
+    path: /admin/image/edit/{iid}
+    controller:  AppBundle\Controller\ImageController::edit
+    
+admin_images_add_image:
+    path: /admin/image/bookmark/{iid}
+    controller:  AppBundle\Controller\ImageController::addBookmark
+
+    
+#=============================events
+    
+events_admin_top:
+    path: /admin/event/top
+    controller: AppBundle\Controller\AdminEventController::Showtop
+  
+events_admin_addbookmark:
+    path:  /admin/event/addbookmark/{eid}
+    controller: AppBundle\Controller\AdminEventController::addBookmark  
+    
+events_admin_addimage:
+    path:  /admin/event/addimage/{eid}/{iid}
+    controller: AppBundle\Controller\AdminEventController::addImage  
+  
+event_admin_removeimage:
+     path: /admin/event/removeimage/{eid}/{irid}
+     controller: AppBundle\Controller\AdminEventController::removeImageRef  
+     
+event_admin_setlocation:     
+     path: /admin/event/setlocation/{eid}/{lid}
+     controller: AppBundle\Controller\AdminEventController::setLocation  
+      
+      
+events_admin_participants:
+    path:  /admin/event/participant/{eid}
+    controller: AppBundle\Controller\AdminEventController::Editparticipants
+  
+    
+events_admin_addparticipant:
+    path:  /admin/event/addparticipant/{eid}/{pid}
+    controller: AppBundle\Controller\AdminEventController::addparticipant
+    
+events_admin_addcontent:
+    path:  /admin/event/addcontent/{eid}/{cid}
+    controller: AppBundle\Controller\AdminEventController::addcontent   
+    
+events_all:
+    path:  /{_locale}/event/all
+    controller:  AppBundle\Controller\EventController::Showall    
+    
+events_top_locale:
+    path: /{_locale}/event/top
+    controller:  AppBundle\Controller\EventController::Showtop
+    requirements:
+        _locale: en|fr|FR|EN
+        
+events_top:
+    path: /{_locale}/event/top
+    controller:  AppBundle\Controller\EventController::Showtop
+  
+events_one:
+    path:  /{_locale}/event/{eid}
+    controller:  AppBundle\Controller\EventController::Showone    
+    requirements:
+        _locale: en|fr|FR|EN
+        
+        
+admin_events_one:
+    path:  /admin/event/{eid}
+    controller: AppBundle\Controller\AdminEventController::Editone 
+    
+admin_event_one:
+    path:  /admin/event/{eid}
+    controller: AppBundle\Controller\AdminEventController::Editone 
+    
+admin_events_detail:
+    path:  /admin/event/detail/{eid}
+    controller: AppBundle\Controller\AdminEventController::Editdetail 
+        
+#======================incidents
+    
+incidents_one:
+    path : /{_locale}/incidents/{inid} 
+    controller:  AppBundle\Controller\IncidentController::Showone    
+    requirements:
+        _locale: en|fr|FR|EN
+        
+        
+admin_incidents_all:
+    path : /admin/incidents/all 
+    controller:  AppBundle\Controller\IncidentController::Showall
+   
+admin_incidents_new:
+    path : /admin/incidents/new/{eid}/{pid}
+    controller:  AppBundle\Controller\IncidentController::new
+    
+    
+admin_incidents_edit:
+    path : /admin/incidents/{inid} 
+    controller:  AppBundle\Controller\IncidentController::edit
+
+
+#=======================location===================
+
+location_top:
+    path: /location/top
+    controller:  AppBundle\Controller\LocationController::Showtop  
+    
+location_all:
+    path : /location/all 
+    controller:  AppBundle\Controller\LocationController::Showall
+    
+admin_location_bookmark:
+    path: /admin/location/addbookmark/{lid}
+    controller:  AppBundle\Controller\LocationController::addbookmark
+ 
+admin_location_top:
+    path: /admin/location/top
+    controller:  AppBundle\Controller\LocationController::Edittop  
+    
+admin_location_editone:
+    path: /admin/location/{lid}
+    controller:  AppBundle\Controller\LocationController::Editone  
+    
+    
+location_new:
+    path: /admin/location/detail/new/{rid}
+    controller:  AppBundle\Controller\LocationController::New
+    
+admin_location_edit_detail:
+    path: /admin/location/detail/{lid}
+    controller:  AppBundle\Controller\LocationController::Edit
+    
+
+
+location_one:
+    path: /{_locale}/location/{lid}
+    controller:  AppBundle\Controller\LocationController::Showone  
+    requirements:
+        _locale: en|fr|FR|EN
+    
+
+
+
+#======================linkrefs ======================
+
+linkrefs_all:
+    path : /admin/linkref/all 
+    controller:  AppBundle\Controller\LinkrefController::Showall
+    
+linkrefs_one:
+    path : /linkrefs/{rid} 
+    controller:  AppBundle\Controller\LinkrefController::Showone  
+    
+
+    
+linkrefs_edit_detail:
+    path : /admin/linkref/edit/{ot}/{oid}/{lrid} 
+    controller:  AppBundle\Controller\LinkrefController::Edit
+    
+linkrefs_delete_one:    
+    path : /admin/linkref/delete/{ot}/{oid}/{lrid} 
+    controller:  AppBundle\Controller\LinkrefController::Delete
+    
+    
+linkrefs_edit:
+    path : /admin/linkref/{ot}/{oid}/{lrid} 
+    controller:  AppBundle\Controller\LinkrefController::Editone
+    
+linkrefs_edit_person_group:
+   path : /admin/linkref/editperson/{pid}
+   controller:  AppBundle\Controller\LinkrefController::EditpersonGroup  
+   
+linkrefs_edit_event_group:
+   path : /admin/linkref/editevent/{eid}
+   controller:  AppBundle\Controller\LinkrefController::EditeventGroup  
+   
+   
+#========================================================
+
+content_all:
+    path: /{_locale}/content/all
+    controller:  AppBundle\Controller\ContentController::Showall  
+    requirements:
+        _locale: en|fr|FR|EN
+        
+content_one:
+    path: /{_locale}/content/{sid}
+    controller:  AppBundle\Controller\ContentController::Showone  
+    requirements:
+        _locale: en|fr|FR|EN
+        
+content_menu:
+    path: /{_locale}/menucontent/{sid}
+    controller:  AppBundle\Controller\ContentController::Showone  
+    requirements:
+        _locale: en|fr|FR|EN
+        
+subject_one:
+    path: /{_locale}/contentid/{cid}
+    controller:  AppBundle\Controller\ContentController::Showcontent  
+    requirements:
+        _locale: en|fr|FR|EN
+        
+admin_content_search:
+    path: /admin/content/search
+    controller:  AppBundle\Controller\ContentController::Adminsearch  
+
+admin_content_edit:
+    path: /admin/content/edit/{cid}
+    controller:  AppBundle\Controller\ContentController::Edit   
+    
+    
+admin_content_delete:
+    path: /admin/content/delete/{cid}
+    controller:  AppBundle\Controller\ContentController::Delete       
+    
+admin_content_bookmark:    
+    path:  /admin/content/addBookmark/{cid}
+    controller:  AppBundle\Controller\ContentController::addBookmark  
+    
+admin_content_editone:
+    path: /admin/content/{sid}
+    controller:  AppBundle\Controller\ContentController::Editsubject
+
+    
+admin_content_deleteimage:
+    path:  /admin/content/deleteimage/{cid}/{isn}
+    controller:  AppBundle\Controller\ContentController::Deleteimage  
+    
+   
+    
+    
+#=========================================================
+    
+catch_all:
+    path: /{catch_all}
+    controller: AppBundle\Controller\AccueilController::Showall
+    

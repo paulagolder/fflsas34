@@ -1,0 +1,45 @@
+{# templates/image/adminsearch.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/image_css/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block middle %}
+  <div id="imagesearchedit">
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+  <form  action="/admin/image/search">
+  <div class="heading">
+   <div class="label"> {{ 'entrez.chercher' | trans }}</div>
+   <input type="text" name="searchfield">
+   <input type="submit" value="{{ 'chercher' | trans }}" >
+   </div>
+   </form>
+   <div class="newimage"><a class="editbutton" href ="/admin/image/edit/0">{{'new.image' | trans}}</a></div>
+   {% if images is defined %}
+    <div class="heading">
+     <div class="label">{{heading | trans}}</div> 
+     <div class="title">{{searchword}}</div>
+    </div>
+     <div class="imagelist" >
+       <div >
+         {% for image in images  %}
+            <div class="image" ><a href="{{ image.link}}" >{{ image.name}}</a> <a class="editbutton" href="/admin/image/{{image.imageid}}">{{'edit.image' |trans}}</a></div>
+         {% endfor %}
+      </div>
+     </div>
+  {% endif %}
+  </div>
+{% endblock %}
+
+
+{% block right %}
+
+   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+
+{% endblock%}

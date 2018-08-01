@@ -1,0 +1,63 @@
+{# templates/image/editone.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/image_css/editone.css') }}" rel="stylesheet" />
+{% endblock %}
+ {% block js %}
+ {{ parent() }}
+ <script>
+     function clicklocation(lid)
+     {
+      window.location.href = '/admin/event/setlocation/{{objid}}/'+lid;
+     }
+     
+     function clickperson(pid)
+     {
+        window.location.href = '/admin/image/addref/person/'+pid+'/{{objid}}';
+     }
+ </script>
+{% endblock %}
+
+
+{% block middle %}
+  
+  <div id="image" >
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+
+   {% if content %}
+   <div class="heading" >
+    <div class="heading">{{content.title}}</div> 
+     <div class="editbutton" ><a class='editbutton' href="/admin/content/edit/{{content.contentid}}">{{'edit.content' |trans}}</a></div>
+       <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+      <div class="deletebutton" ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}">{{'delete.content' |trans}}</a></div>
+      
+     </div>
+     
+    <div class='maintext'>
+        {{ content.text | raw}} 
+     </div>
+
+     <div class="refs">
+       <div  class="linksheading" >{%trans%}liens.a{% endtrans %}</div>
+       {% for obtype , oref in refs %}
+        <div class="linkgroup" >{{obtype  | trans}}</div>
+         {% for obid , ref in oref %}       
+        <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a> </div>
+        {% endfor %}
+           {% endfor %}
+    </div>
+     </div>
+  {% endif %}
+
+{% endblock %}
+
+{% block right %}
+
+   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+
+{% endblock%}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,9 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\File\File;
 
 
-use App\Entity\Content;
-use App\Entity\Text;
-use App\Service\MyLibrary;
+use AppBundle\Entity\Content;
+use AppBundle\Entity\Text;
+use AppBundle\Service\MyLibrary;
 use App\Forms\ContentForm;
 
 class ContentController extends Controller
@@ -41,7 +41,7 @@ class ContentController extends Controller
     public function Showall()
     {
         # $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $contents = $this->getDoctrine()->getRepository("App:Content")->findAll();
+        $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findAll();
         
         if (!$contents) {
             return $this->render('content/showall.html.twig', [ 'message' =>  'Content not Found',]);
@@ -59,7 +59,7 @@ class ContentController extends Controller
     public function Showone($sid)
     {
         $content=null;
-        $content_ar = $this->getDoctrine()->getRepository("App:Content")->findSubject($sid);
+        $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
         
         if(array_key_exists ($this->lang,$content_ar )) 
         {
@@ -78,10 +78,10 @@ class ContentController extends Controller
         {
           var_dump( $content_ar);
           }
-        # $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('content',$cid);
+        # $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
         # $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         # $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
-        $refs = $this->getDoctrine()->getRepository("App:Linkref")->findGroup('content',$sid);
+        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
         
         return $this->render('content/showone.html.twig', 
         [
@@ -97,13 +97,13 @@ class ContentController extends Controller
     public function Showcontent($cid)
     {
         $content=null;
-        $content= $this->getDoctrine()->getRepository("App:Content")->findOne($cid);
+        $content= $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
         
        
-         $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('content',$cid);
+         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
          $title = $this->mylib->selectText($text_ar,'title',$this->lang);
          $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
-        $refs = $this->getDoctrine()->getRepository("App:Linkref")->findGroup('content',$content->getSubjectid());
+        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$content->getSubjectid());
         
         return $this->render('content/showone.html.twig', 
         [
@@ -116,9 +116,9 @@ class ContentController extends Controller
     
     public function Editone($cid)
     {
-        $content = $this->getDoctrine()->getRepository("App:Content")->findOne($cid);
+        $content = $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
         
-        $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('content',$cid);
+        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
         
@@ -137,10 +137,10 @@ class ContentController extends Controller
     
       public function Editsubject($sid)
     {
-        $contents = $this->getDoctrine()->getRepository("App:Content")->findSubject($sid);
+        $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
         foreach ($contents as $content)
         {
-        $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('content',$content['contentid']);
+        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$content['contentid']);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
       #  $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
         $content['label'] = $title;
@@ -213,14 +213,14 @@ class ContentController extends Controller
         
         if (!$pfield) 
         {
-            $contents = $this->getDoctrine()->getRepository("App:Content")->findAll();
+            $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findAll();
             $heading =  'trouver.tout';
             
         }
         else
         {
             $pfield = "%".$pfield."%";
-            $contents = $this->getDoctrine()->getRepository("App:Content")->findSearch($pfield);
+            $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
             $heading =  'trouver.avec';
         }
         
@@ -253,7 +253,7 @@ class ContentController extends Controller
     public function addBookmark($cid,Request $request)
     {
         $gfield = $request->query->get('searchfield');
-        $content =  $this->getDoctrine()->getRepository("App:Content")->findOne($cid);
+        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');
         if($ilist == null)
@@ -309,7 +309,7 @@ class ContentController extends Controller
     
      public function Delete($cid)
     {
-        $this->getDoctrine()->getRepository("App:Content")->delete($cid);
+        $this->getDoctrine()->getRepository("AppBundle:Content")->delete($cid);
         return $this->redirect("/admin/content/search");
     }
     

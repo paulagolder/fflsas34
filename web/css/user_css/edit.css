@@ -1,0 +1,23 @@
+
+
+
+  
+
+div#fuser
+{
+    
+   margin-top :0.5em;
+   font-size :1em;
+   color : red;
+}
+
+div#fuser div.userform form div
+{
+    display:flex;
+}
+
+div#fuser div.userform form div label
+{
+    color: yellow;
+    width: 138px;
+}

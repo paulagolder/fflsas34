@@ -1,0 +1,117 @@
+{# templates/event/showone.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('event_css/showone.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block js %}
+ {{ parent() }}
+
+
+{% endblock %}
+
+
+
+{% block myheader %} {{ parent() }}{% endblock %}
+
+
+{% block middle %}
+  <div id="event">
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+ 
+     {% if event is defined %}
+     
+   {% if event.ancestors %}
+       {% set ancestors = event.ancestors %}
+        <div  class="breadcrumbs">
+          {% for key in ancestors | keys %}
+           => <a href='{{ancestors[key].link}}' >{{ancestors[key].title}} </a> 
+          {% endfor %}
+        </div>
+   {% endif %} 
+   
+   <div class="heading">
+         <div class="title">{{ event.title}} </div>
+         {% if is_granted('ROLE_ADMIN') %} 
+           <div>
+              <a class="editbutton" href="/admin/event/{{event.eventid}}"> edit.event</a>
+              <a class="editbutton" href = "/admin/event/addbookmark/{{event.eventid}}" >bookmark.event</a>
+            </div>
+         {% endif %}
+         </div>
+         
+         {% if ( event.startdate != "" ) and (event.enddate is defined )%}
+             <div class="dates" > {{ event.startdate}} : {{ event.enddate}} </div>
+         {% elseif event.startdate is defined  %}
+             <div class="dates" > {{ event.startdate}}  </div>
+         {% endif %}
+
+
+  
+    
+     {% if event.locid %}
+      <div class="location" > {% trans %} Endroit {% endtrans %} : <a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
+     {% endif %}
+     
+     {% if images %}
+   <div class="imagegroup" >
+    {% for image in images %}
+     <div class="image">
+      <div class="imageimage" ><a href="{{image.link}}"><img src="{{image.fullpath}}" /></a></div>
+      <div class="imagelabel"> {{image.title}} </div>
+    </div>
+    {% endfor %}
+    </div>
+      {% endif %}
+      
+    <div class="refgroup" >
+    {% for ref in refs %}
+      <div class="ref">
+        <div class="refref" ><a href="{{ref.link}}" target="_map" >{{ref.label}}</a></div>
+      </div>
+    {% endfor %}
+    </div>
+    
+  
+    
+    {% if text  %}  
+      <div class="text" >
+        {% if text is defined %}    
+            {{ text | raw }}
+        {% endif %}
+     </div>
+   {% endif %}
+   
+   {% if participants %}
+     <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'participants' | trans }}</button></div>
+     <div id="pdiv" >
+     <div  class=participants>
+        {% for  key in participants | keys %}
+         <div class=participant > <a href='{{participants[key].link}}' >{{participants[key].label}}</a>  </div>
+        {% endfor %}
+        </div>
+        </div>
+    {% endif %}
+    
+    {% if event.children %}
+       {% set children = event.children %}
+        <div class="hidebar" > <button onclick="HideMe('cdiv' )">{{'sous.evenements' | trans}}</button></div>
+        <div id="cdiv">
+         <div class='children' >       
+          {% for key in children | keys %}
+          <div><a href='{{children[key]["link"]}}' > {{children[key]['title']}}</a> <span class="dates" >{{ children[key]['fstartdate'] }}</span> </div>
+          {% endfor %}
+         </div>
+         </div>
+      {% endif %} 
+    {% endif %}
+    
+  </div>
+{% endblock %}
+
+   

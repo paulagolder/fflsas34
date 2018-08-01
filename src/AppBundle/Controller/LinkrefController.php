@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controller;
+namespace AppBundle\Controller;
 use Goutte\Client;
 use GuzzleHttp\Client as GuzzleClient;
 
 
 
-use App\Service\MyLibrary;
-use App\Entity\Linkref;
-use App\Entity\event;
+use AppBundle\Service\MyLibrary;
+use AppBundle\Entity\Linkref;
+use AppBundle\Entity\event;
 use App\Forms\LinkrefForm;
 
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,7 +39,7 @@ class LinkrefController extends Controller
     
     public function Showall()
     {
-        $linkrefs = $this->getDoctrine()->getRepository("App:Linkref")->findAll();
+        $linkrefs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findAll();
         
         if (!$linkrefs) {
             return $this->render('linkref/showall.html.twig', [ 'message' =>  'Refs not Found',]);
@@ -51,7 +51,7 @@ class LinkrefController extends Controller
     
      public function Showone($rid)
     {
-        $ref = $this->getDoctrine()->getRepository("App:Linkref")->findOne($rid);
+        $ref = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findOne($rid);
         if (!$ref) 
         {
             return $this->render('linkref/showone.html.twig', [ 'message' =>  'Ref'.$rid.' not Found',]);
@@ -62,7 +62,7 @@ class LinkrefController extends Controller
             $pp = explode("/", $path);
             $cid =$pp[1];
             echo("conetent:".$cid);
-            $content=  $this->getDoctrine()->getRepository("App:Content")->findOne($cid);
+            $content=  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
             return $this->render('content/showone.html.twig', 
                   ['lang'=>$this->lang, 
                    'message' =>  '',
@@ -75,7 +75,7 @@ class LinkrefController extends Controller
         
         else
         {
-        $text_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup('linkrefs',$rid);
+        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$rid);
        
         $goutteClient = new Client();
         $guzzleClient = new GuzzleClient(array( 'timeout' => 60,));
@@ -96,12 +96,12 @@ class LinkrefController extends Controller
     
     public function EditPersonGroup($pid)
     {
-        $refs = $this->getDoctrine()->getRepository("App:Linkref")->findGroup('person',$pid);
-        $person = $this->getDoctrine()->getRepository("App:Person")->findOne($pid);
+        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('person',$pid);
+        $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
         $texts_ar = array();
         foreach( $refs as $ref)
         {
-        $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("App:Text")->findGroup('linkref',$ref['linkid']);
+        $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref',$ref['linkid']);
        
         }
         
@@ -119,12 +119,12 @@ class LinkrefController extends Controller
     
     public function EditEventGroup($eid)
     {
-        $refs = $this->getDoctrine()->getRepository("App:Linkref")->findGroup('event',$eid);
+        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
        
         $texts_ar = array();
         foreach( $refs as $ref)
         {
-        $texts_ar[$ref['id']] =  $this->getDoctrine()->getRepository("App:Text")->findGroup('linkrefs',$ref['id']);
+        $texts_ar[$ref['id']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$ref['id']);
        
         }
         
@@ -144,7 +144,7 @@ class LinkrefController extends Controller
      public function Editone($ot,$oid,$lrid)
     {
         $ref = $this->getDoctrine()->getRepository('App:Linkref')->findOne($lrid);
-        $texts_ar =  $this->getDoctrine()->getRepository("App:Text")->findGroup2('linkref',$lrid);
+        $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup2('linkref',$lrid);
         return $this->render('linkref/editone.html.twig', 
                    ['lang'=>$this->lang, 
                      'message' =>  '',
@@ -219,7 +219,7 @@ class LinkrefController extends Controller
     
     public function delete($ot,$oid,$lrid)
     {
-        $this->getDoctrine()->getRepository("App:Linkref")->deleteOne($lrid);
+        $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteOne($lrid);
         return $this->redirect("/admin/linkref/edit".$ot."/".$oid);
     }
 }

@@ -1,0 +1,29 @@
+
+
+
+div#content div.contentlist
+{
+    height:400px;
+    width:90%;
+    margin-left: -25px;
+    overflow:hidden; 
+    overflow-y:scroll;
+    
+}
+
+div#content div.contentlist div div.content a
+ {
+    line-height: 26px;
+    margin-bottom:5px;
+    color:blue;
+    text-decoration:none;
+    margin-bottom:5px;
+ }
+
+div#content div.contentlist div div.content a.editbutton
+{
+    color:white;
+}
+ 
+ 
+

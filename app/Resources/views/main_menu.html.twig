@@ -1,0 +1,18 @@
+
+            {% set locale =  app.request.getLocale() | lower %}
+<div id="mainmenu">
+ <div class="menuitem" > <a  href="/{{locale}}/menucontent/201"> {% trans %}introduction{% endtrans %}</a></div>
+  <div class="menuitem" > <a  href="/{{locale}}/menucontent/200"> {% trans %}notre.site{% endtrans %}</a></div>
+ <div class="menuitem" > <a  href="/{{locale}}/person/all"> {% trans %}les.hommes{% endtrans %}</a></div>
+ <div class="menuitem" > <a href="/{{locale}}/event/top"> {% trans %}les.actions{% endtrans %}</a> </div>
+
+{% if is_granted('ROLE_USER') %}
+   <div class="menuitem" > <a href="/{{locale}}/search/all"> {% trans %}chercher.site{% endtrans %}</a> </div>
+{% endif %}
+ {% if is_granted('ROLE_ADMIN') %}  
+   <div class="menuitem" > <a href="/admin/image/search"> {% trans %}admin.images{% endtrans %}</a> </div>
+    <div class="menuitem" > <a href="/admin/location/top"> {% trans %}admin.locations{% endtrans %}</a> </div>
+      <div class="menuitem" > <a href="/admin/content/search"> {% trans %}admin.content{% endtrans %}</a> </div>
+      <div class="menuitem" > <a href="/admin/users"> {% trans %}admin.allusers{% endtrans %}</a> </div>
+{% endif %}
+</div>
