@@ -4,7 +4,7 @@
  {% set locale =  app.request.getLocale() | lower %}
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('results_p/showall.css') }}" rel="stylesheet" />
+   <link href="{{ asset('results_css/showall.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block myheader %} {{ parent() }}{% endblock %}

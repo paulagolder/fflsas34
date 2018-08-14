@@ -28,8 +28,8 @@ class IncidentRepository extends EntityRepository
      
        $qb = $this->createQueryBuilder("i");
        $qb->select('i.incidentid','i.personid','i.eventid','i.itypeid','i.name_recorded', 'i.sdate', 'i.edate', 'i.locid','i.location','pl.surname','pl.forename' , 'it.label as typename');
-       $qb->join('App\Entity\Person', 'pl', 'WITH', 'pl.personid = i.personid');
-       $qb->join('App\Entity\IncidentType', 'it', 'WITH', 'it.itypeid = i.itypeid');
+       $qb->join(' AppBundle\Entity\Person', 'pl', 'WITH', 'pl.personid = i.personid');
+       $qb->join(' AppBundle\Entity\IncidentType', 'it', 'WITH', 'it.itypeid = i.itypeid');
        $qb->orderBy('pl.surname', 'ASC');
         $qbq = $qb->getQuery();
         $incidents =  $qbq->getResult();
@@ -68,7 +68,7 @@ class IncidentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder("i");
         $qb->select('i.incidentid','i.personid','i.eventid','i.itypeid','i.name_recorded', 'i.sdate', 'i.edate', 'i.locid','i.location','it.label' ,'i.sequence');
-        $qb->join('App\Entity\IncidentType', 'it', 'WITH', 'it.itypeid = i.itypeid');
+        $qb->join(' AppBundle\Entity\IncidentType', 'it', 'WITH', 'it.itypeid = i.itypeid');
         $qb->andWhere('i.personid = :pid');
         $qb->setParameter('pid', $personid);
         $qb->andWhere('i.eventid = :eid');

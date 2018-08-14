@@ -1,33 +1,30 @@
 <?php
 
-// src/Forms/PersonFormType.php
-namespace App\Forms;
+// src/Forms/TextForm.php
+namespace AppBundle\Form;
 
-use App\Entity\person;
+use  AppBundle\Entity\Text;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class PersonForm extends AbstractType
+class TextForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
-            
-        $builder ->add('surname', TextType::class);
-        $builder ->add('forename', TextType::class);
-        $builder ->add('alias', TextType::class);
-           
+        #$builder    ->add('title', TextareaType::class);   
+        $builder    ->add('comment', TextareaType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Person::class,
+            'data_class' => Text::class,
         ));
     }
 }

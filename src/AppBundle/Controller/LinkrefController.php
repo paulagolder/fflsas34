@@ -9,7 +9,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use AppBundle\Service\MyLibrary;
 use AppBundle\Entity\Linkref;
 use AppBundle\Entity\event;
-use App\Forms\LinkrefForm;
+use AppBundle\Form\LinkrefForm;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

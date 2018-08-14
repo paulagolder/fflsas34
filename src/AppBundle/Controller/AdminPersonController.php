@@ -12,7 +12,7 @@ use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-use App\Forms\PersonForm;
+use AppBundle\Form\PersonForm;
 use AppBundle\Entity\person;
 use AppBundle\Entity\Imageref;
 use AppBundle\Entity\Linkref;

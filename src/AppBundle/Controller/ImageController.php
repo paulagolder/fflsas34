@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use AppBundle\Entity\Imageref;
 use AppBundle\Entity\Image;
 use AppBundle\Service\MyLibrary;
-use App\Forms\ImageForm;
+use AppBundle\Form\ImageForm;
 
 class ImageController extends Controller
 {
@@ -171,7 +171,7 @@ class ImageController extends Controller
         ]);
     }
     
-    public function AdminSearch(Request $request)
+    public function ContentSearch(Request $request)
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();

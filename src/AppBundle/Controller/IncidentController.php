@@ -12,7 +12,7 @@ use AppBundle\Entity\Incident;
 use AppBundle\Entity\IncidentType;
 use AppBundle\Entity\person;
 use AppBundle\Entity\event;
-use App\Forms\IncidentFormType;
+use AppBundle\Form\IncidentFormType;
 
 class IncidentController extends Controller
 {

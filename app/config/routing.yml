@@ -3,8 +3,7 @@
 
 index:
    path: /
-   controller: AppBundle\Controller\AccueilController::Showall
-
+   controller: AppBundle\Controller\AccueilController::ShowFrench
    
 index_en:
    path: /en/accueil
@@ -429,7 +428,7 @@ linkrefs_edit_event_group:
    controller:  AppBundle\Controller\LinkrefController::EditeventGroup  
    
    
-#========================================================
+#====================content====================================
 
 content_all:
     path: /{_locale}/content/all
@@ -457,7 +456,7 @@ subject_one:
         
 admin_content_search:
     path: /admin/content/search
-    controller:  AppBundle\Controller\ContentController::Adminsearch  
+    controller:  AppBundle\Controller\ContentController::ContentSearch  
 
 admin_content_edit:
     path: /admin/content/edit/{cid}

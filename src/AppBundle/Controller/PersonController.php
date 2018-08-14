@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
 
-use App\Forms\PersonFormType;
+use AppBundle\Form\PersonFormType;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Location;
 use AppBundle\Entity\Event;

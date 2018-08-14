@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use AppBundle\Entity\person;
 use AppBundle\Entity\Participant;
 use AppBundle\Service\MyLibrary;
-use App\Forms\ParticipantForm;
+use AppBundle\Form\ParticipantForm;
 
 
 class ParticipantController extends Controller

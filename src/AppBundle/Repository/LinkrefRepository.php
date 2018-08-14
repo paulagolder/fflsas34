@@ -48,7 +48,7 @@ class LinkrefRepository extends EntityRepository
     
     public function deleteOne($refid)
     {
-        $sql = "delete FROM App\Entity\Linkref p where p.linkid = '".$refid."'";
+        $sql = "delete FROM  AppBundle\Entity\Linkref p where p.linkid = '".$refid."'";
         $query = $this->em->createQuery($sql);
         $numDeleted = $query->execute();
         return $numDeleted;

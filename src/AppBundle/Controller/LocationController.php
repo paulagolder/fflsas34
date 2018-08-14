@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 
-use App\Forms\LocationForm;
+use AppBundle\Form\LocationForm;
 
 use AppBundle\Service\MyLibrary;
 use AppBundle\Entity\Location;

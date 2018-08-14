@@ -88,7 +88,7 @@ class ContentRepository extends EntityRepository
     
      public function delete($contentid)
     {
-        $sql = "delete FROM App\Entity\Content c where c.contentid = '".$contentid."'";
+        $sql = "delete FROM  AppBundle\Entity\Content c where c.contentid = ".$contentid;
         $query = $this->em->createQuery($sql);
         $numDeleted = $query->execute();
         return $numDeleted;

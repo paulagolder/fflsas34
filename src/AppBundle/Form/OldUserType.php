@@ -1,30 +1,35 @@
 <?php
 
 // src/Forms/UserType.php
-namespace App\Forms;
+namespace AppBundle\Form;
 
-use App\Entity\User;
+use AppBundle\Entity\User;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-
-class UserType extends AbstractType
+use Symfony\Component\OptionsResolver\OptionsResolver;
+class OldUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username', TextType::class);
-        $builder->add('plainPassword', RepeatedType::class, array(
+        $builder
+           
+            ->add('username', TextType::class)
+            ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),));
-        $builder->add('email', TextType::class);
-       # $builder->add('roles', TextType::class);
-        $builder->get('email')->setRequired(false);
-       # $builder->get('roles')->setRequired(false);
+                'second_options' => array('label' => 'Repeat Password'),))
+             ->add('Rolestr', TextType::class)
+             ->add('email', TextType::class)
+        ;
+         $builder->get('plainPassword')->setRequired(false);
+         $builder->get('Rolestr')->setRequired(false);
     }
 
     public function configureOptions(OptionsResolver $resolver)

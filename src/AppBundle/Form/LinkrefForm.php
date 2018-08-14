@@ -1,30 +1,37 @@
 <?php
 
-// src/Forms/TextForm.php
-namespace App\Forms;
+// src/Forms/LinkrefFormType.php
+namespace AppBundle\Form;
 
-use App\Entity\Text;
+
+use  AppBundle\Entity\Linkref;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class TextForm extends AbstractType
+class LinkrefForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        #$builder    ->add('title', TextareaType::class);   
-        $builder    ->add('comment', TextareaType::class);
+        
+            
+        $builder    ->add('objecttype', TextType::class);
+        $builder     ->add('objid', TextType::class);
+        $builder      ->add('label', TextType::class);
+        $builder      ->add('path', TextType::class);
+        $builder      ->add('doctype', TextType::class);
+           
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Text::class,
+            'data_class' => Linkref::class,
         ));
     }
 }

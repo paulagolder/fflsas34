@@ -1,9 +1,9 @@
 <?php
 
 // src/Forms/PersonFormType.php
-namespace App\Forms;
+namespace AppBundle\Form;
 
-use App\Entity\event;
+use  AppBundle\Entity\event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

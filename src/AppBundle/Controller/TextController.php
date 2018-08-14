@@ -10,7 +10,7 @@ use AppBundle\Entity\event;
 use AppBundle\Entity\Text;
 use AppBundle\Entity\person;
 use AppBundle\Service\MyLibrary;
-use App\Forms\TextForm;
+use AppBundle\Form\TextForm;
 
 class TextController extends Controller
 {

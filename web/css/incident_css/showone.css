@@ -3,7 +3,7 @@ div#incident div.heading
 {
     display:flex;
     color:maroon;
-    font-size:1em;
+    font-size:1.2em;
     display:flex;
 }
 
@@ -12,7 +12,7 @@ div#incident div.heading div.label
 {
 
     color:yellow;
-    font-size:1em;
+    font-size:1.2em;
 }
 
 div#incident div.heading div.title
@@ -20,6 +20,7 @@ div#incident div.heading div.title
 
     color:maroon;
     font-size:1em;
+    padding-left:10px;
 }
 
 div#incident > div

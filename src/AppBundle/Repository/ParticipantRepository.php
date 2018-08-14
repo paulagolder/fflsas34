@@ -138,7 +138,7 @@ class ParticipantRepository extends EntityRepository
     
     public function deleteOne($participationid)
     {
-        $query = $this->em->createQuery('delete FROM App\Entity\Participant p where p.participationid = '.$participationid);
+        $query = $this->em->createQuery('delete FROM  AppBundle\Entity\Participant p where p.participationid = '.$participationid);
         $numDeleted = $query->execute();
 
        return $numDeleted;

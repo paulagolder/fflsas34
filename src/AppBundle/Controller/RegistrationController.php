@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
-use App\Forms\UserType;
+use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use AppBundle\Service\MyLibrary;
 

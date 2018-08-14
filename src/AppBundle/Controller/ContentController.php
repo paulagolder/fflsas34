@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use AppBundle\Entity\Content;
 use AppBundle\Entity\Text;
 use AppBundle\Service\MyLibrary;
-use App\Forms\ContentForm;
+use AppBundle\Form\ContentForm;
 
 class ContentController extends Controller
 {
@@ -48,7 +48,7 @@ class ContentController extends Controller
         }
         
         
-        return $this->render('content/adminsearch.html.twig', 
+        return $this->render('content/contentsearch.html.twig', 
         [
         'lang' => $this->lang,
         'message' =>  '' ,
@@ -60,7 +60,7 @@ class ContentController extends Controller
     {
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
-        
+       # var_dump($content_ar);
         if(array_key_exists ($this->lang,$content_ar )) 
         {
             
@@ -162,11 +162,11 @@ class ContentController extends Controller
     {   
         
         $contentid=$cid;
-        $content= $this->getDoctrine()->getRepository('App:Content')->findOne($contentid);
+        $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
         $label = $content->getTitle();
         
         $request = $this->requestStack->getCurrentRequest();
-        $content = $this->getDoctrine()->getRepository('App:Content')->findOne($contentid);
+        $content = $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
         if($content==null)
         {
             $content = new Content();
@@ -203,7 +203,7 @@ class ContentController extends Controller
             ));
     }
     
-    public function AdminSearch(Request $request)
+    public function ContentSearch(Request $request)
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -239,7 +239,7 @@ class ContentController extends Controller
         }
         
         
-        return $this->render('content/adminsearch.html.twig', 
+        return $this->render('content/contentsearch.html.twig', 
         [ 
         'message' => $message,
         'heading' =>  $heading,
@@ -289,7 +289,7 @@ class ContentController extends Controller
      public function Deleteimage($cid,$isn)
     {
         $contentid=$cid;
-        $content= $this->getDoctrine()->getRepository('App:Content')->findOne($contentid);
+        $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
         $matches = array();
         $n = preg_match_all('(<img\s[A-z="]*\s*src[^"]"[^"]+[^/>]+/>)', $content->getText(),$matches);
     

@@ -1,9 +1,9 @@
 <?php
 
 // src/Forms/ImageType.php
-namespace App\Forms;
+namespace AppBundle\Form;
 
-use App\Entity\Image;
+use  AppBundle\Entity\Image;
 
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\AbstractType;
