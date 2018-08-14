@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use AppBundle\Entity\User;
-use App\Form\OldUserType;
+use AppBundle\Form\OldUserType;
 use AppBundle\Service\MyLibrary;
 
 
