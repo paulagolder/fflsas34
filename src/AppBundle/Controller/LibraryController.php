@@ -13,7 +13,7 @@ class LibraryController extends Controller
      */
     public function index()
      {
-         return $this->render('events/index.html.twig', [
+         return $this->render('event/index.html.twig', [
          'controller_name' => 'EventController',
          ]);
      }

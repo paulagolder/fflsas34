@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('event_css/showone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/event_css/showone.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block js %}
@@ -39,12 +39,12 @@
     {% if ( event.startdate is defined ) or (event.enddate is defined )%}
     <div class="dates" > {{ event.startdate}} : {{ event.enddate}} </div>
      {% endif %}
-     {% if event.locid %}
-      <div class="location" > {% trans %} Endroit {% endtrans %} : <a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
-     {% endif %}
-    
-    
   
+   
+
+    
+   
+   
    
      
    {% if participants %}
@@ -70,6 +70,6 @@
 
 {% block right %}
 
-<div> Partiicpanmts </div>
+   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
 
 {% endblock%}

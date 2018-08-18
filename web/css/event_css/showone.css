@@ -78,8 +78,7 @@ div#event div.participant  a
 div#event div.image
 {
     max-width: 138px;
-flex-grow: 1;
-    
+    flex-grow: 1;
 }
 
 div#event div.imagegroup
@@ -93,14 +92,14 @@ div#event div.imagegroup
 div#event div.image img
 {
     margin:10px;
-    max-width:100px;
-    max-height:100px;
+    max-width:150px;
+    max-height:150px;
 }
 
 div#event div.image div.imagelabel
 {
     
-    max-width:100px;
+    max-width:150px;
     color:blue;
     font-size:0.75em;
 }

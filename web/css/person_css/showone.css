@@ -4,7 +4,7 @@
 div#person div.pageheading
 {
     display:flex;
-   xalign-items: center;
+    xalign-items: center;
 }
 
 
@@ -13,8 +13,8 @@ div#person div.pageheading
 
 div#person > div
 {
-   margin-left: 5em;
-   margin-top: 20px;
+    margin-left: 5em;
+    margin-top: 20px;
 }
 
 
@@ -26,26 +26,26 @@ div#person div.refgroup
 
 div#person div.refgroup div.reflabel
 {
-   color:yellow;
+    color:yellow;
 }
 
 div#person div.refgroup div.ref a
 {
-   margin-left:1em;;
+    margin-left:1em;;
 }
 
 
 div#person div.refgroup div.ref a
 {
-   color:blue;
-   text-decoration:none;
+    color:blue;
+    text-decoration:none;
 }
 
 div#person div.text
 {
-   margin-left: 5em;
-   font-size: 1em;
-   margin-top: 20px;
+    margin-left: 5em;
+    font-size: 1em;
+    margin-top: 20px;
 }
 
 
@@ -73,7 +73,7 @@ div#person div.eventtree ul li a
 
 div#person div.eventtree ul li div.incident
 {
-  margin-left: 1em;
+    margin-left: 1em;
 }
 
 div#person div.eventtree ul li div.incident > a
@@ -85,35 +85,35 @@ div#person div.eventtree ul li div.incident > a
 div.image
 {
     max-width: 138px;
-flex-grow: 1;
-
+    flex-grow: 1;
+    
     
 }
 
 div#person div.imagegroup
 {
-     display: flex;
-     flex-direction: row;
-     flex-wrap: wrap;
-     justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 div#person div.imagegroup div.image img
 {
     margin:10px;
-    max-width:100px;
-    max-height:100px;
-     display:block;
-  margin-left:auto;
-  margin-right:auto;
+    max-width:150px;
+    max-height:150px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 div#person div.imagegroup div.imagelabel
 {
-text-align: center;
-vertical-align: middle;
-color:blue;
-font-size:1em;
+    text-align: center;
+    vertical-align: middle;
+    color:blue;
+    font-size:1em;
 }
 
 

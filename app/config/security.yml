@@ -28,7 +28,7 @@ security:
              form_login: 
                login_path: login
                check_path: login
-               default_target_path: /fr/accueil
+               default_target_path: /fr/person/all
     #            always_use_default_target_path: 1
         #secured_area:
             # ...
@@ -53,6 +53,7 @@ security:
          - { path: ^/(fr|en|FR|EN)/content, roles: ROLE_USER }  
          - { path: ^/(fr|en|FR|EN)/search, roles: ROLE_USER }
          - { path: ^/(fr|en|FR|EN)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/(fr|en|FR|EN)/accueil, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN), roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/, roles: ROLE_ADMIN  }
         

@@ -32,7 +32,7 @@ class AdminEventController extends Controller
   
     public function index()
      {
-         return $this->render('events/index.html.twig', [
+         return $this->render('event/index.html.twig', [
          'controller_name' => 'EventController',
          ]);
      }
@@ -45,11 +45,11 @@ class AdminEventController extends Controller
          $Events = $this->getDoctrine()->getRepository("AppBundle:Event")->findAll();
      if (!$Events) 
      {
-         return $this->render('events/showall.html.twig', [ 'message' =>  'Events not Found',]);
+         return $this->render('event/showall.html.twig', [ 'message' =>  'Events not Found',]);
      }
      
      
-     return $this->render('events/adminshowall.html.twig',
+     return $this->render('event/adminshowall.html.twig',
                          [
                             'lang' => $this->lang,
                             'message' =>  '',
@@ -66,7 +66,7 @@ class AdminEventController extends Controller
          
          if (!$event) 
          {
-             return $this->render('events/showone.html.twig', 
+             return $this->render('event/showone.html.twig', 
              [ 
                'lang' => $this->lang,
                'message' =>  'Event '.$eid.' not Found',
@@ -176,7 +176,7 @@ class AdminEventController extends Controller
         
         $linkrefs =$this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
         
-        return $this->render('events/editone.html.twig', [ 
+        return $this->render('event/editone.html.twig', [ 
              'lang' => $this->lang,
              'message' =>  '',
              'heading' =>  'Event '.$eid.' found',
@@ -234,7 +234,7 @@ class AdminEventController extends Controller
             }
         }
         
-        return $this->render('events/editdetail.html.twig', array(
+        return $this->render('event/editdetail.html.twig', array(
             'form' => $form->createView(),
             'objid'=>$eid,
             'returnlink'=>'/admin/event/'.$eid,

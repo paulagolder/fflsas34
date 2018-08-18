@@ -15,14 +15,14 @@ div#contactform  div.heading
 
 div#contactform  label
 {
-  font-size: 0.8em;
+  font-size: 1.0em;
   color: yellow;
+  width: 5em;
 }
 
-xdiv#contactform div#form div 
+div#contactform div#form div 
 {
-    margin-bottom: 15px;
-    margin-left: 50px;
+    display:flex;
 }
 
 xdiv#contactform div#form div 

@@ -163,7 +163,7 @@ class EventController extends Controller
             $linkrefs[$key]['label'] =  $this->mylib ->selectText($reftext_ar,'title',$this->lang);
         }
         
-        return $this->render('events/showone.html.twig', [ 
+        return $this->render('event/showone.html.twig', [ 
         'lang' => $this->lang,
         'message' =>  '',
         'heading' =>  'Event '.$eid.' found',

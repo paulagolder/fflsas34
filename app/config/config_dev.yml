@@ -1,5 +1,6 @@
 imports:
     - { resource: config.yml }
+  
 
 framework:
     router:
@@ -37,5 +38,3 @@ monolog:
         #    type: chromephp
         #    level: info
 
-#swiftmailer:
-#    delivery_addresses: ['me@example.com']
