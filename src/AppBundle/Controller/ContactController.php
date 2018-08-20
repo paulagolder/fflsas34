@@ -63,17 +63,13 @@ class ContactController extends Controller
 
        # $message = \Swift_Message::newInstance();
            $message = (new \Swift_Message('Hello Email'));
-           $message      ->setSubject($subject);
-            $message     ->setFrom('paul.a.golder@gmail.com');
-           $message     ->setTo($email);
-          $message     ->setBody($messagetext);
+           $message->setSubject($subject);
+           $message->setFrom('paul.a.golder@gmail.com');
+           $message->setTo($email);
+           $message->setBody($messagetext);
         #$this->renderView('contact/base.html.twig',array('name' => $name)),'text/html');
 
-       #   $transport = \Swift_SmtpTransport::newInstance('ssl://smtp.gmail.com', 465);
           $mailer->send($message);
-       #    $this->get('mailer')->send($message);
-       
-
             return $this->redirect('/fr/person/all');                
       } 
             

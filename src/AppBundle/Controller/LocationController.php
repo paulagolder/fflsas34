@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use AppBundle\Form\LocationForm;
 
 use AppBundle\Service\MyLibrary;
-use AppBundle\Entity\Location;
+use AppBundle\Entity\location;
 
 class LocationController extends Controller
 {
@@ -221,8 +221,8 @@ class LocationController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         if($lid>0)
         {
-            $location = $this->getDoctrine()->getRepository('App:Location')->findOne($lid);
-            $region = $this->getDoctrine()->getRepository('App:Location')->findOne($location->getRegion());
+            $location = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($lid);
+            $region = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($location->getRegion());
         }
         if(! isset($location))
         {
@@ -259,13 +259,15 @@ class LocationController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         if($rid>0)
         {
-            $region = $this->getDoctrine()->getRepository('App:Location')->findOne($rid);
+            $region = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($rid);
         }
      
-            $location = new Location();
+            $location = new location();
             $location->setRegion($rid);
             $location->setLatitude( 46.63874 );
-             $location->setLongitude(4.86918);
+            $location->setLongitude(4.86918);
+             
+             var_dump($location);
         $form = $this->createForm(LocationForm::class, $location);
         
         if ($request->getMethod() == 'POST') 
@@ -280,8 +282,8 @@ class LocationController extends Controller
                 return $this->redirect("/admin/location/".$rid);
             }
         }
-        
-        return $this->render('Location/edit.html.twig', array(
+    
+        return $this->render('location/edit.html.twig', array(
             'form' => $form->createView(),
             'regionname'=>$region->getName(),
             'location'=>$location,

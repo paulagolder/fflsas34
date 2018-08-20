@@ -3,7 +3,7 @@
 // src/Forms/UserType.php
 namespace AppBundle\Form;
 
-use  AppBundle\Entity\Location;
+use AppBundle\Entity\location;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

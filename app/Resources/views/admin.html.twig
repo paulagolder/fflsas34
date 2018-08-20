@@ -39,9 +39,9 @@
             <div class="messagebar" >
               {% set locale =  app.request.getLocale() %}
             {% if 'en' in locale | lower %}
-               <div class="languagelink"><a href="/fr/accueil"  ><img src="{{asset('common/fr.gif')}}"/></a></div>
+               <div class="languagelink"><a href="/fr/person/all"  ><img src="{{asset('common/fr.gif')}}"/></a></div>
             {% else %}
-               <div class="languagelink"><a href ="/en/accueil" ><img src="{{asset('common/en.gif')}}" /></a></div>
+               <div class="languagelink"><a href ="/en/person/all" ><img src="{{asset('common/en.gif')}}" /></a></div>
             {% endif %}
                <div class="filler">
                {% if app.user  is null %}

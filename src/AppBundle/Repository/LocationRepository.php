@@ -2,7 +2,7 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Location;
+use AppBundle\Entity\location;
 
 use Doctrine\ORM\EntityRepository;
 #use Doctrine\Bundle\DoctrineBundle\Repository\EntityRepository;
@@ -13,11 +13,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class LocationRepository extends EntityRepository
 {
-    ##public function __construct(RegistryInterface $registry)
-    ##{
-   ##     parent::__construct($registry, Location::class);
-    ##}
-
+    
 
       public function findAll()
     {

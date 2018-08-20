@@ -16,7 +16,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 use AppBundle\Form\PersonFormType;
 use AppBundle\Entity\Person;
-use AppBundle\Entity\Location;
+use AppBundle\Entity\location;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Text;
 use AppBundle\Service\MyLibrary;
