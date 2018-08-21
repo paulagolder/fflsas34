@@ -74,11 +74,13 @@ incident.role: role
 incident.to: 'Incident in the service of :'
 incidents: incidents
 introduction: Introduction
+latitude: Latitudeen
 les.actions: 'The Action'
 les.hommes: 'The Men'
 liens.a: 'Links to'
 liens: Links
 location.a.editer: Edit location
+location.name: Nameen
 log.in: 'Log In'
 log.out: 'Log Out'
 login.message: 'To access more of our site sign in.'

@@ -267,7 +267,6 @@ class LocationController extends Controller
             $location->setLatitude( 46.63874 );
             $location->setLongitude(4.86918);
              
-             var_dump($location);
         $form = $this->createForm(LocationForm::class, $location);
         
         if ($request->getMethod() == 'POST') 

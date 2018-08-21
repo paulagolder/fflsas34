@@ -15,7 +15,7 @@ class LocationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
        
-        $builder ->add('name', TextType::class);
+        $builder ->add('name', TextType::class,array('label' => 'location.name'));
         $builder ->add('region', TextType::class);
         $builder ->add('latitude', TextType::class);
         $builder ->add('longitude', TextType::class);

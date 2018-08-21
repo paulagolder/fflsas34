@@ -74,11 +74,13 @@ incident.role: rôle
 incident.to: 'Incident dans le parcours de'
 incidents: Incidents
 introduction: Introduction
+latitude: latitudefr
 les.actions: 'Les Actions'
 les.hommes: 'Les Hommes'
 liens.a: 'Liens a'
 liens: liens
 location.a.editer: Editer Location
+location.name: Nom
 log.in: S'Identifier
 log.out: Deconecter
 login.message: Pour acceder encore s'identifiez

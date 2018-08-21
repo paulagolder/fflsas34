@@ -171,7 +171,7 @@ class ImageController extends Controller
         ]);
     }
     
-    public function ContentSearch(Request $request)
+    public function AdminSearch(Request $request)
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
