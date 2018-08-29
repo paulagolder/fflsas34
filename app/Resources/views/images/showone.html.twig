@@ -30,9 +30,10 @@
       </div>
      <div class="refs">
      {% if refs %}
-       <div  class="linksheading" >{%trans%}liens.a{% endtrans %}</div>
+       
        {% for obtype , oref in refs %}
-        <div class="linkgroup" >{{obtype  | trans}}</div>
+       {% set label = obtype ~ ".links" %}
+        <div  class="linkgroup" >{{  label | trans }}</div>
          {% for obid , ref in oref %}       
         <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a> </div>
         {% endfor %}

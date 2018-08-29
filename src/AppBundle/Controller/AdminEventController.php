@@ -210,7 +210,7 @@ class AdminEventController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         if($eid>0)
         {
-            $event = $this->getDoctrine()->getRepository('App:Event')->findOne($eid);
+            $event = $this->getDoctrine()->getRepository('AppBundle:Event')->findOne($eid);
         }
         if(! isset($event))
         {
@@ -242,29 +242,7 @@ class AdminEventController extends Controller
             ));
     }
    
-    public function addbookmark($eid)
-    {
-        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
-        $session = $this->requestStack->getCurrentRequest()->getSession();
-        $elist = $session->get('eventList');
-        if($elist == null)
-        {
-          $elist = array();
-        }
-
-       if( !array_key_exists ( $eid , $elist))
-       {
-        $newev = array();
-        $newev['id'] = $eid;
-        $newev["label"]= $event->getLabel();
-        $elist[$eid] = $newev;
-         $session->set('eventList', $elist);
-       }
-     
-        return $this->redirect('/admin/event/'.$eid);
-        
-    }
-     
+   
      
      public function addimage($eid,$iid)
     {
@@ -306,7 +284,7 @@ class AdminEventController extends Controller
         $participations =  $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipationsbyEntityPerson($eid,$pid);
        if(!count($participations)>0)
        {
-        $newp = new Participants();
+        $newp = new Participant();
         $newp->setEventid((int)$eid);
         $newp->setPersonid((int)$pid);
         $newp->setContributor($user->getUsername());
@@ -342,6 +320,30 @@ class AdminEventController extends Controller
      $em = $this->getDoctrine()->getManager();
       $em->remove($image);
      $em->flush();
+        return $this->redirect('/admin/event/'.$eid);
+        
+    }
+    
+    public function addbookmark($eid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $elist = $session->get('eventList');
+        if($elist == null)
+        {
+          $elist = array();
+        }
+
+       if( !array_key_exists ( $eid , $elist))
+       {
+        $newev = array();
+        $newev['id'] = $eid;
+        $newev["label"]= $event->getLabel();
+        $elist[$eid] = $newev;
+         $session->set('eventList', $elist);
+       }
+     
         return $this->redirect('/admin/event/'.$eid);
         
     }

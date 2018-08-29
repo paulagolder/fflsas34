@@ -10,6 +10,7 @@ add.text: 'Ajouter nouveau texte'
 admin.content: Gerer Contenu
 admin.images: Gerer Images
 admin.locations: Gerer Locations
+admin.allusers: Gerer Utilisateurs
 annuler: Annuler
 at.place: à
 at: à
@@ -19,11 +20,13 @@ bienvenue.visiteur: 'Bienvenue visiteur'
 bienvenue: Bienvenue
 blessé: blessé
 bookmark.event: signet
+bookmark.person: signet
 bookmark: signet
 bookmarks: signets
 chercher.site: 'Chercher dans la Base de Donnees'
 chercher: Chercher
 child.of: Enfant de
+enfants.evenment: 'sous evenments'
 comment: Commentaire
 compte.de: 'Compte des'
 contact.us: 'Nous envoyer une message ou poser un question'
@@ -57,11 +60,13 @@ enregister: 'Enregistre avec notre site'
 enregistrement: Enregistrer
 enregistrer: Enregister
 entrez.chercher: 'Entrez mot a chercher'
-evenement: Evenement
-evenements: Evenements
+evenment: Evenement
+evenment.enfants: 'Sous-Evenments'
+evenments: Evenements
 event.a.editer: evenement a editer
-event: Evenement
-events: Evenements
+event: Evenment
+event.links: Liens aux Evenments
+events: Evenments
 found.too.many: 'Trop trouver'
 found: Retrouvé
 he.was: 'il a été'
@@ -95,8 +100,10 @@ no.text: 'Texte pas encore ajoutee'
 notre.site: "Notre Site"
 number.of: 'Compte de'
 on.date: le
+participants: Participants
 participated.in.events: Participations
 password: 'Mot de pass'
+person.links : Liens aux Hommes
 people: Hommes
 person.a.editer: Editer
 person: 'Les Hommes'
@@ -106,8 +113,10 @@ retour: Retour
 rien.a.chercher: 'Aucune phrase a Chercher'
 search.results: 'Resultats du recherche pour :'
 si.non.enregistre: 'Si non encore enregistee'
+sous.evenements : 'Sous Evenements'
 subject: Sujet
 submit: Envoyez
+textes: Textes
 the.campaign: 'la campagne'
 this.is.an.edit: 'Cet un edit'
 toutes.endroits: 'Toutes Endroits'

@@ -36,9 +36,10 @@ class ParticipantRepository extends EntityRepository
  
     public function findAll()
     {
-       $qb = $this->createQueryBuilder("p");
-       $participations =  $qb->getQuery()->getResult();
-       
+       $sql = " select p.*  from AppBundle:participant p ";
+      $query = $this->em->createQuery($sql);
+      $participations = $query->getResult();
+
        foreach( $participations as $participation )
        {
           $url = "/admin/participant/detail/".$participation->getParticipationId();
@@ -53,12 +54,18 @@ class ParticipantRepository extends EntityRepository
      
     public function findOne($participationid)
     {
-       $qb = $this->createQueryBuilder("p");
-       $qb->andWhere('p.participationid = :pid');
-       $qb->setParameter('pid', $participationid);
-       $participation =  $qb->getQuery()->getOneOrNullResult();
-       $manager = $this->getEntityManager();
-       $conn = $manager->getConnection();
+    # paul to fix simplify with join
+       #$qb = $this->createQueryBuilder("p");
+       #$qb->andWhere('p.participationid = :pid');
+       #$qb->setParameter('pid', $participationid);
+       #$participation =  $qb->getQuery()->getOneOrNullResult();
+       
+       $sql = " select p.*  from AppBundle:participant p  where p.participationid = ".$participationid;
+      $query = $this->em->createQuery($sql);
+      $participations = $query->getResult();
+      $participation = $participations[0];
+      # $manager = $this->getEntityManager();
+       $conn =  $this->em->getConnection();
        $persons = $conn->query("select * from person where personid  =".$participation->getpersonid())->fetchAll();
        $person = $persons[0];
      //  $person->fixPerson();
@@ -99,12 +106,6 @@ class ParticipantRepository extends EntityRepository
     
     public function findParticipations($personid)
     {
-      # $qb = $this->getDoctrine()->getRepository(Participant::class)->createQueryBuilder("p");
-     #  $qb = $this->em->createQueryBuilder('p');
-     #  $qb ->select('personid', 'eventid' );
-     #  $qb ->from('Participant','p');
-     ##  $qb->where('personid = ?');
-     #  $qb->setParameter(0, $personid);
       $sql = "select p from AppBundle:participant p ";
       $sql .= " where p.personid = ".$personid;
       $query = $this->em->createQuery($sql);
@@ -122,18 +123,24 @@ class ParticipantRepository extends EntityRepository
     
       public function findParticipationsbyEntityPerson($eventid, $personid)
     {
-       $qb = $this->createQueryBuilder("p");
-       $qb->andWhere('p.personid = :pid');
-       $qb->setParameter('pid', $personid);
-       $qb->andWhere('p.eventid = :eid');
-       $qb->setParameter('eid', $eventid);
-       $participations =  $qb->getQuery()->getResult();
-       
-       foreach( $participations as $participation )
-       {
+       #$qb = $this->createQueryBuilder("p");
+       #$qb->andWhere('p.personid = :pid');
+       #$qb->setParameter('pid', $personid);
+      # $qb->andWhere('p.eventid = :eid');
+       #$qb->setParameter('eid', $eventid);
+      # $participations =  $qb->getQuery()->getResult();
+      $sql = " select p, pl from AppBundle:participant p ";
+      $sql .= " join 'AppBundle\Entity\Person' pl WITH pl.personid = p.personid " ;
+      $sql .= " where p.eventid = ".$eventid;
+      $sql .= " and p.personid = ".$personid;
+      $sql .= " order by pl.surname ASC ";
+      $query = $this->em->createQuery($sql);
+      $participations = $query->getResult();
+      foreach( $participations as $participation )
+      {
           $participation->label = $participation->getEventid();
-       }
-       return $participations;
+      }
+      return $participations;
     }
     
     public function deleteOne($participationid)

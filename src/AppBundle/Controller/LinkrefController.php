@@ -143,7 +143,7 @@ class LinkrefController extends Controller
     
      public function Editone($ot,$oid,$lrid)
     {
-        $ref = $this->getDoctrine()->getRepository('App:Linkref')->findOne($lrid);
+        $ref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findOne($lrid);
         $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup2('linkref',$lrid);
         return $this->render('linkref/editone.html.twig', 
                    ['lang'=>$this->lang, 
@@ -169,7 +169,7 @@ class LinkrefController extends Controller
         $linkref=null;
         if($lrid>0)
         {
-            $linkref = $this->getDoctrine()->getRepository('App:Linkref')->findOne($lrid);
+            $linkref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findOne($lrid);
         }
         if(! isset($linkref))
         {
@@ -186,7 +186,7 @@ class LinkrefController extends Controller
         }
         $entity = ucfirst($ot);
         $form = $this->createForm(LinkrefForm::class, $linkref);
-         $object =  $this->getDoctrine()->getRepository('App:'.$entity)->findOne($oid);
+         $object =  $this->getDoctrine()->getRepository('AppBundle:'.$entity)->findOne($oid);
          $label = $object->getlabel();
         if ($request->getMethod() == 'POST') 
         {

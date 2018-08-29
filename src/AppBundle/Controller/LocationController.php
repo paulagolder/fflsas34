@@ -16,7 +16,7 @@ class LocationController extends Controller
 {
 
 
-    private $lang="FR";
+    private $lang="fr";
     private $mylib;
     private $requestStack ;
     
@@ -30,12 +30,12 @@ class LocationController extends Controller
     /**
      *
      */
-    public function index()
-    {
-        return $this->render('Location/index.html.twig', [
-            'controller_name' => 'LocationController',
-        ]);
-    }
+    #public function index()
+    #{
+    #    return $this->render('Location/index.html.twig', [
+    #        'controller_name' => 'LocationController',
+    #    ]);
+    #}
     
     /**
      * 

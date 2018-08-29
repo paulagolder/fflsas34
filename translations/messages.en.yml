@@ -10,6 +10,7 @@ add.text: 'Add a new text'
 admin.content: Edit Content
 admin.images: Edit images
 admin.locations: Edit locations
+admin.allusers: Edit Users
 annuler: Cancel
 at.place: at
 at: at
@@ -18,12 +19,13 @@ bienvenue.site: 'Welcome to the FFLSAS site'
 bienvenue.visiteur: 'Welcome Guest'
 bienvenue: Welcome
 blessé: wounded
-bookmark.event: marquer un evenement
-bookmark: signet
-bookmarks: signets
+bookmark.event: bookmark
+bookmark:  bookmark
+bookmarks:  bookmarks
+bookmark.person: bookmark
 chercher.site: 'Search the database'
 chercher: Search
-child.of: Enfant de
+child.of: 'Child of'
 comment: Comment
 compte.de: 'Number of'
 contact.us: 'Send us a message or ask a question'
@@ -59,8 +61,9 @@ enregistrer: Save
 entrez.chercher: 'Enter Search Term'
 evenement: event
 evenements: events
-event.a.editer: edit eventr
+event.a.editer: Edit Event
 event: Event
+event.links : Links to Events
 events: Events
 found.too.many: 'Too many found'
 found: Found
@@ -80,7 +83,7 @@ les.hommes: 'The Men'
 liens.a: 'Links to'
 liens: Links
 location.a.editer: Edit location
-location.name: Nameen
+location.name: Name
 log.in: 'Log In'
 log.out: 'Log Out'
 login.message: 'To access more of our site sign in.'
@@ -99,14 +102,17 @@ password: Password
 people: People
 person.a.editer: Editing
 person: 'The Men'
+person.links : Links to People
 ref.edit: 'Edit links'
 rejoint: rejoined
 retour: Cancel
 rien.a.chercher: 'No search term entered'
 search.results: 'Results of search for :'
 si.non.enregistre: 'To Register'
+sous.evenements : 'Sub-Events'
 subject: Subject
 submit: Send
+textes: Texts
 the.campaign: 'the campaign'
 this.is.an.edit: This is an edit
 toutes.endroits: 'All Places'

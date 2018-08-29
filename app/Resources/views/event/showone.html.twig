@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('/css/event_css/showone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/event/showone.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block js %}
@@ -39,8 +39,8 @@
          <div class="title">{{ event.title}} </div>
          {% if is_granted('ROLE_ADMIN') %} 
            <div>
-              <a class="editbutton" href="/admin/event/{{event.eventid}}"> edit.event</a>
-              <a class="editbutton" href = "/admin/event/addbookmark/{{event.eventid}}" >bookmark.event</a>
+              <a class="editbutton" href="/admin/event/{{event.eventid}}"> {{'edit.event'|trans}}</a>
+              <a class="editbutton" href = "/user/event/addbookmark/{{event.eventid}}" >{{'bookmark.event'|trans}}</a>
             </div>
          {% endif %}
          </div>
@@ -55,7 +55,12 @@
   
     
      {% if event.locid %}
-      <div class="location" > {% trans %} Endroit {% endtrans %} : <a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
+      <div class="subheading">
+         <div class="label" > {% trans %} Endroit {% endtrans %} : </div>
+         <div class= "title" >
+           <a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> 
+         </div>
+      </div>
      {% endif %}
      
      {% if images %}
@@ -100,7 +105,7 @@
     
     {% if event.children %}
        {% set children = event.children %}
-        <div class="hidebar" > <button onclick="HideMe('cdiv' )">{{'sous.evenements' | trans}}</button></div>
+        <div class="hidebar" > <button onclick="HideMe('cdiv' )">{{'evenment.enfants' | trans}}</button></div>
         <div id="cdiv">
          <div class='children' >       
           {% for key in children | keys %}

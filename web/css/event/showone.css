@@ -12,11 +12,28 @@ div#event div.breadcrumbs  a
   text-decoration:none;
 }
 
+div#event a
+{
+  color:blue;
+  text-decoration:none;
+}
 
 div#event div.heading 
 {
   
  display:flex;
+}
+
+div#event div.subheading
+{
+     display:flex;
+    
+}
+
+div#event div.subheading div.label
+{
+    color:yellow;
+    
 }
 
 
@@ -77,7 +94,7 @@ div#event div.participant  a
 
 div#event div.image
 {
-    max-width: 138px;
+    /*! max-width: 138px; */
     flex-grow: 1;
 }
 

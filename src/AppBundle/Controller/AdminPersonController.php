@@ -36,15 +36,12 @@ class AdminPersonController extends Controller
     }
     
     
-    
     public function index()
     {
         return $this->render('person/index.html.twig', [
         'controller_name' => 'AdminPersonController',
         ]);
     }
-    
-    
     
     
     public function Editone($pid)
@@ -61,9 +58,7 @@ class AdminPersonController extends Controller
         $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",$pid);
         $textcomment = $lib->selectText($text_ar,"comment",$this->lang);
         
-        
         $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipations($pid);
-        
         
         $i=0;
         $incidents =  $this->getDoctrine()->getRepository("AppBundle:Incident")->seekByPerson($pid);
@@ -113,7 +108,6 @@ class AdminPersonController extends Controller
             $i++;
         }
         
-        
         $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("person",$pid);
         $images= array();
         $i=0;
@@ -135,9 +129,6 @@ class AdminPersonController extends Controller
         $mess = '';
         
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
-        #$session = $this->requestStack->getCurrentRequest()->getSession();
-       # $imagelist = $session->get('imageList');
-        
         
         return $this->render('person/editone.html.twig', 
         [ 'lang' => $this->lang,
@@ -182,7 +173,7 @@ class AdminPersonController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         if($pid>0)
         {
-            $person = $this->getDoctrine()->getRepository('App:Person')->findOne($pid);
+            $person = $this->getDoctrine()->getRepository('AppBundle:Person')->findOne($pid);
         }
         if(! isset($person))
         {
@@ -211,25 +202,7 @@ class AdminPersonController extends Controller
             ));
     }
     
-    public function addbookmark($pid)
-    {
-        $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
-        $session = $this->requestStack->getCurrentRequest()->getSession();
-        $plist = $session->get('personList');
-        if($plist == null)
-        {
-            $plist = array();
-        }
-        if( !array_key_exists ( $pid , $plist))
-        {
-            $newperson = array();
-            $newperson['id'] = $pid;
-            $newperson["label"]= $person->getFullname();
-            $plist[$pid] = $newperson;
-            $session->set('personList', $plist);
-        }
-        return $this->redirect('/admin/person/'.$pid);
-    }
+   
     
     public function addimage($pid,$iid)
     {
@@ -273,7 +246,7 @@ class AdminPersonController extends Controller
         $participations =  $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipationsbyEntityPerson($eid, $pid);
         if(count($participations)<1)
         {
-        $part = new Participants();
+        $part = new Participant();
         $part->setEventid((int)$eid);
         $part->setPersonid((int)$pid);
         $part->setNameRecorded(" new name");
@@ -290,6 +263,29 @@ class AdminPersonController extends Controller
         
         $this->getDoctrine()->getRepository("AppBundle:Participant")->deleteOne($partid);
         return $this->redirect("/admin/person/".$pid);
+    }
+    
+    
+     public function addbookmark($pid)
+    {
+     $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $plist = $session->get('personList');
+        if($plist == null)
+        {
+            $plist = array();
+        }
+        if( !array_key_exists ( $pid , $plist))
+        {
+            $newperson = array();
+            $newperson['id'] = $pid;
+            $newperson["label"]= $person->getFullname();
+            $plist[$pid] = $newperson;
+            $session->set('personList', $plist);
+        }
+        return $this->redirect("/admin/person/".$pid);
+       
     }
 }
 

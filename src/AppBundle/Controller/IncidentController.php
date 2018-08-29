@@ -19,7 +19,7 @@ class IncidentController extends Controller
 
 
 
-    private $lang="FR";
+    private $lang="fr";
     private $mylib;
     private $requestStack ;
     
@@ -94,6 +94,7 @@ class IncidentController extends Controller
         $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($incident['eventid']);
         $itype = $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findOne($incident['itypeid']);
         $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($incident['locid']);
+        $location->link = "/".$this->lang."/location/".$incident['locid'];
         $label = $itype->getLabel();
         return $this->render('incident/showone.html.twig', 
                 [ 
@@ -115,7 +116,7 @@ class IncidentController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         if($inid>0)
         {
-            $incident_ar = $this->getDoctrine()->getRepository('App:Incident')->findOne($inid);
+            $incident_ar = $this->getDoctrine()->getRepository('AppBundle:Incident')->findOne($inid);
             $incident = $this->transformtoIncident($incident_ar);
         }
         if(! isset($incident))

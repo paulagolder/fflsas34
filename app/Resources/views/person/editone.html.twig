@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
    {{ parent() }}
-   <link href="{{ asset('person_css/editone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/person/editone.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block js %}
  {{ parent() }}
@@ -46,6 +46,7 @@
           <div class="heading" >
             <div class="label">  {{ 'person.a.editer' | trans }} : </div>
             <div class="title">   {{ person.fullname}} </div>
+            <div class="editbutton" ><a href="/admin/person/addbookmark/{{person.personid}}"> {{"bookmark.person" | trans }} </a></div>
             <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {%trans%}edit.person{% endtrans %}</a></div>
 
             <div class="returnbutton"> <a href = "{{returnlink}}" >{% trans %} retour {% endtrans%} </a></div>
@@ -79,7 +80,7 @@
             
         {% if text  %}
            <div class="textpanel" >
-             <div class="label"> {{'texts'|trans}}</div>
+             <div class="label"> {{'textes'|trans}}</div>
                 
                 <div class="text" >
                     {{ text | raw }}

@@ -13,7 +13,7 @@ use AppBundle\Service\MyLibrary;
 
 class SearchController extends Controller
 {
-    private $lang="FR";
+    private $lang="fr";
     private $mylib;
     private $requestStack ;
     

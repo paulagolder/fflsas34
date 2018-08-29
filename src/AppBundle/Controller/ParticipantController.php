@@ -64,11 +64,11 @@ class ParticipantController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         if($ptid>0)
         {
-            $participation = $this->getDoctrine()->getRepository('App:Participant')->findOne($ptid);
+            $participation = $this->getDoctrine()->getRepository('AppBundle:Participant')->findOne($ptid);
         }
         if(! isset($participation))
         {
-            $$participation = new Participants();
+            $participation = new Participant();
         }
         $form = $this->createForm(ParticipantForm::class, $participation);
         
@@ -111,7 +111,7 @@ class ParticipantController extends Controller
     {
      $em = $this->getDoctrine()->getManager();
 
-        $newp = new Participants();
+        $newp = new Participant();
         $newp->setEventid($eid);
         $newp->setPersonid($pid);
         $em->persist($newp);

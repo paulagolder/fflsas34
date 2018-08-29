@@ -205,4 +205,40 @@ class PersonController extends Controller
       }
       return $text;
     }
+    
+    public function addbookmark($pid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $this->bookmark($pid);
+        return $this->redirect('/admin/person/'.$pid);
+       
+    }
+    
+    public function addUserbookmark($pid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $this->bookmark($pid);
+        return $this->redirect("/".$this->lang.'/person/'.$pid);
+    }
+    
+    
+    private function bookmark($pid)
+    {
+       
+        $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $plist = $session->get('personList');
+        if($plist == null)
+        {
+            $plist = array();
+        }
+        if( !array_key_exists ( $pid , $plist))
+        {
+            $newperson = array();
+            $newperson['id'] = $pid;
+            $newperson["label"]= $person->getFullname();
+            $plist[$pid] = $newperson;
+            $session->set('personList', $plist);
+        }
+    }
 }

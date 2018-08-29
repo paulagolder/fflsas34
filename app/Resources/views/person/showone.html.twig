@@ -5,7 +5,7 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link href="{{ asset('css/person_css/showone.css') }}" rel="stylesheet" />
+<link href="{{ asset('/css/person/showone.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block middle %}
@@ -20,8 +20,8 @@
         <div class="title" >{{ person.fullname}} </div>
         {% if is_granted('ROLE_ADMIN') %} 
         <div  >
-            <a class="editbutton" href = "/admin/person/{{person.personid}}" >edit.person</a>
-            <a class="editbutton" href = "/admin/person/addbookmark/{{person.personid}}" >bookmark.person</a>
+            <a class="editbutton" href = "/admin/person/{{person.personid}}" >{{'edit.person' | trans }}</a>
+            <a class="editbutton" href = "/{{lang}}/person/addbookmark/{{person.personid}}" >{{'bookmark.person' | trans}}</a>
         </div>
         {% endif %}
     </div>

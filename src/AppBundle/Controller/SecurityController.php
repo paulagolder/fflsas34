@@ -16,7 +16,7 @@ use AppBundle\Service\MyLibrary;
 class SecurityController extends Controller
 {
 
-    private $lang="FR";
+    private $lang="fr";
     private $mylib;
     private $requestStack ;
     

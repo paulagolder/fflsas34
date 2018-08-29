@@ -51,17 +51,24 @@ div#image div.content div.refs div.ref a
 div#image div.linksheading
 {
     font-size:1.5em;
+    color:yellow;
+    
 }
 
-
-div#image div.linksgroup
+div#image div.content div.refs div.linkgroup{}
+div#image div.linkgroup
 {
     font-size:1em;
     font-style:italic;
+    color:yellow;
+    
 }
 
 div#image div.ref
 {
     font-size:1em;
     color:white;
+    padding-left:1em;
 }
+
+

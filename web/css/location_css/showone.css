@@ -13,17 +13,7 @@ font-size : 1em;
 text-decoration:none;
 }
 
-xspan.title
-{
-   color:black;
-font-size : 2em; 
-}
 
-xspan.subtitle
-{
-       color:black;
-font-size : 1em; 
-}
 
  div#location div.heading div.heading
 {
@@ -47,6 +37,12 @@ div#location  div.text
 }
 
 
+div#location div a
+{
+      margin-top:20px;
+      color:blue;
+     text-decoration:none;
+}
 
 div#location div.childrenandrefs
 {
@@ -75,6 +71,18 @@ div#location div.children a
       color:blue;
       text-decoration:none;
 }
+
+div#location  div.links div.label
+{
+    color:yellow;
+}
+
+
+div#location   div.links div.link
+{
+    margin-left:20px;
+}
+
 
 
 #mapid { height: 400px;  }

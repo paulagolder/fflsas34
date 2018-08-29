@@ -26,7 +26,7 @@ use AppBundle\Service\MyLibrary;
 class AccueilController  extends Controller
 {
     
-    private $lang="FR";
+    private $lang="fr";
     private $mylib;
     private $requestStack ;
     private $translator;
@@ -45,7 +45,7 @@ class AccueilController  extends Controller
     
     public function showEnglish()
     {
-        $this->lang= ("EN");
+        $this->lang= "EN";
         $this->mylib->setLang("EN");
         $request = new Request();
         $request->setLocale("EN");
@@ -55,7 +55,7 @@ class AccueilController  extends Controller
     
     public function showFrench()
     {
-        $this->lang= ("FR");
+        $this->lang= "FR";
         $this->mylib->setLang("FR");
         $request = new Request();
         $request->setLocale("FR");

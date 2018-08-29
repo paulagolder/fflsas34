@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('/css/event_css/editone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/event/editone.css') }}" rel="stylesheet" />
  {% endblock %}
 
  {% block js %}
@@ -54,8 +54,8 @@
    <div class="heading">
      <div class="label"> {{'event.a.editer' | trans}}</div>
      <div class='title' >{{ event.title}}</div>
-     <div class="editbutton" ><a href="/admin/event/detail/{{event.eventid}}"> {{"edit.event.detail" | trans }} </a></div>
-     <div class="editbutton" ><a href="/admin/event/addbookmark/{{event.eventid}}"> {{"bookmark.event" | trans }} </a></div>
+     <div class="editbutton first" ><a href="/admin/event/detail/{{event.eventid}}"> {{"edit.event.detail" | trans }} </a></div>
+     <div class="editbutton " ><a href="/admin/event/addbookmark/{{event.eventid}}"> {{"bookmark.event" | trans }} </a></div>
      <div class="returnbutton" ><a href="{{returnlink}}"> {{"retour" | trans }} </a></div>
    </div>
    
@@ -86,7 +86,7 @@
      <div class="refgroup" >
      <div class="header">
      <div class="label"> {{'liens' | trans}}</div>
-     <div class="editbutton" ><a href="/admin/linkref/editevent/{{event.eventid}}">{{'edit.refs' | trans }}</a></div>
+     <div class="editbutton first" ><a href="/admin/linkref/editevent/{{event.eventid}}">{{'edit.refs' | trans }}</a></div>
      </div>
     {% for ref in refs %}
      <div class="ref">
@@ -97,9 +97,7 @@
  
            {% if text or title %}
            <div class="textpanel" >
-                <div class="edit editbutton">
-                   <a href = "/admin/text/event/{{objid}}"   > {%trans%}edit.text{% endtrans %}</a>
-                </div>
+               
                 <div class="texts">
                   <div class="title" >
                     {{ title| raw }}
@@ -107,6 +105,9 @@
                 <div class="text" >
                     {{ text | raw }}
                 </div>
+                </div>
+                 <div class="edit editbutton first">
+                   <a href = "/admin/text/event/{{objid}}"   > {%trans%}edit.text{% endtrans %}</a>
                 </div>
             </div>
         {%else%}
@@ -127,12 +128,12 @@
         </div>
     {% endif %}
     
-    <div class="hidebar" > <button onclick="HideMe2('pdiv2' )">{{'sous.evenments' | trans }}</button></div>
+    <div class="hidebar" > <button onclick="HideMe2('pdiv2' )">{{'evenment.enfants' | trans }}</button></div>
   
     <div id="pdiv2" class="children">
     <div class= "subheading" >
-      <div class="label"> {{'children'|trans}}</div>
-      <div class="editbutton" >  <a href="/admin/event/detail/-{{event.eventid}}"> {{"edit.event.new" | trans }} </a></div>
+      <div class="label"> {{'evenment.enfants'|trans}}</div>
+      <div class="editbutton first" >  <a href="/admin/event/detail/-{{event.eventid}}"> {{"edit.event.new" | trans }} </a></div>
     </div>
       {% if event.children %}
       {% set children = event.children %}

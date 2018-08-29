@@ -14,7 +14,12 @@ index_fr:
    controller: AppBundle\Controller\AccueilController::ShowFrench
    
    
-
+adminlang:
+  path: /{_locale}/adminlang/{oldpath}
+  controller: AppBundle\Controller\AdminlangController::Changelang
+  requirements:
+        _locale: en|fr|FR|EN
+   
    
 login:
     path: /{_locale}/login
@@ -119,6 +124,10 @@ admin_Person_removeimage:
 admin_Person_bookmark:
     path: /admin/person/addbookmark/{pid}
     controller: AppBundle\Controller\AdminPersonController::addbookmark
+   
+user_Person_bookmark:
+    path: /{_locale}/person/addbookmark/{pid}
+    controller: AppBundle\Controller\PersonController::addUserbookmark   
    
 removeparticipation:
     path: /admin/person/delete/{pid}/{partid}
@@ -269,6 +278,10 @@ events_admin_top:
 events_admin_addbookmark:
     path:  /admin/event/addbookmark/{eid}
     controller: AppBundle\Controller\AdminEventController::addBookmark  
+    
+events_user_addbookmark:
+    path:  /user/event/addbookmark/{eid}
+    controller: AppBundle\Controller\EventController::addBookmark  
     
 events_admin_addimage:
     path:  /admin/event/addimage/{eid}/{iid}
@@ -468,8 +481,13 @@ admin_content_delete:
     controller:  AppBundle\Controller\ContentController::Delete       
     
 admin_content_bookmark:    
-    path:  /admin/content/addBookmark/{cid}
+    path:  /admin/content/addbookmark/{sid}
     controller:  AppBundle\Controller\ContentController::addBookmark  
+    
+user_content_bookmark:    
+    path:  /{_locale}/content/addbookmark/{sid}
+    controller:  AppBundle\Controller\ContentController::addUserBookmark  
+    
     
 admin_content_editone:
     path: /admin/content/{sid}

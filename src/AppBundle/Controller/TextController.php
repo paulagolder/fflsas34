@@ -143,19 +143,19 @@ class TextController extends Controller
         switch ($objecttype) 
         {
             case "person":
-                $person = $this->getDoctrine()->getRepository('App:Person')->findOne($objid);
+                $person = $this->getDoctrine()->getRepository('AppBundle:Person')->findOne($objid);
                 $label = $person->getFullname();
                 break;
             case "event":
-                $event = $this->getDoctrine()->getRepository('App:Event')->findOne($objid);
+                $event = $this->getDoctrine()->getRepository('AppBundle:Event')->findOne($objid);
                 $label = $event->getLabel();
                 break;
             case "image":
-                  $image = $this->getDoctrine()->getRepository('App:Image')->findOne($objid);
+                  $image = $this->getDoctrine()->getRepository('AppBundle:Image')->findOne($objid);
                 $label = $image->getName();
                 break;
             case "linkref":
-                $ref = $this->getDoctrine()->getRepository('App:Linkref')->findOne($objid);
+                $ref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findOne($objid);
                 $label = $ref->getLabel();
                 break;
             default:

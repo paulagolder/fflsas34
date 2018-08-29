@@ -22,6 +22,12 @@
 {% if content %}
     <div class="heading" >
        <div class="title">{{content.title}}</div> 
+         {% if is_granted('ROLE_ADMIN') %} 
+        <div  >
+            <a class="editbutton" href = "/admin/content/{{content.subjectid}}" >{{'edit.content' | trans }}</a>
+            <a class="editbutton" href = "/user/content/addbookmark/{{content.subjectid}}" >{{'bookmark.content' | trans}}</a>
+        </div>
+        {% endif %}
     </div>
     
     <div class='maintext'>

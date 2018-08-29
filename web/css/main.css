@@ -216,3 +216,44 @@ div#middle  div.heading div.title
     font-size:1.8em;
 }
 
+div#middle div.hidebar button
+{
+    color:white;
+}
+
+
+ div#middle  div.refs 
+{
+    margin-top:20px;
+}
+
+ div#middle  div.refs div.linklist 
+{
+     margin-top:20px;
+}
+
+ div#middle  div.refs div.longlinklist 
+{
+     margin-top:20px;
+}
+
+ div#middle  div.refs div.longlinklist div.label
+{
+     margin-top:20px;
+    color:yellow;
+}
+
+ div#middle  div.refs div.longlinklist div.list
+{
+     margin-top:20px;
+    display:flex;
+    flex-wrap: wrap ;
+}
+
+ div#middle  div.refs div.longlinklist div.list div
+{
+    width:10em;
+    margin-left: 1em;
+    overflow: hidden;
+    margin-bottom: 0.5em;
+}

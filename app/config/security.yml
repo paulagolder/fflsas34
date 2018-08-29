@@ -34,7 +34,7 @@ security:
             # ...
              logout:
                 path:   /logout
-                target: /fr/accueil                    
+                target: /fr/person/all                    
             
             # remember_me:
              #   secret:   '%kernel.secret%'

@@ -185,7 +185,30 @@ class EventController extends Controller
         return $this->Showone($topevent->getEventId());
     }
     
-    
+    public function addbookmark($eid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $elist = $session->get('eventList');
+        if($elist == null)
+        {
+          $elist = array();
+        }
+
+       if( !array_key_exists ( $eid , $elist))
+       {
+        $newev = array();
+        $newev['id'] = $eid;
+        $newev["label"]= $event->getLabel();
+        $elist[$eid] = $newev;
+         $session->set('eventList', $elist);
+       }
+     
+        return $this->redirect('/'.$this->lang.'/event/'.$eid);
+        
+    }
+     
 
     
     

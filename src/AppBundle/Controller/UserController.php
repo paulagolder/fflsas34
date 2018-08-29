@@ -23,7 +23,7 @@ use AppBundle\Service\MyLibrary;
 class UserController extends Controller
 {
     
-    private $lang="FR";
+    private $lang="fr";
     private $mylib;
     private $requestStack ;
     

@@ -46,6 +46,7 @@
            {% if ( incident.locid > 1   ) %}
               <div class="subheading" >
                <div class="label"  >{{'at' |trans}}</div><div class="field">  {{location.name}} </div>
+               <div class="returnbutton"><a href="{{location.link}}">{{'voir'|trans}}</a></div>
                    </div>  
            {% endif %}
             {% if (incident.location !="" and  incident.locid < 1) %}

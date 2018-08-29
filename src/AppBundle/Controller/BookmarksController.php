@@ -25,7 +25,7 @@ use AppBundle\Service\MyLibrary;
 class BookmarksController  extends Controller
 {
     
-    private $lang="FR";
+    private $lang="fr";
     private $mylib;
     private $requestStack ;
     
@@ -41,8 +41,6 @@ class BookmarksController  extends Controller
      $request = $this->requestStack->getCurrentRequest();
      $source = $request->query->get('source');
 
-  
-       
         $session = $request->getSession();
         $ilist = $session->get($blt.'List');
        
@@ -52,20 +50,15 @@ class BookmarksController  extends Controller
            $session->set($blt.'List', $ilist);
         }
         return $this->redirect("/admin/bookmark/edit");
-        
     }
     
     
-   
-    
-    
-      public function setfield($name='', $color='',$blt="all")
+    public function setfield($name='', $color='',$blt="all")
     {
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $request = $this->requestStack->getCurrentRequest();
         $source = $request->query->get('source');
 
-      
         if($blt =="all")
         {
           $blts =["image","person","event","location","content"];
@@ -81,18 +74,15 @@ class BookmarksController  extends Controller
                      'blists'=>$blists,
                    ]);
         }
-        
     }
     
     
-       public function Edit()
+    public function Edit()
     {
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $request = $this->requestStack->getCurrentRequest();
         $source = $request->query->get('source');
 
-      
-       
           $blts =["image","person","event","location","content"];
           $blists = array();
           foreach( $blts as $blt )
@@ -105,8 +95,6 @@ class BookmarksController  extends Controller
                      'source'=>$source,
                      'blists'=>$blists,
                    ]);
-        
-        
     }
     
     

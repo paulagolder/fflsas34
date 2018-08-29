@@ -19,7 +19,7 @@ class ContentController extends Controller
 {
     
     
-    private $lang="FR";
+    private $lang="fr";
     private $mylib;
     private $requestStack ;
     
@@ -56,11 +56,13 @@ class ContentController extends Controller
         'contents'=> $contents,]);
     }
     
-    public function Showone($sid)
+    public function Showone($sid, Request $request)
     {
+          $uri = $request->getUri();
+           var_dump($uri);
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
-       # var_dump($content_ar);
+  
         if(array_key_exists ($this->lang,$content_ar )) 
         {
             
@@ -77,10 +79,8 @@ class ContentController extends Controller
         else
         {
           var_dump( $content_ar);
-          }
-        # $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
-        # $title = $this->mylib->selectText($text_ar,'title',$this->lang);
-        # $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
+        }
+
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
         
         return $this->render('content/showone.html.twig', 
@@ -94,7 +94,7 @@ class ContentController extends Controller
     
     
     
-    public function Showcontent($cid)
+    public function Showcontent($cid,Request $request)
     {
         $content=null;
         $content= $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
@@ -104,7 +104,8 @@ class ContentController extends Controller
          $title = $this->mylib->selectText($text_ar,'title',$this->lang);
          $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$content->getSubjectid());
-        
+         $uri = $request->getUri();
+           var_dump($uri);
         return $this->render('content/showone.html.twig', 
         [
         'message' =>  '',
@@ -250,10 +251,12 @@ class ContentController extends Controller
     }
     
     
-    public function addBookmark($cid,Request $request)
+    public function addBookmark($sid,Request $request)
     {
         $gfield = $request->query->get('searchfield');
-        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
+           $uri = $request->getUri();
+           var_dump($uri);
+        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');
         if($ilist == null)
@@ -261,12 +264,14 @@ class ContentController extends Controller
             $ilist = array();
         }
         $newcontent = array();
-        $newcontent['id'] = $cid;
+        $newcontent['id'] = $sid;
         $newcontent["label"]= $content->getTitle();
-        $ilist[$cid]= $newcontent;
+        $ilist[$sid]= $newcontent;
         $session->set('contentList', $ilist);
         
-        return $this->redirect("/admin/content/search?searchfield=".$gfield);
+         return $this->redirect($uri);
+        
+       # return $this->redirect("/admin/content/search?searchfield=".$gfield);
         
     }
     

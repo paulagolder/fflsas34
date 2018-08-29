@@ -6,6 +6,9 @@ div#editevent
    color : red;
 }
 
+
+
+
 div#editevent div.label
 {
     color:yellow;
@@ -30,6 +33,11 @@ div#editevent  div.editbutton a
      text-decoration:none;
 }
 
+div#editevent div.breadcrumbs
+{
+   font-size :1em;
+   color : yellow;
+}
 
 div#editevent div.breadcrumbs a
 {
@@ -51,9 +59,10 @@ div#editevent div.heading
 }
 
 
-
-
-
+div#editevent  div.editbutton.first
+{
+ margin-left:auto;
+}
 
 
 
