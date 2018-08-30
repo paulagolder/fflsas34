@@ -1,14 +1,4 @@
-
-
-
-
-
-    
-xdiv.notext
-{
-   margin-top:40px; 
-}
-  
+ 
   
 div#editevent
 {
@@ -32,56 +22,18 @@ div#editevent div.breadcrumbs a
      color:blue;
      text-decoration:none;
 }
-    
-    
-    
-    
+     
 div#editevent div.text
 {
    margin-left: 5em;
    font-size: 1.2em;
 }
 
-
-
-    
-
-
-
-
-
-xdiv#editevent span.label
-{
-   font-size :1.2em;
-   color : red;
-}
-
-
-xdiv#editevent span.title
-{
-   font-size :1.2em;
-   color : blue;
-}
-
-xdiv#editevent span.name
-{
-   font-size :2em;
-   color : blue;
-}
-
-xdiv#editevent span.editbutton
-{
-   font-size :1em;
-   color : yellow;
-}
-
 div#editevent div.dates
 {
    font-size :1em;
    color : white; 
-    
 }
-
 
 div#editevent div.heading 
 {
@@ -91,21 +43,12 @@ div#editevent div.heading
     height:20px;
 }
 
-
-
-
-
-
-
-
-
-
 div#editevent div.imagegroup
 {
      display: flex;
      flex-direction: row;
      flex-wrap: wrap;
-     justify-content: center;
+     justify-content: space-evenly;
 }
 
 div#editevent div.imagegroup div.imageedit
@@ -121,7 +64,6 @@ div#editevent div.imagegroup div.images
     overflow: auto;
     border: 2px solid blue;
 }
-
 
 div#editevent div.imagegroup div.images div.image
 {

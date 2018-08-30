@@ -88,4 +88,13 @@ class AccueilController  extends Controller
         'texts'=> $texts,
         ]);
     }
+    
+     public function Showtest()
+    {
+        
+       return new Response(
+            '<html><body>Accueil test </body></html>'
+        );
+     
+    }
 }

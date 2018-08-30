@@ -95,7 +95,7 @@ div#person div.imagegroup
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 div#person div.imagegroup div.image img

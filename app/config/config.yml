@@ -45,6 +45,9 @@ doctrine:
         dbname: 'fssymf'
         user: 'symfuser'
         password: 'cheilly'
+       # dbname: 'lerot_fssymf'
+       # user: 'lerot_symfuser'
+       # password: 'ch8##71eilly'
         charset: UTF8
 
     orm:

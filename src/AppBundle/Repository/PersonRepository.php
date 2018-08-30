@@ -4,21 +4,17 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\person;
-##use Doctrine\Bundle\DoctrineBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 
 class PersonRepository extends EntityRepository
 {
-    #public function __construct(RegistryInterface $registry)
-   # {
-   #     parent::__construct($registry, Person::class);
-   # }
-
+   
 
     
     public function findAll()
     {
+      dump(" here we are ");
        $qb = $this->createQueryBuilder("p");
        $qb->orderBy("p.surname", "ASC");
        $people =  $qb->getQuery()->getResult();
@@ -26,6 +22,7 @@ class PersonRepository extends EntityRepository
        {
           $person->fixperson();
        }
+        dump(" here we are2  ");
        return $people;
     }
     

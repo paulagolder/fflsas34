@@ -22,14 +22,7 @@ null)
 class ParticipantRepository extends EntityRepository
 {
    
-    public $em ;
     
-   public function __construct(EntityManagerInterface $entityManager)
-    {
-        #parent::__construct($registry, Participant::class);
-        $this->em=$entityManager;
-        #$repository = $this->getDoctrine()->getRepository(Participant::class);
-    }
 
    
 
@@ -37,7 +30,7 @@ class ParticipantRepository extends EntityRepository
     public function findAll()
     {
        $sql = " select p.*  from AppBundle:participant p ";
-      $query = $this->em->createQuery($sql);
+      $query = $this->getEntityManager()->createQuery($sql);
       $participations = $query->getResult();
 
        foreach( $participations as $participation )
@@ -61,7 +54,7 @@ class ParticipantRepository extends EntityRepository
        #$participation =  $qb->getQuery()->getOneOrNullResult();
        
        $sql = " select p.*  from AppBundle:participant p  where p.participationid = ".$participationid;
-      $query = $this->em->createQuery($sql);
+      $query = $this->getEntityManager()->createQuery($sql);
       $participations = $query->getResult();
       $participation = $participations[0];
       # $manager = $this->getEntityManager();
@@ -81,7 +74,7 @@ class ParticipantRepository extends EntityRepository
       $sql .= " join 'AppBundle\Entity\Person' pl WITH pl.personid = p.personid " ;
       $sql .= " where p.eventid = ".$eventid;
       $sql .= " order by pl.surname ASC ";
-      $query = $this->em->createQuery($sql);
+      $query = $this->getEntityManager()->createQuery($sql);
       $participations = $query->getResult();
 
        $participants = array();
@@ -108,7 +101,7 @@ class ParticipantRepository extends EntityRepository
     {
       $sql = "select p from AppBundle:participant p ";
       $sql .= " where p.personid = ".$personid;
-      $query = $this->em->createQuery($sql);
+      $query = $this->getEntityManager()->createQuery($sql);
       $participations = $query->getResult();
       # $participations =  $qb->getQuery()->getResult();
        
@@ -134,7 +127,7 @@ class ParticipantRepository extends EntityRepository
       $sql .= " where p.eventid = ".$eventid;
       $sql .= " and p.personid = ".$personid;
       $sql .= " order by pl.surname ASC ";
-      $query = $this->em->createQuery($sql);
+      $query = $this->getEntityManager()->createQuery($sql);
       $participations = $query->getResult();
       foreach( $participations as $participation )
       {

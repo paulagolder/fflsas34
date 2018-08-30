@@ -15,17 +15,7 @@ use Doctrine\DBAL\Driver\Connection;
 class ImagerefRepository extends EntityRepository
 {
 
-   #public $objectnames = array();
-   public $em ;
-    
-    
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-       # parent::__construct($registry, Imageref::class);
-      # $this->objectnames["person"]="people";
-      #  $this->objectnames["event"]="event";
-        $this->em=$entityManager;
-    }
+  
 
  
     public function findOne($refid)
@@ -64,7 +54,7 @@ class ImagerefRepository extends EntityRepository
       $sql = "select t from AppBundle:imageref t ";
       $sql .= " where t.objecttype = '".$objecttype."' ";
       $sql .= " and t.objid = ".$objid;
-      $query = $this->em->createQuery($sql);
+      $query = $this->getEntityManager()->createQuery($sql);
         $refs = $query->getResult();
             
                  
@@ -93,7 +83,7 @@ class ImagerefRepository extends EntityRepository
               #    ->setParameter(1, $objid)
       $sql = "select t from AppBundle:imageref t ";
       $sql .= " where t.imageid= ".$imgid." ";
-      $query = $this->em->createQuery($sql);
+      $query = $this->getEntityManager()->createQuery($sql);
         $refs = $query->getResult();
   
        $ref_ar= array();
@@ -113,7 +103,7 @@ class ImagerefRepository extends EntityRepository
         $sql = "delete FROM  AppBundle\Entity\Imageref p where p.objecttype = '".$objecttype."'";
         $sql .= ' and p.objid = '.$objid;
         $sql .= ' and p.imageid = '.$imageid;
-        $query = $this->em->createQuery($sql);
+        $query = $this->getEntityManager()->createQuery($sql);
         $numDeleted = $query->execute();
         return $numDeleted;
     }

@@ -15,14 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class LinkrefRepository extends EntityRepository
 {
 
-   public $em ;
-   
-   public function __construct(EntityManagerInterface $entityManager)
-    {
-        #parent::__construct($registry, Linkref::class);
-        $this->em=$entityManager;
-    }
-
+  
     
 
      public function findAll()
@@ -49,7 +42,7 @@ class LinkrefRepository extends EntityRepository
     public function deleteOne($refid)
     {
         $sql = "delete FROM  AppBundle\Entity\Linkref p where p.linkid = '".$refid."'";
-        $query = $this->em->createQuery($sql);
+        $query = $this->getEntityManager()->createQuery($sql);
         $numDeleted = $query->execute();
         return $numDeleted;
     }
@@ -68,7 +61,7 @@ class LinkrefRepository extends EntityRepository
       $sql .= " where r.objecttype  = '".$objecttype."' ";
         $sql .= " and r.objid  = ".$objid." ";
  
-      $query = $this->em->createQuery($sql);
+      $query = $this->getEntityManager()->createQuery($sql);
         $refs = $query->getResult();
  
        $ref_ar= array();

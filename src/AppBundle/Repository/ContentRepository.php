@@ -5,9 +5,8 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Content;
 
 use Doctrine\ORM\EntityRepository;
-#use Doctrine\Bundle\DoctrineBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Doctrine\ORM\EntityManagerInterface;
+
 
 
 class ContentRepository extends EntityRepository
@@ -15,17 +14,13 @@ class ContentRepository extends EntityRepository
 
     public $em ;
 
-     public function __construct(EntityManagerInterface $entityManager)
-    {
-        #parent::__construct($registry, Content::class);
-        $this->em=$entityManager;
-    }
+   
 
     public function findAll()
     {
        $sql = "select c from AppBundle:content c ";
        $sql .= " order by c.title ASC ";
-       $query = $this->em->createQuery($sql);
+       $query = $this->getEntityManager()->createQuery($sql);
        $contents = $query->getResult();
        return $contents;
     }
@@ -35,7 +30,7 @@ class ContentRepository extends EntityRepository
     {
        $sql = "select c from AppBundle:content c ";
        $sql .= " where c.contentid = ".$contentid." ";
-       $query = $this->em->createQuery($sql);
+       $query = $this->getEntityManager()->createQuery($sql);
        $contents = $query->getResult();
        return $contents[0];
     }
@@ -55,7 +50,7 @@ class ContentRepository extends EntityRepository
     {
        $sql = "select c from AppBundle:content c ";
        $sql .= " where c.subjectid = ".$subjectid." ";
-       $query = $this->em->createQuery($sql);
+       $query = $this->getEntityManager()->createQuery($sql);
        $contents = $query->getResult();
        
        
@@ -89,7 +84,7 @@ class ContentRepository extends EntityRepository
      public function delete($contentid)
     {
         $sql = "delete FROM  AppBundle\Entity\Content c where c.contentid = ".$contentid;
-        $query = $this->em->createQuery($sql);
+        $query = $this->getEntityManager()->createQuery($sql);
         $numDeleted = $query->execute();
         return $numDeleted;
     }
