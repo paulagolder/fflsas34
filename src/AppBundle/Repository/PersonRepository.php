@@ -4,7 +4,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\person;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+
 
 
 class PersonRepository extends EntityRepository
@@ -14,7 +14,7 @@ class PersonRepository extends EntityRepository
     
     public function findAll()
     {
-      dump(" here we are ");
+      #dump(" here we are ");
        $qb = $this->createQueryBuilder("p");
        $qb->orderBy("p.surname", "ASC");
        $people =  $qb->getQuery()->getResult();
@@ -22,7 +22,7 @@ class PersonRepository extends EntityRepository
        {
           $person->fixperson();
        }
-        dump(" here we are2  ");
+       # dump(" here we are2  ");
        return $people;
     }
     

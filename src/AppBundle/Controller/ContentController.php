@@ -58,8 +58,6 @@ class ContentController extends Controller
     
     public function Showone($sid, Request $request)
     {
-          $uri = $request->getUri();
-           var_dump($uri);
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
   
@@ -78,7 +76,7 @@ class ContentController extends Controller
         }
         else
         {
-          var_dump( $content_ar);
+          dump( $content_ar);
         }
 
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
@@ -104,8 +102,7 @@ class ContentController extends Controller
          $title = $this->mylib->selectText($text_ar,'title',$this->lang);
          $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$content->getSubjectid());
-         $uri = $request->getUri();
-           var_dump($uri);
+        
         return $this->render('content/showone.html.twig', 
         [
         'message' =>  '',
@@ -194,7 +191,7 @@ class ContentController extends Controller
         $matches = array();
         
         $n = preg_match_all('(<img\s[A-z="]*\s*src[^"]"[^"]+[^/>]+/>)', $content->getText(),$matches);
-     #   var_dump($matches);
+
         return $this->render('content/edit.html.twig', array(
             'form' => $form->createView(),
             'label'=> $label,

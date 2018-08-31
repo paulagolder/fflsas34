@@ -67,7 +67,7 @@ class UserController extends Controller
         $encoder = $this->encoderFactory->getEncoder($fuser);
         $tpass= $fuser->getEmail();
         
-        dump("user:".$fuser->getUsername()." roles:".$fuser->getRolestr()." pw=".$fuser->getPassword());
+       # dump("user:".$fuser->getUsername()." roles:".$fuser->getRolestr()." pw=".$fuser->getPassword());
         
         $form = $this->createForm(OldUserType::class, $fuser);
         
@@ -76,7 +76,7 @@ class UserController extends Controller
         {
             $entityManager = $this->getDoctrine()->getManager();
             $plainpassword = $fuser->getPlainPassword();
-            dump("user PP:".$plainpassword).
+            #dump("user PP:".$plainpassword).
             $hashpassword = $encoder->encodePassword($plainpassword,null);
             $fuser->setPassword($hashpassword);
             dump(  "isvalid ?".$encoder->isPasswordValid($hashpassword, $plainpassword,null));

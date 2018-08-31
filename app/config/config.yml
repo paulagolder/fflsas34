@@ -57,11 +57,17 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-swiftmailer:
     delivery_addresses: ['paul.a.golder@lerot.org']
-    transport:  gmail
-    username:  paul.a.golder@gmail.com
-    password:  'ch8#71eilly'
+   # transport:  gmail
+  #  username:  paul.a.golder@gmail.com
+   # password:  'ch8#71eilly'
+     delivery_addresses: ['paul.a.golder@lerot.org']
+    transport:  smtp
+    host: lerot.org
+    port: 465
+    username:  testfflsas@lerot.org
+    password:  'ffl#1944#sas'
     spool: { type: memory }
-
+    
+#
 
