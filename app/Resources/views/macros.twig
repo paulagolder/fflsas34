@@ -38,3 +38,23 @@
   </div>
 {% endif %}
 {% endmacro %}
+
+
+{% macro emailbody( name, fromemail,toemail, subject, body ) %}
+
+<div id="mailmessage">
+<h3 class="label">Message Enyoyer</h3>
+<table  >
+<tr><td >{{'from'| trans}} </td><td> {{ name }}</td></tr>
+<tr><td> {{ 'mail.to' |trans }}</td><td>{{toemail}} </td></tr>
+<tr><td> {{ 'mail.from' |trans }}</td><td>{{fromemail}} </td></tr>
+<tr><td>{{'mail.subject'| trans}} </td><td> {{ subject }}</td></tr>
+<tr><td>{{'mail.body'| trans}}  </td><td>{{ body }}</td></tr>
+</table>
+</div>
+
+
+
+
+
+{% endmacro %}

@@ -1,9 +1,6 @@
 <?php
 
-
 namespace AppBundle\Controller;
-
-
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,11 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 #use Symfony\Bundle\SwiftmailerBundle\Swift_SmtpTransport;
+#use AppBundle\MyClasses\EMail;
 
 use AppBundle\Entity\Contact;
 
@@ -40,19 +35,19 @@ class ContactController extends Controller
         
       # Handle form and recaptcha response
         $form->handleRequest($request);
-        
+    
       # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid())
         {
             $name = $form['name']->getData();
-            $email = $form['email']->getData();
+            $fromemail = $form['email']->getData();
             $subject = $form['subject']->getData();
             $messagetext = $form['message']->getData();
              
             
       # set form data   
             $contact->setName($name);
-            $contact->setEmail($email);          
+            $contact->setEmail($fromemail);          
             $contact->setSubject($subject);     
             $contact->setMessage($messagetext);           
             
@@ -61,17 +56,30 @@ class ContactController extends Controller
             $sn -> persist($contact);
             $sn -> flush();
 
-       # $message = \Swift_Message::newInstance();
            $message = (new \Swift_Message('Hello Email'));
            $message->setSubject($subject);
-           $message->setFrom('paul.a.golder@gmail.com');
-           $message->setTo($email);
-           $message->setBody($messagetext);
-        #$this->renderView('contact/base.html.twig',array('name' => $name)),'text/html');
+           $message->setFrom('admin@syfflsas3.lerot.org','fflsas-admin');
+           $message->setTo($fromemail);
+            $message->setBody(
+            $this->renderView('contact/emailbody.html.twig',array(
+               'name' => $name,
+               'fromemail'=> $fromemail,
+               'toemail'=> 'me@me',
+               'subject' =>$subject,
+               'body'=>$messagetext )
+            ),'text/html');
+   
 
           $mailer->send($message);
-            return $this->redirect('/fr/person/all');                
-      } 
+
+            return $this->render('contact/email.html.twig',array(
+               'name' => $name,
+               'toemail'=> 'me@me',
+               'fromemail'=>$fromemail,
+               'subject' =>$subject,
+               'body'=>$messagetext )
+            );                
+      } ;
             
         return $this->render('contact/form.html.twig', array( 'lang'=>$this->lang,
             'form' => $form->createView()  

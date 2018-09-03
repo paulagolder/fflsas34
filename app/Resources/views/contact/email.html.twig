@@ -1,0 +1,17 @@
+{# templates/person/showone.html.twig #}
+
+{% import 'macros.twig' as m %}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('/css/contact/emailbody.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+<div id= "emailresp" >
+<div class= "label" >This message was sent </div>
+
+{{ m.emailbody(name,toemail,fromemail, subject,body)  }} 
+</div>
+{% endblock %}
