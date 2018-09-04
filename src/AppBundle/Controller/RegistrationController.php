@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Contact;
 use AppBundle\Service\MyLibrary;
 
 
@@ -62,18 +63,55 @@ class RegistrationController extends Controller
         {
             $pass="fail";
         }
+        $this->sendacknowledgement( $user);
+        
            return $this->render('registration/done.html.twig',
             array(
-              'username' => $user->getUsername() ,
-               'plainpassword' => $plainpassword ,
-                'hashpassword' => $hashpassword ,
-                 'isvalid' => $pass ,
+                'username' => $user->getUsername() ,
+                'email' => $plainpassword 
+                
               ));
         }
 
         return $this->render(
             'registration/register.html.twig',
-            array('form' => $form->createView() , 'lang'=>$this->lang,)
+             array('form' => $form->createView() , 'lang'=>$this->lang,)
         );
     }
+    
+    
+    function sendacknowledgement($user)
+    {
+            $contact = new contact();
+            $contact->setName($user->getUsername());
+            $contact->setEmail($user->getEmail());          
+            $contact->setSubject('registration success');     
+            $contact->setMessage('you have sucessfully regisered ');   
+            $datesent =new \DateTime();
+            $contact->setDate_sent( $datesent);
+            
+       # finally add data in database
+            $sn = $this->getDoctrine()->getManager();      
+            $sn -> persist($contact);
+            $sn -> flush();
+
+           $message = (new \Swift_Message('Hello Email'));
+           $message->setSubject($contact->getSubject());
+           $message->setFrom('admin@syfflsas3.lerot.org','fflsas-admin');
+           $message->setTo($contact->getEmail());
+            $message->setBody(
+            $this->renderView('contact/emailbody.html.twig',array(
+               'name' => $contact->getName(),
+               'fromemail'=> 'fflsas-admin',
+               'toemail'=> $contact->getEmail(),
+               'subject' =>$contact->getSubject(),
+               'body'=>$contact->getMessage(),
+               'datesent' => $contact->getDate_sent()->format('Y-m-d H:i:s'))
+            ),'text/html');
+   
+  $this->get('mailer')->send($message);
+          #$mailer->send($message);
+
+                        
+      } 
 }

@@ -174,12 +174,12 @@ class Contact
        return $this->message;
    }
    
-   public function getDate_sent(): ?\DateTimeImmutable
+   public function getDate_sent(): ?\DateTime
    {
      return $this->date_sent;
    } 
    
-   public function setDate_sent(?\DateTimeImmutable $date_sent): self
+   public function setDate_sent(?\DateTime $date_sent): self
    {
      $this->date_sent = $date_sent;
       return $this;

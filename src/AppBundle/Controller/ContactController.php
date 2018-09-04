@@ -49,7 +49,9 @@ class ContactController extends Controller
             $contact->setName($name);
             $contact->setEmail($fromemail);          
             $contact->setSubject($subject);     
-            $contact->setMessage($messagetext);           
+            $contact->setMessage($messagetext);   
+            $datesent =new \DateTime();
+            $contact->setDate_sent( $datesent);
             
        # finally add data in database
             $sn = $this->getDoctrine()->getManager();      
@@ -66,7 +68,8 @@ class ContactController extends Controller
                'fromemail'=> $fromemail,
                'toemail'=> 'me@me',
                'subject' =>$subject,
-               'body'=>$messagetext )
+               'body'=>$messagetext,
+               'datesent' => $datesent->format('Y-m-d H:i:s'))
             ),'text/html');
    
 
@@ -77,7 +80,8 @@ class ContactController extends Controller
                'toemail'=> 'me@me',
                'fromemail'=>$fromemail,
                'subject' =>$subject,
-               'body'=>$messagetext )
+               'body'=>$messagetext,
+               'datesent' => $datesent->format('Y-m-d H:i:s'))
             );                
       } ;
             

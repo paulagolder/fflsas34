@@ -40,14 +40,12 @@ twig:
 doctrine:
     dbal:
         driver: pdo_mysql
-        host: 'localhost'
-        port: '3306'
-        dbname: 'fssymf'
-        user: 'symfuser'
-        password: 'cheilly'
-       # dbname: 'lerot_fssymf'
-       # user: 'lerot_symfuser'
-       # password: 'ch8##71eilly'
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+   
         charset: UTF8
 
     orm:

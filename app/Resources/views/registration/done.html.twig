@@ -13,8 +13,11 @@
 
 
 {% block middle %}
-<div>username:{{username}}</div>
-<div>plainpassword:{{plainpassword}}</div>
-<div>haspassword:{{hashpassword}}</div>
-<div>isvalid:{{isvalid}}</div>
+<div id="regack" >
+<div class="label" >{{'welcome.to.our.site' | trans}}</div>
+<div>{{'username' | trans }}:{{username}}</div>
+<div>{{'email' | trans }}:{{email}}</div>
+<div>{{'registration.message' | trans }}</div>
+</div>
+
 {% endblock %}

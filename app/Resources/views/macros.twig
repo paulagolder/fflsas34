@@ -40,11 +40,12 @@
 {% endmacro %}
 
 
-{% macro emailbody( name, fromemail,toemail, subject, body ) %}
+{% macro emailbody( name,datesent, fromemail,toemail, subject, body ) %}
 
 <div id="mailmessage">
 <h3 class="label">Message Enyoyer</h3>
 <table  >
+<tr><td >{{'date'| trans}} </td><td> {{ datesent }}</td></tr>
 <tr><td >{{'from'| trans}} </td><td> {{ name }}</td></tr>
 <tr><td> {{ 'mail.to' |trans }}</td><td>{{toemail}} </td></tr>
 <tr><td> {{ 'mail.from' |trans }}</td><td>{{fromemail}} </td></tr>
