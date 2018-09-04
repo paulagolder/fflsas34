@@ -53,6 +53,13 @@ class Contact
     */
 
    private $message;
+   
+   
+   /**
+   * @ORM\Column(type="datetime", nullable=true)
+   */
+
+   private $date_sent;
 
    /**
     * Get id
@@ -166,5 +173,18 @@ class Contact
    {
        return $this->message;
    }
+   
+   public function getDate_sent(): ?\DateTimeImmutable
+   {
+     return $this->date_sent;
+   } 
+   
+   public function setDate_sent(?\DateTimeImmutable $date_sent): self
+   {
+     $this->date_sent = $date_sent;
+      return $this;
+  }
+  
+  
 
 }
