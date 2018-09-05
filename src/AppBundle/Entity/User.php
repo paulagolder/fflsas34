@@ -52,7 +52,22 @@ class User implements UserInterface, \Serializable
     private $isActive;
     
     
+     /**
+     * @ORM\Column(name="lastlogin", type="datetime")
+     */
+    private $lastlogin;
+    
+    
+    
+     /**
+     * @ORM\Column(name="registrationcode", type="integer")
+     */
+    private $registrationcode;
+    
+    
+    
     private $plainPassword;
+    private $newregistrationcode;
 
     public function __construct()
     {
@@ -100,7 +115,12 @@ class User implements UserInterface, \Serializable
     {
         return $this->plainPassword;
     }
-
+    
+    
+    public function getNewregistrationcode()
+    {
+        return $this->newregistrationcode;
+    }
 
     public function getRoles()
     {
@@ -156,7 +176,16 @@ class User implements UserInterface, \Serializable
         $this->email=$email;
     }
     
-    
+      public function getLastlogin(): ?\DateTime
+   {
+     return $this->lastlogin;
+   } 
+   
+   public function setLastlogin(?\DateTime $lastlogin): self
+   {
+     $this->lastlogin = $lastlogin;
+      return $this;
+  }
 
    
     
@@ -173,6 +202,11 @@ class User implements UserInterface, \Serializable
     }
 
     
+    public function setNewregistrationcode($codeno)
+    {
+        $this->newregistrationcode = $codeno;
+    }
+    
      public function setPassword($password)
     {
         $this->password = $password;
@@ -184,6 +218,17 @@ class User implements UserInterface, \Serializable
     
      # $this->setPlainPassword(null);
     }
+    
+      public function getRegistrationcode()
+   {
+     return $this->registrationcode;
+   } 
+   
+   public function setRegistrationcode($registrationcode)
+   {
+     $this->registrationcode= $registrationcode;
+      return $this;
+  }
 
     /** @see \Serializable::serialize() */
     public function serialize()
@@ -205,6 +250,12 @@ class User implements UserInterface, \Serializable
             $this->password,
            # $this->salt,
         ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+    
+    public function codeisvalid()
+    {
+       if($this->newregistrationcode == $this->registrationcode)  return true;
+       else return false;
     }
 }
 

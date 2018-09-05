@@ -1,27 +1,22 @@
 {# templates/registration/register.html.twig #}
 
-
 {% import 'macros.twig' as m %}
-
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('/css/person/showone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/registration/regform.css') }}" rel="stylesheet" />
 {% endblock %}
 
-
-
 {% block middle %}
-
-
-{{ form_start(form) }}
+<div id="regform">
+  {{ form_start(form) }}
     {{ form_row(form.username) }}
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}
 
     <button type="submit">Register!</button>
-{{ form_end(form) }}
-
+  {{ form_end(form) }}
+</div>
 {% endblock %}

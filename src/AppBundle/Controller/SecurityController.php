@@ -86,4 +86,20 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 }
 
 
+   /**
+     * @Route("/login_success", name="login_success")
+   
+    public function postLoginRedirectAction()
+    {
+        if () {
+            return $this->redirectToRoute("location_a");
+        } else if () {
+            return $this->redirectToRoute("location_b");
+        } else {
+            return $this->redirectToRoute("index");
+        }
+    }
+  */
+
+
 }

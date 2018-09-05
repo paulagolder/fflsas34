@@ -1,0 +1,25 @@
+{# templates/registration/completesuccess.html.twig #}
+
+
+{% import 'macros.twig' as m %}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('/css/person/showone.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+
+{% block middle %}
+
+<div id="completesuccess">
+  <div class="label"> {{'sucessful.completion' | trans }}</div>
+  <div class="title"> {{ name }}</div>
+  <div class="title"> {{ email }}</div>
+  </div>
+
+
+
+{% endblock %}

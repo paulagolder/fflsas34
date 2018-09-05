@@ -1,4 +1,10 @@
 
+div#loginerror
+{
+    font-size:2.em;
+    color: red;
+    text-align: center; 
+}
 
 div#loginform
 {
@@ -69,4 +75,5 @@ div#loginform div.registration a.registerbutton
     text-shadow: 0 1px 0 #fff;
     width: 200px;
     display: block;
+    cursor: pointer;
 }

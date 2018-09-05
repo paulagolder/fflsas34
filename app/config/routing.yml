@@ -31,6 +31,8 @@ login:
     requirements:
         _locale: en|fr|FR|EN
         
+        
+    
 logout:
     path: /logout
     #controller:  AppBundle\Controller\SecurityController::logoutAction      
@@ -49,6 +51,12 @@ login_check:
 register:
     path: /{_locale}/register
     controller:  AppBundle\Controller\RegistrationController::register    
+    requirements:
+        _locale: en|fr|FR|EN
+        
+complete_registration:
+    path: /{_locale}/complete/{uid}
+    controller:  AppBundle\Controller\RegistrationController::complete   
     requirements:
         _locale: en|fr|FR|EN
    

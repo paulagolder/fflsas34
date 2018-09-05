@@ -1,4 +1,4 @@
-{# templates/registration/register.html.twig #}
+{# templates/registration/done.html.twig #}
 
 
 {% import 'macros.twig' as m %}
@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('/css/person/showone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/registration/regack.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
@@ -15,9 +15,18 @@
 {% block middle %}
 <div id="regack" >
 <div class="label" >{{'welcome.to.our.site' | trans}}</div>
-<div>{{'username' | trans }}:{{username}}</div>
-<div>{{'email' | trans }}:{{email}}</div>
-<div>{{'registration.message' | trans }}</div>
+<div class="heading">
+<div class="label" >{{'username' | trans }}:</div>
+<div class="title">{{username}}</div>
+</div>
+<div class="heading">
+<div class="label" >{{'email' | trans }}:</div>
+<div class="title">{{email}}</div>
+</div>
+<div class="message">
+{{ message }}
+</div>
+
 </div>
 
 {% endblock %}

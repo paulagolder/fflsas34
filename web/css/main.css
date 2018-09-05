@@ -213,7 +213,13 @@ div#middle  div.heading
 div#middle  div.heading div.title
 {
     color:maroon;
-    font-size:1.8em;
+    font-size:1.2em;
+}
+
+div#middle  div.heading div.label
+{
+    color:yellow;
+    font-size:1.2em;
 }
 
 div#middle div.hidebar button
@@ -257,3 +263,4 @@ div#middle div.hidebar button
     overflow: hidden;
     margin-bottom: 0.5em;
 }
+

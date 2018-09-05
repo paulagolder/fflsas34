@@ -11,7 +11,7 @@
 
 {% block middle %}
 {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div id="loginerror" >{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 <div id="loginform" >
 <div class="headingmessage" >{{ 'login.message' |trans }}</div>

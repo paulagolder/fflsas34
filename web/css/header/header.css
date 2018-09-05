@@ -11,6 +11,8 @@
    align-items: center;
 }
 
+
+
  #header div.messagebar div.languagelink
 {
     flex :1;
@@ -19,17 +21,32 @@
      cursor: pointer;
 }
 
+div#header.header div.messagebar div.welcome
+{
+        order: 2;
+}
+
+div#header.header div.messagebar div.status
+{
+        order: 3;
+}
+div#header.header div.messagebar div.complete
+{
+        order: 4;
+}
+
+
  #header div.messagebar div.contactbutton
 {
     flex:1;
-     order: 5;
+     order: 7;
      #float:right;
 }
 
  #header div.messagebar div.loginlink
 {
     flex:1;
-    order: 4;
+    order: 6;
     cursor: pointer;
 }
 

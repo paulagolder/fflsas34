@@ -48,7 +48,7 @@
                {% set cpath  = (cpath | replace({'/FR/' :'/en/'}) ) %}
                <div class="languagelink"><a href ={{cpath}} ><img src="{{asset('common/en.gif')}}" /></a></div>
             {% endif %}
-               <div class="filler">
+               <div class="welcome">
                {% if app.user  is null %}
               {{ 'bienvenue.visiteur' | trans }}
                {% else %}
@@ -56,8 +56,16 @@
                     ({% if is_granted('ROLE_ADMIN') %} Administrator{% endif %}
                     {% if is_granted('ROLE_USER') %} User{% endif %} )
                {% endif %}
+               </div>
+               <div class="status">
                [{{locale}}] Syfflsas3
                </div>
+               
+                {% if is_granted('ROLE_TEMP') %}
+                <div class="complete messbutton">
+                     <a href="/{{locale}}/complete/{{ app.user.userid }}" >{{ "complete.reg" | trans}}</a>
+                </div>
+                {% endif %}
                 {% if app.user  is null%}
                 <div class="loginlink messbutton">
                      <a href="/{{locale}}/login" >{{ "log.in" | trans}}</a>
