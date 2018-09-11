@@ -15,7 +15,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
-use AppBundle\Form\UserType;
+use AppBundle\Form\UserRegForm;
 use AppBundle\Form\CompleteRegForm;
 
 use AppBundle\Entity\User;
@@ -46,7 +46,7 @@ class RegistrationController extends Controller
     {
        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserRegForm::class, $user);
         $form->handleRequest($request);
        # $form->bind($request);
         if ($form->isSubmitted() && $form->isValid()) 
@@ -61,19 +61,21 @@ class RegistrationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-        
+            $baseurl = $this->container->get('router')->getContext()->getBaseUrl();
             $message =    $this->trans->trans('you.have.sucessfully.regisered');
             $message .=                $this->trans->trans('to.complete');
             $message .=               "<". $user->getRegistrationcode().">";
             $message .=                $this->trans->trans('when.first.signing');
+            $message .=                "  ".$baseurl.'/remotecomplete/'.$user->getUserid()."/".$user->getRegistrationcode();
             $subject = 'registration success';
             $this->sendMessage($user, $subject,$message);
-        
+              $message2 =    $this->trans->trans('you.have.sucessfully.regisered');
+            $message .=                $this->trans->trans('to.complete.reply.to email');
            return $this->render('registration/done.html.twig',
             array(
                 'username' => $user->getUsername() ,
-                'email' => $plainpassword ,
-                'message'=>$message,
+                'email' => $user->getEmail(),
+                'message'=>$message2,
               ));
         }
 
@@ -106,8 +108,8 @@ class RegistrationController extends Controller
             $subject =  $this->trans->trans('registration.complete');
             $this->sendMessage( $user,$subject,$message);
         
-           $container->get('security.context')->setToken(null);
-           $container->get('session')->invalidate();
+          # $this->get('security.context')->setToken(null);
+         #  $this->get('session')->invalidate();
            return $this->render('registration/completesuccess.html.twig',
             array(
                 'username' => $user->getUsername() ,
@@ -120,6 +122,37 @@ class RegistrationController extends Controller
             'registration/complete.html.twig',
              array('form' => $form->createView() , 'lang'=>$this->lang,)
         );
+    }
+    
+    
+    public function remotecomplete(Request $request,  $uid, $code)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
+        $usercode = $user->getRegistrationCode();
+        if($code == $usercode)
+        {
+            $user->setLastlogin( new \DateTime());
+            $user->setRolestr("ROLE_USER;");
+            $user->setRegistrationcode(null);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+       
+            $message =  $this->trans->trans('you.have.sucessfully.comlpeted');
+            $subject =  $this->trans->trans('registration.complete');
+            $this->sendMessage( $user,$subject,$message);
+        
+      
+           return $this->render('registration/completesuccess.html.twig',
+            array(
+                'username' => $user->getUsername() ,
+                'email' => $user->getEmail()
+    
+              ));
+        }
+
+        return $this->redirect("/fr/login");
     }
     
     
@@ -147,7 +180,7 @@ class RegistrationController extends Controller
                 $this->renderView('contact/emailbody.html.twig',array(
                'name' => $contact->getName(),
                'fromemail'=> 'fflsas-admin',
-               'toemail'=> $contact->getEmail(),
+               'sentto'=> $contact->getEmail(),
                'subject' =>$contact->getSubject(),
                'body'=>$contact->getMessage(),
                'datesent' => $contact->getDate_sent()->format('Y-m-d H:i:s'))

@@ -163,7 +163,7 @@ class PersonController extends Controller
         foreach( $incidents as $key=>$incident )
         {
            $incidents[$key]['label'] = $this->formatIncident($incident);
-           $incidents[$key]['link'] =  "/".$this->lang."/incidents/".$incident['incidentid'];
+           $incidents[$key]['link'] =  "/".$this->lang."/incident/".$incident['incidentid'];
         }
         $mess = '';
         

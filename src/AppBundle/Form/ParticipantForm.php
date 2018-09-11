@@ -18,8 +18,6 @@ class ParticipantForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
-            
         $builder->add('personid', TextType::class);
         $builder->add('eventid', TextType::class);
         $builder->add('namerecorded', TextType::class);
@@ -27,6 +25,7 @@ class ParticipantForm extends AbstractType
         $builder->add('role', TextType::class);   
         $builder->add('sdate', TextType::class); 
         $builder->add('edate', TextType::class);
+        
         $builder->get('sdate')->setRequired(false);
         $builder->get('edate')->setRequired(false);
         $builder->get('rank')->setRequired(false);

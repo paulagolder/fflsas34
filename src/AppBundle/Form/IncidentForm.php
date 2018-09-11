@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class IncidentFormType extends AbstractType
+class IncidentForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,6 +35,8 @@ class IncidentFormType extends AbstractType
         $builder->get('edate')->setRequired(false);
         $builder->get('rank')->setRequired(false);
         $builder->get('role')->setRequired(false);
+        $builder->get('locid')->setRequired(false);
+        $builder->get('sequence')->setRequired(false);
         $builder->get('namerecorded')->setRequired(false);
         $builder->get('personid')->setDisabled(true);
         $builder->get('eventid')->setDisabled(true);

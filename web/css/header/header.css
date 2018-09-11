@@ -15,60 +15,65 @@
 
  #header div.messagebar div.languagelink
 {
-    flex :1;
+    
     order: 1;
     #float:left;
      cursor: pointer;
 }
 
-div#header.header div.messagebar div.welcome
+#header.header div.messagebar div.welcome
 {
         order: 2;
 }
 
-div#header.header div.messagebar div.status
+#header.header div.messagebar div.status
 {
         order: 3;
 }
-div#header.header div.messagebar div.complete
+
+#header.header div.messagebar div.complete
+{
+        order: 5;
+}
+
+#header.header div.messagebar div.filler
 {
         order: 4;
+        margin-left: auto;
 }
 
-
- #header div.messagebar div.contactbutton
+div#header div.messagebar div.contactbutton
 {
-    flex:1;
+    
      order: 7;
-     #float:right;
 }
 
- #header div.messagebar div.loginlink
+div#header div.messagebar div.loginlink
 {
-    flex:1;
+   
     order: 6;
     cursor: pointer;
 }
 
- #header div.messagebar div.contactlink
+div#header div.messagebar div.contactlink
 {
-    xflex:4;
-    order: 5;
+  
+    order: 7;
     cursor: pointer;
 }
 
 
- #header div.messagebar div.registerlink
+div#header div.messagebar div.registerlink
 {
-    flex:1;
+  
     order: 3;
      cursor: pointer;
 }
 
 #header div.messagebar div.logoutlink
 {
-    flex:2;
-    order: 3;
+   
+    order: 6;
      cursor: pointer;
 }
 

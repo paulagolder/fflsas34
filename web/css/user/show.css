@@ -1,0 +1,64 @@
+
+
+
+  
+
+div#fuser
+{
+    
+   margin-top :0.5em;
+   font-size :1em;
+   color : red;
+}
+
+div#fuser div.heading
+{
+    display:flex;
+}
+
+div#fuser div.userdata div.datarow
+{
+    display:flex;
+}
+
+div#fuser div.userform form div
+{
+    display:flex;
+}
+
+div#fuser div.userform form div label
+{
+    color: yellow;
+    width: 138px;
+}
+
+
+
+div#fuser div.contact
+{
+       display:flex;
+}
+
+div#fuser div.contactlist div.contact div.sentto
+{
+    width:10em;
+    margin-left:2em;
+} 
+div#fuser div.contactlist div.contact div.subject
+{
+    width:10em;
+    margin-left:2em;
+}
+
+
+div#fuser div.contactlist div.contact div.date
+{
+    width : 4em;
+    margin-left:2em;
+}
+
+div#fuser div.contactlist div.contact div.message
+{
+    width:10em;
+    margin-left:20em;
+}

@@ -48,17 +48,14 @@ class ParticipantRepository extends EntityRepository
     public function findOne($participationid)
     {
     # paul to fix simplify with join
-       #$qb = $this->createQueryBuilder("p");
-       #$qb->andWhere('p.participationid = :pid');
-       #$qb->setParameter('pid', $participationid);
-       #$participation =  $qb->getQuery()->getOneOrNullResult();
+   
        
-       $sql = " select p.*  from AppBundle:participant p  where p.participationid = ".$participationid;
+       $sql = " select p  from AppBundle:participant p  where p.participationid = ".$participationid;
       $query = $this->getEntityManager()->createQuery($sql);
       $participations = $query->getResult();
       $participation = $participations[0];
       # $manager = $this->getEntityManager();
-       $conn =  $this->em->getConnection();
+       $conn =  $this->getEntityManager()->getConnection();
        $persons = $conn->query("select * from person where personid  =".$participation->getpersonid())->fetchAll();
        $person = $persons[0];
      //  $person->fixPerson();
@@ -131,7 +128,8 @@ class ParticipantRepository extends EntityRepository
       $participations = $query->getResult();
       foreach( $participations as $participation )
       {
-          $participation->label = $participation->getEventid();
+      
+         # $participation->label = $participation->geteventid();
       }
       return $participations;
     }

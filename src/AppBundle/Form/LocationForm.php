@@ -1,6 +1,6 @@
 <?php
 
-// src/Forms/UserType.php
+// src/Forms/LocationForm.php
 namespace AppBundle\Form;
 
 use AppBundle\Entity\location;

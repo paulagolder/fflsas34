@@ -30,9 +30,8 @@
 
 <div id="editincident"  >
 <div class="heading">
- <div class="label" > {{'edit.incident' |trans }} </div>
+ <div class="label" > {{'new.incident' |trans }} </div>
  <div class="title" >{{personname}} : {{eventlabel}} </div>
- <div class="deletebutton button1" > <a class="deletebutton" href="/admin/incident/delete/{{incidentid}}">{{'delete'|trans}}</a></div>
  <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
 </div>
 
@@ -46,11 +45,7 @@
       <div class="itypelist" >
         <select id="itypelist" onchange="seltype(this.value)" >
          {% for itype in itypes %} 
-           {% if (itype.itypeid ) == itypeid %}
-             <option value = "{{itype.itypeid}}" selected >{{itype.label}}</option>
-           {% else %}
              <option value = "{{itype.itypeid}}">{{itype.label}}</option>
-         {% endif %}
      {% endfor %}
     </select>
     </div>

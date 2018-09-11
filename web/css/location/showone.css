@@ -85,4 +85,8 @@ div#location   div.links div.link
 
 
 
-#mapid { height: 400px;  }
+#mapid 
+{ 
+    height: 400px;  
+    max-width : 600px;
+}

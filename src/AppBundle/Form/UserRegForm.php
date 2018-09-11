@@ -1,6 +1,6 @@
 <?php
 
-// src/Forms/UserType.php
+// src/Forms/UserRegorm.php
 namespace AppBundle\Form;
 
 use  AppBundle\Entity\User;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UserType extends AbstractType
+class UserRegForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,9 +22,7 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),));
         $builder->add('email', TextType::class);
-       # $builder->add('roles', TextType::class);
-        $builder->get('email')->setRequired(false);
-       # $builder->get('roles')->setRequired(false);
+        #$builder->get('email')->setRequired(false);
     }
 
     public function configureOptions(OptionsResolver $resolver)

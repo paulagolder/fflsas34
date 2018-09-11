@@ -35,9 +35,17 @@ class Contact
     *
     * @ORM\Column(name="email", type="string", length=255)
     */
-
    private $email;
 
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="sentto", type="string", length=25)
+    */
+
+    private $sentto;
+   
+   
    /**
     * @var string
     *
@@ -98,6 +106,24 @@ class Contact
        return $this->name;
    }
 
+     public function setSentto($to)
+   {
+       $this->sentto = $to;
+       return $this;
+   }
+
+   /**
+    * Get name
+    *
+    * @return string
+    */
+
+   public function getSentto()
+   {
+       return $this->sentto;
+   }
+   
+   
    /**
     * Set email
     *

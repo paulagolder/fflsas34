@@ -25,7 +25,7 @@ class IncidentRepository extends EntityRepository
         $incidents =  $qbq->getResult();
        foreach( $incidents as $key=>$incident)
        {
-          $url = "/incidents/".$incident['incidentid'];
+          $url = "/incident/".$incident['incidentid'];
           $incidents[$key]['link'] = $url;
           $incidents[$key]['label'] = $incident['surname'].", ".$incident['forename'];
           #echo( $incident['surname'].", ".$incident['forename']);
@@ -46,7 +46,7 @@ class IncidentRepository extends EntityRepository
         $incid_ar = array();
        foreach( $incidents as $incident)
        {
-          $url = "/incidents/".$incident['incidentid'];
+          $url = "/incident/".$incident['incidentid'];
           $incident['link'] = $url;
           $incid_ar[] = $incident;
        }
@@ -69,7 +69,7 @@ class IncidentRepository extends EntityRepository
         $incid_ar = array();
        foreach( $incidents as $incident)
        {
-          $url = "/admin/incidents/".$incident['incidentid'];
+          $url = "/admin/incident/".$incident['incidentid'];
           $incident['link'] = $url;
           $incid_ar[] = $incident;
        }
@@ -85,9 +85,9 @@ class IncidentRepository extends EntityRepository
       $sql .= " where i.incidentid = ".$incidentid." ";
       $query = $this->getEntityManager()->createQuery($sql);
         $incidents = $query->getResult();
- 
-     #   $incident=  $qbq->getOneOrNullResult();
-       return $incidents[0];
+      if(sizeof($incidents) >0)
+         return $incidents[0];
+    else return null;
     }
 
     public function findLocations($locid)
@@ -101,5 +101,17 @@ class IncidentRepository extends EntityRepository
        
        return $incidents;
     }
+    
+    
+      public function delete($incidentid)
+    {
+      
+        $qd = $this->createQueryBuilder('i');
+        $qd->delete();
+        $qd->where('i.incidentid = :uid');
+        $qd->setParameter('uid',$incidentid);
+        $query = $qd->getQuery()->getResult();
+    }
+    
     
 }

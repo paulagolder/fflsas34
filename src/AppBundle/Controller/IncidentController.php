@@ -10,9 +10,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use AppBundle\Service\MyLibrary;
 use AppBundle\Entity\Incident;
 use AppBundle\Entity\IncidentType;
+use AppBundle\Entity\Participation;
 use AppBundle\Entity\person;
 use AppBundle\Entity\event;
-use AppBundle\Form\IncidentFormType;
+use AppBundle\Form\IncidentForm;
 
 class IncidentController extends Controller
 {
@@ -57,7 +58,7 @@ class IncidentController extends Controller
               $etext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$eventid);
                  $etitle= $lib->selectText( $etext_ar,"title",$this->lang);
             $incidents[$key]['label'] = $personname.":".$etitle.":".$incident['typename'];
-             $incidents[$key]['link'] ="/admin/incidents/".$incident['incidentid'];
+             $incidents[$key]['link'] ="/admin/incident/".$incident['incidentid'];
         }
      
         return $this->render('incident/showall.html.twig', 
@@ -123,7 +124,7 @@ class IncidentController extends Controller
         {
             $incident = new Incident();
         }
-        $form = $this->createForm(IncidentFormType::class, $incident);
+        $form = $this->createForm(IncidentForm::class, $incident);
         
         if ($request->getMethod() == 'POST') 
         {
@@ -148,6 +149,7 @@ class IncidentController extends Controller
             'form' => $form->createView(),
             'eventlabel'=>$event->getLabel(),
             'personname'=> $person->getSurname(),
+            'incidentid'=>$inid,
             'itypes'=>$incidenttypes,
             'itypeid'=>$incident->getItypeid(),
             'returnlink'=>'/admin/participant/'.$participations[0]->getParticipationid(),
@@ -163,7 +165,7 @@ class IncidentController extends Controller
             $incident->setEventid($eid);
             $incident->setPersonid($pid);
       
-        $form = $this->createForm(IncidentFormType::class, $incident);
+        $form = $this->createForm(IncidentForm::class, $incident);
         
         if ($request->getMethod() == 'POST') 
         {
@@ -175,8 +177,8 @@ class IncidentController extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($incident);
                 $entityManager->flush();
-                $inid= $form->submit($request->request->get($form->getId()));
-                return $this->redirect("/admin/incidents/".$inid);
+                $inid= $incident->getIncidentid();
+                return $this->redirect("/admin/incident/".$inid);
             }
         }
          $pid = $form["personid"]->getData();
@@ -184,13 +186,23 @@ class IncidentController extends Controller
          $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
          $event =   $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
          $incidenttypes =   $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findAll();
-        return $this->render('incident/edit.html.twig', array(
+        return $this->render('incident/new.html.twig', array(
             'form' => $form->createView(),
             'eventlabel'=>$event->getLabel(),
             'personname'=> $person->getFullname(),
             'itypes'=>$incidenttypes,
             'returnlink'=>'/admin/person/'.$pid,
             ));
+    }
+    
+    public function delete($inid)
+    {
+        $incident = $this->getDoctrine()->getRepository('AppBundle:Incident')->findOne($inid);
+        $eventid = $incident['eventid'];
+        $personid = $incident['personid'];
+        $participations = $this->getDoctrine()->getRepository('AppBundle:Participant')->findParticipationsbyEntityPerson($eventid, $personid);
+        $this->getDoctrine()->getRepository("AppBundle:Incident")->delete($inid);
+        return $this->redirect("/admin/participant/".$participations[0]->getParticipationId());
     }
      
      

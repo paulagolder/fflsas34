@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block middle %}
-  <div class="fusers">
+  <div id="fusers">
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
@@ -16,13 +16,14 @@
    {% if fusers %}
      <h1>{{heading | trans}} ({{ fusers | length }} )</h1> 
      <div class="fuserlist">
-     <nav>
-       <ul>
+   
          {% for fuser in fusers %}
-            <li><a href="{{fuser.link}}" >{{fuser.username}} </a></li>
+           <div class="user">
+            <div><a href="{{fuser.link}}" >{{fuser.username}} </a></div>
+            <div class="deletebutton" > <a class="deletebutton" href="/admin/user/delete/{{fuser.userid}}" >{{"delete.user" | trans }} </a> </div>
+                 </div>
          {% endfor %}
-      </ul>
-     </nav>
+
      </div>
   {% endif %}
   </div>

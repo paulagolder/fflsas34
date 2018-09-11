@@ -10,11 +10,18 @@ div#randomimage  div.heading
     text-align : center;
 }
 
-div#randomimage  div.title
+div#randomimage  div.heading div.title
 {
-    color:blue;
+    color:yellow;
     font-size:1em;
     text-align : center;
+}
+
+div#randomimage div.image div.title
+{
+    color:maroon;
+    font-size: 1em;
+    text-align: center;
 }
 
 div#randomimage

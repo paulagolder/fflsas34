@@ -20,12 +20,16 @@ class LinkrefForm extends AbstractType
     {
         
             
-        $builder    ->add('objecttype', TextType::class);
-        $builder     ->add('objid', TextType::class);
-        $builder      ->add('label', TextType::class);
-        $builder      ->add('path', TextType::class);
-        $builder      ->add('doctype', TextType::class);
-           
+        $builder->add('objecttype', TextType::class);
+        $builder->add('objid', TextType::class);
+        $builder->add('label', TextType::class);
+        $builder->add('path', TextType::class);
+        $builder->add('doctype', TextType::class);
+        $builder->get('objecttype')->setDisabled(true);
+        $builder->get('objid')->setDisabled(true);
+        $builder->get('path')->setRequired(false);
+        $builder->get('doctype')->setRequired(false);
+                
     }
 
     public function configureOptions(OptionsResolver $resolver)

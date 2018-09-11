@@ -11,6 +11,16 @@ div#fuser
    color : red;
 }
 
+div#fuser div.heading
+{
+    display:flex;
+}
+
+div#fuser div.userdata div.datarow
+{
+    display:flex;
+}
+
 div#fuser div.userform form div
 {
     display:flex;

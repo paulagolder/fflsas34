@@ -22,7 +22,14 @@ class ContactController extends Controller
     
    public function create(Request $request , \Swift_Mailer $mailer)
     {
+         $user = $this->getUser();
+      
         $contact = new Contact;
+        if($user)
+        {
+         $contact->setName($user->getUsername());
+         $contact->setEmail($user->getEmail());
+         }
       
       # Add form fields
         $form = $this->createFormBuilder($contact)
@@ -30,7 +37,7 @@ class ContactController extends Controller
         ->add('email', TextType::class, array('label'=> 'email','attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
         ->add('subject', TextType::class, array('label'=> 'subject','attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
         ->add('message', TextareaType::class, array('label'=> 'message','attr' => array('class' => 'form-control')))
-        ->add('Save', SubmitType::class, array('label'=> 'submit', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-top:15px')))
+        ->add('Submit', SubmitType::class, array('label'=> 'submit', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-top:15px')))
         ->getForm();
         
       # Handle form and recaptcha response
@@ -43,9 +50,10 @@ class ContactController extends Controller
             $fromemail = $form['email']->getData();
             $subject = $form['subject']->getData();
             $messagetext = $form['message']->getData();
-             
+            $sentto = "admin";  
             
       # set form data   
+            $contact->setSentto($sentto);
             $contact->setName($name);
             $contact->setEmail($fromemail);          
             $contact->setSubject($subject);     
@@ -66,7 +74,7 @@ class ContactController extends Controller
             $this->renderView('contact/emailbody.html.twig',array(
                'name' => $name,
                'fromemail'=> $fromemail,
-               'toemail'=> 'me@me',
+               'sentto'=> $sentto,
                'subject' =>$subject,
                'body'=>$messagetext,
                'datesent' => $datesent->format('Y-m-d H:i:s'))
@@ -77,7 +85,7 @@ class ContactController extends Controller
 
             return $this->render('contact/email.html.twig',array(
                'name' => $name,
-               'toemail'=> 'me@me',
+               'sentto'=> $sentto,
                'fromemail'=>$fromemail,
                'subject' =>$subject,
                'body'=>$messagetext,

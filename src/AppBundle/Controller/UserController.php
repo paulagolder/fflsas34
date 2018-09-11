@@ -16,7 +16,9 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use AppBundle\Entity\User;
-use AppBundle\Form\OldUserType;
+use AppBundle\Entity\Contact;
+use AppBundle\Form\UserUserForm;
+use AppBundle\Form\UserForm;
 use AppBundle\Service\MyLibrary;
 
 
@@ -67,9 +69,7 @@ class UserController extends Controller
         $encoder = $this->encoderFactory->getEncoder($fuser);
         $tpass= $fuser->getEmail();
         
-       # dump("user:".$fuser->getUsername()." roles:".$fuser->getRolestr()." pw=".$fuser->getPassword());
-        
-        $form = $this->createForm(OldUserType::class, $fuser);
+        $form = $this->createForm(UserForm::class, $fuser);
         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
@@ -85,23 +85,65 @@ class UserController extends Controller
             return $this->redirect("/admin/users");
         }
         
-        
-        $password = $fuser->getPassword();
-        $isvalid=  $encoder->isPasswordValid($password, $tpass,null);
-        if($isvalid)
-        {
-            $pass="ok";
-        }
-        else
-        {
-            $pass="fail";
-        }
-        return $this->render('user/edit.html.twig', array(
+      
+        return $this->render('user/adminedit.html.twig', array(
             'form' => $form->createView(),
-            'password' => $fuser->getPassword(),
-            'isvalid' =>$pass,
             'returnlink'=>'/admin/users',
             ));
     }
     
+    
+    public function edituser($uid)
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $encoder = $this->encoderFactory->getEncoder($fuser);
+        $tpass= $fuser->getEmail();
+         
+        $form = $this->createForm(UserUserForm::class, $fuser);
+        
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $plainpassword = $fuser->getPlainPassword();
+            #dump("user PP:".$plainpassword).
+            $hashpassword = $encoder->encodePassword($plainpassword,null);
+            $fuser->setPassword($hashpassword);
+            dump(  "isvalid ?".$encoder->isPasswordValid($hashpassword, $plainpassword,null));
+            $entityManager->persist($fuser);
+            $entityManager->flush();
+            return $this->redirect("/admin/users");
+        }
+        
+        $password = $fuser->getPassword();
+      
+        return $this->render('user/useredit.html.twig', array(
+            'form' => $form->createView(),
+            'password' => $fuser->getPassword(),
+            'returnlink'=>'/admin/users',
+            ));
+    }
+    
+    
+    public function showuser($uid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $email= $fuser->getEmail();
+        
+        $contacts = $this->getDoctrine()->getRepository('AppBundle:Contact')->findbyemail($fuser->getEmail());
+        return $this->render('user/show.html.twig', array(
+            'lang'=>$this->lang,
+            'user' => $fuser,
+            'contacts' =>$contacts,
+            'returnlink'=> "/".$this->lang."/person/all",
+            ));
+    }
+    
+    public function deleteuser($uid)
+    {
+     $this->getDoctrine()->getRepository('AppBundle:User')->delete($uid);
+     return $this->redirect("/admin/users");
+    }
 }

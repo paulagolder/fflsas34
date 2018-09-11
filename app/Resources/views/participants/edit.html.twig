@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('participant/edit.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/participant/edit.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
@@ -35,7 +35,7 @@
 {{ form_end(form) }}
 </div>
 <div class="incidents">
- <div class="editbutton"> <a href = "/admin/incidents/new/{{eventid}}/{{personid}}" >{% trans %} create.incident {% endtrans%} </a> </div>
+ <div class="editbutton"> <a href = "/admin/incident/new/{{eventid}}/{{personid}}" >{% trans %} create.incident {% endtrans%} </a> </div>
  <div class="incidents"> 
  <div class="subheading" >
  <div class="label">{{'incidents' | trans}}</div>
@@ -44,8 +44,8 @@
  {% for incident in incidents %}
  <div class='incident' > 
     <div >{{incident.label}}</div>
-    <a class="editbutton" href="{{incident['link']}}">{{'edit'|trans}}</a>
-     <a class="editbutton" href="{{incident['link']}}">{{'delete'|trans}}</a>
+    <div class="button1" > <a class="editbutton" href="{{incident['link']}}">{{'edit'|trans}}</a></div>
+     <div class="deletebutton" > <a class="deletebutton" href="{{incident['link']}}">{{'delete'|trans}}</a></div>
     </div>
  {% endfor%}
  </div>

@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 
-use AppBundle\Form\EventFormType;
+use AppBundle\Form\EventForm;
 use AppBundle\Service\MyLibrary;
 use AppBundle\Entity\event;
 use AppBundle\Entity\person;
@@ -218,7 +218,7 @@ class AdminEventController extends Controller
             $event = new Event();
             $event-> setParent( $eid );
         }
-        $form = $this->createForm(EventFormType::class, $event);
+        $form = $this->createForm(EventForm::class, $event);
         
         if ($request->getMethod() == 'POST') 
         {
