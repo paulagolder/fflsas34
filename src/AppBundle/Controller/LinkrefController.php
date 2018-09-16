@@ -1,12 +1,13 @@
 <?php
 
 namespace AppBundle\Controller;
-use Goutte\Client;
-use GuzzleHttp\Client as GuzzleClient;
+#use Goutte\Client;
+#use GuzzleHttp\Client as GuzzleClient;
 
 
 
 use AppBundle\Service\MyLibrary;
+
 use AppBundle\Entity\Linkref;
 use AppBundle\Entity\event;
 use AppBundle\Form\LinkrefForm;
@@ -64,8 +65,8 @@ class LinkrefController extends Controller
             echo("conetent:".$cid);
             $content=  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
             return $this->render('content/showone.html.twig', 
-                  ['lang'=>$this->lang, 
-                   'message' =>  '',
+                  [ 'lang'=>$this->lang, 
+                    'message' =>  '',
                     'content'=>$content,
                     'objid'=>$ref->getObjid(),
                     'refs'=>null,
@@ -75,12 +76,13 @@ class LinkrefController extends Controller
         
         else
         {
+        require('Snoopy.class.php');
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$rid);
        
-        $goutteClient = new Client();
-        $guzzleClient = new GuzzleClient(array( 'timeout' => 60,));
-         $goutteClient->setClient($guzzleClient);
-        $crawler = $goutteClient->request('GET', 'https://github.com/');
+       # $goutteClient = new Client();
+       ## $guzzleClient = new GuzzleClient(array( 'timeout' => 60,));
+       #  $goutteClient->setClient($guzzleClient);
+       # $crawler = $goutteClient->request('GET', 'https://github.com/');
        #  return $this->redirect('http://stackoverflow.com');
        return $this->render('linkref/showone.html.twig', 
                   ['lang'=>$this->lang, 
@@ -157,6 +159,28 @@ class LinkrefController extends Controller
                      ]);
     }
     
+    public function Addlink($otype1,$oid1,$otype2,$oid2)
+    {
+          $user = $this->getUser();
+           $time = new \DateTime();
+          $time->setTimestamp($time->getTimestamp());
+            $linkref = new Linkref();
+            $linkref->setObjecttype($otype1);
+            $linkref-> setObjid($oid1);
+            $linkref-> setLabel($otype2.":".$oid2);
+            $linkref->setPath($otype2."/".$oid2);
+            $linkref->setContributor($user->getUsername());
+            $now = new \DateTime();
+            $linkref->setUpdateDt($now);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($linkref);
+            $entityManager->flush();
+            $lrid = $linkref->getLinkId();
+    
+    
+             return $this->redirect('/admin/'.$otype1."/".$oid1);
+    
+    }
     
     
     public function edit($ot,$oid,$lrid)
@@ -222,4 +246,50 @@ class LinkrefController extends Controller
         $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteOne($lrid);
         return $this->redirect("/admin/linkref/edit".$ot."/".$oid);
     }
+    
+    public function getLinks($objecttype, $objectid)
+    {
+      #   $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
+        $links = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup($objecttype,$objectid);
+        $link_ar = array();
+        foreach( $links as $link)
+        {
+          $linkid = $link['linkid'];
+          $linkref = array();
+        
+         $path = $link['path'];
+         if(substr( $path, 0, 7 ) === "/admin/")
+         {
+         
+         }
+         elseif (substr( $path, 0, 1 ) === "/")
+         {
+         
+            $path = "/" . $this->lang.$path;
+         
+         }
+         else
+         {
+         
+         
+         }
+        $linkref['path'] = $path;
+          $linkref['label'] = $link['label'];
+     
+        $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref',$link['linkid']);
+            $linkref['title']  = $this->mylib->selectText($texts_ar,'title',$this->lang);
+            if($linkref['title'] )
+            {
+             $linkref['label'] =    $linkref['title'] ;
+            }
+            $link_ar[$linkid] = $linkref;
+        }
+        
+
+        return $link_ar;
+    }
+    
+    
+    
+    
 }

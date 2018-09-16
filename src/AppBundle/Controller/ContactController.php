@@ -13,14 +13,28 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 #use AppBundle\MyClasses\EMail;
 
 use AppBundle\Entity\Contact;
+use AppBundle\Service\MyLibrary;
+
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ContactController extends Controller
 { 
 
-     private $lang="EN";
+  
+    private $requestStack ;
+    private $lang="fr";
+    private $mylib;
+    
 
     
-   public function create(Request $request , \Swift_Mailer $mailer)
+    public function __construct( MyLibrary $mylib,RequestStack $request_stack )
+    {
+        $this->mylib = $mylib;
+        $this->requestStack = $request_stack;
+        
+    }
+    
+   public function createUserMessage(Request $request , \Swift_Mailer $mailer)
     {
          $user = $this->getUser();
       
@@ -50,7 +64,7 @@ class ContactController extends Controller
             $fromemail = $form['email']->getData();
             $subject = $form['subject']->getData();
             $messagetext = $form['message']->getData();
-            $sentto = "admin";  
+            $sentto = "fflsas-admin";  
             
       # set form data   
             $contact->setSentto($sentto);
@@ -83,7 +97,7 @@ class ContactController extends Controller
 
           $mailer->send($message);
 
-            return $this->render('contact/email.html.twig',array(
+            return $this->render('contact/usermessage-resp.html.twig',array(
                'name' => $name,
                'sentto'=> $sentto,
                'fromemail'=>$fromemail,
@@ -98,7 +112,35 @@ class ContactController extends Controller
         ));
     }
     
+    public function showMessages()
+    {
+        $messages =  $this->getDoctrine()->getRepository("AppBundle:Contact")->findAdmin();
     
-    
+        return $this->render('contact/showall.html.twig', array( 'lang'=>$this->lang,
+            'messages' => $messages,
+            'returnlink'=> "/admin/contact/all",
+        ));
+   }
   
+  
+   public function showMessage($cid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+       
+        
+        $contact = $this->getDoctrine()->getRepository('AppBundle:Contact')->find($cid);
+        return $this->render('contact/show.html.twig', array(
+            'lang'=>$this->lang,
+            'contact' =>$contact,
+            'returnlink'=> "/admin/contact/all",
+            ));
+    }
+    
+    public function deleteMessage($cid)
+    {
+        
+        $this->getDoctrine()->getRepository('AppBundle:Contact')->delete($cid);
+        return $this->redirect("/admin/contact/all");
+    
+    }
 }

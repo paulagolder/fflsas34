@@ -1,5 +1,5 @@
 
-div#linkrefsedit div.heading
+div#linkref div.heading
 {
     display:flex;
 }
@@ -16,7 +16,10 @@ div#linkref div.ref div.path
     color:blue;
 }
 
-div#linkrefs div.reflist
+div#linkref div.reflist
+{
+    margin-top: 40px;
+}
 
 div#linkref div.texts div.textref div.textref
 {

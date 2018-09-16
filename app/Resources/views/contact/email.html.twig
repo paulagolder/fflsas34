@@ -1,6 +1,6 @@
-{# templates/person/showone.html.twig #}
+{# templates/contact/usermessage.html.twig #}
 
-{% import 'macros.twig' as m %}
+{% import 'messagebodies.twig' as m %}
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
@@ -10,8 +10,8 @@
 
 {% block middle %}
 <div id= "emailresp" >
-<div class= "label" >This message was sent </div>
+<div class= "label" >{{'this.message.was.sent.by'}}  </div>
 
-{{ m.emailbody(name,datesent,sentto,fromemail, subject,body)  }} 
+{{ m.emailbody1(name,datesent,sentto,fromemail, subject,body)  }} 
 </div>
 {% endblock %}

@@ -109,7 +109,11 @@ div#right
     cursor: pointer; 
 }
 
-
+.button1
+{
+    margin-left:auto;
+}
+    
 
 a.editbutton:visited ,a.editbutton:link, a.editbutton:visited 
 {
@@ -264,3 +268,20 @@ div#middle div.hidebar button
     margin-bottom: 0.5em;
 }
 
+div#middle div.datarow
+{
+    font-size:1em;
+}
+
+div#middle div.datarow div.label
+{
+    color:yellow;
+     font-size:1em;
+}
+
+
+div#middle div.datarow div.data
+{
+    color:blue;
+     font-size:1em;
+}

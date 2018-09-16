@@ -1,0 +1,31 @@
+{# templates/contact/usermessage.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('/css/contact/emailbody.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+<div id= "emailresp" >
+<div class= "subheading">
+   <div class= "label" >{{'message.sent.by'|trans }}</div>
+   <div class= "title" >{{name}} ({{fromemail}}) </div>
+</div>
+<div class= "subheading"
+   <div class= "label" >{{'message.to'|trans}}</div>
+   <div clas="title" >{{sentto}}</div>
+   <div class= "label" >{{'message.date' | trans}} </div>
+   <div class="title"> {{datesent}}</div>
+</div>
+<div class= "subheading">
+   <div class= "label" >{{'message.subject'|trans }}</div>
+   <div class= "title" >{{subject}} (</div>
+</div>
+<div class= "messagebody">
+    {{ body }}
+</div>
+
+</div>
+{% endblock %}

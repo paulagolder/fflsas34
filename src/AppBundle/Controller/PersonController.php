@@ -19,6 +19,7 @@ use AppBundle\Entity\Person;
 use AppBundle\Entity\location;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\Text;
+use AppBundle\Controller\LinkrefController;
 use AppBundle\Service\MyLibrary;
 use AppBundle\MyClasses\eventTree;
 use AppBundle\MyClasses\eventTreeNode;
@@ -167,7 +168,9 @@ class PersonController extends Controller
         }
         $mess = '';
         
-        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
+       // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
+        
+        $refs = $this->get('linkref_service')->getLinks("person",$pid);
         
         return $this->render('person/showone.html.twig', 
                    [ 'lang' => $this->lang,

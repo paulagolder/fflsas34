@@ -1,0 +1,39 @@
+
+div#usermessage-resp div.messagebody
+{
+    border-style :solid;
+    border-color: blue;
+    border-width:2;
+    width:50%;
+    margin-top: 2em;
+}
+
+div#usermessage-resp div.heading 
+{
+  display:flex;
+  margin-bottom:2em;
+}
+
+
+
+div#usermessage-resp div.subheading 
+{
+  display:flex;
+  margin-top:0.5em;
+}
+
+
+div#usermessage-resp div.subheading div.label
+{
+  font-size: 1.0em;
+  color: yellow;
+ 
+}
+
+div#usermessage-resp div.subheading div.title
+{
+  font-size: 1.0em;
+  color: blue;
+  margin-left:1em;
+   margin-right:1em;
+}

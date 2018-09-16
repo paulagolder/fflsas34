@@ -1,0 +1,66 @@
+
+
+{# templates/contact/show.html.twig #}
+
+
+
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/contact/show.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/contact/usermessage-resp.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block middle %}
+
+<div id="fuser"  >
+<div class="heading">
+  <div class="label" > {%trans%}edit.message{% endtrans%}</div>
+  <div class="title" > {{contact.id}}</div>
+
+  <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+</div>
+
+
+<div class="contactlist" >
+<div class="subheading" >
+  <div class="label" > {{'contact.list' | trans }}</div>
+</div>
+
+
+<div id= "usermessage-resp" >
+  <div class = "deletebutton">
+      <a class='deletebutton' href="/admin/contact/delete/{{contact.id}}">{{'delete.contact' |trans}}</a>
+ </div>
+<div class="heading"> 
+ <div class= "label" >{{'message.forwarded.by.admin'|trans }}</div>
+</div>
+<div class= "subheading">
+   <div class= "label" >{{'message.sent.by'|trans }}</div>
+   <div class= "title" >{{contact.name}} ({{contact.email}}) </div>
+</div>
+<div class= "subheading" >
+   <div class= "label" >{{'message.to'|trans}}</div>
+   <div class="title" >{{contact.sentto}}</div>
+   <div class= "label" >{{'message.date' | trans}} </div>
+   <div class="title"> {{contact.date_sent  | date("Y-m-d")}}</div>
+</div>
+<div class= "subheading">
+   <div class= "label" >{{'message.subject'|trans }}</div>
+   <div class= "title" >{{contact.subject}}</div>
+</div>
+<div class= "messagebody">
+    {{ contact.message }}
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+{% endblock %}

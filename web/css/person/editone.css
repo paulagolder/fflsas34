@@ -35,15 +35,25 @@ div#editperson div.heading div.label
     
 div#editperson div.person div.heading div.editbutton
 {
-     margin-left:auto;
+   ;
+}
+
+div#editperson div.person div.heading div.editbutton.button1
+{
+    
+      margin-left:auto;
 }
     
-    
-  div#editperson div.person div.participants div.participantlist div.participant div.particiantedit.editbutton
+  div#editperson div.person div.participants div.participantlist div.participant div.button1
   {
-       margin-left:auto;
+       xmargin-left:auto;
   }
-    
+  
+div#editperson div.participants div.participantlist div.participant div.editbutton.button1
+ {
+       margin-left:auto;
+  }    
+
  div#editperson div.refgroup   
 {
    display:flex;

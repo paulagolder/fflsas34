@@ -18,17 +18,15 @@ class UserUserForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('username', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
+        $builder->add('username', TextType::class);
+        $builder->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),))
-             ->add('Rolestr', TextType::class)
-             ->add('email', TextType::class)
-        ;
+                'second_options' => array('label' => 'Repeat Password'),));
+        $builder->add('rolestr', TextType::class);
+        $builder->add('email', TextType::class);
         $builder->get('plainPassword')->setRequired(false);
-        $builder->get('Rolestr')->setDisabled(true);
+        $builder->get('rolestr')->setDisabled(true);
         $builder->get('email')->setDisabled(true);
     }
 

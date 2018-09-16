@@ -32,11 +32,16 @@ div#fuser div.userform form div label
     width: 138px;
 }
 
+ div#fuser div.contactlist
+ {
+     margin-top:20px;
+ }
 
 
 div#fuser div.contact
 {
        display:flex;
+       color:blue;
 }
 
 div#fuser div.contactlist div.contact div.sentto
@@ -60,5 +65,5 @@ div#fuser div.contactlist div.contact div.date
 div#fuser div.contactlist div.contact div.message
 {
     width:10em;
-    margin-left:20em;
+    margin-left:2em;
 }

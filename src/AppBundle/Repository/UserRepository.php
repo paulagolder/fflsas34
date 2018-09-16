@@ -40,12 +40,10 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     
     public function delete($userid)
     {
-       #$query = $this->createQuery('delete FROM AppBundle:User where n.userid = '.$userid);
-      # $result = $query->getResult();
         $qd = $this->createQueryBuilder('u');
-        $qd->delete()
-        ->where('u.id = :uid')
-        ->setParameter('uid',$userid);
+        $qd->delete();
+        $qd->where('u.id = :uid');
+        $qd>setParameter('uid',$userid);
         $query = $qd->getQuery()->getResult();
     }
 }

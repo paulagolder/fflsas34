@@ -2,7 +2,7 @@ Alias: Alias
 Endroit: Endroit
 Forename: Forename
 Name: Surname
-Toutes.Endroits: 'All Places'
+Toutes.Endroits: 'Al Places'
 accueil: Home
 add.new.linkref: 'Create new Link'
 add.participation: 'Create new participation'
@@ -86,7 +86,7 @@ location.a.editer: 'Edit location'
 location.name: Name
 log.in: 'Log In'
 log.out: 'Log Out'
-login.message: 'To access all of our site sign in.'
+login.message: 'To access more of our site sign in.'
 mail.us: 'Send us a message'
 message: Message
 name: Name
@@ -122,38 +122,33 @@ trouver.avec: 'Found with'
 tué: killed
 under.the.name.of: 'under the name of'
 username: Username
-for: for
-voir.user: see user
-delete.user: delete user
-edit.user.detail: edit user
-user.email: user email
-user.roles: user roles
-user.lastlogin: User Last login
-contact.list: message list
-view.contact: see message
-delete.contact: delete message
-message.enyoyer: message sent 
-date: on the
-from: from
-mail.from: message fropm
-mail.subject: subject
-mail.body: message
-voir: see
-new.incident:New incident
-a.link.from: Link from
-participants: participants
-evenment.enfants: child events
-mail.date.sent: message sent on
-mail.sentby: message sent by
-complete.reg: Complete registration
-sucessful.completion: Registartion successful
-welcome.to.our.site: Welcome to our site
-edit.contents: edit contents
-bookmark.content:bookmark content
-delete.content: delete content
-content.for.subject: subject
-message.forwarded.by.admin: forwarded by FFLSAS-admin
-message.sent.by: sent by
-message.to: sent to 
-message.date: date sent
-message.subject: subject
+for: __for
+voir.user: __voir.user
+delete.user: __delete.user
+edit.user.detail: __edit.user.detail
+user.email: __user.email
+user.roles: __user.roles
+user.lastlogin: __user.lastlogin
+contact.list: __contact.list
+view.contact: __view.contact
+delete.contact: __delete.contact
+message.enyoyer: __message.enyoyer
+date: __date
+from: __from
+mail.from: __mail.from
+mail.subject: __mail.subject
+mail.body: __mail.body
+voir: __voir
+new.incident: __new.incident
+a.link.from: __a.link.from
+participants: __participants
+evenment.enfants: __evenment.enfants
+mail.date.sent: __mail.date.sent
+mail.sentby: __mail.sentby
+complete.reg: __complete.reg
+sucessful.completion: __sucessful.completion
+welcome.to.our.site: __welcome.to.our.site
+edit.contents: __edit.contents
+bookmark.content: __bookmark.content
+delete.content: __delete.content
+content.for.subject: __content.for.subject

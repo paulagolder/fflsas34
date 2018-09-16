@@ -34,6 +34,12 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    library_service:
+    xlibrary_service:
         class: AppBundle\Controller\LibraryController
     
+    
+    linkref_service:
+        class: AppBundle\Controller\LinkrefController
+        calls:
+            - [setContainer, ["@service_container"]]
+        

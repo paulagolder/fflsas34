@@ -11,13 +11,24 @@
  <script>
      function clicklocation(lid)
      {
-      window.location.href = '/admin/event/setlocation/{{objid}}/'+lid;
+      window.location.href = '/admin/addref/{{objecttype}}/{{objid}}/location/'+lid;
      }
      
      function clickperson(pid)
      {
-        window.location.href = '/admin/image/addref/person/'+pid+'/{{objid}}';
+        window.location.href =  '/admin/addref/{{objecttype}}/{{objid}}/person/'+pid;
      }
+     
+      function clickevent(eid)
+     {
+        window.location.href =  '/admin/addref/{{objecttype}}/{{objid}}/event/'+eid;
+     } 
+     
+      function clickcontent(cid)
+     {
+        window.location.href =  '/admin/addref/{{objecttype}}/{{objid}}/content/'+cid;
+     } 
+     
  </script>
 {% endblock %}
 

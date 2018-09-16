@@ -14,12 +14,13 @@
    {% endif %}
 
    {% if fusers %}
-     <h1>{{heading | trans}} ({{ fusers | length }} )</h1> 
+     <h1>{{'users'| trans}} ({{ fusers | length }} )</h1> 
      <div class="fuserlist">
    
          {% for fuser in fusers %}
            <div class="user">
-            <div><a href="{{fuser.link}}" >{{fuser.username}} </a></div>
+            <div>{{fuser.username}} </div>
+             <div class="editbutton button1" > <a class="editbutton" href="{{fuser.link}}" >{{"edit.user" | trans }} </a> </div>
             <div class="deletebutton" > <a class="deletebutton" href="/admin/user/delete/{{fuser.userid}}" >{{"delete.user" | trans }} </a> </div>
                  </div>
          {% endfor %}

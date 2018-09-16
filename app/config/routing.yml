@@ -65,12 +65,30 @@ remote_complete_registration:
     controller:  AppBundle\Controller\RegistrationController::remotecomplete   
 
    
+   
+#=============================contacts==================   
+   
 contact_mail:
     path: /{_locale}/mailto
-    controller: AppBundle\Controller\ContactController:create
+    controller: AppBundle\Controller\ContactController:createUserMessage
     requirements:
         _locale: en|fr|FR|EN
         
+contacts_show_all:
+    path: /admin/contact/all
+    controller: AppBundle\Controller\ContactController:showMessages
+   
+        
+        
+contact_show_one:
+    path: /admin/contact/{cid}
+    controller: AppBundle\Controller\ContactController:showMessage
+    
+    
+contact_delete:
+    path: /admin/contact/delete/{cid}
+    controller: AppBundle\Controller\ContactController:deleteMessage
+    
 #=============================users==================
 
 
@@ -98,6 +116,13 @@ user_editdetail:
      controller:  AppBundle\Controller\UserController:edituser
      requirements:
         _locale: en|fr|FR|EN
+        
+user_viewcontact:        
+      path:  /{_locale}/user/{uid}/viewcontact/{cid}
+      controller:  AppBundle\Controller\UserController:viewcontact
+      requirements:
+        _locale: en|fr|FR|EN
+        
         
 #=========================search===============
     
@@ -478,6 +503,10 @@ linkref_edit_event_group:
    path : /admin/linkref/editevent/{eid}
    controller:  AppBundle\Controller\LinkrefController::EditeventGroup  
    
+   
+linkref_add:
+   path : /admin/addref/{otype1}/{oid1}/{otype2}/{oid2}
+   controller:  AppBundle\Controller\LinkrefController::Addlink  
    
 #====================content====================================
 

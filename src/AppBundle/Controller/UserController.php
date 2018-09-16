@@ -146,4 +146,20 @@ class UserController extends Controller
      $this->getDoctrine()->getRepository('AppBundle:User')->delete($uid);
      return $this->redirect("/admin/users");
     }
+    
+    
+     public function viewcontact($uid,$cid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $email= $fuser->getEmail();
+        
+        $contact = $this->getDoctrine()->getRepository('AppBundle:Contact')->find($cid);
+        return $this->render('user/showcontact.html.twig', array(
+            'lang'=>$this->lang,
+            'user' => $fuser,
+            'contact' =>$contact,
+            'returnlink'=> "/".$this->lang."/user/".$uid,
+            ));
+    }
 }

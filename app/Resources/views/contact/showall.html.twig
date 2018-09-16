@@ -1,0 +1,46 @@
+{# templates/contact/showall.html.twig #}
+
+
+
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('css/contact/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block middle %}
+
+<div id="contacts"  >
+    <div class="heading">
+        <div class="label" > {%trans%}see.admin.contacts{% endtrans%}</div>
+        
+        <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+    </div>
+    
+    
+    <div class="contactlist" >
+        <div class="subheading" >
+            <div class="label" > {{'contact.list' | trans }}</div>
+        </div>
+        
+        {% for contact in messages %}
+        <div class= "contact">
+            <div class= "date" > {{contact.date_sent | date("Y-m-d") }}</div>
+            <div class="subject" > {{contact.subject}}</div>
+            
+            <div class = "message" > {{ contact.message|length > 50 ? contact.message|slice(0, 50) ~ '...' : contact.message  }}</div>
+            <div class = "editbutton button1">
+                <a class='editbutton' href="/admin/contact/{{contact.id}}">{{'view.contact' |trans}}</a>
+            </div>
+            <div class = "deletebutton">
+                <a class='deletebutton' href="/admin/contact/delete/{{contact.id}}">{{'delete.contact' |trans}}</a>
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+    {% endblock %}
+    

@@ -3,7 +3,7 @@
 
   
 
-div#fusers
+div#contacts
 {
     
    margin-top :0.5em;
@@ -11,17 +11,17 @@ div#fusers
    color : blue;
 }
 
-div#fusers div.heading
+div#contacts div.heading
 {
     display:flex;
 }
 
-div#fusers div.fuserlist div.user div.deletebutton
+div#contacts div.fuserlist div.user div.deletebutton
 {
    # margin-left:auto;
 }
 
-div#fusers div.deletebutton a {
+div#contacts div.deletebutton a {
     padding: 4px;
     display: inline;
     border-radius: 7px;
@@ -38,7 +38,7 @@ div#fusers div.deletebutton a {
 }
 
 
-div#fusers div.fuserlist div.user
+div#contacts div.fuserlist div.user
 {
     display:flex;
 }
@@ -47,7 +47,7 @@ div#fusers div.fuserlist div.user
 
 
 
-div#fuser div.contact
+div#contacts div.contact
 {
        display:flex;
 }
