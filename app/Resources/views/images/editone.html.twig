@@ -33,8 +33,11 @@
    {% if image %}
    <div class="heading" >
     <div class="heading">{{title}}</div> 
+     <div class="editbutton button1"><a class="editbutton" href=" /admin/image/addBookmark/{{image.imageid}}">{{'bookmark.image' |trans}}</a></div>
      <div class="editbutton" ><a class='editbutton' href="/admin/image/edit/{{image.imageid}}">{{'edit.image' |trans}}</a></div>
       <div class="editbutton" ><a class='editbutton' href="/admin/text/image/{{image.imageid}}">{{'edit.texts' |trans}}</a></div>
+      <div class="returnbutton"> <a href ='/admin/image/search' >{% trans %} retour {% endtrans%} </a> </div>
+      
      </div>
      <div class='path'>
         {{ image.path}} 

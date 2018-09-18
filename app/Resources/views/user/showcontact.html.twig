@@ -1,7 +1,4 @@
-{# templates/user/showcontact.html.twig #}
-
-
-
+{# templates/user/showmessage.html.twig #}
 
 {% extends 'admin.html.twig' %}
 
@@ -16,43 +13,30 @@
 <div id="fuser"  >
 <div class="heading">
   <div class="label" > {%trans%}edit.person{% endtrans%}</div>
-  <div class="title" > {{user.username}}</div>
+  <div class="title" > {{user.username}} ({{user.email}}</div>
 
   <div class="editbutton button1" ><a class='editbutton' href="/{{lang}}/useredit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
   <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
 </div>
 
-<div  class="userdata" >
- <div class="datarow">
-  <div class="label" > {%trans%}user.email{% endtrans%}</div>
-  <div class="data" > {{user.email}}</div>
- </div>
- <div class="datarow">
-  <div class="label" > {%trans%}user.roles{% endtrans%}</div>
-  <div class="data" > {{user.rolestr}}</div>
- </div>
-  <div class="datarow">
-  <div class="label" > {%trans%}user.lastlogin{% endtrans%}</div>
-  <div class="data" > {{user.lastlogin | date("Y-m-d") }}</div>
- </div>
-</div>
 
-<div class="contactlist" >
+
+<div class="messagelist" >
 <div class="subheading" >
-  <div class="label" > {{'contact.list' | trans }}</div>
+  <div class="label" > {{'message' | trans }}</div>
 </div>
 
 
-<div class= "contact">
- <div class="subject" > {{contact.subject}}</div>
- <div class= "date" > {{contact.date_sent | date("Y-m-d") }}</div>
- <div class = "message" > {{ contact.message|length > 50 ? contact.message|slice(0, 50) ~ '...' : contact.message  }}</div>
+
+ <div class="subject" > {{message.subject}}</div>
+ <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
+ <div class = "message" > {{ message.message|length > 50 ? message.message|slice(0, 50) ~ '...' : message.message  }}</div>
  <div class = "editbutton button1">
-      <a class='editbutton' href="/{{lang}}/user/{{user.userid}}/viewcontact/{{contact.id}}">{{'view.contact' |trans}}</a>
+      <a class='editbutton' href="/{{lang}}/user/{{user.userid}}/viewmessage/{{message.id}}">{{'view.message' |trans}}</a>
  </div>
-  <div class = "edeletebutton">
-      <a class='deletebutton' href="/{{lang}}/user/{{user.userid}}/contact/delete/{{contact.id}}">{{'delete.contact' |trans}}</a>
- </div>
+  <div class = "deletebutton">
+      <a class='deletebutton' href="/{{lang}}/user/{{user.userid}}/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
+
 </div>
 
 

@@ -1,59 +1,56 @@
-
-
-{# templates/contact/show.html.twig #}
-
-
-
+{# templates/message/show.html.twig #}
 
 {% extends 'admin.html.twig' %}
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/contact/show.css') }}" rel="stylesheet" />
-   <link href="{{ asset('/css/contact/usermessage-resp.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/message/show.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/message/usermessage-resp.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
 {% block middle %}
 
-<div id="fuser"  >
+<div id="message"  >
 <div class="heading">
   <div class="label" > {%trans%}edit.message{% endtrans%}</div>
-  <div class="title" > {{contact.id}}</div>
+  <div class="title" > {{message.id}}</div>
 
   <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
 </div>
 
 
-<div class="contactlist" >
-<div class="subheading" >
-  <div class="label" > {{'contact.list' | trans }}</div>
-</div>
+<div class="messagelist" >
+
+
 
 
 <div id= "usermessage-resp" >
+ <div class = "editbutton">
+      <a class='editbutton' href="/admin/message/send/{{message.email}}">{{'send.message' |trans}}</a>
+ </div>
   <div class = "deletebutton">
-      <a class='deletebutton' href="/admin/contact/delete/{{contact.id}}">{{'delete.contact' |trans}}</a>
+      <a class='deletebutton' href="/admin/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
  </div>
 <div class="heading"> 
  <div class= "label" >{{'message.forwarded.by.admin'|trans }}</div>
 </div>
 <div class= "subheading">
    <div class= "label" >{{'message.sent.by'|trans }}</div>
-   <div class= "title" >{{contact.name}} ({{contact.email}}) </div>
+   <div class= "title" >{{message.name}} ({{message.email}}) </div>
 </div>
 <div class= "subheading" >
    <div class= "label" >{{'message.to'|trans}}</div>
-   <div class="title" >{{contact.sentto}}</div>
+   <div class="title" >{{message.sentto}}</div>
    <div class= "label" >{{'message.date' | trans}} </div>
-   <div class="title"> {{contact.date_sent  | date("Y-m-d")}}</div>
+   <div class="title"> {{message.date_sent  | date("Y-m-d")}}</div>
 </div>
 <div class= "subheading">
    <div class= "label" >{{'message.subject'|trans }}</div>
-   <div class= "title" >{{contact.subject}}</div>
+   <div class= "title" >{{message.subject}}</div>
 </div>
 <div class= "messagebody">
-    {{ contact.message }}
+    {{ message.message }}
 </div>
 
 </div>

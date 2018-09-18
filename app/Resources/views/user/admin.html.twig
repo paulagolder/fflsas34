@@ -44,6 +44,7 @@
     <div class="messagelist" >
         <div class="subheading" >
             <div class="label" > {{'message.list' | trans }}</div>
+            <div class="editbutton button1" ><a class='editbutton' href="/admin/message/send/{{user.userid}}">{{'send,message' |trans}}</a></div>
         </div>
         
         {% for message in messages %}

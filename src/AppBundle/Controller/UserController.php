@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use AppBundle\Entity\User;
-use AppBundle\Entity\Contact;
+use AppBundle\Entity\Message;
 use AppBundle\Form\UserUserForm;
 use AppBundle\Form\UserForm;
 use AppBundle\Service\MyLibrary;
@@ -95,6 +95,8 @@ class UserController extends Controller
     
     public function edituser($uid)
     {
+        $user = $this->getUser();
+        if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $request = $this->requestStack->getCurrentRequest();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $encoder = $this->encoderFactory->getEncoder($fuser);
@@ -121,25 +123,43 @@ class UserController extends Controller
         return $this->render('user/useredit.html.twig', array(
             'form' => $form->createView(),
             'password' => $fuser->getPassword(),
-            'returnlink'=>'/admin/users',
+             'returnlink'=> "/".$this->lang."/user/".$uid,
             ));
     }
     
     
     public function showuser($uid)
     {
+        
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $email= $fuser->getEmail();
         
-        $contacts = $this->getDoctrine()->getRepository('AppBundle:Contact')->findbyemail($fuser->getEmail());
+        $messages = $this->getDoctrine()->getRepository('AppBundle:Message')->findbyemail($fuser->getEmail());
         return $this->render('user/show.html.twig', array(
             'lang'=>$this->lang,
             'user' => $fuser,
-            'contacts' =>$contacts,
+            'messages' =>$messages,
             'returnlink'=> "/".$this->lang."/person/all",
             ));
     }
+    
+     public function useradmin($uid)
+    {
+        
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $email= $fuser->getEmail();
+        
+        $messages = $this->getDoctrine()->getRepository('AppBundle:Message')->findbyemail($fuser->getEmail());
+        return $this->render('user/admin.html.twig', array(
+            'lang'=>$this->lang,
+            'user' => $fuser,
+            'messages' =>$messages,
+            'returnlink'=> "/admin/users",
+            ));
+    }
+    
     
     public function deleteuser($uid)
     {
@@ -148,18 +168,28 @@ class UserController extends Controller
     }
     
     
-     public function viewcontact($uid,$cid)
+     public function viewMessage($uid,$mid)
     {
+        $user = $this->getUser();
+        if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/user/".$uid);
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $email= $fuser->getEmail();
         
-        $contact = $this->getDoctrine()->getRepository('AppBundle:Contact')->find($cid);
-        return $this->render('user/showcontact.html.twig', array(
+        $message = $this->getDoctrine()->getRepository('AppBundle:Message')->find($mid);
+        return $this->render('user/showmessage.html.twig', array(
             'lang'=>$this->lang,
             'user' => $fuser,
-            'contact' =>$contact,
+            'message' =>$message,
             'returnlink'=> "/".$this->lang."/user/".$uid,
             ));
+    }
+    
+    public function deletemessage($uid,$mid)
+    {
+        $user = $this->getUser();
+        if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
+       $this->getDoctrine()->getRepository('AppBundle:Message')->delete($mid);
+      return $this->redirect("/".$this->lang."/user/".$uid);
     }
 }

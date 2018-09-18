@@ -1,4 +1,4 @@
-{# templates/contact/showall.html.twig #}
+{# templates/message/showall.html.twig #}
 
 
 
@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
 {{ parent() }}
-<link href="{{ asset('css/contact/showall.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/message/showall.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
@@ -15,8 +15,7 @@
 
 <div id="contacts"  >
     <div class="heading">
-        <div class="label" > {%trans%}see.admin.contacts{% endtrans%}</div>
-        
+        <div class="label" > {%trans%}see.admin.messages{% endtrans%}</div>
         <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
     </div>
     
@@ -28,15 +27,17 @@
         
         {% for contact in messages %}
         <div class= "contact">
+            <div class="name" > {{contact.name}}</div>
+            <div class="name" > ({{contact.email}})</div>
             <div class= "date" > {{contact.date_sent | date("Y-m-d") }}</div>
             <div class="subject" > {{contact.subject}}</div>
             
             <div class = "message" > {{ contact.message|length > 50 ? contact.message|slice(0, 50) ~ '...' : contact.message  }}</div>
             <div class = "editbutton button1">
-                <a class='editbutton' href="/admin/contact/{{contact.id}}">{{'view.contact' |trans}}</a>
+                <a class='editbutton' href="/admin/message/{{contact.id}}">{{'view.contact' |trans}}</a>
             </div>
             <div class = "deletebutton">
-                <a class='deletebutton' href="/admin/contact/delete/{{contact.id}}">{{'delete.contact' |trans}}</a>
+                <a class='deletebutton' href="/admin/message/delete/{{contact.id}}">{{'delete.contact' |trans}}</a>
             </div>
         </div>
         {% endfor %}

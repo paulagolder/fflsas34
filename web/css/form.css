@@ -1,0 +1,25 @@
+ div.form form div label
+ {
+     color: yellow;
+     font-size: 1em;
+     width: 10em;
+ }
+ 
+div.form form div
+{
+    display: flex;
+}
+
+div.form form div  div
+{
+    display: flex;
+}
+
+html body div#page div.mypage div.mypageinner div#middle div#contactform div.form form div#form div label.required
+{
+}
+
+ div.form
+{
+    margin-top:20px;
+}

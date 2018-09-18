@@ -63,7 +63,7 @@ function myFunction() {
      {
         window.location.href = '/admin/event/'+eid;
      }
-     function clickimage(iid)
+     function clickimage(iid,label)
      {
         window.location.href = '/admin/image/'+iid;
      }

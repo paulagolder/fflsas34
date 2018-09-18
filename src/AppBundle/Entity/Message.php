@@ -4,13 +4,13 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* Contact
+* Message
 *
-* @ORM\Table(name="contact")
-* @ORM\Entity(repositoryClass="AppBundle\Repository\ContactRepository")
+* @ORM\Table(name="message")
+* @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
 */
 
-class Contact
+class Message
 {
    /**
     * @var int

@@ -66,28 +66,32 @@ remote_complete_registration:
 
    
    
-#=============================contacts==================   
+#=============================messages==================   
    
-contact_mail:
+message_mail:
     path: /{_locale}/mailto
-    controller: AppBundle\Controller\ContactController:createUserMessage
+    controller: AppBundle\Controller\MessageController:createUserMessage
     requirements:
         _locale: en|fr|FR|EN
         
-contacts_show_all:
-    path: /admin/contact/all
-    controller: AppBundle\Controller\ContactController:showMessages
+messages_show_all:
+    path: /admin/message/all
+    controller: AppBundle\Controller\MessageController:showMessages
    
         
         
-contact_show_one:
-    path: /admin/contact/{cid}
-    controller: AppBundle\Controller\ContactController:showMessage
+message_show_one:
+    path: /admin/message/{cid}
+    controller: AppBundle\Controller\MessageController:showMessage
     
     
-contact_delete:
-    path: /admin/contact/delete/{cid}
-    controller: AppBundle\Controller\ContactController:deleteMessage
+message_delete:
+    path: /admin/message/delete/{cid}
+    controller: AppBundle\Controller\MessageController:deleteMessage
+    
+message_send:
+    path: /admin/message/send/{uid}
+    controller: AppBundle\Controller\MessageController:sendMessageToUser
     
 #=============================users==================
 
@@ -100,6 +104,10 @@ users_showall:
 users_editone:
     path: /admin/user/{uid}
     controller:  AppBundle\Controller\UserController:editone
+    
+user_admin:
+    path: /admin/useradmin/{uid}
+    controller:  AppBundle\Controller\UserController:useradmin
     
 user_delete:
     path: /admin/user/delete/{uid}
@@ -117,12 +125,17 @@ user_editdetail:
      requirements:
         _locale: en|fr|FR|EN
         
-user_viewcontact:        
-      path:  /{_locale}/user/{uid}/viewcontact/{cid}
-      controller:  AppBundle\Controller\UserController:viewcontact
+user_viewmessage:        
+      path:  /{_locale}/user/{uid}/viewmessage/{mid}
+      controller:  AppBundle\Controller\UserController:viewmessage
       requirements:
         _locale: en|fr|FR|EN
         
+user_message_delete:        
+      path:  /{_locale}/user/{uid}/message/delete/{mid}
+      controller:  AppBundle\Controller\UserController:deletemessage
+      requirements:
+        _locale: en|fr|FR|EN
         
 #=========================search===============
     

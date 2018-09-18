@@ -1,0 +1,46 @@
+{# templates/user/showmessage.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/user/showmessage.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block middle %}
+
+<div id="fuser"  >
+<div class="heading">
+  <div class="label" > {%trans%}see.message{% endtrans%}</div>
+  <div class="title" > {{user.username}} ({{user.email}})</div>
+  <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+</div>
+
+
+
+<div class="heading"> 
+ <div class= "label" >{{'message.forwarded.by.admin'|trans }}</div>
+</div>
+<div class= "subheading">
+   <div class= "label" >{{'message.sentby'|trans }}</div>
+   <div class= "title" >{{message.name}} ({{message.email}}) </div>
+</div>
+<div class= "subheading" >
+   <div class= "label" >{{'message.to'|trans}}</div>
+   <div class="title" >{{message.sentto}}</div>
+   <div class= "label" >{{'message.date' | trans}} </div>
+   <div class="title"> {{message.date_sent | date("Y-m-d h:m:s")}}</div>
+</div>
+<div class= "subheading">
+   <div class= "label" >{{'message.subject'|trans }}</div>
+   <div class= "title" >{{message.subject}}</div>
+</div>
+<div class= "messagebody">
+    {{ message.message }}
+</div>
+
+
+
+</div>
+{% endblock %}

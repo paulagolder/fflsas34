@@ -2,37 +2,32 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Contact;
+use AppBundle\Entity\Message;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 
-class ContactRepository extends EntityRepository
+class MessageRepository extends EntityRepository
 {
-    
-    
-    
     
     public function findbyemail($email)
     {
-        return $this->createQueryBuilder('c')
-        ->andWhere('c.email= :val')
-        ->setParameter('val', $email)
-        ->getQuery()
-        ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('c');
+        $qb->andWhere('c.email= :val');
+        $qb->setParameter('val', $email);
+        
+         return $qb->getQuery()->getResult();
     }
     
     public function findAdmin()
     {
         $admin = "FFLSAS-admin";
-        return $this->createQueryBuilder('c')
-        ->andWhere('c.sentto= :val')
-        ->setParameter('val', $admin)
-        ->getQuery()
-        ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('c');
+        $qb->andWhere('c.sentto= :val');
+        $qb->setParameter('val', $admin);
+        
+         return $qb->getQuery()->getResult();
     }
     
     public function delete($contactid)

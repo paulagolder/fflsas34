@@ -29,7 +29,11 @@
      <div class="imagelist" >
        <div >
          {% for image in images  %}
-            <div class="image" ><a href="{{ image.link}}" >{{ image.name}}</a> <a class="editbutton" href="/admin/image/{{image.imageid}}">{{'edit.image' |trans}}</a></div>
+            <div class="image row" >
+              <div >{{ image.name}}</div>
+              <div class="editbutton button1"><a class="editbutton" href=" /admin/image/addBookmark/{{image.imageid}}">{{'bookmark.image' |trans}}</a></div>
+              <div class="editbutton"><a class="editbutton" href="/admin/image/{{image.imageid}}">{{'see.image' |trans}}</a></div>
+              </div>
          {% endfor %}
       </div>
      </div>

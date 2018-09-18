@@ -207,6 +207,11 @@ div#middle  div.returnbutton a
     text-decoration : none;
 }
 
+div#middle div.row
+{
+    display:flex;
+}
+
 div#middle  div.heading 
 {
     display:flex;
@@ -224,6 +229,25 @@ div#middle  div.heading div.label
 {
     color:yellow;
     font-size:1.2em;
+}
+
+div#middle  div.subheading 
+{
+    display:flex;
+    align-items: center;
+    margin-top:10px;
+}
+  
+div#middle  div.subheading div.title
+{
+    color:maroon;
+    font-size:1.0em;
+}
+
+div#middle  div.subheading div.label
+{
+    color:yellow;
+    font-size:1.0em;
 }
 
 div#middle div.hidebar button

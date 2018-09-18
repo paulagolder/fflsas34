@@ -43,33 +43,27 @@ div#fuser div.userform form div label
      margin-top:20px;
  }
 
+ div#fuser div.subheading 
+{
+    display:flex;
+}
 
+div#fuser div.subheading div.label
+{
+    color:yellow;
+    font-size:1em;
+}
+
+div#fuser div.subheading div.title
+{
+     color:blue;
+    font-size:1em;
+}
+    
+ 
 div#fuser div.message
 {
        display:flex;
        color:blue;
 }
 
-div#fuser div.messagelist div.message div.sentto
-{
-    width:10em;
-    margin-left:2em;
-} 
-div#fuser div.messagelist div.message div.subject
-{
-    width:10em;
-    margin-left:1em;
-}
-
-
-div#fuser div.messagelist div.message div.date
-{
-    width : 10em;
-    margin-left:1em;
-}
-
-div#fuser div.messagelist div.message div.message
-{
-    width:10em;
-    margin-left:1em;
-}
