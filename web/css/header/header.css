@@ -206,7 +206,7 @@ div#mainmenu
     
 }
 
-#mainmenu  div.menuitem
+div#mainmenu  div.menuitem
 {
   color:blue;   
   padding-top:0em;
@@ -220,7 +220,7 @@ div#mainmenu > div.menuitem > a
   padding-top:0em;
   padding-bottom:0em;
   font-size:1em;
-    text-decoration: none;
+  text-decoration: none;
 }
 
 div#mainmenu > div.menuitem >  a:link
@@ -230,7 +230,7 @@ div#mainmenu > div.menuitem >  a:link
 
 div#mainmenu > div.menuitem >   a:hover
 {
-  color:blue;   
+  color:white;   
 }
 
 div#mainmenu > div.menuitem >  a:visited

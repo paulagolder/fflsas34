@@ -67,7 +67,7 @@ class UserController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $encoder = $this->encoderFactory->getEncoder($fuser);
-        $tpass= $fuser->getEmail();
+        #$tpass= $fuser->getEmail();
         
         $form = $this->createForm(UserForm::class, $fuser);
         
@@ -82,13 +82,43 @@ class UserController extends Controller
             dump(  "isvalid ?".$encoder->isPasswordValid($hashpassword, $plainpassword,null));
             $entityManager->persist($fuser);
             $entityManager->flush();
-            return $this->redirect("/admin/users");
+            return $this->redirect("/admin/user/search");
         }
         
       
         return $this->render('user/adminedit.html.twig', array(
             'form' => $form->createView(),
-            'returnlink'=>'/admin/users',
+            'returnlink'=>'/admin/user/search',
+            ));
+    }
+    
+     public function newuser()
+    {
+        
+        $request = $this->requestStack->getCurrentRequest();
+        $fuser = new User;
+        $encoder = $this->encoderFactory->getEncoder($fuser);
+     
+        
+        $form = $this->createForm(UserForm::class, $fuser);
+        
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $plainpassword = $fuser->getPlainPassword();
+            #dump("user PP:".$plainpassword).
+            $hashpassword = $encoder->encodePassword($plainpassword,null);
+            $fuser->setPassword($hashpassword);
+            $entityManager->persist($fuser);
+            $entityManager->flush();
+            return $this->redirect("/admin/user/search");
+        }
+        
+      
+        return $this->render('user/adminedit.html.twig', array(
+            'form' => $form->createView(),
+            'returnlink'=>'/admin/user/search',
             ));
     }
     
@@ -112,10 +142,9 @@ class UserController extends Controller
             #dump("user PP:".$plainpassword).
             $hashpassword = $encoder->encodePassword($plainpassword,null);
             $fuser->setPassword($hashpassword);
-            dump(  "isvalid ?".$encoder->isPasswordValid($hashpassword, $plainpassword,null));
             $entityManager->persist($fuser);
             $entityManager->flush();
-            return $this->redirect("/admin/users");
+            return $this->redirect("/admin/user/search");
         }
         
         $password = $fuser->getPassword();
@@ -130,7 +159,8 @@ class UserController extends Controller
     
     public function showuser($uid)
     {
-        
+         $user = $this->getUser();
+        if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $email= $fuser->getEmail();
@@ -156,7 +186,7 @@ class UserController extends Controller
             'lang'=>$this->lang,
             'user' => $fuser,
             'messages' =>$messages,
-            'returnlink'=> "/admin/users",
+            'returnlink'=> "/admin/user/search",
             ));
     }
     
@@ -164,7 +194,7 @@ class UserController extends Controller
     public function deleteuser($uid)
     {
      $this->getDoctrine()->getRepository('AppBundle:User')->delete($uid);
-     return $this->redirect("/admin/users");
+     return $this->redirect("/admin/user/search");
     }
     
     
@@ -191,5 +221,51 @@ class UserController extends Controller
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
        $this->getDoctrine()->getRepository('AppBundle:Message')->delete($mid);
       return $this->redirect("/".$this->lang."/user/".$uid);
+    }
+    
+     public function UserSearch(Request $request)
+    {
+        $message="";
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        
+        $pfield = $request->query->get('searchfield');
+        $gfield = $request->query->get('searchfield');
+        
+        if (!$pfield) 
+        {
+            $users = $this->getDoctrine()->getRepository("AppBundle:User")->findAll();
+            $heading =  'trouver.tout';
+            
+        }
+        else
+        {
+            $pfield = "%".$pfield."%";
+            $users = $this->getDoctrine()->getRepository("AppBundle:User")->findSearch($pfield);
+            $heading =  'trouver.avec';
+        }
+        
+        
+        if (count($users)<1) 
+        {
+            $message = 'rien.trouver.pour';
+        }
+        else
+        {
+            foreach($users as $user)
+            {
+                $user->link = "/admin/user/".$user->getUserid();
+            }
+            
+        }
+        
+        
+        return $this->render('user/usersearch.html.twig', 
+        [ 
+        'message' => $message,
+        'heading' =>  $heading,
+        'searchfield' =>$gfield,
+        'users'=> $users,
+        
+        ]);
     }
 }

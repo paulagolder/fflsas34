@@ -41,7 +41,7 @@ div#image img
     height: auto;
 }
 
-div#image div.content div.refs div.ref a
+xdiv#image div.content div.refs div.ref a
 {
     color:blue;
     text-decoration:none;

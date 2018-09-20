@@ -15,7 +15,12 @@
 <div class="heading">
   <div class="label" > {%trans%}edit.message{% endtrans%}</div>
   <div class="title" > {{message.id}}</div>
-
+<div class = "editbutton button1">
+      <a class='editbutton' href="/admin/message/send/{{message.email}}">{{'send.message' |trans}}</a>
+ </div>
+  <div class = "deletebutton">
+      <a class='deletebutton' href="/admin/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
+ </div>
   <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
 </div>
 
@@ -26,12 +31,7 @@
 
 
 <div id= "usermessage-resp" >
- <div class = "editbutton">
-      <a class='editbutton' href="/admin/message/send/{{message.email}}">{{'send.message' |trans}}</a>
- </div>
-  <div class = "deletebutton">
-      <a class='deletebutton' href="/admin/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
- </div>
+ 
 <div class="heading"> 
  <div class= "label" >{{'message.forwarded.by.admin'|trans }}</div>
 </div>

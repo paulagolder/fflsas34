@@ -1,4 +1,4 @@
-div#location div.children div
+
 
 div#location  div.breadcrumbs
 {
@@ -6,12 +6,7 @@ color:red;
 font-size : 1em;
 }
 
-div#location  div.breadcrumbs a
-{
-color:blue;
-font-size : 1em;
-text-decoration:none;
-}
+
 
 
 
@@ -22,7 +17,7 @@ text-decoration:none;
 }
 
 
- div#location div.heading div.latlong
+ div#location div.latlong
 {
     color:white;
     margin-left:2em;

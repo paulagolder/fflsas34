@@ -19,7 +19,7 @@
         <div class="label" > {%trans%}profil.person{% endtrans%}</div>
         <div class="title" > {{user.username}}</div>
         
-        <div class="editbutton button1" ><a class='editbutton' href="/{{lang}}/useredit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
+        <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
         <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
     </div>
     
@@ -53,10 +53,10 @@
             <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
             <div class = "message" > {{ message.message|length > 20 ? message.message|slice(0, 20) ~ '...' : message.message  }}</div>
             <div class = "editbutton button1">
-                <a class='editbutton' href="/{{lang}}/user/{{user.userid}}/viewmessage/{{message.id}}">{{'view.message' |trans}}</a>
+                <a class='editbutton' href="/admin/user/{{user.userid}}/message/view/{{message.id}}">{{'view.message' |trans}}</a>
             </div>
             <div class = "deletebutton">
-                <a class='deletebutton' href="/{{lang}}/user/{{user.userid}}/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
+                <a class='deletebutton' href="/admin/user/{{user.userid}}/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
             </div>
         </div>
         {% endfor %}

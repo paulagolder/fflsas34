@@ -1,12 +1,12 @@
 
 
-div#event div.breadcrumbs
+xdiv#event div.breadcrumbs
 {
 color:red;
 font-size : 1em;
 }
 
-div#event div.breadcrumbs  a
+xdiv#event div.breadcrumbs  a
 {
   color:blue;
   text-decoration:none;
@@ -83,7 +83,7 @@ div#event div.participant
   padding-top : 10px;
 }
 
-div#event div.participant  a
+xdiv#event div.participant  a
 {
   color:blue;
   text-decoration:none;
@@ -141,7 +141,7 @@ div#event div.children div
 }
 
 
-div#event div.children div a 
+xdiv#event div.children div a 
 {
     color:blue;
     font-size:1.0em;

@@ -75,9 +75,9 @@ class ContentRepository extends EntityRepository
        $qb->andWhere('p.title LIKE :pid  or p.text LIKE :pid ');
        $qb->setParameter('pid', $sfield);
        $qb->orderBy("p.title", "ASC");
-       $images =  $qb->getQuery()->getResult();
+       $contents =  $qb->getQuery()->getResult();
       
-       return $images;
+       return $contents;
     }
     
     

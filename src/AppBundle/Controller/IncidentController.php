@@ -95,7 +95,8 @@ class IncidentController extends Controller
         $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($incident['eventid']);
         $itype = $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findOne($incident['itypeid']);
         $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($incident['locid']);
-        $location->link = "/".$this->lang."/location/".$incident['locid'];
+        if($location)
+           $location->link = "/".$this->lang."/location/".$incident['locid'];
         $label = $itype->getLabel();
         return $this->render('incident/showone.html.twig', 
                 [ 

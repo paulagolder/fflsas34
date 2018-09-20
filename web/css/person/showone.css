@@ -59,14 +59,14 @@ div#person div.text p
 
 
 
-div#person div.eventtree a
+xdiv#person div.eventtree a
 {
     color:blue;
     text-decoration:none;
 }
 
 
-div#person div.eventtree ul li a
+xdiv#person div.eventtree ul li a
 {
     text-decoration:none;
 }
@@ -81,6 +81,10 @@ div#person div.eventtree ul li div.incident > a
     color: white;
 }
 
+div#person div.eventtree ul li div.incident > a:hover
+{
+    color: blue;
+}
 
 div.image
 {

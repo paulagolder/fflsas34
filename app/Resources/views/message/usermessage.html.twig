@@ -11,7 +11,12 @@
 <div id= "emailresp" >
 <div class= "subheading">
    <div class= "label" >{{'message.sent.by'|trans }}</div>
-   <div class= "title" >{{name}} ({{fromemail}}) </div>
+   {% if 'admin' in ( sentto | lower)  %}
+   
+    <div class= "title" >{{name}} ({{fromemail}}) </div>
+   {% else %}
+   <div class= "title" >FFLSAS-admin </div>
+   {% endif %}
 </div>
 <div class= "subheading"
    <div class= "label" >{{'message.to'|trans}}</div>

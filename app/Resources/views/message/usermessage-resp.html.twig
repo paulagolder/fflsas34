@@ -11,23 +11,30 @@
 <div id= "usermessage-resp" >
 <div class="heading"> 
  <div class= "label" >{{'message.forwarded.by.admin'|trans }}</div>
+ <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
 </div>
 <div class= "subheading">
    <div class= "label" >{{'message.sent.by'|trans }}</div>
-   <div class= "title" >{{name}} ({{fromemail}}) </div>
+   {% set tolist = message.to | join(', ') %}
+   {% if 'admin' in tolist  %}
+   
+    <div class= "title" >{{message.name}} ({{message.email}}) </div>
+   {% else %}
+   <div class= "title" >FFLSAS-admin </div>
+   {% endif %}
 </div>
 <div class= "subheading" >
    <div class= "label" >{{'message.to'|trans}}</div>
-   <div class="title" >{{sentto}}</div>
+   <div class="title" >{{message.to |join(', ')}}</div>
    <div class= "label" >{{'message.date' | trans}} </div>
-   <div class="title"> {{datesent}}</div>
+   <div class="title"> {{message.date |date('Y-m-d h:m:s')  }}</div>
 </div>
 <div class= "subheading">
    <div class= "label" >{{'message.subject'|trans }}</div>
-   <div class= "title" >{{subject}}</div>
+   <div class= "title" >{{message.subject}}</div>
 </div>
 <div class= "messagebody">
-    {{ body }}
+    {{ message.body | raw }}
 </div>
 
 </div>

@@ -1,37 +1,39 @@
-{# templates/contents/adminsearch.html.twig #}
+{# templates/usersearch.html.twig #}
 
 {% extends 'admin.html.twig' %}
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/content/searchall.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/user/searchall.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block middle %}
-  <div id="content">
+  <div id="user">
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
-  <form  action="/admin/content/search">
+  <form  action="/admin/user/search">
   <div class="heading">
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
    <input type="text" name="searchfield">
    <input type="submit" value="{{ 'chercher' | trans }}" >
    </div>
    </form>
-   <div class="newcontent"><a class="editbutton" href ="/admin/content/edit/0">{{'new.content' | trans}}</a></div>
-   {% if contents is defined %}
+   <div class="newuser"><a class="editbutton" href ="/admin/user/new">{{'new.user' | trans}}</a></div>
+   {% if users is defined %}
      <div class="heading">
      <div class="label">{{heading | trans}}</div> 
      <div class="title">{{searchfield}}</div> 
      </div>
-     <div class="contentlist" >
-         {% for content in contents  %}
-            <div class="content row" >
-             <a href="{{content.link}}" >{{content.title}}</a> 
-             <div class="editbutton button1"><a class="editbutton" href="/admin/content/{{content.subjectid}}">{{'edit.content' |trans}}</a></div>
+     <div class="userlist" >
+       <div >
+         {% for user in users  %}
+            <div class="user row" >
+             <div><a href="{{user.link}}" >{{user.username}}({{user.email}})</a> </div>
+             <div class="editbutton button1" ><a class="editbutton" href="/admin/user/{{user.userid}}">{{'edit.user' |trans}}</a></div>
             </div>
          {% endfor %}
+      </div>
      </div>
   {% endif %}
   </div>

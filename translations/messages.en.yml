@@ -139,7 +139,7 @@ mail.from: message fropm
 mail.subject: subject
 mail.body: message
 voir: see
-new.incident:New incident
+new.incident: New incident
 a.link.from: Link from
 participants: participants
 evenment.enfants: child events
@@ -149,7 +149,7 @@ complete.reg: Complete registration
 sucessful.completion: Registartion successful
 welcome.to.our.site: Welcome to our site
 edit.contents: edit contents
-bookmark.content:bookmark content
+bookmark.content: bookmark content
 delete.content: delete content
 content.for.subject: subject
 message.forwarded.by.admin: forwarded by FFLSAS-admin

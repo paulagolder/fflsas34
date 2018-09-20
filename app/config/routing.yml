@@ -82,8 +82,11 @@ messages_show_all:
         
 message_show_one:
     path: /admin/message/{cid}
-    controller: AppBundle\Controller\MessageController:showMessage
-    
+    controller: AppBundle\Controller\MessageController:showAdminMessage
+
+message_show_user_one:
+    path: /admin/user/{uid}/message/view/{cid}
+    controller: AppBundle\Controller\MessageController:showUserMessage
     
 message_delete:
     path: /admin/message/delete/{cid}
@@ -95,19 +98,22 @@ message_send:
     
 #=============================users==================
 
+admin_user_new:
+    path: /admin/user/new
+    controller:  AppBundle\Controller\UserController::newuser  
 
-users_showall:
-    path: /admin/users
-    controller:  AppBundle\Controller\UserController:showAll
     
+admin_user_search:
+    path: /admin/user/search
+    controller:  AppBundle\Controller\UserController::UserSearch     
     
 users_editone:
     path: /admin/user/{uid}
-    controller:  AppBundle\Controller\UserController:editone
+    controller:  AppBundle\Controller\UserController:useradmin
     
 user_admin:
-    path: /admin/useradmin/{uid}
-    controller:  AppBundle\Controller\UserController:useradmin
+    path: /admin/user/edit/{uid}
+    controller:  AppBundle\Controller\UserController:editone
     
 user_delete:
     path: /admin/user/delete/{uid}
@@ -136,6 +142,9 @@ user_message_delete:
       controller:  AppBundle\Controller\UserController:deletemessage
       requirements:
         _locale: en|fr|FR|EN
+        
+        
+
         
 #=========================search===============
     

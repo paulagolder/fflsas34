@@ -125,7 +125,7 @@ class MessageController extends Controller
    }
   
   
-   public function showMessage($cid)
+   public function showAdminMessage($cid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
        
@@ -137,6 +137,21 @@ class MessageController extends Controller
             'lang'=>$this->lang,
             'message' =>$message,
             'returnlink'=> "/admin/message/all",
+            ));
+    }
+    
+     public function showUserMessage($uid,$cid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+       
+        
+        $message = $this->getDoctrine()->getRepository('AppBundle:Message')->find($cid);
+        #$user =  $this->getDoctrine()->getRepository('AppBundle:User')->findbyEmail($user->getEmail());
+        
+        return $this->render('message/show.html.twig', array(
+            'lang'=>$this->lang,
+            'message' =>$message,
+            'returnlink'=> "/admin/user/".$uid,
             ));
     }
     
@@ -207,13 +222,9 @@ class MessageController extends Controller
           $mailer->send($message);
 
             return $this->render('message/usermessage-resp.html.twig',array(
-               'name' => $name,
-               'sentto'=> $sentto,
-               'fromemail'=>$fromemail,
-               'subject' =>$subject,
-               'body'=>$messagetext,
-               'datesent' => $datesent->format('Y-m-d H:i:s'))
-            );                
+               'message'=>$message,
+               'returnlink'=>'/admin/user/'.$uid,
+            ));          
       } ;
             
         return $this->render('message/sendto.html.twig', array( 'lang'=>$this->lang,
