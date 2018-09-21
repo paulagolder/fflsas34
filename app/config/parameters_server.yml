@@ -1,0 +1,13 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host:  'localhost'
+    database_port: '3306'
+    database_name: 'lerot_fssymf'
+    database_user: 'lerot_symfuser'
+    database_password: 'cheilly'
+    
+    mailer_transport: smtp
+    mailer_host: smtp.gmail.com
+    mailer_user: syfflsas3.lerot.org
+    secret: 56f1c6ae2e2bea4288f04e3c1e67795d5890d3e0
+    mailer_password: li8$39chfield
