@@ -43,13 +43,34 @@ class BookmarksController  extends Controller
 
         $session = $request->getSession();
         $ilist = $session->get($blt.'List');
-       
-        if($ilist != null)
+        $ilist = array_values($ilist);
+       #dump($ilist);
+      # dump($key);
+       if($ilist != null)
         {
-           unset($ilist[$key]);
-           $session->set($blt.'List', $ilist);
+         $k = count($ilist);
+       #  dump($k);
+         for($j=0; $j<$k; $j++)
+         {
+            if(array_key_exists($j, $ilist))
+            {
+         #      dump($ilist[$j]['id']);
+             if($ilist[$j]['id']==$key)
+            {
+              unset($ilist[$j]);
+            }
+            }
         }
-        return $this->redirect("/admin/bookmark/edit");
+        
+   $session->set($blt.'List', $ilist);
+        }
+       return $this->redirect("/admin/bookmark/edit");
+       #  return $this->render('bookmarks/trace.html.twig', 
+       #            [
+        #             'source'=>$source,
+                 
+        #             'blist'=>$ilist,
+         #          ]);
     }
     
     

@@ -167,7 +167,7 @@ class TextController extends Controller
         $text = $this->getDoctrine()->getRepository('AppBundle:Text')->findOne($objecttype, $objid,$attribute,$language);
         if($text==null)
         {
-            $text = new Texts();
+            $text = new Text();
             $text->setObjecttype($objecttype);
             $text->setObjid($objid);
             $text->setAttribute($attribute);

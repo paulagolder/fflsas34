@@ -33,19 +33,19 @@
    <div class="heading">
      <div class="label" >{{ 'content.for.subject' | trans }} </div>
      <div class="title" > {{subjectid}}</div>
-     <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+     <div class="returnbutton button1"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
    </div>
    {% for content in contents %}
    <div class="contents">
     <div class="heading" >
-      <div class="label">{{content.title}}</div> 
+      <div class="title">{{content.title}}</div> 
       <div class="title">{{content.language}}</div> 
-      <div class="editbutton" ><a class='editbutton' href="/admin/content/edit/{{content.contentid}}">{{'edit.content' |trans}}</a></div>
+      <div class="editbutton button1" ><a class='editbutton' href="/admin/content/edit/{{content.contentid}}">{{'edit.content' |trans}}</a></div>
   
       <div class="deletebutton" ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}">{{'delete.content' |trans}}</a></div>      
     </div>
      
-    <div class='maintext'>
+    <div class='maintext resizable'>
         {{ content.text | raw}} 
     </div>
 

@@ -19,7 +19,7 @@ class ContentForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         
-        $builder    ->add('subjectid', TextType::class);  
+        $builder    ->add('subjectid', TextType::class, array('attr' => array('style' => 'width: 40px'),));  
       #    $builder    ->add('language', TextType::class);  
        $builder    ->add('language', ChoiceType::class, array(
         'choices'  => array(
@@ -27,8 +27,9 @@ class ContentForm extends AbstractType
          'en' => 'en',
         '*' => '*', ),
             ));
-        $builder    ->add('title', TextType::class);
-        $builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),));
+        $builder->add('title', TextType::class, array('attr' => array('style' => 'width: 400px'),));
+       # $builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),));
+       $builder->add('text', TextareaType::class, array('attr' => array('style' => 'width: 400px ;height:400px;'),));
    }
 
     public function configureOptions(OptionsResolver $resolver)

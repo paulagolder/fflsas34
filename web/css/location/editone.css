@@ -5,10 +5,10 @@ div#editlocation > div
     margin-bottom:20px;
 }
 
-div#editlocation div.breadcrumbs a
+xdiv#editlocation div.breadcrumbs a
 {
-    color:blue;
-    text-decoration:none;
+   color:blue;
+   text-decoration:none;
 }
 
 div#editlocation  div.heading
@@ -20,7 +20,7 @@ div#editlocation  div.heading
 div#editlocation div.heading > div
 {
 
-    margin-left: 10px;
+   xmargin-left: 10px;
 }
 
 div#editlocation  div.heading div.label

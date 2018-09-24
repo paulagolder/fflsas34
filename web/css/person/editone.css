@@ -56,7 +56,7 @@ div#editperson div.participants div.participantlist div.participant div.editbutt
 
  div#editperson div.refgroup   
 {
-   display:flex;
+   xdisplay:flex;
    margin-top:40px;
 } 
 
@@ -296,9 +296,9 @@ div#editperson  div.participants div.participantlist div.participant
 
 div#editperson div.participants div.participantlist div.participant a
 {
-    text-decoration:none;
-    color:blue;
-     font-size: 0.75em;
+    #text-decoration:none;
+    #color:blue;
+    # font-size: 0.75em;
 }
 
 div#editperson div.person div.participants div.participantlist div.participant div.particiantdelete.deletebutton a

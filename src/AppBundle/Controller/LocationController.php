@@ -299,12 +299,14 @@ class LocationController extends Controller
         {
           $llist = array();
         }
-        $newloc = array();
-        $newloc['id'] = $lid;
-        $newloc["label"]= $location->getName();
-        array_push($llist, $newloc);
-        $session->set('locationList', $llist);
-        
+           if( !array_key_exists ( $lid , $llist))
+        {
+          $newloc = array();
+          $newloc['id'] = $lid;
+          $newloc["label"]= $location->getName();
+          $llist[$lid] = $newloc;
+          $session->set('locationList', $llist);
+        }
         return $this->redirect('/admin/location/'.$lid);
         
     }

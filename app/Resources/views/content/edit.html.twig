@@ -8,6 +8,7 @@
 {% block stylesheets %}
       {{ parent() }}
    <link href="{{ asset('css/content/edit.css') }}" rel="stylesheet" />
+      <link href="{{ asset('css/form.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block js %}
@@ -25,31 +26,35 @@
 <div class="heading">
  <div class="label" >{{ 'edit.contents' | trans }} </div>
   <div class="title" >{{ label}} : {{contentid}} </div>
-  <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+  <div class="returnbutton button1"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
 </div> 
+<div class="form">
 {{ form_start(form) }}
 
  {{  form_row(form.subjectid) }}
 
   {{ form_row(form.language) }}
-    {{ form_row(form.title,{ 'attr': {'cols': '50'} }) }}
+    {{ form_row(form.title) }}
     <div id="maintext">
-{{ form_row(form.text,{ 'attr': {'cols': '50'} }) }}
+{{ form_row(form.text) }}
     </div>
     <button type="submit">{% trans %} enregistrer {% endtrans%} </button>
 {{ form_end(form) }}
-
+</div>
 {% for  imagelink in imagelinks %}
 {% for  key , sublink in imagelink %}
-<div class="sub;link" >
+<div class="sublink" >
 <div> {{ sublink }} </div>
-<div class="editbutton"> <a href = "/admin/content/deleteimage/{{contentid}}/{{key}}" >{% trans %} delete {% endtrans%} </a> </di 
+<div class="editbutton"> 
+   <a href = "/admin/content/deleteimage/{{contentid}}/{{key}}" >{% trans %} delete {% endtrans%} </a> 
+</div>
+</div>
 {% endfor %}
 {% endfor %}
 </div>
-</div>
-</div>
-</div>
+
+
+
 {% endblock %}
 
 

@@ -233,6 +233,11 @@ div#mainmenu > div.menuitem >   a:hover
   color:white;   
 }
 
+html body div#page div.mypage div.mypageinner div#left div#mainmenu div.menuitem a:hover
+{
+    color:white;
+}
+
 div#mainmenu > div.menuitem >  a:visited
 {
   color:blue;   

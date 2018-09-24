@@ -143,19 +143,39 @@ mail.from: de
 mail.subject: sujet
 mail.body: contenu
 voir: voir
-new.incident: nouvel incident 
-a.link.from:  lien de
-mail.date.sent: envoyer le
-mail.sentby: envoyer par
+new.incident: 'nouvel incident'
+a.link.from: 'lien de'
+mail.date.sent: 'envoyer le'
+mail.sentby: 'envoyer par'
 complete.reg: 'compléter l''inscription'
-sucessful.completion: inscription réussie
-welcome.to.our.site: Bienvenue sur notre site
-edit.contents: modifier le contenu
-bookmark.content: marquer le contenu
-delete.content: supprimer le contenue
+sucessful.completion: 'inscription réussie'
+welcome.to.our.site: 'Bienvenue sur notre site'
+edit.contents: 'modifier le contenu'
+bookmark.content: 'marquer le contenu'
+delete.content: 'supprimer le contenue'
 content.for.subject: sujet
-message.forwarded.by.admin: message transmis par FFLSAS-admin
-message.sent.by: envoyé par
-message.to: envoyé à
-message.date: envoyé le
+message.forwarded.by.admin: 'message transmis par FFLSAS-admin'
+message.sent.by: 'envoyé par'
+message.to: 'envoyé à'
+message.date: 'envoyé le'
 message.subject: sujet
+to.add.images.use.bookmarks: __to.add.images.use.bookmarks
+see.admin.messages: __see.admin.messages
+edit.message: __edit.message
+send.message: __send.message
+delete.message: __delete.message
+message.to.user: __message.to.user
+admin.messages: __admin.messages
+users: __users
+user.show: __user.show
+edit.user: __edit.user
+profil.person: __profil.person
+message.list: __message.list
+'send,message': '__send,message'
+view.message: __view.message
+see.message: __see.message
+message.sentby: __message.sentby
+new.user: __new.user
+register: __register
+bookmark.image: __bookmark.image
+see.image: __see.image

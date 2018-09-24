@@ -231,7 +231,7 @@ class ContentController extends Controller
         {
             foreach($contents as $content)
             {
-                $content->link = "/admin/content/addBookmark/".$content->getContentid();
+                $content->link = "/admin/content/addbookmark/".$content->getContentid();
             }
             
         }
@@ -266,9 +266,9 @@ class ContentController extends Controller
         $ilist[$sid]= $newcontent;
         $session->set('contentList', $ilist);
         
-         return $this->redirect($uri);
+         #return $this->redirect($uri);
         
-       # return $this->redirect("/admin/content/search?searchfield=".$gfield);
+        return $this->redirect("/admin/content/search?searchfield=".$gfield);
         
     }
     

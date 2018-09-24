@@ -55,7 +55,8 @@
             
         
            <div class="imagegroup" >
-             <div class="images">
+             <div class="images tooltip">
+               <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
                 {% for image in images %}
                 <div class="image">
                     <div class="imageimage" ><a href="{{image.link}}" ><img src="{{image.fullpath}}" /></a></div>
@@ -69,15 +70,17 @@
             
             
         <div class="refgroup" >
+        <div class="subheading" >
            <div class="label"> {{'liens'|trans}}</div>
-           <div class="editbutton" ><a  href="/admin/linkref/editperson/{{person.personid}}">{%trans%}ref.edit{%endtrans%}</a></div>
-             <div class="reflist">
+           <div class="editbutton" >
+               <a  href="/admin/linkref/editperson/{{person.personid}}">{%trans%}ref.edit{%endtrans%}</a>
+            </div>
+         </div>
+         <div class="reflist">
          {% for ref in refs %}
-        
-               <div class="refref" >{{ref.label}}</a></div>
-         
+               <div class="refref" >{{ref.label}}</div>
            {% endfor %}
-              </div>
+         </div>
        </div>
             
         {% if text  %}
@@ -110,7 +113,7 @@
               </div>
                 <div class="participantlist" >
                 {% for participant in participants %}
-                    <div class="participant" >
+                    <div class="participant selectable" >
                      <div > {{ participant.label}}</div>
                       <div class="editbutton button1" ><a href="{{participant.link}}">{%trans%}edit{%endtrans%}</a>
                     </div>

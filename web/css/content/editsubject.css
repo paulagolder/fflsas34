@@ -3,8 +3,9 @@
 
 div#editcontent div.maintext
 {
-    width: 500px;
-    height: 100px;
+    margin-top:20px;
+    width: 600px;
+    height: 400px;
     background-color: #eee;
     overflow: scroll;
     

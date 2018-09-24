@@ -25,7 +25,7 @@
         </div>
         
         {% for contact in messages %}
-        <div class= "contact">
+        <div class= "contact  selectable">
             <div class="name" > {{contact.name}}</div>
             <div class="name" > ({{contact.email}})</div>
             <div class= "date" > {{contact.date_sent | date("Y-m-d") }}</div>
@@ -40,7 +40,7 @@
             </div>
         </div>
         {% endfor %}
-        
+ </div>       
   </div>
 {% endblock %}
     

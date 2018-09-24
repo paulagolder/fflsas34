@@ -13,7 +13,7 @@ div#peoplesidebar{
  
  div#peoplesidebar div.heading
  {
-     color:maroon;
+     color:yellow;
      font-size:1em;
      
  }
@@ -28,5 +28,11 @@ div#peoplesidebar nav ul{overflow:hidden; overflow-y:scroll;}
 div#peoplesidebar >nav > ul >li > a
 {
      color:blue;
+     text-decoration : none;
+}
+
+div#peoplesidebar >nav > ul >li > a:hover
+{
+     color:white;
      text-decoration : none;
 }

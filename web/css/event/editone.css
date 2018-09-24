@@ -21,7 +21,7 @@ div#editevent div.label
     margin-left:20px;
  }
  
-div#editevent  a
+xdiv#editevent  a
 {
      color:blue;
      text-decoration:none;
@@ -201,7 +201,7 @@ div#editevent  div.participants
 
 
 
-div#editevent div.participants div.participant a
+xdiv#editevent div.participants div.participant a
 {
    color:blue;
    text-decoration : none;
@@ -246,7 +246,7 @@ div#editevent div.children div.child
     display:flex;
 }
 
-div#editevent div.children div.child a
+xdiv#editevent div.children div.child a
 {
     color:blue;
     text-decoration:none;

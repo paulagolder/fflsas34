@@ -115,14 +115,14 @@ div#right
 }
     
 
-a.editbutton:visited ,a.editbutton:link, a.editbutton:visited 
+div#middle  a.editbutton,  a.editbutton:visited ,a.editbutton:link, a.editbutton:visited 
 {
     color: white;
 }
  
- a.editbutton:hover
+div#middle   a.editbutton:hover
  {
-     color:green;
+     color:blue;
  }
 
 a.editbutton 
@@ -207,7 +207,7 @@ div#middle  div.returnbutton a
     text-decoration : none;
 }
 
-div#middle  a, a:visited ,a:link, a:visited 
+div#middle  a, a:visited ,a:link 
 {
    text-decoration: none;
    color:blue;
@@ -332,4 +332,41 @@ div#middle div.datarow div.data
 {
     color:blue;
      font-size:1em;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+   # background-color: black;
+    color: #f00;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.selectable:hover
+{
+    background: rgba(0, 0, 80, 0.1);
+}
+
+.resizable
+{
+    resize: both;
+    overflow: auto;
 }
