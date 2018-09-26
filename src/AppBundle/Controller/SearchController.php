@@ -59,7 +59,7 @@ class SearchController extends Controller
         }
         
         $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
-        $results = array();
+       
         foreach($contents as $key => $content)
         {
           $cid = $content->getContentid();

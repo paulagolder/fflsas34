@@ -26,7 +26,7 @@ class ParticipantController extends Controller
     
     public function index()
     {
-        return $this->render('participants/index.html.twig', [
+        return $this->render('participant/index.html.twig', [
             'controller_name' => 'ParticipantController',
         ]);
     }
@@ -36,10 +36,10 @@ class ParticipantController extends Controller
         $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findAll();
         
         if (!$participations) {
-            return $this->render('participants/showall.html.twig', [ 'message' =>  'participations not Found',]);
+            return $this->render('participant/showall.html.twig', [ 'message' =>  'participations not Found',]);
         }
         
-        return $this->render('participants/showall.html.twig',
+        return $this->render('participant/showall.html.twig',
         [ 'message' =>  '',
           'heading' =>  'all participations ('.count($participations).')',
           'participations'=> $participations,
@@ -51,10 +51,10 @@ class ParticipantController extends Controller
         $participant = $this->getDoctrine()->getRepository("AppBundle:Participant")->findOne($pid);
         if (!$participant) 
         {
-            return $this->render('participants/showone.html.twig', [ 'message' =>  'participant '.$pid.' not Found',]);
+            return $this->render('participant/showone.html.twig', [ 'message' =>  'participant '.$pid.' not Found',]);
         }
         
-        return $this->render('participants/showone.html.twig', [ 'message' =>  '','heading' =>  'one participant ('.$pid.')','participant'=> $participant, ]);
+        return $this->render('participant/showone.html.twig', [ 'message' =>  '','heading' =>  'one participant ('.$pid.')','participant'=> $participant, ]);
     }
     
     
@@ -91,7 +91,7 @@ class ParticipantController extends Controller
          $incidents=   $this->getDoctrine()->getRepository("AppBundle:Incident")->findbyParticipation($eid,$pid);
          $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
          $event =   $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
-             return $this->render('participants/edit.html.twig', array(
+             return $this->render('participant/edit.html.twig', array(
             'form' => $form->createView(),
             'eventlabel'=>$event->getLabel(),
             'personname'=> $person->getFullname(),

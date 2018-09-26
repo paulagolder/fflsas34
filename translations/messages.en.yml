@@ -157,23 +157,23 @@ message.sent.by: 'sent by'
 message.to: 'sent to'
 message.date: 'date sent'
 message.subject: subject
-to.add.images.use.bookmarks: __to.add.images.use.bookmarks
-see.admin.messages: __see.admin.messages
-edit.message: __edit.message
-send.message: __send.message
-delete.message: __delete.message
-message.to.user: __message.to.user
-admin.messages: __admin.messages
-users: __users
-user.show: __user.show
-edit.user: __edit.user
-profil.person: __profil.person
-message.list: __message.list
-'send,message': '__send,message'
-view.message: __view.message
-see.message: __see.message
-message.sentby: __message.sentby
-new.user: __new.user
-register: __register
-bookmark.image: __bookmark.image
-see.image: __see.image
+to.add.images.use.bookmarks: To add images use bookmarks.
+see.admin.messages: See admin messages
+edit.message: Edit message
+send.message: Send message
+delete.message: Delete message
+message.to.user: Message to USER
+admin.messages: Message to ADMIN
+users: users
+user.show: Shoe user
+edit.user: Edit user
+profil.person: User profile
+message.list: List of messages
+send,message: Send message
+view.message: Read message
+see.message: Read messagee
+message.sentby: Message sent by
+new.user: New user
+register: Register
+bookmark.image: Bookmark image
+see.image: See image

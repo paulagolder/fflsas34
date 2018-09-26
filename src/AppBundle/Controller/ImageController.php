@@ -29,7 +29,7 @@ class ImageController extends Controller
     
     public function index()
     {
-        return $this->render('images/index.html.twig', [
+        return $this->render('image/index.html.twig', [
         'controller_name' => 'ImageController',
         ]);
     }
@@ -41,11 +41,11 @@ class ImageController extends Controller
         $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findAll();
         
         if (!$images) {
-            return $this->render('images/showall.html.twig', [ 'message' =>  'Images not Found',]);
+            return $this->render('image/showall.html.twig', [ 'message' =>  'Images not Found',]);
         }
         
         
-        return $this->render('images/showall.html.twig', 
+        return $this->render('image/showall.html.twig', 
         [
         'lang' => $this->lang,
         #'message' =>  '' ,
@@ -58,7 +58,7 @@ class ImageController extends Controller
         $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($iid);
         if (!$image) 
         {
-            return $this->render('images/showone.html.twig', [ 'message' =>  'Image '.$iid.' not Found',]);
+            return $this->render('image/showone.html.twig', [ 'message' =>  'Image '.$iid.' not Found',]);
         }
         
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$iid);
@@ -101,7 +101,7 @@ class ImageController extends Controller
                 echo( "unknown group ");
         }
         
-        return $this->render('images/showone.html.twig', 
+        return $this->render('image/showone.html.twig', 
         ['lang'=>$this->lang, 
         'message' =>  '',
         'image'=> $image,
@@ -117,7 +117,7 @@ class ImageController extends Controller
         $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($iid);
         if (!$image) 
         {
-            return $this->render('images/editone.html.twig', [ 
+            return $this->render('image/editone.html.twig', [ 
             'message' =>  'Image '.$iid.' not Found',
             'objid' =>$iid,
             'image'=>null,
@@ -161,7 +161,7 @@ class ImageController extends Controller
                 echo( "unknown group ");
         }
         
-        return $this->render('images/editone.html.twig', 
+        return $this->render('image/editone.html.twig', 
         ['lang'=>$this->lang, 
         'message' =>  '',
         'objid' => $iid,
@@ -205,7 +205,7 @@ class ImageController extends Controller
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $imagelist = $session->get('imageList');
         
-        return $this->render('images/adminsearch.html.twig', 
+        return $this->render('image/adminsearch.html.twig', 
         [ 
         'message' => $message,
         'heading' =>  $heading,
@@ -300,7 +300,7 @@ class ImageController extends Controller
             }
         }
         
-        return $this->render('images/edit.html.twig', array(
+        return $this->render('image/edit.html.twig', array(
             'form' => $form->createView(),
             'objid'=>$iid,
             'returnlink'=>'/admin/image/'.$iid,

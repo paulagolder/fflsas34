@@ -1,17 +1,17 @@
-{# templates/event/showall.html.twig #}
+{# templates/search/showall.html.twig #}
 
 {% extends 'base.html.twig' %}
  {% set locale =  app.request.getLocale() | lower %}
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('results_css/showall.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/search/showall.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block myheader %} {{ parent() }}{% endblock %}
 
 
 {% block middle %}
-  
+  <div id="search" >
    {% if message %}
      <h1> {{message | trans }}</h1>
    {% endif %}
@@ -25,12 +25,19 @@
    </div>
    {% if results is defined  %}
      {% if results %}
-       <div class="heading">{{'search.results' | trans}} {{searchkey}}</div> 
+       <div class="subheading"> 
+       <div class="label">{{'search.results' | trans}} </div> 
+       <div class="title">{{searchkey}}</div> 
+      </div> 
        {% for key, group in results %}
        {%if ( group | length ) > 20 %}
-        <div> {{'found.too.many' | trans}} {{key |trans}} ( {{group | length}} )</div>
+       <div class="subheading">
+        <div class="label"> {{'found.too.many' | trans}} {{key |trans}} ( {{group | length}} )</div>
+        </div>
        {% else %}
-         <div> {{'found' | trans}} {{key |trans}}</div>
+         <div class="subheading" >
+         <div class="label" > {{'found' | trans}} {{key |trans}}</div>
+       </div>
            <ul>
              {% for subject in group %}
                <li><a href="{{subject.link}}" >{{ subject.label}}</a> </li>
@@ -41,5 +48,5 @@
   {% endif %}
   {% endif %}
   
-  
+</div>  
 {% endblock %}

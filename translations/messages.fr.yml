@@ -161,21 +161,21 @@ message.date: 'envoyé le'
 message.subject: sujet
 to.add.images.use.bookmarks: __to.add.images.use.bookmarks
 see.admin.messages: __see.admin.messages
-edit.message: __edit.message
-send.message: __send.message
-delete.message: __delete.message
-message.to.user: __message.to.user
-admin.messages: __admin.messages
-users: __users
-user.show: __user.show
-edit.user: __edit.user
-profil.person: __profil.person
-message.list: __message.list
-'send,message': '__send,message'
-view.message: __view.message
-see.message: __see.message
-message.sentby: __message.sentby
-new.user: __new.user
-register: __register
-bookmark.image: __bookmark.image
-see.image: __see.image
+edit.message: Editer
+send.message: Envoyer
+delete.message: Suprimer
+message.to.user: Message au utiisateur
+admin.messages: Message de l'administrateur
+users: utiisateurs
+user.show: voir utilisateur
+edit.user: editer utilisateur
+profil.person: profil de l'utilisateur
+message.list: list des messages
+send,message: envoyer message
+view.message: voir le message
+see.message: voir le message
+message.sentby: messaege de
+new.user: nouvel utilisateur
+register: s'inscrire 
+bookmark.image: signet l'image
+see.image: voir l'image

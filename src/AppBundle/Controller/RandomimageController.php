@@ -43,7 +43,7 @@ class RandomimageController extends Controller
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$image->getImageId());
         //var_dump($text_ar);
         $title =  $this->mylib->selectText($text_ar,'title',$this->lang);
-         return $this->render('randomimages/showone.html.twig', 
+         return $this->render('randomimage/showone.html.twig', 
                    ['lang'=>$this->lang, 
                      'image'=> $image,
                      'title'=>$title,
