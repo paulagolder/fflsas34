@@ -3,28 +3,28 @@
 
 
 
-div#randomimage  div.heading 
+xdiv#randomimage  div.heading 
 {
     color:maroon;
     font-size:1.2em;
     text-align : center;
 }
 
-div#randomimage  div.heading div.title
+xdiv#randomimage  div.heading div.title
 {
     color:yellow;
     font-size:1em;
     text-align : center;
 }
 
-div#randomimage div.image div.title
+xdiv#randomimage div.image div.title
 {
     color:maroon;
     font-size: 1em;
     text-align: center;
 }
 
-div#randomimage
+xdiv#randomimage
 {
 	border-style: double;
 	border-color: rgba(255, 255, 255, 0.5);

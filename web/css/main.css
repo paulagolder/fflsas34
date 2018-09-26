@@ -183,10 +183,57 @@ div.plus90
 }
 
 
+div#right div.frame
+{
+	border-style: double;
+	border-color: rgba(255, 255, 255, 0.5);
+	border-radius: 5px;
+	background-color: rgba(76, 76, 76, 0.2);
+	xmargin: 10px;
+	padding: 10px;
+	xpadding-top: 20px;
+}
+
+
 div#right div.heading
 {
     color:yellow;
-    font-size:1.0em;
+    font-size:1.2em;
+     display:flex;
+      align-content: center;
+      align-items: center;
+}
+
+div#right div.heading div.label
+{
+    color:yellow;
+    
+}
+
+div#right div.heading div.title
+{
+    color:maroon;
+  
+}
+
+div#right div.subheading 
+{
+   margin-top:10px;
+    font-size:0.8em;
+    display:flex;
+     align-content: center;
+}
+
+div#right div.subheading div.label
+{
+    color:yellow;
+    
+}
+
+div#right div.subheading div.title
+{
+    color:maroon;
+    
 }
 
 
