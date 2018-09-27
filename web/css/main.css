@@ -7,7 +7,8 @@ body
 	font-stretch: normal;
 	padding: 0;
 	margin: 0;
-	background: url(/common/skybig.jpg) 20% 0;
+	xbackground: url(/common/skybig.jpg) 20% 0;
+    background: url(/common/sky7.jpg) 20% 0;
 }
 
 
@@ -22,7 +23,8 @@ div#page
 
 div#page div.header
 {
-  color: #fff;
+  #color: #fff;
+  color: #0f0;
 }
 
 div#footer

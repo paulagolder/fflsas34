@@ -15,11 +15,16 @@ class MessageForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-         $builder->add('name', TextType::class);
-         $builder->add('email', TextType::class);
+         $builder->add('fromname', TextType::class);
+         $builder->add('fromemail', TextType::class);
+         $builder->add('toname', TextType::class);
+         $builder->add('toemail', TextType::class);
          $builder->add('subject', TextType::class);
          $builder->add('message', TextareaType::class);
-        
+         $builder->get('toname')->setDisabled(true);
+         $builder->get('toemail')->setDisabled(true);
+         $builder->get('fromname')->setDisabled(true);
+         $builder->get('fromemail')->setDisabled(true);
     }
 
     public function configureOptions(OptionsResolver $resolver)

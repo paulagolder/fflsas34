@@ -243,9 +243,18 @@ class LocationController extends Controller
             }
         }
         
+        if($region) 
+        {
+         $regionname = $region->getName();
+         } 
+         else
+         {
+         $regionname = "No Parent";
+         }
+        
         return $this->render('location/edit.html.twig', array(
             'form' => $form->createView(),
-            'regionname'=>$region->getName(),
+            'regionname'=>$regionname,
             'location'=>$location,
             'objid'=>$lid,
             'returnlink'=>'/admin/location/'.$lid,

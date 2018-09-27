@@ -69,8 +69,8 @@ class RegistrationController extends Controller
             $message .=                "  ".$baseurl.'/remotecomplete/'.$user->getUserid()."/".$user->getRegistrationcode();
             $subject = 'registration success';
             $this->sendMessage($user, $subject,$message);
-              $message2 =    $this->trans->trans('you.have.sucessfully.regisered');
-            $message .=                $this->trans->trans('to.complete.reply.to email');
+            $message2 =    $this->trans->trans('you.have.sucessfully.regisered');
+            $message2 .=                $this->trans->trans('to.complete.reply.to email');
            return $this->render('registration/done.html.twig',
             array(
                 'username' => $user->getUsername() ,
@@ -81,7 +81,8 @@ class RegistrationController extends Controller
 
         return $this->render(
             'registration/register.html.twig',
-             array('form' => $form->createView() , 'lang'=>$this->lang,)
+             array('form' => $form->createView() , 
+             'lang'=>$this->lang,)
         );
     }
     

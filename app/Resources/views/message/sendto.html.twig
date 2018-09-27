@@ -11,11 +11,13 @@
   <div class=heading>{{'message.to.user' | trans}}</div>
   <div class="form">
        {{form_start(form)}}
-       {{ form_row(form.name)   }}
-       {{ form_row(form.email)   }}
+           {{ form_row(form.toname)   }}
+       {{ form_row(form.fromemail)   }}
+       {{ form_row(form.fromname)   }}
+       {{ form_row(form.toemail)   }}
        {{ form_row(form.subject)   }}
        {{ form_row(form.message)   }}
-    <button type="submit">Register!</button>
+    <button type="submit">Envoyer!</button>
        {{form_end(form)}}
    </div>
 </div>

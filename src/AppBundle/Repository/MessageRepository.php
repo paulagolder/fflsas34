@@ -14,7 +14,7 @@ class MessageRepository extends EntityRepository
     public function findbyemail($email)
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->andWhere('c.email= :val');
+        $qb->andWhere('c.fromemail= :val');
         $qb->setParameter('val', $email);
         
          return $qb->getQuery()->getResult();
@@ -24,8 +24,8 @@ class MessageRepository extends EntityRepository
     {
         $admin = "FFLSAS-admin";
         $qb = $this->createQueryBuilder('c');
-        $qb->andWhere('c.sentto= :val');
-        $qb->setParameter('val', $admin);
+      #  $qb->andWhere('c.toname = :val');
+     #   $qb->setParameter('val', $admin);
         
          return $qb->getQuery()->getResult();
     }

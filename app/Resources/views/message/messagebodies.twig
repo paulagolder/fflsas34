@@ -3,31 +3,31 @@
 
 
 
-{% macro emailbody1( name,datesent, fromemail,sentto, subject, body ) %}
+{% macro emailbody1( message ) %}
 
 <div id="mailmessage">
-<h3 class="label">{{'message.enyoyer'|trans }} {{sentto}}</h3>
+<h3 class="label">{{'message.enyoyer'|trans }} {{message.toname}}</h3>
 <table  >
-<tr><td >{{'mail.date.sent'| trans}} </td><td> {{ datesent }}</td></tr>
-<tr><td >{{'mail.sentby'| trans}} </td><td> {{ name }}</td></tr>
-<tr><td> {{ 'mail.from' |trans }}</td><td>{{fromemail}} </td></tr>
-<tr><td>{{'mail.subject'| trans}} </td><td> {{ subject }}</td></tr>
-<tr><td>{{'mail.body'| trans}}  </td><td>{{ body }}</td></tr>
+<tr><td >{{'mail.date.sent'| trans}} </td><td> {{ message.date_sent  | date("Y-m-d h:m:s")}}</td></tr>
+<tr><td >{{'mail.sentby'| trans}} </td><td> {{ message.toname }}</td></tr>
+<tr><td> {{ 'mail.from' |trans }}</td><td>{{message.fromemail}} </td></tr>
+<tr><td>{{'mail.subject'| trans}} </td><td> {{ message.subject }}</td></tr>
+<tr><td>{{'mail.body'| trans}}  </td><td>{{ message.message }}</td></tr>
 </table>
 </div>
 {% endmacro %}
 
 
-{% macro emailbody2( name,datesent, fromemail,sentto, subject, body ) %}
+{% macro emailbody2( message ) %}
 
 <div id="mailmessage">
 <h3 class="label">{{'message.forwarded.by.admin'|trans }} </h3>
 <table  >
-<tr><td  style="font-weight: bold;" >{{'mail.date.sent'| trans}}</td><td> {{ datesent }}</td></tr>
-<tr><td  style="font-weight: bold;">{{'mail.sentby'| trans}} </td><td> {{ name }} ({{fromemail}}) </td></tr>
-<tr><td  style="font-weight: bold;">{{'mail.subject'| trans}} </td><td> {{ subject }}</td></tr>
+<tr><td  style="font-weight: bold;" >{{'mail.date.sent'| trans}}</td><td> {{ message.date_sent | date("Y-m-d h:m:s") }}</td></tr>
+<tr><td  style="font-weight: bold;">{{'mail.sentby'| trans}} </td><td> {{ name }} ({{message.fromemail}}) </td></tr>
+<tr><td  style="font-weight: bold;">{{'mail.subject'| trans}} </td><td> {{ message.subject }}</td></tr>
 </table>
 </div>
-<div  style="margin-top:2em;" >{{ body }}</div>
+<div  style="margin-top:2em;" >{{ message.message }}</div>
 </div>
 {% endmacro %}

@@ -4,8 +4,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* Message
-*
 * @ORM\Table(name="message")
 * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
 */
@@ -22,44 +20,34 @@ class Message
 
    private $id;
 
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="name", type="string", length=255)
-    */
+     /**
+     * @ORM\Column(type="string", length=25)
+     */
+   private $fromname;
 
-   private $name;
+     /**
+     * @ORM\Column(type="string", length=100)
+     */
+   private $fromemail;
 
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="email", type="string", length=255)
-    */
-   private $email;
-
-    /**
-    * @var string
-    *
-    * @ORM\Column(name="sentto", type="string", length=25)
-    */
-
-    private $sentto;
+     /**
+     * @ORM\Column(type="string", length=25)
+     */
+   private $toname;
    
-   
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="subject", type="string", length=255)
-    */
-
+     /**
+     * @ORM\Column(type="string", length=100)
+     */
+   private $toemail;
+    
+      /**
+     * @ORM\Column(type="string", length=25)
+     */
    private $subject;
 
-   /**
-    * @var string
-    *
-    * @ORM\Column(name="message", type="string", length=255)
-    */
-
+     /**
+     * @ORM\Column(type="text", length=2000, unique=true)
+     */
    private $message;
    
    
@@ -69,11 +57,7 @@ class Message
 
    private $date_sent;
 
-   /**
-    * Get id
-    *
-    * @return int
-    */
+  
 
    public function getId()
 
@@ -81,81 +65,64 @@ class Message
        return $this->id;
    }
 
-   /**
-    * Set name
-    *
-    * @param string $name
-    *
-    * @return Contact
-    */
+   
 
-   public function setName($name)
+   public function setToname($name)
    {
-       $this->name = $name;
+       $this->toname = $name;
        return $this;
    }
 
-   /**
-    * Get name
-    *
-    * @return string
-    */
+   
 
-   public function getName()
+   public function getToname()
    {
-       return $this->name;
+       return $this->toname;
    }
-
-     public function setSentto($to)
+   
+    public function setFromname($name)
    {
-       $this->sentto = $to;
+       $this->fromname = $name;
        return $this;
    }
 
-   /**
-    * Get name
-    *
-    * @return string
-    */
+ 
 
-   public function getSentto()
+   public function getFromname()
    {
-       return $this->sentto;
+       return $this->fromname;
+   }
+
+     public function setToemail($to)
+   {
+       $this->toemail = $to;
+       return $this;
+   }
+
+ 
+
+   public function getToemail()
+   {
+       return $this->toemail;
    }
    
    
-   /**
-    * Set email
-    *
-    * @param string $email
-    *
-    * @return Contact
-    */
 
-   public function setEmail($email)
+
+   public function setFromemail($email)
    {
-       $this->email = $email;
+       $this->fromemail = $email;
        return $this;
    }
 
-   /**
-    * Get email
-    *
-    * @return string
-    */
-
-   public function getEmail()
+ 
+   public function getFromemail()
    {
-       return $this->email;
+       return $this->fromemail;
    }
+   
 
-   /**
-    * Set subject
-    *
-    * @param string $subject
-    *
-    * @return Contact
-    */
+  
 
    public function setSubject($subject)
    {
@@ -163,24 +130,14 @@ class Message
        return $this;
    }
 
-   /**
-    * Get subject
-    *
-    * @return string
-    */
+ 
 
    public function getSubject()
    {
        return $this->subject;
    }
 
-   /**
-    * Set message
-    *
-    * @param string $message
-    *
-    * @return Contact
-    */
+
 
    public function setMessage($message)
    {
@@ -188,11 +145,7 @@ class Message
        return $this;
    }
 
-   /**
-    * Get message
-    *
-    * @return string
-    */
+ 
 
    public function getMessage()
 

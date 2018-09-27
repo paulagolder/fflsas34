@@ -15,6 +15,7 @@ use Symfony\Bundle\SwiftmailerBundle\Swift_SmtpTransport;
 use AppBundle\Entity\Message;
 use AppBundle\Service\MyLibrary;
 use AppBundle\Form\MessageForm;
+use AppBundle\Form\UserMessageForm;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -39,78 +40,67 @@ class MessageController extends Controller
     public function createUserMessage(Request $request ,\Swift_Mailer $mailer) 
     {
          $user = $this->getUser();
-      
+    
         $message = new Message;
         if($user)
         {
-         $message->setName($user->getUsername());
-         $message->setEmail($user->getEmail());
+         $message->setFromname($user->getUsername());
+         $message->setFromEmail($user->getEmail());
          }
-      
-      # Add form fields
-        $form = $this->createFormBuilder($message)
-        ->add('name', TextType::class, array('label'=> 'name', 'attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-        ->add('email', TextType::class, array('label'=> 'email','attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-        ->add('subject', TextType::class, array('label'=> 'subject','attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-        ->add('message', TextareaType::class, array('label'=> 'message','attr' => array('class' => 'form-control')))
-        ->add('Submit', SubmitType::class, array('label'=> 'submit', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-top:15px')))
-        ->getForm();
-        
+         $toname = $this->getParameter('admin-name');
+         $toemail = $this->getParameter('admin-email');
+         $message->setToname($toname);
+         $message->setToemail($toemail);
+    
+         $form = $this->createForm(UserMessageForm::class, $message);
       # Handle form and recaptcha response
         $form->handleRequest($request);
     
       # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid())
         {
-            $name = $form['name']->getData();
-            $fromemail = $form['email']->getData();
+            $fromname = $form['fromname']->getData();
+            $fromemail = $form['fromemail']->getData();
             $subject = $form['subject']->getData();
             $messagetext = $form['message']->getData();
-            $sentto = "fflsas-admin";  
+            
             
       # set form data   
-            $message->setSentto($sentto);
-            $message->setName($name);
-            $message->setEmail($fromemail);          
+            $message->setToname($toname);
+            $message->setToemail($toemail);
+            $message->setFromname($fromname);
+            $message->setFromemail($fromemail);          
             $message->setSubject($subject);     
-            $message->setMessage($messagetext);   
+            $message->setMessage($messagetext); 
             $datesent =new \DateTime();
             $message->setDate_sent( $datesent);
-            
+            dump($message);
        # finally add data in database
             $sn = $this->getDoctrine()->getManager();      
             $sn -> persist($message);
             $sn -> flush();
 
-           $message = (new \Swift_Message('Hello Email'));
-           $message->setSubject($subject);
-           $message->setFrom('admin@syfflsas3.lerot.org','fflsas-admin');
-           $message->setTo($fromemail);
-            $message->setBody(
+           $smessage = (new \Swift_Message('Hello Email'));
+           $smessage->setSubject($subject);
+           $smessage->setFrom($this->getParameter('admin-email'),$this->getParameter('admin-name'));
+           $smessage->setTo($toemail);
+           $smessage->setBody(
             $this->renderView('message/emailbody.html.twig',array(
-               'name' => $name,
-               'fromemail'=> $fromemail,
-               'sentto'=> $sentto,
-               'subject' =>$subject,
-               'body'=>$messagetext,
-               'datesent' => $datesent->format('Y-m-d H:i:s'))
-            ),'text/html');
+               'message'=>$message,
+            ),'text/html'));
    
 
-          $mailer->send($message);
+           $mailer->send($smessage);
 
-            return $this->render('message/usermessage-resp.html.twig',array(
-               'name' => $name,
-               'sentto'=> $sentto,
-               'fromemail'=>$fromemail,
-               'subject' =>$subject,
-               'body'=>$messagetext,
-               'datesent' => $datesent->format('Y-m-d H:i:s'))
+           return $this->render('message/usermessage-resp.html.twig',array(
+               'message'=>$message,
+               'returnlink' =>"/$this->lang/person/all")
             );                
-      } ;
+        } ;
             
-        return $this->render('message/form.html.twig', array( 'lang'=>$this->lang,
-            'form' => $form->createView()  
+        return $this->render('message/form.html.twig', array( 
+            'lang'=>$this->lang,
+            'form' => $form->createView(),  
         ));
     }
     
@@ -170,10 +160,11 @@ class MessageController extends Controller
         $message = new Message;
         if($fuser)
         {
-         $message->setName($fuser->getUsername());
-         $message->setEmail($fuser->getEmail());
+         $message->setToname($fuser->getUsername());
+         $message->setToemail($fuser->getEmail());
          }
-        
+          $message->setFromname($this->getParameter('admin-name'));
+         $message->setFromemail($this->getParameter('admin-email'));
 
       
         $form = $this->createForm(MessageForm::class, $message);
@@ -184,16 +175,16 @@ class MessageController extends Controller
       # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid())
         {
-            $name = $form['name']->getData();
-            $fromemail = $form['email']->getData();
+            $fromname = $form['fromname']->getData();
+            $fromemail = $form['fromemail']->getData();
             $subject = $form['subject']->getData();
             $messagetext = $form['message']->getData();
             $sentto = $fuser->getEmail();  
             
       # set form data   
-            $message->setSentto($sentto);
-            $message->setName($name);
-            $message->setEmail($fromemail);          
+           # $message->setToname($toname);
+          #  $message->setFromname($name);
+          #  $message->setEmail($fromemail);          
             $message->setSubject($subject);     
             $message->setMessage($messagetext);   
             $datesent =new \DateTime();
@@ -204,22 +195,17 @@ class MessageController extends Controller
             $sn -> persist($message);
             $sn -> flush();
 
-           $message = (new \Swift_Message('Hello Email'));
-           $message->setSubject($subject);
-           $message->setFrom('admin@syfflsas3.lerot.org','fflsas-admin');
-           $message->setTo($fromemail);
-            $message->setBody(
+           $smessage = (new \Swift_Message('Hello Email'));
+           $smessage->setSubject($subject);
+           $smessage->setFrom('admin@syfflsas3.lerot.org','fflsas-admin');
+           $smessage->setTo($fromemail);
+            $smessage->setBody(
             $this->renderView('message/emailbody.html.twig',array(
-               'name' => $name,
-               'fromemail'=> $fromemail,
-               'sentto'=> $sentto,
-               'subject' =>$subject,
-               'body'=>$messagetext,
-               'datesent' => $datesent->format('Y-m-d H:i:s'))
-            ),'text/html');
+               'message'=>$message,
+            ),'text/html'));
    
 
-          $mailer->send($message);
+          $mailer->send($smessage);
 
             return $this->render('message/usermessage-resp.html.twig',array(
                'message'=>$message,

@@ -3,24 +3,27 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-      {{ parent() }}
-        <link href="{{ asset('css/form.css') }}" rel="stylesheet" />
+{{ parent() }}
+<link href="{{ asset('css/form.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block middle %}
 <div id="contactform" >
-<div class=heading>
-<div class="label" >{{'contact.us' | trans}}</div>
-</div>       
-<div class="form">
-     {{form_start(form)}}
-       {{ form_row(form.name) }}
-       {{ form_row(form.email) }}
-       {{ form_row(form.subject) }}
-       {{ form_row(form.message) }}
-    {{form_end(form)}}
-</div>
-       
+    <div class=heading>
+        <div class="label" >{{'contact.us' | trans}}</div>
+    </div>       
+    <div class="form">
+        {{form_start(form)}}
+        {{ form_row(form.toname) }}
+        {{ form_row(form.toemail) }}
+        {{ form_row(form.fromname) }}
+        {{ form_row(form.fromemail) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.message) }}
+        <button type="submit">envoyer!</button>
+        {{form_end(form)}}
+    </div>
+    
 </div>
 
 {% endblock %}
