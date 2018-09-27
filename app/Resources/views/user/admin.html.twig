@@ -49,6 +49,8 @@
         
         {% for message in messages %}
         <div class= "message">
+          <div class="subject" > {{message.fromname}}</div>
+            <div class="subject" > {{message.toname}}</div>
             <div class="subject" > {{message.subject}}</div>
             <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
             <div class = "message" > {{ message.message|length > 20 ? message.message|slice(0, 20) ~ '...' : message.message  }}</div>

@@ -36,7 +36,6 @@ class MessageController extends Controller
         
     }
     
-   #public function createUserMessage(Request $request , \Swift_Mailer $mailer)
     public function createUserMessage(Request $request ,\Swift_Mailer $mailer) 
     {
          $user = $this->getUser();
@@ -80,14 +79,14 @@ class MessageController extends Controller
             $sn -> persist($message);
             $sn -> flush();
 
-           $smessage = (new \Swift_Message('Hello Email'));
+           $smessage = (new \Swift_Message('FFLSAS Email'));
            $smessage->setSubject($subject);
            $smessage->setFrom($this->getParameter('admin-email'),$this->getParameter('admin-name'));
            $smessage->setTo($toemail);
            $smessage->setBody(
             $this->renderView('message/emailbody.html.twig',array(
                'message'=>$message,
-            ),'text/html'));
+            )),'text/html');
    
 
            $mailer->send($smessage);
@@ -197,7 +196,7 @@ class MessageController extends Controller
 
            $smessage = (new \Swift_Message('Hello Email'));
            $smessage->setSubject($subject);
-           $smessage->setFrom('admin@syfflsas3.lerot.org','fflsas-admin');
+           $smessage->setFrom($this->getParameter('admin-email'),$this->getParameter('admin-name'));
            $smessage->setTo($fromemail);
             $smessage->setBody(
             $this->renderView('message/emailbody.html.twig',array(

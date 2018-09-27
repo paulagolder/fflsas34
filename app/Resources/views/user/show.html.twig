@@ -48,7 +48,7 @@
         
         {% for message in messages %}
         <div class= "message">
-        {% if message.sentto == 'FFLSAS-admin' %}
+        {% if message.toname == 'FFLSAS-admin' %}
           {% set sentto ='user.to.admin' %}
           
         {% else %}

@@ -14,7 +14,7 @@ class MessageRepository extends EntityRepository
     public function findbyemail($email)
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->andWhere('c.fromemail= :val');
+        $qb->andWhere('c.fromemail= :val or c.toemail= :val');
         $qb->setParameter('val', $email);
         
          return $qb->getQuery()->getResult();
