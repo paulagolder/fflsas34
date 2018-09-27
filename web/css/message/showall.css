@@ -51,3 +51,24 @@ div#contacts div.contact
 {
        display:flex;
 }
+
+div#contacts div.contactlist  div.name
+{
+    color:yellow;
+}
+
+div#contacts div.contactlist  div.date
+{
+   padding-left: 5px;
+}
+
+div#contacts div.contactlist  div.subject
+{
+   padding-left: 5px;
+}
+
+
+div#contacts div.contactlist  div.message
+{
+   padding-left: 5px;
+}

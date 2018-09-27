@@ -9,6 +9,7 @@
    background-color :rgba(0, 0, 70, 0.8);
    display: flex;
    align-items: center;
+   color:white;
 }
 
 
@@ -235,7 +236,7 @@ div#mainmenu > div.menuitem >   a:hover
   color:white;   
 }
 
-html body div#page div.mypage div.mypageinner div#left div#mainmenu div.menuitem a:hover
+div#mainmenu div.menuitem a:hover
 {
     color:white;
 }
@@ -247,11 +248,10 @@ div#mainmenu > div.menuitem >  a:visited
 
  
 div#footer 
-
 {
-  width:100%;
-    position:fixed;
-    bottom:0px;;
+   width:100%;
+   position:fixed;
+   bottom:0px;;
 }
 
 div#footer table 

@@ -16,18 +16,16 @@ class MessageRepository extends EntityRepository
         $qb = $this->createQueryBuilder('c');
         $qb->andWhere('c.fromemail= :val or c.toemail= :val');
         $qb->setParameter('val', $email);
-        
-         return $qb->getQuery()->getResult();
+        $qb->orderBy("c.date_sent", "DESC");
+        return $qb->getQuery()->getResult();
     }
     
     public function findAdmin()
     {
         $admin = "FFLSAS-admin";
         $qb = $this->createQueryBuilder('c');
-      #  $qb->andWhere('c.toname = :val');
-     #   $qb->setParameter('val', $admin);
-        
-         return $qb->getQuery()->getResult();
+        $qb->orderBy("c.date_sent", "DESC");
+        return $qb->getQuery()->getResult();
     }
     
     public function delete($contactid)

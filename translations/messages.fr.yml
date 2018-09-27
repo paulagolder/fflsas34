@@ -134,8 +134,8 @@ user.email: 'Adresse e-mail'
 user.roles: 'rôles d''utilisateur'
 user.lastlogin: 'dernier accès'
 contact.list: 'liste de messages'
-view.contact: 'voir le message'
-delete.contact: 'supprimer le message'
+view.contact: 'voir'
+delete.contact: 'supprimer'
 message.enyoyer: 'message enyoyer'
 date: 'enyoyer le'
 from: 'enyoyer par'
@@ -159,8 +159,8 @@ message.sent.by: 'envoyé par'
 message.to: 'envoyé à'
 message.date: 'envoyé le'
 message.subject: sujet
-to.add.images.use.bookmarks: __to.add.images.use.bookmarks
-see.admin.messages: __see.admin.messages
+to.add.images.use.bookmarks: To add an image use a bookmark
+see.admin.messages: See admin messages
 edit.message: Editer
 send.message: Envoyer
 delete.message: Suprimer
