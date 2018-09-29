@@ -8,7 +8,9 @@ body
 	padding: 0;
 	margin: 0;
 	xbackground: url(/common/skybig.jpg) 20% 0;
-    background: url(/common/sky9.jpg) 20% 0;
+    background: url(/common/sky10.jpg) ;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
 }
 
 
@@ -294,7 +296,7 @@ div#middle  div.heading div.title
 {
     color:maroon;
     font-size:1.2em;
-    margin-left: 1em;
+    xmargin-left: 1em;
 }
 
 div#middle  div.heading div.label

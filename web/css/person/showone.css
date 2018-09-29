@@ -13,7 +13,7 @@ div#person div.pageheading
 
 div#person > div
 {
-    margin-left: 5em;
+    xmargin-left: 5em;
     margin-top: 20px;
 }
 

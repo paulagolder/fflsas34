@@ -73,6 +73,7 @@ class IncidentController extends Controller
      
        public function Showone($inid)
      {
+      $lib =  $this->mylib ;
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
          $incident = $this->getDoctrine()->getRepository("AppBundle:Incident")->findOne($inid);
         if (!$incident ) 
@@ -93,20 +94,23 @@ class IncidentController extends Controller
         }
         $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($incident['personid']);
         $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($incident['eventid']);
+         $eventlabel=$event->getLabel();
+        $etext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('event',$incident['eventid']);
+          $eventlabel= $lib->selectText( $etext_ar,"title",$this->lang);
         $itype = $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findOne($incident['itypeid']);
         $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($incident['locid']);
         if($location)
            $location->link = "/".$this->lang."/location/".$incident['locid'];
-        $label = $itype->getLabel();
+        $ilabel = $itype->getLabel();
         return $this->render('incident/showone.html.twig', 
                 [ 
                    'lang'=>$this->lang,
                    'message' =>  '',
-                   'eventlabel'=>$event->getLabel(),
+                   'eventlabel'=>$eventlabel,
                    'personname' => $person->getFullname(),
                    'incident'=> $incident,
                    'location'=>$location,
-                   'label'=>$label,
+                   'label'=>$ilabel,
                    'returnlink'=>"/".$this->lang."/person/".$person->getPersonid(),
                 ]);
      

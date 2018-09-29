@@ -10,11 +10,12 @@ font-size: 0.8em;
 color: silver;
 }
 
+
 div#image div.content
 {
      display: flex;
      flex-direction: row;
-    
+     margin-top:20px;
 }
 
 div#image div.image

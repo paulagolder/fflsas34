@@ -63,5 +63,7 @@ security:
          - { path: ^/(fr|en|FR|EN)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/accueil, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin/bookmark/edit, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
+         - { path: ^/admin/bookmark/delete, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/, roles: ROLE_ADMIN  }
         

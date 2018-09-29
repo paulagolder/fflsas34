@@ -40,7 +40,7 @@ class ContentController extends Controller
     
     public function Showall()
     {
-        # $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+       
         $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findAll();
         
         if (!$contents) {
@@ -60,10 +60,12 @@ class ContentController extends Controller
     {
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
-  
+        if(!$content_ar )
+        {
+          $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
+        }
         if(array_key_exists ($this->lang,$content_ar )) 
         {
-            
             $content = $content_ar[$this->lang] ;
         }
         elseif(array_key_exists ("fr",$content_ar ))
@@ -76,7 +78,7 @@ class ContentController extends Controller
         }
         else
         {
-          dump( $content_ar);
+           $content = $content_ar['*'] ;
         }
 
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
@@ -84,6 +86,7 @@ class ContentController extends Controller
         return $this->render('content/showone.html.twig', 
         [
         'message' =>  '',
+        'lang'=>$this->lang,
         'content'=> $content,
         'title'=>$content['title'],
         'refs'=>$refs,
@@ -106,6 +109,7 @@ class ContentController extends Controller
         return $this->render('content/showone.html.twig', 
         [
         'message' =>  '',
+        'lang'=>$this->lang,
         'content'=> $content,
         'title'=>$title,
         'refs'=>$refs,
@@ -269,6 +273,29 @@ class ContentController extends Controller
          #return $this->redirect($uri);
         
         return $this->redirect("/admin/content/search?searchfield=".$gfield);
+        
+    }
+    
+      public function addUserBookmark($sid)
+    {
+       // $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+    
+        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $ilist = $session->get('contentList');
+        if($ilist == null)
+        {
+            $ilist = array();
+        }
+        $newcontent = array();
+        $newcontent['id'] = $sid;
+        $newcontent["label"]= $content->getTitle();
+        $ilist[$sid]= $newcontent;
+        $session->set('contentList', $ilist);
+        
+        // return $this->redirect($uri);
+        
+        return $this->redirect("/fr/contentid/".$sid);
         
     }
     

@@ -49,7 +49,7 @@ class Location
     
     
     public $link;
-      public $label;
+    public $label;
     public $ancestors = array();
     public $children = array();
 
@@ -143,6 +143,16 @@ class Location
         return $this;
     }
     
-    
+      public function getLabel(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->name = $label;
+
+        return $this;
+    }
     
 }

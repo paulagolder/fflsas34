@@ -319,4 +319,25 @@ class LocationController extends Controller
         return $this->redirect('/admin/location/'.$lid);
         
     }
+    
+    
+     public function addUserbookmark($lid)
+    {
+         $location =  $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($lid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $llist = $session->get('locationList');
+        if($llist == null)
+        {
+          $llist = array();
+        }
+           if( !array_key_exists ( $lid , $llist))
+        {
+          $newloc = array();
+          $newloc['id'] = $lid;
+          $newloc["label"]= $location->getName();
+          $llist[$lid] = $newloc;
+          $session->set('locationList', $llist);
+        }
+        return $this->redirect("/".$this->lang.'/location/'.$lid);
+    }
 }

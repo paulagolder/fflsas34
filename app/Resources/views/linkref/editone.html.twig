@@ -29,9 +29,10 @@
    {% if message %}
      <h1> {{message}}</h1>
    {% else %}
-     <div class ="heading" >{{heading}}  
-           <span class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </span>
-           <a class="editicon" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/{{ref.linkid}} " > {{'edit' | trans}}</a>
+     <div class ="heading" >
+     <div class="title" >{{heading}}  </div>
+           <div class="returnbutton button1"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+           <div class="editbutton" ><a class="editbutton" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/{{ref.linkid}} " > {{'edit' | trans}}</a></div>
     </div>
             <div class="ref">
               <div class= "name" >{{ ref.label}}</div>
@@ -67,13 +68,17 @@
          </div>
   {% endif %}
   {% if not frtitle  %}
-  <div   class="textref" > {{ ref.label}}: FR : title :
-           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/title/FR" >{% trans %} create.this{% endtrans%} </a> 
+  <div   class="subheading selectable" > 
+           <div class="label">{{ ref.label}}: FR : title :</div>
+           <div class="editbutton button1">
+           <a class= "editbutton " href="/admin/text/{{objecttype}}/{{objid}}/title/FR" >{% trans %} create.this{% endtrans%} </a> </div>
            </div>
   {% endif %}
   {% if not entitle  %}
-  <div   class="textref" > {{ ref.label}}: EN : title :
-           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/title/EN"  >{% trans %} create.this{% endtrans%} </a> 
+   <div   class="subheading selectable" > 
+           <div class="label">{{ ref.label}}: EN : title :</div>
+           <div class="editbutton button1">
+           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/title/EN"  >{% trans %} create.this{% endtrans%} </a> </div>
            </div>
   {% endif %}
  
@@ -89,5 +94,5 @@
 
 
 {% block right %}
-   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+   {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
 {% endblock%}

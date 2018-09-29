@@ -235,6 +235,25 @@ class ImageController extends Controller
         
     }
     
+      public function addUserBookmark($iid)
+    {
+        $image =  $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($iid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $ilist = $session->get('imageList');
+        if($ilist == null)
+        {
+            $ilist = array();
+        }
+        $newimage = array();
+        $newimage['id'] = $iid;
+        $newimage["label"]= $image->getName();
+        $ilist[$iid]= $newimage;
+        $session->set('imageList', $ilist);
+        
+        return $this->redirect("/".$this->lang."/image/".$iid);
+        
+    }
+    
     public function edit($iid)
     {
         $user = $this->getUser();

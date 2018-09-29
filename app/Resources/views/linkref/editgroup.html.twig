@@ -44,22 +44,27 @@
       <div class="label" >{{"edit.links.for" |trans}}</div> 
       <div class="title" >{{label}}</div> 
       <div class="button1 editbutton">  <a class="editbutton" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/0 " > {{ 'add.new.linkref' | trans }}</a></div>
+    
+      <div class="returnbutton">  <a class="returnbutton" href= "{{returnlink}}" > {{ 'retour' | trans }}</a></div>
      </div>
+
    {% if refs %}
    <div class="reflist">
          {% for ref in refs %}
-            <div ><a href="{{ref.link}}" >{{ ref.label}}</a>
-            <a class="editicon" href= "/admin/linkref/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'edit' | trans}}</a>
-              <a class="editicon" href= "/admin/linkref/delete/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'delete' | trans}}</a>
+            <div class= "row" >
+            <a href="{{ref.link}}" >{{ ref.label}}</a>
+            <div class="editbutton button1"><a class="editbutton" href= "/admin/linkref/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'edit' | trans}}</a></div>
+            <div class="deletebutton">  <a class="deletebutton" href= "/admin/linkref/delete/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'delete' | trans}}</a></div>
             </div>
          {% endfor %}
      </div>
      {%endif%}
   {% endif %}
   </div>
+       </div>
 {% endblock %}
 
 
 {% block right %}
-   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+   {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
 {% endblock%}

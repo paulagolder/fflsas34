@@ -74,6 +74,11 @@ div#editperson div.participants div.participantlist div.participant div.editbutt
   text-decoration:none;
 }
 
+ div#editperson div.person div.refgroup div.reflist
+ {
+     margin-top:5px;
+     
+ }
     
 div#editperson div.text
 {

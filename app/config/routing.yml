@@ -158,11 +158,11 @@ search_all:
 
 bookmarkdelete:
      path: /admin/bookmark/delete/{blt}/{key}
-     controller:  AppBundle\Controller\BookmarksController::delete
+     controller:  AppBundle\Controller\BookmarkController::delete
      
 admin_bookmark_edit:
      path: /admin/bookmark/edit
-     controller:  AppBundle\Controller\BookmarksController::Edit     
+     controller:  AppBundle\Controller\BookmarkController::Edit     
 
 #===================== Person edit      
         
@@ -194,6 +194,10 @@ admin_Person_addcontent:
     path: /admin/person/addcontent/{pid}/{cid}
     controller: AppBundle\Controller\AdminPersonController::addcontent     
 
+admin_Person_addlocation:
+    path: /admin/person/addlocation/{pid}/{lid}
+    controller: AppBundle\Controller\AdminPersonController::addlocation   
+    
     
 admin_Person_removeimage:
     path: /admin/person/removeimage/{pid}/{iid}
@@ -302,51 +306,57 @@ texts_edit_group:
    path : /admin/text/{objecttype}/{objid}
    controller:  AppBundle\Controller\TextController::editgroup  
 
-#==============================images=====================
+#==============================image=====================
    
-admin_images_asearch:
+admin_image_asearch:
     path : /admin/image/search 
     controller:  AppBundle\Controller\ImageController::Adminsearch      
    
-images_all:
+user_image_all:
     path : /{_locale}/image/all 
     controller:  AppBundle\Controller\ImageController::Showall
     requirements:
         _locale: en|fr|FR|EN
         
-images_one:
+user_image_one:
     path : /{_locale}/image/{iid}
     controller:  AppBundle\Controller\ImageController::Showone
     requirements:
         _locale: en|fr|EN|FR
         
         
-admin_images_addbookmark:
+admin_image_addbookmark:
     path:   /admin/image/addBookmark/{iid}
     controller:  AppBundle\Controller\ImageController::addbookmark
                    
-admin_images_addref:
+admin_image_addref:
     path:   /admin/image/addref/{otype}/{oid}/{iid}
     controller:  AppBundle\Controller\ImageController::addref
     
     
     
         
-admin_images_showone:
+admin_image_showone:
     path: /admin/image/{iid}
     controller:  AppBundle\Controller\ImageController::editone
            
          
            
         
-admin_images_edit:
+admin_image_edit:
     path: /admin/image/edit/{iid}
     controller:  AppBundle\Controller\ImageController::edit
     
-admin_images_add_image:
+admin_image_bookmark:
     path: /admin/image/bookmark/{iid}
     controller:  AppBundle\Controller\ImageController::addBookmark
 
+    
+user_image_bookmark:
+    path: /{_locale}/image/addbookmark/{iid}
+    controller:  AppBundle\Controller\ImageController::addUserbookmark
+    requirements:
+        _locale: en|fr|FR|EN
     
 #=============================events
     
@@ -359,9 +369,11 @@ events_admin_addbookmark:
     controller: AppBundle\Controller\AdminEventController::addBookmark  
     
 events_user_addbookmark:
-    path:  /user/event/addbookmark/{eid}
+    path:  /{_locale}/event/addbookmark/{eid}
     controller: AppBundle\Controller\EventController::addBookmark  
-    
+    requirements:
+        _locale: en|fr|FR|EN
+        
 events_admin_addimage:
     path:  /admin/event/addimage/{eid}/{iid}
     controller: AppBundle\Controller\AdminEventController::addImage  
@@ -463,6 +475,14 @@ location_all:
 admin_location_bookmark:
     path: /admin/location/addbookmark/{lid}
     controller:  AppBundle\Controller\LocationController::addbookmark
+    
+user_location_bookmark:
+    path: /{_locale}/location/addbookmark/{lid}
+    controller:  AppBundle\Controller\LocationController::addUserbookmark
+    requirements:
+        _locale: en|fr|FR|EN
+
+ 
  
 admin_location_top:
     path: /admin/location/top

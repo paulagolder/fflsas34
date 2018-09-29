@@ -40,6 +40,11 @@
     {% if location %}
     <div class="heading" >
         <div class="title" >{{ location.name }}</div>
+             {% if is_granted('ROLE_USER') %} 
+        <div class="editbutton button1" >
+            <a class="editbutton" href = "/{{lang}}/location/addbookmark/{{location.locid}}" >{{'bookmark.location' | trans}}</a>
+       </div>
+        {% endif %}
     </div>
     <div class="latlong" > {{location.latitude | number_format(4, '.', '') }} : {{location.longitude | number_format(4, '.', '') }} </div>
     

@@ -21,6 +21,10 @@
      {
         window.location.href = '/admin/person/addimage/{{person.personid}}/'+iid;
      }
+     function clicklocation(lid)
+     {
+        window.location.href = '/admin/person/addlocation/{{person.personid}}/'+lid;
+     }
      function clickcontent(cid)
      {
         window.location.href = '/admin/person/addcontent/{{person.personid}}/'+cid;
@@ -141,5 +145,5 @@
 
 
 {% block right %}
-   {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+   {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
 {% endblock%}

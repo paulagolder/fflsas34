@@ -9,6 +9,7 @@
         {% endblock %}
         {% block js %}
            <script src="{{asset('js/main.js')}}"></script>
+           <script src="{{asset('js/frbookmarks.js')}}"></script>
         {% endblock %}
        
       
@@ -109,10 +110,11 @@
          <div id="right" >
          {% block right %}
             <div> <p> </p></div>
-           {{ render(controller('AppBundle\\Controller\\RandomimageController::randomimage')) }}
-             {% if is_granted('ROLE_ADMIN') %}
- {{ render(controller('AppBundle\\Controller\\BookmarksController::setfield'))}}
+           
+             {% if is_granted('ROLE_USER') %}
+ {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
  {% endif %}
+ {{ render(controller('AppBundle\\Controller\\RandomimageController::randomimage')) }}
           {% endblock %}
           </div>
         </div>

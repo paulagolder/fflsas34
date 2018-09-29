@@ -103,11 +103,9 @@ class LinkrefController extends Controller
         $texts_ar = array();
         foreach( $refs as $ref)
         {
-        $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref',$ref['linkid']);
-       
+          $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref',$ref['linkid']);
         }
         
-
         return $this->render('linkref/editgroup.html.twig', 
                    ['lang'=>$this->lang, 
                      'message' =>  '',
@@ -115,7 +113,8 @@ class LinkrefController extends Controller
                      'objecttype'=>'person',
                      'objid'=>$pid,
                      'texts'=>$texts_ar,
-                     'refs'=>$refs
+                     'refs'=>$refs,
+                     'returnlink'=>"/admin/person/".$pid,
                      ]);
     }
     
@@ -139,7 +138,8 @@ class LinkrefController extends Controller
                      'objecttype'=>'event',
                      'objid'=>$eid,
                      'xtexts'=>$texts_ar,
-                     'refs'=>$refs
+                     'refs'=>$refs,
+                     'returnlink'=>"/admin/event/".$eid,
                      ]);
     }
     
@@ -161,6 +161,8 @@ class LinkrefController extends Controller
     
     public function Addlink($otype1,$oid1,$otype2,$oid2)
     {
+        // $obj = $this->getDoctrine()->getRepository('AppBundle:$otype2')->findOne($oid2);
+        // $label= $obj->getLabel();
           $user = $this->getUser();
            $time = new \DateTime();
           $time->setTimestamp($time->getTimestamp());
@@ -249,6 +251,7 @@ class LinkrefController extends Controller
     
     public function getLinks($objecttype, $objectid)
     {
+   
       #   $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
         $links = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup($objecttype,$objectid);
         $link_ar = array();
@@ -274,7 +277,7 @@ class LinkrefController extends Controller
          
          }
         $linkref['path'] = $path;
-          $linkref['label'] = $link['label'];
+        $linkref['label'] = $link['label'];
      
         $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref',$link['linkid']);
             $linkref['title']  = $this->mylib->selectText($texts_ar,'title',$this->lang);

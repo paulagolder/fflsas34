@@ -219,9 +219,11 @@ class AdminPersonController extends Controller
     
     public function addContent($pid,$cid)
     {
+        $obj = $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($cid);
+         $label= $obj->getLabel();
         $linkref = new Linkref();
-        $linkref->setLabel("content:".$cid);
-        $linkref->setPath("content/".$cid);
+        $linkref->setLabel($label);
+        $linkref->setPath("/content/".$cid);
         $linkref->setObjecttype("person");
         $linkref->setObjid($pid);
         $entityManager = $this->getDoctrine()->getManager();
@@ -230,6 +232,21 @@ class AdminPersonController extends Controller
         return $this->redirect("/admin/person/".$pid);
     }
     
+     
+    public function addLocation($pid,$lid)
+    {
+        $obj = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($lid);
+         $label= $obj->getLabel();
+        $linkref = new Linkref();
+        $linkref->setLabel($label);
+        $linkref->setPath("/location/".$lid);
+        $linkref->setObjecttype("person");
+        $linkref->setObjid($pid);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($linkref);
+        $entityManager->flush();
+        return $this->redirect("/admin/person/".$pid);
+    }
     
     public function removeimage($pid,$iid)
     {

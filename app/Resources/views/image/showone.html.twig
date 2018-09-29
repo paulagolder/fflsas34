@@ -19,6 +19,11 @@
    {% if image %}
      <div class="heading">
      <div class="title">{{title}}</div> 
+            {% if is_granted('ROLE_USER') %} 
+        <div class="editbutton button1" >
+            <a class="editbutton" href = "/{{lang}}/image/addbookmark/{{image.imageid}}" >{{'bookmark.image' | trans}}</a>
+       </div>
+        {% endif %}
     </div>
      <div class="content">
        <div class="image"> 
