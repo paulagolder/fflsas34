@@ -38,8 +38,33 @@ services:
         class: AppBundle\Controller\LibraryController
     
     
+
+    #app.mylibrary:
+    #    class: 
+    AppBundle\Service\MyLibrary:
+        arguments:
+           $parameterA : '%new-images-folder%'
+           $parameterB: '%external-images%'
+            
+    
+    
     linkref_service:
         class: AppBundle\Controller\LinkrefController
         calls:
             - [setContainer, ["@service_container"]]
         
+        
+
+    AppBundle\Service\FileUploader:
+        arguments:
+            $targetDir: '%new-images-folder%'
+            
+
+            # app/config/services.yml
+
+ 
+    AppBundle\EventListener\ImageUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            

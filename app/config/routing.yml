@@ -1,6 +1,10 @@
 
 # config/routing.yml
 
+imageroute : 
+   path: /web/newimages
+
+
 index:
    path: /
    controller: AppBundle\Controller\AccueilController::ShowFrench
@@ -333,14 +337,16 @@ admin_image_addref:
     path:   /admin/image/addref/{otype}/{oid}/{iid}
     controller:  AppBundle\Controller\ImageController::addref
     
-    
+admin_image_new:
+    path: /admin/image/new
+    controller:  AppBundle\Controller\ImageController::newimage         
     
         
 admin_image_showone:
     path: /admin/image/{iid}
     controller:  AppBundle\Controller\ImageController::editone
            
-         
+    
            
         
 admin_image_edit:

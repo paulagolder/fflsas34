@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Image
 {
     
-    private  $new_images_folder ='/symfonyimages/new/';
+    private  $new_images_folder = '/newimages/';
     private  $external_images = "http://fflsas.org/images/stories/fflsas/";
     
     /**
@@ -73,7 +73,12 @@ class Image
     public $link;
     public $fullpath;
     private $label;
-   public $filepath;
+     /**
+     * @ORM\Column(type="string")
+     *
+     *
+     */
+    private $Imagefile;
 
 
     public function getImageid(): ?int
@@ -114,6 +119,18 @@ class Image
         return $this;
     }
     
+      public function getImagefile()
+    {
+        return $this->Imagefile;
+    }
+
+  
+    public function setImagefile($path): self
+    {
+        $this->Imagefile = $path;
+
+        return $this;
+    }
  
    
     
@@ -286,7 +303,7 @@ class Image
      }
        
        
-       public function makeFullpath()
+       public function xmakeFullpath()
        {
           if ($this->isTemp())
           {

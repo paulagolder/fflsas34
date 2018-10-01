@@ -8,12 +8,7 @@ use Doctrine\ORM\EntityRepository;
 #use Doctrine\Bundle\DoctrineBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-/**
- * @method Images|null find($id, $lockMode = null, $lockVersion = null)
- * @method Images|null findOneBy(array $criteria, array $orderBy = null)
- * @method Images[]    findAll()
- * @method Images[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
+
 class ImageRepository extends EntityRepository
 {
 
@@ -33,7 +28,8 @@ class ImageRepository extends EntityRepository
        foreach($images as $image)
        {
          $image->makeLabel();
-            $image->makeFullpath();
+         
+         //   $image->setFullpath($this->getParameter('new-images-folder').$this->getPath());
        }
        return $images;
     }
@@ -49,7 +45,7 @@ class ImageRepository extends EntityRepository
        {
        $image->makeLabel();
  
-       $image->makeFullpath();
+       #$image->makeFullpath();
      #   echo("===".$image->getFullpath());
         }
        return $image;

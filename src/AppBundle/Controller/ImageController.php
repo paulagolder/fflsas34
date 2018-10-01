@@ -13,10 +13,11 @@ use AppBundle\Entity\Imageref;
 use AppBundle\Entity\Image;
 use AppBundle\Service\MyLibrary;
 use AppBundle\Form\ImageForm;
+use AppBundle\Service\FileUploader;
 
 class ImageController extends Controller
 {
-
+    
     private $lang="fr";
     private $mylib;
     private $requestStack ;
@@ -48,8 +49,6 @@ class ImageController extends Controller
         return $this->render('image/showall.html.twig', 
         [
         'lang' => $this->lang,
-        #'message' =>  '' ,
-       # 'heading' =>  'Les Images',
         'images'=> $images,]);
     }
     
@@ -60,7 +59,8 @@ class ImageController extends Controller
         {
             return $this->render('image/showone.html.twig', [ 'message' =>  'Image '.$iid.' not Found',]);
         }
-        
+        $this->mylib->setFullpath($image);
+        $mess = $image->getFullpath();
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$iid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
@@ -103,7 +103,7 @@ class ImageController extends Controller
         
         return $this->render('image/showone.html.twig', 
         ['lang'=>$this->lang, 
-        'message' =>  '',
+        'message' =>  $mess,
         'image'=> $image,
         'objid' => $iid,
         'title'=>$title,
@@ -123,12 +123,14 @@ class ImageController extends Controller
             'image'=>null,
             ]);
         }
-        
+         $this->mylib->setFullpath($image);
+        $mess = $image->getFullpath();
         if(@getimagesize($image->getFullpath()))
         {
             //image exists!
         }else{
-            $image->setFullpath($this->getParameter('new_images_folder').$image->getPath());
+            // $image->setFullpath($this->getParameter('new-images-folder').$image->getPath());
+            $image->setFullpath('/newimages/'.$image->getPath());
         }
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$iid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
@@ -163,7 +165,7 @@ class ImageController extends Controller
         
         return $this->render('image/editone.html.twig', 
         ['lang'=>$this->lang, 
-        'message' =>  '',
+        'message' => $mess,
         'objid' => $iid,
         'image'=> $image,
         'title'=>$title,
@@ -235,7 +237,7 @@ class ImageController extends Controller
         
     }
     
-      public function addUserBookmark($iid)
+    public function addUserBookmark($iid)
     {
         $image =  $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($iid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
@@ -254,27 +256,14 @@ class ImageController extends Controller
         
     }
     
-    public function edit($iid)
+    public function edit($iid,  FileUploader $fileUploader)
     {
         $user = $this->getUser();
         $time = new \DateTime();
         $time->setTimestamp($time->getTimestamp());
         $request = $this->requestStack->getCurrentRequest();
-        if($iid>0)
-        {
-            $image = $this->getDoctrine()->getRepository('AppBundle:Image')->findOne($iid);
-        }
-        if(! isset($image))
-        {
-            $image= new Images();
-        }
-   #     if( $image->getFilepath()!="")
-   #     {
-   # #        $image->setPath($image->getFilepath());
-   #         $image->setFilepath("");
-   #         //  $oldfilename = $image->getFilepath();
-   #         //  $image->setFilepath( new File("/home/paul/symphony/syfflsas/public/".$this-#>getParameter('new_images_folder').'/'.$oldfilename));
-    #    }
+        $image = $this->getDoctrine()->getRepository('AppBundle:Image')->findOne($iid);
+        
         $form = $this->createForm(ImageForm::class, $image);
         
         if ($request->getMethod() == 'POST') 
@@ -285,10 +274,14 @@ class ImageController extends Controller
             {
                 
                 /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-                $file = $image->getFilepath();
-                if($file!= null)
+                $file = $image->getImagefile();
+                $file = $form['imagefile']->getData();
+                
+                
+                
+                #  if($file!= null)
                 {
-                    $formname = $form["name"]->getData();
+                    $formname = $image->getName();
                     
                     $fileName = $time->format('YmdHis').'.jpeg';
                     
@@ -296,21 +289,14 @@ class ImageController extends Controller
                     {
                         $image.setFormname($filename);
                     }  
-                    $file->move(
-                        $this->getParameter('new_images_folder'),
-                        $fileName
-                        );
-                        $image->setPath($fileName);
-                        $image->setFilepath($fileName);
-                }
-                else
-                {
-                    //     $image->setFilepath($oldfileName);
-                    
+                    $file->move( $this->getParameter('new-images-folder-long'), $fileName);
+                    $image->setPath($fileName);
+                    $image->setImagefile($fileName);
                 }
                 
+                
                 $image->setContributor($user->getUsername());
-                # $image->setUpdateDt($time);
+                $image->setUpdateDt($time);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($image);
                 $entityManager->flush();
@@ -323,6 +309,69 @@ class ImageController extends Controller
             'form' => $form->createView(),
             'objid'=>$iid,
             'returnlink'=>'/admin/image/'.$iid,
+            ));
+    }
+    
+    public function newimage(Request $request, FileUploader $fileUploader)
+    {
+        $user = $this->getUser();
+        $time = new \DateTime();
+        $time->setTimestamp($time->getTimestamp());
+        #$request = $this->requestStack->getCurrentRequest();
+        
+        $image= new Image();
+        
+        
+        $form = $this->createForm(ImageForm::class, $image);
+        
+        
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            
+            $file = $form['imagefile']->getData();
+            
+           # dump($file);
+            
+            if($file!= null)
+            {
+                $formname = $image->getName();
+                
+                $fileName = $time->format('YmdHis').'.jpeg';
+                
+                if($formname =="")
+                {
+                    $image.setFormname($filename);
+                }  
+                $file->move( $this->getParameter('new-images-folder-long'), $fileName);
+                $image->setPath($fileName);
+                $image->setImagefile("");
+            }
+            else
+            {
+                //     $image->setImagefile($oldfileName);
+                //$image->setPath(" whoi is here ");
+                $fileName = $fileUploader->upload($file);
+                
+                $image->setImagefile($fileName);
+            }
+            
+            $image->setContributor($user->getUsername());
+            $image->setUpdateDt($time);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($image);
+            $entityManager->flush();
+            $niid = $image->getImageid();
+            return $this->redirect("/admin/image/".$niid);
+        }
+        
+        
+        return $this->render('image/edit.html.twig', array(
+            'form' => $form->createView(),
+            
+            'returnlink'=>'/admin/image/search',
             ));
     }
     
@@ -339,5 +388,10 @@ class ImageController extends Controller
         $entityManager->flush();
         return $this->redirect("/admin/image/".$iid);
     }
+    
+  
+     
+        
+    
     
 }

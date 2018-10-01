@@ -153,6 +153,7 @@ class AdminEventController extends Controller
            $images[$i]['imageid']= $imageid;
            $images[$i]['refid']= $ref_ar[$key]['id'];
            $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+           $this->mylib->setFullpath($image);
            $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
            $images[$i]['fullpath']= $image->fullpath;
            $images[$i]['title'] = $this->mylib ->selectText($text_ar,'title',$this->lang);

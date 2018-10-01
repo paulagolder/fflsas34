@@ -8,9 +8,21 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use AppBundle\Entity\Image;
+
 class MyLibrary 
 {
-    
+
+ private  $parama="";
+  private  $paramb="";
+  
+    public function __construct(string $parameterA, $parameterB)
+    {
+        // ...
+        
+        $this->parama = $parameterA;
+         $this->paramb = $parameterB;
+    }
    
      
     static public function selectText($text_ar,$attribute,$language)
@@ -157,4 +169,18 @@ class MyLibrary
      
     }
     
+     public function setFullpath($image)
+    {
+          if ($image->isTemp())
+          {
+             $image->setFullpath ( $this->parama.$image->getPath());   
+          }
+          else
+          {
+             $image->setFullpath ($this->paramb.$image->getPath());   
+          }
+        
+    }
+    
+   
 }

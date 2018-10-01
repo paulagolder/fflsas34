@@ -133,6 +133,7 @@ class EventController extends Controller
         {
             $imageid = $ref_ar[$key]['imageid'];
             $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+            $this->mylib->setFullpath($image);
             $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
             #echo ( "++++". $image->getName()."----".$image->getLabel() );
             $images[$i]['fullpath']= $image->fullpath;

@@ -1,6 +1,7 @@
 <?php
 
-// src/Forms/ImageType.php
+// src/Forms/ImageForm.php
+
 namespace AppBundle\Form;
 
 use  AppBundle\Entity\Image;
@@ -9,10 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+;
 
 class ImageForm extends AbstractType
 {
@@ -27,7 +27,7 @@ class ImageForm extends AbstractType
         $builder ->add('format', TextType::class);
        # $builder ->add('doctype', TextType::class);
         $builder ->add('access', TextType::class);
-        $builder->add('filepath', FileType::class, array('label' => 'Image file','required'=>false));
+        $builder->add('imagefile', FileType::class, array('label' => 'Image file(jpg)','required'=>false,  'data_class' => null));
        # $builder->get('path')->setDisabled(true);
         $builder->get('path')->setRequired(false);
         $builder->get('height')->setRequired(false);

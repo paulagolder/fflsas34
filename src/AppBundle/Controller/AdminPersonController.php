@@ -117,12 +117,21 @@ class AdminPersonController extends Controller
             $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
             if($image )
             {
+              $this->mylib->setFullpath($image);
             $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
             $images[$i]['imageid']= $imageid;
             $images[$i]['fullpath']= $image->getFullpath();
             $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
             $images[$i]['link'] = "/admin/image/".$imageid;
             $i++;
+            }
+            else
+            {
+                $images[$i]['link'] = "/admin/image/".$imageid;
+                 $images[$i]['imageid']= $imageid;
+               $images[$i]['title'] = "delete me";
+                    $images[$i]['fullpath']= "";
+                 $i++;
             }
         }
         

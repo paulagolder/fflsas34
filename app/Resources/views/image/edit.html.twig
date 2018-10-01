@@ -8,7 +8,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/image/edit.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/image/editone.css') }}" rel="stylesheet" />
    
 {% endblock %}
 {% block js %}
@@ -34,6 +34,7 @@
     {{ form_row(form.orientation) }}
     {{ form_row(form.format) }}
     {{ form_row(form.access) }}
+    {{ form_row(form.imagefile) }}
     <button type="submit">Register!</button>
    {{ form_end(form) }}
   </div>

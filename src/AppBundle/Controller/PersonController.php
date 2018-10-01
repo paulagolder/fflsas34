@@ -21,6 +21,7 @@ use AppBundle\Entity\Event;
 use AppBundle\Entity\Text;
 use AppBundle\Controller\LinkrefController;
 use AppBundle\Service\MyLibrary;
+use AppBundle\Service\FLSASImage;
 use AppBundle\MyClasses\eventTree;
 use AppBundle\MyClasses\eventTreeNode;
 
@@ -151,8 +152,10 @@ class PersonController extends Controller
         {
            $imageid = $ref_ar[$key]['imageid'];
            $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+        
            if($image)
            {
+              $this->mylib->setFullpath($image);
            $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
            $images[$i]['fullpath']= $image->fullpath;
            $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
