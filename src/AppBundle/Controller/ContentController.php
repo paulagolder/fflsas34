@@ -172,7 +172,7 @@ class ContentController extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($content);
                 $entityManager->flush();
-                return $this->redirect("/admin/content/edit/".$cid);
+                return $this->redirect("/".$this->lang."/content/".$cid);
                 
             }
         }

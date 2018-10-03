@@ -12,7 +12,7 @@
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
-  <form  action="/admin/content/search">
+  <form  action="/{{lang}}/content/all">
   <div class="heading">
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
    <input type="text" name="searchfield">
@@ -29,7 +29,7 @@
          {% for content in contents  %}
             <div class="content row" >
              <div>{{content.title}}</div> 
-             <div class="editbutton button1"><a class="editbutton" href="/user/content/addbookmark/{{content.subjectid}}">{{'bookmark' |trans}}</a></div>
+             <div class="editbutton button1"><a class="editbutton" href="/{{lang}}/content/addbookmark/{{content.subjectid}}">{{'bookmark' |trans}}</a></div>
              <div class="editbutton "><a class="editbutton" href="/{{lang}}/content/{{content.subjectid}}">{{'see.content' |trans}}</a></div>
             </div>
          {% endfor %}

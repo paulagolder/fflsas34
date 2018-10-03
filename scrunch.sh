@@ -16,7 +16,7 @@ tar --append --file="$FILE"  "app/config/routing.yml"
 tar --append --file="$FILE"  "app/config/security.yml"
 tar --append --file="$FILE"  "app/config/services.yml"
 tar --append --file="$FILE"  "app/Resources"
-tar --append --file="$FILE"  "app/AppKernel.php"
+tar --append --file="$FILE"  "app/AppKernel_server.php"
 
 
 
