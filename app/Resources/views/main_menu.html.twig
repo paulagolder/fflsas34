@@ -8,6 +8,7 @@
 
 {% if is_granted('ROLE_USER') %}
    <div class="menuitem" > <a href="/{{locale}}/search/all"> {% trans %}chercher.site{% endtrans %}</a> </div>
+    <div class="menuitem" > <a href="/{{locale}}/content/all"> {% trans %}chercher.content{% endtrans %}</a> </div>
    <div class="menuitem" > <a href="/{{locale}}/user/{{ app.user.userid }}""> {% trans %}voir.user{% endtrans %}</a> </div>
 {% endif %}
  {% if is_granted('ROLE_ADMIN') %}  

@@ -88,6 +88,7 @@ div#editevent div.imagegroup div.images
     height: 200px;
     overflow: auto;
     border: 2px solid blue;
+       flex-wrap: wrap;
 }
 
 

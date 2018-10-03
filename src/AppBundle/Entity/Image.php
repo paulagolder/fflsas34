@@ -33,32 +33,37 @@ class Image
      */
     private $path;
     
-        /**
-     ** @ORM\Column(type="smallint", nullable=true)
-     */
-    private $width;
-        /**
-     * * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $height;
+  #      /**
+  #   ** @ORM\Column(type="smallint", nullable=true)
+  #   */
+  #  private $width;
+  #      /**
+  #   * * @ORM\Column(type="smallint", nullable=true)
+  #   */
+  #  private $height;
     
-      /**
-     * @ORM\Column(type="string", length=5, nullable=true)
-     */
-    private $orientation;
+  #    /**
+ #    * @ORM\Column(type="string", length=5, nullable=true)
+  #   */
+  #  private $orientation;
     
-    /**
-     * @ORM\Column(type="string", length=14, nullable=true)
-     */
+  #  /**
+  #   * @ORM\Column(type="string", length=14, nullable=true)
+  #   */
     
-    private $date;
+  #  private $date;
       /**
      * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $format;
    
-    
-    private $access;
+      /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $copyright;
+  
+  
+  private $access;
     
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
@@ -142,13 +147,26 @@ class Image
 
 
     
+    public function setCopyright($copyr)
+    {
+        $this->copyright = $copyr;
+
+        return $this;
+    }
+    
+         public function getCopyright()
+    {
+        return $this->copyright;
+    }
+
+
+    
     public function setFullpath($file)
     {
         $this->fullpath = $file;
 
         return $this;
     }
-    
     
     
     
@@ -164,53 +182,53 @@ class Image
         return $this;
     }
 
-    public function getWidth(): ?int
-    {
-        return $this->width;
-    }
+   # public function getWidth(): ?int
+   # {
+   ##     return $this->width;
+   # }
 
-    public function setWidth(?int $width): self
-    {
-        $this->width = $width;
+   # public function setWidth(?int $width): self
+   # {
+   #     $this->width = $width;
+#
+   #     return $this;
+  #  }
 
-        return $this;
-    }
+  #  public function getHeight(): ?int
+  #  {
+  #      return $this->height;
+  #  }
 
-    public function getHeight(): ?int
-    {
-        return $this->height;
-    }
+  #  public function setHeight(?int $height): self
+  #  {
+  #      $this->height = $height;
+#
+  #      return $this;
+  #  }
 
-    public function setHeight(?int $height): self
-    {
-        $this->height = $height;
+  #  public function getOrientation(): ?string
+  #  {
+  #      return $this->orientation;
+  #  }
 
-        return $this;
-    }
+  #  public function setOrientation(?string $orientation): self
+  #  {
+   #     $this->orientation = $orientation;
+#
+  #      return $this;
+   # }
 
-    public function getOrientation(): ?string
-    {
-        return $this->orientation;
-    }
+   # public function getDate(): ?string
+  ##  {
+  #      return $this->date;
+  #  }
 
-    public function setOrientation(?string $orientation): self
-    {
-        $this->orientation = $orientation;
-
-        return $this;
-    }
-
-    public function getDate(): ?string
-    {
-        return $this->date;
-    }
-
-    public function setDate(?string $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
+  #  public function setDate(?string $date): self
+  #  {
+  #      $this->date = $date;
+#
+  #      return $this;
+  #  }
 
     public function getFormat(): ?string
     {

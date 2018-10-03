@@ -21,7 +21,7 @@
       </div>
      {% else %}
       <div class="bookmark{{key1}}" >
-        <button onclick="click{{key1}}({{blist[key]['id']}},'{{blist[key]['label'] }}');">{{blist[key]['label'] }}</button>
+        <button onclick="click{{key1}}({{blist[key]['id']}},'{{blist[key]['label'] |escape('js') }}');">{{blist[key]['label'] }}</button>
       </div>
       {% endif %}
       {%endfor%}

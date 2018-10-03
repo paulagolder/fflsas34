@@ -11,3 +11,10 @@ parameters:
     mailer_user: syfflsas3.lerot.org
     secret: 56f1c6ae2e2bea4288f04e3c1e67795d5890d3e0
     mailer_password: li8$39chfield
+
+    
+    admin-name: "FFLSAS-admin"
+    admin-email: "fflsasadmin@lerot.org"
+    new-images-folder: '/newimages/'
+    new-images-folder-long: '%kernel.project_dir%/web/newimages/'
+    external-images : "http://fflsas.org/images/stories/fflsas/"

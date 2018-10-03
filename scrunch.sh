@@ -19,4 +19,5 @@ tar --append --file="$FILE"  "app/Resources"
 tar --append --file="$FILE"  "app/AppKernel.php"
 
 
+
 gzip "$FILE"  

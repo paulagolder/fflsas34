@@ -76,14 +76,18 @@
     </div>
       {% endif %}
       
+    
+    
     <div class="refgroup" >
+     <div class="header">
+     <div class="label"> {{'liens' | trans}}</div>
+     </div>
     {% for ref in refs %}
-      <div class="ref">
-        <div class="refref" ><a href="{{ref.link}}" target="_map" >{{ref.label}}</a></div>
-      </div>
+     <div class="ref">
+      <div class="refref" ><a href="{{ref.link}}"  target="_map">{{ref.label}}</a></div>
+    </div>
     {% endfor %}
     </div>
-    
   
     
     {% if text  %}  

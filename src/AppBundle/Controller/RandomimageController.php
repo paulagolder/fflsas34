@@ -39,6 +39,7 @@ class RandomimageController extends Controller
         $icount = count($images);
         $number = mt_rand(0, $icount);
         $image =   $images[$number];
+        $this->mylib->setFullpath($image);
         $image->link = "/".$this->lang."/image/".$image->getImageid();
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$image->getImageId());
         //var_dump($text_ar);

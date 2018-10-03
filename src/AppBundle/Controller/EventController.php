@@ -161,7 +161,7 @@ class EventController extends Controller
         foreach($linkrefs as $key=>$linkref)
         {
             $reftext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("linkref",$linkrefs[$key]['linkid']);
-            $linkrefs[$key]['label'] =  $this->mylib ->selectText($reftext_ar,'title',$this->lang);
+            $linkrefs[$key]['label'] =  $this->mylib->selectText($reftext_ar,'title',$this->lang);
         }
         
         return $this->render('event/showone.html.twig', [ 

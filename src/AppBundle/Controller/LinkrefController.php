@@ -76,14 +76,10 @@ class LinkrefController extends Controller
         
         else
         {
-        require('Snoopy.class.php');
+        
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$rid);
        
-       # $goutteClient = new Client();
-       ## $guzzleClient = new GuzzleClient(array( 'timeout' => 60,));
-       #  $goutteClient->setClient($guzzleClient);
-       # $crawler = $goutteClient->request('GET', 'https://github.com/');
-       #  return $this->redirect('http://stackoverflow.com');
+
        return $this->render('linkref/showone.html.twig', 
                   ['lang'=>$this->lang, 
                    'message' =>  '',
@@ -125,7 +121,7 @@ class LinkrefController extends Controller
         $texts_ar = array();
         foreach( $refs as $ref)
         {
-        $texts_ar[$ref['id']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$ref['id']);
+        $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$ref['linkid']);
        
         }
         
