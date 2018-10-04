@@ -52,24 +52,24 @@ div#fuser div.message
 
 div#fuser div.messagelist div.message div.sentto
 {
-    width:10em;
+    xwidth:10em;
     margin-left:2em;
 } 
 div#fuser div.messagelist div.message div.subject
 {
-    width:10em;
+    xwidth:10em;
     margin-left:1em;
 }
 
 
 div#fuser div.messagelist div.message div.date
 {
-    width : 10em;
+    xwidth : 10em;
     margin-left:1em;
 }
 
 div#fuser div.messagelist div.message div.message
 {
-    width:10em;
+    xwidth:10em;
     margin-left:1em;
 }

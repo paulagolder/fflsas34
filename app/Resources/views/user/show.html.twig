@@ -49,14 +49,14 @@
         {% for message in messages %}
         <div class= "message">
         {% if message.toname == 'FFLSAS-admin' %}
-          {% set sentto ='user.to.admin' %}
+          {% set sentto = ('user.to.admin' | trans ) %}
           
         {% else %}
-         {% set sentto ='admin.to.user' %}
+         {% set sentto = ('admin.to.user' | trans ) %}
          {% endif %}
             <div class="subject" > {{sentto}}</div>
             <div class="subject" > {{message.subject}}</div>
-            <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
+            <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
             <div class = "message" > {{ message.message|length > 20 ? message.message|slice(0, 20) ~ '...' : message.message  }}</div>
             <div class = "editbutton button1">
                 <a class='editbutton' href="/{{lang}}/user/{{user.userid}}/viewmessage/{{message.id}}">{{'view.message' |trans}}</a>

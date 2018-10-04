@@ -64,8 +64,8 @@ class ContentController extends Controller
         {
            $content = $content_ar['*'] ;
         }
-       ;
-        #$content['text'] =  $this->setImageLinks($content["text"]);
+       
+        $content['text'] =  $this->setImageLinks($content["text"]);
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
         
         return $this->render('content/showone.html.twig', 
@@ -162,7 +162,7 @@ class ContentController extends Controller
         $content ->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
         $content ->setUpdateDt($now);
-        $content->setText($this->setImagelinks($content->getText()));
+       # $content->setText($this->setImagelinks($content->getText()));
         $form = $this->createForm(ContentForm::class, $content);
         if ($request->getMethod() == 'POST') 
         {
@@ -329,7 +329,7 @@ class ContentController extends Controller
         
         // return $this->redirect($uri);
         
-        return $this->redirect("/".$this->lang."/content/all");
+        return $this->redirect("/".$this->lang."/content/".$sid);
         
     }
     
@@ -420,7 +420,7 @@ class ContentController extends Controller
      $text = preg_replace('/(<p.+?)style=".+?"(>.+?)/i', "$1$2", $text);
      $text = preg_replace('/(<p.+?)class=".+?"(>.+?)/i', "$1$2", $text);
       $text = preg_replace('/(<span.+?)style=".+?"(>.+?)/i', "$1$2", $text);
-     $text =  strip_tags($text,"<p><img>");
+     $text =  strip_tags($text,"<p><img><br>");
       $text=  str_ireplace("\"images/stories/fflsas/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
        $text=  str_ireplace("\"images/stories/fflsas/newimages/","\"http://fflsas.org/images/stories/fflsas/newimages/", $text);
      # http://fflsas.org/images/stories/fflsas/images/jacques_de_bollardie_252.jpg

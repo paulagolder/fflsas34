@@ -127,7 +127,7 @@ tué: tué
 under.the.name.of: nommé
 username: 'Nom de utilisateur'
 for: __for
-voir.user: 'profil de l''utilisateur'
+voir.user: 'Profil de l''utilisateur'
 delete.user: 'supprimer utilisateur'
 edit.user.detail: 'Modifier l''utilisateur'
 user.email: 'Adresse e-mail'
@@ -179,3 +179,6 @@ new.user: nouvel utilisateur
 register: s'inscrire 
 bookmark.image: signet l'image
 see.image: voir l'image
+chercher.content: Chercher les articles
+user.to.admin: Utilisateur a l'administrateur
+admin.to.user: Administrateur a l'Utilisateur 

@@ -9,7 +9,7 @@ body
 	margin: 0;
 	xbackground: url(/common/skybig.jpg) 20% 0;
     background: url(/common/sky11.jpg) ;
-    background-repeat: no-repeat;
+    xbackground-repeat: no-repeat;
     background-size: 100% auto;
 }
 

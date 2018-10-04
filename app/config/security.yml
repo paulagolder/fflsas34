@@ -58,7 +58,7 @@ security:
          - { path: ^/linkref/, roles: ROLE_USER } 
          - { path: ^/(fr|en|FR|EN)/incident/, roles:  IS_AUTHENTICATED_ANONYMOUSLY} 
          - { path: ^/(fr|en|FR|EN)/menucontent/, roles:  IS_AUTHENTICATED_ANONYMOUSLY} 
-         - { path: ^/(fr|en|FR|EN)/images, roles: ROLE_USER }  
+         - { path: ^/(fr|en|FR|EN)/image, roles: ROLE_USER }  
          - { path: ^/(fr|en|FR|EN)/content, roles: ROLE_USER }  
          - { path: ^/(fr|en|FR|EN)/search, roles: ROLE_USER }
          - { path: ^/(fr|en|FR|EN)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -281,7 +281,7 @@ class ImageController extends Controller
                 
                 
                 
-                #  if($file!= null)
+                 if($file!= null)
                 {
                     $formname = $image->getName();
                     
@@ -294,7 +294,7 @@ class ImageController extends Controller
                     $file->move( $this->getParameter('new-images-folder-long'), $fileName);
                     $image->setPath($fileName);
                     $image->setImagefile($fileName);
-                }
+             
                 
                 
                 $image->setContributor($user->getUsername());
@@ -304,6 +304,11 @@ class ImageController extends Controller
                 $entityManager->flush();
                 $niid = $image->getImageid();
                 return $this->redirect("/admin/image/".$niid);
+                }
+                else
+                {
+                 return $this->redirect("/admin/image/search");
+                }
             }
         }
         
