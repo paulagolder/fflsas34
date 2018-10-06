@@ -14,7 +14,7 @@ parameters:
 
     
     admin-name: "FFLSAS-admin"
-    admin-email: "fflsasadmin@lerot.org"
+    admin-email: "admin@fflsas3.lerot.org"
     new-images-folder: '/newimages/'
     new-images-folder-long: '%kernel.project_dir%/web/newimages/'
     external-images : "http://fflsas.org/images/stories/fflsas/"

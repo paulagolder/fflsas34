@@ -12,7 +12,7 @@
 <tr><td >{{'mail.sentby'| trans}} </td><td> {{ message.toname }}</td></tr>
 <tr><td> {{ 'mail.from' |trans }}</td><td>{{message.fromemail}} </td></tr>
 <tr><td>{{'mail.subject'| trans}} </td><td> {{ message.subject }}</td></tr>
-<tr><td>{{'mail.body'| trans}}  </td><td>{{ message.message }}</td></tr>
+<tr><td>{{'mail.body'| trans}}  </td><td>{{ message.body }}</td></tr>
 </table>
 </div>
 {% endmacro %}
@@ -28,6 +28,6 @@
 <tr><td  style="font-weight: bold;">{{'mail.subject'| trans}} </td><td> {{ message.subject }}</td></tr>
 </table>
 </div>
-<div  style="margin-top:2em;" >{{ message.message }}</div>
+<div  style="margin-top:2em;" >{{ message.body }}</div>
 </div>
 {% endmacro %}

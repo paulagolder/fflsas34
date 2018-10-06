@@ -37,3 +37,21 @@ div#usermessage-resp div.subheading div.title
   margin-left:1em;
    margin-right:1em;
 }
+
+div#usermessage-resp div.mailmessage table tr td:nth-child(1) 
+{
+    font-size: 1.0em;
+  color: yellow;
+}
+
+div#usermessage-resp div.mailmessage table tr td:nth-child(2) 
+{
+    font-size: 1.0em;
+  color: blue;
+} 
+
+div#usermessage-resp div.mailmessage table tr:nth-child(8) > td
+{
+    font-size: 1.0em;
+  color:blue;
+}

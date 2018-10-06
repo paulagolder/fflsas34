@@ -59,9 +59,9 @@ swiftmailer:
     transport:  smtp
     encryption: ssl 
     auth_mode: login
-    host: syfflsas3.lerot.org
+    host: fflsas3.lerot.org
     port: 465
-    username:  'admin@syfflsas3.lerot.org'
+    username:  'admin@fflsas3.lerot.org'
     password:  'savannah#1944'
     spool: { type: memory }
 

@@ -53,7 +53,12 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
         
-        
+    message_service:
+        class: AppBundle\Controller\MessageController
+        calls:
+            - [setContainer, ["@service_container"]]
+            
+            
 
     AppBundle\Service\FileUploader:
         arguments:

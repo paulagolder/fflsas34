@@ -30,7 +30,7 @@
 
  <div class="subject" > {{message.subject}}</div>
  <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
- <div class = "message" > {{ message.message|length > 50 ? message.message|slice(0, 50) ~ '...' : message.message  }}</div>
+ <div class = "message" > {{ message.body|length > 50 ? message.body|slice(0, 50) ~ '...' : message.body  }}</div>
  <div class = "editbutton button1">
       <a class='editbutton' href="/{{lang}}/user/{{user.userid}}/viewmessage/{{message.id}}">{{'view.message' |trans}}</a>
  </div>

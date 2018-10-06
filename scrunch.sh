@@ -18,6 +18,6 @@ tar --append --file="$FILE"  "app/config/services.yml"
 tar --append --file="$FILE"  "app/Resources"
 tar --append --file="$FILE"  "app/AppKernel_server.php"
 
-
+#tar  --transform 's,^AppKernel_server.php,AppKernal_x.php,'   cf  --file= "$FILE"  cf
 
 gzip "$FILE"  

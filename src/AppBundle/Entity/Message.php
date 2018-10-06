@@ -48,7 +48,7 @@ class Message
      /**
      * @ORM\Column(type="text", length=2000, unique=true)
      */
-   private $message;
+   private $body;
    
    
    /**
@@ -139,18 +139,18 @@ class Message
 
 
 
-   public function setMessage($message)
+   public function setBody($body)
    {
-       $this->message = $message;
+       $this->body = $body;
        return $this;
    }
 
  
 
-   public function getMessage()
+   public function getBody()
 
    {
-       return $this->message;
+       return $this->body;
    }
    
    public function getDate_sent(): ?\DateTime
@@ -164,6 +164,15 @@ class Message
       return $this;
   }
   
-  
+  public function __construct($toname, $toemail, $fromname , $fromemail, $subject, $body)
+    {
+        $this->toname= $toname;
+        $this->toemail = $toemail;
+        $this->fromname = $fromname;
+        $this->fromemail =$fromemail;
+        $this->subject = $subject;
+        $this->body =$body;
+    }
+       
 
 }

@@ -174,7 +174,7 @@ class UserController extends Controller
             ));
     }
     
-     public function useradmin($uid)
+     public function showone($uid)
     {
         
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -182,7 +182,7 @@ class UserController extends Controller
         $email= $fuser->getEmail();
         
         $messages = $this->getDoctrine()->getRepository('AppBundle:Message')->findbyemail($fuser->getEmail());
-        return $this->render('user/admin.html.twig', array(
+        return $this->render('user/showone.html.twig', array(
             'lang'=>$this->lang,
             'user' => $fuser,
             'messages' =>$messages,

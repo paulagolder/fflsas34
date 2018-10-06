@@ -113,7 +113,7 @@ admin_user_search:
     
 users_editone:
     path: /admin/user/{uid}
-    controller:  AppBundle\Controller\UserController:useradmin
+    controller:  AppBundle\Controller\UserController:showone
     
 user_admin:
     path: /admin/user/edit/{uid}

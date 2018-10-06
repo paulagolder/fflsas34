@@ -53,7 +53,7 @@
             <div class="subject" > {{message.toname}}</div>
             <div class="subject" > {{message.subject}}</div>
             <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
-            <div class = "message" > {{ message.message|length > 20 ? message.message|slice(0, 20) ~ '...' : message.message  }}</div>
+            <div class = "message" > {{ message.body|length > 20 ? message.body|slice(0, 20) ~ '...' : message.body  }}</div>
             <div class = "editbutton button1">
                 <a class='editbutton' href="/admin/user/{{user.userid}}/message/view/{{message.id}}">{{'view.message' |trans}}</a>
             </div>

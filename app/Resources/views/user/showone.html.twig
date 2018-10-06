@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  <link href="{{ asset('css/user/show.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/user/showone.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
@@ -19,7 +19,7 @@
         <div class="label" > {%trans%}profil.person{% endtrans%}</div>
         <div class="title" > {{user.username}}</div>
         
-        <div class="editbutton button1" ><a class='editbutton' href="/{{lang}}/useredit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
+        <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
         <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
     </div>
     
@@ -44,25 +44,21 @@
     <div class="messagelist" >
         <div class="subheading" >
             <div class="label" > {{'message.list' | trans }}</div>
+            <div class="editbutton button1" ><a class='editbutton' href="/admin/message/send/{{user.userid}}">{{'send,message' |trans}}</a></div>
         </div>
         
         {% for message in messages %}
-        <div class= "message">
-        {% if message.toname == 'FFLSAS-admin' %}
-          {% set sentto = ('user.to.admin' | trans ) %}
-          
-        {% else %}
-         {% set sentto = ('admin.to.user' | trans ) %}
-         {% endif %}
-            <div class="subject" > {{sentto}}</div>
+        <div class= "message selectable">
+          <div class="subject" > {{message.fromname}}</div>
+            <div class="subject" > {{message.toname}}</div>
             <div class="subject" > {{message.subject}}</div>
-            <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
+            <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
             <div class = "message" > {{ message.body|length > 20 ? message.body|slice(0, 20) ~ '...' : message.body  }}</div>
             <div class = "editbutton button1">
-                <a class='editbutton' href="/{{lang}}/user/{{user.userid}}/viewmessage/{{message.id}}">{{'view.message' |trans}}</a>
+                <a class='editbutton' href="/admin/user/{{user.userid}}/message/view/{{message.id}}">{{'view.message' |trans}}</a>
             </div>
             <div class = "deletebutton">
-                <a class='deletebutton' href="/{{lang}}/user/{{user.userid}}/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
+                <a class='deletebutton' href="/admin/user/{{user.userid}}/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
             </div>
         </div>
         {% endfor %}

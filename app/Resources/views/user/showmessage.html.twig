@@ -12,7 +12,7 @@
 
 <div id="fuser"  >
 <div class="heading">
-  <div class="label" > {%trans%}see.message{% endtrans%}</div>
+  <div class="label" > {%trans%}view.message{% endtrans%}</div>
   <div class="title" > {{user.username}} ({{user.email}})</div>
   <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
 </div>
@@ -37,7 +37,7 @@
    <div class= "title" >{{message.subject}}</div>
 </div>
 <div class= "messagebody">
-    {{ message.message }}
+    {{ message.body }}
 </div>
 
 

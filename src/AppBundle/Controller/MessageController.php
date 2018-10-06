@@ -156,15 +156,21 @@ class MessageController extends Controller
     {
          $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
       
-        $message = new Message;
-        if($fuser)
-        {
-         $message->setToname($fuser->getUsername());
-         $message->setToemail($fuser->getEmail());
-         }
-          $message->setFromname($this->getParameter('admin-name'));
-         $message->setFromemail($this->getParameter('admin-email'));
-
+     //     $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+        //    $smessage = $this->get('message_service')->sendMessage($message);
+  
+       ## if($fuser)
+       # {
+       #  $message->setToname($fuser->getUsername());
+       #  $message->setToemail($fuser->getEmail());
+       #  }
+       #   $message->setFromname($this->getParameter('admin-name'));
+       #  $message->setFromemail($this->getParameter('admin-email'));
+       $subject ="";
+       $body="";
+   $message = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+          #  $smessage = $this->get('message_service')->sendMessage($message);
+  
       
         $form = $this->createForm(MessageForm::class, $message);
         
@@ -174,37 +180,38 @@ class MessageController extends Controller
       # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid())
         {
-            $fromname = $form['fromname']->getData();
-            $fromemail = $form['fromemail']->getData();
-            $subject = $form['subject']->getData();
-            $messagetext = $form['message']->getData();
-            $sentto = $fuser->getEmail();  
+           # $fromname = $form['fromname']->getData();
+           # $fromemail = $form['fromemail']->getData();
+          # # $subject = $form['subject']->getData();
+          #  $messagetext = $form['message']->getData();
+          #  $sentto = $fuser->getEmail();  
             
       # set form data   
            # $message->setToname($toname);
           #  $message->setFromname($name);
           #  $message->setEmail($fromemail);          
-            $message->setSubject($subject);     
-            $message->setMessage($messagetext);   
+         #   $message->setSubject($subject);     
+         #   $message->setMessage($messagetext);   
             $datesent =new \DateTime();
             $message->setDate_sent( $datesent);
             
        # finally add data in database
-            $sn = $this->getDoctrine()->getManager();      
-            $sn -> persist($message);
-            $sn -> flush();
+        ##    $sn = $this->getDoctrine()->getManager();      
+         #   $sn -> persist($message);
+         #   $sn -> flush();
 
-           $smessage = (new \Swift_Message('Hello Email'));
-           $smessage->setSubject($subject);
-           $smessage->setFrom($this->getParameter('admin-email'),$this->getParameter('admin-name'));
-           $smessage->setTo($fromemail);
-            $smessage->setBody(
-            $this->renderView('message/emailbody.html.twig',array(
-               'message'=>$message,
-            ),'text/html'));
+       #    $smessage = (new \Swift_Message('Hello Email'));
+       #    $smessage->setSubject($subject);
+       #    $smessage->setFrom($this->getParameter('admin-email'),$this->getParameter('admin-name'));
+       #    $smessage->setTo($fromemail);
+        #    $smessage->setBody(
+         #   $this->renderView('message/emailbody.html.twig',array(
+         #      'message'=>$message,
+         #   ),'text/html'));
    
 
-          $mailer->send($smessage);
+       #   $mailer->send($smessage);
+       $this->sendMessage($message);
 
             return $this->render('message/usermessage-resp.html.twig',array(
                'message'=>$message,
@@ -216,4 +223,60 @@ class MessageController extends Controller
             'form' => $form->createView()  
         ));
     }
+    
+      function xsendMessage($user,$subject, $message)
+    {
+            $message = new message();
+            $message->setName($user->getUsername());
+            $message->setEmail($user->getEmail());          
+            $message->setSubject($subject);     
+           
+            $message->setMessage($message);   
+            $datesent =new \DateTime();
+            $message->setDate_sent( $datesent);
+            
+            $sn = $this->getDoctrine()->getManager();      
+            $sn -> persist($message);
+            $sn -> flush();
+
+           $smessage = (new \Swift_Message('Registration Email'));
+           $smessage->setSubject($message->getSubject());
+           $smessage->setFrom('admin@syfflsas3.lerot.org','fflsas-admin');
+           $smessage->setTo($message->getEmail());
+           $smessage->setBody(
+                $this->renderView('message/emailbody.html.twig',array(
+               'name' => $message->getName(),
+               'fromemail'=> 'fflsas-admin',
+               'sentto'=> $message->getEmail(),
+               'subject' =>$message->getSubject(),
+               'body'=>$message->getBody(),
+               'datesent' => $message->getDate_sent()->format('Y-m-d H:i:s'))
+                         ),'text/html');
+          $smessage->setContentType("text/html");
+          $this->get('mailer')->send($smessage);
+      } 
+      
+      
+      function makeSwiftMessage($message)
+      {
+           $smessage = (new \Swift_Message('FFLSAS Email'));
+           $smessage->setSubject($message->getSubject());
+           $smessage->setFrom($message->getFromemail(),$message->getFromname());
+           $smessage->setTo($message->gettoEmail());
+           $smessage->setBody(
+                $this->renderView('message/emailbody.html.twig',array(
+               'message'=>$message,),'text/html'));
+           $smessage->setContentType("text/html");
+           return $smessage;
+      
+      }
+      
+    function sendMessage($message)
+    {
+            $sn = $this->getDoctrine()->getManager();      
+            $sn -> persist($message);
+            $sn -> flush();
+            $smessage = $this->makeSwiftMessage($message);
+            $this->get('mailer')->send($smessage);
+      } 
 }

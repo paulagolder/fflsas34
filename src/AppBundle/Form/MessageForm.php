@@ -20,7 +20,7 @@ class MessageForm extends AbstractType
          $builder->add('toname', TextType::class);
          $builder->add('toemail', TextType::class);
          $builder->add('subject', TextType::class);
-         $builder->add('message', TextareaType::class);
+         $builder->add('body', TextareaType::class);
          $builder->get('toname')->setDisabled(true);
          $builder->get('toemail')->setDisabled(true);
          $builder->get('fromname')->setDisabled(true);

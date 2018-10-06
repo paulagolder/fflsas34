@@ -34,7 +34,7 @@
             <div class= "date" > {{contact.date_sent | date("Y-m-d") }}</div>
             <div class="subject" > {{contact.subject}}</div>
             
-            <div class = "message" > {{ contact.message|length > 20 ? contact.message|slice(0, 20) ~ '...' : contact.message  }}</div>
+            <div class = "message" > {{ contact.body|length > 20 ? contact.body|slice(0, 20) ~ '...' : contact.body  }}</div>
             <div class = "editbutton button1">
                 <a class='editbutton' href="/admin/message/{{contact.id}}">{{'view.contact' |trans}}</a>
             </div>

@@ -19,7 +19,7 @@ use AppBundle\Form\UserRegForm;
 use AppBundle\Form\CompleteRegForm;
 
 use AppBundle\Entity\User;
-use AppBundle\Entity\Contact;
+use AppBundle\Entity\Message;
 use AppBundle\Service\MyLibrary;
 
 
@@ -62,13 +62,15 @@ class RegistrationController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
             $baseurl = $this->container->get('router')->getContext()->getBaseUrl();
-            $message =    $this->trans->trans('you.have.sucessfully.regisered');
-            $message .=                $this->trans->trans('to.complete');
-            $message .=               "<". $user->getRegistrationcode().">";
-            $message .=                $this->trans->trans('when.first.signing');
-            $message .=                "  ".$baseurl.'/remotecomplete/'.$user->getUserid()."/".$user->getRegistrationcode();
-            $subject = 'registration success';
-            $this->sendMessage($user, $subject,$message);
+            $body =    $this->trans->trans('you.have.sucessfully.registered');
+            $body .=   $this->trans->trans('to.complete');
+            $body .=    "<". $user->getRegistrationcode().">";
+            $body .=   $this->trans->trans('when.first.signing');
+            $body .=   "  ".$baseurl.'/remotecomplete/'.$user->getUserid()."/".$user->getRegistrationcode();
+            $subject = $this->trans->trans('registration success');
+            $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+            $smessage = $this->get('message_service')->sendMessage($message);
+  
             $message2 =    $this->trans->trans('you.have.sucessfully.regisered');
             $message2 .=                $this->trans->trans('to.complete.reply.to email');
            return $this->render('registration/done.html.twig',
@@ -105,9 +107,18 @@ class RegistrationController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
            # return $this->redirectToRoute('index');
-            $message =  $this->trans->trans('you.have.sucessfully.comlpeted');
+            $body =  $this->trans->trans('you.have.sucessfully.completed');
             $subject =  $this->trans->trans('registration.complete');
-            $this->sendMessage( $user,$subject,$message);
+            $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+    
+          #  $datesent =new \DateTime();
+           # $message->setDate_sent( $datesent);
+            
+           # $sn = $this->getDoctrine()->getManager();      
+           # $sn -> persist($message);
+          #  $sn -> flush();
+            $smessage = $this->get('message_service')->sendMessage($message);
+          #  $this->sendMessage( $user,$subject,$body);
         
           # $this->get('security.context')->setToken(null);
          #  $this->get('session')->invalidate();
@@ -142,7 +153,7 @@ class RegistrationController extends Controller
        
             $message =  $this->trans->trans('you.have.sucessfully.comlpeted');
             $subject =  $this->trans->trans('registration.complete');
-            $this->sendMessage( $user,$subject,$message);
+            $this->sendUserMessage( $user,$subject,$message);
         
       
            return $this->render('registration/completesuccess.html.twig',
@@ -158,34 +169,5 @@ class RegistrationController extends Controller
     
     
     
-    function sendMessage($user,$subject, $message)
-    {
-            $contact = new contact();
-            $contact->setName($user->getUsername());
-            $contact->setEmail($user->getEmail());          
-            $contact->setSubject($subject);     
-           
-            $contact->setMessage($message);   
-            $datesent =new \DateTime();
-            $contact->setDate_sent( $datesent);
-            
-            $sn = $this->getDoctrine()->getManager();      
-            $sn -> persist($contact);
-            $sn -> flush();
-
-           $message = (new \Swift_Message('Registration Email'));
-           $message->setSubject($contact->getSubject());
-           $message->setFrom('admin@syfflsas3.lerot.org','fflsas-admin');
-           $message->setTo($contact->getEmail());
-            $message->setBody(
-                $this->renderView('contact/emailbody.html.twig',array(
-               'name' => $contact->getName(),
-               'fromemail'=> 'fflsas-admin',
-               'sentto'=> $contact->getEmail(),
-               'subject' =>$contact->getSubject(),
-               'body'=>$contact->getMessage(),
-               'datesent' => $contact->getDate_sent()->format('Y-m-d H:i:s'))
-                         ),'text/html');
-          $this->get('mailer')->send($message);
-      } 
+   
 }

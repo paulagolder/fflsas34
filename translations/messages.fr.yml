@@ -172,8 +172,7 @@ edit.user: editer utilisateur
 profil.person: profil de l'utilisateur
 message.list: list des messages
 send,message: envoyer message
-view.message: voir le message
-see.message: voir le message
+view.message: voir
 message.sentby: messaege de
 new.user: nouvel utilisateur
 register: s'inscrire 
@@ -182,3 +181,5 @@ see.image: voir l'image
 chercher.content: Chercher les articles
 user.to.admin: Utilisateur a l'administrateur
 admin.to.user: Administrateur a l'Utilisateur 
+message.envoyer.a: Destinataire
+
