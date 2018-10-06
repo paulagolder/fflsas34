@@ -160,7 +160,7 @@ message.to: 'envoyé à'
 message.date: 'envoyé le'
 message.subject: sujet
 to.add.images.use.bookmarks: To add an image use a bookmark
-see.admin.messages: See admin messages
+see.admin.messages: Messagerie
 edit.message: Editer
 send.message: Envoyer
 delete.message: Suprimer

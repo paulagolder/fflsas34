@@ -39,12 +39,19 @@ class AdminlangController extends Controller
    
     public function Changelang($oldpath)
     {
-      $oldpath = str_replace( "_~", "\\",$oldpath);
-        $this->lang= "FR";
-        $this->mylib->setLang("FR");
-        $request = new Request();
-        $request->setLocale("FR");
-        $this->requestStack->getCurrentRequest()->setLocale("fr");
-           return $this->redirect($oldpath);
+     # $oldpath = str_replace( "_~", "\\",$oldpath);
+       # $this->lang= "EN";
+       # $this->mylib->setLang("EN");
+       # $request = new Request();
+      #  $request->setLocale("EN");
+       # $this->requestStack->getCurrentRequest()->setLocale("en");
+        
+      #  $routes = $this->get('router')->getRouteCollection();
+       # $newroute =  $routes->get($oldpath);//->getDefaults()['_controller'];
+  
+       # return new Response(
+     #       '<html><body>'.$oldpath.'</body></html>'
+      #  );
+           return $this->redirectToRoute($oldpath);
     }
 }

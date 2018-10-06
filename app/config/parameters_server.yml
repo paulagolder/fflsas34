@@ -1,10 +1,12 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host:  'localhost'
+   
+   
+    database_host:  '127.0.0.1'
     database_port: '3306'
     database_name: 'lerot_fssymf'
-    database_user: 'lerot_symfuser'
-    database_password: 'cheilly'
+    database_user: 'lerot_fflsas3'
+    database_password: 'ch8_71eilly'
     
     mailer_transport: smtp
     mailer_host: smtp.gmail.com
@@ -12,6 +14,17 @@ parameters:
     secret: 56f1c6ae2e2bea4288f04e3c1e67795d5890d3e0
     mailer_password: li8$39chfield
 
+   # delivery_addresses: ['paul.a.golder@lerot.org']
+    #transport:  smtp
+    #encryption: ssl 
+    #auth_mode: login
+    #host: fflsas3.lerot.org
+    #port: 465
+    #username:  'admin@fflsas3.lerot.org'
+    #password:  'savannah#1944'
+    #spool: { type: memory }
+
+    
     
     admin-name: "FFLSAS-admin"
     admin-email: "admin@fflsas3.lerot.org"
