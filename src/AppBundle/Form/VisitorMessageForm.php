@@ -12,20 +12,19 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
-class UserMessageForm extends AbstractType
+class VisitorMessageForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
          $builder->add('fromname', TextType::class);
          $builder->add('fromemail', TextType::class);
          $builder->add('toname', TextType::class);
-         $builder->add('toemail',HiddenType::class );
+         $builder->add('toemail', HiddenType::class);
          $builder->add('subject', TextType::class);
          $builder->add('body', TextareaType::class);
          $builder->get('toname')->setDisabled(true);
          $builder->get('toemail')->setDisabled(true);
-         $builder->get('fromname')->setDisabled(true);
-         $builder->get('fromemail')->setDisabled(true);
+       
     }
 
     public function configureOptions(OptionsResolver $resolver)

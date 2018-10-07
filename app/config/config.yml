@@ -56,13 +56,13 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     delivery_addresses: ['paul.a.golder@lerot.org']
-    transport:  smtp
-    encryption: ssl 
-    auth_mode: login
-    host: fflsas3.lerot.org
-    port: 465
-    username:  'admin@fflsas3.lerot.org'
-    password:  'savannah#1944'
+    transport:   '%email-transport%'
+    encryption:  '%email-encryption%'
+    auth_mode:   '%email-auth_mode%'
+    host:  '%email-host%'
+    port:  '%email-port%'
+    username:   '%email-username%'
+    password:   '%email-password%'
     spool: { type: memory }
 
 #

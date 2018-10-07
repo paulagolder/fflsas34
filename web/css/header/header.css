@@ -217,7 +217,7 @@ div#mainmenu  div.menuitem
   font-size:1em;
 }
 
-div#mainmenu > div.menuitem > a 
+div#mainmenu  div.menuitem  a 
 {
   color:blue;   
   padding-top:0em;
@@ -226,22 +226,22 @@ div#mainmenu > div.menuitem > a
   text-decoration: none;
 }
 
-div#mainmenu > div.menuitem >  a:link
+div#mainmenu  div.menuitem   a:link
 {
   color:blue;   
 }
 
-div#mainmenu > div.menuitem >   a:hover
+div#mainmenu  div.menuitem   a:hover
 {
   color:white;   
 }
 
-div#mainmenu div.menuitem a:hover
+xdiv#mainmenu div.menuitem a:hover
 {
     color:white;
 }
 
-div#mainmenu > div.menuitem >  a:visited
+div#mainmenu div.menuitem   a:visited
 {
   color:blue;   
 }

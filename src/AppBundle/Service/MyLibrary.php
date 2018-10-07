@@ -57,7 +57,7 @@ class MyLibrary
      if( array_key_exists ( $language , $text_ar[$attribute] ))return $text_ar[$attribute][$language] ;
       //if($text_ar[$attribute][$language] ) return $text_ar[$attribute][$language] ;
       if( array_key_exists ( "FR" , $text_ar[$attribute] )) return $text_ar[$attribute]["FR"] ;
-      if($text_ar[$attribute]["EN"] ) return $text_ar[$attribute]["EN"] ;
+      if( array_key_exists ( "EN" , $text_ar[$attribute] )) return $text_ar[$attribute]["EN"] ;
       return "No text found";
     }
     

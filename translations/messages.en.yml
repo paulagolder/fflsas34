@@ -181,3 +181,9 @@ chercher.content: Search Articles
 user.to.admin: User to Admin
 admin.to.user: Admin to User
 message.envoyer.a: Recipient
+Toname: Destination
+Toemail: Destination email
+Fromname: Sender
+Fromemail: Sender email
+Subject: Subject
+Body: Message

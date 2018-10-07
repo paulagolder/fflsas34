@@ -182,4 +182,9 @@ chercher.content: Chercher les articles
 user.to.admin: Utilisateur a l'administrateur
 admin.to.user: Administrateur a l'Utilisateur 
 message.envoyer.a: Destinataire
-
+Toname: Destinataire
+Toemail: Destinataire email
+Fromname: Expéditeur
+Fromemail: Expéditeur email
+Subject: Sujet
+Body: Message

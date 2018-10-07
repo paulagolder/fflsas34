@@ -74,7 +74,7 @@ remote_complete_registration:
    
 message_mail:
     path: /{_locale}/mailto
-    controller: AppBundle\Controller\MessageController:createUserMessage
+    controller: AppBundle\Controller\MessageController:createMessage
     requirements:
         _locale: en|fr|FR|EN
         

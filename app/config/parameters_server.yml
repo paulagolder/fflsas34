@@ -8,20 +8,20 @@ parameters:
     database_user: 'lerot_fflsas3'
     database_password: 'ch8_71eilly'
     
-    mailer_transport: smtp
-    mailer_host: smtp.gmail.com
-    mailer_user: syfflsas3.lerot.org
+  #  mailer_transport: smtp
+  #  mailer_host: smtp.gmail.com
+  #  mailer_user: syfflsas3.lerot.org
     secret: 56f1c6ae2e2bea4288f04e3c1e67795d5890d3e0
-    mailer_password: li8$39chfield
+  #  mailer_password: li8$39chfield
 
    # delivery_addresses: ['paul.a.golder@lerot.org']
-    #transport:  smtp
-    #encryption: ssl 
-    #auth_mode: login
-    #host: fflsas3.lerot.org
-    #port: 465
-    #username:  'admin@fflsas3.lerot.org'
-    #password:  'savannah#1944'
+    email-transport: 'smtp'
+    email-encryption: ssl 
+    email-auth_mode: login
+    email-host: fflsas3.lerot.org
+    email-port: 465
+    email-username:  'admin@fflsas3.lerot.org'
+    email-password:  'savannah#1944'
     #spool: { type: memory }
 
     
