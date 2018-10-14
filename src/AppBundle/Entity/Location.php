@@ -47,6 +47,10 @@ class Location
      */
     private $zoom;
     
+      /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $showchildren = 0;
     
     public $link;
     public $label;
@@ -73,15 +77,37 @@ class Location
     
     public function getZoom(): ?int
     {
+     if ($this->zoom > 0)
         return $this->zoom;
+      else
+         return 1;
     }
 
-    public function setZoom(int $zoom): self
+    public function setZoom( $zoom): self
     {
+     if ( is_int ( $zoom ))
+      {
         $this->zoom = $zoom;
+      }
+     else
+     {
+        $this->zoom = 1;
+      }
+        return $this;
+    }
+    
+    public function getShowchildren() :  ?bool
+    {
+        return $this->showchildren;
+    }
+
+    public function setShowchildren(?bool $show): self
+    {
+        $this->showchildren = $show;
 
         return $this;
     }
+    
     
     public function getName(): ?string
     {
@@ -153,6 +179,71 @@ class Location
         $this->name = $label;
 
         return $this;
+    }
+    
+       public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): self
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+    
+    
+    public function getJson()
+    {
+      $str ="{";
+      $str .=  '"locid":'.$this->locid.',';
+      $str .=  '"name":"'.$this->name.'",';
+      $str .=  '"label":"'.$this->label.'",';
+      $str .=  '"link":"'.$this->link.'",';
+      $str .=  '"kml":"'.$this->kml.'",';
+      $str .=  '"longitude":'.$this->longitude.",";
+      $str .=  '"latitude":'.$this->latitude.", ";
+      if($this->showchildren)
+      $str .=  '"showchildren":true ,';
+      else
+        $str .=  '"showchildren":false ,';
+            $str .=  '"zoom":'.$this->getZoom()." ";
+         if($this->children)
+         {
+           $childlist =', "children" : [';
+           $first = true;
+           foreach ($this->children as $child)
+           {
+             if($first )
+             {
+              $childlist .=  $child->getJsonShallow();
+               $first = false;
+              }
+              else
+              {
+                 $childlist .= " , ".$child->getJsonShallow();
+              }
+            }
+            $childlist .="]";
+            $str .= $childlist;
+         }
+      $str .="}";
+    return $str;
+    }
+    
+     public function getJsonShallow()
+    {
+      $str ="{";
+      $str .=  '"locid":'.$this->locid.',';
+      $str .=  '"name":"'.$this->name.'",';
+      $str .=  '"label":"'.$this->label.'",';
+      $str .=  '"link":"'.$this->link.'",';
+      $str .=  '"kml":"'.$this->kml.'",';
+      $str .=  '"longitude":'.$this->longitude.",";
+      $str .=  '"latitude":'.$this->latitude." ";
+      $str .="}";
+    return $str;
     }
     
 }

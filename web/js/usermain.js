@@ -1,11 +1,11 @@
 
 
-function myFunction() {
+function xmyFunction() {
     window.location.href = "/mailto";
 }
 
 
-   function myMapper2(lat, long) 
+   function xmyMapper2(lat, long) 
    {
       var mymap = L.map('mapid').setView([ lat , long], 5);
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -18,7 +18,7 @@ function myFunction() {
       return mymap;
    }
    
-    function myMapper3(lat, long, zoom) 
+    function xmyMapper3(lat, long, zoom) 
    {
       var mymap = L.map('mapid').setView([ lat , long], zoom);
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {

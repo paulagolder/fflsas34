@@ -1,36 +1,12 @@
 
 
-function myFunction() {
+function xmyFunction() {
     window.location.href = "/mailto";
 }
 
 
-   function myMapper2(lat, long) 
-   {
-      var mymap = L.map('mapid').setView([ lat , long], 5);
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: 'mapbox.streets',
-      accessToken: 'pk.eyJ1IjoicGF1bGFnb2xkZXIiLCJhIjoiY2pneXhhbWoyMmkxazMzcDZncHFhODlkdiJ9.edTBTkIMndOfkYHlYp4eAQ'
-      }).addTo(mymap);
-      var marker = L.marker([lat , long]).addTo(mymap);
-      return mymap;
-   }
-   
-    function myMapper3(lat, long, zoom) 
-   {
-      var mymap = L.map('mapid').setView([ lat , long], zoom);
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: 'mapbox.streets',
-      accessToken: 'pk.eyJ1IjoicGF1bGFnb2xkZXIiLCJhIjoiY2pneXhhbWoyMmkxazMzcDZncHFhODlkdiJ9.edTBTkIMndOfkYHlYp4eAQ'
-      }).addTo(mymap);
-      var marker = L.marker([lat , long]).addTo(mymap);
-      return mymap;
-   }
-   
+    
+                
     function HideMe( divid) 
     {
       var x = document.getElementById(divid);

@@ -296,13 +296,14 @@ div#middle  div.heading div.title
 {
     color:maroon;
     font-size:1.2em;
-    xmargin-left: 1em;
+    margin-right: 1em;
 }
 
 div#middle  div.heading div.label
 {
     color:yellow;
     font-size:1.2em;
+    margin-right: 1em;
 }
 
 div#middle  div.subheading 
@@ -316,13 +317,14 @@ div#middle  div.subheading div.title
 {
     color:maroon;
     font-size:1.0em;
-    margin-left: 1em;
+    margin-right: 1em;
 }
 
 div#middle  div.subheading div.label
 {
     color:yellow;
     font-size:1.0em;
+    margin-right: 1em;
 }
 
 div#middle div.hidebar button

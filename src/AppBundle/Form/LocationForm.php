@@ -8,7 +8,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class LocationForm extends AbstractType
 {
@@ -23,6 +25,9 @@ class LocationForm extends AbstractType
         $builder ->add('zoom', IntegerType::class);
         $builder->get('zoom')->setRequired(false);
         $builder->get('kml')->setRequired(false);
+        $builder->add('showchildren', CheckboxType::class, array(
+    'label'    => 'Show the children?',
+    'required' => false,));
     }
 
     public function configureOptions(OptionsResolver $resolver)

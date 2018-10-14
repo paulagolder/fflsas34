@@ -124,6 +124,12 @@ div#header div.messagebar  div.messbutton a
     width: 150px;
  }
  
+div#header.header div.messagebar div.messbutton a:hover
+ {
+    color: #e3e3e3;
+    background: #333;
+ }
+ 
 div#header.header div.messagebar div.registerlink.button
 {
     cursor: pointer;
@@ -231,21 +237,16 @@ div#mainmenu  div.menuitem   a:link
   color:blue;   
 }
 
-div#mainmenu  div.menuitem   a:hover
-{
-  color:white;   
-}
-
-xdiv#mainmenu div.menuitem a:hover
-{
-    color:white;
-}
 
 div#mainmenu div.menuitem   a:visited
 {
   color:blue;   
 }
 
+div#mainmenu  div.menuitem   a:hover
+{
+  color:white;   
+}
  
 div#footer 
 {

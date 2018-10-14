@@ -36,12 +36,12 @@
    <div class="heading">
          <div class="title">{{ event.title}} </div>
           {% if is_granted('ROLE_USER') %} 
-           <div  class="button1" >
+           <div  class="editbutton button1" >
               <a class="editbutton" href = "/{{lang}}/event/addbookmark/{{event.eventid}}" >{{'bookmark.event'|trans}}</a>
             </div>
          {% endif %}
          {% if is_granted('ROLE_ADMIN') %} 
-           <div class="button1" >
+           <div class="editbutton" >
               <a class="editbutton" href="/admin/event/{{event.eventid}}"> {{'edit.event'|trans}}</a>
             </div>
          {% endif %}

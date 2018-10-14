@@ -64,6 +64,10 @@ services:
         arguments:
             $targetDir: '%new-images-folder%'
             
+    AppBundle\Service\KMLFileUploader:
+        arguments:
+            $targetDir: '%kml-folder%'
+            
 
             # app/config/services.yml
 

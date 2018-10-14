@@ -478,6 +478,10 @@ location_all:
     path : /location/all 
     controller:  AppBundle\Controller\LocationController::Showall
     
+admin_location_upload:    
+    path: /admin/location/upload/{lid}
+    controller:  AppBundle\Controller\LocationController::upload
+    
 admin_location_bookmark:
     path: /admin/location/addbookmark/{lid}
     controller:  AppBundle\Controller\LocationController::addbookmark

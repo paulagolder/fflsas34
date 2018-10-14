@@ -176,14 +176,15 @@ class TextController extends Controller
         $text->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
         $text->setUpdateDt($now);
-      
+       
         $form = $this->createForm(TextForm::class, $text);
         
         if ($request->getMethod() == 'POST') {
             #$form->bindRequest($request);
             $form->handleRequest($request);
-            if ($form->isValid()) {
-                // perform some action, such as save the object to the database
+            if ($form->isValid())
+            {
+                $text->setComment ( $this->filterText($text->getComment()));
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($text);
                 $entityManager->flush();
@@ -202,6 +203,17 @@ class TextController extends Controller
             'objid'=> $objid,
             'returnlink' => "/admin/text/".$objecttype."/".$objid,
             ));
+    }
+    
+     public function filterText($text)
+    {
+  
+     $text = preg_replace('/(<p.+?)style=".+?"(>.+?)/i', "$1$2", $text);
+     $text = preg_replace('/(<p.+?)class=".+?"(>.+?)/i', "$1$2", $text);
+     $text = preg_replace('/(<span.+?)style=".+?"(>.+?)/i', "$1$2", $text);
+     $text =  strip_tags($text,"<p><img><br>");
+
+       return $text;
     }
     
     
