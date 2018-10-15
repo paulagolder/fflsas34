@@ -276,7 +276,26 @@ class LocationController extends Controller
         {
             $regionname = "No Parent";
         }
-        
+         $childrenlist =  $location->children;
+        $children = array();
+          $childrenkml = "";
+        if(count($childrenlist))
+        {
+          
+            $l = count($childrenlist);
+            for($i=0; $i<$l;$i++)
+            {
+                $cid = $childrenlist[$i]['id'];
+                $achild = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($cid);
+                if($i>0) $childrenkml .= ",";
+                $childrenkml .= $achild->getKml();
+                $url = "/".$this->lang."/location/".$cid;
+                $achild->setLink($url) ;
+                $children[$i] =   $achild ;
+            }
+           $childrenkml .= "";
+            $location->children = $children;
+        }
         return $this->render('location/edit.html.twig', array(
             'form' => $form->createView(),
             'regionname'=>$regionname,

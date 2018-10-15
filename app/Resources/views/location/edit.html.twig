@@ -69,7 +69,7 @@
       <div id="mapid"></div>
        {% set jslocation = location.getJson() %}
       <script  type="text/javascript" >
-       var mymap = myMapper3({{jslocation}});
+       var mymap = myMapper3("{{jslocation}}");
          mymap.on('click', onMapClick);
       </script>
    </div>

@@ -2,8 +2,16 @@
 
 
 
-function myMapper3(lat, long, zoom) 
+function myMapper3(location) 
 {
+    var location_dc =redecode(location);
+    //console.log(location_dc);
+    var mylocation = JSON.parse(location_dc)
+      var lat = mylocation.latitude;
+    var long = mylocation.longitude;
+    var zoom = mylocation.zoom;
+    if(zoom <1 ) zoom = 1;
+    
     var mymap = L.map('mapid').setView([ lat , long], zoom);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
