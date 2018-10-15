@@ -1,20 +1,15 @@
-# This file is auto-generated during the composer install
+# This file is for server lerot.org parameters
+
 parameters:
-   
    
     database_host:  '127.0.0.1'
     database_port: '3306'
-    database_name: 'lerot_fssymf'
+    database_name: 'lerot_fflsas3'
     database_user: 'lerot_fflsas3'
     database_password: 'ch8_71eilly'
     
-  #  mailer_transport: smtp
-  #  mailer_host: smtp.gmail.com
-  #  mailer_user: syfflsas3.lerot.org
     secret: 56f1c6ae2e2bea4288f04e3c1e67795d5890d3e0
-  #  mailer_password: li8$39chfield
 
-   # delivery_addresses: ['paul.a.golder@lerot.org']
     email-transport: 'smtp'
     email-encryption: ssl 
     email-auth_mode: login
@@ -22,12 +17,11 @@ parameters:
     email-port: 465
     email-username:  'admin@fflsas3.lerot.org'
     email-password:  'savannah#1944'
-    #spool: { type: memory }
-
-    
     
     admin-name: "FFLSAS-admin"
     admin-email: "admin@fflsas3.lerot.org"
+    kml-folder-long: '%kernel.project_dir%/web/kml/'
+    kml-folder: '/kml/'
     new-images-folder: '/newimages/'
     new-images-folder-long: '%kernel.project_dir%/web/newimages/'
     external-images : "http://fflsas.org/images/stories/fflsas/"

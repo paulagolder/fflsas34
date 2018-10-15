@@ -55,7 +55,7 @@
     {{ form_row(form.longitude) }}
     {{ form_row(form.kml) }}    
     {{ form_row(form.zoom) }}
-        {{ form_row(form.showchildren) }}
+    {{ form_row(form.showchildren) }}
   <div class="subheading" >  
     <div> <button type="submit">Register!</button></div>
   </div>
@@ -67,8 +67,9 @@
    </div>
    <div class="map" >
       <div id="mapid"></div>
+       {% set jslocation = location.getJson() %}
       <script  type="text/javascript" >
-       var mymap = myMapper3({{location.latitude}}, {{location.longitude}},{{location.zoom}});
+       var mymap = myMapper3({{jslocation}});
          mymap.on('click', onMapClick);
       </script>
    </div>

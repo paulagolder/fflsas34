@@ -155,7 +155,7 @@ class LocationController extends Controller
         'heading' =>  'location '.$lid.' found',
         'location'=> $location,
         'childrenkml' =>    $childrenkml,
-        'showchildren' =>  true,  //$location->getShowchildren(),
+        'showchildren' =>  $location->getShowchildren(),
         'texts'=> $textcomment,
         'personlocs'=>$incidentlocs,
         'eventlocs'=>$eventlocs,
