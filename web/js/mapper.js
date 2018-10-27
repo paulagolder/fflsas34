@@ -83,12 +83,19 @@ function myMapper7(location)
         {
             var kmllist = new Array();
             comune = omnivore.kml("/"+mylocation.kml);
-            var poly1 = comune.bindPopup(mylocation.name);
+           // var poly1 = comune.bindPopup(mylocation.name);
             kmllist.push(comune);
             var kmlLayer = L.layerGroup(kmllist);
             kmlLayer.on("loaded", function(e) 
             { 
                 mymap.fitBounds(e.target.getBounds());
+                 kmlLayer.eachLayer(function(layer) {
+            // See the `.bindPopup` documentation for full details. This
+            // dataset has a property called `name`: your dataset might not,
+            // so inspect it and customize to taste.
+            layer.bindPopup(layer.toGeoJSON().feature.properties.name);
+          
+        });
             });
             kmlLayer.addTo(mymap);
         }

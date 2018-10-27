@@ -77,9 +77,9 @@
       {% endif %}
       
     
-    
+    {% if refs %}
     <div class="refgroup" >
-     <div class="header">
+     <div class="heading">
      <div class="label"> {{'liens' | trans}}</div>
      </div>
     {% for ref in refs %}
@@ -88,6 +88,7 @@
     </div>
     {% endfor %}
     </div>
+    {% endif %}
   
     
     {% if text  %}  

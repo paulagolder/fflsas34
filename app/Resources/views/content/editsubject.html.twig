@@ -35,7 +35,16 @@
      <div class="title" > {{subjectid}}</div>
      <div class="returnbutton button1"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
    </div>
+   {% set founden = false %}
+    {% set foundfr = false %}
    {% for content in contents %}
+   {% if content.language == 'fr' %}
+     {% set foundfr = true %}
+  {% endif %}
+  {% if content.language == 'en' %}
+     {% set founden = true %}
+  {% endif %}
+  
    <div class="contents">
     <div class="heading" >
       <div class="title">{{content.title}}</div> 
@@ -54,6 +63,24 @@
      
      {% endfor%}
   {% endif %}
+    {% if not foundfr %}
+    <div class="subheading" >
+    <div class="label" > make.french.text</div>
+     <div class="button1" >
+     <a class='editbutton' href="/admin/content/edit/{{subjectid}}/fr">{{'new.content' |trans}}</a>
+    </div>
+    </div>
+   {% endif %}
+   {% if not founden %}
+    <div class="subheading" >
+    <div class="label" > make english </div>
+     <div class="button1" >
+     <a class='editbutton' href="/admin/content/edit/{{subjectid}}/en">{{'new.content' |trans}}</a>
+    </div>
+    </div>
+   {% endif %}
+    
+     
    <div class="refs">
        <div  class="linksheading" >{%trans%}liens.a{% endtrans %}</div>
        {% for obtype , oref in refs %}

@@ -35,7 +35,15 @@ class ContentRepository extends EntityRepository
        return $contents[0];
     }
     
-      public function findOnebyLang($subjectid,$lang)
+     public function findMaxSid()
+    {
+       $sql = "select max(c.subjectid) from AppBundle:content c ";
+       $query = $this->getEntityManager()->createQuery($sql);
+       $sid = $query->getResult();
+       return $sid;
+    }
+    
+     public function findOnebyLang($subjectid,$lang)
     {
        $qb = $this->createQueryBuilder("i");
        $qb->andWhere('i.subjectid = :sid');

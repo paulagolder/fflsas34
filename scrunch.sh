@@ -20,5 +20,7 @@ tar --append --file="$FILE"  "app/Resources"
 tar --append --file="$FILE"  "app/AppKernel_server.php"
 
 #tar  --transform 's,^AppKernel_server.php,AppKernal_x.php,'   cf  --file= "$FILE"  cf
+#sed 's/_server/_freddy/g'  <$FILE  >newfile.tar
 
+#gzip newfile.tar
 gzip "$FILE"  

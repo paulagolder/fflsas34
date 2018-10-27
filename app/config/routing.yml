@@ -570,13 +570,13 @@ content_all:
         
 content_one:
     path: /{_locale}/content/{sid}
-    controller:  AppBundle\Controller\ContentController::Showone  
+    controller:  AppBundle\Controller\ContentController::Showsubject  
     requirements:
         _locale: en|fr|FR|EN
         
 content_menu:
     path: /{_locale}/menucontent/{sid}
-    controller:  AppBundle\Controller\ContentController::Showone  
+    controller:  AppBundle\Controller\ContentController::Showsubjet 
     requirements:
         _locale: en|fr|FR|EN
         
@@ -594,6 +594,9 @@ admin_content_edit:
     path: /admin/content/edit/{cid}
     controller:  AppBundle\Controller\ContentController::Edit   
     
+admin_content_newt:
+    path: /admin/content/new/
+    controller:  AppBundle\Controller\ContentController::Editnew   
     
 admin_content_delete:
     path: /admin/content/delete/{cid}
@@ -611,7 +614,10 @@ user_content_bookmark:
 admin_content_editone:
     path: /admin/content/{sid}
     controller:  AppBundle\Controller\ContentController::Editsubject
-
+    
+admin_content_new:    
+    path: /admin/content/edit/{sid}/{lang}
+    controller:  AppBundle\Controller\ContentController::Newlang
     
 admin_content_deleteimage:
     path:  /admin/content/deleteimage/{cid}/{isn}

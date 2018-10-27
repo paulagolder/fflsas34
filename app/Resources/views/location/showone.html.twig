@@ -42,14 +42,16 @@
         {% if location %}
         <div class="heading" >
             <div class="title" >{{ location.name }}</div>
+            <div class= "button1">
             {% if is_granted('ROLE_USER') %} 
-            <div class="editbutton button1" >
-                <a class="editbutton" href = "/{{lang}}/location/addbookmark/{{location.locid}}" >{{'bookmark.location' | trans}}</a>
-            </div>
+        
+                <a class="editbutton" href = "/{{lang}}/location/addbookmark/{{location.locid}}" >{{'bookmark' | trans}}</a>
+       
               {% endif %}
               {% if is_granted('ROLE_ADMIN') %} 
-             <div class='editbutton ' ><a class="editbutton" href="/admin/location/{{location.locid}}">{{'edit.detail' |trans}}</a></div>
+            <a class="editbutton" href="/admin/location/{{location.locid}}">{{'edit' |trans}}</a>
             {% endif %}
+            </div>
         </div>
         <div class="latlong" > {{location.latitude | number_format(4, '.', '') }} : {{location.longitude | number_format(4, '.', '') }} </div>
         

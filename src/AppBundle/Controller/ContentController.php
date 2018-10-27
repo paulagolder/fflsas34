@@ -40,14 +40,14 @@ class ContentController extends Controller
     
    
     
-    public function Showone($sid, Request $request)
+    public function ShowSubject($sid)
     {
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
-        if(!$content_ar )
-        {
-          $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
-        }
+       # if(!$content_ar )
+       # {
+       #   $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
+       # }
         if(array_key_exists ($this->lang,$content_ar )) 
         {
             $content = $content_ar[$this->lang] ;
@@ -62,10 +62,12 @@ class ContentController extends Controller
         }
         else
         {
-           $content = $content_ar['*'] ;
+        dump($content_ar);
+          # $content = $content_ar['*'] ;
         }
        
         $content['text'] =  $this->setImageLinks($content["text"]);
+         $content['title'] = $content["title"];
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
         
         return $this->render('content/showone.html.twig', 
@@ -73,7 +75,6 @@ class ContentController extends Controller
         'message' =>  '',
         'lang'=>$this->lang,
         'content'=> $content,
-        'title'=>$content['title'],
         'refs'=>$refs,
         ]);
     }
@@ -151,14 +152,9 @@ class ContentController extends Controller
         $contentid=$cid;
         $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
         $label = $content->getTitle();
-        
+        $sid = $content->getSubjectid();
         $request = $this->requestStack->getCurrentRequest();
         $content = $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
-        if($content==null)
-        {
-            $content = new Content();
-            $content->setLanguage($this->lang);
-        }
         $content ->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
         $content ->setUpdateDt($now);
@@ -172,6 +168,53 @@ class ContentController extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($content);
                 $entityManager->flush();
+                return $this->redirect("/".$this->lang."/content/".$sid);
+                
+            }
+        }
+        
+        $matches = array();
+        
+        $n = preg_match_all('(<img\s[A-z="]*\s*src[^"]"[^"]+[^/>]+/>)', $content->getText(),$matches);
+
+        return $this->render('content/edit.html.twig', array(
+            'form' => $form->createView(),
+            'label'=> $label,
+            'returnlink' => "/admin/content/".$content->getsubjectid(),
+            'contentid'=>$contentid,
+            'imagelinks'=>$matches,
+            ));
+    }
+    
+     public function editnew()
+    {   
+        
+        #$contentid=$cid;
+        $maxsid= $this->getDoctrine()->getRepository('AppBundle:Content')->findMaxSid();
+        #$label = $content->getTitle();
+        $label="";
+        $contentid=null;
+        dump($maxsid[0][1]);
+        $ms = intval($maxsid[0][1]);
+        #dump($ms);
+        $request = $this->requestStack->getCurrentRequest();
+     #   $content = $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
+            $content = new Content();
+            $content->setLanguage($this->lang);
+            $content->setSubjectid($ms+1);
+        $content ->setContributor($this->getUser()->getUsername());
+        $now = new \DateTime();
+        $content ->setUpdateDt($now);
+        $form = $this->createForm(ContentForm::class, $content);
+        if ($request->getMethod() == 'POST') 
+        {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                // perform some action, such as save the object to the database
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($content);
+                $entityManager->flush();
+                 $cid = $content->getContentid();
                 return $this->redirect("/".$this->lang."/content/".$cid);
                 
             }
@@ -188,6 +231,29 @@ class ContentController extends Controller
             'contentid'=>$contentid,
             'imagelinks'=>$matches,
             ));
+    }
+    
+    
+      public function newlang($sid,$lang)
+    {   
+        
+       
+            $content = new Content();
+            $content->setLanguage($lang);
+            $content->setSubjectid($sid);
+            $content->setTitle("?");
+            $content->setText("?");
+        $content ->setContributor($this->getUser()->getUsername());
+        $now = new \DateTime();
+        $content ->setUpdateDt($now);
+       
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($content);
+                $entityManager->flush();
+                 $cid = $content->getContentid();
+                return $this->redirect("/".$this->lang."/content/".$sid);
+                
+       
     }
     
      public function Showall(Request $request)

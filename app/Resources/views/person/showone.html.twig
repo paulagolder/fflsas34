@@ -43,16 +43,18 @@
     </div>
     {% endif %}
     
-    <div class="refgroup" >
+  
         {% if refs %}
+          <div class="refgroup" >
         <div class="reflabel">{{'liens' | trans }} : </div>
         <div class="reflist">
         {% for ref in refs %}
         <div class="ref" ><a href="{{ref.path}}"> {{ref.label}}</a></div>
         {% endfor %}
         </div>
+            </div>
         {% endif %}
-    </div>
+
     
      
     
