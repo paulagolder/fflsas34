@@ -1,4 +1,4 @@
-syfflsas3
+fflsas3
 =========
 
-A Symfony project created on July 31, 2018, 9:23 am.
+The latest version of the FFLSAS website. Developed in symfony3
