@@ -41,26 +41,26 @@
 
     {{ form_row(form.personid)}}
     {{ form_row(form.eventid) }}
-      {{ form_row(form.itypeid) }}
+    {{ form_row(form.itypeid) }}
      
-      <div class="itypelist" >
+    <div class="itypelist" >
         <select id="itypelist" onchange="seltype(this.value)" >
          {% for itype in itypes %} 
            {% if (itype.itypeid ) == itypeid %}
              <option value = "{{itype.itypeid}}" selected >{{itype.label}}</option>
            {% else %}
              <option value = "{{itype.itypeid}}">{{itype.label}}</option>
-         {% endif %}
-     {% endfor %}
-    </select>
+           {% endif %}
+         {% endfor %}
+      </select>
     </div>
-    {{ form_row(form.namerecorded)   }}
+    {{ form_row(form.namerecorded) }}
     {{ form_row(form.rank) }}
-      {{ form_row(form.locid) }}
+    {{ form_row(form.locid) }}
     {{ form_row(form.role) }}
     {{ form_row(form.sdate) }}
     {{ form_row(form.edate) }}
-     {{ form_row(form.sequence) }}
+    {{ form_row(form.sequence) }}
      
     <button type="submit">Register!</button>
 {{ form_end(form) }}

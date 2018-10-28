@@ -40,7 +40,7 @@ class ContentController extends Controller
     
    
     
-    public function ShowSubject($sid)
+    public function Showsubject($sid)
     {
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);

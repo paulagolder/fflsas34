@@ -18,6 +18,7 @@
         <div id="page" >
           <div class='header' id='header' >
           {% block myheader %}
+          
             <table  >
               <tr>
                <td class="logo1" rowspan="2">
@@ -126,13 +127,19 @@
  
      <div id="footer">
       {% block myfooter %}
+        {% set locale =  app.request.getLocale() | lower %}
       <table>
          <tr>
-           <td class='left' >left footer</td>
+           <td class='left' >
+             <div class="menuitem" > <a href="/{{locale}}/menucontent/204"> {% trans %}admin.copyright{% endtrans %}</a> </div>
+           </td>
            <td class='center' >
              <h1 > FFLSAS &copy;</h1>
            </td>
-           <td  class='right'> right footer</td>
+           <td  class='right'> 
+           
+              <div class="menuitem" > <a href="/{{locale}}/menucontent/194"> {% trans %}admin.privacy{% endtrans %}</a> </div>
+           </td>
          </tr>
       </table>
       {% endblock %}  

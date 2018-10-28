@@ -576,7 +576,7 @@ content_one:
         
 content_menu:
     path: /{_locale}/menucontent/{sid}
-    controller:  AppBundle\Controller\ContentController::Showsubjet 
+    controller:  AppBundle\Controller\ContentController::Showsubject 
     requirements:
         _locale: en|fr|FR|EN
         
