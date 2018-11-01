@@ -20,7 +20,6 @@ class ContentForm extends AbstractType
     {
         
         $builder    ->add('subjectid', TextType::class, array('attr' => array('style' => 'width: 40px'),));  
-      #    $builder    ->add('language', TextType::class);  
        $builder    ->add('language', ChoiceType::class, array(
         'choices'  => array(
          'fr' => 'fr',
@@ -28,8 +27,9 @@ class ContentForm extends AbstractType
         '*' => '*', ),
             ));
         $builder->add('title', TextType::class, array('attr' => array('style' => 'width: 400px'),));
-       # $builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),));
-       $builder->add('text', TextareaType::class, array('attr' => array('style' => 'width: 400px ;height:400px;'),));
+        #$builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),));
+           $builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),'attr' => array('style' => 'width: 400px ;height:400px;'),));
+      # $builder->add('text', TextareaType::class, array('attr' => array('style' => 'width: 400px ;height:400px;'),));
    }
 
     public function configureOptions(OptionsResolver $resolver)

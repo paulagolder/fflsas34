@@ -23,3 +23,18 @@ html body div#page div.mypage div.mypageinner div#middle div#contactform div.for
 {
     margin-top:20px;
 }
+
+
+ 
+
+ div#contentedit div.form form div#maintext
+{
+    
+     display: block;
+}
+
+div#contentedit div.form form div#maintext div
+{
+    
+    display: block;
+}

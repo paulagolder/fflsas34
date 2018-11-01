@@ -44,10 +44,16 @@ class ContentController extends Controller
     {
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
-       # if(!$content_ar )
-       # {
-       #   $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
-       # }
+        if(!$content_ar )
+       {
+          return $this->render('content/showone.html.twig', 
+        [
+        'message' =>  'contenu non trouver',
+        'lang'=>$this->lang,
+        'content'=> null,
+        'refs'=> null,
+        ]);
+        }
         if(array_key_exists ($this->lang,$content_ar )) 
         {
             $content = $content_ar[$this->lang] ;
@@ -62,12 +68,12 @@ class ContentController extends Controller
         }
         else
         {
-        dump($content_ar);
+        #dump($content_ar);
           # $content = $content_ar['*'] ;
         }
        
-        $content['text'] =  $this->setImageLinks($content["text"]);
-         $content['title'] = $content["title"];
+         $content->setText( $this->setImageLinks($content->getText()));
+        # $content['title'] = $content["title"];
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
         
         return $this->render('content/showone.html.twig', 
@@ -105,7 +111,7 @@ class ContentController extends Controller
     public function Editone($cid)
     {
         $content = $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
-        
+        $content->setText(  $this->setImageLinks($content->getText()));
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
@@ -128,10 +134,14 @@ class ContentController extends Controller
         $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
         foreach ($contents as $content)
         {
-        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$content['contentid']);
+        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$content->getContentid());
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
-      #  $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
-        $content['label'] = $title;
+        if($title)
+           $content->setLabel($title);
+        else
+           $content->setLabel($content->getTitle());
+           
+        $content->setText( $this->setImageLinks($content->getText()));
         }
         
         return $this->render('content/editsubject.html.twig', 
@@ -148,23 +158,22 @@ class ContentController extends Controller
     
     public function edit($cid)
     {   
-        
+        $request = $this->requestStack->getCurrentRequest();
         $contentid=$cid;
         $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
         $label = $content->getTitle();
         $sid = $content->getSubjectid();
-        $request = $this->requestStack->getCurrentRequest();
-        $content = $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
+
         $content ->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
         $content ->setUpdateDt($now);
-       # $content->setText($this->setImagelinks($content->getText()));
+        $content->setText($this->setImagelinks($content->getText()));
         $form = $this->createForm(ContentForm::class, $content);
         if ($request->getMethod() == 'POST') 
         {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                // perform some action, such as save the object to the database
+               # $content->setText($this->setImagelinks($content->getText()));
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($content);
                 $entityManager->flush();
@@ -173,16 +182,15 @@ class ContentController extends Controller
             }
         }
         
-        $matches = array();
+        #$matches = array();
         
-        $n = preg_match_all('(<img\s[A-z="]*\s*src[^"]"[^"]+[^/>]+/>)', $content->getText(),$matches);
+       # $n = preg_match_all('(<img\s[A-z="]*\s*src[^"]"[^"]+[^/>]+/>)', $content->getText(),$matches);
 
         return $this->render('content/edit.html.twig', array(
             'form' => $form->createView(),
             'label'=> $label,
             'returnlink' => "/admin/content/".$content->getsubjectid(),
             'contentid'=>$contentid,
-            'imagelinks'=>$matches,
             ));
     }
     
@@ -194,7 +202,7 @@ class ContentController extends Controller
         #$label = $content->getTitle();
         $label="";
         $contentid=null;
-        dump($maxsid[0][1]);
+      #  dump($maxsid[0][1]);
         $ms = intval($maxsid[0][1]);
         #dump($ms);
         $request = $this->requestStack->getCurrentRequest();
@@ -356,7 +364,7 @@ class ContentController extends Controller
     {
         $gfield = $request->query->get('searchfield');
            $uri = $request->getUri();
-           var_dump($uri);
+          # var_dump($uri);
         $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');

@@ -41,16 +41,7 @@
     <button type="submit">{% trans %} enregistrer {% endtrans%} </button>
 {{ form_end(form) }}
 </div>
-{% for  imagelink in imagelinks %}
-{% for  key , sublink in imagelink %}
-<div class="sublink" >
-<div> {{ sublink }} </div>
-<div class="editbutton"> 
-   <a href = "/admin/content/deleteimage/{{contentid}}/{{key}}" >{% trans %} delete {% endtrans%} </a> 
-</div>
-</div>
-{% endfor %}
-{% endfor %}
+
 </div>
 
 

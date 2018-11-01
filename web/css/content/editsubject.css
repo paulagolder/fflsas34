@@ -6,9 +6,10 @@ div#editcontent div.maintext
     margin-top:20px;
     width: 600px;
     height: 400px;
-    background-color: #eee;
+    xbackground-color: #eee;
     overflow: scroll;
+    border: 5px solid gray;
     
 }
 
-div.maintext
+

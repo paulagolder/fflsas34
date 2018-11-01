@@ -66,13 +66,7 @@ class ContentRepository extends EntityRepository
        foreach( $contents as $content )
        {
          $key = $content->getLanguage();
-         $acontent = array();
-         $acontent['title']= $content->getTitle();
-         $acontent['text'] = $content->getText();
-         $acontent['language'] = $content->getLanguage();
-         $acontent['subjectid'] = $content->getSubjectid();
-         $acontent['contentid'] = $content->getContentid();
-         $content_ar[$key] = $acontent;
+         $content_ar[$key] = $content;
        }
        return $content_ar;
     }
