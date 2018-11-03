@@ -44,7 +44,7 @@
             {% if 'en' in locale | lower %}
               
               {% set cpath = (cpath | replace({ "/": "_~" }) ) %}
-                 {{ dump(cpath) }}
+                
                <div class="languagelink"><a href='/fr/adminlang/{{cpath}}'  ><img src="{{asset('common/fr.gif')}}"/></a></div>
             {% else %}
                <div class="languagelink"><a href ='/en/adminlang/{{cpath}}' ><img src="{{asset('common/en.gif')}}" /></a></div>

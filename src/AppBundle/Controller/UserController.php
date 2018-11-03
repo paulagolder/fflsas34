@@ -79,7 +79,7 @@ class UserController extends Controller
             #dump("user PP:".$plainpassword).
             $hashpassword = $encoder->encodePassword($plainpassword,null);
             $fuser->setPassword($hashpassword);
-            dump(  "isvalid ?".$encoder->isPasswordValid($hashpassword, $plainpassword,null));
+            #dump(  "isvalid ?".$encoder->isPasswordValid($hashpassword, $plainpassword,null));
             $entityManager->persist($fuser);
             $entityManager->flush();
             return $this->redirect("/admin/user/search");
