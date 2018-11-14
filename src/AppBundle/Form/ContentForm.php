@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+
 
 
 class ContentForm extends AbstractType
@@ -28,8 +28,8 @@ class ContentForm extends AbstractType
             ));
         $builder->add('title', TextType::class, array('attr' => array('style' => 'width: 400px'),));
         #$builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),));
-           $builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),'attr' => array('style' => 'width: 400px ;height:400px;'),));
-      # $builder->add('text', TextareaType::class, array('attr' => array('style' => 'width: 400px ;height:400px;'),));
+        #   $builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),'attr' => array('style' => 'width: 400px ;height:400px;'),));
+       $builder->add('text', TextareaType::class, array('attr' => array('style' => 'width: 400px ;height:400px;'),));
    }
 
     public function configureOptions(OptionsResolver $resolver)

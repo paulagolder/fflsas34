@@ -586,23 +586,29 @@ subject_one:
     requirements:
         _locale: en|fr|FR|EN
         
-admin_content_search:
+content_admin_process_edit:
+    path: /admin/content/process_edit/{cid}
+    controller:  AppBundle\Controller\ContentController::process_edit   
+    
+content_admin_search:
     path: /admin/content/search
     controller:  AppBundle\Controller\ContentController::ContentSearch  
 
-admin_content_edit:
+content_admin_edit:
     path: /admin/content/edit/{cid}
-    controller:  AppBundle\Controller\ContentController::Edit   
+    controller:  AppBundle\Controller\ContentController::Edit_alt   
     
-admin_content_newt:
-    path: /admin/content/new/
-    controller:  AppBundle\Controller\ContentController::Editnew   
-    
-admin_content_delete:
+content_admin_new:
+    path: /admin/content/new/{sid}/{lang}
+    controller:  AppBundle\Controller\ContentController::newlang  
+    requirements:
+        lang: en|fr|FR|EN
+        
+content_admin_delete:
     path: /admin/content/delete/{cid}
     controller:  AppBundle\Controller\ContentController::Delete       
     
-admin_content_bookmark:    
+content_admin_bookmark:    
     path:  /admin/content/addbookmark/{sid}
     controller:  AppBundle\Controller\ContentController::addBookmark  
     
@@ -610,16 +616,15 @@ user_content_bookmark:
     path:  /{_locale}/content/addbookmark/{sid}
     controller:  AppBundle\Controller\ContentController::addUserBookmark  
     
-    
-admin_content_editone:
+content_admin_editone:
     path: /admin/content/{sid}
     controller:  AppBundle\Controller\ContentController::Editsubject
     
-admin_content_new:    
+content_admin_new:    
     path: /admin/content/edit/{sid}/{lang}
     controller:  AppBundle\Controller\ContentController::Newlang
     
-admin_content_deleteimage:
+content_admin_deleteimage:
     path:  /admin/content/deleteimage/{cid}/{isn}
     controller:  AppBundle\Controller\ContentController::Deleteimage  
     

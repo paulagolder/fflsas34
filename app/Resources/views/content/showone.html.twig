@@ -28,7 +28,7 @@
         </div>
         {% endif %}
          {% if is_granted('ROLE_ADMIN') %} 
-        <div  class="editbutton button1">
+        <div  class="editbutton">
             <a class="editbutton button1" href = "/admin/content/{{content.subjectid}}" >{{'edit.content' | trans }}</a>
         </div>
          {% endif %}

@@ -100,9 +100,9 @@
           
             </div>
         {%else%}
-            <div  class="notext" >
-                <span class="label" > {% trans %} no.text {% endtrans %} </span>
-                <a href = "/admin/text/person/{{person.personid}}" class="editbutton"  > {%trans%}add.text{% endtrans %}</a>
+            <div  class="notext row" >
+                <div class="redlabel" > {% trans %} no.text {% endtrans %} </div>
+                <div class="button1" ><a href = "/admin/text/person/{{person.personid}}" class="editbutton"  > {%trans%}add.text{% endtrans %}</a></div>
             </div>
         {% endif %}
             
@@ -113,6 +113,8 @@
           <div class="heading" > 
              <div class= 'label'>
                  {%trans%}participated.in.events{%endtrans%}
+              </div>
+              <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.participation.use.bookmarks' | trans }}</span>
               </div>
               </div>
                 <div class="participantlist" >
