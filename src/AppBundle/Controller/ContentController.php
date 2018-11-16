@@ -74,8 +74,7 @@ class ContentController extends Controller
               $text = $content->getText();
         $text = $this->insertImages($text);
         $content->setText(  $this->cleanText($text));
-         $content->setText( $this->cleanText($content->getText()));
-        # $content['title'] = $content["title"];
+       # $content->setText( $this->cleanText($content->getText()));
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
         
         return $this->render('content/showone.html.twig', 
@@ -116,7 +115,7 @@ class ContentController extends Controller
         $text = $content->getText();
         $text = $this->insertImages($text);
         $content->setText(  $this->cleanText($text));
-        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
+        #$text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
         
@@ -160,7 +159,7 @@ class ContentController extends Controller
     
     
     
-    public function edit_alt($cid)
+    public function edit_quill($cid)
     {   
         $request = $this->requestStack->getCurrentRequest();
         $contentid=$cid;
@@ -308,8 +307,6 @@ class ContentController extends Controller
     
       public function newlang($sid,$lang)
     {   
-        
-       
             $content = new Content();
             $content->setLanguage($lang);
             $content->setSubjectid($sid);
@@ -324,8 +321,6 @@ class ContentController extends Controller
                 $entityManager->flush();
                  $cid = $content->getContentid();
                 return $this->redirect("/".$this->lang."/content/".$sid);
-                
-       
     }
     
      public function Showall(Request $request)
@@ -520,11 +515,11 @@ class ContentController extends Controller
       {
       $k2 = strpos ( $text , "]]",$k1 );
       $tokengroup = substr($text,$k1, $k2-$k1+2);
-      dump($tokengroup);
+      #dump($tokengroup);
       $tokens=substr($tokengroup,2,$k2-$k1-2);
-        dump($tokens);
+       # dump($tokens);
       $token_list=json_decode("{".$tokens."}",true);
-     dump($token_list);
+     #dump($token_list);
 
     $imageid =  $token_list['image'];
     // $imageid=16;

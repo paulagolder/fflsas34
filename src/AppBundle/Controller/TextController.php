@@ -11,6 +11,8 @@ use AppBundle\Entity\Text;
 use AppBundle\Entity\person;
 use AppBundle\Service\MyLibrary;
 use AppBundle\Form\TextForm;
+use AppBundle\Form\TextForm_server;
+
 
 class TextController extends Controller
 {
@@ -136,7 +138,7 @@ class TextController extends Controller
     
     
     
-    public function editone($objecttype,$objid,$attribute, $language)
+    public function xeditone($objecttype,$objid,$attribute, $language)
     {   
         
         $language = strtoupper($language);
@@ -205,6 +207,94 @@ class TextController extends Controller
             ));
     }
     
+    
+      public function edit($tid)
+    {   
+           $text = $this->getDoctrine()->getRepository('AppBundle:Text')->findOne($tid);
+        $objecttype = $text->getObjecttype();
+        $objid = $text->getObjid();
+        $text->setContributor($this->getUser()->getUsername());
+        $now = new \DateTime();
+        $text->setUpdateDt($now);
+       
+        $form = $this->createForm(TextForm_server::class, $text);
+          $request = $this->requestStack->getCurrentRequest();
+        if ($request->getMethod() == 'POST') {
+            #$form->bindRequest($request);
+            $form->handleRequest($request);
+            if ($form->isValid())
+            {
+                $text->setComment ( $this->filterText($text->getComment()));
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($text);
+                $entityManager->flush();
+                return $this->redirect("/admin/text/".$objecttype."/".$objid);
+               
+            }
+        }
+        
+        return $this->render('text/update.html.twig', array(
+            
+            'form' => $form->createView(),
+            'text' =>$text,
+            'returnlink' => "/admin/text/".$objecttype."/".$objid,
+            ));
+    }
+    
+    
+       public function edit_ct($tid)
+    {   
+           $text = $this->getDoctrine()->getRepository('AppBundle:Text')->findOne($tid);
+        $objecttype = $text->getObjecttype();
+        $objid = $text->getObjid();
+        $text->setContributor($this->getUser()->getUsername());
+        $now = new \DateTime();
+        $text->setUpdateDt($now);
+       
+        $form = $this->createForm(TextForm_server::class, $text);
+          $request = $this->requestStack->getCurrentRequest();
+        if ($request->getMethod() == 'POST') {
+            #$form->bindRequest($request);
+            $form->handleRequest($request);
+            if ($form->isValid())
+            {
+                $text->setComment ( $this->filterText($text->getComment()));
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($text);
+                $entityManager->flush();
+                return $this->redirect("/admin/text/".$objecttype."/".$objid);
+               
+            }
+        }
+        
+        return $this->render('text/update.html.twig', array(
+            
+            'form' => $form->createView(),
+            'text' =>$text,
+            'returnlink' => "/admin/text/".$objecttype."/".$objid,
+            ));
+    }
+    
+    
+     public function new($objecttype,$objid,$attribute,$language)
+    {   
+            $text = new Text();
+            $text ->setLanguage($language);
+            $text ->setObjid($objid);
+            $text ->setAttribute($attribute);
+            $text ->setObjecttype($objecttype);
+            $text ->setComment("?");
+         $text->setContributor($this->getUser()->getUsername());
+         $now = new \DateTime();
+         $text ->setUpdateDt($now);
+       
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($text);
+                $entityManager->flush();
+                $tid = $text->getId();
+                return $this->redirect("/admin/text/".$tid);
+    }
+    
      public function filterText($text)
     {
   
@@ -216,5 +306,56 @@ class TextController extends Controller
        return $text;
     }
     
+     public function edit_quill($tid)
+    {   
+         $request = $this->requestStack->getCurrentRequest();
+      
+        $text= $this->getDoctrine()->getRepository('AppBundle:Text')->findOne($tid);
+     
+
+        $text->setContributor($this->getUser()->getUsername());
+        $now = new \DateTime();
+        $text->setUpdateDt($now);
+       # $content->setText($this->cleanText($content->getText()));
+       
+        
+          return $this->render('text/edit_quill.html.twig', array(
+           'text' =>$text,
+           'returnlink' => "/admin/text/".$tid,
+
+            ));
+    }
     
+    public function process_edit($tid)
+    {   
+         $request = $this->requestStack->getCurrentRequest();
+         $text= $this->getDoctrine()->getRepository('AppBundle:Text')->findOne($tid);
+         $objecttype = $text->getObjecttype();
+         $objid = $text->getObjid();
+         $attribute = $text->getAttribute();
+         $lang= $text->getLanguage(); 
+   
+        $text ->setContributor($this->getUser()->getUsername());
+        $now = new \DateTime();
+        $text ->setUpdateDt($now);
+   
+    
+        if ($request->getMethod() == 'POST') 
+        {
+            $comment =$request->request->get('_text');
+            $text->setComment($this->filterText($comment));
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($text);
+            $entityManager->flush();
+            return $this->redirect("/".$this->lang."/".$objecttype."/".$objid);
+        }
+        
+       return $this->render('text/edit_quill.html.twig', array(
+          
+            'text'=> $text,
+            'returnlink' => "/admin/text/".$text->getId(),
+            'contentid'=>$textid,
+            ));
+    }
 }
