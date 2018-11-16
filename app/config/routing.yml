@@ -605,11 +605,11 @@ content_admin_search:
 
 content_admin_edit:
     path: /admin/content/edit/{cid}
-    controller:  AppBundle\Controller\ContentController::Edit_alt   
+    controller:  AppBundle\Controller\ContentController::Edit_quill   
     
 content_admin_new:
     path: /admin/content/new/{sid}/{lang}
-    controller:  AppBundle\Controller\ContentController::newlang  
+    controller:  AppBundle\Controller\ContentController::newContent 
     requirements:
         lang: en|fr|FR|EN
         
@@ -628,10 +628,6 @@ user_content_bookmark:
 content_admin_editone:
     path: /admin/content/{sid}
     controller:  AppBundle\Controller\ContentController::Editsubject
-    
-content_admin_new:    
-    path: /admin/content/edit/{sid}/{lang}
-    controller:  AppBundle\Controller\ContentController::Newlang
     
 content_admin_deleteimage:
     path:  /admin/content/deleteimage/{cid}/{isn}

@@ -22,6 +22,11 @@ div#contentedit div.heading
      width :5em;
  }
 
+ div#contentedit div.form form label
+ {
+     color:yellow;
+     width :5em;
+ }
 
 
 div#contentedit div.form form div.trumbowyg-box.trumbowyg-en.trumbowyg.trumbowyg-editor-visible
