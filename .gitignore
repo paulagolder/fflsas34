@@ -14,6 +14,9 @@
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /vendor/
+/web/bundles/*
 /web/common/*.xcf
+/web/kml/*
+/web/newimages/*
 /*.tar.*
 
