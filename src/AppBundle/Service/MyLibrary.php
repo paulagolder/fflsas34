@@ -30,11 +30,11 @@ class MyLibrary
       $lanu = strtoupper($language);
      if( array_key_exists ($attribute,$text_ar ))
      {
-      if( array_key_exists ($lanu,$text_ar[$attribute] )) return $text_ar[$attribute][$lanu] ;
-      if(array_key_exists ("FR",$text_ar[$attribute] ) )return $text_ar[$attribute]["FR"] ;
-       if(array_key_exists ("fr",$text_ar[$attribute] ) )return $text_ar[$attribute]["fr"] ;
-      if(array_key_exists ("EN",$text_ar[$attribute] )) return $text_ar[$attribute]["EN"] ;
-      if(array_key_exists ("en",$text_ar[$attribute] )) return $text_ar[$attribute]["en"] ;
+      if( array_key_exists ($lanu,$text_ar[$attribute] )) return $text_ar[$attribute][$lanu]["comment"];
+      if(array_key_exists ("FR",$text_ar[$attribute] ) )return $text_ar[$attribute]["FR"]["comment"] ;
+       if(array_key_exists ("fr",$text_ar[$attribute] ) )return $text_ar[$attribute]["fr"]["comment"] ;
+      if(array_key_exists ("EN",$text_ar[$attribute] )) return $text_ar[$attribute]["EN"]["comment"] ;
+      if(array_key_exists ("en",$text_ar[$attribute] )) return $text_ar[$attribute]["en"]["comment"] ;
       }
       return null;
     }

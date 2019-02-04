@@ -22,4 +22,17 @@ div#contentedit div.heading
      width :5em;
  }
 
-html body div#page div.mypage div#middle div#contentedit div.sub;link
+
+
+
+
+div.modal div.note-btn-group.btn-group div.dropdown-menu {
+display: none !important;
+}
+
+div.modal div.note-btn-group.btn-group.show div.dropdown-menu {
+display: block !important;
+overflow-y: scroll;
+max-height: 250px;
+left: 0;
+}

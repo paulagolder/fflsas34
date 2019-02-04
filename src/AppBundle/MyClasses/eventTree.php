@@ -7,13 +7,7 @@ use AppBundle\Repository\TextsRepository;
 
 class eventTree
 {
-
       private $topNode;
-   
-    
-     
-    
-     
      
      function __construct( Event $ev) 
      {
