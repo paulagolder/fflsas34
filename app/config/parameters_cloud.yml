@@ -13,7 +13,7 @@ parameters:
     email-transport: 'smtp'
     email-encryption: ssl 
     email-auth_mode: login
-    email-host: fflsas3.lerot.org
+    email-host: mail.lerot.org
     email-port: 465
     email-username:  'admin_fflsas34@lerot.org'
     email-password:  'harrods_1944'
