@@ -24,4 +24,4 @@ parameters:
     kml-folder: '/kml/'
     new-images-folder: '/newimages/'
     new-images-folder-long: '%kernel.project_dir%/web/newimages/'
-external-images : "http://fflsas.org/images/stories/fflsas/"
+    external-images : "http://fflsas.org/images/stories/fflsas/"
