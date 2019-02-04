@@ -19,7 +19,7 @@ parameters:
     email-password:  'harrods_1944'
     
     admin-name: "FFLSAS-admin"
-    admin-email: "admin@fflsas3.lerot.org"
+    admin-email: "admin_fflsas34@lerot.org"
     kml-folder-long: '%kernel.project_dir%/web/kml/'
     kml-folder: '/kml/'
     new-images-folder: '/newimages/'
