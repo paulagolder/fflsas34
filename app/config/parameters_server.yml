@@ -4,8 +4,8 @@ parameters:
    
     database_host:  '127.0.0.1'
     database_port: '3306'
-    database_name: 'lerot_fflsas3'
-    database_user: 'lerot_fflsas3'
+    database_name: 'xxlerot_fflsas3'
+    database_user: 'xxlerot_fflsas3'
     database_password: 'ch8_71eilly'
     
     secret: 56f1c6ae2e2bea4288f04e3c1e67795d5890d3e0
