@@ -1,6 +1,6 @@
 fflsas3
 =========
 
-The latest version of the FFLSAS website. Developed in symfony3. 
+old version Cloud34 is the appropriate one to use. 
 It is Licenced under the MIT licence.
 
