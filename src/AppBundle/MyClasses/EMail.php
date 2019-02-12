@@ -17,7 +17,7 @@ class EMail
 
   function __construct()
   {
-    $this->Server = "syfflsas3.lerot.org";
+    $this->Server = "mail.fflsas.org";
     $this->Port = 465;
     $this->Localhost = "localhost";
     $this->ConnectTimeout = 60;
@@ -136,14 +136,14 @@ class EMail
   }
 
 
-function testmail()
+function xtestmail()
 {
 
 
 
 $mail = new EMail;
 $mail->Username = 'admin@syfflsas3.lerot.org';
-$mail->Password = 'savannah#1944';
+$mail->Password = 'dummy';
 
 $mail->SetFrom("admin@syfflsas3.lerot.org","admin fflsas");		// Name is optional
 $mail->AddTo("paul.a.golder@lerot.org","paullerot");	// Name is optional
