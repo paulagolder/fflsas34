@@ -17,7 +17,7 @@ class EMail
 
   function __construct()
   {
-    $this->Server = "syfflsas3.lerot.org";
+    $this->Server = "mail.fflsas.org";
     $this->Port = 465;
     $this->Localhost = "localhost";
     $this->ConnectTimeout = 60;
