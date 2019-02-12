@@ -18,9 +18,12 @@
     <div class="heading">
         <div class="label" > {%trans%}profil.person{% endtrans%}</div>
         <div class="title" > {{user.username}}</div>
-        
-        <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
-        <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+           {% if is_granted('ROLE_ADMIN') %} 
+  <div class="deletebutton"> <a href = {{deletelink}} >{{'delete' | trans }} </a> </div>
+  <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
+     {% endif %}
+       
+        <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} return {% endtrans%} </a> </div>
     </div>
     
     <div  class="userdata" >

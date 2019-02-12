@@ -171,6 +171,7 @@ class UserController extends Controller
             'user' => $fuser,
             'messages' =>$messages,
             'returnlink'=> "/".$this->lang."/person/all",
+          
             ));
     }
     
@@ -187,6 +188,7 @@ class UserController extends Controller
             'user' => $fuser,
             'messages' =>$messages,
             'returnlink'=> "/admin/user/search",
+            'deletelink'=> "/admin/user/delete/".$uid,
             ));
     }
     

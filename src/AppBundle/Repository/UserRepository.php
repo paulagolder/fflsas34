@@ -43,7 +43,7 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
         $qd = $this->createQueryBuilder('u');
         $qd->delete();
         $qd->where('u.id = :uid');
-        $qd>setParameter('uid',$userid);
+        $qd->setParameter('uid',$userid);
         $query = $qd->getQuery()->getResult();
     }
     

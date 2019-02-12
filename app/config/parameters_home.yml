@@ -1,0 +1,31 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: localhost
+    database_port: '3306'
+    database_name: fssymf
+    database_user: symfuser
+    database_password: cheilly
+    
+    email-transport: 'smtp'
+    email-encryption: ssl 
+    email-auth_mode: login
+    email-host: mail.fflsas.org
+    email-port: 465
+    email-username:  'admin34@fflsas.org'
+    email-password:  'ch#_34eilly'
+    #spool: { type: memory }
+    secret: 56f1c6ae2e2bea4288f04e3c1e67795d5890d3e0
+    mailer_password: li8$39chfield
+
+    
+    admin-name: "FFLSAS-admin"
+    admin-email: "admin34@fflsas.org"
+    new-images-folder: '/newimages/'
+    new-images-folder-long: '%kernel.project_dir%/web/newimages/'
+    kml-folder-long: '%kernel.project_dir%/web/kml/'
+    kml-folder: '/kml/'
+    external-images : "http://fflsas.org/images/stories/fflsas/"
+
+    
+    # app/config/config.yml (or config/packages/knp_snappy.yaml if using Symfony4 and the Flex recipe)
+    kernel.cache_dir: '%kernel.project_dir%/var/pdf'

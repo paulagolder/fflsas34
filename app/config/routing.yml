@@ -237,6 +237,12 @@ Person_one_locale:
     requirements:
         _locale: en|fr|FR|EN
         
+Person_pdf_one:
+    path: /{_locale}/person/pdf/{pid}
+    controller:  AppBundle\Controller\PersonController::pdfone
+    requirements:
+        _locale: en|fr|FR|EN
+        
 
     
     

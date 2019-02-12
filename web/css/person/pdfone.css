@@ -1,0 +1,150 @@
+
+div#person  div.heading div.title {
+    color: maroon;
+    font-size: 2.0em;
+    margin-right: 1em;
+ }
+ 
+ 
+ div#person a, a:visited, a:link {
+    text-decoration: none;
+    color: blue;
+}
+
+div#person div.pageheading
+{
+    display:flex;
+    xalign-items: center;
+}
+
+
+
+
+
+div#person > div
+{
+    xmargin-left: 5em;
+    margin-top: 20px;
+}
+
+
+
+
+div#person div.text
+{
+    margin-left: 5em;
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+
+div#person div.text p
+{
+    margin-top:5px;
+    margin-bottom : 5px;
+}
+
+
+
+
+
+xdiv#person div.eventtree a
+{
+    color:blue;
+    text-decoration:none;
+}
+
+
+xdiv#person div.eventtree ul li a
+{
+    text-decoration:none;
+}
+
+div#person div.eventtree ul li div.incident
+{
+    margin-left: 1em;
+}
+
+div#person div.eventtree ul li div.incident > a
+{
+    color: white;
+}
+
+div#person div.eventtree ul li div.incident > a:hover
+{
+    color: blue;
+}
+
+div.image
+{
+    max-width: 138px;
+    flex-grow: 1;
+    
+    
+}
+
+div#person div.imagegroup
+{
+    display: table;
+    xflex-direction: row;
+   xflex-wrap: wrap;
+    xjustify-content: space-evenly;
+    border: 0px solid red;
+    width : 100%;
+}
+
+div#person div.imagegroup div.imagerow 
+{
+   display:table-row;
+   
+}
+div#person div.imagegroup div.image 
+{
+   display:table-cell;
+   
+}
+
+div#person div.imagegroup div.image img
+{
+    margin:10px;
+    max-width:150px;
+    max-height:150px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+div#person div.imagegroup div.imagelabel
+{
+    text-align: center;
+    vertical-align: middle;
+    color:blue;
+    font-size:1em;
+}
+
+
+
+
+div#person div.eventtree
+{
+    font-size : 1em;
+    margin-left: 2em;
+    color : black;
+    margin-top:40px;
+}
+
+
+
+div#person div.eventtree ul li div.incident > a {
+
+    color: red;
+
+}
+
+div#person a, a:visited, a:link {
+
+    text-decoration: none;
+    color: black;
+
+}
+
