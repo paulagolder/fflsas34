@@ -158,6 +158,7 @@ message.to: 'sent to'
 message.date: 'date sent'
 message.subject: subject
 to.add.images.use.bookmarks: To add images use bookmarks.
+to.add.participation.use.bookmarks :  To add a participant use a bookmark
 see.admin.messages: Admin messages
 edit.message: Edit message
 send.message: Send message

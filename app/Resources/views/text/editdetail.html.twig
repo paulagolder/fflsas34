@@ -29,12 +29,12 @@
          {% for lang in ['FR','EN'] %}
               {% if texts[attribute][lang] is defined   %} 
                <div   class="textref" >{{attribute}} : {{lang}}
-                <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/{{attribute}}/{{lang}}" >{% trans %} edit.this{% endtrans%} </a> 
+                <a class= "editbutton" href="/admin/text/{{texts[attribute][lang]['id']}}" >{% trans %} edit.this{% endtrans%} </a> 
                </div>
-               <div class="textpanel" > {{texts[attribute][lang]| raw }} </div>
+               <div class="textpanel" > {{texts[attribute][lang]['comment']| raw }} </div>
              {% else %}
                 <div   class="textref" >{{ attribute}} : {{lang}}
-                 <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/{{attribute}}/{{lang}}" >{% trans %} create.this{% endtrans%} </a> 
+                 <a class= "editbutton" href="/admin/text/new/{{objecttype}}/{{objid}}/{{attribute}}/{{lang}}" >{% trans %} create.this{% endtrans%} </a> 
                </div>
              {% endif %} 
           {% endfor %}

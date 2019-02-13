@@ -7,6 +7,13 @@ div#middle div.label
     font-size:1.5em;
 }
 
+div#middle div.redlabel
+{
+    color:red;
+    margin-right:0.5em;
+    font-size:1.5em;
+}
+
 /*=================buttons===================*/
 
 div#middle  div.editbutton 

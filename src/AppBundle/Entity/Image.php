@@ -140,7 +140,7 @@ class Image
    
     
     
-      public function getFullpath()
+      public function xgetFullpath()
     {
         return $this->fullpath;
     }
@@ -206,29 +206,8 @@ class Image
   #      return $this;
   #  }
 
-  #  public function getOrientation(): ?string
-  #  {
-  #      return $this->orientation;
-  #  }
 
-  #  public function setOrientation(?string $orientation): self
-  #  {
-   #     $this->orientation = $orientation;
-#
-  #      return $this;
-   # }
 
-   # public function getDate(): ?string
-  ##  {
-  #      return $this->date;
-  #  }
-
-  #  public function setDate(?string $date): self
-  #  {
-  #      $this->date = $date;
-#
-  #      return $this;
-  #  }
 
     public function getFormat(): ?string
     {
@@ -330,6 +309,18 @@ class Image
           else
           {
              $this->setFullpath ($this->external_images.$this->getPath());   
+          }
+        }
+        
+         public function getFullpath()
+       {
+          if ($this->isTemp())
+          {
+             return $this->new_images_folder.$this->getPath();   
+          }
+          else
+          {
+             return $this->external_images.$this->getPath();   
           }
         }
 }

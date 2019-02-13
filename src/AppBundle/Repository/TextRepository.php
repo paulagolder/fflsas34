@@ -15,14 +15,7 @@ use AppBundle\Entity\Text;
  */
 class TextRepository extends EntityRepository
 {
-   # public function __construct(RegistryInterface $registry)
-   # {
-       # parent::__construct($registry, Text::class);
-   # }
-
-
-    
-    
+ 
  
     public function findAll()
     {
@@ -32,8 +25,6 @@ class TextRepository extends EntityRepository
        
        foreach( $texts as $text)
        {
-        #  $url = "/text/".$text->getId();
-         # $text->link = $url;
           $text->label = $text->getObjecttype().":".$text->getObjid().":".$text->getAttribute().":".$text->getLanguage();
        }
        return $texts;
@@ -57,11 +48,12 @@ class TextRepository extends EntityRepository
           $language = $text->getLanguage();
           $attribute = $text->getAttribute();
           $comment = $text->getComment();
-          $text_ar['link'] = $url;
-          $text_ar['objid'] = $objid;
-          $text_ar['objecttype'] = $objecttype;
-          $text_ar[$attribute][$language] = $comment;
-          $text_ar['label'] = $objecttype.":".$objid;
+          $text_ar[$attribute][$language]['id'] = $text->getId();
+          $text_ar[$attribute][$language]['link'] = $url;
+          $text_ar[$attribute][$language]['objid'] = $objid;
+          $text_ar[$attribute][$language]['objecttype'] = $objecttype;
+          $text_ar[$attribute][$language]['comment'] = $comment;
+          $text_ar[$attribute][$language]['label'] = $objecttype.":".$objid;
        }
         #echo("=+=+=".$text_ar['link']);
        return $text_ar;
@@ -99,7 +91,7 @@ class TextRepository extends EntityRepository
     }
    
    
-     public function findOne($objecttype, $objid,$attribute,$language)
+     public function findOnebyoal($objecttype, $objid,$attribute,$language)
     {
         $text =  $this->createQueryBuilder('t')
             ->andWhere('t.objecttype = :ot')
@@ -123,6 +115,27 @@ class TextRepository extends EntityRepository
          # $text->setattribute($attribute);
          # $text->setlanguage($language);
          # $text->getcomment($comment);
+          $text->label = $objecttype.":".$objid.":".$attribute.":".$language;
+         }
+       return $text;
+    }
+    
+       public function findOne($id)
+    {
+        $text =  $this->createQueryBuilder('t')
+            ->andWhere('t.id= :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+            $objecttype = $text->getObjecttype();
+            $objid = $text->getObjid();
+            $attribute = $text->getAttribute();
+            $language = $text->getLanguage();
+         if($text)
+         {
+          $url = "/".$objecttype."/".$objid;
+          $comment = $text->getComment();
+          $text->link = $url;;
           $text->label = $objecttype.":".$objid.":".$attribute.":".$language;
          }
        return $text;
