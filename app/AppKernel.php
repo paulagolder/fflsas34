@@ -15,8 +15,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+<<<<<<< HEAD
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+=======
+           # new FOS\CKEditorBundle\FOSCKEditorBundle(),
+>>>>>>> c1439da4e12081cf6c7d6ddf69ac1028354a26fd
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             
