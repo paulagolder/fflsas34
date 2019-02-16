@@ -237,7 +237,7 @@ class TextController extends Controller
             
             'form' => $form->createView(),
             'text' =>$text,
-            'returnlink' => "/admin/text/".$objecttype."/".$objid,
+            'returnlink' => "/admin/".$objecttype."/".$objid,
             ));
     }
     
