@@ -29,8 +29,11 @@ use AppBundle\Service\FLSASImage;
 use AppBundle\MyClasses\eventTree;
 use AppBundle\MyClasses\eventTreeNode;
 
+<<<<<<< HEAD
 use Dompdf\Dompdf;
 use Dompdf\Options;
+=======
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 
 class PersonController extends Controller
 {
@@ -38,9 +41,15 @@ class PersonController extends Controller
     private $mylib;
     private $requestStack ;
     private $translator ;
+<<<<<<< HEAD
     
     
     
+=======
+
+    
+   
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
     
     public function __construct( MyLibrary $mylib ,RequestStack $request_stack,TranslatorInterface $translator)
     {
@@ -51,7 +60,11 @@ class PersonController extends Controller
         #$this->translator->setLocale($this->mylib->toLocale($this->lang));
     }
     
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
     
     public function index()
     {
@@ -63,13 +76,18 @@ class PersonController extends Controller
     
     public function Showall()
     {
+<<<<<<< HEAD
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+=======
+       $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
         if (!$people) {
             return $this->render('person/showall.html.twig', [ 'message' =>  'People not Found',]);
         }        
         foreach($people as $person)
         {
+<<<<<<< HEAD
             $person->link = "/".$this->lang."/person/".$person->getPersonid();
         }
         return $this->render('person/showall.html.twig', 
@@ -79,6 +97,17 @@ class PersonController extends Controller
         'heading' => 'les.hommes',
         'people'=> $people,
         ]);
+=======
+           $person->link = "/".$this->lang."/person/".$person->getPersonid();
+        }
+        return $this->render('person/showall.html.twig', 
+                              [ 
+                                'lang' => $this->lang,
+                                'message' =>  '' ,
+                                'heading' => 'les.hommes',
+                                'people'=> $people,
+                                ]);
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
     }
     
     
@@ -92,6 +121,7 @@ class PersonController extends Controller
         }        
         foreach($people as $person)
         {
+<<<<<<< HEAD
             $person->link = "/".$this->lang."/person/".$person->getPersonid();
         }
         return $this->render('person/showsidebar.html.twig', 
@@ -101,6 +131,17 @@ class PersonController extends Controller
         'heading' =>  'les.hommes',
         'people'=> $people,
         ]);
+=======
+           $person->link = "/".$this->lang."/person/".$person->getPersonid();
+        }
+        return $this->render('person/showsidebar.html.twig', 
+                              [ 
+                                'lang' => $this->lang,
+                                 'message' =>  '' ,
+                                 'heading' =>  'les.hommes',
+                                 'people'=> $people,
+                                ]);
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
     }
     
     public function Showone($pid)
@@ -116,7 +157,11 @@ class PersonController extends Controller
         
         $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",$pid);
         $textcomment = $lib->selectText($text_ar,"comment",$this->lang);
+<<<<<<< HEAD
         
+=======
+       
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         
         $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipations($pid);
         $pevents = array();
@@ -124,6 +169,7 @@ class PersonController extends Controller
         $i=0;
         foreach($participations as $participation)
         {
+<<<<<<< HEAD
             $ppid = $participation->getEventid();
             $pevents[$i] = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ppid);
             $parents= $pevents[$i]->ancestors;
@@ -145,6 +191,29 @@ class PersonController extends Controller
             if(   $pevents[$i]->title ==null) $pevents[$i]->title = "pas trouver";
             $pevents[$i]->link = "/".$this->lang."/event/".$ppid;
             $i++;
+=======
+           $ppid = $participation->getEventid();
+           $pevents[$i] = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ppid);
+            $parents= $pevents[$i]->ancestors;
+            if(count($parents))
+            {
+               $l = count($parents);
+               for($ip=0; $ip<$l;$ip++)
+               {
+                 $psid = $parents[$ip]->getEventid();
+                 $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$psid);
+                 //echo("=+=+=".$this->lang);
+                 $parents[$ip]->title= $lib->selectText( $ptext_ar,"title",$this->lang);
+                 $parents[$ip]->link = "/".$this->lang."/event/".$psid;
+               }
+            $pevents[$i]->ancestors =$parents;
+          }
+           $etexts_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$ppid);
+           $pevents[$i]->title = $this->mylib->selectText($etexts_ar,'title',$this->lang);
+          if(   $pevents[$i]->title ==null) $pevents[$i]->title = "pas trouver";
+            $pevents[$i]->link = "/".$this->lang."/event/".$ppid;
+           $i++;
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         }
         $topevent =  $this->getDoctrine()->getRepository("AppBundle:Event")->findTop();
         $topevent->title = " TOP ".  $topevent->getLabel();
@@ -156,6 +225,7 @@ class PersonController extends Controller
         $i=0;
         foreach($ref_ar as $key => $ref)
         {
+<<<<<<< HEAD
             $imageid = $ref_ar[$key]['imageid'];
             $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
             
@@ -168,20 +238,44 @@ class PersonController extends Controller
                 $images[$i]['link'] = "/".$this->lang."/image/".$imageid;
                 $i++;
             }
+=======
+           $imageid = $ref_ar[$key]['imageid'];
+           $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+        
+           if($image)
+           {
+              $this->mylib->setFullpath($image);
+           $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
+           $images[$i]['fullpath']= $image->fullpath;
+           $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
+           $images[$i]['link'] = "/".$this->lang."/image/".$imageid;
+           $i++;
+           }
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         }
         $incidents =  $this->getDoctrine()->getRepository("AppBundle:Incident")->seekByPerson($pid);
         foreach( $incidents as $key=>$incident )
         {
+<<<<<<< HEAD
             $incidents[$key]['label'] = $this->formatIncident($incident);
             $incidents[$key]['link'] =  "/".$this->lang."/incident/".$incident['incidentid'];
         }
         $mess = '';
         
         // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
+=======
+           $incidents[$key]['label'] = $this->formatIncident($incident);
+           $incidents[$key]['link'] =  "/".$this->lang."/incident/".$incident['incidentid'];
+        }
+        $mess = '';
+        
+       // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         
         $refs = $this->get('linkref_service')->getLinks("person",$pid);
         
         return $this->render('person/showone.html.twig', 
+<<<<<<< HEAD
         [ 'lang' => $this->lang,
         'message' =>  $mess,
         'person'=> $person, 
@@ -191,10 +285,22 @@ class PersonController extends Controller
         'refs'=>$refs,
         'incidents'=>$incidents,
         ]);
+=======
+                   [ 'lang' => $this->lang,
+                      'message' =>  $mess,
+                     'person'=> $person, 
+                     'text'=> $textcomment,
+                     'images'=> $images,
+                     'eventtree'=>$evt,
+                     'refs'=>$refs,
+                     'incidents'=>$incidents,
+                    ]);
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
     }
     
     public function formatIncident($incident)
     {
+<<<<<<< HEAD
         $text = $incident['label'];
         if($incident['locid']>0)
         {
@@ -216,6 +322,29 @@ class PersonController extends Controller
             $text .= " $on ". $sdate;
         }
         return $text;
+=======
+      $text = $incident['label'];
+      if($incident['locid']>0)
+      {
+         $at = $this->translator->trans('at.place');
+         $lid = $incident['locid'];
+         $location =   $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($lid);
+         $text .= " $at ". $location->getName();
+      }
+      elseif( $incident['location']!= "")
+      {
+           $at = $this->translator->trans('at.place');
+          $text .= " $at ". $incident['location'];
+      }
+      if( $incident['sdate'] >0 )
+      {
+          $on =  $this->translator->trans('on.date');
+          $sdate= $incident['sdate'];
+          $sdate = $this->mylib->formatdate($sdate,$this->lang);
+          $text .= " $on ". $sdate;
+      }
+      return $text;
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
     }
     
     public function addbookmark($pid)
@@ -223,7 +352,11 @@ class PersonController extends Controller
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $this->bookmark($pid);
         return $this->redirect('/admin/person/'.$pid);
+<<<<<<< HEAD
         
+=======
+       
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
     }
     
     public function addUserbookmark($pid)
@@ -236,7 +369,11 @@ class PersonController extends Controller
     
     private function bookmark($pid)
     {
+<<<<<<< HEAD
         
+=======
+       
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $plist = $session->get('personList');
@@ -254,10 +391,16 @@ class PersonController extends Controller
         }
     }
     
+<<<<<<< HEAD
     
     public function pdfone($pid)
     {
         $lib =  $this->mylib ;
+=======
+    public function pdfone($pid)
+    {
+     $lib =  $this->mylib ;
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
         $person->link = "/".$this->lang."/person/".$person->getPersonid();
@@ -268,7 +411,11 @@ class PersonController extends Controller
         
         $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",$pid);
         $textcomment = $lib->selectText($text_ar,"comment",$this->lang);
+<<<<<<< HEAD
         
+=======
+       
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         
         $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipations($pid);
         $pevents = array();
@@ -276,6 +423,7 @@ class PersonController extends Controller
         $i=0;
         foreach($participations as $participation)
         {
+<<<<<<< HEAD
             $ppid = $participation->getEventid();
             $pevents[$i] = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ppid);
             $parents= $pevents[$i]->ancestors;
@@ -297,6 +445,29 @@ class PersonController extends Controller
             if(   $pevents[$i]->title ==null) $pevents[$i]->title = "pas trouver";
             $pevents[$i]->link = "/".$this->lang."/event/".$ppid;
             $i++;
+=======
+           $ppid = $participation->getEventid();
+           $pevents[$i] = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ppid);
+            $parents= $pevents[$i]->ancestors;
+            if(count($parents))
+            {
+               $l = count($parents);
+               for($ip=0; $ip<$l;$ip++)
+               {
+                 $psid = $parents[$ip]->getEventid();
+                 $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$psid);
+                 //echo("=+=+=".$this->lang);
+                 $parents[$ip]->title= $lib->selectText( $ptext_ar,"title",$this->lang);
+                 $parents[$ip]->link = "/".$this->lang."/event/".$psid;
+               }
+            $pevents[$i]->ancestors =$parents;
+          }
+           $etexts_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$ppid);
+           $pevents[$i]->title = $this->mylib->selectText($etexts_ar,'title',$this->lang);
+          if(   $pevents[$i]->title ==null) $pevents[$i]->title = "pas trouver";
+            $pevents[$i]->link = "/".$this->lang."/event/".$ppid;
+           $i++;
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         }
         $topevent =  $this->getDoctrine()->getRepository("AppBundle:Event")->findTop();
         $topevent->title = " TOP ".  $topevent->getLabel();
@@ -308,6 +479,7 @@ class PersonController extends Controller
         $i=0;
         foreach($ref_ar as $key => $ref)
         {
+<<<<<<< HEAD
             $imageid = $ref_ar[$key]['imageid'];
             $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
             
@@ -320,10 +492,25 @@ class PersonController extends Controller
                 $images[$i]['link'] = "/".$this->lang."/image/".$imageid;
                 $i++;
             }
+=======
+           $imageid = $ref_ar[$key]['imageid'];
+           $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+        
+           if($image)
+           {
+              $this->mylib->setFullpath($image);
+           $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
+           $images[$i]['fullpath']= $image->fullpath;
+           $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
+           $images[$i]['link'] = "/".$this->lang."/image/".$imageid;
+           $i++;
+           }
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
         }
         $incidents =  $this->getDoctrine()->getRepository("AppBundle:Incident")->seekByPerson($pid);
         foreach( $incidents as $key=>$incident )
         {
+<<<<<<< HEAD
             $incidents[$key]['label'] = $this->formatIncident($incident);
             $incidents[$key]['link'] =  "/".$this->lang."/incident/".$incident['incidentid'];
         }
@@ -372,4 +559,49 @@ class PersonController extends Controller
     }
     
     
+=======
+           $incidents[$key]['label'] = $this->formatIncident($incident);
+           $incidents[$key]['link'] =  "/".$this->lang."/incident/".$incident['incidentid'];
+        }
+        $mess = '';
+        
+       // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
+        
+        $refs = $this->get('linkref_service')->getLinks("person",$pid);
+        
+     $header = $this->renderView('person/header.html.twig', array(
+       'name' => $person->getFullname(),
+    ));
+  
+    $footer = $this->renderView('person/footer.html.twig', array(
+        'date' => "today",
+    ));
+    
+  
+    
+        $html = $this->renderView('person/pdfone.html.twig', 
+                      [ 'lang' => $this->lang,
+                      'message' =>  $mess,
+                     'person'=> $person, 
+                     'text'=> $textcomment,
+                     'images'=> $images,
+                     'eventtree'=>$evt,
+                     'refs'=>"",
+                     'incidents'=>$incidents,
+                    ]);
+     
+        $options = [
+        'header-html' => $header,
+        'footer-html' => $footer,];
+ 
+           $pdfout =  $this->get('knp_snappy.pdf')->getOutputFromHtml($html, $options, true );
+            $response=new Response($pdfout);
+            $outfile = "p".$pid.".pdf";
+$response->headers->set('Content-type', 'application/octect-stream');
+$response->headers->set('Content-Disposition', sprintf('attachment; filename="'.$outfile.'"', "Your report.pdf"));
+$response->headers->set('Content-Transfer-Encoding', 'binary');
+return $response;
+
+}
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 }

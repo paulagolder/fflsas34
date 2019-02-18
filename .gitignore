@@ -1,7 +1,10 @@
 /.web-server-pid
+<<<<<<< HEAD
 /composer.json
 /composer.lock
 /tests/
+=======
+>>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 /app/config/parameters*.*
 /build/
 /phpunit.xml
