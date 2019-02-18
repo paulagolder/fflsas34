@@ -1,0 +1,29 @@
+{# templates/message/contact.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('location/showall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block myheader %} {{ parent() }}{% endblock %}
+
+
+{% block sidebar %}
+  
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+
+   {% if locations %}
+     <h1>{% trans %}Toutes.Endroits{% endtrans %}({{  locations | length }})</h1> 
+     <nav>
+       <ul>
+         {% for location in locations %}
+            <li><a href="{{location.link}}" >{{ location.name}}</a> </li>
+         {% endfor %}
+      </ul>
+     </nav>
+  {% endif %}
+{% endblock %}

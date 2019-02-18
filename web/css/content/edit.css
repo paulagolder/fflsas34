@@ -1,0 +1,38 @@
+
+div#content
+{
+    background-color: #8093b7;
+}
+
+
+
+div#contentedit div.heading
+{
+    display:flex;
+}
+
+ div#contentedit form div
+{
+    xdisplay:flex;
+}
+
+ div#contentedit form div label.required
+ {
+     color:yellow;
+     width :5em;
+ }
+
+
+
+
+
+div.modal div.note-btn-group.btn-group div.dropdown-menu {
+display: none !important;
+}
+
+div.modal div.note-btn-group.btn-group.show div.dropdown-menu {
+display: block !important;
+overflow-y: scroll;
+max-height: 250px;
+left: 0;
+}

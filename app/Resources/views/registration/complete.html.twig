@@ -1,0 +1,23 @@
+{# templates/registration/complete.html.twig #}
+
+
+{% import 'macros.twig' as m %}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('/css/person/showone.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+
+<div id="regcomplete">
+{{ form_start(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.newregistrationcode) }}
+    <button type="submit">Register!</button>
+{{ form_end(form) }}
+</div>
+{% endblock %}

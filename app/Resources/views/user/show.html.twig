@@ -1,0 +1,73 @@
+{# templates/user/show.html.twig #}
+
+
+{% import 'macros.twig' as m %}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('css/user/show.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block middle %}
+
+<div id="fuser"  >
+    
+    <div class="heading">
+        <div class="label" > {%trans%}profil.person{% endtrans%}</div>
+        <div class="title" > {{user.username}}</div>
+        
+        <div class="editbutton button1" ><a class='editbutton' href="/{{lang}}/useredit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+    </div>
+    
+    <div  class="userdata" >
+        <div class="datarow">
+            <div class="label" > {%trans%}user.email{% endtrans%}</div>
+            <div class="data" > {{user.email}}</div>
+        </div>
+        <div class="datarow">
+            <div class="label" > {%trans%}user.roles{% endtrans%}</div>
+            <div class="data" > {{user.rolestr}}</div>
+        </div>
+        <div class="datarow">
+            <div class="label" > {%trans%}user.lastlogin{% endtrans%}</div>
+            <div class="data" > {{user.lastlogin | date("Y-m-d") }}</div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <div class="messagelist" >
+        <div class="subheading" >
+            <div class="label" > {{'message.list' | trans }}</div>
+        </div>
+        
+        {% for message in messages %}
+        <div class= "message">
+        {% if message.toname == 'FFLSAS-admin' %}
+          {% set sentto = ('user.to.admin' | trans ) %}
+          
+        {% else %}
+         {% set sentto = ('admin.to.user' | trans ) %}
+         {% endif %}
+            <div class="subject" > {{sentto}}</div>
+            <div class="subject" > {{message.subject}}</div>
+            <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
+            <div class = "message" > {{ message.body|length > 20 ? message.body|slice(0, 20) ~ '...' : message.body  }}</div>
+            <div class = "editbutton button1">
+                <a class='editbutton' href="/{{lang}}/user/{{user.userid}}/viewmessage/{{message.id}}">{{'view.message' |trans}}</a>
+            </div>
+            <div class = "deletebutton">
+                <a class='deletebutton' href="/{{lang}}/user/{{user.userid}}/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>
+    {% endblock %}
+    

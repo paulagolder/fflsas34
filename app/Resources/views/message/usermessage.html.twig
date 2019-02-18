@@ -1,0 +1,36 @@
+{# templates/message/usermessage.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('/css/message/emailbody.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+<div id= "emailresp" >
+<div class= "subheading">
+   <div class= "label" >{{'message.sent.by'|trans }}</div>
+   {% if 'admin' in ( sentto | lower)  %}
+   
+    <div class= "title" >{{name}} ({{fromemail}}) </div>
+   {% else %}
+   <div class= "title" >FFLSAS-admin </div>
+   {% endif %}
+</div>
+<div class= "subheading"
+   <div class= "label" >{{'message.to'|trans}}</div>
+   <div clas="title" >{{sentto}}</div>
+   <div class= "label" >{{'message.date' | trans}} </div>
+   <div class="title"> {{datesent}}</div>
+</div>
+<div class= "subheading">
+   <div class= "label" >{{'message.subject'|trans }}</div>
+   <div class= "title" >{{subject}} (</div>
+</div>
+<div class= "messagebody">
+    {{ body }}
+</div>
+
+</div>
+{% endblock %}

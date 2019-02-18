@@ -1,0 +1,190 @@
+Alias: Alias
+Endroit: Endroit
+Forename: Forename
+Name: Surname
+Toutes.Endroits: 'All Places'
+accueil: Home
+add.new.linkref: 'Create new Link'
+add.participation: 'Create new participation'
+add.text: 'Add a new text'
+admin.content: 'Edit Content'
+admin.images: 'Edit images'
+admin.locations: 'Edit locations'
+admin.allusers: 'Edit Users'
+annuler: Cancel
+at.place: at
+at: at
+bienvenue.page: 'Welcome All'
+bienvenue.site: 'Welcome to the FFLSAS site'
+bienvenue.visiteur: 'Welcome Guest'
+bienvenue: Welcome
+blessé: wounded
+bookmark.event: bookmark
+bookmark: bookmark
+bookmarks: bookmarks
+bookmark.person: bookmark
+chercher.site: 'Search the database'
+chercher: Search
+child.of: 'Child of'
+comment: Comment
+compte.de: 'Number of'
+contact.us: 'Send us a message or ask a question'
+contactez.nous: 'Contact Us All'
+create.incident: 'Create an incident'
+create.newperson: 'Create a Person'
+create.this: 'Create this'
+delete: Delete
+during: during
+edit.content: 'Edit Content'
+edit.detail: 'Edit detail'
+edit.event.detail: 'Edit detail'
+edit.event.new: 'Create New Event'
+edit.event: 'Edit event'
+edit.image: 'Edit image'
+edit.images: 'Edit images'
+edit.incident: 'Edit incident'
+edit.links.for: 'Edit links'
+edit.location: 'Edit location'
+edit.participation: Edit
+edit.participations: Edit
+edit.person: Edit
+edit.refs: Edit
+edit.text: 'Edit texts'
+edit.texts: 'Edit texts'
+edit.this: Edit
+edit: Edit
+email: Email
+endroit: location
+enregister: Register
+enregistrement: Register
+enregistrer: Save
+entrez.chercher: 'Enter Search Term'
+evenement: event
+evenements: events
+event.a.editer: 'Edit Event'
+event: Event
+event.links: 'Links to Events'
+events: Events
+found.too.many: 'Too many found'
+found: Found
+he.was: 'he was'
+homme: person
+hommes: People
+image.chance: 'Lucky Image'
+images: Images
+incident.rank: 'with the rank of'
+incident.role: role
+incident.to: 'Incident in the service of :'
+incidents: incidents
+introduction: Introduction
+latitude: Latitudeen
+les.actions: 'The Action'
+les.hommes: 'The Men'
+liens.a: 'Links to'
+liens: Links
+location.a.editer: 'Edit location'
+location.name: Name
+log.in: 'Log In'
+log.out: 'Log Out'
+login.message: 'To access all of our site sign in.'
+mail.us: 'Send us a message'
+message: Message
+name: Name
+new.content: 'New Content'
+new.image: 'New Image'
+new.location: 'New Location'
+new.person: 'Create a new Man'
+no.text: 'No texts added yet'
+notre.site: 'Our Site'
+on.date: the
+participated.in.events: Participations
+password: Password
+people: People
+person.a.editer: Editing
+person: 'The Men'
+person.links: 'Links to People'
+ref.edit: 'Edit links'
+rejoint: rejoined
+retour: Cancel
+rien.a.chercher: 'No search term entered'
+search.results: 'Results of search for :'
+si.non.enregistre: 'To Register'
+sous.evenements: Sub-Events
+subject: Subject
+submit: Send
+textes: Texts
+the.campaign: 'the campaign'
+this.is.an.edit: 'This is an edit'
+toutes.endroits: 'All Places'
+transféré: transfered
+trouver.tout: 'All found'
+trouver.avec: 'Found with'
+tué: killed
+under.the.name.of: 'under the name of'
+username: Username
+for: for
+voir.user: 'see user'
+delete.user: 'delete user'
+edit.user.detail: 'edit user'
+user.email: 'user email'
+user.roles: 'user roles'
+user.lastlogin: 'User Last login'
+contact.list: 'message list'
+view.contact: 'see message'
+delete.contact: 'delete message'
+message.enyoyer: 'message sent'
+date: 'on the'
+from: from
+mail.from: 'message fropm'
+mail.subject: subject
+mail.body: message
+voir: see
+new.incident: 'New incident'
+a.link.from: 'Link from'
+participants: participants
+evenment.enfants: 'child events'
+mail.date.sent: 'message sent on'
+mail.sentby: 'message sent by'
+complete.reg: 'Complete registration'
+sucessful.completion: 'Registartion successful'
+welcome.to.our.site: 'Welcome to our site'
+edit.contents: 'edit contents'
+bookmark.content: 'bookmark content'
+delete.content: 'delete content'
+content.for.subject: subject
+message.forwarded.by.admin: 'forwarded by FFLSAS-admin'
+message.sent.by: 'sent by'
+message.to: 'sent to'
+message.date: 'date sent'
+message.subject: subject
+to.add.images.use.bookmarks: To add images use bookmarks.
+to.add.participation.use.bookmarks :  To add a participant use a bookmark
+see.admin.messages: Admin messages
+edit.message: Edit message
+send.message: Send message
+delete.message: Delete message
+message.to.user: Message to USER
+admin.messages: Message to ADMIN
+users: users
+user.show: Shoe user
+edit.user: Edit user
+profil.person: User profile
+message.list: List of messages
+send,message: Send message
+view.message: Read message
+see.message: Read messagee
+message.sentby: Message sent by
+new.user: New user
+register: Register
+bookmark.image: Bookmark image
+see.image: See image
+chercher.content: Search Articles
+user.to.admin: User to Admin
+admin.to.user: Admin to User
+message.envoyer.a: Recipient
+Toname: Destination
+Toemail: Destination email
+Fromname: Sender
+Fromemail: Sender email
+Subject: Subject
+Body: Message

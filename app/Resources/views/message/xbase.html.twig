@@ -1,0 +1,66 @@
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}Avanzu Admin!{% endblock %}</title>
+
+    {# -------------------------------------------------------------------------------------------------- STYLESHEETS #}
+    {% block stylesheets %}
+    {% endblock %}
+
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    {# --------------------------------------------------------------------------------------------- JAVASCRIPTS_HEAD #}
+    {%  block javascripts_head %}
+    {% endblock %}
+
+</head>
+<body>
+
+    <div class="wrapper">
+
+   
+
+        
+       
+
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <div class="content-wrapper">
+            
+           
+
+            <!-- Main content -->
+            <section class="content">
+                {% block flash_messages %}
+                    {% if app.session.flashbag is defined and app.session.flashbag.peekAll|length > 0 %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {{ macro.session_flash(avanzu_adminlte_close_alert|default(false)) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock flash_messages %}
+                {% block page_content %}{% endblock %}
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+   
+
+    </div>
+<!-- ./wrapper -->
+
+{# ------------------------------------------------------------------------------------------------------ JAVASCRIPTS #}
+{% block javascripts %}
+{% endblock %}
+
+{# ----------------------------------------------------------------------------------------------- JAVASCRIPTS_INLINE #}
+{% block javascripts_inline %}
+{% endblock %}
+</body>
+</html>

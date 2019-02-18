@@ -1,0 +1,33 @@
+{# templates/user/edit.html.twig #}
+
+
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/form.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+{% block middle %}
+
+<div id="fuserform"  >
+  <div class="heading" >
+    <div class="label" > {%trans%}edit.person{% endtrans%}</div>
+    <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+ </div>
+ <div  class="form" >
+    {{ form_start(form) }}
+      {{ form_row(form.username) }}
+      {{ form_row(form.plainPassword) }}
+      {{ form_row(form.rolestr) }}
+      {{ form_row(form.email) }}
+    <button type="submit">Register!</button>
+   {{ form_end(form) }}
+
+
+</div>
+
+</div>
+{% endblock %}

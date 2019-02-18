@@ -1,0 +1,15 @@
+
+div#content
+{
+    xbackground-color: #8093b7;
+    background-color: rgba(76, 76, 76, 0.1);
+    padding: 10px;
+}
+
+
+
+div#content div.maintext
+{
+    margin-right:1em;
+    
+}

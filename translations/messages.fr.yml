@@ -1,0 +1,191 @@
+Alias: Alias
+Endroit: Endroit
+Forename: Prénom
+Surname: Nom
+Toutes.Endroits: 'Toutes Endroits'
+accueil: Acceuil
+add.new.linkref: 'Creer Lien'
+add.participation: 'Ajouter une participation'
+add.text: 'Ajouter nouveau texte'
+admin.content: 'Gerer Contenu'
+admin.images: 'Gerer Images'
+admin.locations: 'Gerer Locations'
+admin.allusers: 'Gerer Utilisateurs'
+annuler: Annuler
+at.place: à
+at: à
+bienvenue.page: Bienvenue
+bienvenue.site: 'Bienvenue au site des FFLSAS'
+bienvenue.visiteur: 'Bienvenue visiteur'
+bienvenue: Bienvenue
+blessé: blessé
+bookmark.event: signet
+bookmark.person: signet
+bookmark: signet
+bookmarks: signets
+chercher.site: 'Chercher dans la Base de Donnees'
+chercher: Chercher
+child.of: 'Enfant de'
+enfants.evenment: 'sous evenments'
+comment: Commentaire
+compte.de: 'Compte des'
+contact.us: 'Nous envoyer une message ou poser un question'
+contactez.nous: 'Contactons Nous'
+create.incident: 'Creer un incident'
+create.newperson: 'Creer un Homme'
+create.this: 'Creer ceci'
+delete: Supprimer
+during: pendant
+edit.content: éditer
+edit.detail: 'éditer le détail'
+edit.event.detail: 'éditer le détail'
+edit.event.new: 'Creer nouvelle evenement'
+edit.event: 'éditer evenement'
+edit.image: éditer
+edit.images: 'éditer images'
+edit.incident: 'éditer incident'
+edit.links.for: 'éditer les liens de'
+edit.location: 'éditer l''endroit'
+edit.participation: éditer
+edit.participations: éditer
+edit.person: éditer
+edit.refs: éditer
+edit.text: 'éditer les textes'
+edit.texts: 'éditer les textes'
+edit.this: éditer
+edit: éditer
+email: Email
+endroit: endroit
+enregister: 'Enregistre avec notre site'
+enregistrement: Enregistrer
+enregistrer: Enregister
+entrez.chercher: 'Entrez mot a chercher'
+evenment: Evenement
+evenment.enfants: Sous-Evenments
+evenments: Evenements
+event.a.editer: 'evenement a editer'
+event: Evenment
+event.links: 'Liens aux Evenments'
+events: Evenments
+found.too.many: 'Trop trouver'
+found: Retrouvé
+he.was: 'il a été'
+homme: Homme
+hommes: Hommes
+image.chance: 'Image par Chance'
+images: Images
+incident.rank: 'avec le grade de'
+incident.role: rôle
+incident.to: 'Incident dans le parcours de'
+incidents: Incidents
+introduction: Introduction
+latitude: latitudefr
+les.actions: 'Les Actions'
+les.hommes: 'Les Hommes'
+liens.a: 'Liens a'
+liens: liens
+location.a.editer: 'Editer Location'
+location.name: Nom
+log.in: 'S''Identifier'
+log.out: Deconecter
+login.message: 'Pour acceder tout notre site s''identifiez'
+mail.us: 'Nous envoyer une message'
+message: Message
+name: nom
+new.content: 'Nouveau contenu'
+new.image: 'Nouveau Image'
+new.location: 'Nouveau endroit'
+new.person: 'Cree un nouveau homme'
+no.text: 'Texte pas encore ajoutee'
+notre.site: 'Notre Site'
+number.of: 'Compte de'
+on.date: le
+participants: Participants
+participated.in.events: Participations
+password: 'Mot de pass'
+person.links: 'Liens aux Hommes'
+people: Hommes
+person.a.editer: Editer
+person: 'Les Hommes'
+ref.edit: 'Editez les liens'
+rejoint: rejoint
+retour: Retour
+rien.a.chercher: 'Aucune phrase a Chercher'
+search.results: 'Resultats du recherche pour :'
+si.non.enregistre: 'Si non encore enregistee'
+sous.evenements: 'Sous Evenements'
+subject: Sujet
+submit: Envoyez
+textes: Textes
+the.campaign: 'la campagne'
+this.is.an.edit: 'Cet un edit'
+toutes.endroits: 'Toutes Endroits'
+transféré: transféré
+trouver.tout: 'Tout retrouvé'
+trouver.avec: 'Trouvé avec'
+tué: tué
+under.the.name.of: nommé
+username: 'Nom de utilisateur'
+for: __for
+voir.user: 'Profil de l''utilisateur'
+delete.user: 'supprimer utilisateur'
+edit.user.detail: 'Modifier l''utilisateur'
+user.email: 'Adresse e-mail'
+user.roles: 'rôles d''utilisateur'
+user.lastlogin: 'dernier accès'
+contact.list: 'liste de messages'
+view.contact: 'voir'
+delete.contact: 'supprimer'
+message.enyoyer: 'message enyoyer'
+date: 'enyoyer le'
+from: 'enyoyer par'
+mail.from: de
+mail.subject: sujet
+mail.body: contenu
+voir: voir
+new.incident: 'nouvel incident'
+a.link.from: 'lien de'
+mail.date.sent: 'envoyer le'
+mail.sentby: 'envoyer par'
+complete.reg: 'compléter l''inscription'
+sucessful.completion: 'inscription réussie'
+welcome.to.our.site: 'Bienvenue sur notre site'
+edit.contents: 'modifier le contenu'
+bookmark.content: 'marquer le contenu'
+delete.content: 'supprimer le contenue'
+content.for.subject: sujet
+message.forwarded.by.admin: 'message transmis par FFLSAS-admin'
+message.sent.by: 'envoyé par'
+message.to: 'envoyé à'
+message.date: 'envoyé le'
+message.subject: sujet
+to.add.images.use.bookmarks: To add an image use a bookmark
+to.add.participation.use.bookmarks :  To add a participant use a bookmark
+see.admin.messages: Messagerie
+edit.message: Editer
+send.message: Envoyer
+delete.message: Suprimer
+message.to.user: Message au utiisateur
+admin.messages: Message de l'administrateur
+users: utiisateurs
+user.show: voir utilisateur
+edit.user: editer utilisateur
+profil.person: profil de l'utilisateur
+message.list: list des messages
+send,message: envoyer message
+view.message: voir
+message.sentby: messaege de
+new.user: nouvel utilisateur
+register: s'inscrire 
+bookmark.image: signet l'image
+see.image: voir l'image
+chercher.content: Chercher les articles
+user.to.admin: Utilisateur a l'administrateur
+admin.to.user: Administrateur a l'Utilisateur 
+message.envoyer.a: Destinataire
+Toname: Destinataire
+Toemail: Destinataire email
+Fromname: Expéditeur
+Fromemail: Expéditeur email
+Subject: Sujet
+Body: Message

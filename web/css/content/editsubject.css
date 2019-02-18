@@ -1,0 +1,15 @@
+
+
+
+div#editcontent div.maintext
+{
+    margin-top:20px;
+    width: 600px;
+    height: 200px;
+    background-color: #eee;
+    overflow: scroll;
+    border: 5px solid gray;
+    
+}
+
+

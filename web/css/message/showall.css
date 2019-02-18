@@ -1,0 +1,74 @@
+
+
+
+  
+
+div#contacts
+{
+    
+   margin-top :0.5em;
+   font-size :1em;
+   color : blue;
+}
+
+div#contacts div.heading
+{
+    display:flex;
+}
+
+div#contacts div.fuserlist div.user div.deletebutton
+{
+   # margin-left:auto;
+}
+
+div#contacts div.deletebutton a {
+    padding: 4px;
+    display: inline;
+    border-radius: 7px;
+    border: 0;
+    margin: 0 10px;
+    background: red;
+    font-size: 12px;
+    line-height: 15px;
+    color: white;
+    width: auto;
+    height: auto;
+    box-sizing: content-box;
+    text-decoration: none;
+}
+
+
+div#contacts div.fuserlist div.user
+{
+    display:flex;
+}
+
+
+
+
+
+div#contacts div.contact
+{
+       display:flex;
+}
+
+div#contacts div.contactlist  div.name
+{
+    color:yellow;
+}
+
+div#contacts div.contactlist  div.date
+{
+   padding-left: 5px;
+}
+
+div#contacts div.contactlist  div.subject
+{
+   padding-left: 5px;
+}
+
+
+div#contacts div.contactlist  div.message
+{
+   padding-left: 5px;
+}

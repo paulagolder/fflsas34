@@ -1,0 +1,44 @@
+{# templates/message/contact.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('text/edit.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block myheader %} {{ parent() }}{% endblock %}
+
+
+{% block middle %}
+  <div id="admintexts" >
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+
+     <div class ="heading" >
+        <div class="label" > {{'edit.texts' |trans}}      </div>
+        <div class="title" > {{ label}} : </div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div></div>
+     </div>
+     <div id="textedit" >
+    
+         {% for attribute in attributes %}
+         {% for lang in ['FR','EN'] %}
+              {% if texts[attribute][lang] is defined   %} 
+               <div   class="textref" >{{attribute}}: {{lang}} :
+                <a class= "editbutton" href="/admin/texts{{texts.link}}" >{% trans %} edit.this{% endtrans%} </a> 
+               </div>
+               <div class="textpanel" > {{texts[attribute][lang]| raw }} </div>
+             {% else %}
+                <div   class="textref" >  {{ attribute}}:{{lang}}
+                 <a class= "editbutton" href="/admin/text/event/{{objid}}/{{attribute}}/{{lang}}" >{% trans %} create.this{% endtrans%} </a> 
+               </div>
+             {% endif %} 
+          {% endfor %}
+          {% endfor %}
+    </div>
+    
+   
+  </div>
+{% endblock %}

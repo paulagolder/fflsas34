@@ -1,0 +1,49 @@
+{# templates/usersearch.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/user/searchall.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block middle %}
+  <div id="user">
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+  <form  action="/admin/user/search">
+  <div class="heading">
+   <div class="label"> {{ 'entrez.chercher' | trans }}</div>
+   <input type="text" name="searchfield">
+   <input type="submit" value="{{ 'chercher' | trans }}" >
+   </div>
+   </form>
+   <div class="newuser"><a class="editbutton" href ="/admin/user/new">{{'new.user' | trans}}</a></div>
+   {% if users is defined %}
+     <div class="heading">
+     <div class="label">{{heading | trans}}</div> 
+     <div class="title">{{searchfield}}</div> 
+     </div>
+     <div class="userlist" >
+       <div >
+         {% for user in users  %}
+            <div class="user row" >
+             <div><a href="{{user.link}}" >{{user.username}}({{user.email}})</a> </div>
+             <div class="editbutton button1" ><a class="editbutton" href="/admin/user/{{user.userid}}">{{'edit.user' |trans}}</a></div>
+            </div>
+         {% endfor %}
+      </div>
+     </div>
+  {% endif %}
+  </div>
+{% endblock %}
+
+
+{% block right %}
+
+
+
+   {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
+
+{% endblock%}
