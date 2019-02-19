@@ -1,51 +1,33 @@
 
-<<<<<<< HEAD
 div#pdf_person  div.heading div.title {
-=======
-div#person  div.heading div.title {
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
+
     color: maroon;
     font-size: 2.0em;
     margin-right: 1em;
  }
  
  
-<<<<<<< HEAD
  div#pdf_person a, a:visited, a:link {
-=======
- div#person a, a:visited, a:link {
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
+
     text-decoration: none;
     color: blue;
 }
 
-<<<<<<< HEAD
+
 div#pdf_person div.pageheading
-=======
-div#person div.pageheading
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
+
 {
     display:flex;
     xalign-items: center;
 }
 
-<<<<<<< HEAD
-div#pdf_person div.pageheading
-{
-    display:flex;
-    xalign-items: center;
-}
+
+
 
 
 
 div#pdf_person > div
-=======
 
-
-
-
-div#person > div
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     xmargin-left: 5em;
     margin-top: 20px;
@@ -54,11 +36,9 @@ div#person > div
 
 
 
-<<<<<<< HEAD
+
 div#pdf_person div.text
-=======
-div#person div.text
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
+
 {
     margin-left: 5em;
     font-size: 1em;
@@ -66,68 +46,38 @@ div#person div.text
 }
 
 
-<<<<<<< HEAD
+
 div#pdf_person div.text p
 {
     margin-top:1px;
     margin-bottom : 1px;
     color:green;
     border: 0 none red;
-=======
-div#person div.text p
-{
-    margin-top:5px;
-    margin-bottom : 5px;
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
+
 }
 
 
 
 
 
-<<<<<<< HEAD
-xdiv#pdf_person div.eventtree a
-=======
-xdiv#person div.eventtree a
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
-{
-    color:blue;
-    text-decoration:none;
-}
-
-
-<<<<<<< HEAD
 xdiv#pdf_person div.eventtree ul li a
-=======
-xdiv#person div.eventtree ul li a
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     text-decoration:none;
 }
 
-<<<<<<< HEAD
 div#pdf_person div.eventtree ul li div.incident
-=======
-div#person div.eventtree ul li div.incident
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     margin-left: 1em;
 }
 
-<<<<<<< HEAD
+
 div#pdf_person div.eventtree ul li div.incident > a
-=======
-div#person div.eventtree ul li div.incident > a
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     color: white;
 }
 
-<<<<<<< HEAD
+
 div#pdf_person div.eventtree ul li div.incident > a:hover
-=======
-div#person div.eventtree ul li div.incident > a:hover
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     color: blue;
 }
@@ -140,11 +90,7 @@ div.image
     
 }
 
-<<<<<<< HEAD
 div#pdf_person div.imagegroup
-=======
-div#person div.imagegroup
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     display: table;
     xflex-direction: row;
@@ -154,30 +100,21 @@ div#person div.imagegroup
     width : 100%;
 }
 
-<<<<<<< HEAD
+
 div#pdf_person div.imagegroup div.imagerow 
-=======
-div#person div.imagegroup div.imagerow 
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
    display:table-row;
    
 }
-<<<<<<< HEAD
+
 div#pdf_person div.imagegroup div.image 
-=======
-div#person div.imagegroup div.image 
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
    display:table-cell;
    
 }
 
-<<<<<<< HEAD
+
 div#pdf_person div.imagegroup div.image img
-=======
-div#person div.imagegroup div.image img
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     margin:10px;
     max-width:150px;
@@ -187,11 +124,8 @@ div#person div.imagegroup div.image img
     margin-right:auto;
 }
 
-<<<<<<< HEAD
+
 div#pdf_person div.imagegroup div.imagelabel
-=======
-div#person div.imagegroup div.imagelabel
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     text-align: center;
     vertical-align: middle;
@@ -202,11 +136,8 @@ div#person div.imagegroup div.imagelabel
 
 
 
-<<<<<<< HEAD
+
 div#pdf_person div.eventtree
-=======
-div#person div.eventtree
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 {
     font-size : 1em;
     margin-left: 2em;
@@ -215,29 +146,23 @@ div#person div.eventtree
 }
 
 
-
-<<<<<<< HEAD
-div#pdf_person div.eventtree ul li div.incident > a {
-=======
-div#person div.eventtree ul li div.incident > a {
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
+div#pdf_person div.eventtree ul li div.incident > a 
+{
 
     color: red;
 
 }
 
-<<<<<<< HEAD
+
+
 div#pdf_person a, a:visited, a:link {
-=======
-div#person a, a:visited, a:link {
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
 
     text-decoration: none;
     color: black;
 
 }
 
-<<<<<<< HEAD
+
 
             /** 
                 Set the margins of the page to 0, so the footer and the header
@@ -288,5 +213,4 @@ div#person a, a:visited, a:link {
             }
      
             footer .page-number:after { content: counter(page); }
-=======
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
+

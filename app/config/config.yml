@@ -70,36 +70,3 @@ swiftmailer:
     spool: { type: memory }
 
 
-<<<<<<< HEAD
-=======
-fos_ck_editor:
-    default_config: my_config
-    configs:
-        my_config:
-            toolbar: [ ["Source", "Image", "Styles", "Cleanup" ] ]
-            uiColor:                "#dddddd"
-            stylesSet: "default"
-        styles:
-            default:
-              - { name: "Blue Title", element: "h2", styles: { color: "Blue" }}
-              - { name: "CSS Style", element: "span", attributes: { class: "my_style" }}
-              - { name: "Widget Style", type: widget, widget: "my_widget", attributes: { class: "my_widget_style" }}
-            # ...
-            
-#   { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-#	{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-
-# app/config/config.yml (or config/packages/knp_snappy.yaml if using Symfony4 and the Flex recipe)
-knp_snappy:
-    temporary_folder: "%kernel.cache_dir%/snappy"
-    pdf:
-       options:
-           page-size: A4
-           dpi: 300
-           image-quality: 80
-           margin-left: 15mm
-           margin-right: 15mm
-           margin-top: 20mm
-           margin-bottom: 20mm
-           #user-style-sheet: %kernel.root_dir%/../web/assets/css/pdf.css
->>>>>>> d5a749a5d181947ac3915b72f1a23e2f4b65f768
