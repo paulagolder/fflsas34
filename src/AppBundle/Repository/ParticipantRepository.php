@@ -68,7 +68,7 @@ class ParticipantRepository extends EntityRepository
     public function findParticipants($eventid)
     {
       $sql = " select p.personid,pl.surname,pl.forename  from AppBundle:participant p ";
-      $sql .= " join 'AppBundle\Entity\Person' pl WITH pl.personid = p.personid " ;
+      $sql .= " join AppBundle\Entity\Person pl WITH pl.personid = p.personid " ;
       $sql .= " where p.eventid = ".$eventid;
       $sql .= " order by pl.surname ASC ";
       $query = $this->getEntityManager()->createQuery($sql);

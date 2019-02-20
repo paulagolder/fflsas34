@@ -41,7 +41,6 @@ class IncidentRepository extends EntityRepository
         $sql .= " where i.personid = ".$personid." ";
         $sql .= " order by i.sdate ASC  ";
         $query = $this->getEntityManager()->createQuery($sql);
-           var_dump ($sql);
         $incidents = $query->getResult();
      
         $incid_ar = array();
@@ -82,7 +81,7 @@ class IncidentRepository extends EntityRepository
     {
         
         $sql = "select i.incidentid,i.personid,i.eventid,i.itypeid,i.name_recorded, i.rank, i.role, i.sdate, i.edate, i.locid,i.location,it.label,i.sequence from AppBundle:incident i ";
-        $sql .= " join 'AppBundle\Entity\IncidentType' it with it.itypeid = i.itypeid ";
+        $sql .= " join AppBundle\Entity\IncidentType it with it.itypeid = i.itypeid ";
         $sql .= " where i.incidentid = ".$incidentid." ";
         $query = $this->getEntityManager()->createQuery($sql);
         $incidents = $query->getResult();
