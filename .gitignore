@@ -12,8 +12,6 @@
 /vendor/
 /web/bundles/*
 /web/common/*.xcf
-/web/kml/
 /web/newimages/*
-/web/openicons/
 /*.tar.*
 
