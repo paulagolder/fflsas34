@@ -67,13 +67,8 @@
                   {% set jslocation = location.getJson() %}
                 <div class="map" >
                     <div id="mapid"></div>
-              
-                    <div>mapper7</div>
-                  
                     <script  type="text/javascript" >
-                        
-                      {#  myMapper4({{location.latitude}}, {{location.longitude}}, {{location.zoom}},"{{asset(location.kml)}}","{{location}}"); #}
-                        myMapper7("{{jslocation}}");
+                        myMapper7("{{jslocation}}","{{locationpath}}");
                     </script>
                    
                 </div>

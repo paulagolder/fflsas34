@@ -37,8 +37,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         pathToWeb: "%kernel.project_dir%/web"
-
-
+        locationpath: '%location-path%'
 
 # Doctrine Configuration
 doctrine:

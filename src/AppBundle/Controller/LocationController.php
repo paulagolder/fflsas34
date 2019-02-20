@@ -29,20 +29,7 @@ class LocationController extends Controller
         $this->requestStack = $request_stack;;
     }
     
-    
-    /**
-     * 
-     */
-    #public function index()
-    #{
-    #    return $this->render('Location/index.html.twig', [
-    #        'controller_name' => 'LocationController',
-    #    ]);
-    #}
-    
-    /**
-     * 
-     */    
+     
     public function Showall()
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();

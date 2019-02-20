@@ -26,8 +26,10 @@ function myMapper3(location)
 
 
 
-function myMapper7(location) 
+function myMapper7(location,serverref) 
 { 
+    var serverref_dc = serverref;
+   // serverref_dc = "http://127.0.0.1:8000/fr/location/";
     var location_dc =redecode(location);
     //console.log(location_dc);
     var mylocation = JSON.parse(location_dc);
@@ -56,7 +58,8 @@ function myMapper7(location)
             if(children[i].kml)
             {
                 comune = omnivore.kml("/"+children[i].kml);
-                var poly1 = comune.bindPopup(children[i].name);
+                link = '<a href="'+serverref_dc +children[i].locid+'"</a>'+children[i].name;
+                var poly1 = comune.bindPopup(link);
                 kmllist.push(comune);
             }
             else
