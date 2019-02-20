@@ -86,17 +86,3 @@ fos_ck_editor:
             
 #   { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 #	{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-
-# app/config/config.yml (or config/packages/knp_snappy.yaml if using Symfony4 and the Flex recipe)
-knp_snappy:
-    temporary_folder: "%kernel.cache_dir%/snappy"
-    pdf:
-       options:
-           page-size: A4
-           dpi: 300
-           image-quality: 80
-           margin-left: 15mm
-           margin-right: 15mm
-           margin-top: 20mm
-           margin-bottom: 20mm
-           #user-style-sheet: %kernel.root_dir%/../web/assets/css/pdf.css
