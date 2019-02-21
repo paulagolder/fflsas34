@@ -6,7 +6,7 @@
     {% if incidents %}
     {% for incident in incidents %}
     {% if incident.eventid == child.eventid %}
-    <div class='incident' >    <a href = "{{ incident['link'] }} " > {{incident['label'] }}</a></div>
+    <div class='incident' >    <a href = "{{ incident['link'] }} " > {{incident['label']  }}</a></div>
     {% endif %}
     {% endfor %}
     {% endif %}
@@ -32,7 +32,7 @@
      <div class='label'>{{ label | trans }}</div>
      <div class="list" >
      {% for key, link in list  %}
-        <div class='link' ><a href='{{link.link}}' >{{link.label}}</a> </div>
+        <div class='link' ><a href='{{link.link}}' >{{link.label }}</a> </div>
      {% endfor %}
      </div>
   </div>

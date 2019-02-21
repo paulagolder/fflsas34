@@ -39,6 +39,9 @@ twig:
         pathToWeb: "%kernel.project_dir%/web"
         locationpath: '%location-path%'
 
+    
+        
+        
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -48,7 +51,7 @@ doctrine:
         dbname: '%database_name%'
         user: '%database_user%'
         password: '%database_password%'
-   
+        logging: false
         charset: UTF8
 
     orm:

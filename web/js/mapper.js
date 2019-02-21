@@ -28,13 +28,12 @@ function myMapper3(location)
 
 function myMapper7(location,serverref) 
 { 
-    var serverref_dc = serverref;
-   // serverref_dc = "http://127.0.0.1:8000/fr/location/";
+       console.log(serverref);
+    var serverref_dc = redecode(serverref);
     var location_dc =redecode(location);
-    //console.log(location_dc);
     var mylocation = JSON.parse(location_dc);
     
-    //console.log(mylocation);
+ 
     
     var children= mylocation.children;
     
@@ -50,15 +49,33 @@ function myMapper7(location,serverref)
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoicGF1bGFnb2xkZXIiLCJhIjoiY2pneXhhbWoyMmkxazMzcDZncHFhODlkdiJ9.edTBTkIMndOfkYHlYp4eAQ'
     }).addTo(mymap);
+        var kmllist = new Array();
     if(mylocation.showchildren )
     {
-        var kmllist = new Array();
+         if(mylocation.kml)
+        {
+           // var kmllist = new Array();
+            comune = omnivore.kml("/"+mylocation.kml);
+           // var poly1 = comune.bindPopup(mylocation.name);
+            kmllist.push(comune);
+           // var kmlLayer = L.layerGroup(kmllist);
+           // kmlLayer.on("loaded", function(e) 
+          //  { 
+          //      mymap.fitBounds(e.target.getBounds());
+           //      kmlLayer.eachLayer(function(layer) {
+          //  layer.bindPopup(lmylocation.name);
+          
+      //  });
+            //};
+          //  kmlLayer.addTo(mymap);
+        }
+       // var kmllist = new Array();
         for (var i =0; i< children.length; i++) 
         {
             if(children[i].kml)
             {
                 comune = omnivore.kml("/"+children[i].kml);
-                link = '<a href="'+serverref_dc +children[i].locid+'"</a>'+children[i].name;
+                link = '<a href="'+serverref_dc +children[i].locid.toString()+'"</a>'+children[i].name;
                 var poly1 = comune.bindPopup(link);
                 kmllist.push(comune);
             }
@@ -93,9 +110,6 @@ function myMapper7(location,serverref)
             { 
                 mymap.fitBounds(e.target.getBounds());
                  kmlLayer.eachLayer(function(layer) {
-            // See the `.bindPopup` documentation for full details. This
-            // dataset has a property called `name`: your dataset might not,
-            // so inspect it and customize to taste.
             layer.bindPopup(layer.toGeoJSON().feature.properties.name);
           
         });
@@ -117,9 +131,9 @@ function myMapper7(location,serverref)
 }
 
 
-function redecode(intstr)
+function redecode(mystr)
 {
-    instr = intstr.replace(/&amp;/g  , '&');
+    var instr = mystr.replace(/&amp;/g  , '&');
     instr = instr.replace(/&gt;/g  , '>');
     instr = instr.replace(/&lt;/g   , '<');
     instr = instr.replace(/&quot;/g  ,  '"');

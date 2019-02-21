@@ -144,10 +144,11 @@ class MyLibrary
     
      static public function formatDate($date, $lang)
     {
+       setlocale(LC_TIME, "");
        if($lang =="EN" | $lang=="en" )
-           setlocale (LC_TIME, 'en_EN.utf8','eng');
+           setlocale (LC_TIME, 'en_EN.utf-8');
        else
-           setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+           setlocale (LC_TIME, 'fr_FR.utf-8','fr_FR'); 
            
        if(substr($date,5,4)=="0000")
            return substr($date,0,4);
@@ -164,7 +165,7 @@ class MyLibrary
        } else 
        {
           $dfdate = strtotime($date);
-          return  strftime('%A %d %B %G', $dfdate);
+          return strftime('%A %d %B %G', $dfdate);
        }     
      
     }
