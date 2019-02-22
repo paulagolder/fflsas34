@@ -9,16 +9,14 @@ use AppBundle\Entity\participant;
 use AppBundle\Entity\Person;
 
 use Doctrine\ORM\EntityRepository;
-#use Doctrine\Bundle\DoctrineBundle\Repository\EntityRepository;
+
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Doctrine\DBAL\Driver\Connection;
 
-/**
-null)
- */
+
 class ParticipantRepository extends EntityRepository
 {
    
@@ -114,7 +112,7 @@ class ParticipantRepository extends EntityRepository
       public function findParticipationsbyEntityPerson($eventid, $personid)
     {
       $sql = " select p, pl from AppBundle:participant p ";
-      $sql .= " join 'AppBundle\Entity\Person' pl WITH pl.personid = p.personid " ;
+      $sql .= " join AppBundle\Entity\Person pl WITH pl.personid = p.personid " ;
       $sql .= " where p.eventid = ".$eventid;
       $sql .= " and p.personid = ".$personid;
       $sql .= " order by pl.surname ASC ";

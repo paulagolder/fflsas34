@@ -1,11 +1,9 @@
 <?php
 
 namespace AppBundle\Repository;
-#namespace AppBundle\Entity;
-use AppBundle\Entity\Imageref;
 
+use AppBundle\Entity\Imageref;
 use Doctrine\ORM\EntityRepository;
-#use Doctrine\Bundle\DoctrineBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,9 +13,6 @@ use Doctrine\DBAL\Driver\Connection;
 class ImagerefRepository extends EntityRepository
 {
 
-  
-
- 
     public function findOne($refid)
     {
         $ref =  $this->createQueryBuilder('t')
@@ -28,7 +23,7 @@ class ImagerefRepository extends EntityRepository
        return $ref;
     }
  
-   public function findMatch($objecttype, $objid,$imageid)
+    public function findMatch($objecttype, $objid,$imageid)
     {
         $ref =  $this->createQueryBuilder('t')
             ->andWhere('t.imageid = :imageid')
@@ -42,15 +37,8 @@ class ImagerefRepository extends EntityRepository
        return $ref;
     }
 
-     public function findGroup($objecttype, $objid)
+    public function findGroup($objecttype, $objid)
     {
-    # $refs = $this->getDoctrine()->getRepository(Imageref::class)->createQueryBuilder("t")
-       #$qb =  $this->createQueryBuilder('t');
-        #->from('AppBundle::Imageref' , 't')
-        #    ->andWhere('t.objecttype = ?')
-        #    ->andWhere('t.objid = ?')
-        #    ->setParameter(0, $objecttype)
-        #    ->setParameter(1, $objid)
       $sql = "select t from AppBundle:imageref t ";
       $sql .= " where t.objecttype = '".$objecttype."' ";
       $sql .= " and t.objid = ".$objid;
