@@ -37,7 +37,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         pathToWeb: "%kernel.project_dir%/web"
-
+        locationpath: '%location-path%'
 
 
 # Doctrine Configuration
@@ -70,19 +70,3 @@ swiftmailer:
     spool: { type: memory }
 
 
-fos_ck_editor:
-    default_config: my_config
-    configs:
-        my_config:
-            toolbar: [ ["Source", "Image", "Styles", "Cleanup" ] ]
-            uiColor:                "#dddddd"
-            stylesSet: "default"
-        styles:
-            default:
-              - { name: "Blue Title", element: "h2", styles: { color: "Blue" }}
-              - { name: "CSS Style", element: "span", attributes: { class: "my_style" }}
-              - { name: "Widget Style", type: widget, widget: "my_widget", attributes: { class: "my_widget_style" }}
-            # ...
-            
-#   { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-#	{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
