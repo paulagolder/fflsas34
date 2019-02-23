@@ -49,27 +49,27 @@ function myMapper7(location,serverref)
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoicGF1bGFnb2xkZXIiLCJhIjoiY2pneXhhbWoyMmkxazMzcDZncHFhODlkdiJ9.edTBTkIMndOfkYHlYp4eAQ'
     }).addTo(mymap);
+    
+      
+        
         var kmllist = new Array();
     if(mylocation.showchildren )
     {
-         if(mylocation.kml)
+         var childrenhavekml = false;
+    
+       for (var i =0; i< children.length; i++) 
+       {
+            if(children[i].kml)
+            {
+                childrenhavekml = true;
+            }
+       }
+       
+         if(mylocation.kml && ! childrenhavekml)
         {
-           // var kmllist = new Array();
             comune = omnivore.kml("/"+mylocation.kml);
-           // var poly1 = comune.bindPopup(mylocation.name);
             kmllist.push(comune);
-           // var kmlLayer = L.layerGroup(kmllist);
-           // kmlLayer.on("loaded", function(e) 
-          //  { 
-          //      mymap.fitBounds(e.target.getBounds());
-           //      kmlLayer.eachLayer(function(layer) {
-          //  layer.bindPopup(lmylocation.name);
-          
-      //  });
-            //};
-          //  kmlLayer.addTo(mymap);
         }
-       // var kmllist = new Array();
         for (var i =0; i< children.length; i++) 
         {
             if(children[i].kml)
