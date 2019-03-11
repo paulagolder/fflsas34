@@ -61,7 +61,7 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    delivery_addresses: ['paul.a.golder@lerot.org']
+    delivery_addresses: ['%testemail%']
     transport:   '%email-transport%'
     encryption:  '%email-encryption%'
     auth_mode:   '%email-auth_mode%'

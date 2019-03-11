@@ -1,5 +1,5 @@
 imports:
-    - { resource: parameters_home.yml }
+    - { resource: parameters_namecheap.yml }
     - { resource: security.yml }
     - { resource: services.yml }
 
@@ -59,7 +59,7 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    delivery_addresses: ['paul.a.golder@lerot.org']
+    delivery_addresses: ['%testemail%']
     transport:   '%email-transport%'
     encryption:  '%email-encryption%'
     auth_mode:   '%email-auth_mode%'
