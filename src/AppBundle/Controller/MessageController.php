@@ -190,13 +190,16 @@ class MessageController extends Controller
     {
         $smessage = (new \Swift_Message('FFLSAS Email'));
         $smessage->setSubject($message->getSubject());
-        $smessage->setFrom($message->getFromemail(),$message->getFromname());
+        //$smessage->setFrom($message->getFromemail(),$message->getFromname());
+        $sender = $this->getParameter('admin-email');
+        $sendername = $this->getParameter('admin-name');
+        $smessage->setFrom($sender,$sendername);
         $smessage->setTo($message->gettoEmail());
         $smessage->setBody(
             $this->renderView('message/emailbody.html.twig',array(
                 'message'=>$message,),'text/html'));
-                $smessage->setContentType("text/html");
-                return $smessage;
+        $smessage->setContentType("text/html");
+        return $smessage;
                 
     }
     
