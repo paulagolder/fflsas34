@@ -189,3 +189,20 @@ Fromname: Expéditeur
 Fromemail: Expéditeur email
 Subject: Sujet
 Body: Message
+message.enyoyer.a:   destinataire     
+see.content:         Voir           
+Click.me:            Envoyez              
+view.user:           view.user             
+return:              retour                
+admin.copyright:     droits d'auteur      
+admin.privacy:       politique de confidentialité 
+Username: 	Nom de Utilisateur
+Email:	Adress mail
+Password:	Mot de pass
+Repeat Password: 	Repeter mot de Pass
+when.first.signing: 	When first signing in
+registration success: 	Registration is successfull
+you.have.sucessfully.completed : "You have successfully completed the registration process. "
+you.have.sucessfully.registered: 	You have registered sucessfully.
+to.complete.reply.to email: 	To complete the registration process reply to the email you receive
+to.complete.enter: To complete registration enter the following code

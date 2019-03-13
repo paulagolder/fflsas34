@@ -61,17 +61,26 @@ class RegistrationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            $baseurl = $this->container->get('router')->getContext()->getBaseUrl();
+            //$baseurl = $this->container->get('router')->getContext()->getBaseUrl();
+            $baseurl = $this->container->getParameter('base-url');
             $body =    $this->trans->trans('you.have.sucessfully.registered');
-            $body .=   $this->trans->trans('to.complete');
+            $body .=   $this->trans->trans('to.complete.enter');
             $body .=    "<". $user->getRegistrationcode().">";
             $body .=   $this->trans->trans('when.first.signing');
-            $body .=   "  ".$baseurl.'/remotecomplete/'.$user->getUserid()."/".$user->getRegistrationcode();
+            $reglink = "{$baseurl}remotecomplete/{$user->getUserid()}/{$user->getRegistrationcode()}";
+            $body .=   " <a href='$reglink '>$reglink</a> ";
+            dump($body);
             $subject = $this->trans->trans('registration success');
-            $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+            $message = Message::CreateMessage();
+            $message->setSubject($subject);
+            $message->setFromEmail( $this->getParameter('admin-email'));
+             $message->setFromName( $this->getParameter('admin-name'));
+            $message->setToEmail($user->getEmail());
+             $message->setToName($user->getUsername());
+            $message->setBody($body, 'text/html');
             $smessage = $this->get('message_service')->sendMessage($message);
   
-            $message2 =    $this->trans->trans('you.have.sucessfully.regisered');
+            $message2 =    $this->trans->trans('you.have.sucessfully.registered');
             $message2 .=                $this->trans->trans('to.complete.reply.to email');
            return $this->render('registration/done.html.twig',
             array(
@@ -111,12 +120,6 @@ class RegistrationController extends Controller
             $subject =  $this->trans->trans('registration.complete');
             $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
     
-          #  $datesent =new \DateTime();
-           # $message->setDate_sent( $datesent);
-            
-           # $sn = $this->getDoctrine()->getManager();      
-           # $sn -> persist($message);
-          #  $sn -> flush();
             $smessage = $this->get('message_service')->sendMessage($message);
           #  $this->sendMessage( $user,$subject,$body);
         
@@ -151,9 +154,13 @@ class RegistrationController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
        
-            $message =  $this->trans->trans('you.have.sucessfully.comlpeted');
+            $body =  $this->trans->trans('you.have.sucessfully.completed');
             $subject =  $this->trans->trans('registration.complete');
-            $this->sendUserMessage( $user,$subject,$message);
+         //      $smessage = $this->get('message_service')->sendMessage($message);
+                     $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+    
+            $smessage = $this->get('message_service')->sendMessage($umessage);
+          //  $this->sendUserMessage( $user,$subject,$message);
         
       
            return $this->render('registration/completesuccess.html.twig',

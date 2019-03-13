@@ -173,6 +173,11 @@ class Message
         $this->subject = $subject;
         $this->body =$body;
     }
+    
+     public static function CreateMessage()
+    {
+        return new Message("","","","","","");
+    }
        
 
 }

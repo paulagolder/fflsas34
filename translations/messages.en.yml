@@ -189,3 +189,20 @@ Fromemail: Sender email
 Subject: Subject
 Body: Message
 parachuté: parachuted
+message.enyoyer.a:   destination     
+see.content:         See           
+Click.me:            Send            
+view.user:           See user            
+return:              return                
+admin.copyright:     Copyright      
+admin.privacy:       Privacy
+Username: 	Username
+Email:	Email Address
+Password:	Password
+Repeat Password: 	Repeat Password
+when.first.signing: 	When first signing in
+registration success: 	Registration is successfull
+you.have.sucessfully.registered: 	"You have registered sucessfully. "
+you.have.sucessfully.completed : "You have successfully completed the registration process. "
+to.complete.reply.to email: 	To complete the registration process reply to the email you receive
+to.complete.enter: To complete registration enter the following code
