@@ -66,4 +66,12 @@ class ImageRepository extends EntityRepository
        return $images;
     }
     
+    
+    public function delete( $imageid)
+    {
+        $sql = "delete FROM  AppBundle\Entity\Image p where  p.imageid = ".$imageid;
+        $query = $this->getEntityManager()->createQuery($sql);
+        $numDeleted = $query->execute();
+        return $numDeleted;
+    }
 }

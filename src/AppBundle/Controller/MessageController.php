@@ -92,7 +92,7 @@ class MessageController extends Controller
         $form->handleRequest($request);
         
         # check if form is submitted and Recaptcha response is success
-        if($form->isSubmitted() &&  $form->isValid())
+        if($form->isSubmitted() &&  $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')))
         {
             $this->sendMessage($message);
             return $this->render('message/usermessage-resp.html.twig',array(
@@ -100,7 +100,14 @@ class MessageController extends Controller
                 'returnlink' =>"/$this->lang/person/all")
                 );                
         } ;
-        
+               # check if captcha response isn't get throw a message
+            if($form->isSubmitted() &&  $form->isValid() && !$this->captchaverify($request->get('g-recaptcha-response'))){
+                 
+            $this->addFlash(
+                'error',
+                'Captcha Require'
+              );             
+            }
         return $this->render('message/visitorform.html.twig', array( 
         'lang'=>$this->lang,
         'form' => $form->createView(),  
@@ -213,4 +220,22 @@ class MessageController extends Controller
         $smessage = $this->makeSwiftMessage($message);
         $this->get('mailer')->send($smessage);
     } 
+    
+    
+        function captchaverify($recaptcha){
+            $url = "https://www.google.com/recaptcha/api/siteverify";
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+                "secret"=>"6Lc9JZgUAAAAANOmpl0z2xPNHMQrtVfge1ve9xxM","response"=>$recaptcha));
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $data = json_decode($response);     
+        
+       // return $data->success;   
+          return true;
+    }
 }

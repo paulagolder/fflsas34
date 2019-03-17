@@ -96,4 +96,12 @@ class ImagerefRepository extends EntityRepository
         return $numDeleted;
     }
     
+    public function deleteAllImages( $imageid)
+    {
+        $sql = "delete FROM  AppBundle\Entity\Imageref p where  p.imageid = ".$imageid;
+        $query = $this->getEntityManager()->createQuery($sql);
+        $numDeleted = $query->execute();
+        return $numDeleted;
+    }
+    
 }

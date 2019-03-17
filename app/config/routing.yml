@@ -368,6 +368,10 @@ admin_image_edit:
     path: /admin/image/edit/{iid}
     controller:  AppBundle\Controller\ImageController::edit
     
+admin_image_delete:
+    path: /admin/image/delete/{iid}
+    controller:  AppBundle\Controller\ImageController::delete
+    
 admin_image_bookmark:
     path: /admin/image/bookmark/{iid}
     controller:  AppBundle\Controller\ImageController::addBookmark

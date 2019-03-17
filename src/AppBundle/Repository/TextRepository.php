@@ -7,12 +7,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use AppBundle\Entity\Text;
 
-/**
- * @method Texts|null find($id, $lockMode = null, $lockVersion = null)
- * @method Texts|null findOneBy(array $criteria, array $orderBy = null)
- * @method Texts[]    findAll()
- * @method Texts[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
+
 class TextRepository extends EntityRepository
 {
  
@@ -160,6 +155,14 @@ class TextRepository extends EntityRepository
           $text_ar[$objecttype][$objid]['label'] = $objecttype.":".$objid;
        }
        return $text_ar;
+    }
+   
+    public function deleteTexts( $objecttype, $objid)
+    {
+        $sql = "delete FROM  AppBundle\Entity\Text p where  p.objid = ".$objid. " and p.objecttype = '".$objecttype."'";
+        $query = $this->getEntityManager()->createQuery($sql);
+        $numDeleted = $query->execute();
+        return $numDeleted;
     }
    
 }

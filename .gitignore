@@ -13,5 +13,6 @@
 /web/bundles/*
 /web/common/*.xcf
 /web/newimages/*
+/recapture.txt
 /*.tar.*
 

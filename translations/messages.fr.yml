@@ -206,3 +206,10 @@ you.have.sucessfully.completed : "You have successfully completed the registrati
 you.have.sucessfully.registered: 	You have registered sucessfully.
 to.complete.reply.to email: 	To complete the registration process reply to the email you receive
 to.complete.enter: To complete registration enter the following code
+print.transcript: imprimer copie
+Name: 	Name
+Path: 	Path
+Copyright: 	Copyright
+Format: 	Format
+Access: 	Access
+Image file(jpg): 	Image file(jpg)

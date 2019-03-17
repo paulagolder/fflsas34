@@ -396,6 +396,18 @@ class ImageController extends Controller
         return $this->redirect("/admin/image/".$iid);
     }
     
+    
+    public function delete($iid)
+    {
+      $this->getDoctrine()->getRepository('AppBundle:Image')->delete($iid);
+      $this->getDoctrine()->getRepository('AppBundle:Imageref')->deleteAllImages($iid);
+      $this->getDoctrine()->getRepository('AppBundle:Text')->deleteTexts('image',$iid);
+    
+    
+    return $this->redirect("/admin/image/search");
+    
+    }
+    
   
      
         
