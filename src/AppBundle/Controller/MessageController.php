@@ -99,15 +99,7 @@ class MessageController extends Controller
                 'message'=>$message,
                 'returnlink' =>"/$this->lang/person/all")
                 );                
-        } ;
-               # check if captcha response isn't get throw a message
-            if($form->isSubmitted() &&  $form->isValid() && !$this->captchaverify($request->get('g-recaptcha-response'))){
-                 
-            $this->addFlash(
-                'error',
-                'Captcha Require'
-              );             
-            }
+        } 
         return $this->render('message/visitorform.html.twig', array( 
         'lang'=>$this->lang,
         'form' => $form->createView(),  

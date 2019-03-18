@@ -7,6 +7,10 @@
       {{ parent() }}
    <link href="{{ asset('/css/form.css') }}" rel="stylesheet" />
 {% endblock %}
+{% block js %}
+
+<script src="https://www.google.com/recaptcha/api.js?hl=fr&amp;render=onload" type="text/javascript"></script>
+{% endblock %}
 
 {% block middle %}
 <div id="registrationform" >
@@ -19,6 +23,8 @@
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}
+     <div class="g-recaptcha" data-sitekey ="6Lc9JZgUAAAAAPgXKPqDHtP16WAo0rrSliQj5VFx"></div>
+                <button type="submit">envoyer!</button>
    <button type="submit">Register!</button>
     {{ form_end(form) }}
 </div>

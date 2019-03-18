@@ -14,5 +14,6 @@
 /web/common/*.xcf
 /web/newimages/*
 /recapture.txt
+/app/config/*parameters*.*
 /*.tar.*
 

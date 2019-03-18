@@ -7,8 +7,8 @@
 <link href="{{ asset('css/form.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block js %}
-<script src='https://www.google.com/recaptcha/appi.js'></script>
-<script src='https://www.google.com/reCAPTCHA/api.js'async defer></script>
+
+<script src="https://www.google.com/recaptcha/api.js?hl=fr&amp;render=onload" type="text/javascript"></script>
 {% endblock %}
 
 {% block middle %}
@@ -23,9 +23,10 @@
         {{ form_row(form.fromemail) }}
         {{ form_row(form.subject) }}
         {{ form_row(form.body) }}
-        <button type="submit">envoyer!</button>
-        {{form_end(form)}}
+
         <div class="g-recaptcha" data-sitekey ="6Lc9JZgUAAAAAPgXKPqDHtP16WAo0rrSliQj5VFx"></div>
+                <button type="submit">envoyer!</button>
+        {{form_end(form)}}
     </div>
     
 </div>

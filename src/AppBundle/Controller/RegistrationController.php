@@ -49,7 +49,7 @@ class RegistrationController extends Controller
         $form = $this->createForm(UserRegForm::class, $user);
         $form->handleRequest($request);
        # $form->bind($request);
-        if ($form->isSubmitted() && $form->isValid()) 
+        if ($form->isSubmitted() && $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')) ) 
         {
             $encoder = $this->encoderFactory->getEncoder($user);
             $plainpassword = $user->getPlainPassword();
@@ -175,6 +175,21 @@ class RegistrationController extends Controller
     }
     
     
-    
+           function captchaverify($recaptcha){
+            $url = "https://www.google.com/recaptcha/api/siteverify";
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+                "secret"=>"6Lc9JZgUAAAAANOmpl0z2xPNHMQrtVfge1ve9xxM","response"=>$recaptcha));
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $data = json_decode($response);     
+        
+       // return $data->success;   
+          return true;
+    }
    
 }

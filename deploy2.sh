@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE="$(date '+%Y-%m-%d')serverupload_2.tar"
+FILE="$(date '+%Y-%m-%d')deploy_2.tar"
 
 
 
