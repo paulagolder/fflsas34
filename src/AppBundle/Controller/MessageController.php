@@ -38,16 +38,16 @@ class MessageController extends Controller
         
     }
     
-     public function createMessage(Request $request ,\Swift_Mailer $mailer) 
+    public function createMessage(Request $request ,\Swift_Mailer $mailer) 
     {
         $user = $this->getUser();
         if($user)
         {
-           return $this->createUserMessage($request ,$mailer)  ;
+            return $this->createUserMessage($request ,$mailer)  ;
         }
         else
         { 
-           return $this->createVisitorMessage($request ,$mailer)  ;
+            return $this->createVisitorMessage($request ,$mailer)  ;
         }
     }
     
@@ -56,14 +56,14 @@ class MessageController extends Controller
         $user = $this->getUser();
         if($user)
         {
-           $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),$user->getUsername(),$user->getEmail() ,"", ""); 
+            $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),$user->getUsername(),$user->getEmail() ,"", ""); 
         }
         else
         {
-        $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),"", "" ,"", "");
+            $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),"", "" ,"", "");
         }
         $form = $this->createForm(UserMessageForm::class, $message);
- 
+        
         $form->handleRequest($request);
         
         # check if form is submitted and Recaptcha response is success
@@ -82,13 +82,13 @@ class MessageController extends Controller
         ));
     }
     
-     public function createVisitorMessage(Request $request ,\Swift_Mailer $mailer) 
+    public function createVisitorMessage(Request $request ,\Swift_Mailer $mailer) 
     {
         
         $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),"", "" ,"", "");
         
         $form = $this->createForm(VisitorMessageForm::class, $message);
- 
+        
         $form->handleRequest($request);
         
         # check if form is submitted and Recaptcha response is success
@@ -182,7 +182,7 @@ class MessageController extends Controller
         ));
     }
     
-   
+    
     
     
     function makeSwiftMessage($message)
@@ -197,8 +197,8 @@ class MessageController extends Controller
         $smessage->setBody(
             $this->renderView('message/emailbody.html.twig',array(
                 'message'=>$message,),'text/html'));
-        $smessage->setContentType("text/html");
-        return $smessage;
+                $smessage->setContentType("text/html");
+                return $smessage;
                 
     }
     
@@ -214,22 +214,22 @@ class MessageController extends Controller
     } 
     
     
-        function captchaverify($recaptcha)
-        {
-            $secret = $this->container->getParameter('recaptcha_secret');
-            $url = "https://www.google.com/recaptcha/api/siteverify";
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-                "secret"=>$secret,"response"=>$recaptcha));
+    function captchaverify($recaptcha)
+    {
+        $secret = $this->container->getParameter('recaptcha_secret');
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+            "secret"=>$secret,"response"=>$recaptcha));
             $response = curl_exec($ch);
             curl_close($ch);
             $data = json_decode($response);     
-        
-       // return $data->success;   
-          return true;
+            
+            return $data->success;   
+            //return true;
     }
 }

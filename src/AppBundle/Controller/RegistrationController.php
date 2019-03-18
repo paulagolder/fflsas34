@@ -25,7 +25,7 @@ use AppBundle\Service\MyLibrary;
 
 class RegistrationController extends Controller
 {
-  
+    
     private $lang="fr";
     private $mylib;
     private $requestStack ;
@@ -39,16 +39,16 @@ class RegistrationController extends Controller
         $this->encoderFactory = $encoderFactory;
         $this->trans =$translator;
     }
-
-  
-
+    
+    
+    
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-       $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user = new User();
         $form = $this->createForm(UserRegForm::class, $user);
         $form->handleRequest($request);
-       # $form->bind($request);
+        # $form->bind($request);
         if ($form->isSubmitted() && $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')) ) 
         {
             $encoder = $this->encoderFactory->getEncoder($user);
@@ -74,39 +74,39 @@ class RegistrationController extends Controller
             $message = Message::CreateMessage();
             $message->setSubject($subject);
             $message->setFromEmail( $this->getParameter('admin-email'));
-             $message->setFromName( $this->getParameter('admin-name'));
+            $message->setFromName( $this->getParameter('admin-name'));
             $message->setToEmail($user->getEmail());
-             $message->setToName($user->getUsername());
+            $message->setToName($user->getUsername());
             $message->setBody($body, 'text/html');
             $smessage = $this->get('message_service')->sendMessage($message);
-  
+            
             $message2 =    $this->trans->trans('you.have.sucessfully.registered');
             $message2 .=                $this->trans->trans('to.complete.reply.to email');
-           return $this->render('registration/done.html.twig',
+            return $this->render('registration/done.html.twig',
             array(
                 'username' => $user->getUsername() ,
                 'email' => $user->getEmail(),
                 'message'=>$message2,
-              ));
+                ));
         }
-
+        
         return $this->render(
             'registration/register.html.twig',
-             array('form' => $form->createView() , 
-             'lang'=>$this->lang,)
-        );
+            array('form' => $form->createView() , 
+            'lang'=>$this->lang,)
+            );
     }
     
     
-      public function complete(Request $request,  $uid)
+    public function complete(Request $request,  $uid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
         $form = $this->createForm(CompleteRegForm::class, $user);
         $form->handleRequest($request);
-       # $form->bind($request);
-         $codeisvalid= $user->codeisvalid();
-    
+        # $form->bind($request);
+        $codeisvalid= $user->codeisvalid();
+        
         if ($form->isSubmitted() && $form->isValid() && $codeisvalid ) 
         {
             $user->setLastlogin( new \DateTime());
@@ -115,28 +115,28 @@ class RegistrationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-           # return $this->redirectToRoute('index');
+            # return $this->redirectToRoute('index');
             $body =  $this->trans->trans('you.have.sucessfully.completed');
             $subject =  $this->trans->trans('registration.complete');
             $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-    
+            
             $smessage = $this->get('message_service')->sendMessage($message);
-          #  $this->sendMessage( $user,$subject,$body);
-        
-          # $this->get('security.context')->setToken(null);
-         #  $this->get('session')->invalidate();
-           return $this->render('registration/completesuccess.html.twig',
+            #  $this->sendMessage( $user,$subject,$body);
+            
+            # $this->get('security.context')->setToken(null);
+            #  $this->get('session')->invalidate();
+            return $this->render('registration/completesuccess.html.twig',
             array(
                 'username' => $user->getUsername() ,
                 'email' => $user->getEmail()
-    
-              ));
+                
+                ));
         }
-
+        
         return $this->render(
             'registration/complete.html.twig',
-             array('form' => $form->createView() , 'lang'=>$this->lang,)
-        );
+            array('form' => $form->createView() , 'lang'=>$this->lang,)
+            );
     }
     
     
@@ -153,46 +153,46 @@ class RegistrationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-       
+            
             $body =  $this->trans->trans('you.have.sucessfully.completed');
             $subject =  $this->trans->trans('registration.complete');
-         //      $smessage = $this->get('message_service')->sendMessage($message);
-                     $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-    
+            //      $smessage = $this->get('message_service')->sendMessage($message);
+            $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+            
             $smessage = $this->get('message_service')->sendMessage($umessage);
-          //  $this->sendUserMessage( $user,$subject,$message);
-        
-      
-           return $this->render('registration/completesuccess.html.twig',
+            //  $this->sendUserMessage( $user,$subject,$message);
+            
+            
+            return $this->render('registration/completesuccess.html.twig',
             array(
                 'username' => $user->getUsername() ,
                 'email' => $user->getEmail()
-    
-              ));
+                
+                ));
         }
-
+        
         return $this->redirect("/fr/login");
     }
     
     
-           function captchaverify($recaptcha)
-           {
-           
-            $secret = $this->container->getParameter('recaptcha_secret');
-            $url = "https://www.google.com/recaptcha/api/siteverify";
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-                "secret"=>$secret,"response"=>$recaptcha));
+    function captchaverify($recaptcha)
+    {
+        
+        $secret = $this->container->getParameter('recaptcha_secret');
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+            "secret"=>$secret,"response"=>$recaptcha));
             $response = curl_exec($ch);
             curl_close($ch);
             $data = json_decode($response);     
-        
-       // return $data->success;   
-          return true;
+            
+            return $data->success;   
+            // return true;
     }
-   
+    
 }

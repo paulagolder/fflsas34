@@ -23,7 +23,7 @@
     {{ form_row(form.email) }}
     {{ form_row(form.plainPassword.first) }}
     {{ form_row(form.plainPassword.second) }}
-     <div class="g-recaptcha" data-sitekey ={{ recaptcha-key }}></div>
+     <div class="g-recaptcha" data-sitekey ="{{ recaptcha_key }}"></div>
               
    <button type="submit">{{'register' | trans}}!</button>
     {{ form_end(form) }}
