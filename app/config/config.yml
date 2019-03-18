@@ -38,7 +38,8 @@ twig:
     globals:
         pathToWeb: "%kernel.project_dir%/web"
         locationpath: '%location-path%'
-
+        recaptcha_key: '%recaptcha_key%'
+        recaptcha_secret: '%recaptcha_key%'
     
         
         

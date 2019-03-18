@@ -175,7 +175,10 @@ class RegistrationController extends Controller
     }
     
     
-           function captchaverify($recaptcha){
+           function captchaverify($recaptcha)
+           {
+           
+            $secret = $this->container->getParameter('recaptcha_secret');
             $url = "https://www.google.com/recaptcha/api/siteverify";
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -183,7 +186,7 @@ class RegistrationController extends Controller
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-                "secret"=>"6Lc9JZgUAAAAANOmpl0z2xPNHMQrtVfge1ve9xxM","response"=>$recaptcha));
+                "secret"=>$secret,"response"=>$recaptcha));
             $response = curl_exec($ch);
             curl_close($ch);
             $data = json_decode($response);     

@@ -24,7 +24,7 @@
         {{ form_row(form.subject) }}
         {{ form_row(form.body) }}
 
-        <div class="g-recaptcha" data-sitekey ="6Lc9JZgUAAAAAPgXKPqDHtP16WAo0rrSliQj5VFx"></div>
+        <div class="g-recaptcha" data-sitekey ="{{ recaptcha_key }}"></div>
                 <button type="submit">envoyer!</button>
         {{form_end(form)}}
     </div>
