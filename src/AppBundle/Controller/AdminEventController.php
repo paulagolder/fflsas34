@@ -127,8 +127,8 @@ class AdminEventController extends Controller
              $children[$i]['link'] =  $url ;
 
            }
-           usort($children, function ($item1, $item2) {return $item1 <=> $item2;});
-            usort($children, function ($item1, $item2) {return $item1['startdate'] <=> $item2['startdate'];});
+           usort($children, function ($item1, $item2) {return ($item1 <=> $item2);});
+           usort($children, function ($item1, $item2) {return ($item1['startdate'] <=> $item2['startdate']);});
 
            $event->children = $children;
         }

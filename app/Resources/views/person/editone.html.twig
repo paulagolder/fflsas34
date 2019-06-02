@@ -59,6 +59,7 @@
             
         
            <div class="imagegroup" >
+           <div class="label" > {% trans %} images {% endtrans %} </div>
              <div class="images tooltip">
                <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
                 {% for image in images %}
@@ -89,12 +90,8 @@
             
         {% if text  %}
            <div class="textpanel" >
-             <div class="label"> {{'textes'|trans}}</div>
-                
-                <div class="text" >
-                    {{ text | raw }}
-                </div>
-                <div class="edit editbutton">
+            <div class="label" > {% trans %} texts {% endtrans %} </div>
+                <div class="edit editbutton button1">
                    <a href = "/admin/text/person/{{person.personid}}"   > {%trans%}edit.text{% endtrans %}</a>
                 </div>
           

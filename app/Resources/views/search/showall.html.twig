@@ -11,6 +11,10 @@
 
 
 {% block middle %}
+       {% set maxlist = 20 %}
+     {% if is_granted('ROLE_ADMIN') %}  
+             {% set maxlist = 100 %}
+        {% endif %}
   <div id="search" >
    {% if message %}
      <h1> {{message | trans }}</h1>
@@ -30,7 +34,7 @@
        <div class="title">{{searchkey}}</div> 
       </div> 
        {% for key, group in results %}
-       {%if ( group | length ) > 20 %}
+       {%if ( group | length ) > maxlist %}
        <div class="subheading">
         <div class="label"> {{'found.too.many' | trans}} {{key |trans}} ( {{group | length}} )</div>
         </div>
@@ -40,7 +44,8 @@
        </div>
            <ul>
              {% for subject in group %}
-               <li><a href="{{subject.link}}" >{{ subject.label}}</a> </li>
+          
+              <li><a href="{{subject.link}}" >{{ subject.label}}</a> </li> 
              {% endfor %}
            </ul>
            {% endif %}

@@ -1,10 +1,10 @@
-{# templates/image/editone.html.twig #}
+{# templates/content/editone.html.twig #}
 
 {% extends 'admin.html.twig' %}
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/image/editone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/content/editone.css') }}" rel="stylesheet" />
 {% endblock %}
  {% block js %}
  {{ parent() }}
@@ -24,7 +24,7 @@
 
 {% block middle %}
   
-  <div id="image" >
+  <div id="content" >
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}

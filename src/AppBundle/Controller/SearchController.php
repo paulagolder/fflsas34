@@ -33,9 +33,9 @@ class SearchController extends Controller
        $pfield = $request->query->get('searchfield');
        $gfield = $request->query->get('searchfield');
    
-        $speople = array();
-        $sevents = array();
-        $simages= array();
+       // $speople = array();
+       // $sevents = array();
+       // $simages= array();
       
         if (!$pfield) 
         {
@@ -79,7 +79,10 @@ class SearchController extends Controller
                  {
                       $pid = $key;
                       $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
-                      $results['people'][$pid]['label'] = $person->getFullname();
+                      if($person)
+                        $results['people'][$pid]['label'] = $person->getFullname();
+                        else
+                         $results['people'][$pid]['label'] = "  notfound ";
                       $results['people'][$pid]['link'] ="/".$this->lang."/person/".$pid;
                  }
                break;
@@ -97,7 +100,8 @@ class SearchController extends Controller
                  {
                       $pid = $key;
                       $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$pid);
-                      $results['images'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang);
+                      $results['images'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang)['comment'];
+                    
                        $results['images'][$pid]['link'] ="/".$this->lang."/image/".$pid;
                  }
               break;

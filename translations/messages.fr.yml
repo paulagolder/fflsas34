@@ -159,8 +159,8 @@ message.sent.by: 'envoyé par'
 message.to: 'envoyé à'
 message.date: 'envoyé le'
 message.subject: sujet
-to.add.images.use.bookmarks: To add an image use a bookmark
-to.add.participation.use.bookmarks :  To add a participant use a bookmark
+to.add.images.use.bookmarks: pour ajouter une image, utilisez un signet
+to.add.participation.use.bookmarks : pour ajouter un participant, utilisez un signet
 see.admin.messages: Messagerie
 edit.message: Editer
 send.message: Envoyer
@@ -200,12 +200,12 @@ Username: 	Nom de Utilisateur
 Email:	Adress mail
 Password:	Mot de pass
 Repeat Password: 	Repeter mot de Pass
-when.first.signing: 	When first signing in
-registration success: 	Registration is successfull
-you.have.sucessfully.completed : "You have successfully completed the registration process. "
-you.have.sucessfully.registered: 	You have registered sucessfully.
-to.complete.reply.to email: 	To complete the registration process reply to the email you receive
-to.complete.enter: To complete registration enter the following code
+when.first.signing: 	lors de la première connexion
+registration success: 	"l'inscription est réussie"
+you.have.sucessfully.completed : "Vous avez terminé le processus d'inscription avec succès. "
+you.have.sucessfully.registered: 	 "Vous vous êtes enregistré avec succès. "
+to.complete.reply.to email: 	"Pour terminer la procédure d'inscription, répondez à l'email que vous avez reçu."
+to.complete.enter: "Pour terminer l'enregistrement, entrez le code suivant "
 print.transcript: imprimer copie
 Name: 	Name
 Path: 	Path
@@ -213,3 +213,5 @@ Copyright: 	Copyright
 Format: 	Format
 Access: 	Access
 Image file(jpg): 	Image file(jpg)
+content: contenu
+enFrancais: "Afficher le site en français"

@@ -44,11 +44,15 @@
               {% set cpath = app.request.uri %}
             {% if 'en' in ( locale | lower ) %}
                 {% set cpath  = (cpath | replace({'/en/' :'/fr/'}) ) %}
-               <div class="languagelink"><a href={{cpath}}  ><img src="{{asset('common/fr.gif')}}"/></a></div>
+               <div class="languagelink tooltip"><a href={{cpath}}  ><img src="{{asset('common/fr.gif')}}"/></a>
+               <span class="tooltiptext">{{ 'enFrancais' | trans }}</span>
+               </div>
             {% else %}
              {% set cpath  = (cpath | replace({'/fr/' :'/en/'}) ) %}
                {% set cpath  = (cpath | replace({'/FR/' :'/en/'}) ) %}
-               <div class="languagelink"><a href ={{cpath}} ><img src="{{asset('common/en.gif')}}" /></a></div>
+               <div class="languagelink tooltip"><a href ={{cpath}} ><img src="{{asset('common/en.gif')}}" /></a>
+                <span class="tooltiptext">{{ 'inEnglish' | trans }}</span>
+               </div>
             {% endif %}
                <div class="welcome">
                {% if app.user  is null %}
@@ -60,7 +64,7 @@
                {% endif %}
                </div>
                <div class="status">
-               [{{locale}}] FFLSAS3
+               [{{locale}}] {{versionname}}
                </div>
                <div class="filler"></div>
                 {% if is_granted('ROLE_TEMP') %}

@@ -69,7 +69,7 @@ class ContentController extends Controller
         else
         {
             #dump($content_ar);
-            # $content = $content_ar['*'] ;
+            $content = $content_ar['*'] ;
         }
         $text = $content->getText();
         $text = $this->insertImages($text);
@@ -555,7 +555,8 @@ class ContentController extends Controller
         $text =  strip_tags($text,"<p><img><br><h1><b><i><h2><strong><em><u><ol><li><ul>");
         $text=  str_ireplace("\"images/stories/fflsas/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
         $text=  str_ireplace("\"images/stories/fflsas/newimages/","\"http://fflsas.org/images/stories/fflsas/newimages/", $text);
-        
+        $text=  str_ireplace("\"http://www.lerot.net/safedocs/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
+         $text=  str_ireplace("\"http://www.lerot.net/fflsasdocs/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
         return $text;
     }
 }

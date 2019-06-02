@@ -311,7 +311,8 @@ class TextController extends Controller
          $request = $this->requestStack->getCurrentRequest();
       
         $text= $this->getDoctrine()->getRepository('AppBundle:Text')->findOne($tid);
-     
+        $objecttype = $text->getObjecttype();
+        $objid = $text->getObjid();
 
         $text->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
@@ -321,7 +322,7 @@ class TextController extends Controller
         
           return $this->render('text/edit_quill.html.twig', array(
            'text' =>$text,
-           'returnlink' => "/admin/text/".$tid,
+           'returnlink' => "/admin/text/".$objecttype."/".$objid,
 
             ));
     }

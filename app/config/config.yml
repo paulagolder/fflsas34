@@ -40,7 +40,10 @@ twig:
         locationpath: '%location-path%'
         recaptcha_key: '%recaptcha_key%'
         recaptcha_secret: '%recaptcha_key%'
-    
+        maxlistuser: '%maxlistuser%'
+        maxlistadmin: '%maxlistadmin%'
+        pdffunction: '%pdf-function%'
+        versionname: '%version-name%'
         
         
 # Doctrine Configuration
@@ -62,7 +65,7 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    delivery_addresses: ['%testemail%']
+    #delivery_addresses: ['%testemail%']
     transport:   '%email-transport%'
     encryption:  '%email-encryption%'
     auth_mode:   '%email-auth_mode%'

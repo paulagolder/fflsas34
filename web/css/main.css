@@ -396,8 +396,8 @@ div#middle div.datarow div.data
 /* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
-   # background-color: black;
+    width: 400px;
+    background-color: white;
     color: #f00;
     text-align: center;
     padding: 5px 0;

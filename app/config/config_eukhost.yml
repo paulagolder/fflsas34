@@ -1,5 +1,5 @@
 imports:
-    - { resource: parameters_home.yml }
+    - { resource: parameters_eukhost.yml }
     - { resource: security.yml }
     - { resource: services.yml }
 
@@ -37,8 +37,14 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         pathToWeb: "%kernel.project_dir%/web"
-
-
+        pdffunction: '%pdf-function%'
+        locationpath: '%location-path%'
+        recaptcha_key: '%recaptcha_key%'
+        recaptcha_secret: '%recaptcha_key%'
+        maxlistuser: '%maxlistuser%'
+        maxlistadmin: '%maxlistadmin%'
+        pdffunction: '%pdf-function%'
+        versionname: '%version-name%'
 
 # Doctrine Configuration
 doctrine:

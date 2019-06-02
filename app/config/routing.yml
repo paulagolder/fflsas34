@@ -147,9 +147,10 @@ user_message_delete:
       requirements:
         _locale: en|fr|FR|EN
         
-        
-
-        
+admin_message_delete:        
+      path:  /admin/user/{uid}/message/delete/{mid}
+      controller:  AppBundle\Controller\UserController:admindeletemessage
+            
 #=========================search===============
     
 search_all:    

@@ -16,4 +16,8 @@
 /recapture.txt
 /app/config/*parameters*.*
 /*.tar.*
+/*.sh
+/*.tar
+/*.tar.gz
+
 

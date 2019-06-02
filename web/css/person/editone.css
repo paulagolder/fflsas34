@@ -114,7 +114,7 @@ div#editperson span.editbutton
 
 div#editperson div.imagegroup
 {
-    #display:flex;
+    display:flex;
     margin-top:40px;
     #align-items: center;
 }

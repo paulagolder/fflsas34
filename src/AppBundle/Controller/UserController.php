@@ -1,9 +1,6 @@
 <?php
 
-// src/Controller/RegistrationController.php
 namespace AppBundle\Controller;
-
-
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,20 +82,20 @@ class UserController extends Controller
             return $this->redirect("/admin/user/search");
         }
         
-      
+        
         return $this->render('user/adminedit.html.twig', array(
             'form' => $form->createView(),
             'returnlink'=>'/admin/user/search',
             ));
     }
     
-     public function newuser()
+    public function newuser()
     {
         
         $request = $this->requestStack->getCurrentRequest();
         $fuser = new User;
         $encoder = $this->encoderFactory->getEncoder($fuser);
-     
+        
         
         $form = $this->createForm(UserForm::class, $fuser);
         
@@ -115,7 +112,7 @@ class UserController extends Controller
             return $this->redirect("/admin/user/search");
         }
         
-      
+        
         return $this->render('user/adminedit.html.twig', array(
             'form' => $form->createView(),
             'returnlink'=>'/admin/user/search',
@@ -131,7 +128,7 @@ class UserController extends Controller
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $encoder = $this->encoderFactory->getEncoder($fuser);
         $tpass= $fuser->getEmail();
-         
+        
         $form = $this->createForm(UserUserForm::class, $fuser);
         
         $form->handleRequest($request);
@@ -148,18 +145,18 @@ class UserController extends Controller
         }
         
         $password = $fuser->getPassword();
-      
+        
         return $this->render('user/useredit.html.twig', array(
             'form' => $form->createView(),
             'password' => $fuser->getPassword(),
-             'returnlink'=> "/".$this->lang."/user/".$uid,
+            'returnlink'=> "/".$this->lang."/user/".$uid,
             ));
     }
     
     
     public function showuser($uid)
     {
-         $user = $this->getUser();
+        $user = $this->getUser();
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
@@ -171,11 +168,11 @@ class UserController extends Controller
             'user' => $fuser,
             'messages' =>$messages,
             'returnlink'=> "/".$this->lang."/person/all",
-          
+            
             ));
     }
     
-     public function showone($uid)
+    public function showone($uid)
     {
         
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -195,12 +192,12 @@ class UserController extends Controller
     
     public function deleteuser($uid)
     {
-     $this->getDoctrine()->getRepository('AppBundle:User')->delete($uid);
-     return $this->redirect("/admin/user/search");
+        $this->getDoctrine()->getRepository('AppBundle:User')->delete($uid);
+        return $this->redirect("/admin/user/search");
     }
     
     
-     public function viewMessage($uid,$mid)
+    public function viewMessage($uid,$mid)
     {
         $user = $this->getUser();
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/user/".$uid);
@@ -221,11 +218,18 @@ class UserController extends Controller
     {
         $user = $this->getUser();
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
-       $this->getDoctrine()->getRepository('AppBundle:Message')->delete($mid);
-      return $this->redirect("/".$this->lang."/user/".$uid);
+        $this->getDoctrine()->getRepository('AppBundle:Message')->delete($mid);
+        return $this->redirect("/".$this->lang."/user/".$uid);
     }
     
-     public function UserSearch(Request $request)
+     public function admindeletemessage($uid,$mid)
+    {
+        $user = $this->getUser();
+        $this->getDoctrine()->getRepository('AppBundle:Message')->delete($mid);
+        return $this->redirect("/admin/user/".$uid);
+    }
+    
+    public function UserSearch(Request $request)
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
