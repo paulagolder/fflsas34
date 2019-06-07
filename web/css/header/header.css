@@ -32,9 +32,26 @@
         order: 3;
 }
 
+@keyframes flasher {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
+
+#header.header div.messagebar div.complete a
+{
+ 
+  background-color: red;
+  animation-name: flasher;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+
+
 #header.header div.messagebar div.complete
 {
         order: 5;
+        cursor: pointer;
 }
 
 #header.header div.messagebar div.filler
@@ -47,7 +64,10 @@ div#header div.messagebar div.contactbutton
 {
     
      order: 7;
+        cursor: pointer;
 }
+
+
 
 div#header div.messagebar div.loginlink
 {

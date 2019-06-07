@@ -134,8 +134,8 @@ user.email: 'Adresse e-mail'
 user.roles: 'rôles d''utilisateur'
 user.lastlogin: 'dernier accès'
 contact.list: 'liste de messages'
-view.contact: 'voir'
-delete.contact: 'supprimer'
+view.contact: voir
+delete.contact: supprimer
 message.enyoyer: 'message enyoyer'
 date: 'enyoyer le'
 from: 'enyoyer par'
@@ -159,59 +159,63 @@ message.sent.by: 'envoyé par'
 message.to: 'envoyé à'
 message.date: 'envoyé le'
 message.subject: sujet
-to.add.images.use.bookmarks: pour ajouter une image, utilisez un signet
-to.add.participation.use.bookmarks : pour ajouter un participant, utilisez un signet
+to.add.images.use.bookmarks: 'pour ajouter une image, utilisez un signet'
+to.add.participation.use.bookmarks: 'pour ajouter un participant, utilisez un signet'
 see.admin.messages: Messagerie
 edit.message: Editer
 send.message: Envoyer
 delete.message: Suprimer
-message.to.user: Message au utiisateur
-admin.messages: Message de l'administrateur
+message.to.user: 'Message au utiisateur'
+admin.messages: 'Message de l''administrateur'
 users: utiisateurs
-user.show: voir utilisateur
-edit.user: editer utilisateur
-profil.person: profil de l'utilisateur
-message.list: list des messages
-send,message: envoyer message
+user.show: 'voir utilisateur'
+edit.user: 'editer utilisateur'
+profil.person: 'profil de l''utilisateur'
+message.list: 'list des messages'
+'send,message': 'envoyer message'
 view.message: voir
-message.sentby: messaege de
-new.user: nouvel utilisateur
-register: s'inscrire 
-bookmark.image: signet l'image
-see.image: voir l'image
-chercher.content: Chercher les articles
-user.to.admin: Utilisateur a l'administrateur
-admin.to.user: Administrateur a l'Utilisateur 
+message.sentby: 'messaege de'
+new.user: 'nouvel utilisateur'
+register: 's''inscrire'
+bookmark.image: 'signet l''image'
+see.image: 'voir l''image'
+chercher.content: 'Chercher les articles'
+user.to.admin: 'Utilisateur a l''administrateur'
+admin.to.user: 'Administrateur a l''Utilisateur'
 message.envoyer.a: Destinataire
 Toname: Destinataire
-Toemail: Destinataire email
+Toemail: 'Destinataire email'
 Fromname: Expéditeur
-Fromemail: Expéditeur email
+Fromemail: 'Expéditeur email'
 Subject: Sujet
 Body: Message
-message.enyoyer.a:   destinataire     
-see.content:         Voir           
-Click.me:            Envoyez              
-view.user:           view.user             
-return:              retour                
-admin.copyright:     droits d'auteur      
-admin.privacy:       politique de confidentialité 
-Username: 	Nom de Utilisateur
-Email:	Adress mail
-Password:	Mot de pass
-Repeat Password: 	Repeter mot de Pass
-when.first.signing: 	lors de la première connexion
-registration success: 	"l'inscription est réussie"
-you.have.sucessfully.completed : "Vous avez terminé le processus d'inscription avec succès. "
-you.have.sucessfully.registered: 	 "Vous vous êtes enregistré avec succès. "
-to.complete.reply.to email: 	"Pour terminer la procédure d'inscription, répondez à l'email que vous avez reçu."
-to.complete.enter: "Pour terminer l'enregistrement, entrez le code suivant "
-print.transcript: imprimer copie
-Name: 	Name
-Path: 	Path
-Copyright: 	Copyright
-Format: 	Format
-Access: 	Access
-Image file(jpg): 	Image file(jpg)
+message.enyoyer.a: destinataire
+see.content: Voir
+Click.me: Envoyez
+view.user: view.user
+return: retour
+admin.copyright: 'droits d''auteur'
+admin.privacy: 'politique de confidentialité'
+Username: 'Nom de Utilisateur'
+Email: 'Adress mail'
+Password: 'Mot de pass'
+'Repeat Password': 'Repeter mot de Pass'
+when.first.signing: 'lors de la première connexion'
+'registration success': 'l''inscription est réussie'
+you.have.sucessfully.completed: 'Vous avez terminé le processus d''inscription avec succès. '
+you.have.sucessfully.registered: 'Vous vous êtes enregistré avec succès. '
+'to.complete.reply.to email': 'Pour terminer la procédure d''inscription, répondez à l''email que vous avez reçu.'
+to.complete.enter: 'Pour terminer l''enregistrement, entrez le code suivant '
+print.transcript: 'imprimer copie'
+Name: Name
+Path: Path
+Copyright: Copyright
+Format: Format
+Access: Access
+'Image file(jpg)': 'Image file(jpg)'
 content: contenu
-enFrancais: "Afficher le site en français"
+enFrancais: 'Afficher le site en français'
+inEnglish: 'Show the site in English'
+texts: Textes
+complete.registration: terminer le processus d'inscription
+delete.image: supprimer l'image

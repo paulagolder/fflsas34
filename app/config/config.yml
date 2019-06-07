@@ -49,9 +49,13 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
+        driver: 'pdo_mysql'
+        server_version: 'mariadb-10.2.19'
+        #server_version: '5.7'
+        #server_version: 
         host: '%database_host%'
-        port: '%database_port%'
+        #port: '%database_port%'
+        port: 
         dbname: '%database_name%'
         user: '%database_user%'
         password: '%database_password%'

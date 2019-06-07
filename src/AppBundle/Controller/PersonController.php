@@ -186,7 +186,7 @@ class PersonController extends Controller
         // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
 
         
-        $refs = $this->get('linkref_service')->getLinks("person",$pid);
+        $refs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
         
         return $this->render('person/showone.html.twig', 
 

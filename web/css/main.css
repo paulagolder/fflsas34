@@ -393,6 +393,8 @@ div#middle div.datarow div.data
     border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
+
+
 /* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;

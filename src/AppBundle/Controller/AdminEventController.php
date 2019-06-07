@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 use AppBundle\Form\EventForm;
 use AppBundle\Service\MyLibrary;
-use AppBundle\Entity\event;
-use AppBundle\Entity\person;
+use AppBundle\Entity\Event;
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Imageref;
 use AppBundle\Entity\Linkref;
 use AppBundle\Entity\Participant;
@@ -209,6 +209,8 @@ class AdminEventController extends Controller
     {
         
         $request = $this->requestStack->getCurrentRequest();
+        $user = $this->getUser();
+        $time = new \DateTime();
         if($eid>0)
         {
             $event = $this->getDoctrine()->getRepository('AppBundle:Event')->findOne($eid);
@@ -227,7 +229,8 @@ class AdminEventController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) 
             {
-                // perform some action, such as save the object to the database
+                $event->setContributor($user->getUsername());
+                $event->setUpdateDt($time);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($event);
                 $entityManager->flush();

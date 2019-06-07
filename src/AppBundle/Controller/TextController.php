@@ -138,7 +138,7 @@ class TextController extends Controller
     
     
     
-    public function xeditone($objecttype,$objid,$attribute, $language)
+    public function editone($objecttype,$objid,$attribute, $language)
     {   
         
         $language = strtoupper($language);
@@ -344,12 +344,17 @@ class TextController extends Controller
         if ($request->getMethod() == 'POST') 
         {
             $comment =$request->request->get('_text');
-            $text->setComment($this->filterText($comment));
+            if($attribute =="title")
+            {
+              $text->setComment(strip_tags($comment));
+            }
+            else
+               $text->setComment($this->filterText($comment));
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($text);
             $entityManager->flush();
-            return $this->redirect("/".$this->lang."/".$objecttype."/".$objid);
+            return $this->redirect("/admin/".$objecttype."/".$objid);
         }
         
        return $this->render('text/edit_quill.html.twig', array(

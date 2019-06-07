@@ -325,6 +325,9 @@ text_admin_reflink:
 texts_edit_group:
    path : /admin/text/{objecttype}/{objid}
    controller:  AppBundle\Controller\TextController::editgroup  
+   
+   
+  
 
 #==============================image=====================
    
@@ -566,6 +569,10 @@ linkref_delete_one:
 linkref_edit:
     path : /admin/linkref/{ot}/{oid}/{lrid} 
     controller:  AppBundle\Controller\LinkrefController::Editone
+    
+linkref_edit2:
+    path : /admin/linkref/{lrid} 
+    controller:  AppBundle\Controller\LinkrefController::Edit
     
 linkref_edit_person_group:
    path : /admin/linkref/editperson/{pid}

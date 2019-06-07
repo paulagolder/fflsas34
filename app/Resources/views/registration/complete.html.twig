@@ -4,20 +4,25 @@
 {% import 'macros.twig' as m %}
 
 {% extends 'base.html.twig' %}
-
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('/css/person/showone.css') }}" rel="stylesheet" />
+   <link href="{{ asset('/css/form.css') }}" rel="stylesheet" />
+
 {% endblock %}
 
 {% block middle %}
 
 <div id="regcomplete">
+<div class=heading>
+<div class="label" >{{'complete.registration' | trans}}</div>
+</div>
+<div class="form">
 {{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
+    {{ form_row(form.username, { 'attr':{'disabled':'disabled'}}) }}
+    {{ form_row(form.email, { 'attr':{'disabled':'disabled'}}) }}
     {{ form_row(form.newregistrationcode) }}
     <button type="submit">Register!</button>
 {{ form_end(form) }}
+</div>
 </div>
 {% endblock %}

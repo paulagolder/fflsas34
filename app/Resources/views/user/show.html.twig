@@ -49,10 +49,10 @@
         {% for message in messages %}
         <div class= "message">
         {% if message.toname == 'FFLSAS-admin' %}
-          {% set sentto = ('user.to.admin' | trans ) %}
+          {% set sentto = ('admin.to.user'  | trans ) %}
           
         {% else %}
-         {% set sentto = ('admin.to.user' | trans ) %}
+         {% set sentto = ('user.to.admin' | trans ) %}
          {% endif %}
             <div class="subject" > {{sentto}}</div>
             <div class="subject" > {{message.subject}}</div>

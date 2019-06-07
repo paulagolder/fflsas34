@@ -3,8 +3,9 @@
     "license": "proprietary",
     "type": "project",
     "autoload": {
-        "psr-4": {
-            "AppBundle\\": "src/AppBundle"
+      
+         "psr-4": {
+            "": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -21,7 +22,8 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/dbal": "^2.9",
+        "doctrine/doctrine-bundle": "^1.11",
         "doctrine/orm": "^2.5",
         "dompdf/dompdf": "dev-master",
         "friendsofsymfony/ckeditor-bundle": "^1.1",

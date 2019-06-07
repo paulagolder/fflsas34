@@ -1,10 +1,6 @@
 <?php
 
 namespace AppBundle\Controller;
-#use Goutte\Client;
-#use GuzzleHttp\Client as GuzzleClient;
-
-
 
 use AppBundle\Service\MyLibrary;
 
@@ -18,8 +14,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class LinkrefController extends Controller
 {
-
-  
+    
+    
     private $lang="fr";
     private $mylib;
     private $requestStack ;
@@ -27,14 +23,15 @@ class LinkrefController extends Controller
     public function __construct( MyLibrary $mylib ,RequestStack $request_stack)
     {
         $this->mylib = $mylib;
-        $this->requestStack = $request_stack;;
+        $this->requestStack = $request_stack;
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
     }
     
     
     public function index()
     {
         return $this->render('linkref/index.html.twig', [
-            'controller_name' => 'LinkrefController',
+        'controller_name' => 'LinkrefController',
         ]);
     }
     
@@ -45,12 +42,12 @@ class LinkrefController extends Controller
         if (!$linkrefs) {
             return $this->render('linkref/showall.html.twig', [ 'message' =>  'Refs not Found',]);
         }
-
+        
         
         return $this->render('linkref/showall.html.twig', [ 'message' =>  '' ,'heading' =>  'Les Liens','refs'=> $linkrefs,]);
     }
     
-     public function Showone($rid)
+    public function Showone($rid)
     {
         $ref = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findOne($rid);
         if (!$ref) 
@@ -65,29 +62,29 @@ class LinkrefController extends Controller
             echo("conetent:".$cid);
             $content=  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
             return $this->render('content/showone.html.twig', 
-                  [ 'lang'=>$this->lang, 
-                    'message' =>  '',
-                    'content'=>$content,
-                    'objid'=>$ref->getObjid(),
-                    'refs'=>null,
-                    ]);
-        
+            [ 'lang'=>$this->lang, 
+            'message' =>  '',
+            'content'=>$content,
+            'objid'=>$ref->getObjid(),
+            'refs'=>null,
+            ]);
+            
         }
         
         else
         {
-        
-        $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$rid);
-       
-
-       return $this->render('linkref/showone.html.twig', 
-                  ['lang'=>$this->lang, 
-                   'message' =>  '',
-                    'texts'=>$text_ar,
-                    'display'=>"fred",
-                    'ref'=>$ref
-                    ]);
-                    
+            
+            $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$rid);
+            
+            
+            return $this->render('linkref/showone.html.twig', 
+            ['lang'=>$this->lang, 
+            'message' =>  '',
+            'texts'=>$text_ar,
+            'display'=>"fred",
+            'ref'=>$ref
+            ]);
+            
         }
     }
     
@@ -99,89 +96,107 @@ class LinkrefController extends Controller
         $texts_ar = array();
         foreach( $refs as $ref)
         {
-          $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref',$ref['linkid']);
+            $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref',$ref['linkid']);
         }
         
         return $this->render('linkref/editgroup.html.twig', 
-                   ['lang'=>$this->lang, 
-                     'message' =>  '',
-                     'label' => $person->getFullname(),
-                     'objecttype'=>'person',
-                     'objid'=>$pid,
-                     'texts'=>$texts_ar,
-                     'refs'=>$refs,
-                     'returnlink'=>"/admin/person/".$pid,
-                     ]);
+        ['lang'=>$this->lang, 
+        'message' =>  '',
+        'label' => $person->getFullname(),
+        'objecttype'=>'person',
+        'objid'=>$pid,
+        'texts'=>$texts_ar,
+        'refs'=>$refs,
+        'returnlink'=>"/admin/person/".$pid,
+        ]);
     }
     
     public function EditEventGroup($eid)
     {
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
-       
+        
         $texts_ar = array();
         foreach( $refs as $ref)
         {
-        $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$ref['linkid']);
-       
+            $texts_ar[$ref['linkid']] =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkrefs',$ref['linkid']);
+            
         }
         
-
+        
         return $this->render('linkref/editgroup.html.twig', 
-                   ['lang'=>$this->lang, 
-                     'message' =>  '',
-                     'heading' => "all links for event".$eid,
-                     'label' => "event:".$eid,
-                     'objecttype'=>'event',
-                     'objid'=>$eid,
-                     'xtexts'=>$texts_ar,
-                     'refs'=>$refs,
-                     'returnlink'=>"/admin/event/".$eid,
-                     ]);
+        ['lang'=>$this->lang, 
+        'message' =>  '',
+        'heading' => "all links for event".$eid,
+        'label' => "event:".$eid,
+        'objecttype'=>'event',
+        'objid'=>$eid,
+        'xtexts'=>$texts_ar,
+        'refs'=>$refs,
+        'returnlink'=>"/admin/event/".$eid,
+        ]);
     }
     
-     public function Editone($ot,$oid,$lrid)
+    public function Editone($ot,$oid,$lrid)
     {
         $ref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findOne($lrid);
         $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup2('linkref',$lrid);
         return $this->render('linkref/editone.html.twig', 
-                   ['lang'=>$this->lang, 
-                     'message' =>  '',
-                     'heading' => "link id= ".$lrid. " for ".$ot." id=".$oid,
-                     'objecttype'=>$ot,
-                     'objid'=>$oid,
-                     'texts'=>$texts_ar,
-                     'ref'=>$ref,
-                     'returnlink'=>"/admin/linkref/edit".$ot."/".$oid,
-                     ]);
+        ['lang'=>$this->lang, 
+        'message' =>  '',
+        'heading' => "link id= ".$lrid. " for ".$ot." id=".$oid,
+        'objecttype'=>$ot,
+        'objid'=>$oid,
+        'texts'=>$texts_ar,
+        'ref'=>$ref,
+        'returnlink'=>"/admin/linkref/edit".$ot."/".$oid,
+        ]);
+    }
+    
+     public function Edit($lrid)
+    {
+        $ref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findOne($lrid);
+        $ot= $ref->getObjecttype();
+        $oid = $ref->getObjid();
+        $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup2('linkref',$lrid);
+        return $this->render('linkref/editone.html.twig', 
+        ['lang'=>$this->lang, 
+        'message' =>  '',
+        'heading' => "link id= ".$lrid. " for ".$ot." id=".$oid,
+        'objecttype'=>$ot,
+        'objid'=>$oid,
+        'texts'=>$texts_ar,
+        'ref'=>$ref,
+        'returnlink'=>"/admin/linkref/edit".$ot."/".$oid,
+        ]);
     }
     
     public function Addlink($otype1,$oid1,$otype2,$oid2)
     {
         // $obj = $this->getDoctrine()->getRepository('AppBundle:$otype2')->findOne($oid2);
         // $label= $obj->getLabel();
-          $user = $this->getUser();
-           $time = new \DateTime();
-          $time->setTimestamp($time->getTimestamp());
-            $linkref = new Linkref();
-            $linkref->setObjecttype($otype1);
-            $linkref-> setObjid($oid1);
-            $linkref-> setLabel($otype2.":".$oid2);
-            $linkref->setPath($otype2."/".$oid2);
-            $linkref->setContributor($user->getUsername());
-            $now = new \DateTime();
-            $linkref->setUpdateDt($now);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($linkref);
-            $entityManager->flush();
-            $lrid = $linkref->getLinkId();
-    
-    
-             return $this->redirect('/admin/'.$otype1."/".$oid1);
-    
+        $user = $this->getUser();
+        $time = new \DateTime();
+        $time->setTimestamp($time->getTimestamp());
+        $linkref = new Linkref();
+        $linkref->setObjecttype($otype1);
+        $linkref-> setObjid($oid1);
+        $linkref-> setLabel($otype2.":".$oid2);
+        $linkref->setPath($otype2."/".$oid2);
+        $linkref->setContributor($user->getUsername());
+        $now = new \DateTime();
+        $linkref->setUpdateDt($now);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($linkref);
+        $entityManager->flush();
+        $lrid = $linkref->getLinkId();
+        
+        
+        return $this->redirect('/admin/'.$otype1."/".$oid1);
+        
     }
     
     
-    public function edit($ot,$oid,$lrid)
+    public function editdetail($ot,$oid,$lrid)
     {
         $user = $this->getUser();
         $time = new \DateTime();
@@ -208,8 +223,8 @@ class LinkrefController extends Controller
         }
         $entity = ucfirst($ot);
         $form = $this->createForm(LinkrefForm::class, $linkref);
-         $object =  $this->getDoctrine()->getRepository('AppBundle:'.$entity)->findOne($oid);
-         $label = $object->getlabel();
+        $object =  $this->getDoctrine()->getRepository('AppBundle:'.$entity)->findOne($oid);
+        $label = $object->getlabel();
         if ($request->getMethod() == 'POST') 
         {
             #$form->bindRequest($request);
@@ -224,7 +239,7 @@ class LinkrefController extends Controller
                 $entityManager->persist($linkref);
                 $entityManager->flush();
                 return $this->redirect('/admin/linkref/'.$ot."/".$oid. "/".$lrid );
-       
+                
             }
         }
         
@@ -247,44 +262,61 @@ class LinkrefController extends Controller
     
     public function getLinks($objecttype, $objectid)
     {
-   
-      #   $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $links = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup($objecttype,$objectid);
         $link_ar = array();
         foreach( $links as $link)
         {
-          $linkid = $link['linkid'];
-          $linkref = array();
-        
-         $path = $link['path'];
-         if(substr( $path, 0, 7 ) === "/admin/")
-         {
-         
-         }
-         elseif (substr( $path, 0, 1 ) === "/")
-         {
-         
-            $path = "/" . $this->lang.$path;
-         
-         }
-         else
-         {
-         
-         
-         }
-        $linkref['path'] = $path;
-        $linkref['label'] = $link['label'];
-     
-        $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref',$link['linkid']);
-            $linkref['title']  = $this->mylib->selectText($texts_ar,'title',$this->lang);
-            if($linkref['title'] )
+            $linkid = $link['linkid'];
+            $linkref = array();
+            $label = $link['label'];
+            $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref', $linkid);
+            if($texts_ar)
             {
-             $linkref['label'] =    $linkref['title'] ;
+            $label  = $this->mylib->selectText($texts_ar,'title',$this->lang);
             }
+            $path = $link['path'];
+            if(substr( $path, 0,4 ) === "http")
+            {
+              
+            }
+            else
+            {
+                if (substr( $path, 0, 1 ) === "/")
+                {
+                    $path =  substr($path,1);
+                }
+                list($objtype, $objid) = explode("/",$path);
+                if($objtype =="content")
+                {
+                    $content = $this->getDoctrine()->getRepository("AppBundle:Content")->findOne( $objid);
+                    $label = $content->getTitle();
+                }
+                else
+                {
+                $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup($objtype, $objid);
+                if($texts_ar)
+                {
+                  $label = $this->mylib->selectText($texts_ar,'title',$this->lang);
+                }
+                }
+                $path = "/".$this->lang."/".$path;
+            }
+            $linkref['path'] = $path;
+            if($label )
+            {
+                $linkref['label'] =    $label ;
+            }
+            else
+            {
+                 $linkref['label'] =    $path ;
+            }
+            
+            
             $link_ar[$linkid] = $linkref;
         }
         
-
+        
         return $link_ar;
     }
     

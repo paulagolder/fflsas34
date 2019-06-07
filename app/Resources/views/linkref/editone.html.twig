@@ -50,7 +50,7 @@
            {% set frtitle = true %} 
            <div class="textref" >
               <div   class="textref " > {{ ref.label}} : {{text.attribute}}: {{text.language | upper}} :
-              <a class= "editbutton" href="/admin/edittext{{text.link}}" >{% trans %} edit.this{% endtrans%} </a> 
+              <a class= "editbutton" href="/admin/text/{{text.id}}" >{% trans %} edit.this{% endtrans%} </a> 
               </div>
               <div class="textpanel" > {{text.comment | raw }} </div>
            </div>
@@ -59,7 +59,7 @@
            {% set entitle = true %} 
            <div class="textref" >
              <div   class="textref " > {{ ref.label}} : {{text.attribute}}: {{text.language | upper}} :
-             <a class= "editbutton" href="/admin/texts{{text.link}}" >{% trans %} edit.this{% endtrans%} </a> 
+             <a class= "editbutton" href="/admin/text/{{text.id}}" >{% trans %} edit.this{% endtrans%} </a> 
              </div>
              <div class="textpanel" > {{text.comment | raw }} </div>
            </div>
@@ -71,14 +71,15 @@
   <div   class="subheading selectable" > 
            <div class="label">{{ ref.label}}: FR : title :</div>
            <div class="editbutton button1">
-           <a class= "editbutton " href="/admin/text/{{objecttype}}/{{objid}}/title/FR" >{% trans %} create.this{% endtrans%} </a> </div>
+        
+           <a class= "editbutton " href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.linkid}}/title/fr" >{% trans %} create.this{% endtrans%} </a> </div>
            </div>
   {% endif %}
   {% if not entitle  %}
    <div   class="subheading selectable" > 
            <div class="label">{{ ref.label}}: EN : title :</div>
            <div class="editbutton button1">
-           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/title/EN"  >{% trans %} create.this{% endtrans%} </a> </div>
+           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.linkid}}/title/en"  >{% trans %} create.this{% endtrans%} </a> </div>
            </div>
   {% endif %}
  
