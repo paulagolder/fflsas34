@@ -37,9 +37,8 @@ class Person
      */
     private $contributor;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    /** @ORM\Column(type="datetime") */
+     
     private $update_dt;
     
     
@@ -138,12 +137,12 @@ class Person
         return $this;
     }
 
-    public function getUpdateDt(): ?\DateTimeImmutable
+    public function getUpdateDt(): ?\DateTimeInterface
     {
         return $this->update_dt;
     }
 
-    public function setUpdateDt(?\DateTimeImmutable $update_dt): self
+    public function setUpdateDt(?\DateTimeInterface $update_dt): self
     {
         $this->update_dt = $update_dt;
 

@@ -54,6 +54,26 @@ class PersonRepository extends EntityRepository
        return $people;
     }
     
+     public function findLatest($max)
+    {
+       $platest = array();
+       $qb = $this->createQueryBuilder("p");
+       $qb->orderBy("p.update_dt", "DESC");
+       $qb->setMaxResults($max);
+       $people =  $qb->getQuery()->getResult();
+       $n =0;
+       foreach( $people as $person)
+       {
+          $person->fixperson();
+          $platest[$n]["objecttype"]="person";
+          $platest[$n]["objid"]=$person->getPersonId();
+          $platest[$n]["label"]=$person->getFullname();
+          $platest[$n]["date"]=$person->getUpdateDt();
+          $platest[$n]["link"]="person/".$person->getPersonId();
+          $n++;
+       }
+       return $platest;
+    }
     
     public function getLabel($personid)
     {

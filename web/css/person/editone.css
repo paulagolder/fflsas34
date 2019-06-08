@@ -58,7 +58,10 @@ div#editperson div.participants div.participantlist div.participant div.editbutt
 {
    xdisplay:flex;
    margin-top:40px;
+
 } 
+
+
 
  div#editperson div.refgroup div.label   
 {
@@ -66,12 +69,12 @@ div#editperson div.participants div.participantlist div.participant div.editbutt
     font-size:1em;
 }  
     
- div#editperson div.refgroup div.ref   a
+ div#editperson div.refgroup div.reflist div.refref   
 {
     color:blue;
     font-size:1em;
-  margin-left: 1em;
-  text-decoration:none;
+    margin-left: 1em;
+    text-decoration:none;
 }
 
  div#editperson div.person div.refgroup div.reflist
@@ -117,6 +120,17 @@ div#editperson div.imagegroup
     display:flex;
     margin-top:40px;
     #align-items: center;
+}
+
+ div#editperson div.person div.imagegroup div.tooltip
+ {
+     margin-right : 10px;
+ }
+
+div#editperson div.person div.imagegroup div.label
+{
+    font-size:1em;
+    color: yellow;
 }
 
 div#editperson div.imagegroup div.imageedit

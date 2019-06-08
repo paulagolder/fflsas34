@@ -135,6 +135,24 @@ class EventRepository extends EntityRepository
        return $events;
     }
     
-    
+       public function findLatest($max)
+    {
+       $platest = array();
+       $qb = $this->createQueryBuilder("p");
+       $qb->orderBy("p.update_dt", "DESC");
+       $qb->setMaxResults($max);
+       $events =  $qb->getQuery()->getResult();
+       $n =0;
+       foreach( $events as $event)
+       {
+          $platest[$n]["objecttype"]="event";
+          $platest[$n]["objid"]=$event->getEventId();
+          $platest[$n]["label"]=$event->getLabel();
+          $platest[$n]["date"]=$event->getUpdateDt();
+          $platest[$n]["link"]="event/".$event->getEventId();
+          $n++;
+       }
+       return $platest;
+    }
     
 }
