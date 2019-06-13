@@ -1,9 +1,8 @@
-fflsas3
+fflsas75
 =========
 
 
-old version Cloud34 is the appropriate one to use. 
-Dont use user cloud34
+This version of the FFLSAS website has been developed in symfony3.4 and is being released to celebrate the 75th anniversary of the Liberation of France.
 
 It is Licenced under the MIT licence.
 
