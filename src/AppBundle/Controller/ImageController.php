@@ -60,8 +60,7 @@ class ImageController extends Controller
             return $this->render('image/showone.html.twig', [ 'message' =>  'Image '.$iid.' not Found',]);
         }
         $this->mylib->setFullpath($image);
-      #  $mess = $image->getFullpath();
-      $mess="";
+        $mess="";
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$iid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);

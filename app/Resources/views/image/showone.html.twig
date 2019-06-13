@@ -1,6 +1,6 @@
 {# templates/image/showone.html.twig #}
 
-{% extends 'base.html.twig' %}
+{% extends 'user.html.twig' %}
 
 {% block stylesheets %}
       {{ parent() }}
@@ -14,7 +14,8 @@
   <div id="image" >
    {% if message %}
      <h1> {{message}}</h1>
-   {% endif %}
+   {% else %}
+
 
    {% if image %}
      <div class="heading">
@@ -23,6 +24,11 @@
         <div class="editbutton button1" >
             <a class="editbutton" href = "/{{lang}}/image/addbookmark/{{image.imageid}}" >{{'bookmark.image' | trans}}</a>
        </div>
+        {% endif %}
+         {% if is_granted('ROLE_ADMIN') %} 
+        <div class="editbutton ">
+            <a class="editbutton" href = "/admin/image/{{image.imageid}}" >{{'edit.image' | trans }}</a>
+        </div>
         {% endif %}
     </div>
      <div class="content">
@@ -47,5 +53,6 @@
     </div>
      </div>
   {% endif %}
+     {% endif %}
   </div>
 {% endblock %}

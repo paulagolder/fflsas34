@@ -1,18 +1,13 @@
-{# templates/admin.html.twig #}
+{# templates/user.html.twig #}
 
-{# a editer pour le presentation du administateur site  #}
+{# a editer pour le presentation du user site  #}
 
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
+{% block js %}
 {{ parent() }}
-  <link href="{{ asset('css/admin.css') }}" rel="stylesheet" />
+    <script src="{{asset('js/frbookmarks.js')}}"></script>
 {% endblock %}
-
-  {% block js %}
-  {{ parent() }}
-      <script src="{{asset('js/adminbookmarks.js')}}"></script>
-  {% endblock %}
 
 
    {% block left %}
@@ -22,7 +17,10 @@
 
 
     {% block right %}
+      {% if is_granted('ROLE_USER') %}
         {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
+      {% endif %}
+      {{ render(controller('AppBundle\\Controller\\RandomimageController::randomimage')) }}
       {{ render(controller('AppBundle\\Controller\\RecentEditsController::recentedits')) }}
     {% endblock %}
 

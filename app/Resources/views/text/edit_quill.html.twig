@@ -4,84 +4,86 @@
 
 {% block stylesheets %}
 {{ parent() }}
-  <link href="{{ asset('css/text/edit_alt.css') }}" rel="stylesheet" />
-  <link href="{{ asset('css/form.css') }}" rel="stylesheet" />
-  <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
-{% endblock %}
-{% block js %}
+<link href="{{ asset('css/text/edit_alt.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/form.css') }}" rel="stylesheet" />
+<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+    {% endblock %}
+    {% block js %}
     {{ parent() }}
     <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
-{% endblock %}
+    {% endblock %}
     
-{% block middle %}
+    {% block middle %}
     <div id="textedit" >
         
         <div class="heading">
             <div class="label" >{{ 'edit.text' | trans }} </div>
             <div class="title" >{{ text.attribute}} : {{text.id}} </div>
-            <div class="returnbutton button1"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+             <div class="label" >{{'for' | trans }}  </div>
+              <div class="title" >{{ source}}  </div>
+            <div class="returnbutton button1"> <a href = "{{returnlink}}" >{% trans %} annuler {% endtrans%} </a> </div>
         </div> 
         <div class="form">
             <form action="/admin/text/process_edit/{{text.id}}" method="post" >
                 <div class="row" >
                     <label for="language">Language:</label>
-                    <input type="text" id="username" name="_language" value="{{ text.language}}" disabled />
+                    <input type="text" id="username" name="_language" value="{{ text.language}}" disabled="disabled" />
                 </div>
                 <div class="row" >
                     <label for="attribute">Attribute:</label>
-                    <input type="text" id="attribute name="_subjectid" value="{{ text.attribute }}" disabled />
+                    <input type="text" id="attribute name="_subjectid" value="{{ text.attribute }}" disabled="disabled"d />
                 </div>
-                <label for="content">Text:</label>
                 <input type="hidden" name="_text" value="{{ text.comment  }}" >
-                <button type="submit" id="submitbutton" style="display: none;"  >{% trans %} enregistrer {% endtrans%} </button> 
-            </form>
+                    <button type="submit" id="submitbutton" style="display: none;"  >{% trans %} enregistrer {% endtrans%} </button> 
+                </form>
                 
-           <div id="editortext"   >
-                {{ text.comment | raw }}
-           </div>
-        </div>
+                <div id="editortext"   >
+                    {{ text.comment | raw }}
+                </div>
+            </div>
             <button onclick="saveform()">{{ 'Click.me' | trans }}</button>  
         </div>
         
-{% endblock %}
+        {% endblock %}
         
-{% block right %}
+        {% block right %}
         {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-{% endblock%}
+        {% endblock%}
         
         
-        {% block end %}
-<script>
-var Block = Quill.import('blots/block');
-var quill = new Quill('#editortext', {
-    modules: {
-        toolbar: [
-        [{ header: [1, false] }],
-        ['bold', 'italic'],
-        [ 'blockquote'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        [{ 'indent': '-1'}, { 'indent': '+1' }] ,
-        ]
-    },
-    placeholder: 'Votre contribution au FFLSAS site',
-    theme: 'snow'
-});
-
-
-function saveform() 
-{
-    var hiddentext = document.querySelector('input[name=_text]');
-    var edstring = quill.root.innerHTML;
-    //alert(edstring);
-    hiddentext.value =   edstring;
-    var submitButton = document.getElementById("submitbutton");
-    submitButton.click(); //
-}
-
-
-</script>
-
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-
-
-{% endblock %}
+        {% block quill %}
+        <script>
+            var Block = Quill.import('blots/block');
+            var quill = new Quill('#editortext', {
+            modules: {
+            toolbar: [
+            [{ header: [1, false] }],
+            ['bold', 'italic'],
+            [ 'blockquote'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }] ,
+            ]
+            },
+            placeholder: 'Votre contribution au FFLSAS site',
+            theme: 'snow'
+            });
+            
+            
+            function saveform() 
+            {
+            var hiddentext = document.querySelector('input[name=_text]');
+            var edstring = quill.root.innerHTML;
+            //alert(edstring);
+            hiddentext.value =   edstring;
+            var submitButton = document.getElementById("submitbutton");
+            submitButton.click(); //
+            }
+            
+            
+        </script>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        
+        
+        {% endblock %}
+        

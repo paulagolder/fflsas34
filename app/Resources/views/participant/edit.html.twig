@@ -45,11 +45,11 @@
  <div class='incident' > 
     <div >{{incident.label}}</div>
     <div class="button1" > <a class="editbutton" href="{{incident['link']}}">{{'edit'|trans}}</a></div>
-     <div class="deletebutton" > <a class="deletebutton" href="{{incident['link']}}">{{'delete'|trans}}</a></div>
+     <div class="deletebutton" > <a class="deletebutton" href="/admin/incident/delete/{{incident['incidentid']}}">{{'delete'|trans}}</a></div>
     </div>
  {% endfor%}
  </div>
  </div>
-
+</div>
 </div>
 {% endblock %}

@@ -9,19 +9,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 use AppBundle\Entity\Image;
+use AppBundle\Entity\Person;
+use AppBundle\Repository\PersonRepository;
 
 class MyLibrary 
 {
 
- private  $parama="";
-  private  $paramb="";
+ private  $newimagepath="";
+  private  $externalimagepath="";
   
-    public function __construct(string $parameterA, $parameterB)
+    public function __construct(string $newimagepath, $externalimagepath)
     {
-        // ...
+        $this->newimagepath = $newimagepath;
+        $this->externalimagepath = $externalimagepath;
         
-        $this->parama = $parameterA;
-         $this->paramb = $parameterB;
     }
    
      
@@ -171,17 +172,19 @@ class MyLibrary
     }
     
      public function setFullpath($image)
-    {
+    { 
           if ($image->isTemp())
           {
-             $image->setFullpath ( $this->parama.$image->getPath());   
+             $image->setFullpath ( $this->newimagepath.$image->getPath());   
           }
           else
           {
-             $image->setFullpath ($this->paramb.$image->getPath());   
+             $image->setFullpath ($this->externalimagepath.$image->getPath());   
           }
         
     }
     
+    
+   
    
 }

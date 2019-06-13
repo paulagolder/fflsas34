@@ -33,5 +33,32 @@ class LibraryController extends Controller
       return "No text found";
     }
     
+     public function getLabel($objecttype, $objid, $lang)
+    {
+    
+      $language = strtoupper($lang);
+        switch ($objecttype) 
+        {
+            case "person":
+                $person = $this->getDoctrine()->getRepository('AppBundle:Person')->findOne($objid);
+                $label = $person->getFullname();
+                break;
+            case "event":
+                $event = $this->getDoctrine()->getRepository('AppBundle:Event')->findOne($objid);
+                $label = $event->getLabel();
+                break;
+            case "image":
+                  $image = $this->getDoctrine()->getRepository('AppBundle:Image')->findOne($objid);
+                $label = $image->getName();
+                break;
+            case "linkref":
+                $ref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findOne($objid);
+                $label = $ref->getLabel();
+                break;
+            default:
+                $label =  "no label found for "+$objecttype+" :"+$objectid;
+        }
+        return $label;
+    }
 
 }

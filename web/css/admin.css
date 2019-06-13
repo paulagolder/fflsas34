@@ -48,7 +48,7 @@ div#middle  div.editbutton a
 
 div#middle div.deletebutton 
 {
-    xmargin-left: auto;
+   
 }
 
 div#middle div.deletebutton a {
@@ -235,7 +235,6 @@ div.adminform form div label{
     color: yellow;
     font-size: 1.2em;
     min-width: 50px;
-    xfloat: left;
     width: 10em;
     margin-right: 1em;
     text-align: right;

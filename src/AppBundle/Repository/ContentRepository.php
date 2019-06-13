@@ -14,8 +14,6 @@ class ContentRepository extends EntityRepository
 
     public $em ;
 
-   
-
     public function findAll()
     {
        $sql = "select c from AppBundle:content c ";
@@ -25,17 +23,17 @@ class ContentRepository extends EntityRepository
        return $contents;
     }
     
-    
     public function findOne($contentid)
     {
        $sql = "select c from AppBundle:content c ";
        $sql .= " where c.contentid = ".$contentid." ";
        $query = $this->getEntityManager()->createQuery($sql);
        $contents = $query->getResult();
+       if(sizeof($contents) == 0) return null;
        return $contents[0];
     }
     
-     public function findMaxSid()
+    public function findMaxSid()
     {
        $sql = "select max(c.subjectid) from AppBundle:content c ";
        $query = $this->getEntityManager()->createQuery($sql);
@@ -43,25 +41,28 @@ class ContentRepository extends EntityRepository
        return $sid;
     }
     
-     public function findOnebyLang($subjectid,$lang)
+    public function findOnebyLang($subjectid,$lang)
     {
        $qb = $this->createQueryBuilder("i");
        $qb->andWhere('i.subjectid = :sid');
        $qb->setParameter('sid', $subjectid);
-       $qb->andWhere(':lang LIKE i.language ' );
-       $qb->setParameter('lang', $lang);
-       $content =  $qb->getQuery()->getOneOrNullResult();
-       return $content;
+     
+       $contents =  $qb->getQuery()->getResult();
+       if(sizeof($contents) == 0) return null;
+       if(sizeof($contents) == 1 ) return $contents[0];
+       else
+       {
+        if( $contents[0]->getLanguage() == $lang)  return $contents[0];
+        else return $contents[1];
+       }
     }
     
-       public function findSubject($subjectid)
+    public function findSubject($subjectid)
     {
        $sql = "select c from AppBundle:content c ";
        $sql .= " where c.subjectid = ".$subjectid." ";
        $query = $this->getEntityManager()->createQuery($sql);
        $contents = $query->getResult();
-       
-       
        $content_ar = array();
        foreach( $contents as $content )
        {
@@ -70,6 +71,10 @@ class ContentRepository extends EntityRepository
        }
        return $content_ar;
     }
+    
+    
+  
+    
     
     public function findSearch($sfield)
     {
@@ -81,7 +86,6 @@ class ContentRepository extends EntityRepository
       
        return $contents;
     }
-    
     
      public function delete($contentid)
     {

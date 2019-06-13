@@ -29,11 +29,7 @@ div#page div.header
   color: #0f0;
 }
 
-div#footer
-{
-  height: 50px;
-  color: #fff;
-}
+
 
 
 div#page div.mypage
@@ -155,6 +151,7 @@ div.hidebar
     width: 100%;
     background-color: #506ab6;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 div.hidebar  button
@@ -240,6 +237,11 @@ div#right div.subheading div.title
     
 }
 
+div#middle 
+{
+   *background-color: red;
+ 
+}
 
 div#middle  div.returnbutton a 
 {
@@ -301,9 +303,9 @@ div#middle  div.heading div.title
 
 div#middle  div.heading div.label
 {
-    color:yellow;
-    font-size:1.2em;
-    margin-right: 1em;
+    xcolor:yellow;
+    xfont-size:1.2em;
+    xmargin-right: 1em;
 }
 
 div#middle  div.subheading 
@@ -390,7 +392,8 @@ div#middle div.datarow div.data
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    color:red;
+    padding-right: 1em;
 }
 
 

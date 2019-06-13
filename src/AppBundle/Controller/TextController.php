@@ -24,6 +24,7 @@ class TextController extends Controller
     {
         $this->mylib = $mylib;
         $this->requestStack = $request_stack;
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
     }
     
     
@@ -313,6 +314,7 @@ class TextController extends Controller
         $text= $this->getDoctrine()->getRepository('AppBundle:Text')->findOne($tid);
         $objecttype = $text->getObjecttype();
         $objid = $text->getObjid();
+         $sourcelabel = $this->get('alibrary_service')->getLabel($objecttype,$objid, $this->lang);
 
         $text->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
@@ -321,6 +323,7 @@ class TextController extends Controller
        
         
           return $this->render('text/edit_quill.html.twig', array(
+           'source'=>  $sourcelabel,
            'text' =>$text,
            'returnlink' => "/admin/text/".$objecttype."/".$objid,
 

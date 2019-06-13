@@ -37,8 +37,9 @@ class RecentEditsController extends Controller
      $max = 10;
         $platest =    $this->getDoctrine()->getRepository("AppBundle:Person")->findLatest($max);
          $elatest =    $this->getDoctrine()->getRepository("AppBundle:Event")->findLatest($max);
+           $ilatest =    $this->getDoctrine()->getRepository("AppBundle:Image")->findLatest($max);
        
-        $latest= array_merge($platest, $elatest);
+        $latest= array_merge($platest, $elatest,$ilatest);
       usort($latest, function($a, $b) {
     return $b['date'] <=> $a['date'];
 });

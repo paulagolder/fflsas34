@@ -7,11 +7,9 @@ div#editevent
 }
 
 
-
-
 div#editevent div.label
 {
-    color:yellow;
+    xcolor:yellow;
 }
     
  div#editevent > div

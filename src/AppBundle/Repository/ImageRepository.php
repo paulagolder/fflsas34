@@ -74,4 +74,24 @@ class ImageRepository extends EntityRepository
         $numDeleted = $query->execute();
         return $numDeleted;
     }
+    
+       public function findLatest($max)
+    {
+       $platest = array();
+       $qb = $this->createQueryBuilder("p");
+       $qb->orderBy("p.update_dt", "DESC");
+       $qb->setMaxResults($max);
+       $images =  $qb->getQuery()->getResult();
+       $n =0;
+       foreach( $images as $image)
+       {
+          $platest[$n]["objecttype"]="image";
+          $platest[$n]["objid"]=$image->getImageId();
+          $platest[$n]["label"]=$image->getName();
+          $platest[$n]["date"]=$image->getUpdateDt();
+          $platest[$n]["link"]="image/".$image->getImageId();
+          $n++;
+       }
+       return $platest;
+    }
 }

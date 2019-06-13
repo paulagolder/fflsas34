@@ -596,7 +596,7 @@ content_all:
         _locale: en|fr|FR|EN
         
 content_one:
-    path: /{_locale}/content/{sid}
+    path: /{_locale}/subject/{sid}
     controller:  AppBundle\Controller\ContentController::Showsubject  
     requirements:
         _locale: en|fr|FR|EN
@@ -608,7 +608,7 @@ content_menu:
         _locale: en|fr|FR|EN
         
 subject_one:
-    path: /{_locale}/contentid/{cid}
+    path: /{_locale}/content/{cid}
     controller:  AppBundle\Controller\ContentController::Showcontent  
     requirements:
         _locale: en|fr|FR|EN
@@ -631,6 +631,12 @@ content_admin_new:
     requirements:
         lang: en|fr|FR|EN
         
+content_new_admin:
+    path: /admin/subject/new/{lang}
+    controller:  AppBundle\Controller\ContentController::newSubject 
+    requirements:
+        lang: en|fr|FR|EN
+        
 content_admin_delete:
     path: /admin/content/delete/{cid}
     controller:  AppBundle\Controller\ContentController::Delete       
@@ -639,12 +645,12 @@ content_admin_bookmark:
     path:  /admin/content/addbookmark/{sid}
     controller:  AppBundle\Controller\ContentController::addBookmark  
     
-user_content_bookmark:    
-    path:  /{_locale}/content/addbookmark/{sid}
+user_subject_bookmark:    
+    path:  /{_locale}/subject/addbookmark/{sid}
     controller:  AppBundle\Controller\ContentController::addUserBookmark  
     
 content_admin_editone:
-    path: /admin/content/{sid}
+    path: /admin/subject/{sid}
     controller:  AppBundle\Controller\ContentController::Editsubject
     
 content_admin_deleteimage:
@@ -657,6 +663,7 @@ content_admin_deleteimage:
 #=========================================================
     
 catch_all:
-    path: /{catch_all}
-    controller: AppBundle\Controller\AccueilController::Showall
-    
+    path: /{catchall}
+    controller: AppBundle\Controller\ContentController::ShowCatchall
+    requirements:
+        catchall: ".+"

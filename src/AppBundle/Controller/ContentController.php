@@ -37,8 +37,12 @@ class ContentController extends Controller
         ]);
     }
     
-    
-    
+      public function ShowCatchAll()
+    {
+       $def = $this->container->getParameter('defaultcontent');
+       return $this->ShowSubject($def);
+       
+    }
     
     public function Showsubject($sid)
     {
@@ -74,7 +78,6 @@ class ContentController extends Controller
         $text = $content->getText();
         $text = $this->insertImages($text);
         $content->setText(  $this->cleanText($text));
-        # $content->setText( $this->cleanText($content->getText()));
         $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
         
         return $this->render('content/showone.html.twig', 
@@ -87,13 +90,23 @@ class ContentController extends Controller
     }
     
     
-    
     public function Showcontent($cid,Request $request)
     {
         $content=null;
         $content= $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
-        #   $content->setText(  $this->cleanText($content->getText()));
+        if(is_null($content))
+        {
         
+           return $this->render('content/showone.html.twig',
+            [
+        'message' =>  'content not found ',
+        'lang'=>$this->lang,
+        'content'=> '',
+        'title'=>'',
+        'refs'=>'',
+        ]);
+     
+        }
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
@@ -143,7 +156,6 @@ class ContentController extends Controller
                 $content->setLabel($title);
             else
                 $content->setLabel($content->getTitle());
-            
             $content->setText( $this->cleanText($content->getText()));
         }
         
@@ -156,8 +168,6 @@ class ContentController extends Controller
         'returnlink'=>'/admin/content/search',
         ]);
     }
-    
-    
     
     public function edit_quill($cid)
     {   
@@ -175,7 +185,7 @@ class ContentController extends Controller
         
         return $this->render('content/edit_quill.html.twig', array(
             'content' =>$content,
-            'returnlink' => "/admin/content/".$content->getsubjectid(),
+            'returnlink' => "/admin/subject/".$content->getsubjectid(),
             
             ));
     }
@@ -298,7 +308,7 @@ class ContentController extends Controller
         return $this->render('content/edit.html.twig', array(
             'form' => $form->createView(),
             'label'=> $label,
-            'returnlink' => "/admin/content/".$content->getsubjectid(),
+            'returnlink' => "/admin/subject/".$content->getsubjectid(),
             'contentid'=>$contentid,
             'imagelinks'=>$matches,
             ));
@@ -321,6 +331,12 @@ class ContentController extends Controller
         $entityManager->flush();
         $cid = $content->getContentid();
         return $this->redirect("/".$this->lang."/content/".$sid);
+    }
+    
+     public function newSubject($lang)
+    {   
+        $sid = $this->newSubjectId();
+       return $this->newContent($sid,$lang);;
     }
     
     public function Showall(Request $request)
@@ -354,7 +370,7 @@ class ContentController extends Controller
         {
             foreach($contents as $content)
             {
-                $content->link = "/".$this->lang."/content/addbookmark/".$content->getContentid();
+                $content->link = "/".$this->lang."/xzxcontent/addbookmark/".$content->getContentid();
             }
             
         }
@@ -423,7 +439,7 @@ class ContentController extends Controller
     {
         $gfield = $request->query->get('searchfield');
         $uri = $request->getUri();
-        # var_dump($uri);
+        dump($uri);
         $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');
@@ -447,7 +463,7 @@ class ContentController extends Controller
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         
-        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
+        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOnebyLang($sid,$this->lang);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');
         if($ilist == null)
@@ -558,5 +574,15 @@ class ContentController extends Controller
         $text=  str_ireplace("\"http://www.lerot.net/safedocs/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
          $text=  str_ireplace("\"http://www.lerot.net/fflsasdocs/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
         return $text;
+    }
+    
+    public function newSubjectID()
+    {
+      $osida = $this->getDoctrine()->getRepository("AppBundle:Content")->findMaxSid();
+      dump($osida);
+     $osidint = $osida[0][1];
+      dump($osidint);
+      return $osidint + 1;
+    
     }
 }

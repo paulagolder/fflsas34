@@ -120,9 +120,11 @@ class IncidentController extends Controller
     {
         
         $request = $this->requestStack->getCurrentRequest();
+           dump($inid);
         if($inid>0)
         {
             $incident_ar = $this->getDoctrine()->getRepository('AppBundle:Incident')->findOne($inid);
+            dump($incident);
             $incident = $this->transformtoIncident($incident_ar);
         }
         if(! isset($incident))
@@ -130,14 +132,15 @@ class IncidentController extends Controller
             $incident = new Incident();
         }
         $form = $this->createForm(IncidentForm::class, $incident);
-        
+        dump($form);
         if ($request->getMethod() == 'POST') 
         {
             #$form->bindRequest($request);
             $form->handleRequest($request);
             if ($form->isValid()) 
             {
-                // perform some action, such as save the object to the database
+               
+                   dump($form);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($incident);
                 $entityManager->flush();

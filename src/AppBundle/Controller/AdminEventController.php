@@ -175,7 +175,8 @@ class AdminEventController extends Controller
          $event->location['link'] = "/admin/location/".$location->getLocid();
        }
         
-        $linkrefs =$this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
+       // $linkrefs =$this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
+          $linkrefs = $this->get('linkref_service')->getLinks("event",$eid, $this->lang);
         
         return $this->render('event/editone.html.twig', [ 
              'lang' => $this->lang,

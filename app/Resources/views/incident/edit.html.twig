@@ -1,6 +1,5 @@
 {# templates/incident/edit.html.twig #}
 
-
 {% import 'macros.twig' as m %}
 
 {% extends 'admin.html.twig' %}
@@ -33,7 +32,7 @@
  <div class="label" > {{'edit.incident' |trans }} </div>
  <div class="title" >{{personname}} : {{eventlabel}} </div>
  <div class="deletebutton button1" > <a class="deletebutton" href="/admin/incident/delete/{{incidentid}}">{{'delete'|trans}}</a></div>
- <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+ <div class="returnbutton"> <a href ="{{returnlink}}" >{{ 'retour' | trans }} </a> </div>
 </div>
 
 <div  class="adminform" >
@@ -47,7 +46,7 @@
         <select id="itypelist" onchange="seltype(this.value)" >
          {% for itype in itypes %} 
            {% if (itype.itypeid ) == itypeid %}
-             <option value = "{{itype.itypeid}}" selected >{{itype.label}}</option>
+             <option value = "{{itype.itypeid}}" selected="selected"  >{{itype.label}}</option>
            {% else %}
              <option value = "{{itype.itypeid}}">{{itype.label}}</option>
            {% endif %}
@@ -70,6 +69,6 @@
 
 
 {% block right %}
-   {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
+  
 {% endblock%}
 

@@ -18,9 +18,9 @@
      {
         window.location.href = '/admin/location/'+lid;
      }
-     function clickcontent(cid)
+     function clickcontent(sid)
      {
-        window.location.href = '/admin/content/'+cid;
+        window.location.href = '/admin/subject/'+sid;
      }
 
      

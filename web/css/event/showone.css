@@ -121,6 +121,15 @@ div#event div.image div.imagelabel
     font-size:0.75em;
 }
 
+div#event div#pdiv
+{
+    margin-bottom:40px;
+}
+
+ div#event div#cdiv
+ {
+       margin-bottom:40px;
+ }
 
 div#event  div.children
 {

@@ -62,13 +62,6 @@ class ImagerefRepository extends EntityRepository
     
      public function findAllGroups( $imgid)
      {
-       # $qb=  $this->createQueryBuilder('r');
-       #    $qb->andWhere('r.imageid = :iid');
-        ##   $qb ->setParameter('iid', $imgid);
-        #   $gqb = $qb->getQuery();
-       #   $refs = $gqb->getResult();
-          
-              #    ->setParameter(1, $objid)
       $sql = "select t from AppBundle:imageref t ";
       $sql .= " where t.imageid= ".$imgid." ";
       $query = $this->getEntityManager()->createQuery($sql);

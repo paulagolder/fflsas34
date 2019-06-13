@@ -63,15 +63,23 @@
      <div class="dates" > {{ event.startdate}} : {{ event.enddate}} </div>
    {% endif %}
    
-     {% if event.locid %}
+   
       <div class="location heading" > 
-      <div class="label" >{% trans %} Endroit {% endtrans %} :</div>
+      <div class="label" >{{ 'Endroit' | trans }}</div>
+                <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.location.use.bookmarks' | trans }}</span>
+              </div>
+                {% if event.locid %}
       <div ><a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
+          {% endif  %}
       </div>
-     {% endif %}
+
      
-     {% if images %}
+    
      <div class="imagegroup" >
+          <div class="label" > {{ 'images' | trans }} </div>  
+          <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
+              </div>
+               {% if images %}
             <div class="images">
                 {% for image in images %}
                 <div class="image">
@@ -80,55 +88,61 @@
                 </div>
                 {% endfor %}
              </div>
+                {% endif %}  
       </div>
-      {% endif %}      
+       
             
      <div class="refgroup" >
      <div class="header">
-     <div class="label"> {{'liens' | trans}}</div>
+     <div class="label"> {{'Liens' | trans}}</div>
+     <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.link.use.bookmarks' | trans }}</span>
+              </div>
      <div class="editbutton first" ><a href="/admin/linkref/editevent/{{event.eventid}}">{{'edit.refs' | trans }}</a></div>
      </div>
+      <div class="reflist">
     {% for ref in refs %}
      <div class="ref">
-      <div class="refref" ><a href="{{ref.link}}">{{ref.label}}</a></div>
+      <div class="refref" ><a href="{{ref.path}}">{{ref.label}}</a></div>
     </div>
     {% endfor %}
+    </div>
     </div>
  
            {% if text or title %}
            <div class="textpanel" >
+                  <div class="label" > {{ 'texts' | trans }} </div>  
                
-                <div class="texts">
-                  <div class="title" >
-                    {{ title| raw }}
-                </div>
-                <div class="text" >
-                    {{ text | raw }}
-                </div>
-                </div>
                  <div class="edit editbutton first">
                    <a href = "/admin/text/event/{{objid}}"   > {%trans%}edit.text{% endtrans %}</a>
                 </div>
             </div>
         {%else%}
             <div  class="notext" >
-                <span class="label" > {% trans %} no.text {% endtrans %} </span>
-                <a href = "/admin/text/event/{{objid}}" class="editbutton"  > {%trans%}add.text{% endtrans %}</a>
+                <span class="label" > {{ 'no.text' | trans }} </span>
+                <a href = "/admin/text/event/{{objid}}" class="editbutton"  > {{ 'add.text' | trans }}</a>
             </div>
         {% endif %}
    
    
      
+        <div class="heading" > 
+            <div class="label">{{'participants' |trans}}</div>
+         <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.participation.use.bookmarks' | trans }}</span>
+       </div>
+   </div>     
    {% if participants %}
-   <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'participants' |trans}}</button></div>
-    <div id="pdiv" class=participants>
+   <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'participants' |trans}}</button>
+       </div>
+    <div id="pdiv" class="participants">
         {% for  key in participants | keys %}
-         <div class=participant > <a href='{{participants[key].link}}' >{{participants[key].label}}</a>  </div>
+         <div class="participant" > <a href='{{participants[key].link}}' >{{participants[key].label}}</a>  </div>
         {% endfor %}
-        </div>
+    </div>
     {% endif %}
     
-    <div class="hidebar" > <button onclick="HideMe2('pdiv2' )">{{'evenment.enfants' | trans }}</button></div>
+    <div class="hidebar" > 
+        <button onclick="HideMe2('pdiv2' )">{{'evenment.enfants' | trans }}</button>
+    </div>
   
     <div id="pdiv2" class="children">
     <div class= "subheading" >

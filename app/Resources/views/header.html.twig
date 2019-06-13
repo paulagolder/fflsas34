@@ -1,0 +1,69 @@
+
+        
+        <table  >
+            <tr>
+                <td class="logo1" rowspan="2">
+                    <img src="{{ asset('common/lorraineflag.gif') }}"  width="100" border="0" />
+                </td>
+                <td class="centertext" >
+                    <p class="headertext1"> Parachutistes S.A.S de la France Libre 1940 - 1945</p>
+                    <p class="headertext2"> Special Air Service 1st SAS - 3rd SAS - 4th SAS </p>
+                    <p class="headertext3"> Chasseurs Parachutistes 1ère CCP - 2ème RCP - 3ème RCP </p>
+                </td>          
+                <td class="logo2" rowspan="2">
+                    <img src="{{ asset('common/wings_tr.png') }}" alt="" width="150" border="0" />
+                </td>
+            </tr>
+            <tr>
+                <td class="bottomtext">
+                    <p class="headertext4"> -La liberté tombée du ciel-</p>
+                </td>
+            </tr>  
+        </table>
+        <div class="messagebar" >
+            {% set locale =  app.request.getLocale() %}
+            {% set cpath = app.request.uri %}
+            {% if 'en' in ( locale | lower ) %}
+            {% set cpath  = (cpath | replace({'/en/' :'/fr/'}) ) %}
+            <div class="languagelink tooltip"><a href={{cpath}}  ><img src="{{asset('common/fr.gif')}}"/></a>
+                <span class="tooltiptext">{{ 'enFrancais' | trans }}</span>
+            </div>
+            {% else %}
+            {% set cpath  = (cpath | replace({'/fr/' :'/en/'}) ) %}
+            {% set cpath  = (cpath | replace({'/FR/' :'/en/'}) ) %}
+            <div class="languagelink tooltip"><a href ={{cpath}} ><img src="{{asset('common/en.gif')}}" /></a>
+                <span class="tooltiptext">{{ 'inEnglish' | trans }}</span>
+            </div>
+            {% endif %}
+            <div class="welcome">
+                {% if app.user  is null %}
+                {{ 'bienvenue.visiteur' | trans }}
+                {% else %}
+                {{ 'bienvenue' | trans }} {{ app.user.username }}
+                ({% if is_granted('ROLE_ADMIN') %} Administrator{% endif %}
+                {% if is_granted('ROLE_USER') %} User{% endif %} )
+                {% endif %}
+            </div>
+            <div class="status">
+                {{versionname}}
+            </div>
+            <div class="filler"></div>
+            {% if is_granted('ROLE_TEMP') %}
+            <div class="complete messbutton">
+                <a href="/{{locale}}/complete/{{ app.user.userid }}" >{{ "complete.reg" | trans}}</a>
+            </div>
+            {% endif %}
+            {% if app.user  is null%}
+            <div class="loginlink messbutton">
+                <a href="/{{locale}}/login" >{{ "log.in" | trans}}</a>
+            </div>
+            {% else %}
+            <div class="logoutlink messbutton">
+                <a href="/logout"  >{{ "log.out" | trans}}</a>
+            </div>                
+            {% endif %}
+            <div class="contactlink messbutton">
+                <a href="/{{locale}}/mailto" >{{ "mail.us" | trans}}</a>
+            </div>
+        </div>
+       

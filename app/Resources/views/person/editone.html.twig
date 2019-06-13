@@ -1,6 +1,5 @@
 {# templates/person/showone.html.twig #}
 
-
 {% import 'macros.twig' as m %}
 
 {% extends 'admin.html.twig' %}
@@ -9,6 +8,7 @@
    {{ parent() }}
    <link href="{{ asset('/css/person/editone.css') }}" rel="stylesheet" />
 {% endblock %}
+
 {% block js %}
  {{ parent() }}
  <script>
@@ -31,7 +31,7 @@
      }
      
    </script>
-{%endblock%}
+{% endblock %}
 
 
 
@@ -62,6 +62,7 @@
            
            <div class="label" > {% trans %} images {% endtrans %} </div>  <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
               </div>
+                {% if images %}
              <div class="images">
                 {% for image in images %}
                 <div class="image">
@@ -71,6 +72,7 @@
                 </div>
                 {% endfor %}
              </div>
+              {% endif %}  
            </div>
         
             
@@ -92,7 +94,7 @@
             
         {% if text  %}
            <div class="textpanel" >
-            <div class="label" > {% trans %} texts {% endtrans %} </div>
+            <div class="label" > {{ 'texts' | trans }} </div>
                 <div class="edit editbutton button1">
                    <a href = "/admin/text/person/{{person.personid}}"   > {%trans%}edit.text{% endtrans %}</a>
                 </div>
@@ -100,8 +102,8 @@
             </div>
         {%else%}
             <div  class="notext row" >
-                <div class="redlabel" > {% trans %} no.text {% endtrans %} </div>
-                <div class="button1" ><a href = "/admin/text/person/{{person.personid}}" class="editbutton"  > {%trans%}add.text{% endtrans %}</a></div>
+                <div class="redlabel" >  {{ 'no.text' | trans }}  </div>
+                <div class="button1" ><a href = "/admin/text/person/{{person.personid}}" class="editbutton"  >  {{ 'add.text' | trans }}</a></div>
             </div>
         {% endif %}
             
@@ -120,8 +122,8 @@
                 {% for participant in participants %}
                     <div class="participant selectable" >
                      <div > {{ participant.label}}</div>
-                      <div class="editbutton button1" ><a href="{{participant.link}}">{%trans%}edit{%endtrans%}</a>
-                    </div>
+                     <div class="editbutton button1" ><a href="{{participant.vue}}">{{ 'vue' | trans }}</a></div>
+                      <div class="editbutton " ><a href="{{participant.link}}">{{ 'edit' | trans }}</a></div>
                     {% if(not participant.incidents )%}    
                     <div class="deletebutton" ><a href="/admin/person/delete/{{person.personid}}/{{participant.id}}">{%trans%}delete{%endtrans%}</a>
                     </div>

@@ -44,6 +44,8 @@ twig:
         maxlistadmin: '%maxlistadmin%'
         pdffunction: '%pdf-function%'
         versionname: '%version-name%'
+        maxrecentchanges: '%maxrecentchanges%'
+        defaultcontent: '%defaultcontent%'
         
         
 # Doctrine Configuration

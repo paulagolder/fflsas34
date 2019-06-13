@@ -34,17 +34,18 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    xlibrary_service:
+    alibrary_service:
         class: AppBundle\Controller\LibraryController
-    
+        calls:
+            - [setContainer, ["@service_container"]]
     
 
     #app.mylibrary:
     #    class: 
     AppBundle\Service\MyLibrary:
         arguments:
-           $parameterA : '%new-images-folder%'
-           $parameterB: '%external-images%'
+           $newimagepath : '%new-images-folder%'
+           $externalimagepath: '%external-images%'
             
     
     

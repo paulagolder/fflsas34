@@ -262,6 +262,7 @@ div#editperson div#person div.participants
  {
      margin-top:20px;
      color: blue;
+     margin-bottom: 20px;
      
  }
  
@@ -271,9 +272,9 @@ div#editperson div#person div.participants
      color: blue;
      font-size:1.2em;
      margin-left:5em;
-      display:flex;
-    align-items: center;
-    height: 25px;
+     display:flex;
+     align-items: center;
+     height: 25px;
      
  }
 

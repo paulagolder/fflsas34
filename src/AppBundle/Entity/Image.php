@@ -1,5 +1,7 @@
 <?php
 
+// src/entity/image.php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -11,8 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Image
 {
     
-    private  $new_images_folder = '/newimages/';
-    private  $external_images = "http://fflsas.org/images/stories/fflsas/";
+   #private  $new_images_folder = '/newimages/';
+   # private  $external_images = "http://fflsas.org/images/stories/fflsas/";
     
     /**
      * @ORM\Id()
@@ -33,25 +35,7 @@ class Image
      */
     private $path;
     
-  #      /**
-  #   ** @ORM\Column(type="smallint", nullable=true)
-  #   */
-  #  private $width;
-  #      /**
-  #   * * @ORM\Column(type="smallint", nullable=true)
-  #   */
-  #  private $height;
-    
-  #    /**
- #    * @ORM\Column(type="string", length=5, nullable=true)
-  #   */
-  #  private $orientation;
-    
-  #  /**
-  #   * @ORM\Column(type="string", length=14, nullable=true)
-  #   */
-    
-  #  private $date;
+ 
       /**
      * @ORM\Column(type="string", length=5, nullable=true)
      */
@@ -140,7 +124,7 @@ class Image
    
     
     
-      public function xgetFullpath()
+      public function getFullpath()
     {
         return $this->fullpath;
     }
@@ -182,33 +166,7 @@ class Image
         return $this;
     }
 
-   # public function getWidth(): ?int
-   # {
-   ##     return $this->width;
-   # }
-
-   # public function setWidth(?int $width): self
-   # {
-   #     $this->width = $width;
-#
-   #     return $this;
-  #  }
-
-  #  public function getHeight(): ?int
-  #  {
-  #      return $this->height;
-  #  }
-
-  #  public function setHeight(?int $height): self
-  #  {
-  #      $this->height = $height;
-#
-  #      return $this;
-  #  }
-
-
-
-
+ 
     public function getFormat(): ?string
     {
         return $this->format;
@@ -289,7 +247,8 @@ class Image
      public function isTemp()
      {
        $startstr = substr($this->path,0,4);
-       if($startstr=="2018")
+       $year =  (int)$startstr;
+       if($year > "2000")
        {
          return true;
        }
@@ -300,27 +259,5 @@ class Image
      }
        
        
-       public function xmakeFullpath()
-       {
-          if ($this->isTemp())
-          {
-             $this->setFullpath ( $this->new_images_folder.$this->getPath());   
-          }
-          else
-          {
-             $this->setFullpath ($this->external_images.$this->getPath());   
-          }
-        }
-        
-         public function getFullpath()
-       {
-          if ($this->isTemp())
-          {
-             return $this->new_images_folder.$this->getPath();   
-          }
-          else
-          {
-             return $this->external_images.$this->getPath();   
-          }
-        }
+     
 }

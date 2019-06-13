@@ -20,4 +20,8 @@
 /*.tar
 /*.tar.gz
 /translations/*.*~
+/*/x*
+*/x*
+/*/*/*/x*
+
 

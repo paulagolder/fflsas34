@@ -112,12 +112,11 @@ class PersonController extends Controller
         $lib =  $this->mylib ;
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
-        $person->link = "/".$this->lang."/person/".$person->getPersonid();
         if (!$person) 
         {
             return $this->render('person/showone.html.twig', [ 'lang'=>$this->lang,  'message' =>  'Person '.$pid.' not Found',]);
         }
-        
+          $person->link = "/".$this->lang."/person/".$person->getPersonid();
         $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",$pid);
         $textcomment = $lib->selectText($text_ar,"comment",$this->lang);
         

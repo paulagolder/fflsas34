@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 use AppBundle\Form\PersonForm;
-use AppBundle\Entity\person;
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Imageref;
 use AppBundle\Entity\Linkref;
 use AppBundle\Entity\event;
@@ -105,6 +105,7 @@ class AdminPersonController extends Controller
             $etexts_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$ppid);
             $label = $this->mylib->selectText($etexts_ar,'title',$this->lang)." : ".$label;
             $participation_ar[$i]['label'] =$label;
+            $participation_ar[$i]['vue'] ="/".$this->lang."/event/".$participation->getEventid();
             $i++;
         }
         
@@ -118,6 +119,7 @@ class AdminPersonController extends Controller
             if($image )
             {
                 $this->mylib->setFullpath($image);
+            
                 $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
                 $images[$i]['imageid']= $imageid;
                 $images[$i]['fullpath']= $image->getFullpath();
@@ -180,6 +182,8 @@ class AdminPersonController extends Controller
     {
         
         $request = $this->requestStack->getCurrentRequest();
+           $user = $this->getUser();
+        $time = new \DateTime();
         if($pid>0)
         {
             $person = $this->getDoctrine()->getRepository('AppBundle:Person')->findOne($pid);
@@ -189,17 +193,18 @@ class AdminPersonController extends Controller
             $person = new Person();
         }
         $form = $this->createForm(PersonForm::class, $person);
-        
         if ($request->getMethod() == 'POST') 
         {
             #$form->bindRequest($request);
             $form->handleRequest($request);
             if ($form->isValid()) 
             {
-                // perform some action, such as save the object to the database
+                $person->setContributor($user->getUsername());
+                $person->setUpdateDt($time);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($person);
                 $entityManager->flush();
+                $pid = $person->getPersonId();
                 return $this->redirect("/admin/person/".$pid);
             }
         }
@@ -215,6 +220,9 @@ class AdminPersonController extends Controller
     
     public function addimage($pid,$iid)
     {
+       $lref = $this->getDoctrine()->getRepository('AppBundle:Imageref')->findMatch('person',$pid,$iid);
+       if(!$lref)
+       {
         $imageref = new Imageref();
         $imageref->setImageid($iid);
         $imageref->setObjecttype("person");
@@ -222,38 +230,49 @@ class AdminPersonController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($imageref);
         $entityManager->flush();
+        }
         return $this->redirect("/admin/person/".$pid);
     }
     
     
     public function addContent($pid,$cid)
     {
+        $path = "/content/".$cid;
+        $lref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findbyPath('person',$pid,$path);
+        if(!$lref)
+        {
         $obj = $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($cid);
         $label= $obj->getLabel();
         $linkref = new Linkref();
         $linkref->setLabel($label);
-        $linkref->setPath("/content/".$cid);
+        $linkref->setPath($path);
         $linkref->setObjecttype("person");
         $linkref->setObjid($pid);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($linkref);
         $entityManager->flush();
+        }
         return $this->redirect("/admin/person/".$pid);
     }
     
     
     public function addLocation($pid,$lid)
     {
+        $path = "/location/".$lid;
+        $lref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findbyPath('person',$pid,$path);
+        if(!$lref)
+        {
         $obj = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($lid);
         $label= $obj->getLabel();
         $linkref = new Linkref();
         $linkref->setLabel($label);
-        $linkref->setPath("/location/".$lid);
+        $linkref->setPath($path);
         $linkref->setObjecttype("person");
         $linkref->setObjid($pid);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($linkref);
         $entityManager->flush();
+        }
         return $this->redirect("/admin/person/".$pid);
     }
     

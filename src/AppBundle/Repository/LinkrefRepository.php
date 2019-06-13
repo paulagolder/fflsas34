@@ -39,6 +39,19 @@ class LinkrefRepository extends EntityRepository
        return $ref;
     }
     
+    public function findbyPath($objecttype, $objid, $path)
+    {
+       $qb = $this->createQueryBuilder("r");
+       $qb->andWhere('r.path = :rpath');
+       $qb->setParameter('rpath', $path);
+       $qb->andWhere('r.objecttype = :ot');
+       $qb->andWhere('r.objid = :oid');
+       $qb->setParameter('ot', $objecttype);
+       $qb->setParameter('oid', $objid);
+       $ref =  $qb->getQuery()->getOneOrNullResult();
+       return $ref;
+    }
+    
     public function deleteOne($refid)
     {
         $sql = "delete FROM  AppBundle\Entity\Linkref p where p.linkid = '".$refid."'";
@@ -50,13 +63,7 @@ class LinkrefRepository extends EntityRepository
     
      public function findGroup($objecttype, $objid)
     {
-       # $refs =  $this->createQueryBuilder('r')
-       #     ->andWhere('r.objecttype = :ot')
-       #     ->andWhere('r.objid = :oid')
-       #     ->setParameter('ot', $objecttype)
-        #    ->setParameter('oid', $objid)
-       #     ->getQuery()
-       #     ->getResult();
+      
       $sql = "select r from AppBundle:linkref  r ";
       $sql .= " where r.objecttype  = '".$objecttype."' ";
         $sql .= " and r.objid  = ".$objid." ";

@@ -1,0 +1,17 @@
+
+        {% set locale =  app.request.getLocale() | lower %}
+        <table  class='footer' >
+            <tr>
+                <td class='left' >
+                    <div class="menuitem" > <a href="/{{locale}}/menucontent/204">     <img src="{{ asset('common/symfony_white_02.png') }}" alt="" width="100" border="0" /></a> </div>
+                </td>
+                <td class='center' >
+                    <a href="/{{locale}}/menucontent/205">  FFLSAS &copy;</a>
+                </td>
+                <td  class='right'> 
+                    
+                    <div class="menuitem" > <a href="/{{locale}}/menucontent/194"> {% trans %}admin.privacy{% endtrans %}</a> </div>
+                </td>
+            </tr>
+        </table>
+       
