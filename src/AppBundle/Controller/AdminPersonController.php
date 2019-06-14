@@ -139,7 +139,8 @@ class AdminPersonController extends Controller
         
         $mess = '';
         
-        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
+       // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
+           $linkrefs = $this->get('linkref_service')->getLinks("persont",$pid, $this->lang);
         
         return $this->render('person/editone.html.twig', 
         [ 'lang' => $this->lang,
@@ -148,7 +149,7 @@ class AdminPersonController extends Controller
         'text'=> $textcomment,
         'images'=> $images,
         'participants'=>$participation_ar,
-        'refs'=>$refs,
+        'refs'=>$linkrefs,
         'returnlink'=>"/".$this->lang."/person/".$pid,
         'source'=>"/admin/person/".$pid,
         ]);

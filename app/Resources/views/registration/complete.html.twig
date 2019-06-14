@@ -18,8 +18,8 @@
 </div>
 <div class="form">
 {{ form_start(form) }}
-    {{ form_row(form.username, { 'attr':{'disabled':'disabled'}}) }}
-    {{ form_row(form.email, { 'attr':{'disabled':'disabled'}}) }}
+    {{ form_row(form.username, { 'attr':{'disabled':'disabled' | trans }}) }}
+    {{ form_row(form.email, { 'attr':{'disabled':'disabled' | trans }}) }}
     {{ form_row(form.newregistrationcode) }}
     <button type="submit">Register!</button>
 {{ form_end(form) }}

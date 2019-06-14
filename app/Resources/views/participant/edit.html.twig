@@ -16,9 +16,9 @@
 
 <div id="editparticipation"  >
 <div class="heading" >
- <div class="label" > {%trans%}edit.participation{% endtrans%} </div>
+ <div class="label" > {{ 'edit.participation' | trans }} </div>
  <div class="title"> {{personname}} : {{eventlabel}} </div>
-  <div class="returnbutton"> <a href = "{{returnlink}}" >{% trans %} retour {% endtrans%} </a> </div>
+  <div class="returnbutton"> <a href = "{{returnlink}}" >{{ ' retour ' | trans }} </a> </div>
   </div>
 <div  class="adminform" >
 {{ form_start(form) }}
@@ -35,7 +35,7 @@
 {{ form_end(form) }}
 </div>
 <div class="incidents">
- <div class="editbutton"> <a href = "/admin/incident/new/{{eventid}}/{{personid}}" >{% trans %} create.incident {% endtrans%} </a> </div>
+ <div class="editbutton"> <a href = "/admin/incident/new/{{eventid}}/{{personid}}" >{{ ' create.incident ' | trans }} </a> </div>
  <div class="incidents"> 
  <div class="subheading" >
  <div class="label">{{'incidents' | trans}}</div>

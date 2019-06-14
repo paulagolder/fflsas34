@@ -194,18 +194,18 @@ see.content: Voir
 Click.me: Envoyez
 view.user: view.user
 return: retour
-admin.copyright: 'droits d''auteur'
+admin.copyright: "droits d''auteur"
 admin.privacy: 'politique de confidentialité'
 Username: 'Nom de Utilisateur'
 Email: 'Adress mail'
 Password: 'Mot de pass'
 'Repeat Password': 'Repeter mot de Pass'
 when.first.signing: 'lors de la première connexion'
-'registration success': 'l''inscription est réussie'
-you.have.sucessfully.completed: 'Vous avez terminé le processus d''inscription avec succès. '
+'registration success': "l''inscription est réussie"
+you.have.sucessfully.completed: "Vous avez terminé le processus d''inscription avec succès. "
 you.have.sucessfully.registered: 'Vous vous êtes enregistré avec succès. '
-'to.complete.reply.to email': 'Pour terminer la procédure d''inscription, répondez à l''email que vous avez reçu.'
-to.complete.enter: 'Pour terminer l''enregistrement, entrez le code suivant '
+'to.complete.reply.to email': "Pour terminer la procédure d''inscription, répondez à l''email que vous avez reçu."
+to.complete.enter: "Pour terminer l''enregistrement, entrez le code suivant "
 print.transcript: 'imprimer copie'
 Name: Name
 Path: Path
@@ -217,5 +217,14 @@ content: contenu
 enFrancais: 'Afficher le site en français'
 inEnglish: 'Show the site in English'
 texts: Textes
-complete.registration: terminer le processus d'inscription
-delete.image: supprimer l'image
+complete.registration: "terminer le processus d''inscription"
+delete.image: "supprimer l''image"
+to.add.location.use.bookmarks: 'Pour ajouter un location utiliser un signet'
+Liens: __Liens
+to.add.link.use.bookmarks: 'Pour ajouter un lien utiliser un signet'
+vue: 'Voir'
+disabled: __disabled
+from.admin.to: 'De ADMIN a'
+to.admin: 'A ADMIN'
+this.message.was.sent.by: 'message envoyé par'
+latest.edits: 'Derniers m-a-j'

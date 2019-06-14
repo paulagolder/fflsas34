@@ -20,7 +20,7 @@
    <div id="bookmarks" >
  
      <div class="heading">
-       <div class="label">{% trans %}bookmarks{% endtrans %}</div> 
+       <div class="label">{{ 'bookmarks' | trans }}</div> 
        </div>
      {% for key1, blist in blists  %}
         <div class="bookmark{{key1}}"> {{key1}}</div>

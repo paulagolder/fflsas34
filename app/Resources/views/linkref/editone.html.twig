@@ -31,7 +31,7 @@
    {% else %}
      <div class ="heading" >
      <div class="title" >{{heading}}  </div>
-           <div class="returnbutton button1"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+           <div class="returnbutton button1"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
            <div class="editbutton" ><a class="editbutton" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/{{ref.linkid}} " > {{'edit' | trans}}</a></div>
     </div>
             <div class="ref">
@@ -50,7 +50,7 @@
            {% set frtitle = true %} 
            <div class="textref" >
               <div   class="textref " > {{ ref.label}} : {{text.attribute}}: {{text.language | upper}} :
-              <a class= "editbutton" href="/admin/text/{{text.id}}" >{% trans %} edit.this{% endtrans%} </a> 
+              <a class= "editbutton" href="/admin/text/{{text.id}}" >{{ ' edit.this' | trans }} </a> 
               </div>
               <div class="textpanel" > {{text.comment | raw }} </div>
            </div>
@@ -59,7 +59,7 @@
            {% set entitle = true %} 
            <div class="textref" >
              <div   class="textref " > {{ ref.label}} : {{text.attribute}}: {{text.language | upper}} :
-             <a class= "editbutton" href="/admin/text/{{text.id}}" >{% trans %} edit.this{% endtrans%} </a> 
+             <a class= "editbutton" href="/admin/text/{{text.id}}" >{{ ' edit.this' | trans }} </a> 
              </div>
              <div class="textpanel" > {{text.comment | raw }} </div>
            </div>
@@ -72,14 +72,14 @@
            <div class="label">{{ ref.label}}: FR : title :</div>
            <div class="editbutton button1">
         
-           <a class= "editbutton " href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.linkid}}/title/fr" >{% trans %} create.this{% endtrans%} </a> </div>
+           <a class= "editbutton " href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.linkid}}/title/fr" >{{ ' create.this' | trans }} </a> </div>
            </div>
   {% endif %}
   {% if not entitle  %}
    <div   class="subheading selectable" > 
            <div class="label">{{ ref.label}}: EN : title :</div>
            <div class="editbutton button1">
-           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.linkid}}/title/en"  >{% trans %} create.this{% endtrans%} </a> </div>
+           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.linkid}}/title/en"  >{{ ' create.this' | trans }} </a> </div>
            </div>
   {% endif %}
  

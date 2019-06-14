@@ -10,7 +10,7 @@
 
 {% block middle %}
 <div id= "emailresp" >
-<div class= "label" >{{'this.message.was.sent.by'}}  </div>
+<div class= "label" >{{'this.message.was.sent.by' | trans }}  </div>
 
 {{ m.emailbody1(name,datesent,sentto,fromemail, subject,body)  }} 
 </div>

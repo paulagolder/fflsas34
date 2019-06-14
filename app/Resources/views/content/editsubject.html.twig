@@ -33,7 +33,7 @@
    <div class="heading">
      <div class="label" >{{ 'content.for.subject' | trans }} </div>
      <div class="title" > {{subjectid}}</div>
-     <div class="returnbutton button1"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+     <div class="returnbutton button1"> <a href = {{returnlink}} >{{ ' annuler ' | trans }} </a> </div>
    </div>
    {% set founden = false %}
     {% set foundfr = false %}
@@ -82,7 +82,7 @@
     
      
    <div class="refs">
-       <div  class="linksheading" >{%trans%}liens.a{% endtrans %}</div>
+       <div  class="linksheading" >{{ 'liens.a' | trans }}</div>
        {% for obtype , oref in refs %}
         <div class="linkgroup" >{{obtype  | trans}}</div>
          {% for obid , ref in oref %}       

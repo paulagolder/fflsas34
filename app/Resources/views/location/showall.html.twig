@@ -17,7 +17,7 @@
    {% endif %}
 
    {% if locations %}
-     <h1>{% trans %}Toutes.Endroits{% endtrans %}({{  locations | length }})</h1> 
+     <h1>{{ 'Toutes.Endroits' | trans }}({{  locations | length }})</h1> 
      <nav>
        <ul>
          {% for location in locations %}

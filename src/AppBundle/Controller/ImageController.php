@@ -65,6 +65,7 @@ class ImageController extends Controller
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
         $refs_ar =  $this->getDoctrine()->getRepository("AppBundle:Imageref")->findAllGroups($iid);
+        
         foreach( $refs_ar as $key=> $refg_ar)
         {
             if($key=="person")

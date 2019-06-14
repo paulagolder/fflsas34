@@ -12,9 +12,9 @@
 
 <div id="fuser"  >
 <div class="heading">
-  <div class="label" > {%trans%}view.message{% endtrans%}</div>
+  <div class="label" > {{ 'view.message' | trans }}</div>
   <div class="title" > {{user.username}} ({{user.email}})</div>
-  <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+  <div class="returnbutton"> <a href = {{returnlink}} >{{ ' annuler ' | trans }} </a> </div>
 </div>
 
 

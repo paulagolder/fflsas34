@@ -11,8 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Content
 {
     
-    private  $content_folder ='/symfonyimages/new/';
-    private  $external_images = "http://fflsas.org/images/stories/fflsas/";
+    private  $xcontent_folder ='/symfonyimages/new/';
+    private  $xexternal_images = "http://fflsas.org/images/stories/fflsas/";
     
     /**
      * @ORM\Id()

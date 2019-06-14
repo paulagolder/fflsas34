@@ -84,7 +84,7 @@
                 {% for image in images %}
                 <div class="image">
                     <div class="imageimage" ><a href="{{image.link}}" ><img src="{{image.fullpath}}" /></a></div>
-                    <div class="imagedelete deletebutton" ><a href="/admin/event/removeimage/{{event.eventid}}/{{image.refid}}">{%trans%}delete{%endtrans%}</a></div>
+                    <div class="imagedelete deletebutton" ><a href="/admin/event/removeimage/{{event.eventid}}/{{image.refid}}">{{ 'delete' | trans }}</a></div>
                 </div>
                 {% endfor %}
              </div>
@@ -113,7 +113,7 @@
                   <div class="label" > {{ 'texts' | trans }} </div>  
                
                  <div class="edit editbutton first">
-                   <a href = "/admin/text/event/{{objid}}"   > {%trans%}edit.text{% endtrans %}</a>
+                   <a href = "/admin/text/event/{{objid}}"   > {{ 'edit.text' | trans }}</a>
                 </div>
             </div>
         {%else%}

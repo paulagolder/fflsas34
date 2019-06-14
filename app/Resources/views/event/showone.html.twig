@@ -58,7 +58,7 @@
     
      {% if event.locid %}
       <div class="subheading">
-         <div class="label" > {% trans %} Endroit {% endtrans %} : </div>
+         <div class="label" > {{ ' Endroit ' | trans }} : </div>
          <div class= "title" >
            <a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> 
          </div>

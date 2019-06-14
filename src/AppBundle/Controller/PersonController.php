@@ -185,7 +185,7 @@ class PersonController extends Controller
         // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
 
         
-        $refs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
+        $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
         
         return $this->render('person/showone.html.twig', 
 
@@ -195,7 +195,7 @@ class PersonController extends Controller
         'text'=> $textcomment,
         'images'=> $images,
         'eventtree'=>$evt,
-        'refs'=>$refs,
+        'refs'=>$linkrefs,
         'incidents'=>$incidents,
         ]);
 
@@ -345,7 +345,7 @@ class PersonController extends Controller
         $mess = '';
         
         
-        $refs = $this->get('linkref_service')->getLinks("person",$pid);
+        $linkrefs = $this->get('linkref_service')->getLinks("person",$pid,$this->lang);
         
         $header = $this->renderView('person/header.html.twig', array(
             'name' => $person->getFullname(),
@@ -364,7 +364,7 @@ class PersonController extends Controller
                 'text'=> $textcomment,
                 'images'=> $images,
                 'eventtree'=>$evt,
-                'refs'=>"",
+                'refs'=>$linkrefs,
                 'incidents'=>$incidents,
                 'header_html' => $header,
                 'footer_html' => $footer,

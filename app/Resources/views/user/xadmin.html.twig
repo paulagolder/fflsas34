@@ -16,24 +16,24 @@
 <div id="fuser"  >
     
     <div class="heading">
-        <div class="label" > {%trans%}profil.person{% endtrans%}</div>
+        <div class="label" > {{ 'profil.person' | trans }}</div>
         <div class="title" > {{user.username}}</div>
         
         <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
-        <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{{ ' annuler ' | trans }} </a> </div>
     </div>
     
     <div  class="userdata" >
         <div class="datarow">
-            <div class="label" > {%trans%}user.email{% endtrans%}</div>
+            <div class="label" > {{ 'user.email' | trans }}</div>
             <div class="data" > {{user.email}}</div>
         </div>
         <div class="datarow">
-            <div class="label" > {%trans%}user.roles{% endtrans%}</div>
+            <div class="label" > {{ 'user.roles' | trans }}</div>
             <div class="data" > {{user.rolestr}}</div>
         </div>
         <div class="datarow">
-            <div class="label" > {%trans%}user.lastlogin{% endtrans%}</div>
+            <div class="label" > {{ 'user.lastlogin' | trans }}</div>
             <div class="data" > {{user.lastlogin | date("Y-m-d") }}</div>
         </div>
     </div>

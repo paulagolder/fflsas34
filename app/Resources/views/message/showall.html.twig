@@ -15,7 +15,7 @@
 
  <div id="contacts"  >
     <div class="heading">
-        <div class="label" > {%trans%}see.admin.messages{% endtrans%}</div>
+        <div class="label" > {{ 'see.admin.messages' | trans }}</div>
     </div>
     
     
@@ -27,9 +27,9 @@
         {% for contact in messages %}
         <div class= "contact  selectable">
         {% if contact.fromname == 'FFLSAS-admin' %}
-           <div class="name" > {{'from.admin.to'}} {{contact.toname}}</div>
+           <div class="name" > {{'from.admin.to' | trans }} {{contact.toname}}</div>
         {% else %}
-           <div class="name" > {{'from'}} {{contact.fromname}} {{'to.admin'}}</div>
+           <div class="name" > {{'from' | trans }} {{contact.fromname}} {{'to.admin' | trans }}</div>
         {% endif %}
             <div class= "date" > {{contact.date_sent | date("Y-m-d") }}</div>
             <div class="subject" > {{contact.subject}}</div>

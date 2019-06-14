@@ -24,8 +24,8 @@
 
 <div id="editevent"  >
 <div class="heading">
- <div class="label" > {%trans%}edit.event{% endtrans%}</div>
- <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+ <div class="label" > {{ 'edit.event' | trans }}</div>
+ <div class="returnbutton"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
 </div>
 <div  class="adminform" >
 {{ form_start(form) }}

@@ -35,7 +35,7 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 
     // last username entered by the user
     $lastUsername = $authenticationUtils->getLastUsername();
-
+  dump($authenticationUtils);
     return $this->render('security/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
@@ -46,7 +46,7 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 
     public function loginCheckAction()
     {
-       //echo(" bonkers ");
+       
           $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
     
        return $this->render('accueil/showall.html.twig', 
@@ -78,7 +78,7 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 
     // last username entered by the user
     $lastUsername = $authenticationUtils->getLastUsername();
-
+    dump($authenticationUtils);
     return $this->render('security/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
@@ -86,20 +86,7 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 }
 
 
-   /**
-     * @Route("/login_success", name="login_success")
-   
-    public function postLoginRedirectAction()
-    {
-        if () {
-            return $this->redirectToRoute("location_a");
-        } else if () {
-            return $this->redirectToRoute("location_b");
-        } else {
-            return $this->redirectToRoute("index");
-        }
-    }
-  */
+  
 
 
 }

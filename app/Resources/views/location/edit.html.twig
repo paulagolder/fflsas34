@@ -41,11 +41,11 @@
 
 <div id="editlocation"  >
    <div class="heading">
-     <div class="label" > {%trans%}edit.location{% endtrans%}</div>
+     <div class="label" > {{ 'edit.location' | trans }}</div>
      <div class="title" >{{location.name}}</div>
      <div class="label" >{{'child.of' |trans}} </div>
      <div class="title">{{regionname}}</div>
-     <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} retour {% endtrans%} </a> </div>
+     <div class="returnbutton"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
    </div>
    <div  class="adminform" >
     {{ form_start(form) }}

@@ -38,7 +38,7 @@
 {% block middle %}
 <div id="editperson">
     <div class="newperson" >
-        <div class="editbutton" ><a href = "/admin/person/detail/0" >{%trans%}new.person{% endtrans %}</a></div>
+        <div class="editbutton" ><a href = "/admin/person/detail/0" >{{ 'new.person' | trans }}</a></div>
     </div>
     <div class="person" >
         {% if message %}
@@ -51,16 +51,16 @@
             <div class="label">  {{ 'person.a.editer' | trans }} : </div>
             <div class="title">   {{ person.fullname}} </div>
             <div class="editbutton button1" ><a href="/admin/person/addbookmark/{{person.personid}}"> {{"bookmark.person" | trans }} </a></div>
-            <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {%trans%}edit.person{% endtrans %}</a></div>
+            <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {{ 'edit.person' | trans }}</a></div>
 
-            <div class="returnbutton"> <a href = "{{returnlink}}" >{% trans %} retour {% endtrans%} </a></div>
+            <div class="returnbutton"> <a href = "{{returnlink}}" >{{ ' retour ' | trans }} </a></div>
           </div>
         {% endif %}
             
         
            <div class="imagegroup" >
            
-           <div class="label" > {% trans %} images {% endtrans %} </div>  <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
+           <div class="label" > {{ ' images ' | trans }} </div>  <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
               </div>
                 {% if images %}
              <div class="images">
@@ -68,7 +68,7 @@
                 <div class="image">
                     <div class="imageimage" ><a href="{{image.link}}" ><img src="{{image.fullpath}}" /></a></div>
                     <div class="imagelabel" >{{image.title}}</div>
-                    <div class="imagedelete deletebutton" ><a href="/admin/person/removeimage/{{person.personid}}/{{image.imageid}}">{%trans%}delete{%endtrans%}</a></div>
+                    <div class="imagedelete deletebutton" ><a href="/admin/person/removeimage/{{person.personid}}/{{image.imageid}}">{{ 'delete' | trans }}</a></div>
                 </div>
                 {% endfor %}
              </div>
@@ -82,7 +82,7 @@
            <div class="label"> {{'Liens'|trans}}</div>  <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.link.use.bookmarks' | trans }}</span>
               </div>
            <div class="editbutton" >
-               <a  href="/admin/linkref/editperson/{{person.personid}}">{%trans%}ref.edit{%endtrans%}</a>
+               <a  href="/admin/linkref/editperson/{{person.personid}}">{{ 'ref.edit' | trans }}</a>
             </div>
          </div>
          <div class="reflist">
@@ -96,7 +96,7 @@
            <div class="textpanel" >
             <div class="label" > {{ 'texts' | trans }} </div>
                 <div class="edit editbutton button1">
-                   <a href = "/admin/text/person/{{person.personid}}"   > {%trans%}edit.text{% endtrans %}</a>
+                   <a href = "/admin/text/person/{{person.personid}}"   > {{ 'edit.text' | trans }}</a>
                 </div>
           
             </div>
@@ -113,7 +113,7 @@
           <div class="participants" >
           <div class="heading" > 
              <div class= 'label'>
-                 {%trans%}participated.in.events{%endtrans%}
+                 {{ 'participated.in.events' | trans }}
               </div>
               <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.participation.use.bookmarks' | trans }}</span>
               </div>
@@ -125,7 +125,7 @@
                      <div class="editbutton button1" ><a href="{{participant.vue}}">{{ 'vue' | trans }}</a></div>
                       <div class="editbutton " ><a href="{{participant.link}}">{{ 'edit' | trans }}</a></div>
                     {% if(not participant.incidents )%}    
-                    <div class="deletebutton" ><a href="/admin/person/delete/{{person.personid}}/{{participant.id}}">{%trans%}delete{%endtrans%}</a>
+                    <div class="deletebutton" ><a href="/admin/person/delete/{{person.personid}}/{{participant.id}}">{{ 'delete' | trans }}</a>
                     </div>
                     {% endif%}
                     </div>
@@ -137,7 +137,7 @@
           </div>
         {% else %}
             <div  class="noparticipants" > 
-                <a href = "/admin/person/addtoparticipants/{{person.personid}}" class="editbutton"  > {%trans%}add.participation{%endtrans%}</a>
+                <a href = "/admin/person/addtoparticipants/{{person.personid}}" class="editbutton"  > {{ 'add.participation' | trans }}</a>
             </div>
         {% endif %}
         {% endif %}

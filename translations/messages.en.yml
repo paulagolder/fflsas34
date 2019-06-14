@@ -216,5 +216,14 @@ content: content
 inEnglish: 'Show site in English'
 enFrancais: 'Afficher le site en français'
 texts: Texts
-complete.registration: Complete registration
-delete.image: Delete Image
+complete.registration: 'Complete registration'
+delete.image: 'Delete Image'
+to.add.location.use.bookmarks: 'To add a location use a bookmark'
+Liens: Links
+to.add.link.use.bookmarks: 'To add a link use a bookmark'
+vue: 'View'
+disabled: 'Disabled'
+from.admin.to: 'From ADMIN to'
+to.admin: 'To ADMIN'
+this.message.was.sent.by: 'This message was sent by'
+latest.edits: 'Latest Updates'

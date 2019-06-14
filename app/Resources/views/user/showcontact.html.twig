@@ -12,11 +12,11 @@
 
 <div id="fuser"  >
 <div class="heading">
-  <div class="label" > {%trans%}edit.person{% endtrans%}</div>
+  <div class="label" > {{ 'edit.person' | trans }}</div>
   <div class="title" > {{user.username}} ({{user.email}}</div>
 
   <div class="editbutton button1" ><a class='editbutton' href="/{{lang}}/useredit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
-  <div class="returnbutton"> <a href = {{returnlink}} >{% trans %} annuler {% endtrans%} </a> </div>
+  <div class="returnbutton"> <a href = {{returnlink}} >{{ ' annuler ' | trans }} </a> </div>
 </div>
 
 

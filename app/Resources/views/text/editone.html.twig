@@ -12,7 +12,7 @@
 
 {% block middle %}
   
- <div >{%trans%}this.is.an.edit {%endtrans%} {{label}}</div>
+ <div >{{ 'this.is.an.edit ' | trans }} {{label}}</div>
 
    {% if texts is defined %}
      <h1>{{heading}}</h1> 

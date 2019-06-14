@@ -40,7 +40,7 @@
     <div class="dates" > {{ event.startdate}} : {{ event.enddate}} </div>
      {% endif %}
      {% if event.locid %}
-      <div class="location" > {% trans %} Endroit {% endtrans %} : <a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
+      <div class="location" > {{ ' Endroit ' | trans }} : <a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
      {% endif %}
     
     

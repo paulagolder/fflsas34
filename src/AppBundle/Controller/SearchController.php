@@ -64,7 +64,7 @@ class SearchController extends Controller
         {
           $cid = $content->getContentid();
           $results['content'][$cid]['label'] = $content->getLabel();
-          $results['content'][$cid]['link'] ="/".$this->lang."/contentid/".$cid;
+          $results['content'][$cid]['link'] ="/".$this->lang."/subject/".$cid;
         }
         
          $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findTexts($pfield);

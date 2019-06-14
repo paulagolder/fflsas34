@@ -28,7 +28,7 @@
         <div class="heading">
             <div class="label" >{{ 'edit.contents' | trans }} </div>
             <div class="title" >{{ content.title}} : {{content.contentid}} </div>
-            <div class="returnbutton button1"> <a href ="{{returnlink}}" >{% trans %} annuler {% endtrans%} </a> </div>
+            <div class="returnbutton button1"> <a href ="{{returnlink}}" >{{ ' annuler ' | trans }} </a> </div>
         </div> 
         <div class="form">
             <form action="/admin/content/process_edit/{{content.contentid}}" method="post" >
@@ -46,7 +46,7 @@
                 </div>
                 <input type="hidden" name="_text" value="{{ content.text  }}" >
                     
-                    <button type="submit" id="submitbutton" style="display: none;"  >{% trans %} enregistrer {% endtrans%} </button> 
+                    <button type="submit" id="submitbutton" style="display: none;"  >{{ ' enregistrer ' | trans }} </button> 
                     
                 </form>
                 

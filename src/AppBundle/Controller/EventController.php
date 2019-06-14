@@ -156,12 +156,13 @@ class EventController extends Controller
             $event->location['link'] = "/".$this->lang."/location/".$location->getLocid();
         }
         
-        $linkrefs =$this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
+       // $linkrefs =$this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);
+           $linkrefs = $this->get('linkref_service')->getLinks("event",$eid, $this->lang);
 
         foreach($linkrefs as $key=>$linkref)
         {
-            $reftext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("linkref",$linkrefs[$key]['linkid']);
-            $linkrefs[$key]['label'] =  $this->mylib->selectText($reftext_ar,'title',$this->lang);
+           // $reftext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("linkref",$linkrefs[$key]['linkid']);
+          //  $linkrefs[$key]['label'] =  $this->mylib->selectText($reftext_ar,'title',$this->lang);
         }
         
         return $this->render('event/showone.html.twig', [ 

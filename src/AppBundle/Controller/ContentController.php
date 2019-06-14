@@ -78,14 +78,15 @@ class ContentController extends Controller
         $text = $content->getText();
         $text = $this->insertImages($text);
         $content->setText(  $this->cleanText($text));
-        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
+       // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$sid);
+           $linkrefs = $this->get('linkref_service')->getLinks("content",$sid, $this->lang);
         
         return $this->render('content/showone.html.twig', 
         [
         'message' =>  '',
         'lang'=>$this->lang,
         'content'=> $content,
-        'refs'=>$refs,
+        'refs'=>$linkrefs,
         ]);
     }
     
@@ -107,18 +108,19 @@ class ContentController extends Controller
         ]);
      
         }
+        $content->setText( $this->insertImages($content->getText()));
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
-        $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$content->getSubjectid());
-        
+     //   $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('content',$content->getSubjectid());
+           $linkrefs = $this->get('linkref_service')->getLinks("content",$content->getSubjectid(), $this->lang);
         return $this->render('content/showone.html.twig', 
         [
         'message' =>  '',
         'lang'=>$this->lang,
         'content'=> $content,
         'title'=>$title,
-        'refs'=>$refs,
+        'refs'=>$linkrefs,
         ]);
     }
     
@@ -531,17 +533,19 @@ class ContentController extends Controller
         {
             $k2 = strpos ( $text , "]]",$k1 );
             $tokengroup = substr($text,$k1, $k2-$k1+2);
-            #dump($tokengroup);
+            dump($tokengroup);
             $tokens=substr($tokengroup,2,$k2-$k1-2);
-            # dump($tokens);
+             dump($tokens);
             $token_list=json_decode("{".$tokens."}",true);
-            #dump($token_list);
+            dump($token_list);
             
             $imageid =  $token_list['image'];
-            // $imageid=16;
+            dump( $imageid);
             $image =  $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+             dump( $image);
             if($image)
             {
+                $this->mylib->setFullpath($image);
                 $style="";
                 if(array_key_exists ('width' , $token_list))
                 {
