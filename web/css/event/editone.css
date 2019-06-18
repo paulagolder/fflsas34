@@ -71,7 +71,7 @@ div#editevent div.imagegroup
      display: flex;
      flex-direction: row;
      flex-wrap: wrap;
-     justify-content: space-evenly;
+     xjustify-content: space-evenly;
 }
 
 div#editevent div.imagegroup div.imageedit

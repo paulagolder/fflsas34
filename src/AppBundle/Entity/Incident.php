@@ -68,9 +68,9 @@ class Incident
     
     
     /**
-     * @ORM\Column(type="string", length=40, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $location;
+    private $comment;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
@@ -206,14 +206,14 @@ class Incident
         return $this;
     }
 
-    public function getLocation(): ?string
+    public function getComment(): ?string
     {
-        return $this->location;
+        return $this->comment;
     }
 
-    public function setLocation(?string $location): self
+    public function setComment(?string $comment): self
     {
-        $this->location = $location;
+        $this->comment = $comment;
 
         return $this;
     }

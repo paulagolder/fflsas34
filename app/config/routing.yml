@@ -68,7 +68,12 @@ remote_complete_registration:
     path: /remotecomplete/{uid}/{code}
     controller:  AppBundle\Controller\RegistrationController::remotecomplete   
 
-   
+    
+admin_message:
+   path: /accueil/message/{mess}
+   controller: AppBundle\Controller\AccueilController::Showmessage   
+   requirements:
+        token: .+
    
 #=============================messages==================   
    
@@ -180,6 +185,10 @@ admin_Person_edit_detail:
     path: /admin/person/detail/{pid}
     controller: AppBundle\Controller\AdminPersonController::edit 
     
+admin_Person_delete:
+    path: /admin/person/delete/{pid}
+    controller: AppBundle\Controller\AdminPersonController::delete
+    
 admin_Person_one:
     path: /admin/person/{pid}
     controller: AppBundle\Controller\AdminPersonController::Editone
@@ -220,7 +229,7 @@ user_Person_bookmark:
 removeparticipation:
     path: /admin/person/delete/{pid}/{partid}
    # controller: AppBundle\Controller\AdminPersonController::delete
-    defaults: { _controller: AppBundle\Controller\AdminPersonController::deleteAction}
+    defaults: { _controller: AppBundle\Controller\AdminPersonController::deleteParticipation}
     requirements:
         partid:  \d+
 
@@ -305,6 +314,10 @@ text_admin_edit:
 text_admin_edit_one:
    path : /admin/text/{tid}
    controller:  AppBundle\Controller\TextController::edit_quill  
+   
+text_person_delete:
+   path : /admin/text/delete/{tid}
+   controller:  AppBundle\Controller\TextController::delete   
    
 text_person_admin:
    path : /admin/text/person/{pid}
@@ -461,6 +474,10 @@ admin_event_one:
 admin_events_detail:
     path:  /admin/event/detail/{eid}
     controller: AppBundle\Controller\AdminEventController::Editdetail 
+    
+admin_events_delete:
+    path:  /admin/event/delete/{eid}
+    controller: AppBundle\Controller\AdminEventController::Delete
         
 #======================incidents
     
@@ -658,8 +675,28 @@ content_admin_deleteimage:
     controller:  AppBundle\Controller\ContentController::Deleteimage  
     
    
+#==============================================url
+
+url_show_all:
+    path: /{_locale}/url/show
+    controller:  AppBundle\Controller\UrlController::Showall  
+    requirements:
+        _locale: en|fr|FR|EN 
+        
+url_delete_one:        
+    path: /admin/url/delete/{urlid}
+    controller:  AppBundle\Controller\UrlController::delete  
+    
+url_edit:        
+    path: /admin/url/edit/{urlid}
+    controller:  AppBundle\Controller\UrlController::edit 
     
     
+url_visit:        
+    path:  /{_locale}/url/visit/{urlid}
+    controller:  AppBundle\Controller\UrlController::visit
+    requirements:
+        _locale: en|fr|FR|EN 
 #=========================================================
     
 catch_all:

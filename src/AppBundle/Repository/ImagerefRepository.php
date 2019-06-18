@@ -89,6 +89,15 @@ class ImagerefRepository extends EntityRepository
         return $numDeleted;
     }
     
+      public function deleteGroup($objecttype, $objid)
+    {
+        $sql = "delete FROM  AppBundle\Entity\Imageref p where p.objecttype = '".$objecttype."'";
+        $sql .= ' and p.objid = '.$objid;
+        $query = $this->getEntityManager()->createQuery($sql);
+        $numDeleted = $query->execute();
+        return $numDeleted;
+    }
+    
     public function deleteAllImages( $imageid)
     {
         $sql = "delete FROM  AppBundle\Entity\Imageref p where  p.imageid = ".$imageid;

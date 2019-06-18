@@ -36,12 +36,6 @@ class AdminPersonController extends Controller
     }
     
     
-    public function index()
-    {
-        return $this->render('person/index.html.twig', [
-        'controller_name' => 'AdminPersonController',
-        ]);
-    }
     
     
     public function Editone($pid)
@@ -120,10 +114,10 @@ class AdminPersonController extends Controller
             {
                 $this->mylib->setFullpath($image);
             
-                $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
+                $itext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
                 $images[$i]['imageid']= $imageid;
                 $images[$i]['fullpath']= $image->getFullpath();
-                $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
+                $images[$i]['title'] = $lib->selectText($itext_ar,'title',$this->lang);
                 $images[$i]['link'] = "/admin/image/".$imageid;
                 $i++;
             }
@@ -138,13 +132,17 @@ class AdminPersonController extends Controller
         }
         
         $mess = '';
-        
+        $candelete = false;
+        dump($participation_ar);
+        dump($text_ar);
+        if(! $participation_ar && ! $text_ar) $candelete= true;
        // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
            $linkrefs = $this->get('linkref_service')->getLinks("persont",$pid, $this->lang);
         
         return $this->render('person/editone.html.twig', 
         [ 'lang' => $this->lang,
         'message' =>  $mess,
+        'candelete' => $candelete,
         'person'=> $person, 
         'text'=> $textcomment,
         'images'=> $images,
@@ -183,7 +181,7 @@ class AdminPersonController extends Controller
     {
         
         $request = $this->requestStack->getCurrentRequest();
-           $user = $this->getUser();
+        $user = $this->getUser();
         $time = new \DateTime();
         if($pid>0)
         {
@@ -304,7 +302,7 @@ class AdminPersonController extends Controller
     }
     
     
-    public function deleteAction($pid,$partid)
+    public function deleteParticipation($pid,$partid)
     {
         
         $this->getDoctrine()->getRepository("AppBundle:Participant")->deleteOne($partid);
@@ -331,6 +329,19 @@ class AdminPersonController extends Controller
             $session->set('personList', $plist);
         }
         return $this->redirect("/admin/person/".$pid);
+        
+    }
+    
+     public function delete($pid)
+    {
+         $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
+     $mess = "person ". $person->getFullname()." deleted";
+     $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteGroup("person",$pid);
+      $this->getDoctrine()->getRepository("AppBundle:Imageref")->deleteGroup("person",$pid);
+     $em = $this->getDoctrine()->getManager();
+      $em->remove($person);
+     $em->flush();
+        return $this->redirect('/accueil/message/'.$mess);
         
     }
 }

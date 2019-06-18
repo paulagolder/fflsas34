@@ -55,6 +55,17 @@ class LocationRepository extends EntityRepository
     
     }
     
+     public function findSearch($sfield)
+    {
+       $qb = $this->createQueryBuilder("p");
+       $qb->andWhere('p.name LIKE :pid  ');
+       $qb->setParameter('pid', $sfield);
+       $qb->orderBy("p.name", "ASC");
+       $places =  $qb->getQuery()->getResult();
+     
+       return $places;
+    }
+    
     
     private function makefindonequery($lid)
     {

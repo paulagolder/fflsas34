@@ -57,6 +57,9 @@
      <div class="editbutton button1" ><a href="/admin/event/detail/{{event.eventid}}"> {{"edit.event.detail" | trans }} </a></div>
      <div class="editbutton " ><a href="/admin/event/addbookmark/{{event.eventid}}"> {{"bookmark.event" | trans }} </a></div>
      <div class="returnbutton" ><a href="{{returnlink}}"> {{"retour" | trans }} </a></div>
+        {% if not event.children %}
+         <div class="deletebutton" ><a  href="/admin/event/delete/{{event.eventid}}"> {{"delete" | trans }} </a></div>
+        {% endif %}
    </div>
    
    {% if ( event.startdate is defined ) or (event.enddate is defined )%}
@@ -75,11 +78,14 @@
 
      
     
-     <div class="imagegroup" >
+     
+        {% if images %}
+        <div class="imagegroup" >
+     <div class="heading">
           <div class="label" > {{ 'images' | trans }} </div>  
           <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
               </div>
-               {% if images %}
+         
             <div class="images">
                 {% for image in images %}
                 <div class="image">
@@ -88,8 +94,16 @@
                 </div>
                 {% endfor %}
              </div>
-                {% endif %}  
-      </div>
+              </div>
+             </div>
+             {% else %}
+               <div class="heading">
+          <div class="label" > {{ 'images' | trans }} </div>  
+          <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
+              </div>
+          </div>
+              {% endif %}  
+    
        
             
      <div class="refgroup" >
@@ -97,9 +111,9 @@
      <div class="label"> {{'Liens' | trans}}</div>
      <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.link.use.bookmarks' | trans }}</span>
               </div>
-     <div class="editbutton first" ><a href="/admin/linkref/editevent/{{event.eventid}}">{{'edit.refs' | trans }}</a></div>
+    
      </div>
-      <div class="reflist">
+    <div class="reflist">
     {% for ref in refs %}
      <div class="ref">
       <div class="refref" ><a href="{{ref.path}}">{{ref.label}}</a></div>
@@ -117,9 +131,9 @@
                 </div>
             </div>
         {%else%}
-            <div  class="notext" >
-                <span class="label" > {{ 'no.text' | trans }} </span>
-                <a href = "/admin/text/event/{{objid}}" class="editbutton"  > {{ 'add.text' | trans }}</a>
+            <div  class="notext heading" >
+                <div class="redlabel" > {{ 'no.text' | trans }} </div>
+                <div  class="button1"><a href = "/admin/text/event/{{objid}}" class="editbutton"  > {{ 'add.text' | trans }}</a></div>
             </div>
         {% endif %}
    

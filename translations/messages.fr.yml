@@ -106,7 +106,7 @@ password: 'Mot de pass'
 person.links: 'Liens aux Hommes'
 people: Hommes
 person.a.editer: Editer
-person: 'Les Hommes'
+person: "L'homme"
 ref.edit: 'Editez les liens'
 rejoint: rejoint
 retour: Retour
@@ -126,7 +126,7 @@ trouver.avec: 'Trouvé avec'
 tué: tué
 under.the.name.of: nommé
 username: 'Nom de utilisateur'
-for: __for
+for: pour
 voir.user: 'Profil de l''utilisateur'
 delete.user: 'supprimer utilisateur'
 edit.user.detail: 'Modifier l''utilisateur'
@@ -220,11 +220,11 @@ texts: Textes
 complete.registration: "terminer le processus d''inscription"
 delete.image: "supprimer l''image"
 to.add.location.use.bookmarks: 'Pour ajouter un location utiliser un signet'
-Liens: __Liens
+Liens: Liens
 to.add.link.use.bookmarks: 'Pour ajouter un lien utiliser un signet'
 vue: 'Voir'
 disabled: __disabled
 from.admin.to: 'De ADMIN a'
-to.admin: 'A ADMIN'
+to.admin: 'a ADMIN'
 this.message.was.sent.by: 'message envoyé par'
 latest.edits: 'Derniers m-a-j'

@@ -14,7 +14,7 @@
   <div class="accueil">
    {% if message %}
      <h1> {{message}}</h1>
-   {% endif %}
+   {% else %}
 
    
      <h1>{{ 'bienvenue.page' | trans }}</h1> 
@@ -37,6 +37,7 @@
      <div class="count" > {{ 'compte.de' | trans }} {{count.label | trans}}   = {{ count.number}}</div>
      {% endfor %}
     </div>
+    {% endif %}
     {% endif %}
   </div>
 {% endblock %}

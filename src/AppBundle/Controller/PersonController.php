@@ -212,7 +212,7 @@ class PersonController extends Controller
             $location =   $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($lid);
             $text .= " $at ". $location->getName();
         }
-        elseif( $incident['location']!= "")
+        elseif( $incident['comment']!= "")
         {
             $at = $this->translator->trans('at.place');
             $text .= " $at ". $incident['location'];

@@ -47,7 +47,7 @@ class SearchController extends Controller
         }
         
         $pfield = "%".$pfield."%";
-    
+        
         $i=0;
         $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findSearch($pfield);
         $results = array();
@@ -59,12 +59,19 @@ class SearchController extends Controller
         }
         
         $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
-       
         foreach($contents as $key => $content)
         {
           $cid = $content->getContentid();
           $results['content'][$cid]['label'] = $content->getLabel();
           $results['content'][$cid]['link'] ="/".$this->lang."/subject/".$cid;
+        }
+        
+        $locations = $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($pfield);
+        foreach($locations as $key => $location)
+        {
+          $lid = $location->getlocid();
+          $results['location'][$lid]['label'] = $location->getName();
+          $results['location'][$lid]['link'] ="/".$this->lang."/location/".$lid;
         }
         
          $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findTexts($pfield);

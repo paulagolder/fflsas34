@@ -25,6 +25,11 @@ div#fuser div.userdata div.datarow
     display:flex;
 }
 
+ div#fuser  div.datarow div.label
+ {
+     width :10em;
+ }
+
 div#fuser div.userform form div
 {
     display:flex;

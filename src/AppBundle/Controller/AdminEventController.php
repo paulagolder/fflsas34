@@ -329,6 +329,19 @@ class AdminEventController extends Controller
         
     }
     
+    public function delete($eid)
+    {
+         $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
+       $peid = $event->ancestors[0]->getEventId(); 
+     $em = $this->getDoctrine()->getManager();
+      $em->remove($event);
+     $em->flush();
+     // remove image links, reflinkk, participants, texts paul to fix
+        return $this->redirect('/admin/event/'.$peid);
+        
+    }
+    
+    
     public function addbookmark($eid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();

@@ -91,4 +91,16 @@ class LinkrefRepository extends EntityRepository
        return $ref_ar;
     }
     
+    
+    public function deleteGroup($objecttype, $objid)
+    {
+      
+      $sql = "delete  AppBundle:linkref  r ";
+      $sql .= " where r.objecttype  = '".$objecttype."' ";
+      $sql .= " and r.objid  = ".$objid." ";
+ 
+      $query = $this->getEntityManager()->createQuery($sql);
+      $query->getResult();
+ 
+    }
 }

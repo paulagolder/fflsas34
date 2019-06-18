@@ -21,20 +21,27 @@
         <div class="label" > {{'for' |trans}}      </div>
         <div class="label" > {{objecttype |trans}} :     </div>
         <div class="title" > {{ label}}  </div>
-        <div class="returnbutton"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div></div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{{ 'retour' | trans }} </a> </div></div>
      </div>
      <div id="textedit" >
     
          {% for attribute in attributes %}
          {% for lang in ['FR','EN'] %}
               {% if texts[attribute][lang] is defined   %} 
-               <div   class="textref" >{{attribute}} : {{lang}}
-                <a class= "editbutton" href="/admin/text/{{texts[attribute][lang]['id']}}" >{{ ' edit.this' | trans }} </a> 
+               <div   class="heading" >
+               <div class="label" >{{attribute}} : {{lang}}</div>
+               <div class ="editbutton button1">
+                <a class= "editbutton" href="/admin/text/{{texts[attribute][lang]['id']}}" >{{ 'edit.this' | trans }} </a> 
+                </div>
+                <div class ="deletebutton">
+                <a href="/admin/text/delete/{{texts[attribute][lang]['id']}}" >{{ 'delete.this' | trans }} </a> 
+                </div>
                </div>
                <div class="textpanel" > {{texts[attribute][lang]['comment']| raw }} </div>
              {% else %}
-                <div   class="textref" >{{ attribute}} : {{lang}}
-                 <a class= "editbutton" href="/admin/text/new/{{objecttype}}/{{objid}}/{{attribute}}/{{lang}}" >{{ ' create.this' | trans }} </a> 
+                <div   class="heading" >
+               <div class="label" >{{attribute}} : {{lang}}</div>
+                <div class="editbutton button1"> <a class= "editbutton" href="/admin/text/new/{{objecttype}}/{{objid}}/{{attribute}}/{{lang}}" >{{ 'create.this' | trans }} </a> </div>
                </div>
              {% endif %} 
           {% endfor %}

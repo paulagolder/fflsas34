@@ -1,24 +1,21 @@
+div#editperson
+{
+   margin-top :0.5em;
+}
 
 
-
-div.eventtree
+div#editperson div.eventtree
 {
     margin-top:40px;
 }
     
-div.notext
+div#editperson div.notext
 {
    margin-top:40px; 
 }
     
 
-div#editperson
-{
-    
-   margin-top :0.5em;
-   xfont-size :1em;
-   xcolor : red;
-}
+
 
 div#editperson > div.person > div.heading
 {
@@ -27,11 +24,7 @@ div#editperson > div.person > div.heading
      flex-wrap: wrap;
 }
     
-div#editperson div.heading div.label   
-{
-    color:yellow;
-    font-size:1em;
-}
+
     
 div#editperson div.person div.heading div.editbutton
 {
@@ -61,13 +54,6 @@ div#editperson div.participants div.participantlist div.participant div.editbutt
 
 } 
 
-
-
- div#editperson div.refgroup div.label   
-{
-    color:yellow;
-    font-size:1em;
-}  
     
  div#editperson div.refgroup div.reflist div.refref   
 {
@@ -77,7 +63,7 @@ div#editperson div.participants div.participantlist div.participant div.editbutt
     text-decoration:none;
 }
 
- div#editperson div.person div.refgroup div.reflist
+ div#editperson div.refgroup div.reflist
  {
      margin-top:5px;
      
@@ -95,25 +81,6 @@ div#editperson div.text p
    
 }
 
-  
-div#editperson span.label
-{
-   font-size :2em;
-   color : red;
-}
-
-div#editperson span.name
-{
-   font-size :2em;
-   color : blue;
-}
-
-div#editperson span.editbutton
-{
-   font-size :1em;
-   color : yellow;
-}
-
 
 div#editperson div.imagegroup
 {
@@ -122,16 +89,6 @@ div#editperson div.imagegroup
     #align-items: center;
 }
 
- div#editperson div.person div.imagegroup div.tooltip
- {
-     margin-right : 10px;
- }
-
-div#editperson div.person div.imagegroup div.label
-{
-    font-size:1em;
-    color: yellow;
-}
 
 div#editperson div.imagegroup div.imageedit
 {
@@ -219,7 +176,7 @@ div#editperson  div.notext
     font-size:1em;
 }
 
-div.noparticipants
+div#editperson div.noparticipants
 {
      margin-top : 2em;
 }
@@ -239,19 +196,7 @@ div#editperson div.textpanel div.text
     border: 2px solid blue;
 }
 
- div#editperson div.person div.textpanel div.label
- {
-     font-size:1em;
- }
-
-div#editperson div.textpanel div.edit
-{
-    flex:;
-}
-
-
-
-
+ 
 div#editperson div#person div.participants
 {
       margin-top :40px;
@@ -287,25 +232,6 @@ div#editperson div.participants div.participantlist div.incident
 }
 
 
-
- 
- iv#editperson div.participants div.heading 
-{
-    color:red;
-    margin-left: 1em;
-    margin-top:15px;
-}
-
-xdiv#editperson div.participants div.heading div.participantlist 
-{
-    color:blue;
-    margin-left:em;
-    margin-top:15px;
-}
-
-
-
-
 div#editperson  div.participants div.participantlist div.participant
 {
     color:blue;
@@ -314,12 +240,6 @@ div#editperson  div.participants div.participantlist div.participant
     margin-left:2em;
 }
 
-div#editperson div.participants div.participantlist div.participant a
-{
-    #text-decoration:none;
-    #color:blue;
-    # font-size: 0.75em;
-}
 
 div#editperson div.person div.participants div.participantlist div.participant div.particiantdelete.deletebutton a
 {

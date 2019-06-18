@@ -120,30 +120,27 @@ class IncidentController extends Controller
     {
         
         $request = $this->requestStack->getCurrentRequest();
-           dump($inid);
+         
         if($inid>0)
         {
-            $incident_ar = $this->getDoctrine()->getRepository('AppBundle:Incident')->findOne($inid);
-            dump($incident);
-            $incident = $this->transformtoIncident($incident_ar);
+            $incident = $this->getDoctrine()->getRepository('AppBundle:Incident')->findOne($inid);
         }
         if(! isset($incident))
         {
             $incident = new Incident();
         }
         $form = $this->createForm(IncidentForm::class, $incident);
-        dump($form);
+      
         if ($request->getMethod() == 'POST') 
         {
-            #$form->bindRequest($request);
             $form->handleRequest($request);
             if ($form->isValid()) 
             {
-               
-                   dump($form);
+ 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($incident);
                 $entityManager->flush();
+                $inid = $incident->getIncidentId();
                 return $this->redirect("/admin/incident/".$inid);
             }
         }
@@ -153,7 +150,7 @@ class IncidentController extends Controller
          $event =   $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
          $incidenttypes =   $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findAll();
          $participations =  $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipationsbyEntityPerson($eid,$pid);
-        return $this->render('incident/edit.html.twig', array(
+         return $this->render('incident/edit.html.twig', array(
             'form' => $form->createView(),
             'eventlabel'=>$event->getLabel(),
             'personname'=> $person->getSurname(),
@@ -217,6 +214,7 @@ class IncidentController extends Controller
     function transformtoIncident($incident_ar)
     {
         $incident = new Incident();
+         $incident->setIncidentid($incident_ar['incidentid']);
         $incident->setEventid($incident_ar['eventid']);
         $incident->setPersonid($incident_ar['personid']);
         $incident->setItypeid($incident_ar['itypeid']);
@@ -226,6 +224,7 @@ class IncidentController extends Controller
         $incident->setsdate($incident_ar['sdate']);
         $incident->setEdate($incident_ar['edate']);
         $incident->setSequence($incident_ar['sequence']);
+        $incident->setComment($incident_ar['comment']);
         return $incident;
     
     }

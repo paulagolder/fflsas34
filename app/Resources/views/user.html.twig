@@ -11,10 +11,9 @@
 
 
    {% block left %}
-      {% include 'main_menu.html.twig' %}
+      {% include 'user_menu.html.twig' %}
       {{ render(controller('AppBundle\\Controller\\PersonController::showsidebar')) }} 
     {% endblock %}
-
 
     {% block right %}
       {% if is_granted('ROLE_USER') %}

@@ -19,11 +19,11 @@
         <div class="label" > {{ 'profil.person' | trans }}</div>
         <div class="title" > {{user.username}}</div>
            {% if is_granted('ROLE_ADMIN') %} 
-  <div class="deletebutton"> <a href = {{deletelink}} >{{'delete' | trans }} </a> </div>
-  <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
+  <div class="deletebutton button1"> <a href = {{deletelink}} >{{'delete' | trans }} </a> </div>
+  <div class="editbutton" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
      {% endif %}
        
-        <div class="returnbutton"> <a href = {{returnlink}} >{{ ' return ' | trans }} </a> </div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{{ 'return' | trans }} </a> </div>
     </div>
     
     <div  class="userdata" >

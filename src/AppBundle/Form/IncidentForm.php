@@ -31,6 +31,7 @@ class IncidentForm extends AbstractType
         $builder->add('role', TextType::class);   
         $builder->add('sdate', TextType::class); 
         $builder->add('edate', TextType::class);
+        $builder->add('comment', TextType::class);
         $builder->get('sdate')->setRequired(false);
         $builder->get('edate')->setRequired(false);
         $builder->get('rank')->setRequired(false);
@@ -38,6 +39,7 @@ class IncidentForm extends AbstractType
         $builder->get('locid')->setRequired(false);
         $builder->get('sequence')->setRequired(false);
         $builder->get('namerecorded')->setRequired(false);
+        $builder->get('comment')->setRequired(false);
         $builder->get('personid')->setDisabled(true);
         $builder->get('eventid')->setDisabled(true);
         

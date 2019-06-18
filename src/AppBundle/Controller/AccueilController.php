@@ -89,6 +89,22 @@ class AccueilController  extends Controller
         ]);
     }
     
+      
+    public function showmessage($mess)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+      
+       
+        return $this->render('accueil/showall.html.twig', 
+        [ 
+        'lang' => $this->lang,
+        'message' =>  $mess,
+        'heading' => '',
+        'counts'=> '', 
+        'texts'=> '',
+        ]);
+    }
+    
      public function Showtest()
     {
         
