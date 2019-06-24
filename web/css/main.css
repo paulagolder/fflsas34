@@ -7,9 +7,9 @@ body
 	font-stretch: normal;
 	padding: 0;
 	margin: 0;
-	xbackground: url(/common/skybig.jpg) 20% 0;
-    background: url(/common/sky11.jpg) ;
-    xbackground-repeat: no-repeat;
+    background-color: #7194d4;
+	background-image: url("/common/skybig.jpg");
+    background-repeat: no-repeat;
     background-size: 100% auto;
 }
 
@@ -389,6 +389,7 @@ div#middle div.hidebar button
 div#middle div.datarow
 {
     font-size:1em;
+    display:flex;
 }
 
 div#middle div.datarow div.label

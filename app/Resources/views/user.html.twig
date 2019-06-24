@@ -12,6 +12,7 @@
 
    {% block left %}
       {% include 'user_menu.html.twig' %}
+            {% include 'admin_menu.html.twig' %}
       {{ render(controller('AppBundle\\Controller\\PersonController::showsidebar')) }} 
     {% endblock %}
 

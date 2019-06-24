@@ -366,7 +366,7 @@ class ContentController extends Controller
         
         if (count($contents)<1) 
         {
-            $message = 'rien.trouver.pour';
+             $subheading = 'rien.trouver.pour';
         }
         else
         {
@@ -400,20 +400,20 @@ class ContentController extends Controller
         if (!$pfield) 
         {
             $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findAll();
-            $heading =  'trouver.tout';
+            $subheading =  'trouver.tout';
             
         }
         else
         {
             $pfield = "%".$pfield."%";
             $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
-            $heading =  'trouver.avec';
+            $subheading =  'trouver.avec';
         }
         
         
         if (count($contents)<1) 
         {
-            $message = 'rien.trouver.pour';
+             $subheading = 'rien.trouver.pour';
         }
         else
         {
@@ -429,7 +429,8 @@ class ContentController extends Controller
         [ 
         'lang'=>$this->lang,
         'message' => $message,
-        'heading' =>  $heading,
+        'heading' =>  'Gestion des Articles',
+        'subheading' =>  $subheading,
         'searchfield' =>$gfield,
         'contents'=> $contents,
         
@@ -437,11 +438,11 @@ class ContentController extends Controller
     }
     
     
-    public function addBookmark($sid,Request $request)
+    public function addBookmark($sid)
     {
-        $gfield = $request->query->get('searchfield');
-        $uri = $request->getUri();
-        dump($uri);
+       // $gfield = $request->query->get('searchfield');
+       // $uri = $request->getUri();
+       // dump($request);
         $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');
@@ -455,9 +456,9 @@ class ContentController extends Controller
         $ilist[$sid]= $newcontent;
         $session->set('contentList', $ilist);
         
-        #return $this->redirect($uri);
+        //return $this->redirect($uri);
         
-        return $this->redirect("/admin/content/search?searchfield=".$gfield);
+        return $this->redirect("/admin/content/search");
         
     }
     

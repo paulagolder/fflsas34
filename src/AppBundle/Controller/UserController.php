@@ -240,20 +240,19 @@ class UserController extends Controller
         if (!$pfield) 
         {
             $users = $this->getDoctrine()->getRepository("AppBundle:User")->findAll();
-            $heading =  'trouver.tout';
-            
+            $subheading =  'trouver.tout';
         }
         else
         {
             $pfield = "%".$pfield."%";
             $users = $this->getDoctrine()->getRepository("AppBundle:User")->findSearch($pfield);
-            $heading =  'trouver.avec';
+            $subheading =  'trouver.avec';
         }
         
         
         if (count($users)<1) 
         {
-            $message = 'rien.trouver.pour';
+             $subheading = 'rien.trouver.pour';
         }
         else
         {
@@ -268,7 +267,8 @@ class UserController extends Controller
         return $this->render('user/usersearch.html.twig', 
         [ 
         'message' => $message,
-        'heading' =>  $heading,
+        'heading' =>  'Gestion des Utilisateurs',
+        'subheading' =>  $subheading,
         'searchfield' =>$gfield,
         'users'=> $users,
         

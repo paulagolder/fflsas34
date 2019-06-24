@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('url/edit.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/url/edit.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block js %}
  {{ parent() }}
@@ -24,7 +24,7 @@
 
 
 {% block middle %}
-  <div id="urlsedit" >
+  <div id="urls" >
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
@@ -34,7 +34,7 @@
       {{'a.link.from' | trans}}
      </div>
   
-      <div class="returnbutton"> <a href = {{returnlink}} >{{ 'retour' | trans }} </a> </div>
+      <div class="returnbutton"> <a href = "/admin/url/search"  >{{ 'retour' | trans }} </a> </div>
      
   {% endif %}
   </div>

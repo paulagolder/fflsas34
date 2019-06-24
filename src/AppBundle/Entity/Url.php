@@ -90,7 +90,7 @@ class Url
         return $this->tags;
     }
 
-    public function setTagsl(string $tags): self
+    public function setTags(string $tags): self
     {
         $this->tags = $tags;
 

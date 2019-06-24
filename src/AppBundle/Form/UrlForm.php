@@ -27,6 +27,7 @@ class UrlForm extends AbstractType
         $builder->add('tags', TextType::class);
 
         $builder->get('tags')->setRequired(false);
+         $builder->get('id')->setDisabled(true);
        
                 
     }

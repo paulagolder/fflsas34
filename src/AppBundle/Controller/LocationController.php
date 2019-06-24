@@ -407,7 +407,54 @@ class LocationController extends Controller
         
     }
     
-    
+      public function LocationSearch(Request $request)
+    {
+        $message="";
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        
+        $pfield = $request->query->get('searchfield');
+        $gfield = $request->query->get('searchfield');
+        
+        if (!$pfield) 
+        {
+            $locations = $this->getDoctrine()->getRepository("AppBundle:Location")->findAll();
+            $subheading =  'trouver.tout';
+            
+        }
+        else
+        {
+            $pfield = "%".$pfield."%";
+            $locations= $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($pfield);
+            $subheading =  'trouver.avec';
+            dump($locations);
+        }
+        
+        
+        if (count($locations)<1) 
+        {
+             $subheading = 'rien.trouver.pour';
+        }
+        else
+        {
+            foreach($locations as $location)
+            {
+                $location->link = "/admin/url/addbookmark/".$location->getLocId();
+            }
+            
+        }
+        
+        
+        return $this->render('location/locationsearch.html.twig', 
+        [ 
+        'lang'=>$this->lang,
+        'message' => $message,
+        'heading' =>  'Gestion des Locations',
+        'subheading' =>  $subheading,
+        'searchfield' =>$gfield,
+        'locations'=> $locations,
+        
+        ]);
+    }
     
     
 }

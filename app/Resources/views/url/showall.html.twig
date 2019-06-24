@@ -3,34 +3,52 @@
 {% extends 'user.html.twig' %}
 
 {% block stylesheets %}
-      {{ parent() }}
-   <link href="{{ asset('css/url/showall.css') }}" rel="stylesheet" />
+{{ parent() }}
+<link href="{{ asset('css/url/show.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/showhide.css') }}" rel="stylesheet" />
 {% endblock %}
+
+{% block js %}
+{{ parent() }}
+    <script src="{{asset('js/showhide.js')}}"></script>
+{% endblock %}
+
 
 {% block middle %}
-  <div id="fusers">
-   {% if message %}
-     <h1> {{message}}</h1>
-   {% endif %}
-
-   {% if fusers %}
-     <h1>{{'urlinks'| trans}} </h1> 
-     <div class="fuserlist">
-   
-         {% for furl in fusers %}
-           <div class="heading">
-            <div>{{furl.label}} </div>
-             <div class="retunbutton button1" > <a class="editbutton" href="/{{lang}}/url/visit/{{furl.id}}" >{{"link.visit" | trans }} </a> </div>
-             {% if is_granted('ROLE_ADMIN') %}  
-             <div class="editbutton " > <a class="editbutton" href="/admin/url/edit/{{furl.id}}" >{{"edit.link" | trans }} </a> </div>
-            <div class="deletebutton" > <a class="deletebutton" href="/admin/url/delete/{{furl.id}}" >{{"delete.user" | trans }} </a> </div>
-            {% endif %}
-                 </div>
-         {% endfor %}
-
-     </div>
-  {% endif %}
-  </div>
+<div id="urls">
+    {% if message %}
+    <h1> {{message}}</h1>
+    {% endif %}
+    
+    {% if groups %}
+    <div class="heading">
+        <div class="label" >{{'urlinks'| trans}} </div> 
+    </div>
+    <div class="urllist">
+        {% for tag,urls in groups %}
+        <button class="collapsible"> 
+          {{ tag |trans({},'tags') }}
+            </button>
+        <div class="content">
+        {% for url in urls %}
+        <div class="url row">
+            <div  class="label" >{{url.label}} </div>
+            <div class="retunbutton button1" > <a class="editbutton" href="/{{lang}}/url/visit/{{url.id}}" >{{"link.visit" | trans }} </a> </div>
+            <div class="editbutton" > <a class="editbutton" href="/{{lang}}/url/addbookmark/{{url.id}}" >{{"bookmark.link" | trans }} </a> </div>
+        </div>
+        
+        {% endfor %} 
+    </div>
+        
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
 
 
+ {% block quill %}
+ <script>
+     showhide();
+ </script>
+ {% endblock %}

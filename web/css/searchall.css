@@ -1,0 +1,30 @@
+
+
+
+div.search div.searchlist
+{
+    height:400px;
+    width:90%;
+    xmargin-left: 1em;
+    margin-top: 1em;
+    overflow:hidden; 
+    overflow-y:scroll;
+   border: 1px solid yellow;
+}
+
+div.search div.searchlist div div.search a
+ {
+    line-height: 26px;
+    margin-bottom:5px;
+    color:blue;
+    text-decoration:none;
+    margin-bottom:5px;
+ }
+
+div.search div.searchlist div div.search a.editbutton
+{
+    color:white;
+}
+ 
+ 
+

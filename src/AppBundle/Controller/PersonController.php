@@ -186,6 +186,7 @@ class PersonController extends Controller
 
         
         $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
+        dump($linkrefs);
         
         return $this->render('person/showone.html.twig', 
 
@@ -215,7 +216,7 @@ class PersonController extends Controller
         elseif( $incident['comment']!= "")
         {
             $at = $this->translator->trans('at.place');
-            $text .= " $at ". $incident['location'];
+            $text .= " $at ". $incident['comment'];
         }
         if( $incident['sdate'] >0 )
         {

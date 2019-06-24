@@ -46,7 +46,8 @@
        {% set label = obtype ~ ".links" %}
         <div  class="linkgroup" >{{  label | trans }}</div>
          {% for obid , ref in oref %}       
-        <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a> </div>
+     {#   <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a>  </div>#}
+         <div class="ref" > <a href="{{ ref.link }}">{{ref.link}}</a>  </div>
         {% endfor %}
            {% endfor %}
      {% endif %}

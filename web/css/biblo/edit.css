@@ -1,0 +1,49 @@
+
+
+
+  
+
+div#biblo
+{
+    
+   margin-top :0.5em;
+   font-size :1em;
+   color : red;
+}
+
+div#biblo div.heading
+{
+    display:flex;
+}
+
+div#biblo div.userdata div.datarow
+{
+    display:flex;
+}
+
+div#biblo div.form form div
+{
+    display:flex;
+}
+
+div#biblo div.form form div label
+{
+    color: yellow;
+    width: 138px;
+}
+
+div#biblo div.form form div label.required
+{
+    color: yellow;
+    width: 138px;
+}
+
+ div#biblo div.form form div input
+ {
+    
+ }
+ 
+div#biblo div.form form div
+{
+    
+}

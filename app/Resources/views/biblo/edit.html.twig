@@ -1,0 +1,62 @@
+{# templates/biblo/edit.html.twig #}
+
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+      {{ parent() }}
+   <link href="{{ asset('css/biblo/edit.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block js %}
+ {{ parent() }}
+ <script>
+  
+     function clickevent(eid)
+     {
+       
+     }
+     function clickimage(iid)
+     {
+       
+     }
+     
+   </script>
+{%endblock%}
+
+
+{% block middle %}
+  <div id="biblo" >
+   {% if message %}
+     <h1> {{message}}</h1>
+   {% endif %}
+   <div class="heading">
+     <div class="label">
+      {{'a.book' | trans}}
+     </div>
+  
+      <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{ 'retour' | trans }} </a> </div>
+       <div class="deletebutton"> <a href = "/admin/biblo/delete/{{biblo.bookid}}" >{{ 'delete' | trans }} </a> </div>
+  </div>
+
+<div  class="form" >
+{{ form_start(form) }}
+    {{ form_row(form.bookid) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.subtitle) }}
+    {{ form_row(form.author) }}
+    {{ form_row(form.publisher) }}
+    {{ form_row(form.year) }}
+    {{ form_row(form.isbn) }}
+     {{ form_row(form.tags) }}
+    <button type="submit">Register!</button>
+{{ form_end(form) }}
+</div>
+
+</div>
+{% endblock %}
+
+
+{% block right %}
+
+ {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}  
+
+{% endblock%}

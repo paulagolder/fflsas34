@@ -74,6 +74,22 @@ class SearchController extends Controller
           $results['location'][$lid]['link'] ="/".$this->lang."/location/".$lid;
         }
         
+         $urls = $this->getDoctrine()->getRepository("AppBundle:Url")->findSearch($pfield);
+        foreach($urls as $key => $url)
+        {
+          $lid = $url->getId();
+          $results['url'][$lid]['label'] = $url->getLabel();
+          $results['url'][$lid]['link'] ="/".$this->lang."/url/".$lid;
+        }
+         
+         $biblos = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findSearch($pfield);
+        foreach($biblos as $key => $biblo)
+        {
+          $lid = $biblo->getBookId();
+          $results['biblo'][$lid]['label'] = $biblo->getTitle();
+          $results['biblo'][$lid]['link'] ="/".$this->lang."/biblo/".$lid;
+        }
+        
          $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findTexts($pfield);
          foreach($ref_ar as $key => $oref_ar)
          {
@@ -130,6 +146,30 @@ class SearchController extends Controller
                       {
                       $results['locations'][$pid]['label'] = $location->getName();
                       $results['locations'][$pid]['link'] ="/".$this->lang."/location/".$pid;
+                      }
+                 }
+                    break;
+               case "url":
+                 foreach($oref_ar as $key => $ref)
+                 {
+                      $pid = $key;
+                      $url =   $this->getDoctrine()->getRepository("AppBundleUrl")->findOne($pid);
+                      if($url != null)
+                      {
+                      $results['urls'][$pid]['label'] = $url->getLabel();
+                      $results['urlss'][$pid]['link'] ="/".$this->lang."/url/".$pid;
+                      }
+                 }
+                    break;
+               case "biblo":
+                 foreach($oref_ar as $key => $ref)
+                 {
+                      $pid = $key;
+                      $biblo =   $this->getDoctrine()->getRepository("AppBundle:Biblo")->findOne($pid);
+                      if($biblo != null)
+                      {
+                      $results['biblos'][$pid]['label'] = $biblo->geTitle();
+                      $results['biblos'][$pid]['link'] ="/".$this->lang."/biblo/".$pid;
                       }
                  }
                       break;

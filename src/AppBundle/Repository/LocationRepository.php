@@ -18,13 +18,8 @@ class LocationRepository extends EntityRepository
       public function findAll()
     {
        $qb = $this->createQueryBuilder("l");
+       $qb->orderBy('l.name', 'ASC');
        $locations =  $qb->getQuery()->getResult();
-       
-       foreach( $locations as $location)
-       {
-         # $url = "/location/".$location->getLocid();
-        #  $location->link = $url;
-       }
        return $locations;
        
     }

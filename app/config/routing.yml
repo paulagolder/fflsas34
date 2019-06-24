@@ -107,16 +107,16 @@ message_send:
     
 #=============================users==================
 
-admin_user_new:
+user_admin_new:
     path: /admin/user/new
     controller:  AppBundle\Controller\UserController::newuser  
 
     
-admin_user_search:
+user_admin_search:
     path: /admin/user/search
     controller:  AppBundle\Controller\UserController::UserSearch     
     
-users_editone:
+user_editone:
     path: /admin/user/{uid}
     controller:  AppBundle\Controller\UserController:showone
     
@@ -152,7 +152,7 @@ user_message_delete:
       requirements:
         _locale: en|fr|FR|EN
         
-admin_message_delete:        
+user_admin_message_delete:        
       path:  /admin/user/{uid}/message/delete/{mid}
       controller:  AppBundle\Controller\UserController:admindeletemessage
             
@@ -166,67 +166,74 @@ search_all:
         
 #==================bookmark
 
-bookmarkdelete:
+bookmark_delete:
      path: /admin/bookmark/delete/{blt}/{key}
      controller:  AppBundle\Controller\BookmarkController::delete
      
-admin_bookmark_edit:
+bookmark_edit:
      path: /admin/bookmark/edit
      controller:  AppBundle\Controller\BookmarkController::Edit     
 
 #===================== Person edit      
         
  
-Person_new:
+person_new:
     path: /admin/person/register
     controller: AppBundle\Controller\AdminPersonController::register  
 
-admin_Person_edit_detail:
+person_admin_edit_detail:
     path: /admin/person/detail/{pid}
     controller: AppBundle\Controller\AdminPersonController::edit 
     
-admin_Person_delete:
+person_admin_delete:
     path: /admin/person/delete/{pid}
     controller: AppBundle\Controller\AdminPersonController::delete
     
-admin_Person_one:
+person_admin_one:
     path: /admin/person/{pid}
     controller: AppBundle\Controller\AdminPersonController::Editone
     
     
-admin_Person_addevent:
+person_admin_addevent:
 # create a participation 
     path: /admin/person/addevent/{pid}/{eid}
     controller: AppBundle\Controller\AdminPersonController::addevent    
     
-admin_Person_addimage:
+person_admin_addimage:
     path: /admin/person/addimage/{pid}/{iid}
     controller: AppBundle\Controller\AdminPersonController::addimage   
     
     
-admin_Person_addcontent:
+person_admin_addcontent:
     path: /admin/person/addcontent/{pid}/{cid}
     controller: AppBundle\Controller\AdminPersonController::addcontent     
 
-admin_Person_addlocation:
+person_admin_addlocation:
     path: /admin/person/addlocation/{pid}/{lid}
     controller: AppBundle\Controller\AdminPersonController::addlocation   
+
+person_admin_addurl:
+    path: /admin/person/addurl/{pid}/{uid}
+    controller: AppBundle\Controller\AdminPersonController::addurl   
     
+person_admin_addbiblo:
+    path: /admin/person/addbiblo/{pid}/{bid}
+    controller: AppBundle\Controller\AdminPersonController::addbiblo     
     
-admin_Person_removeimage:
+person_admin_removeimage:
     path: /admin/person/removeimage/{pid}/{iid}
     controller: AppBundle\Controller\AdminPersonController::removeimage   
     
     
-admin_Person_bookmark:
+person_admin_bookmark:
     path: /admin/person/addbookmark/{pid}
     controller: AppBundle\Controller\AdminPersonController::addbookmark
    
-user_Person_bookmark:
+person_bookmark:
     path: /{_locale}/person/addbookmark/{pid}
     controller: AppBundle\Controller\PersonController::addUserbookmark   
    
-removeparticipation:
+person_removeparticipation:
     path: /admin/person/delete/{pid}/{partid}
    # controller: AppBundle\Controller\AdminPersonController::delete
     defaults: { _controller: AppBundle\Controller\AdminPersonController::deleteParticipation}
@@ -270,15 +277,15 @@ participants_one:
      requirements:
         _locale: en|fr|FR|EN
      
-admin_participants_editone:
+participant_admin_editone:
     path: /admin/participant/detail/{ptid}
     controller:  AppBundle\Controller\ParticipantController::edit   
      
-admin_participants_edit:
+participant_admin_edit:
     path: /admin/participant/{ptid}
     controller:  AppBundle\Controller\ParticipantController::edit   
     
-admin_participant_person:
+participant_admin_person:
      path: /admin/participations/editperson/{pid}
      controller:  AppBundle\Controller\ParticipantController::EditPerson
 
@@ -291,11 +298,11 @@ participants_add_person:
     
 #===================texts
     
-texts_all:
+text_all:
     path: /text/all
     controller:  AppBundle\Controller\TextController::Showall    
     
-texts_group:
+text_group:
     path: /text/group
     controller:  AppBundle\Controller\TextController::Showgroup  
     
@@ -335,7 +342,7 @@ text_admin_reflink:
     path: /admin/text/reflink/{rfid}   
     controller:  AppBundle\Controller\TextController::editreflink 
    
-texts_edit_group:
+text_edit_group:
    path : /admin/text/{objecttype}/{objid}
    controller:  AppBundle\Controller\TextController::editgroup  
    
@@ -344,57 +351,57 @@ texts_edit_group:
 
 #==============================image=====================
    
-admin_image_asearch:
+image_admin_asearch:
     path : /admin/image/search 
     controller:  AppBundle\Controller\ImageController::Adminsearch      
    
-user_image_all:
+image_user_all:
     path : /{_locale}/image/all 
     controller:  AppBundle\Controller\ImageController::Showall
     requirements:
         _locale: en|fr|FR|EN
         
-user_image_one:
+image_user_one:
     path : /{_locale}/image/{iid}
     controller:  AppBundle\Controller\ImageController::Showone
     requirements:
         _locale: en|fr|EN|FR
         
         
-admin_image_addbookmark:
+image_admin_addbookmark:
     path:   /admin/image/addBookmark/{iid}
     controller:  AppBundle\Controller\ImageController::addbookmark
                    
-admin_image_addref:
+image_admin_addref:
     path:   /admin/image/addref/{otype}/{oid}/{iid}
     controller:  AppBundle\Controller\ImageController::addref
     
-admin_image_new:
+image_admin_new:
     path: /admin/image/new
     controller:  AppBundle\Controller\ImageController::newimage         
     
         
-admin_image_showone:
+image_admin_showone:
     path: /admin/image/{iid}
     controller:  AppBundle\Controller\ImageController::editone
            
     
            
         
-admin_image_edit:
+image_admin_edit:
     path: /admin/image/edit/{iid}
     controller:  AppBundle\Controller\ImageController::edit
     
-admin_image_delete:
+image_admin_delete:
     path: /admin/image/delete/{iid}
     controller:  AppBundle\Controller\ImageController::delete
     
-admin_image_bookmark:
+image_admin_bookmark:
     path: /admin/image/bookmark/{iid}
     controller:  AppBundle\Controller\ImageController::addBookmark
 
     
-user_image_bookmark:
+image_user_bookmark:
     path: /{_locale}/image/addbookmark/{iid}
     controller:  AppBundle\Controller\ImageController::addUserbookmark
     requirements:
@@ -402,21 +409,21 @@ user_image_bookmark:
     
 #=============================events
     
-events_admin_top:
+event_admin_top:
     path: /admin/event/top
     controller: AppBundle\Controller\AdminEventController::Showtop
   
-events_admin_addbookmark:
+event_admin_addbookmark:
     path:  /admin/event/addbookmark/{eid}
     controller: AppBundle\Controller\AdminEventController::addBookmark  
     
-events_user_addbookmark:
+event_user_addbookmark:
     path:  /{_locale}/event/addbookmark/{eid}
     controller: AppBundle\Controller\EventController::addBookmark  
     requirements:
         _locale: en|fr|FR|EN
         
-events_admin_addimage:
+event_admin_addimage:
     path:  /admin/event/addimage/{eid}/{iid}
     controller: AppBundle\Controller\AdminEventController::addImage  
   
@@ -429,53 +436,48 @@ event_admin_setlocation:
      controller: AppBundle\Controller\AdminEventController::setLocation  
       
       
-events_admin_participants:
+event_participant_admin:
     path:  /admin/event/participant/{eid}
     controller: AppBundle\Controller\AdminEventController::Editparticipants
   
     
-events_admin_addparticipant:
+event_admin_addparticipant:
     path:  /admin/event/addparticipant/{eid}/{pid}
     controller: AppBundle\Controller\AdminEventController::addparticipant
     
-events_admin_addcontent:
+event_admin_addcontent:
     path:  /admin/event/addcontent/{eid}/{cid}
     controller: AppBundle\Controller\AdminEventController::addcontent   
     
-events_all:
+event_all:
     path:  /{_locale}/event/all
     controller:  AppBundle\Controller\EventController::Showall    
     
-events_top_locale:
+event_top_locale:
     path: /{_locale}/event/top
     controller:  AppBundle\Controller\EventController::Showtop
     requirements:
         _locale: en|fr|FR|EN
         
-events_top:
+event_top:
     path: /{_locale}/event/top
     controller:  AppBundle\Controller\EventController::Showtop
   
-events_one:
+event_one:
     path:  /{_locale}/event/{eid}
     controller:  AppBundle\Controller\EventController::Showone    
     requirements:
         _locale: en|fr|FR|EN
-        
-        
-admin_events_one:
+    
+event_admin_one:
     path:  /admin/event/{eid}
     controller: AppBundle\Controller\AdminEventController::Editone 
     
-admin_event_one:
-    path:  /admin/event/{eid}
-    controller: AppBundle\Controller\AdminEventController::Editone 
-    
-admin_events_detail:
+event_admin_detail:
     path:  /admin/event/detail/{eid}
     controller: AppBundle\Controller\AdminEventController::Editdetail 
     
-admin_events_delete:
+event_admin_delete:
     path:  /admin/event/delete/{eid}
     controller: AppBundle\Controller\AdminEventController::Delete
         
@@ -526,19 +528,21 @@ admin_location_bookmark:
     path: /admin/location/addbookmark/{lid}
     controller:  AppBundle\Controller\LocationController::addbookmark
     
-user_location_bookmark:
-    path: /{_locale}/location/addbookmark/{lid}
-    controller:  AppBundle\Controller\LocationController::addUserbookmark
-    requirements:
-        _locale: en|fr|FR|EN
 
  
- 
+admin_location_search:
+    path: /admin/location/search
+    controller:  AppBundle\Controller\LocationController::LocationSearch
+    
 admin_location_top:
     path: /admin/location/top
     controller:  AppBundle\Controller\LocationController::Edittop  
-    
+
 admin_location_editone:
+    path: /admin/location/edit/{lid}
+    controller:  AppBundle\Controller\LocationController::Editone  
+    
+admin_location_editoneb:
     path: /admin/location/{lid}
     controller:  AppBundle\Controller\LocationController::Editone  
     
@@ -551,6 +555,11 @@ admin_location_edit_detail:
     path: /admin/location/detail/{lid}
     controller:  AppBundle\Controller\LocationController::Edit
     
+user_location_bookmark:
+    path: /{_locale}/location/addbookmark/{lid}
+    controller:  AppBundle\Controller\LocationController::addUserbookmark
+    requirements:
+        _locale: en|fr|FR|EN
 
 
 location_one:
@@ -606,30 +615,7 @@ linkref_add:
    
 #====================content====================================
 
-content_all:
-    path: /{_locale}/content/all
-    controller:  AppBundle\Controller\ContentController::Showall  
-    requirements:
-        _locale: en|fr|FR|EN
-        
-content_one:
-    path: /{_locale}/subject/{sid}
-    controller:  AppBundle\Controller\ContentController::Showsubject  
-    requirements:
-        _locale: en|fr|FR|EN
-        
-content_menu:
-    path: /{_locale}/menucontent/{sid}
-    controller:  AppBundle\Controller\ContentController::Showsubject 
-    requirements:
-        _locale: en|fr|FR|EN
-        
-subject_one:
-    path: /{_locale}/content/{cid}
-    controller:  AppBundle\Controller\ContentController::Showcontent  
-    requirements:
-        _locale: en|fr|FR|EN
-        
+
 content_admin_process_edit:
     path: /admin/content/process_edit/{cid}
     controller:  AppBundle\Controller\ContentController::process_edit   
@@ -659,33 +645,100 @@ content_admin_delete:
     controller:  AppBundle\Controller\ContentController::Delete       
     
 content_admin_bookmark:    
-    path:  /admin/content/addbookmark/{sid}
+    path:  /admin/subject/addbookmark/{sid}
     controller:  AppBundle\Controller\ContentController::addBookmark  
     
-user_subject_bookmark:    
-    path:  /{_locale}/subject/addbookmark/{sid}
-    controller:  AppBundle\Controller\ContentController::addUserBookmark  
-    
-content_admin_editone:
+content_admin_edit_subject:
     path: /admin/subject/{sid}
     controller:  AppBundle\Controller\ContentController::Editsubject
+    
+content_admin_editone:
+    path: /admin/content/{cid}
+    controller:  AppBundle\Controller\ContentController::Showcontent
     
 content_admin_deleteimage:
     path:  /admin/content/deleteimage/{cid}/{isn}
     controller:  AppBundle\Controller\ContentController::Deleteimage  
+
+content_all:
+    path: /{_locale}/content/all
+    controller:  AppBundle\Controller\ContentController::Showall  
+    requirements:
+        _locale: en|fr|FR|EN
+        
+content_one:
+    path: /{_locale}/subject/{sid}
+    controller:  AppBundle\Controller\ContentController::Showsubject  
+    requirements:
+        _locale: en|fr|FR|EN
+        
+content_menu:
+    path: /{_locale}/menucontent/{sid}
+    controller:  AppBundle\Controller\ContentController::Showsubject 
+    requirements:
+        _locale: en|fr|FR|EN
+        
+subject_one:
+    path: /{_locale}/content/{cid}
+    controller:  AppBundle\Controller\ContentController::Showcontent  
+    requirements:
+        _locale: en|fr|FR|EN
+        
+user_subject_bookmark:    
+    path:  /{_locale}/subject/addbookmark/{sid}
+    controller:  AppBundle\Controller\ContentController::addUserBookmark  
+    
+
     
    
 #==============================================url
 
+
+
+url_admin_show_all:
+    path: /admin/url/show
+    controller:  AppBundle\Controller\UrlController::Showall  
+    
+url_admin_search:
+    path: /admin/url/search
+    controller:  AppBundle\Controller\UrlController::UrlSearch  
+
+url_show_one:        
+    path: /admin/url/{urlid}
+    controller:  AppBundle\Controller\UrlController::show  
+    
+        
 url_show_all:
-    path: /{_locale}/url/show
+    path: /{_locale}/url/show/all
     controller:  AppBundle\Controller\UrlController::Showall  
     requirements:
         _locale: en|fr|FR|EN 
         
+ 
+url_show_allb:
+    path: /{_locale}/url/show
+    controller:  AppBundle\Controller\UrlController::Showall  
+    requirements:
+        _locale: en|fr|FR|EN 
+    
+
+    
+url_user_show_one:
+    path: /{_locale}/url/show/{urlid}
+    controller:  AppBundle\Controller\UrlController::Show  
+    requirements:
+        _locale: en|fr|FR|EN 
+ 
+ 
+
+        
 url_delete_one:        
     path: /admin/url/delete/{urlid}
     controller:  AppBundle\Controller\UrlController::delete  
+    
+url_edit_all:        
+    path: /admin/url/edit/all
+    controller:  AppBundle\Controller\UrlController::editall 
     
 url_edit:        
     path: /admin/url/edit/{urlid}
@@ -697,6 +750,67 @@ url_visit:
     controller:  AppBundle\Controller\UrlController::visit
     requirements:
         _locale: en|fr|FR|EN 
+        
+url_admin_bookmark:    
+    path:  /admin/url/addbookmark/{uid}
+    controller:  AppBundle\Controller\UrlController::addBookmark 
+        
+url_user_bookmark:    
+    path:  /{_locale}/url/addbookmark/{uid}
+    controller:  AppBundle\Controller\UrlController::addUserBookmark  
+    
+ 
+        
+#==============================================biblo
+
+biblo_show_all:
+    path: /{_locale}/biblo/show/all
+    controller:  AppBundle\Controller\BibloController::Showall  
+    requirements:
+        _locale: en|fr|FR|EN 
+        
+biblo_show_one:
+    path: /{_locale}/biblo/{bid}
+    controller:  AppBundle\Controller\BibloController::Showone  
+    requirements:
+        _locale: en|fr|FR|EN 
+        
+biblo_show_oneb:
+    path: /{_locale}/biblo/show/{bid}
+    controller:  AppBundle\Controller\BibloController::Showone  
+    requirements:
+        _locale: en|fr|FR|EN 
+        
+biblo_admin_search:
+    path: /admin/biblo/search
+    controller:  AppBundle\Controller\BibloController::BibloSearch  
+        
+biblo_delete_one:        
+    path: /admin/biblo/delete/{bkid}
+    controller:  AppBundle\Controller\BibloController::delete  
+    
+biblo_edit:        
+    path: /admin/biblo/edit/{bkid}
+    controller:  AppBundle\Controller\BibloController::edit 
+    
+    
+biblo_visit:        
+    path:  /{_locale}/biblo/visit/{bkid}
+    controller:  AppBundle\Controller\BibloController::visit
+    requirements:
+        _locale: en|fr|FR|EN 
+        
+biblo_admin_bookmark:    
+    path:  /admin/biblo/addbookmark/{bid}
+    controller:  AppBundle\Controller\BibloController::addBookmark  
+        
+biblo_user_bookmark:    
+    path:  /{_locale}/biblo/addbookmark/{bid}
+    controller:  AppBundle\Controller\BibloController::addUserBookmark  
+    
+
+    
+    
 #=========================================================
     
 catch_all:

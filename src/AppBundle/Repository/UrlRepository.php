@@ -14,9 +14,10 @@ class UrlRepository extends EntityRepository
     {
        $qb = $this->createQueryBuilder("p");
        $qb->orderBy("p.label", "ASC");
-       $furls =  $qb->getQuery()->getResult();
+        $qb->orderBy("p.tags", "ASC");
+       $urls =  $qb->getQuery()->getResult();
       
-       return $furls;
+       return $urls;
     }
     
     

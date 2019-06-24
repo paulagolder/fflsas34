@@ -33,5 +33,9 @@ function xmyFunction() {
       }
    } 
 
-   
+   function myFunction(img)
+   {
+          document.body.style.backgroundImage = img;
+      
+   }
 

@@ -82,12 +82,15 @@ class BookmarkController  extends Controller
 
         if($blt =="all")
         {
-          $blts =["image","person","event","location","content"];
+          $blts =["image","person","event","location","content","url","biblo"];
           $blists = array();
           foreach( $blts as $blt )
           {
-            $blists[$blt] =  $session->get($blt.'List');
+          if($session->get($blt.'List'))
+          {
           
+            $blists[$blt] =  $session->get($blt.'List');
+          }
           }
          return $this->render('bookmarks/bookmark.html.twig', 
                    [
@@ -104,7 +107,7 @@ class BookmarkController  extends Controller
         $request = $this->requestStack->getCurrentRequest();
         $source = $request->query->get('source');
 
-          $blts =["image","person","event","location","content"];
+          $blts =["image","person","event","location","content","url","biblo"];
           $blists = array();
           foreach( $blts as $blt )
           {

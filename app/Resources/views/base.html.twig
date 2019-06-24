@@ -4,6 +4,7 @@
 <link rel="shortcut" type="image/x-icon" href="{{asset('favicon.ico')}}" />
 {% block title %}
   <title>{{ 'bienvenue.site' | trans }}</title>
+    <link rel="prefetch" href="{{ asset('common/sky11ss.jpg') }}">
 {% endblock %}
 {% block stylesheets %}
    <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
@@ -12,12 +13,14 @@
 {% endblock %}
 
 {% block js %}
+
    <script src="{{asset('js/main.js')}}"></script>
 {% endblock %}
 
 
 </head>
-<body>
+<body  >
+
 <div id="page" >
     <div class='header' id='header' >
         {% block myheader %}

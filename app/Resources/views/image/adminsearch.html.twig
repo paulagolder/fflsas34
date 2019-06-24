@@ -4,15 +4,19 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/image/showall.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/searchall.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
 {% block middle %}
-  <div id="imagesearchedit">
+  <div id="images" class="search">
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
+    <div class="heading">
+      <div class="label"> {{ heading | trans }}</div>
+      <div class="editbutton button1"><a class="editbutton" href =""/admin/image/new">{{'new.image' | trans}}</a></div>
+   </div>
   <form  action="/admin/image/search">
   <div class="heading">
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
@@ -20,13 +24,12 @@
    <input type="submit" value="{{ 'chercher' | trans }}" >
    </div>
    </form>
-   <div class="newimage"><a class="editbutton" href ="/admin/image/new">{{'new.image' | trans}}</a></div>
    {% if images is defined %}
-    <div class="heading">
-     <div class="label">{{heading | trans}}</div> 
+    <div class="subheading">
+     <div class="label">{{subheading | trans}}</div> 
      <div class="title">{{searchword}}</div>
     </div>
-     <div class="imagelist" >
+     <div class="searchlist" >
        <div >
          {% for image in images  %}
             <div class="image row" >

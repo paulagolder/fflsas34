@@ -34,22 +34,29 @@ class UrlController extends Controller
     }
     
     public function Showall()
-    {
+    { 
+        $urlgroups = array();
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $furls = $this->getDoctrine()->getRepository("AppBundle:Url")->findAll();
-        if (!$furls) {
+        $urls = $this->getDoctrine()->getRepository("AppBundle:Url")->findAll();
+        if (!$urls) {
             return $this->render('url/showall.html.twig', [ 'message' =>  'Urls not Found',]);
         }        
-        foreach($furls as $fuser)
+        foreach($urls as $url)
         {
-            $fuser->link = "/admin/url/".$fuser->getId();
+           $tag = $url->getTags();
+           if(! array_key_exists($tag,$urlgroups))
+           {
+            $urlgroups[$tag] = array();
+           }
+           $urlgroups[$tag][$url->getId()]=$url;
+            #$fuser->link = "/admin/url/".$fuser->getId();
         }
         return $this->render('url/showall.html.twig', 
         [ 
         'lang' => $this->lang,
         'message' =>  '' ,
-        'heading' => 'urls',
-        'fusers'=> $furls,
+        'heading' => 'Browsing urls',
+        'groups'=> $urlgroups,
         ]);
     }
     
@@ -59,17 +66,38 @@ class UrlController extends Controller
         $this->getDoctrine()->getRepository("AppBundle:Url")->delete($urlid);
     
        
-         return $this->redirect("/".$this->lang.'/url/show');
+         return $this->redirect("/admin/url/search");
     }
     
+     public function show($urlid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $url = $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($urlid);
+        if(!$url)
+        {
+          $mess = "URL not found";
+        }
+        return $this->render('url/show.html.twig', 
+        [ 
+        'lang' => $this->lang,
+        'message' =>  $mess ,
+        'heading' => 'Visit.urls',
+        'url'=> $url,
+        ]);
+    }
     
      public function visit($urlid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $furl = $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($urlid);
+        $url = $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($urlid);
     
-       return new RedirectResponse('http://bbc.co.uk');
-       //  return $this->redirect("/".$this->lang.'/url/show');
+        return $this->render('url/show.html.twig', 
+        [ 
+        'lang' => $this->lang,
+        'message' =>  '' ,
+        'heading' => 'Browsing urls',
+        'url'=> $url,
+        ]);
     }
     
       public function edit($urlid)
@@ -85,6 +113,7 @@ class UrlController extends Controller
         if(! isset($url))
         {
             $url = new Url();
+            $url->setId(0);
         }
        
         $form = $this->createForm(UrlForm::class, $url);
@@ -108,9 +137,98 @@ class UrlController extends Controller
             'form' => $form->createView(),
             'message' =>  '',
             'url' => $url,
-            'returnlink'=>'/'.$this->lang.'/url/show'   ///admin/linkref/event/272/8
+            'returnlink'=>'/'.$this->lang.'/url/show/'.$urlid   ///admin/linkref/event/272/8
             ));
     }
     
-   
+     public function UrlSearch(Request $request)
+    {
+        $message="";
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        
+        $pfield = $request->query->get('searchfield');
+        $gfield = $request->query->get('searchfield');
+        
+        if (!$pfield) 
+        {
+            $urls = $this->getDoctrine()->getRepository("AppBundle:Url")->findAll();
+            $subheading =  'trouver.tout';
+            
+        }
+        else
+        {
+            $pfield = "%".$pfield."%";
+            $urls = $this->getDoctrine()->getRepository("AppBundle:Url")->findSearch($pfield);
+            $subheading =  'trouver.avec';
+        }
+        
+        
+        if (count($urls)<1) 
+        {
+             $subheading = 'rien.trouver.pour';
+        }
+        else
+        {
+            foreach($urls as $url)
+            {
+                $url->link = "/admin/url/addbookmark/".$url->getId();
+            }
+            
+        }
+        
+        
+        return $this->render('url/urlsearch.html.twig', 
+        [ 
+        'lang'=>$this->lang,
+        'message' => $message,
+        'heading' =>  'Gestion des Liens',
+        'subheading' =>  $subheading,
+        'searchfield' =>$gfield,
+        'urls'=> $urls,
+        
+        ]);
+    }
+    
+    public function addBookmark($uid)
+    {
+        //$gfield = $request->query->get('searchfield');
+        $url =  $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($uid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $ilist = $session->get('urlList');
+        if($ilist == null)
+        {
+            $ilist = array();
+        }
+        $newcontent = array();
+        $newcontent['id'] = $uid;
+        $newcontent["label"]= $url->getLabel();
+        $ilist[$uid]= $newcontent;
+        $session->set('urlList', $ilist);
+          return $this->redirect("/admin/url/search");
+        return $this->redirect("/admin/url/search?searchfield=".$gfield);
+    }
+    
+    public function addUserBookmark($uid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        
+        $url =  $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($uid);
+        $session = $this->requestStack->getCurrentRequest()->getSession();
+        $ilist = $session->get('urlList');
+        if($ilist == null)
+        {
+            $ilist = array();
+        }
+        $newcontent = array();
+        $newcontent['id'] = $uid;
+        $newcontent["label"]= $url->getLabel();
+        $ilist[$uid]= $newcontent;
+        $session->set('urlList', $ilist);
+        
+        // return $this->redirect($uri);
+        
+        return $this->redirect("/".$this->lang."/url/show");
+        
+    }
+    
 }

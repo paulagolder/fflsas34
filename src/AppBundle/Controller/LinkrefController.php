@@ -61,7 +61,7 @@ class LinkrefController extends Controller
             $cid =$pp[1];
             echo("conetent:".$cid);
             $content=  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
-            return $this->render('content/showone.html.twig', 
+            return $this->render('linkref/showone.html.twig', 
             [ 'lang'=>$this->lang, 
             'message' =>  '',
             'content'=>$content,

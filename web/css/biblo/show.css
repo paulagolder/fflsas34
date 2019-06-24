@@ -1,0 +1,27 @@
+
+
+
+  
+
+div#biblo
+{
+    
+   margin-top :0.5em;
+   font-size :1em;
+   color : red;
+}
+
+div#biblo div.datarow
+{
+    display:flex;
+}
+
+
+
+
+ 
+div#biblo div.datarow div.label
+{
+    color: yellow;
+    width: 138px;
+}

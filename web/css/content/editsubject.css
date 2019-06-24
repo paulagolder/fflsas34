@@ -5,9 +5,10 @@ div#editcontent div.maintext
 {
     margin-top:20px;
     width: 600px;
-    height: 200px;
-    background-color: #eee;
-    overflow: scroll;
+    xheight: 200px;
+    max-height: 200px;
+    xbackground-color: #eee;
+    overflow: hidden;
     border: 5px solid gray;
     
 }

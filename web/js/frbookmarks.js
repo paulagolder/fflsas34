@@ -24,6 +24,15 @@
         window.location.href = '/fr/content/'+cid;
      }
      
+     function clickbiblo(bid)
+     {
+        window.location.href = '/fr/biblo/'+bid;
+     }
+     
+     function clickurl(uid)
+     {
+        window.location.href = '/fr/url/'+uid;
+     }
 
      
      function deletebookmark(bktype, cid)

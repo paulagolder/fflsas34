@@ -22,6 +22,15 @@
      {
         window.location.href = '/admin/subject/'+sid;
      }
+     function clickbiblo(bid)
+     {
+        window.location.href = '/admin/biblo/'+bid;
+     }
+     
+     function clickurl(uid)
+     {
+        window.location.href = '/admin/url/'+uid;
+     }
 
      
      function deletebookmark(bktype, cid)

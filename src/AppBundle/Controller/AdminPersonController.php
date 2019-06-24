@@ -255,6 +255,27 @@ class AdminPersonController extends Controller
     }
     
     
+    public function addBiblo($pid,$bid)
+    {
+        $path = "/biblo/".$bid;
+        $book = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findbyPath('biblo',$bid,$path);
+        if(!$book)
+        {
+        $obj = $this->getDoctrine()->getRepository('AppBundle:Biblo')->findOne($bid);
+        $label= $obj->getTitle();
+        $linkref = new Linkref();
+        $linkref->setLabel($label);
+        $linkref->setPath($path);
+        $linkref->setObjecttype("person");
+        $linkref->setObjid($pid);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($linkref);
+        $entityManager->flush();
+        }
+        return $this->redirect("/admin/person/".$pid);
+    }
+    
+    
     public function addLocation($pid,$lid)
     {
         $path = "/location/".$lid;

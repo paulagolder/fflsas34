@@ -28,7 +28,7 @@ div#user div.userlist div div.user a.editbutton
  
 
 
- div#user div.userlist div div.user.row:nth-child(2n+2) {  
+ div#xuser div.userlist div div.user.row:nth-child(2n+2) {  
   xbackground-color: #ccc;
-  background: rgba(0, 0, 80, 0.1)
+  xbackground: rgba(0, 0, 80, 0.1)
 }

@@ -74,8 +74,11 @@ class ImageController extends Controller
                 {
                     #echo ("person ".$pkey);
                     $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pkey);
+                    if($person)
+                    {
                     $refs_ar[$key][$pkey]['label'] = $person->getFullname();
                     $refs_ar[$key][$pkey]['link'] = "/".$this->lang."/person/".$person->getPersonid();
+                    }
                 }
             }
             else if($key="event")
@@ -185,18 +188,18 @@ class ImageController extends Controller
         if (!$pfield) 
         {
             $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findAll();
-            $heading =  'trouver.tout';
+            $subheading =  'trouver.tout';
         }
         else
         {
             $pfield = "%".$pfield."%";
             $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findSearch($pfield);
-            $heading =  'trouver.avec';
+            $subheading =  'trouver.avec';
         }
         
         if (count($images)<1) 
         {
-            $message = 'rien.trouver.pour';
+             $subheading = 'rien.trouver.pour';
         }
         else
         {
@@ -209,13 +212,15 @@ class ImageController extends Controller
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $imagelist = $session->get('imageList');
         
-        return $this->render('image/adminsearch.html.twig', 
+        return $this->render('image/imagesearch.html.twig', 
         [ 
+        'lang'=>$this->lang,
         'message' => $message,
-        'heading' =>  $heading,
+        'heading' =>  'Gestion des Images',
+        'subheading' =>  $subheading,
         'searchword' =>$gfield,
         'images'=> $images,
-        'imagelist' => $imagelist,
+        'ximagelist' => $imagelist,
         ]);
     }
     
