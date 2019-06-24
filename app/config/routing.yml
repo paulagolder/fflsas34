@@ -703,10 +703,27 @@ url_admin_search:
     path: /admin/url/search
     controller:  AppBundle\Controller\UrlController::UrlSearch  
 
+
+
+url_admin_bookmark:    
+    path:  /admin/url/addbookmark/{uid}
+    controller:  AppBundle\Controller\UrlController::addBookmark 
+        
+url_delete_one:        
+    path: /admin/url/delete/{urlid}
+    controller:  AppBundle\Controller\UrlController::delete  
+    
+url_edit_all:        
+    path: /admin/url/edit/all
+    controller:  AppBundle\Controller\UrlController::editall 
+    
+url_edit:        
+    path: /admin/url/edit/{urlid}
+    controller:  AppBundle\Controller\UrlController::edit 
+
 url_show_one:        
     path: /admin/url/{urlid}
     controller:  AppBundle\Controller\UrlController::show  
-    
         
 url_show_all:
     path: /{_locale}/url/show/all
@@ -731,18 +748,6 @@ url_user_show_one:
  
  
 
-        
-url_delete_one:        
-    path: /admin/url/delete/{urlid}
-    controller:  AppBundle\Controller\UrlController::delete  
-    
-url_edit_all:        
-    path: /admin/url/edit/all
-    controller:  AppBundle\Controller\UrlController::editall 
-    
-url_edit:        
-    path: /admin/url/edit/{urlid}
-    controller:  AppBundle\Controller\UrlController::edit 
     
     
 url_visit:        
@@ -751,13 +756,17 @@ url_visit:
     requirements:
         _locale: en|fr|FR|EN 
         
-url_admin_bookmark:    
-    path:  /admin/url/addbookmark/{uid}
-    controller:  AppBundle\Controller\UrlController::addBookmark 
+
         
 url_user_bookmark:    
     path:  /{_locale}/url/addbookmark/{uid}
     controller:  AppBundle\Controller\UrlController::addUserBookmark  
+    
+url_user_show_oneb:
+    path: /{_locale}/url/{urlid}
+    controller:  AppBundle\Controller\UrlController::Show  
+    requirements:
+        _locale: en|fr|FR|EN 
     
  
         

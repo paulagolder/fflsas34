@@ -76,6 +76,9 @@ class UrlController extends Controller
         if(!$url)
         {
           $mess = "URL not found";
+        } else
+        {
+          $mess = '';
         }
         return $this->render('url/show.html.twig', 
         [ 
