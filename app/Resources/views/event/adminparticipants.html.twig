@@ -15,6 +15,7 @@
 
 
 {% block middle %}
+<div id="middle" >
   <div id="event">
    {% if message %}
      <h1> {{message}}</h1>
@@ -30,9 +31,6 @@
         </p>
    {% endif %} 
   
-
-
- 
       <div>
         <span class='title' >{{ event.title}}</span>
      </div>
@@ -40,12 +38,6 @@
     <div class="dates" > {{ event.startdate}} : {{ event.enddate}} </div>
      {% endif %}
   
-   
-
-    
-   
-   
-   
      
    {% if participants %}
    <div class="hidebar" > <button onclick="HideMe('pdiv' )">Participants</button></div>
@@ -66,10 +58,7 @@
       {% endif %} 
   {% endif %}
   </div>
+  </div>
 {% endblock %}
 
-{% block right %}
 
-   {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-
-{% endblock%}

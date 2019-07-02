@@ -11,13 +11,14 @@
 
 
 {% block middle %}
+<div id="middle" >
        {% set maxlist = 20 %}
      {% if is_granted('ROLE_ADMIN') %}  
              {% set maxlist = 100 %}
         {% endif %}
-  <div id="search" >
+  <div id="search" class="search" >
    {% if message %}
-     <h1> {{message | trans }}</h1>
+     <div class="pageheading"> {{message | trans }}</div>
    {% endif %}
 
    <form  action="/{{locale}}/search/all">
@@ -52,6 +53,6 @@
        {% endfor %}
   {% endif %}
   {% endif %}
-  
+</div>
 </div>  
 {% endblock %}

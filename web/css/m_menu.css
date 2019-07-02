@@ -1,0 +1,47 @@
+
+
+
+div#mainmenu 
+{
+   
+    border-style: double;
+    border-color: rgba(255, 255, 255, 0.5);;
+    border-radius: 5px;
+    background-color :rgba(76, 76, 76, 0.2);
+    padding: 10px;
+
+    }
+
+div#mainmenu  div.menuitem
+{
+  color:blue;   
+  padding-top:0em;
+  padding-bottom:0em;
+  font-size:1em;
+}
+
+div#mainmenu  div.menuitem  a 
+{
+  color:blue;   
+  padding-top:0em;
+  padding-bottom:0em;
+  font-size:1em;
+  text-decoration: none;
+}
+
+div#mainmenu  div.menuitem   a:link
+{
+  color:blue;   
+}
+
+
+div#mainmenu div.menuitem   a:visited
+{
+  color:blue;   
+}
+
+div#mainmenu  div.menuitem   a:hover
+{
+  color:white;   
+}
+ 

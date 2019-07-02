@@ -1,0 +1,327 @@
+
+
+
+
+
+#header div.messagebar
+{
+    position: absolute;
+    top: 7em;
+    width:100%;   
+    background-color :rgba(0, 0, 70, 0.8);
+    display: flex;
+    align-items: center;
+    color:white;
+    height: 33px;
+}
+
+
+
+#header div.messagebar div.languagelink
+{
+    
+    order: 1;
+    #float:left;
+    cursor: pointer;
+}
+
+#header.header div.messagebar div.welcome
+{
+    order: 2;
+}
+
+#header.header div.messagebar div.status
+{
+    order: 3;
+}
+
+@keyframes flasher {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+
+#header.header div.messagebar div.complete a
+{
+    
+    background-color: red;
+    animation-name: flasher;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+
+
+#header.header div.messagebar div.complete
+{
+    order: 5;
+    cursor: pointer;
+}
+
+#header.header div.messagebar div.filler
+{
+    order: 4;
+    margin-left: auto;
+}
+
+div#header div.messagebar div.contactbutton
+{
+    
+    order: 7;
+    cursor: pointer;
+}
+
+
+
+div#header div.messagebar div.loginlink
+{
+    
+    order: 6;
+    cursor: pointer;
+}
+
+div#header div.messagebar div.contactlink
+{
+    
+    order: 7;
+    cursor: pointer;
+}
+
+
+div#header div.messagebar div.registerlink
+{
+    
+    order: 3;
+    cursor: pointer;
+}
+
+#header div.messagebar div.logoutlink
+{
+    
+    order: 6;
+    cursor: pointer;
+}
+
+#header div.messagebar div.filler
+{
+    flex-grow: 20;
+    order: 2;
+}
+
+div#header.header div.messagebar div.languagelink a img
+{
+    height:20px;
+}
+
+
+
+
+
+
+div#header div.messagebar  div.messbutton a
+{
+    all:unset;
+    background: #e3e3e3;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    color: #333;
+    font: bold 12px/1 sans-serif;
+    padding: 8px 0 8px;
+    text-align: center;
+
+    width: 150px;
+}
+
+div#header.header div.messagebar div.messbutton a:hover
+{
+    color: #e3e3e3;
+    background: #333;
+}
+
+div#header.header div.messagebar div.registerlink.button
+{
+    cursor: pointer;
+}
+
+
+
+div#header.header
+{
+    clear : both ;
+    position:static;
+    font-size:14px;
+    height: 9em;
+}
+
+
+
+#header  div.logo1
+{
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    
+    
+    
+}
+
+#header  div.logo1 img
+{
+    width: 8em;
+}
+
+#header  div.logo2
+{
+    position: absolute;
+    top: 1em;
+    right:1em;
+}
+
+#header  div.logo2 img
+{
+    width : 10em;
+}
+
+
+
+
+#header  div.headertext1
+{
+    position: absolute;
+    top: 1.5em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1em;;
+    xtext-align:center;
+    xtext-align:center;
+    color: white;
+}
+
+
+
+#header  div.headertext2
+{
+    position: absolute;
+    top: 3em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1em;
+    font-style:italic;
+    text-align:center;
+    color:white;
+}
+
+
+
+#header  div.headertext3
+{
+    position: absolute;
+    top: 4.5em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1em;
+    font-style:italic;
+    text-align:center;
+    color:white;
+}
+
+#header  div.headertext4
+{
+    position: absolute;
+    top: 6em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size:1em;
+    font-style:italic;
+    xtext-align:center;
+    color: #990000;
+}
+
+
+@media (max-width: 500px) 
+{
+    
+    
+    
+    
+    #header  div.headertext1
+    {
+        color: white;
+        width: 100%;
+        
+        text-align: center;
+    }     
+    
+    
+    
+    #header  div.headertext2
+    {
+        display:none;
+    }
+    
+    #header  div.headertext3
+    {
+        color: white;
+        width: 100%;
+        
+        text-align: center;
+    }    
+    
+    #header  div.headertext4
+    {
+        
+        top: 3em;
+        left: 50%
+    }
+    
+    #header  div.logo1 img
+    {
+        width : 2em;
+    }
+    
+    #header  div.logo2 img
+    {
+        width: 3em;
+    }
+    
+    #header  div.logo1 
+    {
+        top: 2.4em;
+    }
+    
+    #header  div.logo2 
+    {
+        top: 2.4em;
+    }
+    
+    #header.header div.messagebar div.welcome
+    {
+        display: none;
+    }
+    
+    #header.header div.messagebar div.status
+    {
+        display: none;
+    }
+    
+    div#header div.messagebar  div.messbutton a
+    {
+       font: bold 12px/1  sans-serif;
+       padding: 2px 0 2px;
+       text-align: center;
+       width: 150px;
+    }
+    
+    
+#header div.messagebar
+{
+    position: absolute;
+    top: 7em;
+    width:100%;   
+    background-color :rgba(0, 0, 70, 0.8);
+    display: flex;
+    align-items: center;
+    color:white;
+    height: 20px;
+}
+
+}

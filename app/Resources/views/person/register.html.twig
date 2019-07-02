@@ -13,6 +13,7 @@
 
 
 {% block middle %}
+<div id="middle" >
 <div id="newperson" class="adminform" >
  <div class="formheading" > {{ 'create.newperson' | trans }}</div>
 {{ form_start(form) }}
@@ -24,5 +25,6 @@
 {{ form_end(form) }}
 
  <div class="returnbutton"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
+</div>
 </div>
 {% endblock %}

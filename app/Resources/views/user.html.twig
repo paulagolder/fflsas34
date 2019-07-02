@@ -1,26 +1,61 @@
 {# templates/user.html.twig #}
 
-{# a editer pour le presentation du user site  #}
+{# a editer pour le presentation du visiteur au site  #}
 
-{% extends 'base.html.twig' %}
+<html>
 
-{% block js %}
-{{ parent() }}
-    <script src="{{asset('js/frbookmarks.js')}}"></script>
-{% endblock %}
-
-
-   {% block left %}
-      {% include 'user_menu.html.twig' %}
-            {% include 'admin_menu.html.twig' %}
-      {{ render(controller('AppBundle\\Controller\\PersonController::showsidebar')) }} 
-    {% endblock %}
-
-    {% block right %}
-      {% if is_granted('ROLE_USER') %}
-        {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-      {% endif %}
-      {{ render(controller('AppBundle\\Controller\\RandomimageController::randomimage')) }}
-      {{ render(controller('AppBundle\\Controller\\RecentEditsController::recentedits')) }}
-    {% endblock %}
-
+<head> 
+    <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}" />
+        <link rel="shortcut" type="image/x-icon" href="{{asset('favicon.ico')}}" />
+        
+        {% block title %}
+        <title>{{ 'bienvenue.site' | trans }}</title>
+        <link rel="prefetch" href="{{ asset('common/sky11ss.jpg') }}">
+            {% endblock %}
+            
+            {% block stylesheets %}
+            <link href="{{ asset('css/f_main.css') }}" rel="stylesheet" />
+            {% endblock %}
+            
+            {% block js %}
+            <script src="{{asset('js/main.js')}}"></script>
+            {% endblock %}
+            
+        </head>
+        <body  >
+        
+        <div id="page" >
+            
+            {% block myheader %}
+              {% include 'f_header.html.twig' %}
+            {% endblock %}
+            
+            
+            {% block mypage %}
+            <div class='mypage'>    
+                <div class='mypageinner'> 
+                    {% include 'user_sides.html.twig' %}
+                    
+                    {% block middle %}
+                     <div id="middle" >
+                        <div><p> middle</p></div>
+                     </div>
+                    {% endblock %}
+                    
+                </div>
+            </div>
+           {% endblock %}
+            
+            
+           {% block myfooter %}
+              <div id="footer">
+                {% include 'f_footer.html.twig' %}
+              </div>
+           {% endblock %}  
+    
+        </div>
+        {% block quill %}
+        {% endblock %}
+    </body>      
+</html>

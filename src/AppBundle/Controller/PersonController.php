@@ -176,7 +176,6 @@ class PersonController extends Controller
         $incidents =  $this->getDoctrine()->getRepository("AppBundle:Incident")->seekByPerson($pid);
         foreach( $incidents as $key=>$incident )
         {
-
             $incidents[$key]['label'] = $this->formatIncident($incident);
             $incidents[$key]['link'] =  "/".$this->lang."/incident/".$incident['incidentid'];
         }
@@ -186,7 +185,7 @@ class PersonController extends Controller
 
         
         $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
-        dump($linkrefs);
+       // dump($linkrefs);
         
         return $this->render('person/showone.html.twig', 
 
@@ -348,11 +347,11 @@ class PersonController extends Controller
         
         $linkrefs = $this->get('linkref_service')->getLinks("person",$pid,$this->lang);
         
-        $header = $this->renderView('person/header.html.twig', array(
+        $header = $this->renderView('person/pdf_header.html.twig', array(
             'name' => $person->getFullname(),
             ));
             
-            $footer = $this->renderView('person/footer.html.twig', array(
+            $footer = $this->renderView('person/pdf_footer.html.twig', array(
                 'date' => "today",
                 ));
                 
@@ -386,6 +385,53 @@ class PersonController extends Controller
                 
     }
     
+     public function personsearch(Request $request)
+    {
+        $message="";
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        
+        $pfield = $request->query->get('searchfield');
+        $gfield = $request->query->get('searchfield');
+        
+        if (!$pfield) 
+        {
+            $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
+            $subheading =  'trouver.tout';
+            dump($people);
+        }
+        else
+        {
+            $pfield = "%".$pfield."%";
+            $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findSearch($pfield);
+            $subheading =  'trouver.avec';
+        }
+        
+        
+        if (count($people)<1) 
+        {
+             $subheading = 'rien.trouver.pour';
+        }
+        else
+        {
+            foreach($people as $person)
+            {
+                $person->link = "/admin/person/addbookmark/".$person->getId();
+            }
+            
+        }
+        
+        
+        return $this->render('person/personsearch.html.twig', 
+        [ 
+        'lang'=>$this->lang,
+        'message' => $message,
+        'heading' =>  'Cherche des Hommes',
+        'subheading' =>  $subheading,
+        'searchfield' =>$gfield,
+        'people'=> $people,
+        
+        ]);
+    }
     
 
 }

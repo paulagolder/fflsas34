@@ -1,6 +1,7 @@
 {# templates/person/showone.html.twig #}
 
 {% import 'macros.twig' as m %}
+
 {% extends 'user.html.twig' %}
 
 {% block stylesheets %}
@@ -8,7 +9,10 @@
 <link href="{{ asset('/css/person/showone.css') }}" rel="stylesheet" />
 {% endblock %}
 
+
+
 {% block middle %}
+<div id="middle" >
 <div id="person" >
     {% if message %}
     <h1> {{message}}</h1>
@@ -83,4 +87,6 @@
     {% endif %}
     {% endif %}
 </div>
+</div>
 {% endblock %}
+

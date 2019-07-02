@@ -35,7 +35,7 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 
     // last username entered by the user
     $lastUsername = $authenticationUtils->getLastUsername();
-  dump($authenticationUtils);
+  //dump($authenticationUtils);
     return $this->render('security/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
@@ -78,7 +78,7 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 
     // last username entered by the user
     $lastUsername = $authenticationUtils->getLastUsername();
-    dump($authenticationUtils);
+    //dump($authenticationUtils);
     return $this->render('security/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,

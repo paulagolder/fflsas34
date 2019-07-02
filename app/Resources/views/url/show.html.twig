@@ -24,6 +24,7 @@
 
 
 {% block middle %}
+<div id="middle" >
   <div id="url" >
    {% if message or message != '' %}
      <h1> {{message}}</h1>
@@ -54,7 +55,7 @@
 <div class="visitbutton">
 <div class="returnbutton" > <a href="{{url.url}}"  target="_blank" >{{'visit'| trans}}</a></div>
 </div>
- 
+</div>
 </div>
 {% endblock %}
 

@@ -244,7 +244,7 @@ person_removeparticipation:
         
 Person_all_locale:
     path: /{_locale}/person/all
-    controller:  AppBundle\Controller\PersonController::Showall
+    controller:  AppBundle\Controller\PersonController::personsearch
     requirements:
         _locale: en|fr|FR|EN
         

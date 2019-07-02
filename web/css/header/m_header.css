@@ -1,0 +1,227 @@
+
+
+
+
+
+ #header div.messagebar
+{
+   width:100%;   
+   background-color :rgba(0, 0, 70, 0.8);
+   display: flex;
+   align-items: center;
+   color:white;
+}
+
+
+
+ #header div.messagebar div.languagelink
+{
+    
+    order: 1;
+    #float:left;
+     cursor: pointer;
+}
+
+#header.header div.messagebar div.welcome
+{
+        order: 2;
+}
+
+#header.header div.messagebar div.status
+{
+        order: 3;
+}
+
+@keyframes flasher {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
+
+#header.header div.messagebar div.complete a
+{
+ 
+  background-color: red;
+  animation-name: flasher;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+
+
+#header.header div.messagebar div.complete
+{
+        order: 5;
+        cursor: pointer;
+}
+
+#header.header div.messagebar div.filler
+{
+        order: 4;
+        margin-left: auto;
+}
+
+div#header div.messagebar div.contactbutton
+{
+    
+     order: 7;
+        cursor: pointer;
+}
+
+
+
+div#header div.messagebar div.loginlink
+{
+   
+    order: 6;
+    cursor: pointer;
+}
+
+div#header div.messagebar div.contactlink
+{
+  
+    order: 7;
+    cursor: pointer;
+}
+
+
+div#header div.messagebar div.registerlink
+{
+  
+    order: 3;
+     cursor: pointer;
+}
+
+#header div.messagebar div.logoutlink
+{
+   
+    order: 6;
+     cursor: pointer;
+}
+
+ #header div.messagebar div.filler
+{
+    flex-grow: 20;
+    order: 2;
+}
+
+ div#header.header div.messagebar div.languagelink a img
+ {
+      height:30px;
+ }
+ 
+
+ 
+ 
+ div#header div.messagebar div.contactbutton  div.button
+ {
+     all:unset;
+    background: #e3e3e3;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    box-shadow: inset 0 0 1px 1px #f6f6f6;
+    color: #333;
+    font: bold 10px/1 "helvetica neue", helvetica, arial, sans-serif;
+    padding: 3px 0 3px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    width: 150px;
+ }
+ 
+div#header div.messagebar  div.messbutton a
+ {
+    all:unset;
+    background: #e3e3e3;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    box-shadow: inset 0 0 1px 1px #f6f6f6;
+    color: #333;
+    font: bold 10px/1 "helvetica neue", helvetica, arial, sans-serif;
+    padding: 3px 0 3px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    width: 150px;
+ }
+ 
+div#header.header div.messagebar div.messbutton a:hover
+ {
+    color: #e3e3e3;
+    background: #333;
+ }
+ 
+div#header.header div.messagebar div.registerlink.button
+{
+    cursor: pointer;
+}
+ 
+ #header div
+ {
+   clear : both ;
+   position:static;
+ }
+
+ #header table
+ {
+   width: 100%;
+ }
+ 
+  #header table  td
+ {
+   font-size: 0.9em;
+  
+ }
+
+ #header  td.logo1 img
+ {
+  
+   width: 2em;
+ }
+
+ #header  td.logo2 img
+ {
+
+    width: 3em;
+ }
+
+
+ #header  td.centertext
+ {
+  
+   text-align:center;
+   color:blue;
+ }
+
+ #headerclass  td.bottomtext
+ {
+   
+   text-align:center;
+   
+ }
+
+ #header  p.headertext1
+ {
+   text-align:center;
+   xcolor:white;
+  x color:blue;
+ }
+
+ #header  p.headertext4
+ {
+   font-style:italic;
+   text-align:center;
+   color: #990000;
+ }
+
+ #header  p.headertext3
+ {
+   font-style:italic;
+  xcolor:white;
+ }
+
+ #header  p.headertext2
+ {
+   font-style:italic;
+   xcolor:white;
+ }
+

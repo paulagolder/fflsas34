@@ -1,0 +1,30 @@
+{# templates/user_sides.html.twig #}
+
+{# a editer pour le presentation du user site  #}
+
+
+
+
+ 
+  
+   {% block left %}
+       <div id="left" >
+      {% include 'user_menu.html.twig' %}
+      {% include 'admin_menu.html.twig' %}
+      {{ render(controller('AppBundle\\Controller\\PersonController::showsidebar')) }} 
+        </div>
+    {% endblock %}
+   
+
+    {% block right %}
+    <div id="right" >
+      {% if is_granted('ROLE_USER') %}
+        {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
+      {% endif %}
+      {{ render(controller('AppBundle\\Controller\\RandomimageController::randomimage')) }}
+      {{ render(controller('AppBundle\\Controller\\RecentEditsController::recentedits')) }}
+        </div>
+    {% endblock %}
+  
+
+

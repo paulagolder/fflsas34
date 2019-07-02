@@ -1,0 +1,54 @@
+
+div#footer 
+{
+   width:100%;
+   position:fixed;
+   bottom:0px;;
+}
+
+div#footer table 
+{
+   width: 100%;
+   background-color :rgba(0, 0, 70, 0.8);
+}
+
+div#footer table.footer tbody tr td.center h1
+{
+      color: white;
+    
+}
+
+div#footer a, a:visited, a:link
+{
+       color: white;
+	text-decoration: none;
+	
+}
+
+
+
+div#footer table tr  td.right
+{
+    text-align: right;
+    vertical-align: middle;
+    color: white;
+    width :30%;
+    font-size: 1em;
+}
+
+div#footer table tr  td.center
+{
+    text-align: center;
+    vertical-align: bottom;
+    width:40%;
+}
+
+div#footer table tr  td.left
+{
+    text-align: left;
+    vertical-align: middle;
+     width :30%
+}
+
+
+

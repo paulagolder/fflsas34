@@ -53,6 +53,7 @@
     
     
     {% block middle %}
+    <div id="middle" >
     <div id="editlocation">
         {% if message %}
         <h1> {{message}}</h1>
@@ -124,11 +125,8 @@
     {% endif %} 
     {% endif %}
 </div>
+</div>
 {% endblock %}
 
-{% block right %}
 
-{{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-
-{% endblock%}
 

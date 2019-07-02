@@ -49,7 +49,7 @@ class Person
 
     public function getId()
     {
-        return $this->id;
+        return $this->personid;
     }
 
     public function getPersonid(): ?int

@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block middle %}
+<div id="middle" >
   <div id="biblos">
    {% if message %}
      <h1> {{message}}</h1>
@@ -50,15 +51,11 @@
             <div class="label" > {{ 'book.isbn' | trans }}</div>
             <div class="data" > {{book.isbn}}</div>
         </div>
-        
     </div>
-    
-    
-    
-    
-   
 </div>
+
   {% endif %}
+  </div>
   </div>
 {% endblock %}
 

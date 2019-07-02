@@ -152,8 +152,12 @@ class EventController extends Controller
         if($event->getLocid())
         {
             $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($event->getLocid());
+            if($location)
+            {
             $event->location['name'] = $location->getName();
             $event->location['link'] = "/".$this->lang."/location/".$location->getLocid();
+            }
+        
         }
         
        // $linkrefs =$this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);

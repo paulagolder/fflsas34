@@ -7,8 +7,8 @@ body
 	font-stretch: normal;
 	padding: 0;
 	margin: 0;
-    background-color: #7194d4;
-	background-image: url("/common/skybig.jpg");
+    background-color: #92a4c5;
+	xbackground-image: url("/common/skybig.jpg");
     background-repeat: no-repeat;
     background-size: 100% auto;
 }

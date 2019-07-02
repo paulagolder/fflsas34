@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block middle %}
-
+<div id="middle" >
 <div id="regcomplete">
 <div class=heading>
 <div class="label" >{{'complete.registration' | trans}}</div>
@@ -23,6 +23,7 @@
     {{ form_row(form.newregistrationcode) }}
     <button type="submit">Register!</button>
 {{ form_end(form) }}
+</div>
 </div>
 </div>
 {% endblock %}

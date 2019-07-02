@@ -1,0 +1,83 @@
+
+div#footer 
+{
+   width:100%;
+   position:fixed;
+   bottom: 0em;
+   height:2em;
+   background-color :rgba(0, 0, 70, 0.8);
+}
+
+
+
+div#footer a, a:visited, a:link
+{
+       color: white;
+	text-decoration: none;
+	
+}
+
+div#footer a:hover
+{
+       color: red;
+	text-decoration: none;
+	
+}
+
+
+div#footer  div.right
+{
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
+   xtext-align: right;
+    vertical-align: middle;
+    color: white;
+   x width :30%
+}
+
+div#footer  div.center
+{
+    position: absolute;
+    top: 1em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+div#footer  div.left
+{
+     position: absolute;
+    top: 0.0em;
+    left: 1em;
+}
+div#footer  div.left img
+{
+   width: 100px;
+}
+
+@media (max-width: 500px) 
+{
+    
+div#footer  div.right
+{
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
+    color: white;
+    font-size: 0.8em;
+}
+
+div#footer  div.center
+{
+    top: 1em;
+}
+
+div#footer  div.left img
+{
+   width: 100px;
+}
+ 
+    
+}
+

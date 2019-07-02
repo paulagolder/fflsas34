@@ -11,6 +11,7 @@
 
 
 {% block middle %}
+<div id="middle" >
   <div id="texts" >
    {% if message %}
      <h1> {{message}}</h1>
@@ -67,5 +68,6 @@
            <a class= "editbutton" href="/admin/edittext/image/{{objid}}/comment/FR" >{{ 'create.this' | trans }} </a> 
            </div>
   {% endif %}
+  </div>
   </div>
 {% endblock %}

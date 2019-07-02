@@ -21,6 +21,7 @@
 {% endblock %}
 
 {% block middle %}
+<div id="middle" >
 <div id="contentedit" >
 
 <div class="heading">
@@ -40,18 +41,16 @@
     </div>
     <button type="submit">{{ ' enregistrer ' | trans }} </button>
 {{ form_end(form) }}
-</div>
 
-  
+ </div> 
 </div>
  <div id="summernotex"></div>
 
 <script>
     $(document).ready(function() { $('#summernotex').summernote(); });
 </script>
+</div>
 {% endblock %}
 
 
-{% block right %}
-   {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-{% endblock%}
+

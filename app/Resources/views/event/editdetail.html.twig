@@ -21,7 +21,7 @@
 {%endblock%}
 
 {% block middle %}
-
+<div id="middle" >
 <div id="editevent"  >
 <div class="heading">
  <div class="label" > {{ 'edit.event' | trans }}</div>
@@ -39,12 +39,8 @@
     <button type="submit">Register!</button>
 {{ form_end(form) }}
 </div>
-
+</div>
 </div>
 {% endblock %}
 
-{% block right %}
 
-           {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-           
-{% endblock %}

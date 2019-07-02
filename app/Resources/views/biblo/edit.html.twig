@@ -24,6 +24,7 @@
 
 
 {% block middle %}
+<div id="middle" >
   <div id="biblo" >
    {% if message %}
      <h1> {{message}}</h1>
@@ -50,13 +51,9 @@
     <button type="submit">Register!</button>
 {{ form_end(form) }}
 </div>
-
+</div>
 </div>
 {% endblock %}
 
 
-{% block right %}
 
- {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}  
-
-{% endblock%}

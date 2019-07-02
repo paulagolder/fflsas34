@@ -23,6 +23,7 @@
 {% endblock %}
     
     {% block middle %}
+    <div id="middle" >
     <div id="contentedit" >
         
         <div class="heading">
@@ -62,13 +63,10 @@
             </div>
              <button onclick="saveform()">{{ 'Click.me' | trans }}</button>  
         </div>
-        
+        </div>
         {% endblock %}
         
-        
-        {% block right %}
-        {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-        {% endblock%}
+      
         
 {% block quill %}
 <script>

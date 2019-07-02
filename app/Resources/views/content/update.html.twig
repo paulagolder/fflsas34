@@ -20,6 +20,7 @@
 {% endblock %}
 
 {% block middle %}
+<div id="middle" >
 <div id="contentedit" >
 
 <div class="heading">
@@ -47,9 +48,8 @@
 {% endfor %}
 {% endfor %}
 </div>
+</div>
 {% endblock %}
 
 
-{% block right %}
-   {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-{% endblock%}
+
