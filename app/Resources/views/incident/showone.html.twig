@@ -39,7 +39,7 @@
        <div class="subheading" >
             <div class="label" >{{'he.was' | trans}} </div><div class="field"> {{label | trans}} </div>
          </div>  
-           {% if incident.name_recorded != "" %}
+           {% if incident.namerecorded != "" %}
               <div class="subheading" >
                 <div class="label" > {{'under.the.name.of' | trans }} </div><div class="field"> {{incident.name_recorded}}</div>
                     </div>  
@@ -50,9 +50,9 @@
                <div class="returnbutton"><a href="{{location.link}}">{{'voir'|trans}}</a></div>
                    </div>  
            {% endif %}
-            {% if (incident.location !="" and  incident.locid < 1) %}
+            {% if (incident.comment !="" and  incident.locid < 1) %}
               <div class="subheading" >
-               <div class="label"  >{{'at' |trans}}</div><div class="field">  {{incident.location}}</div>
+               <div class="label"  >{{'at' |trans}}</div><div class="field">  {{incident.comment}}</div>
                    </div>  
            {% endif %}
            {% if incident.sdate != "" %}

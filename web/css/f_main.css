@@ -1,4 +1,8 @@
 
+* {
+  box-sizing: border-box;
+}
+
 body 
 {
 	font-size: 12pt;
@@ -520,7 +524,7 @@ div#right
     
    div#left
    {
-       width:97%;
+       width:100%;
        padding: 2px;
    }
     

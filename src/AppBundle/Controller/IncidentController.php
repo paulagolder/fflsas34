@@ -84,23 +84,23 @@ class IncidentController extends Controller
              'message' =>  'Incident '.$inid. ' not Found',
              ]);
         }
-        if($incident['sdate']>0)
+        if($incident->getSdate()>0)
         {
-        $incident['sdate'] = $this->mylib->formatDate($incident['sdate'],$this->lang);
+          $incident->setSdate( $this->mylib->formatDate($incident->getSdate(),$this->lang));
         }
         else
         {
-          $incident['sdate'] = "";
+           $incident->setSdate( "");
         }
-        $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($incident['personid']);
-        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($incident['eventid']);
+        $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($incident->getPersonid());
+        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($incident->getEventid());
          $eventlabel=$event->getLabel();
-        $etext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('event',$incident['eventid']);
+        $etext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('event',$incident->getEventid());
           $eventlabel= $lib->selectText( $etext_ar,"title",$this->lang);
-        $itype = $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findOne($incident['itypeid']);
-        $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($incident['locid']);
+        $itype = $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findOne($incident->getItypeid());
+        $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($incident->getLocid());
         if($location)
-           $location->link = "/".$this->lang."/location/".$incident['locid'];
+           $location->link = "/".$this->lang."/location/".$incident->getLocid();
         $ilabel = $itype->getLabel();
         return $this->render('incident/showone.html.twig', 
                 [ 

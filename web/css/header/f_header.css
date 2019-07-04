@@ -1,18 +1,65 @@
 
 
+div#header.header
+{
+    clear : both ;
+    position:static;
+    font-size:1.5em;
+}
+
+div#header.header div.headerbody
+{
+    height: 6em;
+    align-items: center;
+}
+
+div#header.header div.headerbody div.texts
+{
+    position: absolute;
+  top: 0.5em;
+  right: 0; 
+  bottom: 0;
+  left: 0;
+     height: 6em;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+div#header.header div.headerbody div.logos
+{
+    position: absolute;
+  top: 0;
+  right: 0;  bottom: 0;
+  left: 0;
+     height: 5em;
+    width: 100%;
+    text-align: center;
+    color: white;
+    display: flex;
+justify-content: space-between;
+align-items: center;
+
+}
+
+#header  div.headertext4
+{
+    color: red;
+    
+}
+
 
 
 
 #header div.messagebar
 {
-    position: absolute;
-    top: 7em;
     width:100%;   
     background-color :rgba(0, 0, 70, 0.8);
     display: flex;
     align-items: center;
     color:white;
     height: 33px;
+    font-size: 0.8em;
 }
 
 
@@ -21,18 +68,25 @@
 {
     
     order: 1;
-    #float:left;
     cursor: pointer;
+    
+}
+
+div#header.header div.messagebar div.languagelink.tooltip
+{
+    padding-right: 0px;
 }
 
 #header.header div.messagebar div.welcome
 {
     order: 2;
+    padding-left: 5px;
 }
 
 #header.header div.messagebar div.status
 {
     order: 3;
+    padding-left: 5px;
 }
 
 @keyframes flasher {
@@ -119,16 +173,16 @@ div#header.header div.messagebar div.languagelink a img
 
 div#header div.messagebar  div.messbutton a
 {
-    all:unset;
+   
     background: #e3e3e3;
     border: 1px solid #bbb;
     border-radius: 3px;
     color: #333;
-    font: bold 12px/1 sans-serif;
-    padding: 8px 0 8px;
+    padding: 8px 2px 8px 2px;
     text-align: center;
-
-    width: 150px;
+    font-weight: bold;
+    font-size: 0.8em;
+    
 }
 
 div#header.header div.messagebar div.messbutton a:hover
@@ -137,48 +191,106 @@ div#header.header div.messagebar div.messbutton a:hover
     background: #333;
 }
 
-div#header.header div.messagebar div.registerlink.button
+xdiv#header.header div.messagebar div.registerlink.button
 {
     cursor: pointer;
 }
 
 
 
-div#header.header
+
+div#header.header div.messagebar div.loginlink
 {
-    clear : both ;
-    position:static;
-    font-size:14px;
-    height: 9em;
+    
+     
+}
+
+div#header.header div.messagebar div.contactlink
+{
+    
+      padding-right: 5px;
 }
 
 
+@media screen and (max-width: 800px) 
+{
+
+    
+div#header.header div.headerbody 
+{
+    
+}
+    
+    div#header.header div.headerbody div.texts
+{
+    font-size: 0.8em;
+}
+    
+        div#header.header div.headerbody 
+{
+    height: 5em;
+}
+  
+div#header.header div.headerbody div.logos
+{
+     height: 4em;
+}
+
+#header.header div.messagebar 
+{
+    font-size: 0.6em;
+}
+
+div#header div.messagebar  div.messbutton a
+{
+   
+    font-size: 0.7em;
+}
+
+
+#header  div.headertext4
+{
+    order: 2;
+    padding: 0.5em 0 0.5em;
+}
+
+
+@media only screen and (max-width: 480px)
+{
+ 
+div#header.header div.headerbody 
+{
+   
+}
+
+div#header.header div.headerbody div.texts
+{
+   
+    font-size: 0.5em;
+    xbackground-color: green;
+    display: flex;
+    flex-direction: column;
+}
 
 #header  div.logo1
 {
-    position: absolute;
-    top: 1em;
-    left: 1em;
-    
-    
+  
     
 }
 
 #header  div.logo1 img
 {
-    width: 8em;
+    width: 3em;
 }
 
 #header  div.logo2
 {
-    position: absolute;
-    top: 1em;
-    right:1em;
+  
 }
 
 #header  div.logo2 img
 {
-    width : 10em;
+    width : 4em;
 }
 
 
@@ -186,142 +298,71 @@ div#header.header
 
 #header  div.headertext1
 {
-    position: absolute;
-    top: 1.5em;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1em;;
-    xtext-align:center;
-    xtext-align:center;
-    color: white;
+    order: 1;
 }
 
 
 
 #header  div.headertext2
 {
-    position: absolute;
-    top: 3em;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1em;
-    font-style:italic;
-    text-align:center;
-    color:white;
+    display: none;
 }
 
 
 
 #header  div.headertext3
 {
-    position: absolute;
-    top: 4.5em;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1em;
-    font-style:italic;
-    text-align:center;
-    color:white;
+    order: 3;
+   
 }
 
 #header  div.headertext4
 {
-    position: absolute;
-    top: 6em;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size:1em;
-    font-style:italic;
-    xtext-align:center;
-    color: #990000;
+    order: 2;
+     padding: 0.8em;
 }
 
 
-@media (max-width: 500px) 
+
+#header.header div.messagebar div.welcome
 {
-    
-    
-    
-    
-    #header  div.headertext1
-    {
-        color: white;
-        width: 100%;
-        
-        text-align: center;
-    }     
-    
-    
-    
-    #header  div.headertext2
-    {
-        display:none;
-    }
-    
-    #header  div.headertext3
-    {
-        color: white;
-        width: 100%;
-        
-        text-align: center;
-    }    
-    
-    #header  div.headertext4
-    {
-        
-        top: 3em;
-        left: 50%
-    }
-    
-    #header  div.logo1 img
-    {
-        width : 2em;
-    }
-    
-    #header  div.logo2 img
-    {
-        width: 3em;
-    }
-    
-    #header  div.logo1 
-    {
-        top: 2.4em;
-    }
-    
-    #header  div.logo2 
-    {
-        top: 2.4em;
-    }
-    
-    #header.header div.messagebar div.welcome
-    {
-        display: none;
-    }
-    
-    #header.header div.messagebar div.status
-    {
-        display: none;
-    }
-    
-    div#header div.messagebar  div.messbutton a
-    {
-       font: bold 12px/1  sans-serif;
-       padding: 2px 0 2px;
-       text-align: center;
-       width: 150px;
-    }
-    
-    
-#header div.messagebar
-{
-    position: absolute;
-    top: 7em;
-    width:100%;   
-    background-color :rgba(0, 0, 70, 0.8);
-    display: flex;
-    align-items: center;
-    color:white;
-    height: 20px;
+    display: none;
 }
 
+#header.header div.messagebar div.status
+{
+    display: none;
+}
+
+
+
+#header.header div.messagebar 
+{
+    font-size: 0.6em;
+}
+
+div#header div.messagebar  div.messbutton a
+{
+   
+    font-size: 0.6em;
+}
+
+
+
+
+
+
+div#header.header div.messagebar div.loginlink
+{
+    
+   
+}
+
+div#header.header div.messagebar div.contactlink
+{
+    
+      
+}
+
+}
 }

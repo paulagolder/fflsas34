@@ -203,7 +203,6 @@ class PersonController extends Controller
     
     public function formatIncident($incident)
     {
-
         $text = $this->translator->trans($incident['label']);
         if($incident['locid']>0)
         {
