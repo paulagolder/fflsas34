@@ -38,13 +38,6 @@
               {% if is_granted('ROLE_USER') %}
                <div class="editbutton "><a class="editbutton" href="/{{lang}}/person/addbookmark/{{person.id}}">{{'bookmark' |trans}}</a></div>
               {% endif %}
-              
-                {% if is_granted('ROLE_ADMIN') %} 
-           <div class="editbutton" >
-               <div class="editbutton "><a class="editbutton" href="/admin/person/edit/{{person.id}}">{{'edit.content' |trans}}</a></div>
-            </div>
-         {% endif %}
-            
             </div>
          {% endfor %}
      </div>

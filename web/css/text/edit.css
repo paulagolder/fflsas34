@@ -14,15 +14,14 @@ div.textref
 div.textedit
 {
     margin-top:2em;
-    
-    
+    color: blue;
 }
 
-div.textpanel
+ div#textedit div.textpanel
 {
     margin-top:2em;
-    
      margin-bottom:2em;
+       color: blue;
 }
 
 textarea#text_form_comment
@@ -45,6 +44,8 @@ div#textedit form div label.required
 {
    visibility: hidden;
 }
+
+
 
 div.formheading
 {

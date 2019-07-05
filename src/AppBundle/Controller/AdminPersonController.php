@@ -137,7 +137,7 @@ class AdminPersonController extends Controller
         dump($text_ar);
         if(! $participation_ar && ! $text_ar) $candelete= true;
        // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
-           $linkrefs = $this->get('linkref_service')->getLinks("persont",$pid, $this->lang);
+           $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
         
         return $this->render('person/editone.html.twig', 
         [ 'lang' => $this->lang,
@@ -211,6 +211,7 @@ class AdminPersonController extends Controller
         return $this->render('person/edit.html.twig', array(
             'form' => $form->createView(),
             'objid'=>$pid,
+            'person'=>$person,
             'returnlink'=>'/admin/person/'.$pid,
             ));
     }
@@ -275,6 +276,26 @@ class AdminPersonController extends Controller
         return $this->redirect("/admin/person/".$pid);
     }
     
+      
+    public function addUrl($pid,$uid)
+    {
+        $path = "/url/".$uid;
+        $url = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findbyPath('url',$uid,$path);
+        if(!$url)
+        {
+        $obj = $this->getDoctrine()->getRepository('AppBundle:Url')->findOne($uid);
+        $label= $obj->getLabel();
+        $linkref = new Linkref();
+        $linkref->setLabel($label);
+        $linkref->setPath($path);
+        $linkref->setObjecttype("person");
+        $linkref->setObjid($pid);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($linkref);
+        $entityManager->flush();
+        }
+        return $this->redirect("/admin/person/".$pid);
+    }
     
     public function addLocation($pid,$lid)
     {
@@ -303,7 +324,11 @@ class AdminPersonController extends Controller
     }
     
     
-    
+     public function removelink($pid,$lid)
+    {
+        $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteOne($lid);
+        return $this->redirect("/admin/person/".$pid);
+    }
     
     
     public function addevent($pid,$eid)

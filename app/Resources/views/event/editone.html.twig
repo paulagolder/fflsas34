@@ -31,6 +31,14 @@
         window.location.href = '/admin/event/addcontent/{{objid}}/'+cid;
      }
      
+      function clickurl(cid)
+     {
+        window.location.href = '/admin/event/addurl/{{objid}}/'+cid;
+     }
+      function clickbiblo(bid)
+     {
+        window.location.href = '/admin/event/addbiblo/{{objid}}/'+bid;
+     }
    </script>
 {% endblock %}
 
@@ -108,23 +116,25 @@
        
             
      <div class="refgroup" >
-     <div class="header">
+     <div class="heading">
      <div class="label"> {{'Liens' | trans}}</div>
      <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.link.use.bookmarks' | trans }}</span>
               </div>
     
      </div>
     <div class="reflist">
-    {% for ref in refs %}
-     <div class="ref">
-      <div class="refref" ><a href="{{ref.path}}">{{ref.label}}</a></div>
-    </div>
-    {% endfor %}
+
+         {% for ref in refs %}
+         <div class="subsubheading">
+               <div class="content" >{{ref.label}}</div>
+               <div class="deletebutton button1" ><a href="/admin/event/removelink/{{event.eventid}}/{{ref.id}}">{{ 'delete' | trans }}</a></div>
+        </div>
+           {% endfor %}
     </div>
     </div>
  
            {% if text or title %}
-           <div class="textpanel" >
+           <div class="textpanel heading" >
                   <div class="label" > {{ 'texts' | trans }} </div>  
                
                  <div class="edit editbutton first">

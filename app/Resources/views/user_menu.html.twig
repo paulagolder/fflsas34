@@ -1,6 +1,4 @@
-{% block stylesheets %}
-   <link href="{{ asset('/css/f_menu.css') }}" rel="stylesheet" />
-{% endblock %}
+
 {% set locale =  app.request.getLocale() | lower %}
 <div id="mainmenu"  class="mainmenu" >
  <div class="menuitem" > <a  href="/{{locale}}/menucontent/201"> {{ 'introduction' | trans }}</a></div>

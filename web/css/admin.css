@@ -175,7 +175,7 @@ div.textref
 div.textedit
 {
     margin-top:2em;
-    
+  
     
 }
 
@@ -184,6 +184,7 @@ div.textpanel
     margin-top:2em;
     
      margin-bottom:2em;
+       color: blue;
 }
 
 textarea#text_form_comment

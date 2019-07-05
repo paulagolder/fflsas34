@@ -26,7 +26,7 @@
          {% for furl in furls %}
            <div class="url row">
             <div  class="label" >{{furl.label}} </div>
-             <div class="retunbutton button1" > <a class="editbutton" href="/{{lang}}/url/visit/{{furl.id}}" >{{"link.visit" | trans }} </a> </div>
+             <div class="returnbutton button1" > <a class="editbutton" href="/{{lang}}/url/visit/{{furl.id}}" >{{"link.visit" | trans }} </a> </div>
              {% if is_granted('ROLE_ADMIN') %}  
              <div class="editbutton" > <a class="editbutton" href="/admin/url/edit/{{furl.id}}" >{{"edit.link" | trans }} </a> </div>
             <div class="deletebutton" > <a class="deletebutton" href="/admin/url/delete/{{furl.id}}" >{{"delete.link" | trans }} </a> </div>

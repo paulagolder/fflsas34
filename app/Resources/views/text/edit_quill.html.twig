@@ -5,7 +5,7 @@
 {% block stylesheets %}
 {{ parent() }}
 <link href="{{ asset('css/text/edit_alt.css') }}" rel="stylesheet" />
-<link href="{{ asset('css/form.css') }}" rel="stylesheet" />
+
 <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
     {% endblock %}
     {% block js %}
@@ -26,11 +26,11 @@
         </div> 
         <div class="form">
             <form action="/admin/text/process_edit/{{text.id}}" method="post" >
-                <div class="row" >
+                <div  >
                     <label for="language">Language:</label>
                     <input type="text" id="username" name="_language" value="{{ text.language}}" disabled="disabled" />
                 </div>
-                <div class="row" >
+                <div  >
                     <label for="attribute">Attribute:</label>
                     <input type="text" id="attribute name="_subjectid" value="{{ text.attribute }}" disabled="disabled"d />
                 </div>

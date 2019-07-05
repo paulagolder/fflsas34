@@ -33,7 +33,7 @@
      <div class ="heading" >
      <div class="title" >{{heading}}  </div>
            <div class="returnbutton button1"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
-           <div class="editbutton" ><a class="editbutton" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/{{ref.linkid}} " > {{'edit' | trans}}</a></div>
+           <div class="editbutton" ><a class="editbutton" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/{{ref.pathid}} " > {{'edit' | trans}}</a></div>
     </div>
             <div class="ref">
               <div class= "name" >{{ ref.label}}</div>
@@ -73,14 +73,14 @@
            <div class="label">{{ ref.label}}: FR : title :</div>
            <div class="editbutton button1">
         
-           <a class= "editbutton " href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.linkid}}/title/fr" >{{ ' create.this' | trans }} </a> </div>
+           <a class= "editbutton " href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.pathid}}/title/fr" >{{ ' create.this' | trans }} </a> </div>
            </div>
   {% endif %}
   {% if not entitle  %}
    <div   class="subheading selectable" > 
            <div class="label">{{ ref.label}}: EN : title :</div>
            <div class="editbutton button1">
-           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.linkid}}/title/en"  >{{ ' create.this' | trans }} </a> </div>
+           <a class= "editbutton" href="/admin/text/{{objecttype}}/{{objid}}/new/linkref/{{ref.pathid}}/title/en"  >{{ ' create.this' | trans }} </a> </div>
            </div>
   {% endif %}
  

@@ -1,6 +1,7 @@
 
 * {
   box-sizing: border-box;
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
 }
 
 body 
@@ -129,7 +130,7 @@ div#middle   a.editbutton:hover
      color:blue;
  }
 
-div#middle  a.editbutton 
+div#middle  div.editbutton a
 {
     text-decoration: none;
     padding: 4px;
@@ -147,6 +148,23 @@ div#middle  a.editbutton
 }
 
 div#middle  a.deletebutton 
+{
+    text-decoration: none;
+    padding: 4px;
+    display: inline;
+    border-radius: 4px;
+    border: 0;
+    margin: 0 10px;
+    background: red;
+    font-size: 12px;
+    line-height: 15px;
+    color: white;
+    width: auto;
+    height: auto;
+    box-sizing: content-box;
+}
+
+div#middle  div.deletebutton a
 {
     text-decoration: none;
     padding: 4px;
@@ -323,14 +341,14 @@ div#middle  div.heading
 div#middle  div.heading div.title
 {
     color:maroon;
-    font-size:1.5em;
+    font-size:1.25em;
     margin-right: 1em;
 }
 
 div#middle  div.heading div.label
 {
     color:yellow;
-    font-size:1.5em;
+    font-size:1.25em;
     margin-right: 1em;
 }
 
@@ -339,6 +357,34 @@ div#middle  div.subheading
     display:flex;
     align-items: center;
     margin-top:10px;
+}
+
+div#middle  div.subsubheading 
+{
+    display:flex;
+    align-items: center;
+    margin-top:5px;
+}
+div#middle  div.subsubheading div.title
+{
+    color:maroon;
+    font-size:0.8em;
+    margin-right: 1em;
+}
+
+div#middle  div.subsubheading div.label
+{
+    color:yellow;
+    font-size:0.8em;
+    margin-right: 1em;
+}
+
+
+div#middle  div.subsubheading div.content
+{
+    color:blue;
+    font-size:0.8em;
+    margin-right: 1em;
 }
   
 div#middle  div.subheading div.title

@@ -70,6 +70,12 @@ class Biblo
     {
         return $this->title;
     }
+    
+    public function getLabel(): ?string
+    {
+        return $this->title;
+    }
+
 
     public function setSubtitle(string $title): self
     {

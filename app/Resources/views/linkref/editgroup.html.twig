@@ -53,7 +53,7 @@
    <div class="reflist">
          {% for ref in refs %}
             <div class= "row" >
-            <a href="{{ref.link}}" >{{ ref.label}}</a>
+            <a href="{{ref.path}}" >{{ ref.label}}</a>
             <div class="editbutton button1"><a class="editbutton" href= "/admin/linkref/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'edit' | trans}}</a></div>
             <div class="deletebutton">  <a class="deletebutton" href= "/admin/linkref/delete/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'delete' | trans}}</a></div>
             </div>

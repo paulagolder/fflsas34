@@ -58,19 +58,19 @@
           <div class="heading" >
             <div class="label">  {{ 'person.a.editer' | trans }} : </div>
             <div class="title">   {{ person.fullname}} </div>
+           </div>
+           <div class="heading" >
             <div class="editbutton button1" ><a href="/admin/person/addbookmark/{{person.personid}}"> {{"bookmark.person" | trans }} </a></div>
             <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {{ 'edit.person' | trans }}</a></div>
-
             <div class="returnbutton"> <a href = "{{returnlink}}" >{{ 'retour' | trans }} </a></div>
-              {% if candelete %}
-              
+            {% if candelete %}
                 <div class="deletebutton"> <a href = "/admin/person/delete/{{person.personid}}" >{{ 'delete' | trans }} </a></div>
-              {% endif %}
+             {% endif %}
           </div>
         {% endif %}
             
         
-           <div class="imagegroup" >
+           <div class="imagegroup heading" >
            
            <div class="label" > {{ 'images' | trans }} </div>  <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
               </div>
@@ -96,13 +96,16 @@
          </div>
          <div class="reflist">
          {% for ref in refs %}
+         <div class="subsubheading">
                <div class="refref" >{{ref.label}}</div>
+               <div class="deletebutton button1" ><a href="/admin/person/removelink/{{person.personid}}/{{ref.id}}">{{ 'delete' | trans }}</a></div>
+        </div>
            {% endfor %}
          </div>
        </div>
             
         {% if text  %}
-           <div class="textpanel" >
+           <div class="textpanel heading" >
             <div class="label" > {{ 'texts' | trans }} </div>
                 <div class="edit editbutton button1">
                    <a href = "/admin/text/person/{{person.personid}}"   > {{ 'edit.text' | trans }}</a>

@@ -15,15 +15,20 @@ div#peoplesidebar{
  {
      color:yellow;
      font-size:1em;
-     
  }
 
 div#peoplesidebar nav ul li
 {
-   
     font-size:0.8em;
 }
-div#peoplesidebar nav ul{height:300px; width:90%;margin-left: -25px;}
+
+div#peoplesidebar nav ul
+{
+     height:300px;
+     xwidth:90%;
+     margin-left: -25px;
+}
+
 div#peoplesidebar nav ul{overflow:hidden; overflow-y:scroll;}
 div#peoplesidebar >nav > ul >li > a
 {

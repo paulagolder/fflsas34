@@ -269,6 +269,7 @@ class LinkrefController extends Controller
         {
             $linkid = $link['linkid'];
             $linkref = array();
+            $linkref["id"]= $linkid;
             $label = $link['label'];
             $texts_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('linkref', $linkid);
             if($texts_ar)

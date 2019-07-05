@@ -286,6 +286,38 @@ class AdminEventController extends Controller
         
     }
     
+    
+      public function addBiblo($eid,$bid)
+    {
+        $biblo =  $this->getDoctrine()->getRepository("AppBundle:Biblo")->findOne($bid);
+        $em = $this->getDoctrine()->getManager();
+        $newp = new Linkref();
+        $newp->setObjid((int)$eid);
+        $newp->setpath("/biblo/".$bid);
+        $newp->setObjecttype('event');
+          $newp->setLabel($biblo->getLabel());
+        $em->persist($newp);
+        $em->flush();
+        return $this->redirect('/admin/event/'.$eid);
+        
+    }
+    
+      
+      public function addUrl($eid,$uid)
+    {
+        $url =  $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($uid);
+        $em = $this->getDoctrine()->getManager();
+        $newp = new Linkref();
+        $newp->setObjid((int)$eid);
+        $newp->setpath("/url/".$uid);
+        $newp->setObjecttype('event');
+          $newp->setLabel($url->getLabel());
+        $em->persist($newp);
+        $em->flush();
+        return $this->redirect('/admin/event/'.$eid);
+        
+    }
+    
     public function addparticipant($eid,$pid)
     {
         $user = $this->getUser();
@@ -329,6 +361,16 @@ class AdminEventController extends Controller
      $image = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findOne($irid);
      $em = $this->getDoctrine()->getManager();
       $em->remove($image);
+     $em->flush();
+        return $this->redirect('/admin/event/'.$eid);
+    }
+    
+    
+    public function removelink($eid,$lid)
+    {
+     $link = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findOne($lid);
+     $em = $this->getDoctrine()->getManager();
+      $em->remove($link);
      $em->flush();
         return $this->redirect('/admin/event/'.$eid);
         

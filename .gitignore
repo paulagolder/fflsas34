@@ -22,5 +22,6 @@
 /translations/*.*~
 /*/x*
 */x*
+/web/css/x*
 /*/*/*/x*
 *.yaml

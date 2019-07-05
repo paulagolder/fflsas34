@@ -223,7 +223,10 @@ person_admin_addbiblo:
 person_admin_removeimage:
     path: /admin/person/removeimage/{pid}/{iid}
     controller: AppBundle\Controller\AdminPersonController::removeimage   
-    
+
+person_admin_removelink:
+    path: /admin/person/removelink/{pid}/{lid}
+    controller: AppBundle\Controller\AdminPersonController::removelink
     
 person_admin_bookmark:
     path: /admin/person/addbookmark/{pid}
@@ -426,10 +429,25 @@ event_user_addbookmark:
 event_admin_addimage:
     path:  /admin/event/addimage/{eid}/{iid}
     controller: AppBundle\Controller\AdminEventController::addImage  
+
+event_admin_addbiblo:
+    path: /admin/event/addbiblo/{eid}/{bid}
+    controller: AppBundle\Controller\AdminEventController::addbiblo     
+
+event_admin_addurl:
+    path: /admin/event/addurl/{eid}/{uid}
+    controller: AppBundle\Controller\AdminEventController::addurl   
   
 event_admin_removeimage:
      path: /admin/event/removeimage/{eid}/{irid}
      controller: AppBundle\Controller\AdminEventController::removeImageRef  
+     
+
+event_admin_removelink:
+    path: /admin/event/removelink/{eid}/{lid}
+    controller: AppBundle\Controller\AdminEventController::removelink
+    
+
      
 event_admin_setlocation:     
      path: /admin/event/setlocation/{eid}/{lid}

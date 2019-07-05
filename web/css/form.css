@@ -1,53 +1,39 @@
- div.form form div label
- {
-     color: yellow;
-     font-size: 1em;
-     width: 10em;
- }
- 
-div.form form div
-{
-    display: flex;
+div.form {
+margin-top:20px;
 }
 
-div.form form div  div
-{
-    display: flex;
+div.form div label.required {
+color:red;
+font-size:1em;
+width:10em;
 }
 
-
-div.form form row
-{
-    display: flex;
+div.form form div {
+align-items:center;
+display:flex;
+flex-direction:row;
+padding-right:9px;
+text-align:right;
 }
 
- div.form form row label
- {
-     color: yellow;
-     font-size: 1em;
-     width: 10em;
- }
-
-html body div#page div.mypage div.mypageinner div#middle div#contactform div.form form div#form div label.required
-{
+div.form form div div {
+display:block;
 }
 
- div.form
-{
-    margin-top:20px;
+div.form form div label {
+color:#FF0;
+display:block;
+font-size:1em;
+padding-right:9px;
+width:10em;
 }
 
-
- 
-
- div#contentedit div.form form div#maintext
-{
-    
-     display: block;
+div.form form row {
+display:flex;
 }
 
-div#contentedit div.form form div#maintext div
-{
-    
-    display: block;
+div.form form row label,div.form form div label.required {
+color:#FF0;
+font-size:1em;
+width:10em;
 }
