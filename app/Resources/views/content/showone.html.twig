@@ -27,6 +27,12 @@
             <a class="editbutton" href = "/{{lang}}/subject/addbookmark/{{content.subjectid}}" >{{'bookmark.content' | trans}}</a>
         </div>
         {% endif %}
+         {% if langlist %}
+         
+           <div  class="editbutton">
+            <a class="editbutton" href = "/{{lang}}/content/FR/{{content.subjectid}}" >{{'FR' | trans }}</a>
+        </div>
+         {% endif %}
          {% if is_granted('ROLE_ADMIN') %} 
         <div  class="editbutton">
             <a class="editbutton button1" href = "/admin/subject/{{content.subjectid}}" >{{'edit.content' | trans }}</a>

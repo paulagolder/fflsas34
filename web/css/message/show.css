@@ -3,43 +3,16 @@
 
   
 
-div#messages
-{
-    
-   margin-top :0.5em;
-   font-size :1em;
-   color : blue;
-}
 
-
-div#messages div.heading
-{
-    display:flex;
-}
-
-div#messages div.fuserlist div.user div.deletebutton
+div#message div.fuserlist div.user div.deletebutton
 {
    # margin-left:auto;
 }
 
-div#messages div.deletebutton a {
-    padding: 4px;
-    display: inline;
-    border-radius: 7px;
-    border: 0;
-    margin: 0 10px;
-    background: red;
-    font-size: 12px;
-    line-height: 15px;
-    color: white;
-    width: auto;
-    height: auto;
-    box-sizing: content-box;
-    text-decoration: none;
-}
 
 
-div#messages div.fuserlist div.user
+
+div#message div.fuserlist div.user
 {
     display:flex;
 }
@@ -48,7 +21,7 @@ div#messages div.fuserlist div.user
 
 
 
-div#messages div.message
+div#message div.message
 {
        display:flex;
 }

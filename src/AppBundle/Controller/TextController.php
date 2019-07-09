@@ -319,7 +319,7 @@ class TextController extends Controller
         $text->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
         $text->setUpdateDt($now);
-        # $content->setText($this->cleanText($content->getText()));
+     
         
         
         return $this->render('text/edit_quill.html.twig', array(

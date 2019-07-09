@@ -40,7 +40,7 @@
 
     {{ form_row(form.personid)}}
     {{ form_row(form.eventid) }}
-    {{ form_row(form.itypeid) }}
+   <div class="itypeid" > {{ form_row(form.itypeid) }}
      
     <div class="itypelist" >
         <select id="itypelist" onchange="seltype(this.value)" >
@@ -52,7 +52,7 @@
            {% endif %}
          {% endfor %}
       </select>
-    </div>
+    </div> </div>
     {{ form_row(form.namerecorded) }}
     {{ form_row(form.rank) }}
     {{ form_row(form.locid) }}

@@ -19,6 +19,11 @@
      {
        putImage(Iid);
      }
+     
+      function clickurl(Uid,label)
+     {
+       putUrl(Uid);
+     }
  </script>
 {% endblock %}
     
@@ -29,7 +34,7 @@
         <div class="heading">
             <div class="label" >{{ 'edit.contents' | trans }} </div>
             <div class="title" >{{ content.title}} : {{content.contentid}} </div>
-            <div class="returnbutton button1"> <a href ="{{returnlink}}" >{{ ' annuler ' | trans }} </a> </div>
+            <div class="returnbutton button1"> <a href ="{{returnlink}}" >{{ 'annuler' | trans }} </a> </div>
         </div> 
         <div class="form">
             <form action="/admin/content/process_edit/{{content.contentid}}" method="post" >
@@ -110,6 +115,17 @@ function putImage(imageid)
     }     
 }
 
+function putUrl(urlid)
+{
+    var range = quill.getSelection(true);
+    if (range) 
+    {
+        if (range.length == 0) 
+        { 
+            quill.insertText(range.index, '[["url":'+urlid+',"label":""]]', 'bold', true); 
+        }
+    }     
+}
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>

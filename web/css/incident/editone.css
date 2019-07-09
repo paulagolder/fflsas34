@@ -42,4 +42,9 @@ div#editincident div.incident div
     margin-bottom:5px;
 }
 
+ div#editincident div.form form div.itypeid div
+ {
+     display: flex;
+ }
+
 div#mapid  { height: 400px;  }

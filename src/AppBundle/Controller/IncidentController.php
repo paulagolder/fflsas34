@@ -203,8 +203,8 @@ class IncidentController extends Controller
     public function delete($inid)
     {
         $incident = $this->getDoctrine()->getRepository('AppBundle:Incident')->findOne($inid);
-        $eventid = $incident['eventid'];
-        $personid = $incident['personid'];
+        $eventid = $incident-> getEventid();
+        $personid = $incident->getPersonid();
         $participations = $this->getDoctrine()->getRepository('AppBundle:Participant')->findParticipationsbyEntityPerson($eventid, $personid);
         $this->getDoctrine()->getRepository("AppBundle:Incident")->delete($inid);
         return $this->redirect("/admin/participant/".$participations[0]->getParticipationId());

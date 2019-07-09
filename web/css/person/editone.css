@@ -4,10 +4,7 @@ div#editperson
 }
 
 
-div#editperson div.eventtree
-{
-    margin-top:40px;
-}
+
     
 div#editperson div.notext
 {
@@ -17,35 +14,10 @@ div#editperson div.notext
 
 
 
-div#editperson > div.person > div.heading
-{
-    display:flex;
-     align-items: center;
-     flex-wrap: wrap;
-}
-    
 
     
-div#editperson div.person div.heading div.editbutton
-{
-   ;
-}
 
-div#editperson div.person div.heading div.editbutton.button1
-{
-    
-      margin-left:auto;
-}
-    
-  div#editperson div.person div.participants div.participantlist div.participant div.button1
-  {
-       xmargin-left:auto;
-  }
-  
-div#editperson div.participants div.participantlist div.participant div.editbutton.button1
- {
-       margin-left:auto;
-  }    
+   
 
  div#editperson div.refgroup   
 {
@@ -63,23 +35,7 @@ div#editperson div.participants div.participantlist div.participant div.editbutt
     text-decoration:none;
 }
 
- div#editperson div.refgroup div.reflist
- {
-     margin-top:5px;
-     
- }
-    
-div#editperson div.text
-{
-   margin-left: 1em;
-   font-size: 0.9em;
-}
 
-div#editperson div.text p
-{
-   margin-left: 1em;
-   
-}
 
 
 div#editperson div.imagegroup
@@ -153,12 +109,7 @@ div#editperson div.imagegroup div.imagedelete
 }
 
  
-div#editperson div.person div.refgroup div.editbutton
-{
-    display: table-cell;
-    vertical-align: middle;
-    margin-left: auto;
-}
+
  
 
 div#editperson div.textpanel div.text
@@ -166,15 +117,13 @@ div#editperson div.textpanel div.text
     color:blue;
 }
 
-d
-
-
-div#editperson  div.notext  
+div#editperson div.person div.notext.heading div.label.red
 {
-    margin-top : 2em;
-    color:red;
-    font-size:1em;
+    color: red;
 }
+
+
+
 
 div#editperson div.noparticipants
 {
@@ -182,19 +131,7 @@ div#editperson div.noparticipants
 }
 
 
-div#editperson div.textpanel
-{
-    display:flex;
-    align-items: center;
-}
 
-div#editperson div.textpanel div.text
-{
-    flex:10;
-    height: 5em;
-    overflow: auto;
-    border: 2px solid blue;
-}
 
  
 div#editperson div#person div.participants
@@ -241,16 +178,7 @@ div#editperson  div.participants div.participantlist div.participant
 }
 
 
-div#editperson div.person div.participants div.participantlist div.participant div.particiantdelete.deletebutton a
-{
-    color:white;
-    
-}
 
-div#editperson div.person div.participants div.participantlist div.participant div.particiantdelete.deletebutton 
-{
-    xmargin-left: auto;
-}
 
 div#editperson div.participants div.participantlist div.incident
 {

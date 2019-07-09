@@ -84,6 +84,7 @@ class UserController extends Controller
         
         
         return $this->render('user/adminedit.html.twig', array(
+              'fuser'=> $fuser,
             'form' => $form->createView(),
             'returnlink'=>'/admin/user/search',
             ));
@@ -94,6 +95,7 @@ class UserController extends Controller
         
         $request = $this->requestStack->getCurrentRequest();
         $fuser = new User;
+        $fuser->setRolestr('ROLE_USER;');
         $encoder = $this->encoderFactory->getEncoder($fuser);
         
         
@@ -114,6 +116,7 @@ class UserController extends Controller
         
         
         return $this->render('user/adminedit.html.twig', array(
+            'fuser'=> $fuser,
             'form' => $form->createView(),
             'returnlink'=>'/admin/user/search',
             ));

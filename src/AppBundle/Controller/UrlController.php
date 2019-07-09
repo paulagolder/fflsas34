@@ -64,8 +64,8 @@ class UrlController extends Controller
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $this->getDoctrine()->getRepository("AppBundle:Url")->delete($urlid);
-    
-       
+        $this->getDoctrine()->getRepository('AppBundle:Text')->deleteTexts('url',$urlid);
+        $this->getDoctrine()->getRepository('AppBundle:Linkref')->deleteAllLinks('url',$urlid);
          return $this->redirect("/admin/url/search");
     }
     

@@ -44,8 +44,8 @@
  {% for incident in incidents %}
  <div class='incident' > 
     <div >{{incident.label}}</div>
-    <div class="button1" > <a class="editbutton" href="{{incident['link']}}">{{'edit'|trans}}</a></div>
-     <div class="deletebutton" > <a class="deletebutton" href="/admin/incident/delete/{{incident['incidentid']}}">{{'delete'|trans}}</a></div>
+    <div class="editbutton button1" > <a  href="{{incident['link']}}">{{'edit'|trans}}</a></div>
+     <div class="deletebutton" > <a  href="/admin/incident/delete/{{incident['incidentid']}}">{{'delete'|trans}}</a></div>
     </div>
  {% endfor%}
  </div>

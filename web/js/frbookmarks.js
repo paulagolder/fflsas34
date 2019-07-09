@@ -19,9 +19,9 @@
         window.location.href = '/fr/location/'+lid;
      }
      
-     function clickcontent(cid)
+     function clickcontent(sid)
      {
-        window.location.href = '/fr/content/'+cid;
+        window.location.href = '/fr/subject/'+sid;
      }
      
      function clickbiblo(bid)

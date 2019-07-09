@@ -51,10 +51,16 @@ class Event
     private $startdate;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string",  nullable=true)
      */
     private $enddate;
 
+    
+        /**
+     * @ORM\Column(type="smallint", length=20, nullable=true)
+     */
+    private $sequence;
+    
     public $link;
     public $ancestors = array();
     public $children = array();
@@ -151,6 +157,18 @@ class Event
     public function setEnddate($enddate): self
     {
         $this->enddate = $enddate;
+
+        return $this;
+    }
+    
+        public function getSequence(): ?int
+    {
+        return $this->sequence;
+    }
+
+    public function setSequence(?int $seq): self
+    {
+        $this->sequence = $seq;
 
         return $this;
     }

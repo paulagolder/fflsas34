@@ -133,11 +133,8 @@ class AdminPersonController extends Controller
         
         $mess = '';
         $candelete = false;
-        dump($participation_ar);
-        dump($text_ar);
         if(! $participation_ar && ! $text_ar) $candelete= true;
-       // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
-           $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
+        $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
         
         return $this->render('person/editone.html.twig', 
         [ 'lang' => $this->lang,
@@ -381,12 +378,12 @@ class AdminPersonController extends Controller
      public function delete($pid)
     {
          $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
-     $mess = "person ". $person->getFullname()." deleted";
-     $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteGroup("person",$pid);
-      $this->getDoctrine()->getRepository("AppBundle:Imageref")->deleteGroup("person",$pid);
-     $em = $this->getDoctrine()->getManager();
-      $em->remove($person);
-     $em->flush();
+         $mess = "person ". $person->getFullname()." deleted";
+         $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteGroup("person",$pid);
+         $this->getDoctrine()->getRepository("AppBundle:Imageref")->deleteGroup("person",$pid);
+         $em = $this->getDoctrine()->getManager();
+         $em->remove($person);
+         $em->flush();
         return $this->redirect('/accueil/message/'.$mess);
         
     }

@@ -33,7 +33,8 @@
    <div class="heading">
      <div class="label" >{{ 'content.for.subject' | trans }} </div>
      <div class="title" > {{subjectid}}</div>
-     <div class="returnbutton button1"> <a href = {{returnlink}} >{{ ' annuler ' | trans }} </a> </div>
+      <div class="returnbutton button1"> <a href = "/{{lang}}/subject/{{subjectid}}" >{{ 'voir' | trans }} </a> </div>
+     <div class="returnbutton "> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
    </div>
    {% set founden = false %}
     {% set foundfr = false %}
@@ -51,7 +52,7 @@
       <div class="title">{{content.language}}</div> 
       <div class="editbutton button1" ><a class='editbutton' href="/admin/content/edit/{{content.contentid}}">{{'edit.content' |trans}}</a></div>
   
-      <div class="deletebutton" ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}">{{'delete.content' |trans}}</a></div>      
+      <div  ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}">{{'delete.content' |trans}}</a></div>      
     </div>
      
     <div class='maintext resizable'>
@@ -66,16 +67,16 @@
     {% if not foundfr %}
     <div class="subheading" >
     <div class="label" > make.french.text</div>
-     <div class="button1" >
-     <a class='editbutton' href="/admin/content/new/{{subjectid}}/fr">{{'new.content' |trans}}</a>
+     <div class="editbutton button1" >
+     <a href="/admin/content/new/{{subjectid}}/fr">{{'new.content' |trans}}</a>
     </div>
     </div>
    {% endif %}
    {% if not founden %}
     <div class="subheading" >
     <div class="label" > make.english.text </div>
-     <div class="button1" >
-     <a class='editbutton' href="/admin/content/new/{{subjectid}}/en">{{'new.content' |trans}}</a>
+     <div class="editbutton button1" >
+     <a  href="/admin/content/new/{{subjectid}}/en">{{'new.content' |trans}}</a>
     </div>
     </div>
    {% endif %}

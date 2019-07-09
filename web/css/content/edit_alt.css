@@ -37,7 +37,8 @@ div#contentedit div.form form div.trumbowyg-box.trumbowyg-en.trumbowyg.trumbowyg
 div#editortext.ql-container.ql-snow
 {
     
-    height:50%
+    xheight:50%;
+    max-height: 1200px;
 }
 
 

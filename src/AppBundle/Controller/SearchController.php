@@ -114,8 +114,16 @@ class SearchController extends Controller
                  {
                       $pid = $key;
                       $event = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($pid);
+                      if($event)
+                      {
                       $results['events'][$pid]['label'] = $event->getLabel();
                       $results['events'][$pid]['link'] ="/".$this->lang."/event/".$pid;
+                      }
+                      else
+                      {
+                       $results['events'][$pid]['label'] = "notfound event ".$pid;
+                         $results['events'][$pid]['link'] ="/".$this->lang."/event/".$pid;
+                       }
                  }
                break;
              case "image":

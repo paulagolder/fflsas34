@@ -138,7 +138,7 @@ view.contact: voir
 delete.contact: supprimer
 message.enyoyer: 'message enyoyer'
 date: 'enyoyer le'
-from: 'enyoyer par'
+from: 'de'
 mail.from: de
 mail.subject: sujet
 mail.body: contenu
@@ -224,11 +224,11 @@ Liens: Liens
 to.add.link.use.bookmarks: 'Pour ajouter un lien utiliser un signet'
 vue: Voir
 disabled: désactivée
-from.admin.to: 'De ADMIN a'
+from.admin.to: 'a'
 to.admin: 'a ADMIN'
 this.message.was.sent.by: 'message envoyé par'
 latest.edits: 'Derniers m-a-j'
-remove.bookmarks: enlever les signetss
+remove.bookmarks: enlever les signets
 new.book: Nouveau Livre
 a.book: Livre
 bibloLinks: Librairie

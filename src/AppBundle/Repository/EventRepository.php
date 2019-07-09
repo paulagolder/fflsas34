@@ -23,6 +23,8 @@ class EventRepository extends EntityRepository
     public function findAll()
     {
        $qb = $this->createQueryBuilder("e");
+       $qb->orderBy('e.startdate');
+       $qb->orderBy('e.sequence');
        $events =  $qb->getQuery()->getResult();
        
        foreach( $events as $event)
@@ -40,6 +42,7 @@ class EventRepository extends EntityRepository
        $qb = $this->createQueryBuilder("e");
        $qb->andWhere('e.parent = :eid');
        $qb->orderBy('e.startdate');
+        $qb->addorderBy('e.sequence');
        $qb->setParameter('eid', $eid);
        $events =  $qb->getQuery()->getResult();
        foreach( $events as $event)
@@ -94,35 +97,9 @@ class EventRepository extends EntityRepository
        return $event;
     }
     
-    private function xfindTextsGroup($objecttype, $objid)
-    {
-        $manager = $this->getEntityManager();
-        $conn = $manager->getConnection();
-        $texts = $conn->query("select * from text where objecttype = 'event' and objid =".$objid)->fetchAll();
-        $text_ar= array();
-        foreach( $texts as $text)
-       {
-          $url = "/".$objecttype."/".$objid;
-          $language = $text['language'];
-          $attribute = $text['attribute'];
-          $comment = $text['comment'];
-          $text_ar['link'] = $url;
-          $text_ar['objid'] = $objid;
-          $text_ar['objecttype'] = $objecttype;
-          $text_ar[$attribute][$language] = $comment;
-          $text_ar['label'] = $objecttype.":".$objid;
-       }
-       return $text_ar;
-    }
+
  
- 
-    static public function xgetText($text_ar,$attribute,$language)
-    {
-      if($text_ar[$attribute][$language] ) return $text_ar[$attribute][$language] ;
-      if($text_ar[$attribute]["FR"] ) return $text_ar[$attribute]["FR"] ;
-      if($text_ar[$attribute]["EN"] ) return $text_ar[$attribute]["EN"] ;
-      return "No text found";
-    }
+
     
     
     public function findLocations($locid)

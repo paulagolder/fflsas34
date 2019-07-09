@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/biblo/edit.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/biblo/biblo.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block js %}
  {{ parent() }}
@@ -30,12 +30,21 @@
      <h1> {{message}}</h1>
    {% endif %}
    <div class="heading">
+   {% if biblo.bookid >0 %}
      <div class="label">
-      {{'a.book' | trans}}
+      {{'edit.book' | trans}}
      </div>
-  
+     <div class="title">
+      {{ biblo.title}}({{biblo.author}})
+     </div>
       <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{ 'retour' | trans }} </a> </div>
        <div class="deletebutton"> <a href = "/admin/biblo/delete/{{biblo.bookid}}" >{{ 'delete' | trans }} </a> </div>
+    {% else %}
+      <div class="label">
+      {{'new.book' | trans}}
+     </div>
+        <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{ 'retour' | trans }} </a> </div>
+        {% endif %}
   </div>
 
 <div  class="form" >

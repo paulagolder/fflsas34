@@ -13,33 +13,31 @@
 
 {% block middle %}
 <div id="middle" >
- <div id="contacts"  >
+ <div id="message"  >
     <div class="heading">
         <div class="label" > {{ 'see.admin.messages' | trans }}</div>
     </div>
+          <div class="subheading" >
+            <div class="label" > {{'message.list' | trans }}</div>
+        </div>  
     
-    
-    <div class="contactlist" >
-        <div class="subheading" >
-            <div class="label" > {{'contact.list' | trans }}</div>
-        </div>
-        
-        {% for contact in messages %}
-        <div class= "contact  selectable">
-        {% if contact.fromname == 'FFLSAS-admin' %}
-           <div class="name" > {{'from.admin.to' | trans }} {{contact.toname}}</div>
+    <div class="messagelist" >
+        {% for message in messages %}
+        <div class= "message  selectable">
+        {% if message.fromname == 'FFLSAS-admin' or message.fromname == 'FFLSAS75-admin' %}
+           <div class="name" > {{'from.admin.to' | trans }} {{message.toname}}</div>
         {% else %}
-           <div class="name" > {{'from' | trans }} {{contact.fromname}} {{'to.admin' | trans }}</div>
+           <div class="name" > {{'from' | trans }} {{message.fromname}} </div>
         {% endif %}
-            <div class= "date" > {{contact.date_sent | date("Y-m-d") }}</div>
-            <div class="subject" > {{contact.subject}}</div>
+            <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
+            <div class="subject" > {{message.subject}}</div>
             
-            <div class = "message" > {{ contact.body|length > 20 ? contact.body|slice(0, 20) ~ '...' : contact.body  }}</div>
+            <div class = "body" > {{  message.body  }}</div>
             <div class = "editbutton button1">
-                <a class='editbutton' href="/admin/message/{{contact.id}}">{{'view.contact' |trans}}</a>
+                <a class='editbutton' href="/admin/message/{{message.id}}">{{'view.message' |trans}}</a>
             </div>
             <div class = "deletebutton">
-                <a class='deletebutton' href="/admin/message/delete/{{contact.id}}">{{'delete.contact' |trans}}</a>
+                <a class='deletebutton' href="/admin/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
             </div>
         </div>
         {% endfor %}

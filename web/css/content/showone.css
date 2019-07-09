@@ -13,3 +13,10 @@ div#content div.maintext
     margin-right:1em;
     
 }
+
+
+div#content div.maintext p strong
+{
+    font-size: 1.5em;
+font-weight: bold;
+}

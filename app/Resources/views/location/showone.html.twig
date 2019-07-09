@@ -43,14 +43,14 @@
         {% if location %}
         <div class="heading" >
             <div class="title" >{{ location.name }}</div>
-            <div class= "button1">
+            <div class= "editbutton button1">
             {% if is_granted('ROLE_USER') %} 
         
-                <a class="editbutton" href = "/{{lang}}/location/addbookmark/{{location.locid}}" >{{'bookmark' | trans}}</a>
+                <a c href = "/{{lang}}/location/addbookmark/{{location.locid}}" >{{'bookmark' | trans}}</a>
        
               {% endif %}
               {% if is_granted('ROLE_ADMIN') %} 
-            <a class="editbutton" href="/admin/location/{{location.locid}}">{{'edit' |trans}}</a>
+            <a  href="/admin/location/{{location.locid}}">{{'edit' |trans}}</a>
             {% endif %}
             </div>
         </div>

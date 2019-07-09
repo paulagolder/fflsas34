@@ -1,4 +1,4 @@
-{# templates/contents/adminsearch.html.twig #}
+{# templates/content/contentsearch.html.twig #}
 
 {% extends 'admin.html.twig' %}
 
@@ -17,7 +17,7 @@
       <div class="label"> {{ heading | trans }}</div>
       <div class="editbutton button1"><a class="editbutton" href ="/admin/subject/new/{{lang}}">{{'new.content' | trans}}</a></div>
    </div>
-  <form  action="/admin/content/search">
+  <form  action="/admin/subject/search">
   <div class="heading">
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
    <input type="text" name="searchfield">
@@ -35,7 +35,6 @@
              <div>{{content.title}}</div> 
              <div class="editbutton button1"><a class="editbutton" href="/admin/subject/addbookmark/{{content.subjectid}}">{{'bookmark' |trans}}</a></div>
              <div class="editbutton "><a class="editbutton" href="/{{lang}}/subject/{{content.subjectid}}">{{'see.content' |trans}}</a></div>
-             <div class="editbutton "><a class="editbutton" href="/admin/subject/{{content.subjectid}}">{{'edit.content' |trans}}</a></div>
             </div>
          {% endfor %}
      </div>

@@ -4,12 +4,12 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/biblo/show.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/biblo/biblo.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block middle %}
 <div id="middle" >
-  <div id="biblos">
+  <div id="biblo">
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
@@ -26,7 +26,7 @@
          
         {% endif %}
     </div>
-<div id="biblo"  >
+<div class="datatable"  >
         <div class="datarow">
             <div class="label" > {{ 'book.title' | trans }}</div>
             <div class="data" > {{book.title}}</div>

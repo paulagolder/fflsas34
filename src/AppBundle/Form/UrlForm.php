@@ -22,12 +22,12 @@ class UrlForm extends AbstractType
             
        
         $builder->add('id', TextType::class);
-        $builder->add('url', TextType::class);
-        $builder->add('label', TextType::class);
+        $builder->add('url', TextType::class,['empty_data' => '', 'attr' => array('style' => 'width: 40em') ]);
+        $builder->add('label', TextType::class,['empty_data' => '', 'attr' => array('style' => 'width: 40em')  ]);
         $builder->add('tags', TextType::class);
 
         $builder->get('tags')->setRequired(false);
-         $builder->get('id')->setDisabled(true);
+        $builder->get('id')->setDisabled(true);
        
                 
     }

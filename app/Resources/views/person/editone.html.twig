@@ -113,9 +113,9 @@
           
             </div>
         {%else%}
-            <div  class="notext row" >
-                <div class="redlabel" >  {{ 'no.text' | trans }}  </div>
-                <div class="button1" ><a href = "/admin/text/person/{{person.personid}}" class="editbutton"  >  {{ 'add.text' | trans }}</a></div>
+            <div  class="notext heading" >
+                <div class="label red" >  {{ 'no.text' | trans }}  </div>
+                <div class="editbutton button1" ><a href = "/admin/text/person/{{person.personid}}"   >  {{ 'add.text' | trans }}</a></div>
             </div>
         {% endif %}
             

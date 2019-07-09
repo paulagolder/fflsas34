@@ -639,7 +639,7 @@ content_admin_process_edit:
     controller:  AppBundle\Controller\ContentController::process_edit   
     
 content_admin_search:
-    path: /admin/content/search
+    path: /admin/subject/search
     controller:  AppBundle\Controller\ContentController::ContentSearch  
 
 content_admin_edit:
@@ -686,19 +686,19 @@ content_all:
         
 content_one:
     path: /{_locale}/subject/{sid}
-    controller:  AppBundle\Controller\ContentController::Showsubject  
+    controller:  AppBundle\Controller\ContentController::Showsubjectl  
     requirements:
         _locale: en|fr|FR|EN
         
 content_menu:
     path: /{_locale}/menucontent/{sid}
-    controller:  AppBundle\Controller\ContentController::Showsubject 
+    controller:  AppBundle\Controller\ContentController::Showsubjectl 
     requirements:
         _locale: en|fr|FR|EN
         
 subject_one:
-    path: /{_locale}/content/{cid}
-    controller:  AppBundle\Controller\ContentController::Showcontent  
+    path: /{_locale}/subject/{sid}/{lang}
+    controller:  AppBundle\Controller\ContentController::Showsubject  
     requirements:
         _locale: en|fr|FR|EN
         

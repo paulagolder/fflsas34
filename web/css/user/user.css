@@ -5,38 +5,50 @@
 div#fuser
 {
     
-   margin-top :0.5em;
-   font-size :1em;
-   color : red;
+ 
 }
 
-div#fuser div.heading
+
+
+
+ div#fuser div.messagelist
+ {
+     margin-top:20px;
+ }
+
+
+div#fuser div.message
 {
-    display:flex;
+       display:flex;
+       color:blue;
 }
 
-div#fuser div.userdata 
+div#fuser div.messagelist div.message div.sentto
 {
-    margin-top:20px;
-}
+    margin-left:2em;
+} 
 
-div#fuser div.userdata div.datarow
+div#fuser div.messagelist div.message div.subject
 {
-    display:flex;
+    margin-left:1em;
 }
 
-div#fuser div.userform form div
+
+div#fuser div.messagelist div.message div.date
 {
-    display:flex;
+    margin-left:1em;
 }
 
-div#fuser div.userform form div label
+div#fuser div.messagelist div.message div.message
 {
-    color: yellow;
-    width: 138px;
+    margin-left:1em;
 }
 
 
+div#fuser div.userdata div.datarow div.label
+{
+    width: 9em;
+}
 
  div#fuser div.messagelist
  {

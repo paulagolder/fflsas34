@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  <link href="{{ asset('css/user/show.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/user/user.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
@@ -20,7 +20,7 @@
         <div class="title" > {{user.username}}</div>
         
         <div class="editbutton button1" ><a class='editbutton' href="/{{lang}}/useredit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
-        <div class="returnbutton"> <a href = {{returnlink}} >{{ ' annuler ' | trans }} </a> </div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
     </div>
     
     <div  class="userdata" >

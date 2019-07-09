@@ -13,8 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Image
 {
     
-   #private  $new_images_folder = '/newimages/';
-   # private  $external_images = "http://fflsas.org/images/stories/fflsas/";
+
     
     /**
      * @ORM\Id()

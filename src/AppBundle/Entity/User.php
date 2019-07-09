@@ -81,7 +81,17 @@ class User implements UserInterface, \Serializable
         return $this->id;
     }
     
+     public function getId()
+    {
+        return $this->id;
+    }
+    
     public function getUsername()
+    {
+        return $this->username;
+    }
+    
+    public function getLabel()
     {
         return $this->username;
     }

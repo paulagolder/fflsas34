@@ -13,15 +13,13 @@
 <div id="middle" >
 <div id="message"  >
 <div class="heading">
-  <div class="label" > {{ 'edit.message' | trans }}</div>
+  <div class="label" > {{ 'read.message' | trans }}</div>
   <div class="title" > {{message.id}}</div>
-<div class = "editbutton button1">
-      <a class='editbutton' href="/admin/message/send/{{message.toemail}}">{{'send.message' |trans}}</a>
- </div>
-  <div class = "deletebutton">
+
+  <div class = "deletebutton button1">
       <a class='deletebutton' href="/admin/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
  </div>
-  <div class="returnbutton"> <a href = {{returnlink}} >{{ ' annuler ' | trans }} </a> </div>
+  <div class="returnbutton"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
 </div>
 
 
@@ -41,7 +39,7 @@
 </div>
 <div class= "subheading" >
    <div class= "label" >{{'message.to'|trans}}</div>
-   <div class="title" >{{message.toname}}</div>
+   <div class="title" >{{message.toname}} ({{message.toemail}}) </div>
    <div class= "label" >{{'message.date' | trans}} </div>
    <div class="title"> {{message.date_sent  | date("Y-m-d")}}</div>
 </div>
