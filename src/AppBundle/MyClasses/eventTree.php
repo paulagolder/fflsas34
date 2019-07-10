@@ -68,6 +68,7 @@ class eventTree
                  $newchild = new eventTreeNode($peid);
                  $newchild->setLabel($pevent->title);
                  $newchild->setLink($pevent->link);
+                  $newchild->setSequence($pevent->getSequence());
                  $currentnode->addChild($newchild);
                  $currentnode = $newchild;
                  $count++;
@@ -80,4 +81,8 @@ class eventTree
          return $count;
      }
     
+    public function sortTree()
+    {
+       $this->topNode->sortChildren();
+    }
 }

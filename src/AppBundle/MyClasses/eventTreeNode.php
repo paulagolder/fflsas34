@@ -11,6 +11,7 @@ class eventTreeNode
       private $children= array();
       private $label;
       private $link ;
+      private $sequence ;
       
 
      
@@ -38,6 +39,16 @@ class eventTreeNode
     public function getLink()
     {
         return $this->link;
+    }
+    
+    public function setSequence( $seq)
+    {
+        $this->sequence = $seq;
+    }
+    
+       public function getSequence()
+    {
+        return $this->sequence;
     }
     
     public function setLink(string $url)
@@ -94,6 +105,19 @@ class eventTreeNode
        return Null;
     }
     
+    public function sortChildren()
+    {
+       $uschildren = $this->children;
+        usort($uschildren , array($this, "cmp_obj"));
+      
+    }
     
-    
+    static function cmp_obj($a, $b)
+    {
+       
+        if ($a->sequence == $b->sequence) {
+            return 0;
+        }
+        return ($a->sequence > $b->sequence) ? +1 : -1;
+    }
 }

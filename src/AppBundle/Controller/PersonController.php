@@ -153,6 +153,7 @@ class PersonController extends Controller
         $topevent->link = "/".$this->lang."/event/".$topevent->getEventid();
         $evt = new eventTree($topevent);
         $evt->buildTree($pevents);
+        $evt->sortTree();
         $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("person",$pid);
         $images= array();
         $i=0;

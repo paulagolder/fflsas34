@@ -106,6 +106,7 @@ class EventController extends Controller
                 $child =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($pid);
                 
                 $children[$i]['startdate'] = $child->getStartdate();
+                 $children[$i]['sequence'] = $child->getSequence();
                 $children[$i]['fstartdate'] = $lib->formatdate($child->getStartdate(),$this->lang);
                 
                 $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$pid);
@@ -117,7 +118,8 @@ class EventController extends Controller
                 $children[$i]['link'] =  $url ;
                 
             }
-            usort($children, function ($item1, $item2) {return $item1 <=> $item2;});
+          //  usort($children, function ($item1, $item2) {return $item1 <=> $item2;});
+             usort($children, function ($item1, $item2) {return $item1['sequence'] <=> $item2['sequence'];});
             usort($children, function ($item1, $item2) {return $item1['startdate'] <=> $item2['startdate'];});
             $event->children = $children;
         }
