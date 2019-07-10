@@ -127,7 +127,9 @@ class ImageController extends Controller
             'image'=>null,
             ]);
         }
+        dump($image->getPath());
          $this->mylib->setFullpath($image);
+          dump($image->getFullpath());
        # $mess = $image->getFullpath();
        $mess="";
         if(@getimagesize($image->getFullpath()))
@@ -135,7 +137,7 @@ class ImageController extends Controller
             //image exists!
         }else{
             // $image->setFullpath($this->getParameter('new-images-folder').$image->getPath());
-            $image->setFullpath('/newimages/'.$image->getPath());
+           // $image->setFullpath('/newimages/'.$image->getPath());
         }
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$iid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);

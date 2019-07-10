@@ -48,7 +48,6 @@ class RegistrationController extends Controller
         $user = new User();
         $form = $this->createForm(UserRegForm::class, $user);
         $form->handleRequest($request);
-        # $form->bind($request);
         if ($form->isSubmitted() && $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')) ) 
         {
             $encoder = $this->encoderFactory->getEncoder($user);
@@ -61,7 +60,6 @@ class RegistrationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            //$baseurl = $this->container->get('router')->getContext()->getBaseUrl();
             $baseurl = $this->container->getParameter('base-url');
             $body =    $this->trans->trans('you.have.sucessfully.registered');
             $body .=   $this->trans->trans('to.complete.enter');
@@ -102,16 +100,21 @@ class RegistrationController extends Controller
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
+        $uname = $user->getUsername();
+        $uemail = $user->getEmail();
+        
         $form = $this->createForm(CompleteRegForm::class, $user);
         $form->handleRequest($request);
-        # $form->bind($request);
         $codeisvalid= $user->codeisvalid();
-        
         if ($form->isSubmitted() && $form->isValid() && $codeisvalid ) 
         {
+        
             $user->setLastlogin( new \DateTime());
             $user->setRolestr("ROLE_USER;");
             $user->setRegistrationcode(null);
+            $user->setUsername($uname);
+            $user->setEmail($uemail);
+             dump($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -123,8 +126,8 @@ class RegistrationController extends Controller
             $smessage = $this->get('message_service')->sendMessage($message);
             #  $this->sendMessage( $user,$subject,$body);
             
-            # $this->get('security.context')->setToken(null);
-            #  $this->get('session')->invalidate();
+           // $this->get('security.context.listener')->setToken(null);
+            $this->get('session')->invalidate();
             return $this->render('registration/completesuccess.html.twig',
             array(
                 'username' => $user->getUsername() ,

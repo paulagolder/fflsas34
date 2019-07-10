@@ -58,6 +58,8 @@ class AuthenticationListener
     private function saveLogin($username, $success) 
     {
          $user =   $this->doctrine->getRepository("AppBundle:User")->loadUserByUsername($username);
+         if($user)
+         {
         $date =  new \DateTime();
     
         $user->setLastLogin( $date);
@@ -65,5 +67,6 @@ class AuthenticationListener
         $em = $this->doctrine->getManager();
         $em->persist($user);
         $em->flush();
+        }
     }
 }

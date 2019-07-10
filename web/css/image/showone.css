@@ -42,6 +42,17 @@ div#image img
     height: auto;
 }
 
+
+
+div#image div.content div.image div.text
+{
+    margin-top: 20px;
+    font-size:1em;
+    color: blue;
+      max-width: 400px;
+      text-align: center;
+}
+
 xdiv#image div.content div.refs div.ref a
 {
     color:blue;
@@ -55,6 +66,8 @@ div#image div.linksheading
     color:yellow;
     
 }
+
+
 
 div#image div.content div.refs div.linkgroup{}
 div#image div.linkgroup

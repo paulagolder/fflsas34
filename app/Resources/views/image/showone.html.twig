@@ -36,7 +36,7 @@
          <img src="{{ image.fullpath }}" />
   
       <div class="text">
-        {{comment}}
+        {{comment | raw}}
       </div>
       </div>
      <div class="refs">
@@ -47,7 +47,7 @@
         <div  class="linkgroup" >{{  label | trans }}</div>
          {% for obid , ref in oref %}       
      {#   <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a>  </div>#}
-         <div class="ref" > <a href="{{ ref.link }}">{{ref.link}}</a>  </div>
+         <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a>  </div>
         {% endfor %}
            {% endfor %}
      {% endif %}

@@ -94,8 +94,10 @@ class ParticipantRepository extends EntityRepository
     
     public function findParticipations($personid)
     {
-      $sql = "select p from AppBundle:participant p ";
-      $sql .= " where p.personid = ".$personid;
+      $sql = "select p from AppBundle:participant p ,AppBundle:Event e ";
+      $sql .= " where p.personid = ".$personid." and p.eventid=e.eventid ";
+      $sql .= " order by e.startdate ";
+      dump($sql);
       $query = $this->getEntityManager()->createQuery($sql);
       $participations = $query->getResult();
       # $participations =  $qb->getQuery()->getResult();

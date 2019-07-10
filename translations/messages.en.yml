@@ -254,4 +254,5 @@ delete.link: Delete Link
 title: Title
 url: URL
 visit: Visit
-delete.this: Deletes
+delete.this: Delete
+reconnect: Logout and Login again to continue as user

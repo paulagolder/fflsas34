@@ -5,12 +5,18 @@
 <div id="adminmenu" class="mainmenu" >
  {% if is_granted('ROLE_ADMIN') %}  
    <div class="menuitem" > <a href="/admin/image/search"> {{ 'admin.images' | trans}}</a> </div>
-      <div class="menuitem" > <a href="/admin/url/search"> {{ 'les.liens' | trans}}</a> </div>
+   
    <div class="menuitem" > <a href="/admin/location/top"> {{ 'browse.locations' | trans}}</a> </div>
      <div class="menuitem" > <a href="/admin/location/search"> {{ 'admin.locations' | trans}}</a> </div>
  <div class="menuitem" > <a href="/admin/biblo/search"> {{ 'les.livres' | trans}}</a> </div>
+    <div class="menuitem" > <a href="/admin/url/search"> {{ 'les.liens' | trans}}</a> </div>
    <div class="menuitem" > <a href="/admin/subject/search"> {{ 'admin.content' | trans}}</a> </div>
    <div class="menuitem" > <a href="/admin/user/search"> {{ 'admin.allusers' | trans}}</a> </div>
    <div class="menuitem" > <a href="/admin/message/all"> {{ 'admin.messages' | trans}}</a> </div>
+{% endif %}
+ {% if is_granted('ROLE_BOSS') %}  
+  
+ <div class="menuitem" > <a href="/admin/biblo/search"> {{ 'special.function' | trans}}</a> </div>
+  
 {% endif %}
 </div>
