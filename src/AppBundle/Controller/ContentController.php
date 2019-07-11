@@ -40,16 +40,16 @@ class ContentController extends Controller
       public function ShowCatchAll()
     {
        $def = $this->container->getParameter('defaultcontent');
-       return $this->ShowSubjectl($def);
+       return $this->ShowContent($def);
        
     }
     
-    public function Showsubjectl($sid)
+    public function ShowContent($sid)
     {
-        return $this->Showsubject($sid,$this->lang);
+        return $this->ShowContentLang($sid,$this->lang);
     }
     
-     public function Showsubject($sid,$lang)
+     public function ShowContentLang($sid,$lang)
     {
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
@@ -88,10 +88,9 @@ class ContentController extends Controller
         $langlist = array();
         foreach($content_ar as $lcont)
         {
-          if($lcont->getContentId()!=$content->getContentId())
-          {
-            $langlist[$lcont->getLanguage()]=$lcont->getContentId();
-          }
+          
+            $langlist[$lcont->getLanguage()]=$lcont->getSubjectId();
+          
         }
         return $this->render('content/showone.html.twig', 
         [
@@ -103,7 +102,7 @@ class ContentController extends Controller
         ]);
     }
     
-    public function Showcontent($cid,$lang)
+    public function xShowcontent($cid,$lang)
     {
         $content=null;
         $content= $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
@@ -154,11 +153,11 @@ class ContentController extends Controller
         'title'=>$title,
         'comment' => $comment,
         'refs' => null,
-        'returnlink'=>'/admin/subject/search',
+        'returnlink'=>'/admin/content/search',
         ]);
     }
     
-    public function Editsubject($sid)
+    public function Editcontent($sid)
     {
         $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
         foreach ($contents as $content)
@@ -171,14 +170,15 @@ class ContentController extends Controller
                 $content->setLabel($content->getTitle());
            //$content->setText( $this->cleanText($content->getText()));
         }
-        
-        return $this->render('content/editsubject.html.twig', 
+           $linkrefs = $this->get('linkref_service')->getLinksfrom("content",$sid);
+
+        return $this->render('content/editcontent.html.twig', 
         ['lang'=>$this->lang, 
         'message' =>  '',
         'contents'=> $contents,
         'subjectid' => $sid,
-        'refs' => null,
-        'returnlink'=>'/admin/subject/search',
+        'refs' => $linkrefs,
+        'returnlink'=>'/admin/content/search',
         ]);
     }
     
@@ -198,7 +198,7 @@ class ContentController extends Controller
         
         return $this->render('content/edit_quill.html.twig', array(
             'content' =>$content,
-            'returnlink' => "/admin/subject/".$content->getsubjectid(),
+            'returnlink' => "/admin/content/".$content->getsubjectid(),
             
             ));
     }
@@ -226,14 +226,14 @@ class ContentController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($content);
             $entityManager->flush();
-            return $this->redirect("/admin/subject/".$sid);
+            return $this->redirect("/admin/content/".$sid);
             
         }
         
         return $this->render('content/edit.html.twig', array(
             'form' => $form->createView(),
             'label'=> $label,
-            'returnlink' => "/admin/subject/".$content->getsubjectid(),
+            'returnlink' => "/admin/content/".$content->getsubjectid(),
             'contentid'=>$contentid,
             ));
     }
@@ -260,7 +260,7 @@ class ContentController extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($content);
                 $entityManager->flush();
-                return $this->redirect("/".$this->lang."/subject/".$sid);
+                return $this->redirect("/".$this->lang."/content/".$sid);
                 
             }
         }
@@ -272,7 +272,7 @@ class ContentController extends Controller
         return $this->render('content/edit.html.twig', array(
             'form' => $form->createView(),
             'label'=> $label,
-            'returnlink' => "/admin/subject/".$content->getsubjectid(),
+            'returnlink' => "/admin/content/".$content->getsubjectid(),
             'contentid'=>$contentid,
             ));
     }
@@ -283,7 +283,7 @@ class ContentController extends Controller
    
     
     
-    public function newContent($sid,$lang)
+    public function newContentLang($sid,$lang)
     {   
         $content = new Content();
         $content->setLanguage($lang);
@@ -298,13 +298,13 @@ class ContentController extends Controller
         $entityManager->persist($content);
         $entityManager->flush();
         $cid = $content->getContentid();
-        return $this->redirect("/".$this->lang."/subject/".$sid);
+        return $this->redirect("/admin/content/edit/".$cid);
     }
     
-     public function newSubject($lang)
+     public function newContent()
     {   
         $sid = $this->newSubjectId();
-       return $this->newContent($sid,$lang);;
+       return $this->EditContent($sid);
     }
     
     public function Showall(Request $request)
@@ -424,7 +424,7 @@ class ContentController extends Controller
         
         //return $this->redirect($uri);
         
-        return $this->redirect("/admin/subject/search");
+        return $this->redirect("/admin/content/search");
         
     }
     
@@ -432,7 +432,7 @@ class ContentController extends Controller
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         
-        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOnebyLang($sid,$this->lang);
+        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findContentLang($sid,$this->lang);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');
         if($ilist == null)
@@ -447,7 +447,7 @@ class ContentController extends Controller
         
         // return $this->redirect($uri);
         
-        return $this->redirect("/".$this->lang."/subject/".$sid);
+        return $this->redirect("/".$this->lang."/content/".$sid);
         
     }
     
@@ -488,8 +488,9 @@ class ContentController extends Controller
     
     public function Delete($cid)
     {
+        $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($cid);
         $this->getDoctrine()->getRepository("AppBundle:Content")->delete($cid);
-        return $this->redirect("/admin/subject/search");
+        return $this->redirect("/admin/content/edit/".$content->getSubjectid());
     }
     
     

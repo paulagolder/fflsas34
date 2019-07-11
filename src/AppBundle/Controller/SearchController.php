@@ -61,9 +61,9 @@ class SearchController extends Controller
         $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
         foreach($contents as $key => $content)
         {
-          $cid = $content->getContentid();
-          $results['content'][$cid]['label'] = $content->getLabel();
-          $results['content'][$cid]['link'] ="/".$this->lang."/subject/".$cid;
+          $sid = $content->getSubjectid();
+          $results['content'][$sid]['label'] = $content->getLabel();
+          $results['content'][$sid]['link'] ="/".$this->lang."/content/".$sid;
         }
         
         $locations = $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($pfield);
@@ -142,7 +142,7 @@ class SearchController extends Controller
                       $pid = $key;
                       $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$pid);
                       $results['content'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang);
-                      $results['content'][$pid]['link'] ="/".$this->lang."/contentid/".$pid;
+                      $results['content'][$pid]['link'] ="/".$this->lang."/content/".$pid;
                  }
               break;
                case "location":

@@ -202,10 +202,10 @@ class UrlController extends Controller
         {
             $ilist = array();
         }
-        $newcontent = array();
-        $newcontent['id'] = $uid;
-        $newcontent["label"]= $url->getLabel();
-        $ilist[$uid]= $newcontent;
+        $newurl = array();
+        $newurl['id'] = $uid;
+        $newurl["label"]= $url->getLabel();
+        $ilist[$uid]= $newurl;
         $session->set('urlList', $ilist);
           return $this->redirect("/admin/url/search");
         return $this->redirect("/admin/url/search?searchfield=".$gfield);
@@ -222,10 +222,10 @@ class UrlController extends Controller
         {
             $ilist = array();
         }
-        $newcontent = array();
-        $newcontent['id'] = $uid;
-        $newcontent["label"]= $url->getLabel();
-        $ilist[$uid]= $newcontent;
+        $newurl = array();
+        $newurl['id'] = $uid;
+        $newurl["label"]= $url->getLabel();
+        $ilist[$uid]= $newurl;
         $session->set('urlList', $ilist);
         
         // return $this->redirect($uri);

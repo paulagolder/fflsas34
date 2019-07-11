@@ -1,32 +1,5 @@
 
-div#content
-{
-    background-color: #8093b7;
-}
 
-
-
-div#contentedit div.heading
-{
-    display:flex;
-}
-
- div#contentedit form div
-{
-    xdisplay:flex;
-}
-
- div#contentedit form div label.required
- {
-     color:yellow;
-     width :5em;
- }
-
- div#contentedit div.form form label
- {
-     color:yellow;
-     width :5em;
- }
 
 
 div#contentedit div.form form div.trumbowyg-box.trumbowyg-en.trumbowyg.trumbowyg-editor-visible

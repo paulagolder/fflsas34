@@ -21,7 +21,7 @@
      
      function clickcontent(sid)
      {
-        window.location.href = '/fr/subject/'+sid;
+        window.location.href = '/fr/content/'+sid;
      }
      
      function clickbiblo(bid)

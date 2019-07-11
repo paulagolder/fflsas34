@@ -91,6 +91,36 @@ class LinkrefRepository extends EntityRepository
        return $ref_ar;
     }
     
+      public function findbyTarget($objecttype, $objid)
+    {
+      
+      $target= "/".$objecttype."/".$objid;
+      $sql = "select r from AppBundle:linkref  r ";
+      $sql .= " where r.path  = '".$target."' ";
+     
+ 
+      $query = $this->getEntityManager()->createQuery($sql);
+        $refs = $query->getResult();
+ 
+       $ref_ar= array();
+       $i=0;
+       foreach( $refs as $ref)
+       {
+          $reflink =   $ref->getPath();
+          $ref_ar[$i]['linkid'] = $ref->getLinkid();
+          $url = "/linkref/".$ref->getLinkid();
+          $ref_ar[$i]['link'] = $url;
+          $ref_ar[$i]['path'] =  $ref->getPath();
+          $ref_ar[$i]['label'] =  $ref->getLabel();
+          $ref_ar[$i]['doctype'] =  $ref->getDoctype();
+          if(substr($reflink,0,4)=="http")
+          {
+            $ref_ar[$i]['link'] = $reflink;
+          }
+          $i++;
+       }
+       return $refs;
+    }
     
     public function deleteGroup($objecttype, $objid)
     {

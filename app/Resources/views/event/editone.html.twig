@@ -83,7 +83,11 @@
                 <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.location.use.bookmarks' | trans }}</span>
               </div>
                 {% if event.locid %}
+                 <div class= "subheading">
+  
       <div ><a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
+         <div class="deletebutton button1" ><a href="/admin/event/deletelocation/{{event.eventid}}"> {{"delete" | trans }} </a></div>
+         </div>
           {% endif  %}
       </div>
 

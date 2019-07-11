@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-<link href="{{ asset('css/content/showone.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/content/content.css') }}" rel="stylesheet" />
 {% endblock %}
 {% block js %}
 {{ parent() }}
@@ -24,12 +24,12 @@
        <div class="title">{{content.title}}</div> 
           {% if is_granted('ROLE_USER') %} 
         <div  class="editbutton button1 ">
-            <a class="editbutton" href = "/{{lang}}/subject/addbookmark/{{content.subjectid}}" >{{'bookmark.content' | trans}}</a>
+            <a class="editbutton" href = "/{{lang}}/content/addbookmark/{{content.subjectid}}" >{{'bookmark.content' | trans}}</a>
         </div>
         {% endif %}
          {% if is_granted('ROLE_ADMIN') %} 
         <div  class="editbutton">
-            <a class="editbutton button1" href = "/admin/subject/{{content.subjectid}}" >{{'edit.content' | trans }}</a>
+            <a class="editbutton button1" href = "/admin/content/{{content.subjectid}}" >{{'edit.content' | trans }}</a>
         </div>
          {% endif %}
        

@@ -15,9 +15,9 @@
    {% endif %}
    <div class="heading">
       <div class="label"> {{ heading | trans }}</div>
-      <div class="editbutton button1"><a class="editbutton" href ="/admin/subject/new/{{lang}}">{{'new.content' | trans}}</a></div>
+      <div class="editbutton button1"><a class="editbutton" href ="/admin/content/new">{{'new.content' | trans}}</a></div>
    </div>
-  <form  action="/admin/subject/search">
+  <form  action="/admin/content/search">
   <div class="heading">
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
    <input type="text" name="searchfield">
@@ -33,8 +33,8 @@
          {% for content in contents  %}
             <div class="search row" >
              <div>{{content.title}}</div> 
-             <div class="editbutton button1"><a class="editbutton" href="/admin/subject/addbookmark/{{content.subjectid}}">{{'bookmark' |trans}}</a></div>
-             <div class="editbutton "><a class="editbutton" href="/{{lang}}/subject/{{content.subjectid}}">{{'see.content' |trans}}</a></div>
+             <div class="editbutton button1"><a class="editbutton" href="/admin/content/addbookmark/{{content.subjectid}}">{{'bookmark' |trans}}</a></div>
+             <div class="editbutton "><a class="editbutton" href="/{{lang}}/content/{{content.subjectid}}">{{'see.content' |trans}}</a></div>
             </div>
          {% endfor %}
      </div>

@@ -68,8 +68,14 @@ class eventTree
                  $newchild = new eventTreeNode($peid);
                  $newchild->setLabel($pevent->title);
                  $newchild->setLink($pevent->link);
-                  $newchild->setSequence($pevent->getSequence());
-                 $currentnode->addChild($newchild);
+                 $seq =$pevent->getSequence();
+                 $sd = $pevent->getStartdate();
+                 if( $sd > 19390000 ) $seq = $sd;
+                  $newchild->setSequence($seq);
+                $currentnode->addChild($newchild);
+                 $cnseq = $currentnode->getSequence();
+                if($cnseq > 1939000 && $seq > 1939000 && $seq <  $cnseq) $currentnode->setSequence($seq);
+                elseif($cnseq < 1939000 && $seq > 1939000 ) $currentnode->setSequence($seq);
                  $currentnode = $newchild;
                  $count++;
              }
@@ -77,12 +83,22 @@ class eventTree
          $newchild = new eventTreeNode($ev->getEventId());
          $newchild->setLabel($ev->title);
          $newchild->setLink($ev->link);
+         $seq =$ev->getSequence();
+         $sd = $ev->getStartdate();
+         dump($ev);
+          if($seq < 19390000 && $sd > 19390000 ) $seq = $sd;
+         elseif($seq > 19390000 && $sd < $seq && $sd > 19390000 ) $seq = $sd;
+          $newchild->setSequence($seq);
+         dump($seq);
          $currentnode->addChild($newchild);
+         $cnseq = $currentnode->getSequence();
+         if($cnseq > 1939000 && $seq > 1939000 && $seq <  $cnseq) $currentnode->setSequence($seq);
+         elseif($cnseq < 1939000 && $seq > 1939000 ) $currentnode->setSequence($seq);
          return $count;
      }
     
     public function sortTree()
     {
-       $this->topNode->sortChildren();
+       $this->topNode->sortsubtree();
     }
 }

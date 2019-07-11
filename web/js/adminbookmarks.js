@@ -20,7 +20,7 @@
      }
      function clickcontent(sid)
      {
-        window.location.href = '/admin/subject/'+sid;
+        window.location.href = '/admin/content/'+sid;
      }
      function clickbiblo(bid)
      {

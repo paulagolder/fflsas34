@@ -71,6 +71,11 @@ class eventTreeNode
       return $this->children;
     }
     
+     public function setChildren($carray)
+    {
+      $this->children = $carray;;
+    }
+    
     public function getChild(int $int)
     {
       return $this->children[$int];
@@ -108,8 +113,19 @@ class eventTreeNode
     public function sortChildren()
     {
        $uschildren = $this->children;
-        usort($uschildren , array($this, "cmp_obj"));
-      
+       usort($uschildren , array($this, "cmp_obj"));
+       $this->setChildren($uschildren);
+    }
+    
+    
+     public function sortsubtree()
+    {
+       $uschildren = $this->children;
+       foreach($uschildren as $child)
+       {
+          $child->sortSubtree();
+       }
+       $this->sortChildren();
     }
     
     static function cmp_obj($a, $b)

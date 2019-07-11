@@ -339,7 +339,7 @@ class AdminEventController extends Controller
         
     }
     
-      public function setlocation($eid,$lid)
+     public function setlocation($eid,$lid)
     {
        $user = $this->getUser();
         $time = new \DateTime();
@@ -350,12 +350,23 @@ class AdminEventController extends Controller
          $event->setUpdateDt($time);
         $em->persist($event);
         $em->flush();
-
+        return $this->redirect('/admin/event/'.$eid);
+    }
+    
+    public function deleteLocation($eid)
+    {
+        $user = $this->getUser();
+        $time = new \DateTime();
+        $em = $this->getDoctrine()->getManager();
+        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($eid);
+        $event->setLocid(null);
+         $event->setContributor($user->getUsername());
+         $event->setUpdateDt($time);
+        $em->persist($event);
+        $em->flush();
         return $this->redirect('/admin/event/'.$eid);
         
     }
-    
-    
       public function removeimageref($eid,$irid)
     {
      $image = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findOne($irid);

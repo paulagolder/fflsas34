@@ -162,26 +162,26 @@ class BibloController extends Controller
         
         if (!$pfield) 
         {
-            $contents = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findAll();
+            $biblos = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findAll();
             $subheading =  'trouver.tout';
         }
         else
         {
             $pfield = "%".$pfield."%";
-            $contents = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findSearch($pfield);
+            $biblos = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findSearch($pfield);
             $subheading =  'trouver.avec';
         }
         
         
-        if (count($contents)<1) 
+        if (count($biblos)<1) 
         {
              $subheading = 'rien.trouver.pour';
         }
         else
         {
-            foreach($contents as $content)
+            foreach($biblos as $biblo)
             {
-                $content->link = "/admin/biblo/addbookmark/".$content->getBookId();
+                $biblo->link = "/admin/biblo/addbookmark/".$biblo->getBookId();
             }
             
         }
@@ -194,7 +194,7 @@ class BibloController extends Controller
         'heading' =>  'Gestion des Livres',
         'subheading' =>  $subheading,
         'searchfield' =>$gfield,
-        'contents'=> $contents,
+        'contents'=> $biblos,
         
         ]);
     }
@@ -202,17 +202,17 @@ class BibloController extends Controller
     public function addBookmark($bid)
     {
         //$gfield = $request->query->get('searchfield');
-        $content =  $this->getDoctrine()->getRepository("AppBundle:Biblo")->findOne($bid);
+        $biblo =  $this->getDoctrine()->getRepository("AppBundle:Biblo")->findOne($bid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('bibloList');
         if($ilist == null)
         {
             $ilist = array();
         }
-        $newcontent = array();
-        $newcontent['id'] = $bid;
-        $newcontent["label"]= $content->getTitle();
-        $ilist[$bid]= $newcontent;
+        $newbiblo = array();
+        $newbiblo['id'] = $bid;
+        $newbiblo["label"]= $biblo->getTitle();
+        $ilist[$bid]= $newbiblo;
         $session->set('bibloList', $ilist);
         return $this->redirect("/admin/biblo/search");
        // return $this->redirect("/admin/biblo/search?searchfield=".$gfield);
@@ -222,17 +222,17 @@ class BibloController extends Controller
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         
-        $content =  $this->getDoctrine()->getRepository("AppBundle:Biblo")->findOne($bid);
+        $biblo =  $this->getDoctrine()->getRepository("AppBundle:Biblo")->findOne($bid);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('bibloList');
         if($ilist == null)
         {
             $ilist = array();
         }
-        $newcontent = array();
-        $newcontent['id'] = $bid;
-        $newcontent["label"]= $content->getTitle();
-        $ilist[$bid]= $newcontent;
+        $newbiblo = array();
+        $newbiblo['id'] = $bid;
+        $newbiblo["label"]= $biblo->getTitle();
+        $ilist[$bid]= $newbiblo;
         $session->set('bibloList', $ilist);
         
         return $this->redirect("/".$this->lang."/biblo/show/all");

@@ -1,10 +1,10 @@
-{# templates/content/editsubject.html.twig #}
+{# templates/content/editcontent.html.twig #}
 
 {% extends 'admin.html.twig' %}
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/content/editsubject.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/content/content.css') }}" rel="stylesheet" />
 {% endblock %}
  {% block js %}
  {{ parent() }}
@@ -28,16 +28,16 @@
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
-
+   {% set founden = false %}
+    {% set foundfr = false %}
    {% if contents %}
    <div class="heading">
      <div class="label" >{{ 'content.for.subject' | trans }} </div>
      <div class="title" > {{subjectid}}</div>
-      <div class="returnbutton button1"> <a href = "/{{lang}}/subject/{{subjectid}}" >{{ 'voir' | trans }} </a> </div>
+      <div class="returnbutton button1"> <a href = "/{{lang}}/content/{{subjectid}}" >{{ 'voir' | trans }} </a> </div>
      <div class="returnbutton "> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
    </div>
-   {% set founden = false %}
-    {% set foundfr = false %}
+
    {% for content in contents %}
    {% if content.language == 'fr' %}
      {% set foundfr = true %}
@@ -83,13 +83,13 @@
     
      
    <div class="refs">
-       <div  class="linksheading" >{{ 'liens.a' | trans }}</div>
-       {% for obtype , oref in refs %}
-        <div class="linkgroup" >{{obtype  | trans}}</div>
-         {% for obid , ref in oref %}       
-        <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a> </div>
+   <div class="subheading">
+       <div  class="label" >{{ 'linked.from' | trans }}</div>
+       </div>
+       {% for ref in refs %}
+         
+        <div class="ref" > <a href="/fr/{{ref.objecttype}}/{{ref.objid}}">{{ref.objecttype}}/{{ref.objid}}</a> </div>
         {% endfor %}
-           {% endfor %}
     </div>
     </div>
     </div>

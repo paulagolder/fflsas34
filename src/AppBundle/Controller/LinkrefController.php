@@ -290,7 +290,7 @@ class LinkrefController extends Controller
                 list($objtype, $objid) = explode("/",$path);
                 if($objtype =="content")
                 {
-                    $content = $this->getDoctrine()->getRepository("AppBundle:Content")->findOne( $objid);
+                    $content = $this->getDoctrine()->getRepository("AppBundle:Content")->findContentLang( $objid,$this->lang);
                     $label = $content->getTitle();
                 }
                 else
@@ -321,6 +321,13 @@ class LinkrefController extends Controller
         return $link_ar;
     }
     
+       public function getLinksFrom($objecttype, $objectid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $links = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findbyTarget($objecttype,$objectid);
+  
+        return $links;
+    }
     
     
     

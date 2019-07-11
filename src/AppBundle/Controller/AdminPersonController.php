@@ -234,11 +234,12 @@ class AdminPersonController extends Controller
     
     public function addContent($pid,$cid)
     {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $path = "/content/".$cid;
         $lref = $this->getDoctrine()->getRepository('AppBundle:Linkref')->findbyPath('person',$pid,$path);
         if(!$lref)
         {
-        $obj = $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($cid);
+        $obj = $this->getDoctrine()->getRepository('AppBundle:Content')->findContentLang($cid,$this->lang);
         $label= $obj->getLabel();
         $linkref = new Linkref();
         $linkref->setLabel($label);

@@ -499,6 +499,12 @@ event_admin_delete:
     path:  /admin/event/delete/{eid}
     controller: AppBundle\Controller\AdminEventController::Delete
         
+
+event_admin_deletelocation:
+    path:  /admin/event/deletelocation/{eid}
+    controller: AppBundle\Controller\AdminEventController::DeleteLocation
+
+        
 #======================incidents
     
 incident_one:
@@ -635,44 +641,51 @@ linkref_add:
 
 
 content_admin_process_edit:
-    path: /admin/content/process_edit/{cid}
+    path: /admin/content/process_edit/{cid}  # note edit by contentid
     controller:  AppBundle\Controller\ContentController::process_edit   
     
 content_admin_search:
-    path: /admin/subject/search
+    path: /admin/content/search
     controller:  AppBundle\Controller\ContentController::ContentSearch  
 
 content_admin_edit:
-    path: /admin/content/edit/{cid}
+    path: /admin/content/edit/{cid}  # note edit by contentid
     controller:  AppBundle\Controller\ContentController::Edit_quill   
     
 content_admin_new:
-    path: /admin/content/new/{sid}/{lang}
+    path: /admin/content/new/
     controller:  AppBundle\Controller\ContentController::newContent 
+    requirements:
+        lang: en|fr|FR|EN
+    
+content_admin_newlang:
+    path: /admin/content/new/{sid}/{lang}
+    controller:  AppBundle\Controller\ContentController::newContentLang
     requirements:
         lang: en|fr|FR|EN
         
 content_new_admin:
-    path: /admin/subject/new/{lang}
-    controller:  AppBundle\Controller\ContentController::newSubject 
+    path: /admin/content/new/{lang}
+    controller:  AppBundle\Controller\ContentController::xnewContentlang 
     requirements:
         lang: en|fr|FR|EN
         
-content_admin_delete:
+        
+content_admin_delete:   # note delete by contentid
     path: /admin/content/delete/{cid}
-    controller:  AppBundle\Controller\ContentController::Delete       
+    controller:  AppBundle\Controller\ContentController::Delete     
     
 content_admin_bookmark:    
-    path:  /admin/subject/addbookmark/{sid}
+    path:  /admin/content/addbookmark/{sid}
     controller:  AppBundle\Controller\ContentController::addBookmark  
     
 content_admin_edit_subject:
-    path: /admin/subject/{sid}
-    controller:  AppBundle\Controller\ContentController::Editsubject
+    path: /admin/content/{sid}
+    controller:  AppBundle\Controller\ContentController::Editcontent
     
-content_admin_editone:
-    path: /admin/content/{cid}
-    controller:  AppBundle\Controller\ContentController::Showcontent
+content_admin_showlang:
+    path: /admin/content/{sid}/{lang}
+    controller:  AppBundle\Controller\ContentController::ShowcontentLang
     
 content_admin_deleteimage:
     path:  /admin/content/deleteimage/{cid}/{isn}
@@ -683,27 +696,30 @@ content_all:
     controller:  AppBundle\Controller\ContentController::Showall  
     requirements:
         _locale: en|fr|FR|EN
+
+content_user_showlang:
+    path: /{_locale}/content/{sid}/{lang}
+    controller:  AppBundle\Controller\ContentController::ShowcontentLang
+    requirements:
+        _locale: en|fr|FR|EN
+        lang: en|fr|FR|EN
         
-content_one:
-    path: /{_locale}/subject/{sid}
-    controller:  AppBundle\Controller\ContentController::Showsubjectl  
+content_show:
+    path: /{_locale}/content/{sid}
+    controller:  AppBundle\Controller\ContentController::ShowContent 
     requirements:
         _locale: en|fr|FR|EN
         
 content_menu:
     path: /{_locale}/menucontent/{sid}
-    controller:  AppBundle\Controller\ContentController::Showsubjectl 
+    controller:  AppBundle\Controller\ContentController::ShowContent 
     requirements:
         _locale: en|fr|FR|EN
         
-subject_one:
-    path: /{_locale}/subject/{sid}/{lang}
-    controller:  AppBundle\Controller\ContentController::Showsubject  
-    requirements:
-        _locale: en|fr|FR|EN
+
         
-user_subject_bookmark:    
-    path:  /{_locale}/subject/addbookmark/{sid}
+user_content_bookmark:    
+    path:  /{_locale}/content/addbookmark/{sid}
     controller:  AppBundle\Controller\ContentController::addUserBookmark  
     
 

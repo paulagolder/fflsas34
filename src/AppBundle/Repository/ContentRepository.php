@@ -41,7 +41,7 @@ class ContentRepository extends EntityRepository
        return $sid;
     }
     
-    public function findOnebyLang($subjectid,$lang)
+    public function findContentLang($subjectid,$lang)
     {
        $qb = $this->createQueryBuilder("i");
        $qb->andWhere('i.subjectid = :sid');
@@ -89,7 +89,7 @@ class ContentRepository extends EntityRepository
     
      public function delete($contentid)
     {
-        $sql = "delete FROM  AppBundle\Entity\Content c where c.contentid = ".$contentid;
+        $sql = "delete FROM  AppBundle\Entity\Content c where c.contentid = ".$contentid ;
         $query = $this->getEntityManager()->createQuery($sql);
         $numDeleted = $query->execute();
         return $numDeleted;
