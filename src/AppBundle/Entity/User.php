@@ -272,5 +272,12 @@ class User implements UserInterface, \Serializable
        if($this->newregistrationcode == $this->registrationcode)  return true;
        else return false;
     }
+    
+    
+    public function hasRole($rstr)
+    {
+if (strpos($this->getRolestr(), $rstr) !== false) return true;
+else return false;   
+    }
 }
 

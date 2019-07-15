@@ -145,7 +145,7 @@ class UserController extends Controller
             $fuser->setPassword($hashpassword);
             $entityManager->persist($fuser);
             $entityManager->flush();
-            return $this->redirect("/admin/user/search");
+            return $this->redirect("/".$this->lang."/user/".$uid);
         }
         
         $password = $fuser->getPassword();

@@ -53,6 +53,7 @@ security:
          - { path: ^/logout, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/remotecomplete, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/remoteregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/remotechange, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/accueil, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/symfonyimages, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/register, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 

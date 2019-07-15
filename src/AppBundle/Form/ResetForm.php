@@ -18,12 +18,6 @@ class ResetForm extends AbstractType
     {
         
         $builder->add('email', TextType::class);
-        $builder->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),));
-    
-        #$builder->get('email')->setRequired(false);
     }
 
     public function configureOptions(OptionsResolver $resolver)
