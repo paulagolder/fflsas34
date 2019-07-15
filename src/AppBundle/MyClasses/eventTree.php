@@ -85,11 +85,9 @@ class eventTree
          $newchild->setLink($ev->link);
          $seq =$ev->getSequence();
          $sd = $ev->getStartdate();
-         dump($ev);
           if($seq < 19390000 && $sd > 19390000 ) $seq = $sd;
          elseif($seq > 19390000 && $sd < $seq && $sd > 19390000 ) $seq = $sd;
           $newchild->setSequence($seq);
-         dump($seq);
          $currentnode->addChild($newchild);
          $cnseq = $currentnode->getSequence();
          if($cnseq > 1939000 && $seq > 1939000 && $seq <  $cnseq) $currentnode->setSequence($seq);

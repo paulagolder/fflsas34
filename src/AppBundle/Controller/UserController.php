@@ -126,6 +126,7 @@ class UserController extends Controller
     public function edituser($uid)
     {
         $user = $this->getUser();
+         if(!$user)  return $this->redirect("/".$this->lang."/login");
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $request = $this->requestStack->getCurrentRequest();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);

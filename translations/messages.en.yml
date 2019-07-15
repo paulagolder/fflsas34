@@ -223,36 +223,50 @@ Liens: Links
 to.add.link.use.bookmarks: 'To add a link use a bookmark'
 vue: View
 disabled: Disabled
-from.admin.to: 'to'
+from.admin.to: to
 to.admin: 'To ADMIN'
 this.message.was.sent.by: 'This message was sent by'
 latest.edits: 'Latest Updates'
-remove.bookmarks: Remove .bookmarks
-new.book: New Bookk
+remove.bookmarks: 'Remove .bookmarks'
+new.book: 'New Bookk'
 a.book: Book
 bibloLinks: Library
 link.visit: Visit
-bookmark.link: Bookmark link
+bookmark.link: 'Bookmark link'
 book: Book
-edit.book.detail: Edit Book
+edit.book.detail: 'Edit Book'
 book.title: Title
 book.subtitle: Subtitle
 book.author: Author
 book.publisher: Publisher
 book.year: Year
 book.isbn: ISBN
-new.url: New Url Link
+new.url: 'New Url Link'
 les.liens: Links
 les.livres: Books
-voir.urls: See Link
-voir.biblo: See Book
+voir.urls: 'See Link'
+voir.biblo: 'See Book'
 urlinks: Links
-new.link: New Link
-edit.link: EditLink
-edit.user: Edit User Data
-delete.link: Delete Link
+new.link: 'New Link'
+edit.link: Edit Link
+delete.link: 'Delete Link'
 title: Title
 url: URL
 visit: Visit
 delete.this: Delete
-reconnect: Logout and Login again to continue as user
+reconnect: 'Logout and Login again to continue as user'
+cherche.des.hommes: 'Search the men'
+Register!: __Register!
+edit.book: __edit.book
+see.location: __see.location
+browse.locations: __browse.locations
+special.function: Special Functions
+enter.new.password: __enter.new.password
+read.message: __read.message
+FR: FR
+EN: EN
+linked.from: Linked from
+if.password.forgotten: Password Forgotten
+mot.de.pass.oublier:   mot-de-pass oublier
+a.link.to: Link To
+tags: Tags

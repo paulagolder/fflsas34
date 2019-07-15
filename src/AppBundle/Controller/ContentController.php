@@ -501,11 +501,11 @@ class ContentController extends Controller
         {
             $k2 = strpos ( $text , "]]",$k1 );
             $tokengroup = substr($text,$k1, $k2-$k1+2);
-            dump($tokengroup);
+            //dump($tokengroup);
             $tokens=substr($tokengroup,2,$k2-$k1-2);
-             dump($tokens);
+            // dump($tokens);
             $token_list=json_decode("{".$tokens."}",true);
-            dump($token_list);
+            //dump($token_list);
             $obj = array_keys($token_list)[0];
             if($obj=="image")
             {
@@ -516,7 +516,7 @@ class ContentController extends Controller
             {
              $replacementstring = $this->urlinsert($token_list);
              $text = str_replace ($tokengroup , $replacementstring , $text );   
-              dump($text);
+             // dump($text);
             }
             else
             {
@@ -533,9 +533,9 @@ class ContentController extends Controller
     {
     
                 $imageid =  $token_list['image'];
-            dump( $imageid);
+           // dump( $imageid);
             $image =  $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
-             dump( $image);
+            // dump( $image);
             if($image)
             {
                 $this->mylib->setFullpath($image);
@@ -559,7 +559,7 @@ class ContentController extends Controller
     {
             $urlid =  $token_list['url'];
             $url =  $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($urlid);
-             dump( $url);
+            // dump( $url);
             if($url)
             {
                     $label= $url->getLabel();
@@ -573,7 +573,7 @@ class ContentController extends Controller
                
               
                  $replacementstring = "<a href='".$url->getUrl()."' target=/'_blank/' >".$label."</a>" ;
-                 dump($replacementstring);
+                 //dump($replacementstring);
             }
             else  
                  $replacementstring = "<div>NO URL </div>" ;

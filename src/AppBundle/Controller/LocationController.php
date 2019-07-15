@@ -426,7 +426,7 @@ class LocationController extends Controller
             $pfield = "%".$pfield."%";
             $locations= $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($pfield);
             $subheading =  'trouver.avec';
-            dump($locations);
+            //dump($locations);
         }
         
         

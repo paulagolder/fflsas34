@@ -45,7 +45,7 @@ edit.image: éditer
 edit.images: 'éditer images'
 edit.incident: 'éditer incident'
 edit.links.for: 'éditer les liens de'
-edit.location: "éditer l'endroit"
+edit.location: 'éditer l''endroit'
 edit.participation: éditer
 edit.participations: éditer
 edit.person: éditer
@@ -86,9 +86,9 @@ liens.a: 'Liens a'
 liens: liens
 location.a.editer: 'Editer Location'
 location.name: Nom
-log.in: "S'Identifier"
+log.in: 'S''Identifier'
 log.out: Deconecter
-login.message: "Pour acceder tout notre site s'identifiez"
+login.message: 'Pour acceder tout notre site s''identifiez'
 mail.us: 'Nous envoyer une message'
 message: Message
 name: nom
@@ -106,7 +106,7 @@ password: 'Mot de pass'
 person.links: 'Liens aux Hommes'
 people: Hommes
 person.a.editer: Editer
-person: "L'homme"
+person: 'L''homme'
 ref.edit: 'Editez les liens'
 rejoint: rejoint
 retour: Retour
@@ -127,18 +127,18 @@ tué: tué
 under.the.name.of: nommé
 username: 'Nom de utilisateur'
 for: pour
-voir.user: "Profil de l'utilisateur"
-delete.user: 'supprimer'
-edit.user.detail: 'Modifier'
+voir.user: 'Profil de l''utilisateur'
+delete.user: supprimer
+edit.user.detail: Modifier
 user.email: 'Adresse e-mail'
-user.roles: "rôles d'utilisateur"
+user.roles: 'rôles d''utilisateur'
 user.lastlogin: 'dernier accès'
 contact.list: 'liste de messages'
 view.contact: voir
 delete.contact: supprimer
 message.enyoyer: 'message enyoyer'
 date: 'enyoyer le'
-from: 'de'
+from: de
 mail.from: de
 mail.subject: sujet
 mail.body: contenu
@@ -147,12 +147,12 @@ new.incident: 'nouvel incident'
 a.link.from: 'lien de'
 mail.date.sent: 'envoyer le'
 mail.sentby: 'envoyer par'
-complete.reg: "compléter l'inscription"
+complete.reg: 'compléter l''inscription'
 sucessful.completion: 'inscription réussie'
 welcome.to.our.site: 'Bienvenue sur notre site'
-edit.contents: 'modifier'
-bookmark.content: 'marquer'
-delete.content: 'supprimer'
+edit.contents: modifier
+bookmark.content: marquer
+delete.content: supprimer
 content.for.subject: sujet
 message.forwarded.by.admin: 'de FFLSAS-admin'
 message.sent.by: 'envoyé par'
@@ -165,23 +165,23 @@ see.admin.messages: Messagerie
 edit.message: Editer
 send.message: Envoyer
 delete.message: Suprimer
-message.to.user: "Message a l'utiisateur"
-admin.messages: "Message de l'administrateur"
+message.to.user: 'Message a l''utiisateur'
+admin.messages: 'Message de l''administrateur'
 users: utiisateurs
 user.show: 'voir utilisateur'
 edit.user: 'editer utilisateur'
-profil.person: "profil de l'utilisateur"
+profil.person: 'profil de l''utilisateur'
 message.list: 'list des messages'
 'send,message': 'envoyer message'
 view.message: voir
 message.sentby: 'messaege de'
 new.user: 'nouvel utilisateur'
-register: "s'inscrire"
-bookmark.image: "signet"
-see.image: "voir"
+register: 's''inscrire'
+bookmark.image: signet
+see.image: voir
 chercher.content: 'Chercher les articles'
-user.to.admin: "a l'administrateur"
-admin.to.user: "a l'Utilisateur"
+user.to.admin: 'a l''administrateur'
+admin.to.user: 'a l''Utilisateur'
 message.envoyer.a: Destinataire
 Toname: Destinataire
 Toemail: 'Destinataire email'
@@ -194,18 +194,18 @@ see.content: Voir
 Click.me: Envoyez
 view.user: view.user
 return: retour
-admin.copyright: "droits d'auteur"
+admin.copyright: 'droits d''auteur'
 admin.privacy: 'politique de confidentialité'
 Username: 'Nom de Utilisateur'
 Email: 'Adress mail'
 Password: 'Mot de pass'
 'Repeat Password': 'Repeter mot de Pass'
 when.first.signing: 'lors de la première connexion'
-'registration success': "l'inscription est réussie"
-you.have.sucessfully.completed: "Vous avez terminé le processus d'inscription avec succès. "
+'registration success': 'l''inscription est réussie'
+you.have.sucessfully.completed: 'Vous avez terminé le processus d''inscription avec succès. '
 you.have.sucessfully.registered: 'Vous vous êtes enregistré avec succès. '
-'to.complete.reply.to email': "Pour terminer la procédure d'inscription, répondez à l'email que vous avez reçu."
-to.complete.enter: "Pour terminer l'enregistrement, entrez le code suivant "
+'to.complete.reply.to email': 'Pour terminer la procédure d''inscription, répondez à l''email que vous avez reçu.'
+to.complete.enter: 'Pour terminer l''enregistrement, entrez le code suivant '
 print.transcript: 'imprimer copie'
 Name: Name
 Path: Path
@@ -217,44 +217,56 @@ content: contenu
 enFrancais: 'Afficher le site en français'
 inEnglish: 'Show the site in English'
 texts: Textes
-complete.registration: "terminer le processus d'inscription"
-delete.image: "supprimer l'image"
+complete.registration: 'terminer le processus d''inscription'
+delete.image: 'supprimer l''image'
 to.add.location.use.bookmarks: 'Pour ajouter un location utiliser un signet'
 Liens: Liens
 to.add.link.use.bookmarks: 'Pour ajouter un lien utiliser un signet'
 vue: Voir
 disabled: désactivée
-from.admin.to: 'a'
+from.admin.to: a
 to.admin: 'a ADMIN'
 this.message.was.sent.by: 'message envoyé par'
 latest.edits: 'Derniers m-a-j'
-remove.bookmarks: enlever les signets
-new.book: Nouveau Livre
+remove.bookmarks: 'enlever les signets'
+new.book: 'Nouveau Livre'
 a.book: Livre
 bibloLinks: Librairie
-link.visit: Voir Lien
+link.visit: 'Voir Lien'
 bookmark.link: signet
 book: Livre
-edit.book.detail: éditer le livre
+edit.book.detail: 'éditer le livre'
 book.title: Titre
 book.subtitle: Soutitre
-book.author:  Auteur
+book.author: Auteur
 book.publisher: Editeur
 book.year: annee
 book.isbn: ISBN
-new.url: créer une URL
-les.liens: Gerer Liens
-les.livres: Gerer nos Livres
-voir.urls: Voir nos Liens
-voir.biblo: Voir nos livres
+new.url: 'créer une URL'
+les.liens: 'Gerer Liens'
+les.livres: 'Gerer nos Livres'
+voir.urls: 'Voir nos Liens'
+voir.biblo: 'Voir nos livres'
 urlinks: Liens
-new.link: créer un Lien
-edit.link: éditer le lien
-edit.user: Editer le utilisateur
+new.link: 'créer un Lien'
+edit.link: 'éditer le lien'
 delete.link: supprimer
 title: Titre
 url: URL
 visit: Visiter
-delete.this: supprimer çeci
-browse.locations:  'Naviguer les locations'
-reconnect: Disconecter et re-Connecter pour continuer comme utilisateur
+delete.this: 'supprimer çeci'
+browse.locations: 'Naviguer les locations'
+reconnect: 'Disconecter et re-Connecter pour continuer comme utilisateur'
+cherche.des.hommes: 'Cherchez les hommes'
+Register!: Enregister!
+edit.book: Editer
+see.location: Voir
+special.function: Fonction especial
+enter.new.password: Nouveau mot-de-pass
+read.message: Lire message
+FR: FR
+EN: EN
+linked.from: Lien de
+if.password.forgotten: Mot-de-pass oubliee
+a.link.to: Lien a
+tags: Étiquettes

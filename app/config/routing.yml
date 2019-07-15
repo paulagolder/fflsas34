@@ -58,6 +58,12 @@ register:
     requirements:
         _locale: en|fr|FR|EN
         
+password_forgottenr:
+    path: /{_locale}/forgotten
+    controller:  AppBundle\Controller\RegistrationController::resetpassword    
+    requirements:
+        _locale: en|fr|FR|EN
+        
 complete_registration:
     path: /{_locale}/complete/{uid}
     controller:  AppBundle\Controller\RegistrationController::complete   
@@ -67,6 +73,10 @@ complete_registration:
 remote_complete_registration:
     path: /remotecomplete/{uid}/{code}
     controller:  AppBundle\Controller\RegistrationController::remotecomplete   
+
+remote_transfer_registration:
+    path: /remoteregister/{uid}/{code}
+    controller:  AppBundle\Controller\RegistrationController::remotereregister   
 
     
 admin_message:

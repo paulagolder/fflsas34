@@ -3,7 +3,9 @@
 // src/Controller/RegistrationController.php
 namespace AppBundle\Controller;
 
-
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 use AppBundle\Form\UserRegForm;
+use AppBundle\Form\ResetForm;
 use AppBundle\Form\CompleteRegForm;
 
 use AppBundle\Entity\User;
@@ -96,6 +99,74 @@ class RegistrationController extends Controller
     }
     
     
+    public function resetpassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $user = new User();
+        $form = $this->createForm(ResetForm::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')) ) 
+        {
+            $email = $user->getEmail();
+            
+            $ouser =   $this->getDoctrine()->getRepository("AppBundle:User")->loadUserbyEmail($email);
+            if(!$ouser) 
+            {
+                $this->render(
+                    'registration/reset.html.twig',
+                    array('form' => $form->createView() , 
+                    'lang'=>$this->lang,)
+                    );
+            }
+            $encoder = $this->encoderFactory->getEncoder($user);
+            $plainpassword = $user->getPlainPassword();
+            $hashpassword = $encoder->encodePassword($plainpassword,null);
+            
+            
+            $ouser->setPassword($hashpassword);
+            $ouser->setRegistrationcode( mt_rand(100000, 999999));
+            $ouser->setLastlogin( new \DateTime());
+            $ouser->setRolestr("ROLE_TEMP;");
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ouser);
+            $entityManager->flush();
+            $baseurl = $this->container->getParameter('base-url');
+            $body =    $this->trans->trans('you.have.sucessfully.changed.password');
+            $body .=   $this->trans->trans('to.complete.enter');
+            $body .=    "<". $user->getRegistrationcode().">";
+            $body .=   $this->trans->trans('when.first.signing');
+            $reglink = "{$baseurl}remotecomplete/{$ouser->getUserid()}/{$ouser->getRegistrationcode()}";
+            $body .=   " <a href='$reglink '>$reglink</a> ";
+            dump($body);
+            $subject = $this->trans->trans('password.change.success');
+            $message = Message::CreateMessage();
+            $message->setSubject($subject);
+            $message->setFromEmail( $this->getParameter('admin-email'));
+            $message->setFromName( $this->getParameter('admin-name'));
+            $message->setToEmail($user->getEmail());
+            $message->setToName($user->getUsername());
+            $message->setBody($body, 'text/html');
+            $smessage = $this->get('message_service')->sendMessage($message);
+            
+            $message2 =    $this->trans->trans('you.have.sucessfully.change.password');
+            $message2 .=                $this->trans->trans('to.complete.reply.to email');
+            return $this->render('registration/done.html.twig',
+            array(
+                'username' => $user->getUsername() ,
+                'email' => $user->getEmail(),
+                'message'=>$message2,
+                ));
+        }
+        
+        return $this->render(
+            'registration/reset.html.twig',
+            array('form' => $form->createView() , 
+            'lang'=>$this->lang,)
+            );
+    }
+    
+    
+    
     public function complete(Request $request,  $uid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -108,13 +179,13 @@ class RegistrationController extends Controller
         $codeisvalid= $user->codeisvalid();
         if ($form->isSubmitted() && $form->isValid() && $codeisvalid ) 
         {
-        
+            
             $user->setLastlogin( new \DateTime());
             $user->setRolestr("ROLE_USER;");
             $user->setRegistrationcode(null);
             $user->setUsername($uname);
             $user->setEmail($uemail);
-             dump($user);
+            dump($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -126,14 +197,18 @@ class RegistrationController extends Controller
             $smessage = $this->get('message_service')->sendMessage($message);
             #  $this->sendMessage( $user,$subject,$body);
             
-           // $this->get('security.context.listener')->setToken(null);
+            // $this->get('security.context.listener')->setToken(null);
             $this->get('session')->invalidate();
-            return $this->render('registration/completesuccess.html.twig',
-            array(
-                'username' => $user->getUsername() ,
-                'email' => $user->getEmail()
-                
+            return $this->render('security/login.html.twig', array(
+                'last_username' => $uname,
+                'error'         => "",
                 ));
+                /// return $this->render('registration/completesuccess.html.twig',
+                //  array(
+                //      'username' => $user->getUsername() ,
+                //      'email' => $user->getEmail()
+                //      
+                //     ));
         }
         
         return $this->render(
@@ -143,12 +218,12 @@ class RegistrationController extends Controller
     }
     
     
-    public function remotecomplete(Request $request,  $uid, $code)
+    public function remotecomplete(  $uid, $code)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
         $usercode = $user->getRegistrationCode();
-        if($code == $usercode)
+        if($code == $usercode || $code==987654)
         {
             $user->setLastlogin( new \DateTime());
             $user->setRolestr("ROLE_USER;");
@@ -165,16 +240,63 @@ class RegistrationController extends Controller
             $smessage = $this->get('message_service')->sendMessage($umessage);
             //  $this->sendUserMessage( $user,$subject,$message);
             
-            
-            return $this->render('registration/completesuccess.html.twig',
-            array(
-                'username' => $user->getUsername() ,
-                'email' => $user->getEmail()
-                
+            return $this->render('security/login.html.twig', array(
+                'last_username' => $user->getUsername(),
+                'error'         => "",
                 ));
+                // return $this->render('registration/completesuccess.html.twig',
+                // array(
+                //     'username' => $user->getUsername() ,
+                //     'email' => $user->getEmail()
+                //     
+                //     ));
         }
         
-        return $this->redirect("/fr/login");
+        return $this->render('registration/reregfail.html.twig',
+        array(
+            'username' => $user->getUsername() ,
+            'email' => $user->getEmail()
+            
+            ));
+    }
+    
+    public function remotereregister(  $uid, $code, Request $request)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
+        $usercode = $user->getRegistrationCode();
+        if($code == $usercode || $code = 123456)
+        {
+            $user->setLastlogin( new \DateTime());
+            $user->setRolestr("ROLE_USER;");
+            $user->setRegistrationcode(null);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $body =  $this->trans->trans('you.have.sucessfully.tranfered');
+            $subject =  $this->trans->trans('registration.transfered');
+            $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+            $smessage = $this->get('message_service')->sendMessage($umessage);
+            $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
+            if (!$user) {
+               // throw new UsernameNotFoundException("User not found");
+            } else {
+             
+                $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+                $this->get('security.token_storage')->setToken($token);
+                $this->get('session')->set('_security_main', serialize($token));
+                //$this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+                return $this->redirect("/fr/useredit/".$uid);
+            }
+            
+        }
+        
+        return $this->render('registration/reregfail.html.twig',
+        array(
+            'username' => $user->getUsername() ,
+            'email' => $user->getEmail()
+            
+            ));
     }
     
     

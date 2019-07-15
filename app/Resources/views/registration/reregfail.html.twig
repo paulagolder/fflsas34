@@ -1,4 +1,4 @@
-{# templates/registration/completesuccess.html.twig #}
+{# templates/registration/reregfail.html.twig #}
 
 
 {% import 'macros.twig' as m %}
@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   
+   <link href="{{ asset('/css/person/showone.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
@@ -17,15 +17,13 @@
 
 <div id="completesuccess">
 <div class="heading">
-  <div class="label"> {{'sucessful.completion' | trans }}</div>
+  <div class="label"> {{'unsucessful.rereg' | trans }}</div>
   <div class="title"> {{ username }}</div>
   <div class="title"> {{ email }}</div>
   </div>
 </div>
-
-
 <div class="heading">
-  <div class="label red"> {{'reconnect' | trans }}</div>
+  <div class="label red"> {{'try again'  | trans }}</div>
  
   </div>
 </div>

@@ -425,7 +425,7 @@ class PersonController extends Controller
         [ 
         'lang'=>$this->lang,
         'message' => $message,
-        'heading' =>  'Cherche des Hommes',
+        'heading' =>  'cherche.des.hommes',
         'subheading' =>  $subheading,
         'searchfield' =>$gfield,
         'people'=> $people,

@@ -11,7 +11,7 @@
 
 {% block middle %}
 <div id="middle" >
-{% if error %}
+{% if error is defined and error %}
     <div id="loginerror" >{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 <div id="loginform" >
@@ -36,9 +36,17 @@
     <button type="submit">login</button>
 </form>
 
-<div class="registration">
-    <div > {{ 'si.non.enregistre'| trans }}</div>
-    <div> <a class="registerbutton"  href="/{{locale}}/register" > {{'enregister' | trans }}</a></div>
+   
+    
+</div>
+
+<div class="heading">
+ <div class="label" > {{ 'if.password.forgotten'| trans }}</div>
+<div class="returnbutton" > <a   href="/{{locale}}/forgotten" > {{'mot.de.pass.oublier' | trans }}</a></div>
+</div>
+<div class="heading">
+    <div class="label" > {{ 'si.non.enregistre'| trans }}</div>
+    <div class="returnbutton"  > <a href="/{{locale}}/register" > {{'enregister' | trans }}</a></div>
 </div>
 </div>
 </div>
