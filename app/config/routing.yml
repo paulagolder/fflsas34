@@ -130,6 +130,13 @@ user_admin_search:
     path: /admin/user/search
     controller:  AppBundle\Controller\UserController::UserSearch     
     
+
+user_admin_rereg:
+    path: /admin/user/rereg/{uid}
+    controller:  AppBundle\Controller\UserController::UserRereg    
+    
+    
+    
 user_editone:
     path: /admin/user/{uid}
     controller:  AppBundle\Controller\UserController:showone

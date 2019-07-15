@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Encoder;
 
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Message;
@@ -25,16 +26,17 @@ class UserController extends Controller
     private $lang="fr";
     private $mylib;
     private $requestStack ;
-    
+    private $trans;
     
     private $encoderFactory;
     
     
-    public function __construct( MyLibrary $mylib ,RequestStack $request_stack,EncoderFactoryInterface $encoderFactory)
+    public function __construct( MyLibrary $mylib ,RequestStack $request_stack,EncoderFactoryInterface $encoderFactory,TranslatorInterface $translator)
     {
         $this->mylib = $mylib;
         $this->requestStack = $request_stack;
         $this->encoderFactory = $encoderFactory;
+        $this->trans =$translator;
     }
     
     public function Showall()
@@ -155,6 +157,30 @@ class UserController extends Controller
             'password' => $fuser->getPassword(),
             'returnlink'=> "/".$this->lang."/user/".$uid,
             ));
+    }
+    
+      public function userRereg($uid)
+    {
+              
+        $request = $this->requestStack->getCurrentRequest();
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+             $fuser->setRegistrationcode( mt_rand(100000, 999999));
+            $fuser->setLastlogin( new \DateTime());
+            $fuser->setRolestr("ROLE_REREG");
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($fuser);
+            $entityManager->flush();
+            $baseurl = $this->container->getParameter('base-url');
+            $body =  $this->trans->trans('you.must.reregister');
+            $body .=    "<". $fuser->getRegistrationcode().">";
+            $body .=   $this->trans->trans('when.first.signing');
+            $reglink = "{$baseurl}remotereregister/{$fuser->getUserid()}/{$fuser->getRegistrationcode()}";
+            $body .=   " <a href='$reglink '>$reglink</a> ";
+          $subject =  $this->trans->trans('reregister');
+          $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+           $smessage = $this->get('message_service')->sendMessage($umessage);
+            
+        return $this->redirect("/admin/user/".$uid);
     }
     
     

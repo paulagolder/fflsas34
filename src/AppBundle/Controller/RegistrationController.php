@@ -364,7 +364,7 @@ class RegistrationController extends Controller
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
         $usercode = $user->getRegistrationCode();
-        $chpx = $user->hasRole("ROLE_PWCH");
+        $chpw = $user->hasRole("ROLE_PWCH");
         if($code == $usercode && $chpw)
         {
             dump($user);
@@ -374,10 +374,10 @@ class RegistrationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            $body =  $this->trans->trans('you.have.sucessfully.reset.your.password');
-            $subject =  $this->trans->trans('password.reset');
-            $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-            $smessage = $this->get('message_service')->sendMessage($umessage);
+          //  $body =  $this->trans->trans('you.have.sucessfully.reset.your.password');
+         //   $subject =  $this->trans->trans('password.reset');
+         //   $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+          //  $smessage = $this->get('message_service')->sendMessage($umessage);
             $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
             if (!$user) {
                // throw new UsernameNotFoundException("User not found");
@@ -386,7 +386,6 @@ class RegistrationController extends Controller
                 $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
                 $this->get('security.token_storage')->setToken($token);
                 $this->get('session')->set('_security_main', serialize($token));
-                //$this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
                 return $this->redirect("/fr/useredit/".$uid);
             }
             
