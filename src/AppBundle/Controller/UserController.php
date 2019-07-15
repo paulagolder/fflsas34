@@ -171,11 +171,12 @@ class UserController extends Controller
             $entityManager->persist($fuser);
             $entityManager->flush();
             $baseurl = $this->container->getParameter('base-url');
-            $body =  $this->trans->trans('you.must.reregister');
+            $body =  $this->trans->trans('you.must.reregister')."<br>";
             $body .=    "<". $fuser->getRegistrationcode().">";
             $body .=   $this->trans->trans('when.first.signing');
             $reglink = "{$baseurl}remotereregister/{$fuser->getUserid()}/{$fuser->getRegistrationcode()}";
-            $body .=   " <a href='$reglink '>$reglink</a> ";
+            $body .=   " <br><a href='$reglink '>$reglink</a> ";
+            $body.= "<br>and.enter.password.twice in the presented.form";
           $subject =  $this->trans->trans('reregister');
           $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
            $smessage = $this->get('message_service')->sendMessage($umessage);
