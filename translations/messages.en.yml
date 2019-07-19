@@ -170,7 +170,7 @@ user.show: 'Shoe user'
 edit.user: 'Edit user'
 profil.person: 'User profile'
 message.list: 'List of messages'
-'send,message': 'Send message'
+send.message: 'Send message'
 view.message: 'Read message'
 see.message: 'Read messagee'
 message.sentby: 'Message sent by'
@@ -199,19 +199,21 @@ admin.privacy: Privacy
 Username: Username
 Email: 'Email Address'
 Password: Password
-'Repeat Password': 'Repeat Password'
+Repeat.Password: 'Repeat Password'
 when.first.signing: 'When first signing in'
-'registration success': 'Registration is successfull'
+registration.success: 'Registration is successfull'
 you.have.sucessfully.registered: 'You have registered sucessfully. '
+you.have.sucessfully.requested.change.password: You have requested to change your password.
+you.must.reregister: You must reregister
 you.have.sucessfully.completed: 'You have successfully completed the registration process. '
-'to.complete.reply.to email': 'To complete the registration process reply to the email you receive'
+to.complete.reply.to.email: 'To complete the registration process reply to the email you receive'
 to.complete.enter: 'To complete registration enter the following code'
 print.transcript: 'print copy'
 Path: Path
 Copyright: Copyright
 Format: Format
 Access: Access
-'Image file(jpg)': 'Image file(jpg)'
+Image.file(jpg): 'Image file(jpg)'
 content: content
 inEnglish: 'Show site in English'
 enFrancais: 'Afficher le site en français'
@@ -248,7 +250,7 @@ voir.urls: 'See Link'
 voir.biblo: 'See Book'
 urlinks: Links
 new.link: 'New Link'
-edit.link: Edit Link
+edit.link: 'Edit Link'
 delete.link: 'Delete Link'
 title: Title
 url: URL
@@ -256,17 +258,25 @@ visit: Visit
 delete.this: Delete
 reconnect: 'Logout and Login again to continue as user'
 cherche.des.hommes: 'Search the men'
-Register!: __Register!
-edit.book: __edit.book
-see.location: __see.location
-browse.locations: __browse.locations
-special.function: Special Functions
-enter.new.password: __enter.new.password
-read.message: __read.message
+Register!: Register!
+edit.book: Edit
+see.location: See
+browse.locations: Browse locations
+special.function: 'Special Functions'
+enter.new.password: Enter new password
+read.message: Read message
 FR: FR
 EN: EN
-linked.from: Linked from
-if.password.forgotten: Password Forgotten
-mot.de.pass.oublier:   mot-de-pass oublier
-a.link.to: Link To
+linked.from: 'Linked from'
+if.password.forgotten: 'Password Forgotten'
+mot.de.pass.oublier: 'mot-de-pass oublier'
+a.link.to: 'Link To'
 tags: Tags
+unsucessful.rereg: Re-registration unsucessful
+try.again: re-try
+rereg.user: re-register user
+reset.password: reset password
+to.complete.reply.to email: To complete the process reply to the email you will receive.
+user.not.recognised: User not recognised
+request.new.password: Request a new password
+sucessfully.registered: Sucessfully registered

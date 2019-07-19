@@ -1,4 +1,4 @@
-{# templates/user/show.html.twig #}
+{# views/user/show.html.twig #}
 
 
 {% import 'macros.twig' as m %}
@@ -33,6 +33,10 @@
             <div class="data" > {{user.rolestr}}</div>
         </div>
         <div class="datarow">
+            <div class="label" > {{ 'user.locale' | trans }}</div>
+            <div class="data" > {{user.locale  }}</div>
+        </div>
+        <div class="datarow">
             <div class="label" > {{ 'user.lastlogin' | trans }}</div>
             <div class="data" > {{user.lastlogin | date("Y-m-d") }}</div>
         </div>
@@ -57,7 +61,6 @@
             <div class="subject" > {{sentto}}</div>
             <div class="subject" > {{message.subject}}</div>
             <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
-            <div class = "message" > {{ message.body|length > 20 ? message.body|slice(0, 20) ~ '...' : message.body  }}</div>
             <div class = "editbutton button1">
                 <a class='editbutton' href="/{{lang}}/user/{{user.userid}}/viewmessage/{{message.id}}">{{'view.message' |trans}}</a>
             </div>

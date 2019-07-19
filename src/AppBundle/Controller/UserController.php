@@ -16,6 +16,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Message;
 use AppBundle\Form\UserUserForm;
+use AppBundle\Form\UserPasswordForm;
 use AppBundle\Form\UserForm;
 use AppBundle\Service\MyLibrary;
 
@@ -86,7 +87,7 @@ class UserController extends Controller
         
         
         return $this->render('user/adminedit.html.twig', array(
-              'fuser'=> $fuser,
+            'fuser'=> $fuser,
             'form' => $form->createView(),
             'returnlink'=>'/admin/user/search',
             ));
@@ -128,7 +129,7 @@ class UserController extends Controller
     public function edituser($uid)
     {
         $user = $this->getUser();
-         if(!$user)  return $this->redirect("/".$this->lang."/login");
+        if(!$user)  return $this->redirect("/".$this->lang."/login");
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $request = $this->requestStack->getCurrentRequest();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
@@ -159,28 +160,63 @@ class UserController extends Controller
             ));
     }
     
-      public function userRereg($uid)
+     public function editpassword($uid)
     {
-              
+        $user = $this->getUser();
+        if(!$user)  return $this->redirect("/".$this->lang."/login");
+        if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $request = $this->requestStack->getCurrentRequest();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
-             $fuser->setRegistrationcode( mt_rand(100000, 999999));
-            $fuser->setLastlogin( new \DateTime());
-            $fuser->setRolestr("ROLE_REREG");
+        $encoder = $this->encoderFactory->getEncoder($fuser);
+        $tpass= $fuser->getEmail();
+        
+        $form = $this->createForm(UserPasswordForm::class, $fuser);
+        
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
             $entityManager = $this->getDoctrine()->getManager();
+            $plainpassword = $fuser->getPlainPassword();
+            #dump("user PP:".$plainpassword).
+            $hashpassword = $encoder->encodePassword($plainpassword,null);
+            $fuser->setPassword($hashpassword);
             $entityManager->persist($fuser);
             $entityManager->flush();
-            $baseurl = $this->container->getParameter('base-url');
-            $body =  $this->trans->trans('you.must.reregister')."<br>";
-            $body .=    "<". $fuser->getRegistrationcode().">";
-            $body .=   $this->trans->trans('when.first.signing');
-            $reglink = "{$baseurl}remotereregister/{$fuser->getUserid()}/{$fuser->getRegistrationcode()}";
-            $body .=   " <br><a href='$reglink '>$reglink</a> ";
-            $body.= "<br>and.enter.password.twice in the presented.form";
-          $subject =  $this->trans->trans('reregister');
-          $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-           $smessage = $this->get('message_service')->sendMessage($umessage);
-            
+            $body =  $this->renderView('message/template/'.$fuser->getLang().'/resetpassword_success.html.twig');
+            $subject =  $this->trans->trans('changepass.success');
+             $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+             $smessage = $this->get('message_service')->sendMessageToUser($umessage);
+            return $this->redirect("/".$this->lang."/user/".$uid);
+        }
+        
+       // $password = $fuser->getPassword();
+        
+        return $this->render('user/userpassword.html.twig', array(
+            'form' => $form->createView(),
+            'password' => $fuser->getPassword(),
+            'returnlink'=> "/".$this->lang."/user/".$uid,
+            ));
+    }
+    
+    public function userRereg($uid)
+    {
+        
+        $request = $this->requestStack->getCurrentRequest();
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $fuser->setRegistrationcode( mt_rand(100000, 999999));
+        $fuser->setLastlogin( new \DateTime());
+        $fuser->setRolestr("ROLE_REREG");
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($fuser);
+        $entityManager->flush();
+        $baseurl = $this->container->getParameter('base-url');
+        $code = $fuser->getRegistrationcode();
+        $reglink = "{$baseurl}remoteregister/{$fuser->getUserid()}/{$code}";
+        $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code));
+        $subject =  $this->trans->trans('reregister');
+        $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+        $smessage = $this->get('message_service')->sendMessage($umessage);
+        
         return $this->redirect("/admin/user/".$uid);
     }
     
@@ -253,7 +289,7 @@ class UserController extends Controller
         return $this->redirect("/".$this->lang."/user/".$uid);
     }
     
-     public function admindeletemessage($uid,$mid)
+    public function admindeletemessage($uid,$mid)
     {
         $user = $this->getUser();
         $this->getDoctrine()->getRepository('AppBundle:Message')->delete($mid);
@@ -279,11 +315,9 @@ class UserController extends Controller
             $users = $this->getDoctrine()->getRepository("AppBundle:User")->findSearch($pfield);
             $subheading =  'trouver.avec';
         }
-        
-        
         if (count($users)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+            $subheading = 'rien.trouver.pour';
         }
         else
         {
@@ -291,10 +325,7 @@ class UserController extends Controller
             {
                 $user->link = "/admin/user/".$user->getUserid();
             }
-            
         }
-        
-        
         return $this->render('user/usersearch.html.twig', 
         [ 
         'message' => $message,

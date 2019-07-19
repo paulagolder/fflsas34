@@ -22,7 +22,7 @@ class UserUserForm extends AbstractType
         $builder->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),));
+                'second_options' => array('label' => 'Repeat.Password'),));
         $builder->add('rolestr', TextType::class);
         $builder->add('email', TextType::class);
         $builder->get('plainPassword')->setRequired(false);

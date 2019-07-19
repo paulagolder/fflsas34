@@ -1,4 +1,4 @@
-{# templates/registration/done.html.twig #}
+{# views/registration/done.html.twig #}
 
 
 {% import 'macros.twig' as m %}
@@ -15,7 +15,7 @@
 {% block middle %}
 <div id="middle" >
 <div id="regack" >
-<div class="label" >{{'welcome.to.our.site' | trans}}</div>
+<div class="label" >{{heading  | trans}}</div>
 <div class="heading">
 <div class="label" >{{'username' | trans }}:</div>
 <div class="title">{{username}}</div>
@@ -25,7 +25,7 @@
 <div class="title">{{email}}</div>
 </div>
 <div class="message">
-{{ message }}
+{{ message | raw }}
 </div>
 </div>
 </div>

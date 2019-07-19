@@ -20,11 +20,13 @@ class UserForm extends AbstractType
         $builder->add('plainPassword', RepeatedType::class, array(
                 'type' => TextType::class,
                 'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),));
+                'second_options' => array('label' => 'Repeat.Password'),));
         $builder->add('email', TextType::class);
         $builder->add('rolestr', TextType::class);
+        $builder->add('locale', TextType::class);
         $builder->get('email')->setRequired(false);
          $builder->get('plainPassword')->setRequired(false);
+         $builder->get('locale')-> setRequired(false);
        # $builder->get('roles')->setRequired(false);
     }
 

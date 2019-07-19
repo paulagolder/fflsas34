@@ -1,4 +1,4 @@
-{# templates/registration/register.html.twig #}
+{# views/registration/register.html.twig #}
 
 
 {% extends 'user.html.twig' %}
@@ -15,6 +15,11 @@
 {% block middle %}
 <div id="middle" >
 <div id="registrationform" >
+{% if message %}
+<div class=subheading>
+<div class="label red" >{{message}}</div>
+</div>
+{% endif %}
 <div class=heading>
 <div class="label" >{{'register' | trans}}</div>
 </div>

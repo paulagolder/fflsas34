@@ -39,39 +39,29 @@ class MessageController extends Controller
         
     }
     
-    public function createMessage(Request $request ,\Swift_Mailer $mailer) 
+    public function createMessageToAdmin(Request $request ,\Swift_Mailer $mailer) 
     {
         $user = $this->getUser();
         if($user)
         {
-            return $this->createUserMessage($request ,$mailer)  ;
+            return $this->createUserMessageToAdmin($request ,$mailer)  ;
         }
         else
         { 
-            return $this->createVisitorMessage($request ,$mailer)  ;
+            return $this->createVisitorMessageToAdmin($request ,$mailer)  ;
         }
     }
     
-    public function createUserMessage(Request $request ,\Swift_Mailer $mailer) 
+    public function createUserMessageToAdmin(Request $request ,\Swift_Mailer $mailer) 
     {
         $user = $this->getUser();
-        if($user)
-        {
-            $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),$user->getUsername(),$user->getEmail() ,"", ""); 
-        }
-        else
-        {
-            $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),"", "" ,"", "");
-        }
+        $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),$user->getUsername(),$user->getEmail() ,"", ""); 
         $form = $this->createForm(UserMessageForm::class, $message);
-        
         $form->handleRequest($request);
-        
-        # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid())
         {
             $this->sendMessage($message);
-            return $this->render('message/usermessage-resp.html.twig',array(
+            return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
                 'returnlink' =>"/$this->lang/person/all")
                 );                
@@ -83,20 +73,17 @@ class MessageController extends Controller
         ));
     }
     
-    public function createVisitorMessage(Request $request ,\Swift_Mailer $mailer) 
+    public function createVisitorMessageToAdmin(Request $request ,\Swift_Mailer $mailer) 
     {
         
         $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),"", "" ,"", "");
-        
         $form = $this->createForm(VisitorMessageForm::class, $message);
-        
         $form->handleRequest($request);
-        
         # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')))
         {
             $this->sendMessage($message);
-            return $this->render('message/usermessage-resp.html.twig',array(
+            return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
                 'returnlink' =>"/$this->lang/person/all")
                 );                
@@ -156,7 +143,7 @@ class MessageController extends Controller
         
     }
     
-    public function sendMessageToUser($uid,Request $request ,\Swift_Mailer $mailer) 
+    public function makeMessageToUser($uid,Request $request ,\Swift_Mailer $mailer) 
     {
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         
@@ -167,12 +154,11 @@ class MessageController extends Controller
         $form = $this->createForm(MessageForm::class, $message);
         $form->handleRequest($request);
         
-        # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid())
         {
-            $this->sendMessage($message);
+            $this->sendMessageToUser($message, $fuser->getLang());
             
-            return $this->render('message/usermessage-resp.html.twig',array(
+            return $this->render('message/admintousermessage_ack.html.twig',array(
                 'message'=>$message,
                 'returnlink'=>'/admin/user/'.$uid,
                 ));          
@@ -186,7 +172,7 @@ class MessageController extends Controller
     
     
     
-    function makeSwiftMessage($message)
+    function xmakeSwiftMessage($message)
     {
         $smessage = (new \Swift_Message('FFLSAS Email'));
         $smessage->setSubject($message->getSubject());
@@ -203,6 +189,20 @@ class MessageController extends Controller
                 
     }
     
+     function makeSwiftMessage($message,$formattedbody)
+    {
+        $smessage = (new \Swift_Message('FFLSAS Email'));
+        $smessage->setSubject($message->getSubject());
+        $sender = $this->getParameter('admin-email');
+        $sendername = $this->getParameter('admin-name');
+        $smessage->setFrom($sender,$sendername);
+        $smessage->setTo($message->gettoEmail());
+        $smessage->setBody($formattedbody);
+        $smessage->setContentType("text/html");
+        return $smessage;
+                
+    }
+    
     function sendMessage($message)
     {
         $datesent =new \DateTime();
@@ -210,10 +210,26 @@ class MessageController extends Controller
         $sn = $this->getDoctrine()->getManager();      
         $sn -> persist($message);
         $sn -> flush();
-        $smessage = $this->makeSwiftMessage($message);
+        $formattedbody =    $this->renderView('message/emailbody.html.twig',array(
+                'message'=>$message,),'text/html');
+       
+        $smessage = $this->makeSwiftMessage($message, $formattedbody);
         $this->get('mailer')->send($smessage);
     } 
     
+    function sendMessageToUser($message,$lang)
+    {
+        $datesent =new \DateTime();
+        $message->setDate_sent( $datesent);
+        $sn = $this->getDoctrine()->getManager();      
+        $sn -> persist($message);
+        $sn -> flush();
+        $formattedbody =    $this->renderView('message/template/'.$lang.'/useremailfull.html.twig',array(
+                'message'=>$message,),'text/html');
+       
+        $smessage = $this->makeSwiftMessage($message, $formattedbody);
+        $this->get('mailer')->send($smessage);
+    } 
     
     function captchaverify($recaptcha)
     {

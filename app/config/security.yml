@@ -3,6 +3,9 @@ security:
     role_hierarchy:
         ROLE_ADMIN:      ROLE_USER
         ROLE_BOSS:       ROLE_ADMIN
+        ROLE_PWCH:       ROLE_USER
+        ROLE_REREG:      ROLE_USER
+        ROLE_TEMP:       ROLE_USER
 
     encoders:
       #Symfony\Component\Security\Core\User\User:
@@ -53,7 +56,7 @@ security:
          - { path: ^/logout, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/remotecomplete, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/remoteregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/remotechange, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/remotechangepassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/accueil, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/symfonyimages, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/register, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 

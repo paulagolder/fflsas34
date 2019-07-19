@@ -8,7 +8,9 @@
 {% block middle %}
 <div id="middle" >
 <div id="contactform">
-  <div class=heading>{{'message.to.user' | trans}}</div>
+  <div class=heading>
+  <div class="label">{{'message.to.user' | trans}}</div>
+  </div>
   <div class="form">
        {{form_start(form)}}
            {{ form_row(form.toname)   }}

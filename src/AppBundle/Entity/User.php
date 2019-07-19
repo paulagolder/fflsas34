@@ -171,6 +171,19 @@ class User implements UserInterface, \Serializable
         return $this->locale;
     }
     
+        
+    public function setLocale($lang)
+    {
+       $this->locale = $lang;
+    }
+    
+     public function getLang()
+    {
+        if( $this->locale == null || $this->locale =="") return "fr";
+        else return $this->locale;
+    }
+    
+    
      public function getIsactive()
     {
         return $this->isactive;

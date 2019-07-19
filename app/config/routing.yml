@@ -75,7 +75,7 @@ remote_complete_registration:
     controller:  AppBundle\Controller\RegistrationController::remotecomplete   
     
 remote_request_password:
-    path: /remotechange/{uid}/{code}
+    path: /remotechangepassword/{uid}/{code}
     controller:  AppBundle\Controller\RegistrationController::remotechangepassword  
 
 remote_transfer_registration:
@@ -93,7 +93,7 @@ admin_message:
    
 message_mail:
     path: /{_locale}/mailto
-    controller: AppBundle\Controller\MessageController:createMessage
+    controller: AppBundle\Controller\MessageController:createMessageToAdmin
     requirements:
         _locale: en|fr|FR|EN
         
@@ -117,7 +117,7 @@ message_delete:
     
 message_send:
     path: /admin/message/send/{uid}
-    controller: AppBundle\Controller\MessageController:sendMessageToUser
+    controller: AppBundle\Controller\MessageController:makeMessageToUser
     
 #=============================users==================
 
@@ -158,6 +158,12 @@ user_edit:
 user_editdetail:
      path: /{_locale}/useredit/{uid}
      controller:  AppBundle\Controller\UserController:edituser
+     requirements:
+        _locale: en|fr|FR|EN
+        
+user_editpassword:
+     path: /{_locale}/userpassword/{uid}
+     controller:  AppBundle\Controller\UserController:editpassword
      requirements:
         _locale: en|fr|FR|EN
         

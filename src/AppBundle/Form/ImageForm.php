@@ -28,7 +28,7 @@ class ImageForm extends AbstractType
        # $builder ->add('doctype', TextType::class);
         $builder ->add('access', TextType::class);
          $builder ->add('copyright', TextType::class);
-        $builder->add('imagefile', FileType::class, array('label' => 'Image file(jpg)','required'=>false,  'data_class' => null));
+        $builder->add('imagefile', FileType::class, array('label' => 'Image.file(jpg)','required'=>false,  'data_class' => null));
        # $builder->get('path')->setDisabled(true);
         $builder->get('path')->setRequired(false);
       #  $builder->get('height')->setRequired(false);

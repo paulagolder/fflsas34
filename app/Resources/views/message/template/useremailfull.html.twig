@@ -1,0 +1,39 @@
+{# views/message/template/emailfull.html.twig #}
+
+<html>
+<style>
+div.bodytext { font-size:12pt; color:black }
+div.link { font-size:12pt;  text-align: center;  }
+div.messageheading div.label { font-size:14pt; text-align: center; text-weight : bold; color: black }
+
+div.mailmessage{background-color:#afc0db;}
+
+
+div.mailfooter table {width : 100%;background-color: #98b9ed;color:white;}
+div.mailheader table {width : 100%;background-color: #98b9ed;color:white;}
+div.mailfooter table tr td.middle {color:white;}
+div.mailfooter table tr td {text-align:center;width:33%;}
+div.mailheader table tr td.middle {text-align:center;width:33%;}
+div.mailheader table tr td.right{text-align:right;width:33%;} 
+
+div.mailmessage table tr td.label{color:yellow;} 
+div.mailmessage table tr td.title{color:blue;} 
+div.mailmessage table tr td.body{color:blue;} 
+</style>
+
+<div id= "usermessage" >
+
+{% include '/message/template/en/useremailheader.html.twig'  with {'webroot':"http://127.0.0.1:8000"}  %}
+
+<div class="mailmessage">
+<table  >
+<tr><td class="label" >{{'message.enyoyer.a'|trans }} </td><td class="title" > {{message.toname}}</td></tr>
+<tr><td class="label" >{{'mail.date.sent'| trans}} </td><td class="title"> {{ message.date_sent  | date("Y-m-d h:m:s")}}</td></tr>
+<tr><td class="label" >{{'mail.sentby'| trans}} </td><td class="title"> {{ message.fromname }}</td></tr>
+<tr><td class="label" > {{'mail.from' |trans }}</td><td class="title">{{message.fromemail}} </td></tr>
+<tr><td class="label" >{{'mail.subject'| trans}} </td><td class="title"> {{ message.subject }}</td></tr>
+<tr><td column-span:all class="body" >{{ message.body | raw }}</td></tr>
+</table>
+</div>
+{% include '/message/template/en/useremailfooter.html.twig'  with {'webroot':"http://127.0.0.1:8000"}  %}
+</html>

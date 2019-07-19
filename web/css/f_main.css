@@ -188,6 +188,13 @@ div#middle div.heading div.label
   margin-right:1em;
 }
 
+ div#middle div.heading div.label.red
+ {
+    color:red; 
+       font-size:1.25em;
+  margin-right:1em;
+ }
+
 div#middle div.heading div.title
 {
   color:maroon;

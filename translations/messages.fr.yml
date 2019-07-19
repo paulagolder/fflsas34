@@ -112,7 +112,7 @@ rejoint: rejoint
 retour: Retour
 rien.a.chercher: 'Aucune phrase a Chercher'
 search.results: 'Resultats du recherche pour :'
-si.non.enregistre: 'Si non encore enregistee'
+si.non.enregistre: 'Pas encore enregistré'
 sous.evenements: 'Sous Evenements'
 subject: Sujet
 submit: Envoyez
@@ -149,6 +149,8 @@ mail.date.sent: 'envoyer le'
 mail.sentby: 'envoyer par'
 complete.reg: 'compléter l''inscription'
 sucessful.completion: 'inscription réussie'
+you.have.sucessfully.requested.change.password: Vous avez demandé à changer votre mot de passe.
+you.must.reregister: vous devez vous réinscrire
 welcome.to.our.site: 'Bienvenue sur notre site'
 edit.contents: modifier
 bookmark.content: marquer
@@ -172,7 +174,7 @@ user.show: 'voir utilisateur'
 edit.user: 'editer utilisateur'
 profil.person: 'profil de l''utilisateur'
 message.list: 'list des messages'
-'send,message': 'envoyer message'
+send.message: 'envoyer message'
 view.message: voir
 message.sentby: 'messaege de'
 new.user: 'nouvel utilisateur'
@@ -198,13 +200,13 @@ admin.copyright: 'droits d''auteur'
 admin.privacy: 'politique de confidentialité'
 Username: 'Nom de Utilisateur'
 Email: 'Adress mail'
-Password: 'Mot de pass'
-'Repeat Password': 'Repeter mot de Pass'
+Password: 'Mot de passe'
+Repeat.Password: 'Repeter mot de Pass'
 when.first.signing: 'lors de la première connexion'
-'registration success': 'l''inscription est réussie'
+registration.success: 'l''inscription est réussie'
 you.have.sucessfully.completed: 'Vous avez terminé le processus d''inscription avec succès. '
 you.have.sucessfully.registered: 'Vous vous êtes enregistré avec succès. '
-'to.complete.reply.to email': 'Pour terminer la procédure d''inscription, répondez à l''email que vous avez reçu.'
+to.complete.reply.to.email: 'Pour terminer la procédure d''inscription, répondez à l''email que vous avez reçu.'
 to.complete.enter: 'Pour terminer l''enregistrement, entrez le code suivant '
 print.transcript: 'imprimer copie'
 Name: Name
@@ -212,7 +214,7 @@ Path: Path
 Copyright: Copyright
 Format: Format
 Access: Access
-'Image file(jpg)': 'Image file(jpg)'
+Image.file(jpg): 'Image file(jpg)'
 content: contenu
 enFrancais: 'Afficher le site en français'
 inEnglish: 'Show the site in English'
@@ -261,12 +263,21 @@ cherche.des.hommes: 'Cherchez les hommes'
 Register!: Enregister!
 edit.book: Editer
 see.location: Voir
-special.function: Fonction especial
-enter.new.password: Nouveau mot-de-pass
-read.message: Lire message
+special.function: 'Fonction especial'
+enter.new.password: 'Nouveau mot-de-pass'
+read.message: 'Lire message'
 FR: FR
 EN: EN
-linked.from: Lien de
-if.password.forgotten: Mot-de-pass oubliee
-a.link.to: Lien a
+linked.from: 'Lien de'
+if.password.forgotten: 'mot de passe oublié'
+a.link.to: 'Lien a'
 tags: Étiquettes
+unsucessful.rereg: re-enregistrement non réussi.
+try.again: réessayer
+mot.de.pass.oublier: mot de passe oublié
+rereg.user: ré-enregistrer un utilisateur
+reset.password: réinitialiser le mot de passe
+to.complete.reply.to email: Pour terminer le processus, répondez au courrier électronique que vous recevrez.
+user.not.recognised: Utilisateur non reconnu
+request.new.password: Demander un nouveau mot de passe
+sucessfully.registered: Enregistrement réussi.

@@ -18,6 +18,18 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getOneOrNullResult();
     }
     
+     public function isuniqueName($username)
+    {
+        $users = $this->createQueryBuilder('u')
+            ->where('u.username = :username OR u.email = :email')
+            ->setParameter('username', $username)
+            ->setParameter('email', $username)
+            ->getQuery()
+            ->getResult();
+            if(count($users)>0) return false;
+            else return true;
+    }
+    
       public function loadUserByEmail($email)
     {
         return $this->createQueryBuilder('u')

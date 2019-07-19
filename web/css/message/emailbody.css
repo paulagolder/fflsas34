@@ -17,3 +17,9 @@ div#mailmessage   label
   width: 5em;
 }
 
+div#emailresp div.messagebody
+{
+     margin-top:1em;
+    font-size: 1.1em;
+    color: blue;
+}

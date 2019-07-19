@@ -1,21 +1,16 @@
+{# views/message/emailbody.html.twig #}
 
 
 <html>
+<style>
+div.bodytext { font-size:12pt; color:black }
+div.link { font-size:12pt;  text-align: center;  }
+div.messageheading div.label { font-size:14pt; text-align: center; text-weight : bold; color: black }
+</style>
 <div class="mailmessage">
- <div class= "heading" style="font-weight:bold;  font-style: italic; ">{{'message.forwarded.by.admin'|trans }}</div>
 
-<table   style="border: 1px solid black;" >
-<tr style="border: 1px solid black;"><td style="font-weight: bold;" >{{'message.enyoyer.a'|trans }} </td><td> {{message.toname}}</td></tr>
-<tr style="border: 1px solid black;"><td style="font-weight: bold;" >{{'mail.date.sent'| trans}} </td><td> {{ message.date_sent  | date("Y-m-d h:m:s")}}</td></tr>
-<tr style="border: 1px solid black;"><td style="font-weight: bold;">{{'mail.sentby'| trans}} </td><td> {{ message.fromname }}</td></tr>
-<tr style="border: 1px solid black;"><td style="font-weight: bold;"> {{'mail.from' |trans }}</td><td>{{message.fromemail}} </td></tr>
-<tr style="border: 1px solid black;"><td style="font-weight: bold;">{{'mail.subject'| trans}} </td><td> {{ message.subject }}</td></tr>
-<tr style="border: 1px solid black;"><td style="font-weight: bold; text-align: center;
-  vertical-align: middle; border-top: 1px solid black;" colspan="2";>{{'mail.body'| trans}}  </td><td></td><tr>
-<tr "><td  colspan="2">{{ message.body | raw }}</td></tr>
-</table>
+{{ message.body | raw }}
 
-</div>
 </div>
 
 </html>
