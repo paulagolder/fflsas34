@@ -238,10 +238,10 @@ class RegistrationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush(); 
-            $body =  $this->trans->trans('you.have.sucessfully.completed');
-            $subject =  $this->trans->trans('registration.complete');
+            $body =  $this->renderView('message/template/'.$user->getLang().'/registrationcompletion_notice.html.twig'e));
+            $subject =  $this->trans->trans('registration.complete',[],null,$user->getLang());
             $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-            $smessage = $this->get('message_service')->sendMessage($umessage);
+            $smessage = $this->get('message_service')->sendMessageToUser($umessage, $user->getLang());
               $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
                 $this->get('security.token_storage')->setToken($token);
                 $this->get('session')->set('_security_main', serialize($token));

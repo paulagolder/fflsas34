@@ -46,6 +46,7 @@ twig:
         versionname: '%version-name%'
         maxrecentchanges: '%maxrecentchanges%'
         defaultcontent: '%defaultcontent%'
+        adminstratorsemails: '%administratorsemails%'
         
         
 # Doctrine Configuration

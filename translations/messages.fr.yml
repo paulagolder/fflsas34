@@ -281,3 +281,7 @@ to.complete.reply.to email: Pour terminer le processus, répondez au courrier é
 user.not.recognised: Utilisateur non reconnu
 request.new.password: Demander un nouveau mot de passe
 sucessfully.registered: Enregistrement réussi.
+you.have.sent.a.message.to.FFLSAS.org: Vous avez envoyé un message à FFLSAS.org
+a.copy.has.been.sent.to.your.email.address: Une copie a été envoyée à votre adresse email.
+user.locale: Langue prefere
+changepass.success: Changement de mot de passe reusite.

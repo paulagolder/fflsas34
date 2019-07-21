@@ -1,4 +1,4 @@
-{# views/message/template/en/useremailfull.html.twig #}
+{# views/message/template/en/emailfull.html.twig #}
 {#  ENGLISH TEMPLATE #}
 <html>
 <style>
@@ -21,7 +21,7 @@ div.body { padding:3em; }
 
 <div id= "usermessage" >
 
-{% include '/message/template/en/useremailheader.html.twig'  with {'webroot':"http://127.0.0.1:8000"}  %}
+{% include '/message/template/en/emailheader.html.twig'  with {'webroot':"http://127.0.0.1:8000"}  %}
 
 <div class="mailmessage">
 <table  >
@@ -35,6 +35,6 @@ div.body { padding:3em; }
 {{ message.body | raw }}
 </div>
 </div>
-{% include '/message/template/en/useremailfooter.html.twig'  with {'webroot':"http://127.0.0.1:8000"}  %}
+{{footer | raw}}
 </div>
 </html>

@@ -185,7 +185,7 @@ class UserController extends Controller
             $body =  $this->renderView('message/template/'.$fuser->getLang().'/resetpassword_success.html.twig');
             $subject =  $this->trans->trans('changepass.success');
              $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-             $smessage = $this->get('message_service')->sendMessageToUser($umessage);
+             $smessage = $this->get('message_service')->sendMessageToUser($umessage,$fuser->getLang());
             return $this->redirect("/".$this->lang."/user/".$uid);
         }
         

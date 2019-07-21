@@ -280,3 +280,7 @@ to.complete.reply.to email: To complete the process reply to the email you will 
 user.not.recognised: User not recognised
 request.new.password: Request a new password
 sucessfully.registered: Sucessfully registered
+you.have.sent.a.message.to.FFLSAS.org:  	You have sent a message to FFLSAS.og
+a.copy.has.been sent to.your.email.address:  A copy has been sent to your email address.
+user.locale: Prefered language
+changepass.success: Password change, succesfull.

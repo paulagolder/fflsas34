@@ -60,7 +60,8 @@ class MessageController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() &&  $form->isValid())
         {
-            $this->sendMessage($message);
+              $this->sendMessageToUserCopytoAdministrators($message, $user->getLang());
+           //  $this->sendMessageToAdmin($message);
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
                 'returnlink' =>"/$this->lang/person/all")
@@ -75,14 +76,14 @@ class MessageController extends Controller
     
     public function createVisitorMessageToAdmin(Request $request ,\Swift_Mailer $mailer) 
     {
-        
+         $lang = $this->requestStack->getCurrentRequest()->getLocale();
         $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),"", "" ,"", "");
         $form = $this->createForm(VisitorMessageForm::class, $message);
         $form->handleRequest($request);
         # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')))
         {
-            $this->sendMessage($message);
+            $this->sendMessageToUserCopytoAdministrators($message, $lang);
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
                 'returnlink' =>"/$this->lang/person/all")
@@ -172,22 +173,7 @@ class MessageController extends Controller
     
     
     
-    function xmakeSwiftMessage($message)
-    {
-        $smessage = (new \Swift_Message('FFLSAS Email'));
-        $smessage->setSubject($message->getSubject());
-        //$smessage->setFrom($message->getFromemail(),$message->getFromname());
-        $sender = $this->getParameter('admin-email');
-        $sendername = $this->getParameter('admin-name');
-        $smessage->setFrom($sender,$sendername);
-        $smessage->setTo($message->gettoEmail());
-        $smessage->setBody(
-            $this->renderView('message/emailbody.html.twig',array(
-                'message'=>$message,),'text/html'));
-                $smessage->setContentType("text/html");
-                return $smessage;
-                
-    }
+
     
      function makeSwiftMessage($message,$formattedbody)
     {
@@ -197,6 +183,21 @@ class MessageController extends Controller
         $sendername = $this->getParameter('admin-name');
         $smessage->setFrom($sender,$sendername);
         $smessage->setTo($message->gettoEmail());
+        $smessage->setBody($formattedbody);
+        $smessage->setContentType("text/html");
+        return $smessage;
+                
+    }
+    
+      function makeSwiftMessageCopyToAdministrators($message,$formattedbody)
+    {
+        $smessage = (new \Swift_Message('FFLSAS Email'));
+        $smessage->setSubject($message->getSubject());
+        $sender = $this->getParameter('admin-email');
+        $administrators = $this->getParameter('administratorsemails');
+        $sendername = $this->getParameter('admin-name');
+        $smessage->setFrom($sender,$sendername);
+        $smessage->setTo($administrators);
         $smessage->setBody($formattedbody);
         $smessage->setContentType("text/html");
         return $smessage;
@@ -217,15 +218,54 @@ class MessageController extends Controller
         $this->get('mailer')->send($smessage);
     } 
     
-    function sendMessageToUser($message,$lang)
+    function sendMessageToUserCopytoAdministrators($message,$lang)
     {
         $datesent =new \DateTime();
         $message->setDate_sent( $datesent);
         $sn = $this->getDoctrine()->getManager();      
         $sn -> persist($message);
         $sn -> flush();
-        $formattedbody =    $this->renderView('message/template/'.$lang.'/useremailfull.html.twig',array(
+        $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
+                'webroot'=>"http://127.0.0.1:8000",),'text/html');
+        $userbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+                'message'=>$message,'footer'=>$userfooter,),'text/html');
+       
+        $umessage = $this->makeSwiftMessage($message, $userbody);
+        $this->get('mailer')->send($umessage);
+            $adminfooter =  $this->renderView('message/template/'.$lang.'/adminemailfooter.html.twig',array(
+                'webroot'=>"http://127.0.0.1:8000",),'text/html');
+          $adminbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+                'message'=>$message, 'footer'=>$adminfooter,),'text/html');
+        $amessage = $this->makeSwiftMessageCopyToAdministrators($message,$adminbody);
+        $this->get('mailer')->send($amessage);
+    } 
+    
+    
+      function sendMessageToAdmin($message,$lang)
+    {
+        $datesent =new \DateTime();
+        $message->setDate_sent( $datesent);
+        $sn = $this->getDoctrine()->getManager();      
+        $sn -> persist($message);
+        $sn -> flush();
+        $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
                 'message'=>$message,),'text/html');
+       
+        $smessage = $this->makeSwiftMessage($message, $formattedbody);
+        $this->get('mailer')->send($smessage);
+    } 
+    
+      function sendMessageToUser($message,$lang)
+    {
+        $datesent =new \DateTime();
+        $message->setDate_sent( $datesent);
+        $sn = $this->getDoctrine()->getManager();      
+        $sn -> persist($message);
+        $sn -> flush();
+        $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
+                'webroot'=>"http://127.0.0.1:8000",),'text/html');
+        $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+                'message'=>$message,'footer'=>$userfooter,),'text/html');
        
         $smessage = $this->makeSwiftMessage($message, $formattedbody);
         $this->get('mailer')->send($smessage);
