@@ -135,7 +135,7 @@ user_admin_rereg:
     path: /admin/user/rereg/{uid}
     controller:  AppBundle\Controller\UserController::UserRereg    
     
-    
+  
     
 user_editone:
     path: /admin/user/{uid}
@@ -179,6 +179,12 @@ user_message_delete:
       requirements:
         _locale: en|fr|FR|EN
         
+user_message_delete_all:
+      path: /admin/user/deleteallmessages/{uid}
+      controller:  AppBundle\Controller\UserController:deleteallmessages
+  
+        
+    
 user_admin_message_delete:        
       path:  /admin/user/{uid}/message/delete/{mid}
       controller:  AppBundle\Controller\UserController:admindeletemessage

@@ -91,7 +91,7 @@ div#fuser div.messagelist div.message div.message
     xwidth:10em;
     margin-left:1em;
 }
-html body div#page div.mypage div.mypageinner div#middle div#message div.messagelist div#usermessage div.messagebody div.messageheading div.label{}
+ div#message div.messagelist div#usermessage div.messagebody div.messageheading div.label{}
 
 div#usermessage  div.bodytext { font-size:12pt; color:black }
 div#usermessage  div.link { font-size:12pt;  text-align: center;  }

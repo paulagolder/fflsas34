@@ -4,17 +4,17 @@
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/user/user.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/message/message.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
 {% block middle %}
 <div id="middle" >
-<div id="fuser"  >
+<div id="message"  >
 <div class="heading">
   <div class="label" > {{ 'view.message' | trans }}</div>
   <div class="title" > {{user.username}} ({{user.email}})</div>
-  <div class="returnbutton"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
+  <div class="returnbutton button1"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
 </div>
 
 
@@ -37,7 +37,7 @@
    <div class= "title" >{{message.subject}}</div>
 </div>
 <div class= "messagebody">
-    {{ message.body }}
+    {{ message.body | raw }}
 </div>
 </div>
 </div>

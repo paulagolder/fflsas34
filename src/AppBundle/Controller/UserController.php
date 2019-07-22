@@ -246,7 +246,7 @@ class UserController extends Controller
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $email= $fuser->getEmail();
         
-        $messages = $this->getDoctrine()->getRepository('AppBundle:Message')->findbyemail($fuser->getEmail());
+        $messages = $this->getDoctrine()->getRepository('AppBundle:Message')->findbyname($fuser->getUsername());
         return $this->render('user/showone.html.twig', array(
             'lang'=>$this->lang,
             'user' => $fuser,
@@ -287,6 +287,13 @@ class UserController extends Controller
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $this->getDoctrine()->getRepository('AppBundle:Message')->delete($mid);
         return $this->redirect("/".$this->lang."/user/".$uid);
+    }
+    
+      public function deleteallmessages($uid)
+    {
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $this->getDoctrine()->getRepository('AppBundle:Message')->deleteallusermessages($user->getUsername());
+        return $this->redirect("/admin/user/".$uid);
     }
     
     public function admindeletemessage($uid,$mid)

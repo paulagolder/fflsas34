@@ -8,6 +8,7 @@
 {% block stylesheets %}
   {{ parent() }}
   <link href="{{ asset('css/user/user.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/message/message.css') }}" rel="stylesheet" />
 {% endblock %}
 
 
@@ -50,18 +51,23 @@
     
     
     
-    <div class="messagelist" >
+    
         <div class="subheading" >
             <div class="label" > {{'message.list' | trans }}</div>
-            <div class="editbutton button1" ><a class='editbutton' href="/admin/message/send/{{user.userid}}">{{'send.message' |trans}}</a></div>
+            <div class="editbutton button1" ><a  href="/admin/message/send/{{user.userid}}">{{'send.message' |trans}}</a></div>
+             <div class="deletebutton" ><a  href="/admin/user/deleteallmessages/{{user.userid}}">{{'delete.messages' |trans}}</a></div>
         </div>
-        
+        <div class="messagelist" >
         {% for message in messages %}
         <div class= "message selectable">
-          <div class="subject" > {{message.fromname}}</div>
-            <div class="subject" > {{message.toname}}</div>
+        {% if message.fromname == user.username %}
+         <div class="name" > {{"to.admin" | trans }}</div>
+         {% else %}
+          <div class="name" > {{"from.admin" | trans }}</div>
+         {% endif %}
+           <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
             <div class="subject" > {{message.subject}}</div>
-            <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
+            
             {% set  body = ( message.body | raw ) %}
             {% set bodys = ( body|length > 20 ? body|slice(0, 20) ~ '...' : body ) %}
           {#  <div class = "messagebody" > {{ bodys | raw }} </div> #}

@@ -38,4 +38,23 @@ class MessageRepository extends EntityRepository
         $qb->getQuery()->getResult();
     }
     
+        public function deleteallusermessages($username)
+    {
+        
+        $qb = $this->createQueryBuilder('c');
+        $qb->delete();
+        $qb->where('c.toname = :name or c.fromname= :name ');
+        $qb->setParameter('name', $username);
+        $qb->getQuery()->getResult();
+    }
+    
+      public function findbyname($name)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->andWhere('c.fromname= :val or c.toname= :val');
+        $qb->setParameter('val', $name);
+        $qb->orderBy("c.date_sent", "DESC");
+        return $qb->getQuery()->getResult();
+    }
+    
 }
