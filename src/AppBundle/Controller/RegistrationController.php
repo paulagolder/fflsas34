@@ -69,11 +69,11 @@ class RegistrationController extends Controller
             $entityManager->flush();
             $baseurl = $this->container->getParameter('base-url');
             $code = $user->getRegistrationcode();
-            $reglink = "{$baseurl}remotecomplete/{$user->getUserid()}/{$code}";
+            $reglink = "{$baseurl}remotecompleteregistration/{$user->getUserid()}/{$code}";
             $body =  $this->renderView('message/template/'.$user->getLang().'/reg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code));
             $subject = $this->trans->trans('registration.success',[],null,$user->getLang());
             $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-            $smessage = $this->get('message_service')->sendMessageToUser($umessage, $user->getLang());
+            $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage, $user->getUserid(),$user->getLang());
             $message2 = $this->trans->trans('you.have.sucessfully.registered');
             $message2 .= $this->trans->trans('to.complete.reply.to.email');
             return $this->render('registration/done.html.twig',
@@ -131,7 +131,7 @@ class RegistrationController extends Controller
             $body =  $this->renderView('message/template/'.$ouser->getLang().'/resetpassword_notice.html.twig', array('reglink'=>$reglink,'code'=>$code));
             $subject = $this->trans->trans('request.new.password',[],null,$ouser->getLang() );
             $umessage = new message($ouser->getUsername(),$ouser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-            $smessage = $this->get('message_service')->sendMessageToUser($umessage, $ouser->getLang());
+            $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage, $ouser->getUserid(),$ouser->getLang());
 
             $message2 =    $this->trans->trans('you.have.sucessfully.requested.change.password');
             $message2 .=   "<br>".$this->trans->trans('to.complete.reply.to email');
@@ -221,7 +221,7 @@ class RegistrationController extends Controller
     }
     
     
-    public function remotecomplete(  $uid, $code)
+    public function remotecompleteregistration(  $uid, $code)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
@@ -241,7 +241,7 @@ class RegistrationController extends Controller
             $body =  $this->renderView('message/template/'.$user->getLang().'/registrationcompletion_notice.html.twig');
             $subject =  $this->trans->trans('registration.complete',[],null,$user->getLang());
             $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-            $smessage = $this->get('message_service')->sendMessageToUser($umessage, $user->getLang());
+            $smessage = $this->get('message_service')->sendMessageToUser($umessage,$user->getUserid(), $user->getLang());
               $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
                 $this->get('security.token_storage')->setToken($token);
                 $this->get('session')->set('_security_main', serialize($token));

@@ -51,7 +51,7 @@ class MessageRepository extends EntityRepository
       public function findbyname($name)
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->andWhere('c.fromname= :val or c.toname= :val');
+        $qb->andWhere(' (c.fromname= :val or c.toname= :val ) and ( c.private = false OR c.private is null )' ); 
         $qb->setParameter('val', $name);
         $qb->orderBy("c.date_sent", "DESC");
         return $qb->getQuery()->getResult();

@@ -257,15 +257,11 @@ div#middle div.row
   display:flex;
 }
 
-div#middle div.row:nth-child(2n+2),.selectable:hover
-{
-  background:rgba(0,0,80,0.1);
-}
 
-div#middle div.search form div.heading div.label
-{
-  font-size:1.2em;
-}
+
+
+
+
 
 div#middle div.subheading div.label
 {

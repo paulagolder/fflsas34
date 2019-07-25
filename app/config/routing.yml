@@ -59,7 +59,7 @@ register:
         _locale: en|fr|FR|EN
         
 password_forgottenr:
-    path: /{_locale}/forgotten
+    path: /{_locale}/resetpassword
     controller:  AppBundle\Controller\RegistrationController::resetpasswordrequest    
     requirements:
         _locale: en|fr|FR|EN
@@ -71,17 +71,20 @@ complete_registration:
         _locale: en|fr|FR|EN
         
 remote_complete_registration:
-    path: /remotecomplete/{uid}/{code}
-    controller:  AppBundle\Controller\RegistrationController::remotecomplete   
+    path: /remotecompleteregistration/{uid}/{code}
+    controller:  AppBundle\Controller\RegistrationController::remotecompleteregistration   
     
 remote_request_password:
     path: /remotechangepassword/{uid}/{code}
     controller:  AppBundle\Controller\RegistrationController::remotechangepassword  
 
-remote_transfer_registration:
-    path: /remoteregister/{uid}/{code}
+remote reregistration:
+    path: /reregister/{uid}/{code}
     controller:  AppBundle\Controller\RegistrationController::remotereregister   
 
+remote_deregistration:
+    path: /remotederegister/{uid}/{code}
+    controller:  AppBundle\Controller\RegistrationController::remotederegister   
     
 admin_message:
    path: /accueil/message/{mess}
@@ -121,21 +124,19 @@ message_send:
     
 #=============================users==================
 
+
+
 user_admin_new:
     path: /admin/user/new
     controller:  AppBundle\Controller\UserController::newuser  
 
-    
 user_admin_search:
     path: /admin/user/search
     controller:  AppBundle\Controller\UserController::UserSearch     
     
-
 user_admin_rereg:
     path: /admin/user/rereg/{uid}
     controller:  AppBundle\Controller\UserController::UserRereg    
-    
-  
     
 user_editone:
     path: /admin/user/{uid}
@@ -149,6 +150,12 @@ user_delete:
     path: /admin/user/delete/{uid}
     controller:  AppBundle\Controller\UserController:deleteuser
 
+user_deregister:
+    path:  /{_locale}/deregister/{uid}
+    controller:  AppBundle\Controller\UserController::userDereg 
+    requirements:
+        _locale: en|fr|FR|EN
+    
 user_edit:
      path: /{_locale}/user/{uid}
      controller:  AppBundle\Controller\UserController:showuser

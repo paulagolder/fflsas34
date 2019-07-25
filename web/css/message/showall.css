@@ -48,10 +48,10 @@ div#message div.messagelist  div.date
 div#message div.messagelist  div.subject
 {
     padding-left: 5px;
-   max-width: 10em;
-   width: 10em;
-   height:1em;
-   display: inline-block;
+    max-width: 10em;
+    width: 10em;
+    height:1em;
+    display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     padding-right: 5px;
@@ -75,12 +75,6 @@ div#message div.messagelist  div.body
 
 
 
-div#message div.fuserlist div.user div.deletebutton
-{
-   # margin-left:auto;
-}
-
-
 
 
 div#message div.fuserlist div.user
@@ -90,9 +84,3 @@ div#message div.fuserlist div.user
 
 
 
-
-
-div#message div.message
-{
-       display:flex;
-}

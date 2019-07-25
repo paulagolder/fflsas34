@@ -60,7 +60,7 @@ class MessageController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() &&  $form->isValid())
         {
-              $this->sendMessageToUserCopytoAdministrators($message, $user->getLang());
+              $this->sendMessageToUserCopytoAdministrators($message,$user->getUserid(), $user->getLang());
            //  $this->sendMessageToAdmin($message);
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
@@ -83,7 +83,7 @@ class MessageController extends Controller
         # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')))
         {
-            $this->sendMessageToUserCopytoAdministrators($message, $lang);
+            $this->sendMessageToUserCopytoAdministrators($message,0, $lang);
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
                 'returnlink' =>"/$this->lang/person/all")
@@ -157,7 +157,7 @@ class MessageController extends Controller
         
         if($form->isSubmitted() &&  $form->isValid())
         {
-            $this->sendMessageToUser($message, $fuser->getLang());
+            $this->sendMessageToUser($message,$fuser->getUserid(), $fuser->getLang());
             
             return $this->render('message/admintousermessage_ack.html.twig',array(
                 'message'=>$message,
@@ -218,18 +218,24 @@ class MessageController extends Controller
         $this->get('mailer')->send($smessage);
     } 
     
-    function sendMessageToUserCopytoAdministrators($message,$lang)
+    function sendMessageToUserCopytoAdministrators($message,$userid,$lang)
     {
         $datesent =new \DateTime();
         $message->setDate_sent( $datesent);
         $sn = $this->getDoctrine()->getManager();      
         $sn -> persist($message);
-        $sn -> flush();
-        $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
-                'webroot'=>"http://127.0.0.1:8000",),'text/html');
-        $userbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-                'message'=>$message,'footer'=>$userfooter,),'text/html');
-       
+        $sn -> flush();;
+                if($userid==0)
+                {
+                   $footer =  $this->renderView('message/template/'.$lang.'/visitoremailfooter.html.twig',array('webroot'=>"http://127.0.0.1:8000",),'text/html');
+                }
+                else
+                {
+                  $footer =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array('webroot'=>"http://127.0.0.1:8000",'userid'=> $userid ),'text/html');
+                
+                }
+            $userbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+                'message'=>$message,'footer'=>$footer,),'text/html');       
         $umessage = $this->makeSwiftMessage($message, $userbody);
         $this->get('mailer')->send($umessage);
             $adminfooter =  $this->renderView('message/template/'.$lang.'/adminemailfooter.html.twig',array(
@@ -255,7 +261,7 @@ class MessageController extends Controller
         $this->get('mailer')->send($smessage);
     } 
     
-      function sendMessageToUser($message,$lang)
+      function sendMessageToUser($message,$userid,$lang)
     {
         $datesent =new \DateTime();
         $message->setDate_sent( $datesent);
@@ -263,13 +269,31 @@ class MessageController extends Controller
         $sn -> persist($message);
         $sn -> flush();
         $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
-                'webroot'=>"http://127.0.0.1:8000",),'text/html');
+                'webroot'=>"http://127.0.0.1:8000",'userid'=>$userid,),'text/html');
         $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
                 'message'=>$message,'footer'=>$userfooter,),'text/html');
        
         $smessage = $this->makeSwiftMessage($message, $formattedbody);
         $this->get('mailer')->send($smessage);
     } 
+    
+    function sendConfidentialMessageToUser($message,$userid,$lang)
+    {
+        $datesent =new \DateTime();
+        $message->setDate_sent( $datesent);
+        $message->setPrivate(TRUE);
+        $sn = $this->getDoctrine()->getManager();      
+        $sn -> persist($message);
+        $sn -> flush();
+        $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
+                'webroot'=>"http://127.0.0.1:8000",'userid'=>$userid,),'text/html');
+        $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+                'message'=>$message,'footer'=>$userfooter,),'text/html');
+       
+        $smessage = $this->makeSwiftMessage($message, $formattedbody);
+        $this->get('mailer')->send($smessage);
+    } 
+    
     
     function captchaverify($recaptcha)
     {

@@ -67,8 +67,6 @@ class UserController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $encoder = $this->encoderFactory->getEncoder($fuser);
-        #$tpass= $fuser->getEmail();
-        
         $form = $this->createForm(UserForm::class, $fuser);
         
         $form->handleRequest($request);
@@ -76,10 +74,8 @@ class UserController extends Controller
         {
             $entityManager = $this->getDoctrine()->getManager();
             $plainpassword = $fuser->getPlainPassword();
-            #dump("user PP:".$plainpassword).
             $hashpassword = $encoder->encodePassword($plainpassword,null);
             $fuser->setPassword($hashpassword);
-            #dump(  "isvalid ?".$encoder->isPasswordValid($hashpassword, $plainpassword,null));
             $entityManager->persist($fuser);
             $entityManager->flush();
             return $this->redirect("/admin/user/search");
@@ -100,8 +96,6 @@ class UserController extends Controller
         $fuser = new User;
         $fuser->setRolestr('ROLE_USER;');
         $encoder = $this->encoderFactory->getEncoder($fuser);
-        
-        
         $form = $this->createForm(UserForm::class, $fuser);
         
         $form->handleRequest($request);
@@ -160,7 +154,7 @@ class UserController extends Controller
             ));
     }
     
-     public function editpassword($uid)
+    public function editpassword($uid)
     {
         $user = $this->getUser();
         if(!$user)  return $this->redirect("/".$this->lang."/login");
@@ -185,11 +179,9 @@ class UserController extends Controller
             $body =  $this->renderView('message/template/'.$fuser->getLang().'/resetpassword_success.html.twig');
             $subject =  $this->trans->trans('changepass.success');
              $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-             $smessage = $this->get('message_service')->sendMessageToUser($umessage,$fuser->getLang());
+             $smessage = $this->get('message_service')->sendMessageToUser($umessage,$fuser->getUserid(),$fuser->getLang());
             return $this->redirect("/".$this->lang."/user/".$uid);
         }
-        
-       // $password = $fuser->getPassword();
         
         return $this->render('user/userpassword.html.twig', array(
             'form' => $form->createView(),
@@ -200,7 +192,6 @@ class UserController extends Controller
     
     public function userRereg($uid)
     {
-        
         $request = $this->requestStack->getCurrentRequest();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $fuser->setRegistrationcode( mt_rand(100000, 999999));
@@ -215,21 +206,43 @@ class UserController extends Controller
         $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code));
         $subject =  $this->trans->trans('reregister');
         $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-        $smessage = $this->get('message_service')->sendMessage($umessage);
+        $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
         
         return $this->redirect("/admin/user/".$uid);
+    }
+    
+    public function userDereg($uid)
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $fuser->setRegistrationcode( mt_rand(100000, 999999));
+        $fuser->setLastlogin( new \DateTime());
+        $fuser->setRolestr("ROLE_DEREG");
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($fuser);
+        $entityManager->flush();
+        $baseurl = $this->container->getParameter('base-url');
+        $code = $fuser->getRegistrationcode();
+        $reglink = "{$baseurl}remotederegister/{$fuser->getUserid()}/{$code}";
+        $body =  $this->renderView('message/template/'.$fuser->getLang().'/dereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code));
+        $subject =  $this->trans->trans('deregister');
+        $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+        $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
+        
+        return $this->redirect("/".$fuser->getLang()."/user/".$uid);
     }
     
     
     public function showuser($uid)
     {
         $user = $this->getUser();
+        if(!$user) return $this->redirect("/".$this->lang."/login");
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $email= $fuser->getEmail();
         
-        $messages = $this->getDoctrine()->getRepository('AppBundle:Message')->findbyemail($fuser->getEmail());
+        $messages = $this->getDoctrine()->getRepository('AppBundle:Message')->findbyname($fuser->getUserName());
         return $this->render('user/show.html.twig', array(
             'lang'=>$this->lang,
             'user' => $fuser,

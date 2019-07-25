@@ -54,8 +54,11 @@ security:
     access_control:
          - { path: ^/web/newimages, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/logout, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/remotecomplete, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/remoteregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/remotecompleteregistration, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/reregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/deregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/remotederegister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+   
          - { path: ^/remotechangepassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/accueil, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/symfonyimages, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
@@ -68,6 +71,7 @@ security:
          - { path: ^/(fr|en|FR|EN)/search, roles: ROLE_USER }
          - { path: ^/(fr|en|FR|EN)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/accueil, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/(fr|en|FR|EN)/resetpassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN), roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin/bookmark/edit, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/admin/bookmark/delete, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 

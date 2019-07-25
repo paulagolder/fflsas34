@@ -32,7 +32,7 @@
      </div>
      <div class="searchlist" >
          {% for person in people  %}
-            <div class="search row" >
+            <div class="search row selectable" >
              <div>{{person.fullname}}</div> 
              <div class="editbutton button1"><a class="editbutton" href="/{{lang}}/person/{{person.id}}">{{'see.content' |trans}}</a></div>
               {% if is_granted('ROLE_USER') %}

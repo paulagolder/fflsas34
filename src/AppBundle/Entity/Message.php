@@ -56,6 +56,12 @@ class Message
    */
 
    private $date_sent;
+   
+      /**
+   * @ORM\Column(type="boolean")
+   */
+
+   private $private;
 
   
 
@@ -163,6 +169,18 @@ class Message
      $this->date_sent = $date_sent;
       return $this;
   }
+  
+     public function getPrivate()
+   {
+       return $this->private;
+   }
+   
+    public function setPrivate($priv)
+   {
+       $this->private = $priv;
+       return $this;
+   }
+
   
   public function __construct($toname, $toemail, $fromname , $fromemail, $subject, $body)
     {

@@ -32,7 +32,7 @@
             <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
             <div class="subject" > {{message.subject}}</div>
             
-            <div class = "body" > {{  message.body  }}</div>
+            <div class = "body" > {{  message.body | raw  }}</div>
             <div class = "editbutton button1">
                 <a class='editbutton' href="/admin/message/{{message.id}}">{{'view.message' |trans}}</a>
             </div>
