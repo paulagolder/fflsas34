@@ -24,14 +24,19 @@ div.body { padding:3em; }
 
 <div id= "usermessage" >
 
-{% include '/message/template/en/emailheader.html.twig'  with {'webroot':"http://127.0.0.1:8000" }  %}
+{% include '/message/template/en/emailheader.html.twig'     %}
 
 <div class="mailmessage">
 <table  >
 <tr><td class="label" >{{ 'Sent To' }} </td><td class="title" > {{message.toname}}</td></tr>
 <tr><td class="label" >{{'Date Sent'}} </td><td class="title"> {{ message.date_sent  | date("Y-m-d h:m:s")}}</td></tr>
-<tr><td class="label" >{{'Sent by'}} </td><td class="title"> {{ message.fromname }} ({{message.fromemail}}) </td></tr>
-{# <tr><td class="label" >{{'Subject'}} </td><td class="title"> {{ message.subject  | trans ({}, 'messages', 'en')  }}</td></tr> #}
+{% if message.bcc is iterable %}
+    <tr><td class="label" >{{'Sent by'}} </td><td class="title"> {{ message.fromname }} </td></tr>
+{% else %}
+    <tr><td class="label" >{{'Sent by'}} </td><td class="title"> {{ message.fromname }} ({{message.fromemail}}) </td></tr>
+{% endif %}
+
+
 
 </table>
 <div class="body">

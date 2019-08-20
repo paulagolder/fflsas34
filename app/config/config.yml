@@ -47,7 +47,7 @@ twig:
         maxrecentchanges: '%maxrecentchanges%'
         defaultcontent: '%defaultcontent%'
         adminstratorsemails: '%administratorsemails%'
-        
+        baseurl: '%base-url%'
         
 # Doctrine Configuration
 doctrine:

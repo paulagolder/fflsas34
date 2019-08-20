@@ -21,7 +21,7 @@ class Content
     private $contentid;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $subjectid;
       /**
@@ -72,12 +72,12 @@ class Content
     }
     
     
-     public function getSubjectid(): ?int
+     public function getSubjectid(): ?string
     {
         return $this->subjectid;
     }
 
-    public function setSubjectid(int $subjectid): self
+    public function setSubjectid($subjectid): self
     {
         $this->subjectid = $subjectid;
 

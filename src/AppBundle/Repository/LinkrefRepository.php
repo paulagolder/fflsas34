@@ -66,10 +66,10 @@ class LinkrefRepository extends EntityRepository
       
       $sql = "select r from AppBundle:linkref  r ";
       $sql .= " where r.objecttype  = '".$objecttype."' ";
-        $sql .= " and r.objid  = ".$objid." ";
+      $sql .= " and r.objid  = ".$objid." ";
  
       $query = $this->getEntityManager()->createQuery($sql);
-        $refs = $query->getResult();
+      $refs = $query->getResult();
  
        $ref_ar= array();
        $i=0;

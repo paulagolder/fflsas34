@@ -122,6 +122,15 @@ message_send:
     path: /admin/message/send/{uid}
     controller: AppBundle\Controller\MessageController:makeMessageToUser
     
+message_bulk:
+    path: /admin/message/bulk/{sid}
+    controller: AppBundle\Controller\MessageController:makeBulkMessage
+    
+message_bulk_send:
+    path: /admin/message/bulk/send/{sid}
+    controller: AppBundle\Controller\MessageController:sendBulkMessage
+    
+
 #=============================users==================
 
 
@@ -132,7 +141,16 @@ user_admin_new:
 
 user_admin_search:
     path: /admin/user/search
-    controller:  AppBundle\Controller\UserController::UserSearch     
+    controller:  AppBundle\Controller\UserController::UserSearch   
+    
+user_admin_bulk_rereg:
+    path: /admin/user/bulkrereg
+    controller:  AppBundle\Controller\UserController::BulkUserRereg    
+    
+user_admin_bulk_rereg_send:
+    path:   admin/user/bulkrereg/send/
+    controller:  AppBundle\Controller\UserController::BulkUserReregSend   
+        
     
 user_admin_rereg:
     path: /admin/user/rereg/{uid}

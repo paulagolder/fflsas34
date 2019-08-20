@@ -1,4 +1,4 @@
-{# views/message/show.html.twig #}
+{# views/message/makebulkmessage.html.twig #}
 
 {% extends 'admin.html.twig' %}
 
@@ -13,12 +13,10 @@
 <div id="middle" >
 <div id="message"  >
 <div class="heading">
-  <div class="label" > {{ 'read.message' | trans }}</div>
+  <div class="label" > {{ 'send bulk.message' | trans }}</div>
   <div class="title" > {{message.id}}</div>
 
-  <div class = "deletebutton button1">
-      <a class='deletebutton' href="/admin/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
- </div>
+
   <div class="returnbutton"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
 </div>
 
@@ -39,21 +37,13 @@
 </div>
 <div class= "subheading" >
    <div class= "label" >{{'message.to'|trans}}</div>
-   {% if  message.bcc %} 
-   <div class="title" >{{message.toname}}  </div>
-   {% else %}
-      <div class="title" >{{message.toname}} ({{message.toemail}}) </div>
-   {% endif %}
+   <div class="title" >{{message.toname}} ({{message.toemail}}) </div>
    <div class= "label" >{{'message.date' | trans}} </div>
    <div class="title"> {{message.date_sent  | date("Y-m-d")}}</div>
 </div>
 <div class= "subheading">
-   <div class= "label" >{{'message.bcc'|trans }}</div>
-   <div class= "title" >{{message.bcc}}</div>
-</div>
-<div class= "subheading">
    <div class= "label" >{{'message.subject'|trans }}</div>
-   <div class= "title" >{{message.subject}}</div>
+   <div class= "title" >{{content.title}}</div>
 </div>
 <div class= "messagebody">
     {{ message.body  | raw }}

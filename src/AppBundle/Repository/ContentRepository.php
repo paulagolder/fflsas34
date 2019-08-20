@@ -60,7 +60,7 @@ class ContentRepository extends EntityRepository
     public function findSubject($subjectid)
     {
        $sql = "select c from AppBundle:content c ";
-       $sql .= " where c.subjectid = ".$subjectid." ";
+       $sql .= " where c.subjectid = '".$subjectid."' ";
        $query = $this->getEntityManager()->createQuery($sql);
        $contents = $query->getResult();
        $content_ar = array();

@@ -47,7 +47,7 @@ class PersonRepository extends EntityRepository
        $qb->setParameter('pid', $sfield);
        $qb->orderBy("p.surname", "ASC");
        $people =  $qb->getQuery()->getResult();
-       dump($qb);
+       //dump($qb);
        foreach( $people as $person)
        {
           $person->fixperson();

@@ -6,7 +6,18 @@
       {{ parent() }}
    <link href="{{ asset('css/searchall.css') }}" rel="stylesheet" />
 {% endblock %}
-
+{% block js %}
+ {{ parent() }}
+ <script>
+  
+     function clickcontent(cid)
+     {
+        window.location.href = '/admin/message/bulk/'+cid;
+     }
+   
+     
+   </script>
+{% endblock %}
 {% block middle %}
 <div id="middle" >
   <div id="user" class="search" >
@@ -22,12 +33,17 @@
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
    <input type="text" name="searchfield">
    <input type="submit" value="{{ 'chercher' | trans }}" >
+    
    </div>
    </form>
    {% if users is defined %}
      <div class="subheading">
      <div class="label">{{subheading | trans}}</div> 
      <div class="title">{{searchfield}}</div> 
+     
+     <div class="editbutton button1 tooltip"> <div class="editbutton">{{'bulk.message' | trans}} </div> <span class="tooltiptext">{{ 'to.send.bulk email.use.bookmarks' | trans }}</span>
+              </div>
+     <div class="editbutton "><a class="editbutton" href ="/admin/user/bulkrereg">{{'rereg.group' | trans}}</a></div>
      </div>
      <div class="searchlist" >
        <div >

@@ -60,8 +60,8 @@ class MessageController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() &&  $form->isValid())
         {
-              $this->sendMessageToUserCopytoAdministrators($message,$user->getUserid(), $user->getLang());
-           //  $this->sendMessageToAdmin($message);
+            $this->sendMessageToUserCopytoAdministrators($message,$user->getUserid(), $user->getLang());
+            //  $this->sendMessageToAdmin($message);
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
                 'returnlink' =>"/$this->lang/person/all")
@@ -76,7 +76,7 @@ class MessageController extends Controller
     
     public function createVisitorMessageToAdmin(Request $request ,\Swift_Mailer $mailer) 
     {
-         $lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $lang = $this->requestStack->getCurrentRequest()->getLocale();
         $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),"", "" ,"", "");
         $form = $this->createForm(VisitorMessageForm::class, $message);
         $form->handleRequest($request);
@@ -170,147 +170,221 @@ class MessageController extends Controller
         ));
     }
     
-    
-    
-    
-
-    
-     function makeSwiftMessage($message,$formattedbody)
+    public function makeBulkMessage(int $sid) 
     {
-        $smessage = (new \Swift_Message('FFLSAS Email'));
-        $smessage->setSubject($message->getSubject());
-        $sender = $this->getParameter('admin-email');
-        $sendername = $this->getParameter('admin-name');
-        $smessage->setFrom($sender,$sendername);
-        $smessage->setTo($message->gettoEmail());
-        $smessage->setBody($formattedbody);
-        $smessage->setContentType("text/html");
-        return $smessage;
-                
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $content =  $this->getDoctrine()->getRepository('AppBundle:Content')->findContentlang($sid, $this->lang);
+        $request = $this->requestStack->getCurrentRequest();
+        $session = $request->getSession();
+        $destinataires = $session->get('selectedusers');
+        //dump($destinataires);
+        $userlist = explode(",",$destinataires);
+        $numbertosend= count($userlist) - 1;
+        return $this->render('message/bulkmessage.html.twig', array(
+            'lang'=>$this->lang,
+            'content'=>$content,
+            'destinataires' =>$destinataires,
+            'numbertosend'=>$numbertosend,
+            'returnlink'=>'/admin/user/search',
+            'actionlink'=>'/admin/message/bulk/send/'.$sid,
+            ));
     }
     
-      function makeSwiftMessageCopyToAdministrators($message,$formattedbody)
+    public function sendBulkMessage(int $sid,Request $request ,\Swift_Mailer $mailer) 
     {
-        $smessage = (new \Swift_Message('FFLSAS Email'));
-        $smessage->setSubject($message->getSubject());
-        $sender = $this->getParameter('admin-email');
-        $administrators = $this->getParameter('administratorsemails');
-        $sendername = $this->getParameter('admin-name');
-        $smessage->setFrom($sender,$sendername);
-        $smessage->setTo($administrators);
-        $smessage->setBody($formattedbody);
-        $smessage->setContentType("text/html");
-        return $smessage;
+        $request = $this->requestStack->getCurrentRequest();
+        $session = $request->getSession();
+        $destinataires = $session->get('selectedusers');
+        $userlist = explode(",",$destinataires);
+        $sendtoemailstr= "";
+        //   foreach (array("fr" ,"en") as $lang) 
+        //   {
+        
+        //    $sendtoemail = array(); 
+        // 
+        foreach($userlist as $uid)
+        {
+            $user =  $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+            if($user)
+            {
+                $lang =  $user->getLocale();
                 
-    }
-    
-    function sendMessage($message)
-    {
-        $datesent =new \DateTime();
-        $message->setDate_sent( $datesent);
-        $sn = $this->getDoctrine()->getManager();      
+                $content =  $this->getDoctrine()->getRepository('AppBundle:Content')->findContentLang($sid,$lang);
+                $subject = $content->gettitle();
+                $body= $content->gettext();
+                
+                
+                $sendtoemailstr .= $user->getemail().", ";
+                
+                $sendtoname = "group.email";
+                $message = new message($user->getUserName(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+                $datesent =new \DateTime();
+                $message->setDate_sent( $datesent);
+                $message->setToemail(  $this->getParameter('admin-email'));
+               
+                $footer =  $this->renderView('message/template/'.$lang.'/contentemailfooter.html.twig',array('userid'=> $uid ,'subjectid'=>$sid ,),'text/html');
+                $userbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+                    'message'=>$message,'footer'=>$footer,),'text/html');
+                    
+                    $smessage = $this->makeSwiftMessage($message, $userbody);
+                    $this->get('mailer')->send($smessage);
+                    
+            }
+        }
+        $sn = $this->getDoctrine()->getManager();   
+        $message->setBcc( $sendtoemailstr);
         $sn -> persist($message);
         $sn -> flush();
-        $formattedbody =    $this->renderView('message/emailbody.html.twig',array(
-                'message'=>$message,),'text/html');
-       
+        // $this->get('mailer')->send($smessage);
+    
+    
+    return $this->render('message/bulkusermessage_ack.html.twig',array(
+        'message'=>$message,
+        'returnlink'=>'/admin/user/search',
+        ));          
+        
+}
+
+
+
+
+
+function makeSwiftMessage($message,$formattedbody)
+{
+    $smessage = (new \Swift_Message('FFLSAS Email'));
+    $smessage->setSubject($message->getSubject());
+    $sender = $this->getParameter('admin-email');
+    $sendername = $this->getParameter('admin-name');
+    $smessage->setFrom($sender,$sendername);
+    $smessage->setTo($message->gettoEmail());
+    $smessage->setBcc($message->getBcc());
+    $smessage->setBody($formattedbody);
+    $smessage->setContentType("text/html");
+    return $smessage;
+    
+}
+
+function makeSwiftMessageCopyToAdministrators($message,$formattedbody)
+{
+    $smessage = (new \Swift_Message('FFLSAS Email'));
+    $smessage->setSubject($message->getSubject());
+    $sender = $this->getParameter('admin-email');
+    $administrators = $this->getParameter('administratorsemails');
+    $sendername = $this->getParameter('admin-name');
+    $smessage->setFrom($sender,$sendername);
+    $smessage->setTo($administrators);
+    $smessage->setBody($formattedbody);
+    $smessage->setContentType("text/html");
+    return $smessage;
+    
+}
+
+function sendMessage($message)
+{
+    $datesent =new \DateTime();
+    $message->setDate_sent( $datesent);
+    $sn = $this->getDoctrine()->getManager();      
+    $sn -> persist($message);
+    $sn -> flush();
+    $formattedbody =    $this->renderView('message/emailbody.html.twig',array(
+        'message'=>$message,),'text/html');
+        
         $smessage = $this->makeSwiftMessage($message, $formattedbody);
         $this->get('mailer')->send($smessage);
-    } 
-    
-    function sendMessageToUserCopytoAdministrators($message,$userid,$lang)
+} 
+
+function sendMessageToUserCopytoAdministrators($message,$userid,$lang)
+{
+    $datesent =new \DateTime();
+    $message->setDate_sent( $datesent);
+    $sn = $this->getDoctrine()->getManager();      
+    $sn -> persist($message);
+    $sn -> flush();;
+    if($userid==0)
     {
-        $datesent =new \DateTime();
-        $message->setDate_sent( $datesent);
-        $sn = $this->getDoctrine()->getManager();      
-        $sn -> persist($message);
-        $sn -> flush();;
-                if($userid==0)
-                {
-                   $footer =  $this->renderView('message/template/'.$lang.'/visitoremailfooter.html.twig',array('webroot'=>"http://127.0.0.1:8000",),'text/html');
-                }
-                else
-                {
-                  $footer =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array('webroot'=>"http://127.0.0.1:8000",'userid'=> $userid ),'text/html');
-                
-                }
-            $userbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-                'message'=>$message,'footer'=>$footer,),'text/html');       
+        $footer =  $this->renderView('message/template/'.$lang.'/visitoremailfooter.html.twig',array(),'text/html');
+    }
+    else
+    {
+        $footer =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array('userid'=> $userid ),'text/html');
+        
+    }
+    $userbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+        'message'=>$message,'footer'=>$footer,),'text/html');       
         $umessage = $this->makeSwiftMessage($message, $userbody);
         $this->get('mailer')->send($umessage);
-            $adminfooter =  $this->renderView('message/template/'.$lang.'/adminemailfooter.html.twig',array(
-                'webroot'=>"http://127.0.0.1:8000",),'text/html');
-          $adminbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-                'message'=>$message, 'footer'=>$adminfooter,),'text/html');
-        $amessage = $this->makeSwiftMessageCopyToAdministrators($message,$adminbody);
-        $this->get('mailer')->send($amessage);
-    } 
-    
-    
-      function sendMessageToAdmin($message,$lang)
-    {
-        $datesent =new \DateTime();
-        $message->setDate_sent( $datesent);
-        $sn = $this->getDoctrine()->getManager();      
-        $sn -> persist($message);
-        $sn -> flush();
-        $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-                'message'=>$message,),'text/html');
-       
+        $adminfooter =  $this->renderView('message/template/'.$lang.'/adminemailfooter.html.twig','text/html');
+        $adminbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+            'message'=>$message, 'footer'=>$adminfooter,),'text/html');
+            $amessage = $this->makeSwiftMessageCopyToAdministrators($message,$adminbody);
+            $this->get('mailer')->send($amessage);
+} 
+
+
+function sendMessageToAdmin($message,$lang)
+{
+    $datesent =new \DateTime();
+    $message->setDate_sent( $datesent);
+    $sn = $this->getDoctrine()->getManager();      
+    $sn -> persist($message);
+    $sn -> flush();
+    $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+        'message'=>$message,),'text/html');
+        
         $smessage = $this->makeSwiftMessage($message, $formattedbody);
         $this->get('mailer')->send($smessage);
-    } 
-    
-      function sendMessageToUser($message,$userid,$lang)
-    {
-        $datesent =new \DateTime();
-        $message->setDate_sent( $datesent);
-        $sn = $this->getDoctrine()->getManager();      
-        $sn -> persist($message);
-        $sn -> flush();
-        $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
-                'webroot'=>"http://127.0.0.1:8000",'userid'=>$userid,),'text/html');
+} 
+
+function sendMessageToUser($message,$userid,$lang)
+{
+    $datesent =new \DateTime();
+    $message->setDate_sent( $datesent);
+    $sn = $this->getDoctrine()->getManager();      
+    $sn -> persist($message);
+    $sn -> flush();
+    $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
+        'userid'=>$userid,),'text/html');
         $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-                'message'=>$message,'footer'=>$userfooter,),'text/html');
-       
-        $smessage = $this->makeSwiftMessage($message, $formattedbody);
-        $this->get('mailer')->send($smessage);
-    } 
-    
-    function sendConfidentialMessageToUser($message,$userid,$lang)
-    {
-        $datesent =new \DateTime();
-        $message->setDate_sent( $datesent);
-        $message->setPrivate(TRUE);
-        $sn = $this->getDoctrine()->getManager();      
-        $sn -> persist($message);
-        $sn -> flush();
-        $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
-                'webroot'=>"http://127.0.0.1:8000",'userid'=>$userid,),'text/html');
-        $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-                'message'=>$message,'footer'=>$userfooter,),'text/html');
-       
-        $smessage = $this->makeSwiftMessage($message, $formattedbody);
-        $this->get('mailer')->send($smessage);
-    } 
-    
-    
-    function captchaverify($recaptcha)
-    {
-        $secret = $this->container->getParameter('recaptcha_secret');
-        $url = "https://www.google.com/recaptcha/api/siteverify";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-            "secret"=>$secret,"response"=>$recaptcha));
-            $response = curl_exec($ch);
-            curl_close($ch);
-            $data = json_decode($response);     
+            'message'=>$message,'footer'=>$userfooter,),'text/html');
             
-            return $data->success;   
-            //return true;
-    }
+            $smessage = $this->makeSwiftMessage($message, $formattedbody);
+            $this->get('mailer')->send($smessage);
+} 
+
+function sendConfidentialMessageToUser($message,$userid,$lang)
+{
+    $datesent =new \DateTime();
+    $message->setDate_sent( $datesent);
+    $message->setPrivate(TRUE);
+    $sn = $this->getDoctrine()->getManager();      
+    $sn -> persist($message);
+    $sn -> flush();
+    $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
+        'userid'=>$userid,),'text/html');
+        $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+            'message'=>$message,'footer'=>$userfooter,),'text/html');
+            
+            $smessage = $this->makeSwiftMessage($message, $formattedbody);
+            $this->get('mailer')->send($smessage);
+} 
+
+
+function captchaverify($recaptcha)
+{
+    $secret = $this->container->getParameter('recaptcha_secret');
+    $url = "https://www.google.com/recaptcha/api/siteverify";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+        "secret"=>$secret,"response"=>$recaptcha));
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $data = json_decode($response);     
+        
+        return $data->success;   
+        //return true;
+}
 }

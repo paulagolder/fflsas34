@@ -203,12 +203,71 @@ class UserController extends Controller
         $baseurl = $this->container->getParameter('base-url');
         $code = $fuser->getRegistrationcode();
         $reglink = "{$baseurl}remoteregister/{$fuser->getUserid()}/{$code}";
-        $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code));
+        $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
         $subject =  $this->trans->trans('reregister');
         $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
         $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
         
         return $this->redirect("/admin/user/".$uid);
+    }
+    
+     public function bulkUserRereg() 
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+   
+        $request = $this->requestStack->getCurrentRequest();
+        $session = $request->getSession();
+        $destinataires = $session->get('selectedusers');
+        //dump($destinataires);
+          $userlist = explode(",",$destinataires);
+          $numbertosend= count($userlist) - 1;
+        return $this->render('user/bulkrereg.html.twig', array(
+            'lang'=>$this->lang,
+            'destinataires' =>$destinataires,
+            'numbertosend'=>$numbertosend,
+            'returnlink'=>'/admin/user/search',
+            'actionlink'=>'/admin/user/bulkrereg/send/',
+            ));
+    }
+    
+    
+       public function bulkUserReregSend()
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        $session = $request->getSession();
+        $destinataires = $session->get('selectedusers');
+        $userlist = explode(",",$destinataires);
+      
+        foreach($userlist as $uid)
+        {
+            $user =  $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+            if($user)
+            {
+                $this-> SendUserRereg($user->getUserid());
+            }
+        }
+      
+        
+        return $this->redirect("/admin/user/search");
+    }
+    
+     public function SendUserRereg($uid)
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $fuser->setRegistrationcode( mt_rand(100000, 999999));
+        $fuser->setLastlogin( new \DateTime());
+        $fuser->setRolestr("ROLE_REREG");
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($fuser);
+        $entityManager->flush();
+        $baseurl = $this->container->getParameter('base-url');
+        $code = $fuser->getRegistrationcode();
+        $reglink = "{$baseurl}remoteregister/{$fuser->getUserid()}/{$code}";
+        $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
+        $subject =  $this->trans->trans('reregister');
+        $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+        $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
     }
     
     public function userDereg($uid)
@@ -231,6 +290,8 @@ class UserController extends Controller
         
         return $this->redirect("/".$fuser->getLang()."/user/".$uid);
     }
+    
+    
     
     
     public function showuser($uid)
@@ -318,6 +379,7 @@ class UserController extends Controller
     
     public function UserSearch(Request $request)
     {
+       $selectedusers="";
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         
@@ -344,8 +406,14 @@ class UserController extends Controller
             foreach($users as $user)
             {
                 $user->link = "/admin/user/".$user->getUserid();
+                $selectedusers .= $user->getUserid().", ";
             }
         }
+        
+       // dump($selectedusers);
+         $request = $this->requestStack->getCurrentRequest();
+          $session = $request->getSession();
+         $session->set('selectedusers', $selectedusers);
         return $this->render('user/usersearch.html.twig', 
         [ 
         'message' => $message,

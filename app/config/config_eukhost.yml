@@ -45,6 +45,10 @@ twig:
         maxlistadmin: '%maxlistadmin%'
         pdffunction: '%pdf-function%'
         versionname: '%version-name%'
+        maxrecentchanges: '%maxrecentchanges%'
+        defaultcontent: '%defaultcontent%'
+        adminstratorsemails: '%administratorsemails%'
+        baseurl: '%base-url%'
 
 # Doctrine Configuration
 doctrine:
@@ -75,20 +79,18 @@ swiftmailer:
     password:   '%email-password%'
     spool: { type: memory }
 
-
-fos_ck_editor:
-    default_config: my_config
-    configs:
-        my_config:
-            toolbar: [ ["Source", "Image", "Styles", "Cleanup" ] ]
-            uiColor:                "#dddddd"
-            stylesSet: "default"
-        styles:
-            default:
-              - { name: "Blue Title", element: "h2", styles: { color: "Blue" }}
-              - { name: "CSS Style", element: "span", attributes: { class: "my_style" }}
-              - { name: "Widget Style", type: widget, widget: "my_widget", attributes: { class: "my_widget_style" }}
+#
+#fos_ck_editor:
+#    default_config: my_config
+#    configs:
+#        my_config:
+#            toolbar: [ ["Source", "Image", "Styles", "Cleanup" ] ]
+#            uiColor:                "#dddddd"
+#            stylesSet: "default"
+#        styles:
+#            default:
+#              - { name: "Blue Title", element: "h2", styles: { color: "Blue" }}
+#              - { name: "CSS Style", element: "span", attributes: { class: "my_style" }}
+#              - { name: "Widget Style", type: widget, widget: "my_widget", attributes: { class: "my_widget_style" }}
             # ...
             
-#   { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-#	{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },

@@ -71,7 +71,7 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
       public function findSearch($sfield)
     {
        $qb = $this->createQueryBuilder("u");
-       $qb->andWhere('u.username LIKE :pid  or u.email LIKE :pid ');
+       $qb->andWhere('u.username LIKE :pid  or u.email LIKE :pid or u.rolestr LIKE :pid ');
        $qb->setParameter('pid', $sfield);
        $qb->orderBy("u.username", "ASC");
        $users =  $qb->getQuery()->getResult();

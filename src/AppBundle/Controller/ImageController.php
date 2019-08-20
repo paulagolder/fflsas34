@@ -127,9 +127,9 @@ class ImageController extends Controller
             'image'=>null,
             ]);
         }
-        dump($image->getPath());
+        //dump($image->getPath());
          $this->mylib->setFullpath($image);
-          dump($image->getFullpath());
+         // dump($image->getFullpath());
        # $mess = $image->getFullpath();
        $mess="";
         if(@getimagesize($image->getFullpath()))

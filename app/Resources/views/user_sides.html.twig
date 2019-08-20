@@ -10,7 +10,9 @@
    {% block left %}
        <div id="left" >
       {% include 'user_menu.html.twig' %}
+        {% if is_granted('ROLE_ADMIN') %}
       {% include 'admin_menu.html.twig' %}
+         {% endif %}
       {{ render(controller('AppBundle\\Controller\\PersonController::showsidebar')) }} 
         </div>
     {% endblock %}

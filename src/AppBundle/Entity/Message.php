@@ -40,6 +40,11 @@ class Message
      */
    private $toemail;
     
+         /**
+     * @ORM\Column(type="string", length=100)
+     */
+   private $bcc;
+    
       /**
      * @ORM\Column(type="string", length=25)
      */
@@ -112,7 +117,16 @@ class Message
        return $this->toemail;
    }
    
+     public function getBcc()
+   {
+       return $this->bcc;
+   }
    
+        public function setBcc($to)
+   {
+       $this->bcc = $to;
+       return $this;
+   }
 
 
    public function setFromemail($email)

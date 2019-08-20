@@ -397,7 +397,7 @@ class PersonController extends Controller
         {
             $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
             $subheading =  'trouver.tout';
-            dump($people);
+            //dump($people);
         }
         else
         {

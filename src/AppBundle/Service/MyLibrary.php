@@ -172,7 +172,8 @@ class MyLibrary
     }
     
      public function setFullpath($image)
-    { 
+    { if($image)
+    {
           if ($image->isTemp())
           {
              $image->setFullpath ( $this->newimagepath.$image->getPath());   
@@ -181,7 +182,7 @@ class MyLibrary
           {
              $image->setFullpath ($this->externalimagepath.$image->getPath());   
           }
-        
+     }   
     }
     
     

@@ -35,8 +35,8 @@ div#message div.messagelist div.message.selectable
 div#message div.messagelist  div.name
 {
     color:yellow;
-    max-width: 5em;
-    width: 5em;
+    max-width: 10em;
+    width: 10em;
 }
 
 div#message div.messagelist  div.date
