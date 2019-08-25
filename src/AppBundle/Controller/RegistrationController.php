@@ -134,7 +134,7 @@ class RegistrationController extends Controller
             $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage, $ouser->getUserid(),$ouser->getLang());
 
             $message2 =    $this->trans->trans('you.have.sucessfully.requested.change.password');
-            $message2 .=   "<br>".$this->trans->trans('to.complete.reply.to email');
+            $message2 .=   "<br>".$this->trans->trans('to.complete.reply.to.email');
             return $this->render('registration/done.html.twig',
             array(
                 'username' => $ouser->getUsername() ,
@@ -229,7 +229,8 @@ class RegistrationController extends Controller
         {
         $usercode = $user->getRegistrationCode();
         $temp = $user->hasRole("ROLE_TEMP");
-        if($code == $usercode && $temp)
+       // $rtereg = $user->hasRole("ROLE_REREG");
+        if($code == $usercode && $temp )
         {
             $user->setLastlogin( new \DateTime());
             $user->setRolestr("ROLE_USER;");
@@ -238,7 +239,7 @@ class RegistrationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush(); 
-            $body =  $this->renderView('message/template/'.$user->getLang().'/registrationcompletion_notice.html.twig');
+            $body =  $this->renderView('message/template/'.$user->getLang().'/registrationcompletion.html.twig');
             $subject =  $this->trans->trans('registration.complete',[],null,$user->getLang());
             $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
             $smessage = $this->get('message_service')->sendMessageToUser($umessage,$user->getUserid(), $user->getLang());

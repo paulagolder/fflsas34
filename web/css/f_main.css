@@ -181,6 +181,32 @@ div#middle div.editbutton a
   width:auto;
 }
 
+
+div#middle div.text
+{
+    margin-left: 5em;
+    font-size: 1.0em;
+    margin-top: 20px;
+}
+
+div#middle div.text p
+{
+    margin-top:5px;
+    margin-bottom : 5px;
+}
+
+
+
+div#middle ul
+{
+    padding-left: 2em;
+}
+
+div#middle div.imagelabel
+{
+    font-size : 1em;
+}
+
 div#middle div.heading div.label
 {
   color:#FF0;
@@ -213,6 +239,7 @@ div#middle div.refs div.longlinklist div.label
 {
   color:#FF0;
   margin-top:20px;
+
 }
 
 div#middle div.refs div.longlinklist div.list
@@ -233,6 +260,7 @@ div#middle div.refs div.longlinklist div.list div
 div#middle div.refs,div#middle div.refs div.linklist,div#middle div.refs div.longlinklist
 {
   margin-top:20px;
+  margin-bottom:20px;
 }
 
 div#middle div.returnbutton a
@@ -413,8 +441,8 @@ div#right div.subheading
 div.hidebar
 {
   background-color:#506ab6;
-  margin-bottom:20px;
-  margin-top:20px;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
   width:100%;
 }
 
@@ -431,16 +459,15 @@ h1
   margin-left:40px;
 }
 
-@media max-width 500px {
-  div#left
-  {
-    padding:2px;
-    width:97%;
-  }
+@media  only screen and (max-width: 538px) 
+{
+ 
   
+
+
   div#middle div.heading div.label
   {
-    font-size:1.2em;
+    font-size:1.0em;
   }
   
   div#page div.mypageinner
@@ -456,7 +483,9 @@ h1
 }
 
 @media max-width 750px {
-  div#left
+    
+    
+  div#page div.mypage div.mypageinner div#left
   {
     padding:2px;
     width:100%;
@@ -464,13 +493,18 @@ h1
   
   div#middle div.heading div.label
   {
-    font-size:1.2em;
+    font-size:1.0em;
   }
   
   div#page div.mypageinner
   {
     display:block;
     flex:1;
+  }
+  
+    div#left
+  {
+    display:none;
   }
   
   div#right,div#peoplesidebar

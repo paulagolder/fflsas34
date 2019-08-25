@@ -170,7 +170,6 @@ user.show: 'Shoe user'
 edit.user: 'Edit user'
 profil.person: 'User profile'
 message.list: 'List of messages'
-send.message: 'Send message'
 view.message: 'Read message'
 see.message: 'Read messagee'
 message.sentby: 'Message sent by'
@@ -203,8 +202,8 @@ Repeat.Password: 'Repeat Password'
 when.first.signing: 'When first signing in'
 registration.success: 'Registration is successfull'
 you.have.sucessfully.registered: 'You have registered sucessfully. '
-you.have.sucessfully.requested.change.password: You have requested to change your password.
-you.must.reregister: You must reregister
+you.have.sucessfully.requested.change.password: 'You have requested to change your password.'
+you.must.reregister: 'You must reregister'
 you.have.sucessfully.completed: 'You have successfully completed the registration process. '
 to.complete.reply.to.email: 'To complete the registration process reply to the email you receive'
 to.complete.enter: 'To complete registration enter the following code'
@@ -261,10 +260,10 @@ cherche.des.hommes: 'Search the men'
 Register!: Register!
 edit.book: Edit
 see.location: See
-browse.locations: Browse locations
+browse.locations: 'Browse locations'
 special.function: 'Special Functions'
-enter.new.password: Enter new password
-read.message: Read message
+enter.new.password: 'Enter new password'
+read.message: 'Read message'
 FR: FR
 EN: EN
 linked.from: 'Linked from'
@@ -272,15 +271,32 @@ if.password.forgotten: 'Password Forgotten'
 mot.de.pass.oublier: 'mot-de-pass oublier'
 a.link.to: 'Link To'
 tags: Tags
-unsucessful.rereg: Re-registration unsucessful
+unsucessful.rereg: 'Re-registration unsucessful'
 try.again: re-try
-rereg.user: re-register user
-reset.password: reset password
-to.complete.reply.to email: To complete the process reply to the email you will receive.
-user.not.recognised: User not recognised
-request.new.password: Request a new password
-sucessfully.registered: Sucessfully registered
-you.have.sent.a.message.to.FFLSAS.org:  	You have sent a message to FFLSAS.og
-a.copy.has.been sent to.your.email.address:  A copy has been sent to your email address.
-user.locale: Prefered language
-changepass.success: Password change, succesfull.
+rereg.user: 're-register user'
+reset.password: 'reset password'
+to.complete.reply.to.email: 'To complete the process reply to the email you will receive.'
+user.not.recognised: 'User not recognised'
+request.new.password: 'Request a new password'
+sucessfully.registered: 'Sucessfully registered'
+you.have.sent.a.message.to.FFLSAS.org: 'You have sent a message to FFLSAS.og'
+a.copy.has.been.sent to.your.email.address: 'A copy has been sent to your email address.'
+user.locale: 'Prefered language'
+changepass.success: 'Password change, succesfull.'
+try.again: 'Try again'
+admin.has.sent.a.message.to: "Admin has sent a message to"
+send.bulk.message: 'Send a message to multiple users'
+recepients: recepients
+send: send
+message.bcc: Blind Copies
+many.users:  Many users
+Envoyer: Send
+a.copy.has.been.sent.to.your.email.address:  "A copy has been sent to your email address"
+send.message: 'Send message'
+bulk.message: 'Bulk message'
+to.send.bulk.email.use.bookmarks: 'To send bulk email use a bookmark'
+rereg.group:  "Reregister a group"
+delete.messages: "Delete messages"
+from.admin:  "From ADMIN"
+forced.registration: "Force re-registration"
+friend: Friend

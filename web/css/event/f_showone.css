@@ -80,7 +80,7 @@ div#event div.participant
 {
   width: 200px;  
   margin: auto;  
-  padding-top : 10px;
+  padding-top : 0.1em;
 }
 
 
@@ -118,18 +118,18 @@ div#event div.image div.imagelabel
 
 div#event div#pdiv
 {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
  div#event div#cdiv
  {
-       margin-bottom: 2em;
+       margin-bottom: 1.5em;
  }
 
 div#event  div.children
 {
     margin-left:2em;
-    margin-top:5px;
+    xmargin-top:5px;
 }
 
 div#event div.children div span.dates
@@ -157,26 +157,14 @@ xdiv#event div.children div a
 {
 
   
-div#person  div.eventtree
-{
-    font-size: 0.8em;
-    margin-left: 1em;
-    color: blue;
-    margin-top: 1em;
-    margin-bottom: 2em;
-}
 
-div#person div.eventtree ul
-{
-    margin-top: 0.1em;
-}
 
-div#person div.imagelabel
+div#event div.imagelabel
 {
     font-size : 0.8em;
 }
 
-div#person div.text
+div#event div.text
 {
    margin-left: 1em;
     font-size: 0.8em;
@@ -184,10 +172,25 @@ div#person div.text
 }
 
 
-div#person div.text p
+div#event div.text p
 {
     margin-top: 0.1em;
     margin-bottom : 0.1em;
 }
+
+
+
+div#event  div.children
+{
+    margin-left:1em;
+    xmargin-top:5px;
+}
+
+div#event div.children div 
+{
+    margin-left: 0em;
+    padding-top: 0.1em;
+
+
 
 }

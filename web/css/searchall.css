@@ -41,12 +41,23 @@ div.search div.searchlist div div.search a.editbutton
 
  div.search div.searchlist div.row:nth-child(2n+2)
 {
-  background:rgba(0,0,80,0.1);
+  background:rgba(0,0,80,0.05);
 }
 
 
 div.search form div.heading div.label
 {
-  font-size:1.2em;
+  font-size:1.0em;
+  color: yellow;
 }
 
+div.search form
+{
+    margin-top:1em;
+}
+
+div.search form div.row div.label
+{
+    font-size:1.0em; 
+    color: yellow;
+}

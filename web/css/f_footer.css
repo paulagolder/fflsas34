@@ -30,11 +30,20 @@ div#footer  div.right
     position: absolute;
     top: 0.5em;
     right: 1em;
-   xtext-align: right;
+ 
     vertical-align: middle;
     color: white;
-   x width :30%
+ 
 }
+ div#footer  div.smallright 
+ {
+    position: absolute;
+    xtop: 0.5em;
+    right: 1em;
+    font-size: 10pt;
+    color: white;
+    display: none;
+ }
 
 div#footer  div.center
 {
@@ -59,13 +68,22 @@ div#footer  div.left img
 @media (max-width: 500px) 
 {
     
+ div#footer  div.smallright a img
+ {
+    
+    width: 32px;
+ }
+ 
+  div#footer  div.smallright 
+ {
+    display: block;
+    width: 32px;
+ }
+ 
 div#footer  div.right
 {
-    position: absolute;
-    top: 0.5em;
-    right: 1em;
-    color: white;
-    font-size: 0.8em;
+    display : none;
+
 }
 
 div#footer  div.center
@@ -75,7 +93,10 @@ div#footer  div.center
 
 div#footer  div.left img
 {
-   width: 100px;
+   width: 60px;
+   margin-top: 0.5em;
+
+}
 }
  
     

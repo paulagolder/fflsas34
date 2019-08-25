@@ -4,7 +4,7 @@ security:
         ROLE_ADMIN:      ROLE_USER
         ROLE_BOSS:       ROLE_ADMIN
         ROLE_PWCH:       ROLE_USER
-        ROLE_REREG:      ROLE_USER
+       # ROLE_REREG:      ROLE_USER
         ROLE_TEMP:       ROLE_USER
 
     encoders:
@@ -58,7 +58,6 @@ security:
          - { path: ^/reregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/deregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/remotederegister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
-   
          - { path: ^/remotechangepassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/accueil, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/symfonyimages, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
@@ -75,5 +74,6 @@ security:
          - { path: ^/(fr|en|FR|EN), roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin/bookmark/edit, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/admin/bookmark/delete, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
+         - { path: ^/, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/, roles: ROLE_ADMIN  }
         

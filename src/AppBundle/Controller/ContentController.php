@@ -193,7 +193,7 @@ class ContentController extends Controller
         $content ->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
         $content ->setUpdateDt($now);
-        //$content->setText($this->cleanText($content->getText()));
+        $content->setText($this->cleanText($content->getText()));
         
         
         return $this->render('content/edit_quill.html.twig', array(
@@ -589,11 +589,13 @@ class ContentController extends Controller
         $text= preg_replace('/(<p.+?)class=".+?"(>.+?)/i', "$1$2", $text);
         $text= preg_replace('/(<span.+?)style=".+?"(>.+?)/i', "$1$2", $text);
         $text= strip_tags($text,"<p><img><a><br><h1><b><i><h2><strong><em><u><ol><li><ul>");
-        $text= str_ireplace("\"images/stories/fflsas/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
-        $text= str_ireplace("\"images/stories/fflsas/newimages/","\"http://fflsas.org/images/stories/fflsas/newimages/", $text);
-        $text= str_ireplace("\"http://www.lerot.net/safedocs/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
-        $text= str_ireplace("\"http://www.lerot.net/fflsasdocs/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
-        $text= str_ireplace("\"http://lerot.org/joomla/images/stories/fflsas/images/","\"http://fflsas.org/images/stories/fflsas/images/", $text);
+        $text= str_ireplace("http://fflsas.org/images/stories/fflsas/", "/oldimages/",$text);
+        $text= str_ireplace("\"images/stories/fflsas/images/","\"/oldimages/images/", $text);
+        $text= str_ireplace("\"images/stories/fflsas/newimages/","\"/newimages/", $text);
+        $text= str_ireplace("\"http://www.lerot.net/safedocs/images/","\"/oldimages/images/", $text);
+        $text= str_ireplace("\"http://www.lerot.net/fflsasdocs/images/","\"/oldimages/images/", $text);
+        $text= str_ireplace("\"http://lerot.org/joomla/images/stories/fflsas/images/","\"/oldimages/images/", $text);
+         $text= str_ireplace("\"http://lerot.org/joomla/images/stories/fflsas/newimages/","\"/oldimages/images/", $text);
         $text= str_ireplace("<p>&nbsp;</p>","<p></p>", $text);
         $text= str_ireplace("<p><br></p>","<p></p>", $text);
         $text= str_ireplace("<p></p><p></p>","<p></p>", $text);

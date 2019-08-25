@@ -20,10 +20,17 @@ div#content div.maintext
 div#content div.maintext p strong
 {
     font-size: 1.5em;
-font-weight: bold;
+    font-weight: bold;
 }
 
-
+div#content div.maintext blockquote
+{
+    font-size: 1em;
+    xfont-weight: bold;
+    margin-top: 0em;
+    margin-bottom: 0em;
+   font-style: italic;
+}
 
 div#content div.contentlist div div.content a
  {

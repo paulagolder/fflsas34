@@ -18,7 +18,7 @@ class MyLibrary
  private  $newimagepath="";
   private  $externalimagepath="";
   
-    public function __construct(string $newimagepath, $externalimagepath)
+    public function __construct(string $newimagepath,string $externalimagepath)
     {
         $this->newimagepath = $newimagepath;
         $this->externalimagepath = $externalimagepath;

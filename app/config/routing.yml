@@ -4,14 +4,24 @@
 imageroute : 
    path: /web/newimages
 
-
+blog_index:
+    path: /
+    defaults: {_controller:AppBundle\Controller\AccueilController::ShowFrench}
+    
+    
 index:
-   path: /
-   controller: AppBundle\Controller\AccueilController::ShowFrench
+    path:      /{_locale}
+    defaults:  { _controller: AppBundle\Controller\AccueilController::ShowFrench, _locale: fr }
+    requirements:
+        _locale:  en|fr
    
-index_en:
-   path: /en/accueil
+index_jen:
+   path: /en/
    controller: AppBundle\Controller\AccueilController::ShowEnglish
+   
+index_jfr:
+   path: /fr/
+   controller: AppBundle\Controller\AccueilController::ShowFrench
    
 index_fr:
    path: /fr/accueil

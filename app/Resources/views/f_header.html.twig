@@ -46,8 +46,8 @@
                 {{ 'bienvenue.visiteur' | trans }}
                 {% else %}
                 {{ 'bienvenue' | trans }} {{ app.user.username }}
-                ({% if is_granted('ROLE_ADMIN') %} Administrator{% endif %}
-                {% if is_granted('ROLE_USER') %} User{% endif %} )
+                ({% if is_granted('ROLE_ADMIN') %} Administrator
+                {% elseif is_granted('ROLE_USER') %} {{ 'friend' | trans }} {% endif %} )
                 {% endif %}
             </div>
             <div class="status">

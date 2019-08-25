@@ -86,9 +86,9 @@ liens.a: 'Liens a'
 liens: liens
 location.a.editer: 'Editer Location'
 location.name: Nom
-log.in: 'S''Identifier'
+log.in: "S'Identifier"
 log.out: Deconecter
-login.message: 'Pour acceder tout notre site s''identifiez'
+login.message: "Pour acceder tout notre site s'identifiez"
 mail.us: 'Nous envoyer une message'
 message: Message
 name: nom
@@ -106,7 +106,7 @@ password: 'Mot de pass'
 person.links: 'Liens aux Hommes'
 people: Hommes
 person.a.editer: Editer
-person: 'L''homme'
+person: "L'homme"
 ref.edit: 'Editez les liens'
 rejoint: rejoint
 retour: Retour
@@ -127,11 +127,11 @@ tué: tué
 under.the.name.of: nommé
 username: 'Nom de utilisateur'
 for: pour
-voir.user: 'Profil de l''utilisateur'
+voir.user: "Profil de l'utilisateur"
 delete.user: supprimer
 edit.user.detail: Modifier
 user.email: 'Adresse e-mail'
-user.roles: 'rôles d''utilisateur'
+user.roles: "rôles d'utilisateur"
 user.lastlogin: 'dernier accès'
 contact.list: 'liste de messages'
 view.contact: voir
@@ -147,10 +147,10 @@ new.incident: 'nouvel incident'
 a.link.from: 'lien de'
 mail.date.sent: 'envoyer le'
 mail.sentby: 'envoyer par'
-complete.reg: 'compléter l''inscription'
+complete.reg: "compléter l'inscription"
 sucessful.completion: 'inscription réussie'
-you.have.sucessfully.requested.change.password: Vous avez demandé à changer votre mot de passe.
-you.must.reregister: vous devez vous réinscrire
+you.have.sucessfully.requested.change.password: 'Vous avez demandé à changer votre mot de passe.'
+you.must.reregister: 'vous devez vous réinscrire'
 welcome.to.our.site: 'Bienvenue sur notre site'
 edit.contents: modifier
 bookmark.content: marquer
@@ -174,7 +174,6 @@ user.show: 'voir utilisateur'
 edit.user: 'editer utilisateur'
 profil.person: 'profil de l''utilisateur'
 message.list: 'list des messages'
-send.message: 'envoyer message'
 view.message: voir
 message.sentby: 'messaege de'
 new.user: 'nouvel utilisateur'
@@ -272,16 +271,32 @@ linked.from: 'Lien de'
 if.password.forgotten: 'mot de passe oublié'
 a.link.to: 'Lien a'
 tags: Étiquettes
-unsucessful.rereg: re-enregistrement non réussi.
+unsucessful.rereg: 're-enregistrement non réussi.'
 try.again: réessayer
-mot.de.pass.oublier: mot de passe oublié
-rereg.user: ré-enregistrer un utilisateur
-reset.password: réinitialiser le mot de passe
-to.complete.reply.to email: Pour terminer le processus, répondez au courrier électronique que vous recevrez.
-user.not.recognised: Utilisateur non reconnu
-request.new.password: Demander un nouveau mot de passe
-sucessfully.registered: Enregistrement réussi.
-you.have.sent.a.message.to.FFLSAS.org: Vous avez envoyé un message à FFLSAS.org
-a.copy.has.been.sent.to.your.email.address: Une copie a été envoyée à votre adresse email.
-user.locale: Langue prefere
-changepass.success: Changement de mot de passe reusite.
+mot.de.pass.oublier: 'mot de passe oublié'
+rereg.user: 'ré-enregistrer un utilisateur'
+reset.password: 'réinitialiser le mot de passe'
+to.complete.reply.to.email: 'Pour terminer le processus, répondez au courrier électronique que vous recevrez.'
+user.not.recognised: 'Utilisateur non reconnu'
+request.new.password: 'Demander un nouveau mot de passe'
+sucessfully.registered: 'Enregistrement réussi.'
+you.have.sent.a.message.to.FFLSAS.org: 'Vous avez envoyé un message à FFLSAS.org'
+a.copy.has.been.sent.to.your.email.address: 'Une copie a été envoyée à votre adresse email.'
+user.locale: 'Langue prefere'
+changepass.success: 'Changement de mot de passe reusite.'
+try.again: réessayer
+admin.has.sent.a.message.to: "Admin a envoyé un message à"
+send.bulk.message: 'Envoyer un message à plusieurs utilisateurs'
+recepients: destinataires
+send: envoyer
+message.bcc: "des copies cachées"
+many.users: "plusieurs utilisateurs"
+Envoyer: Envoyer
+send.message: 'Envoyer un message'
+bulk.message: "message à plusieurs utilisateurs"
+to.send.bulk.email.use.bookmarks: 'Pour envoyer des e-mails en masse, utilisez un signet.'
+rereg.group: "Re-enregistrer un groupe"
+delete.messages: "Supprimer les messages"
+from.admin: "De ADMIN"
+forced.registration: "Demander une réinscription"
+friend: Ami

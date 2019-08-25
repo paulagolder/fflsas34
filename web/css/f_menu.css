@@ -48,6 +48,14 @@ div.mainmenu  div.menuitem   a:hover
  
 @media (max-width: 750px) 
 {
+    div#left {
+
+    background: rgba(0,0,0,0.05);
+    order: 1;
+    padding: 10px;
+    width: 100%;
+
+}
     
    div.mainmenu 
 {

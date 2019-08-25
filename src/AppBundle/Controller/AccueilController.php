@@ -18,6 +18,7 @@ use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
 
+
 use AppBundle\Entity\person;
 use AppBundle\Entity\event;
 use AppBundle\Service\MyLibrary;
@@ -52,6 +53,8 @@ class AccueilController  extends Controller
         $this->requestStack->getCurrentRequest()->setLocale("en");
         return $this->showall();
     }
+    
+  
     
     public function showFrench()
     {

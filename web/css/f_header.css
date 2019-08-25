@@ -4,7 +4,7 @@ div#header.header
 {
     clear : both ;
     position:static;
-    font-size:1.5em;
+    font-size:1.2em;
 }
 
 div#header.header div.headerbody
@@ -255,7 +255,7 @@ div#header div.messagebar  div.messbutton a
 }
 
 
-@media only screen and (max-width: 480px)
+@media only screen and (max-width: 538px)
 {
  
 div#header.header div.headerbody 
@@ -267,9 +267,9 @@ div#header.header div.headerbody div.texts
 {
    
     font-size: 0.5em;
-    xbackground-color: green;
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
 }
 
 #header  div.logo1
@@ -280,7 +280,7 @@ div#header.header div.headerbody div.texts
 
 #header  div.logo1 img
 {
-    width: 3em;
+    width: 2em;
 }
 
 #header  div.logo2
@@ -290,7 +290,7 @@ div#header.header div.headerbody div.texts
 
 #header  div.logo2 img
 {
-    width : 4em;
+    width : 3em;
 }
 
 

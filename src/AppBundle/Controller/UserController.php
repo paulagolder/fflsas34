@@ -202,7 +202,7 @@ class UserController extends Controller
         $entityManager->flush();
         $baseurl = $this->container->getParameter('base-url');
         $code = $fuser->getRegistrationcode();
-        $reglink = "{$baseurl}remoteregister/{$fuser->getUserid()}/{$code}";
+        $reglink = "{$baseurl}reregister/{$fuser->getUserid()}/{$code}";
         $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
         $subject =  $this->trans->trans('reregister');
         $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
@@ -263,7 +263,7 @@ class UserController extends Controller
         $entityManager->flush();
         $baseurl = $this->container->getParameter('base-url');
         $code = $fuser->getRegistrationcode();
-        $reglink = "{$baseurl}remoteregister/{$fuser->getUserid()}/{$code}";
+        $reglink = "{$baseurl}reregister/{$fuser->getUserid()}/{$code}";
         $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
         $subject =  $this->trans->trans('reregister');
         $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
@@ -297,7 +297,7 @@ class UserController extends Controller
     public function showuser($uid)
     {
         $user = $this->getUser();
-        if(!$user) return $this->redirect("/".$this->lang."/login");
+        if(!$user) return $this->redirect("/".$this->lang."/loginx");
         if($uid!= $user->getUserId())  return $this->redirect("/".$this->lang."/person/all");
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);

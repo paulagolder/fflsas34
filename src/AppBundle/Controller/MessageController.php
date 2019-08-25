@@ -313,7 +313,7 @@ function sendMessageToUserCopytoAdministrators($message,$userid,$lang)
         'message'=>$message,'footer'=>$footer,),'text/html');       
         $umessage = $this->makeSwiftMessage($message, $userbody);
         $this->get('mailer')->send($umessage);
-        $adminfooter =  $this->renderView('message/template/'.$lang.'/adminemailfooter.html.twig','text/html');
+        $adminfooter =  $this->renderView('message/template/'.$lang.'/adminemailfooter.html.twig',array(),'text/html');
         $adminbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
             'message'=>$message, 'footer'=>$adminfooter,),'text/html');
             $amessage = $this->makeSwiftMessageCopyToAdministrators($message,$adminbody);
@@ -361,11 +361,11 @@ function sendConfidentialMessageToUser($message,$userid,$lang)
     $sn -> flush();
     $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
         'userid'=>$userid,),'text/html');
-        $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
+    $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
             'message'=>$message,'footer'=>$userfooter,),'text/html');
             
-            $smessage = $this->makeSwiftMessage($message, $formattedbody);
-            $this->get('mailer')->send($smessage);
+    $smessage = $this->makeSwiftMessage($message, $formattedbody);
+    $this->get('mailer')->send($smessage);
 } 
 
 
