@@ -1,4 +1,4 @@
-{# views/message/contact.html.twig #}
+{# views/text/editdetail.html.twig #}
 
 {% extends 'admin.html.twig' %}
 
@@ -25,9 +25,9 @@
         <div class="returnbutton"> <a href = {{returnlink}} >{{ 'retour' | trans }} </a> </div></div>
      </div>
      <div id="textedit" >
-    
+      {% for lang in ['FR','EN'] %}
          {% for attribute in attributes %}
-         {% for lang in ['FR','EN'] %}
+       
               {% if texts[attribute][lang] is defined   %} 
                <div   class="heading" >
                <div class="label" >{{attribute}} : {{lang}}</div>
@@ -46,6 +46,7 @@
                </div>
              {% endif %} 
           {% endfor %}
+          <div class="hline"> </div>
           {% endfor %}
     </div>
   </div>  
