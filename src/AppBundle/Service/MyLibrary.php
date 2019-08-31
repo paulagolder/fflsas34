@@ -70,7 +70,7 @@ class MyLibrary
     
 
 
-    public function getMess()
+    public function xgetMess()
     {
     
      return "happy messagfe";
@@ -112,7 +112,7 @@ class MyLibrary
        return $toLocale[$lang];
     }
     
-    public function getLang()
+    public function xgetLang()
     {
          $request = new Request();
          $locale =    $request->getLocale();

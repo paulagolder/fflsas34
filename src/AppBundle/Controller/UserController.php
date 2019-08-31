@@ -206,6 +206,8 @@ class UserController extends Controller
         $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
         $subject =  $this->trans->trans('reregister');
         $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+         //$copyto = $this->container->getParameter('testemail');
+        // $umessage->setBcc( $copyto);
         $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
         
         return $this->redirect("/admin/user/".$uid);
@@ -247,7 +249,6 @@ class UserController extends Controller
             }
         }
       
-        
         return $this->redirect("/admin/user/search");
     }
     

@@ -50,7 +50,7 @@
          {% for user in users  %}
             <div class="user row" >
              <div><a href="{{user.link}}" >{{user.username}}({{user.email}})</a> </div>
-             <div class="editbutton button1" ><a class="editbutton" href="/admin/user/{{user.userid}}">{{'edit.user' |trans}}</a></div>
+             <div class="editbutton button1" ><a class="editbutton" href="/admin/user/{{user.userid}}">{{'see.user' |trans}}</a></div>
             </div>
          {% endfor %}
       </div>

@@ -268,6 +268,7 @@ class RegistrationController extends Controller
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
+        $lang = $user->getLocale();
         $usercode = $user->getRegistrationCode();
         $temp = $user->hasRole("ROLE_REREG");
         if($code == $usercode && $temp)
@@ -286,7 +287,7 @@ class RegistrationController extends Controller
                 $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
                 $this->get('security.token_storage')->setToken($token);
                 $this->get('session')->set('_security_main', serialize($token));
-                return $this->redirect("/fr/userpassword/".$uid);
+                return $this->redirect("/".$lang."/userpassword/".$uid);
             }
             
         }

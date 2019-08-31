@@ -406,10 +406,8 @@ class ContentController extends Controller
     
     public function addBookmark($sid)
     {
-       // $gfield = $request->query->get('searchfield');
-       // $uri = $request->getUri();
-       // dump($request);
-        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($sid);
+    $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findContentLang($sid,$this->lang);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');
         if($ilist == null)

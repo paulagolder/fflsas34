@@ -1,4 +1,4 @@
-
+/*    message/showall.css */
 
 
   
@@ -10,12 +10,9 @@ div#message
 }
 
 
-
-
-
 div#message div.messagelist
 {
-    padding-top: 20px;
+    padding-bottom: 1em;
     color: blue;
 }
 

@@ -228,11 +228,18 @@ div#middle div.heading div.title
   margin-right:1em;
 }
 
-div#middle div.heading,div#middle div.subheading
+div#middle div.heading
 {
   align-items:center;
   display:flex;
-  margin-top:10px;
+  margin-bottom:1em;
+}
+
+div#middle div.subheading
+{
+  align-items:center;
+  display:flex;
+  margin-bottom:0.5em;
 }
 
 div#middle div.refs div.longlinklist div.label
@@ -358,6 +365,11 @@ div#middle div.datarow div.title
   margin-right:1em;
 }
 
+
+
+div#middle div.list div.selectable:hover {
+    background: rgba(80, 0, 0, 0.1);
+}
 
 div#page
 {

@@ -60,8 +60,8 @@ class MessageController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() &&  $form->isValid())
         {
+          dump($message);
             $this->sendMessageToUserCopytoAdministrators($message,$user->getUserid(), $user->getLang());
-            //  $this->sendMessageToAdmin($message);
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
                 'returnlink' =>"/$this->lang/person/all")
@@ -80,9 +80,9 @@ class MessageController extends Controller
         $message = new Message($this->getParameter('admin-name'), $this->getParameter('admin-email'),"", "" ,"", "");
         $form = $this->createForm(VisitorMessageForm::class, $message);
         $form->handleRequest($request);
-        # check if form is submitted and Recaptcha response is success
         if($form->isSubmitted() &&  $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')))
         {
+           dump($message);
             $this->sendMessageToUserCopytoAdministrators($message,0, $lang);
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
@@ -197,31 +197,21 @@ class MessageController extends Controller
         $destinataires = $session->get('selectedusers');
         $userlist = explode(",",$destinataires);
         $sendtoemailstr= "";
-        //   foreach (array("fr" ,"en") as $lang) 
-        //   {
-        
-        //    $sendtoemail = array(); 
-        // 
         foreach($userlist as $uid)
         {
             $user =  $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
             if($user)
             {
-                $lang =  $user->getLocale();
+                $lang =  $user->getLang();
                 
                 $content =  $this->getDoctrine()->getRepository('AppBundle:Content')->findContentLang($sid,$lang);
                 $subject = $content->gettitle();
                 $body= $content->gettext();
-                
-                
                 $sendtoemailstr .= $user->getemail().", ";
-                
                 $sendtoname = "group.email";
                 $message = new message($user->getUserName(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
                 $datesent =new \DateTime();
                 $message->setDate_sent( $datesent);
-                $message->setToemail(  $this->getParameter('admin-email'));
-               
                 $footer =  $this->renderView('message/template/'.$lang.'/contentemailfooter.html.twig',array('userid'=> $uid ,'subjectid'=>$sid ,),'text/html');
                 $userbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
                     'message'=>$message,'footer'=>$footer,),'text/html');
@@ -256,8 +246,7 @@ function makeSwiftMessage($message,$formattedbody)
     $sender = $this->getParameter('admin-email');
     $sendername = $this->getParameter('admin-name');
     $smessage->setFrom($sender,$sendername);
-    $smessage->setTo($message->gettoEmail());
-    $smessage->setBcc($message->getBcc());
+    $smessage->setTo($message->getToEmail());
     $smessage->setBody($formattedbody);
     $smessage->setContentType("text/html");
     return $smessage;
@@ -269,7 +258,8 @@ function makeSwiftMessageCopyToAdministrators($message,$formattedbody)
     $smessage = (new \Swift_Message('FFLSAS Email'));
     $smessage->setSubject($message->getSubject());
     $sender = $this->getParameter('admin-email');
-    $administrators = $this->getParameter('administratorsemails');
+    $administrators = explode(",",$this->getParameter('administratorsemailsx'));
+    dump($administrators);
     $sendername = $this->getParameter('admin-name');
     $smessage->setFrom($sender,$sendername);
     $smessage->setTo($administrators);

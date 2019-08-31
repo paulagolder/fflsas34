@@ -39,7 +39,7 @@ twig:
         pathToWeb: "%kernel.project_dir%/web"
         locationpath: '%location-path%'
         recaptcha_key: '%recaptcha_key%'
-        recaptcha_secret: '%recaptcha_key%'
+        recaptcha_secret: '%recaptcha_secret%'
         maxlistuser: '%maxlistuser%'
         maxlistadmin: '%maxlistadmin%'
         pdffunction: '%pdf-function%'
@@ -72,7 +72,7 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    #delivery_addresses: ['%testemail%']
+    delivery_addresses: ['%testemail%']
     transport:   '%email-transport%'
     encryption:  '%email-encryption%'
     auth_mode:   '%email-auth_mode%'
