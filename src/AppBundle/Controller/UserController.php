@@ -178,8 +178,8 @@ class UserController extends Controller
             $entityManager->flush();
             $body =  $this->renderView('message/template/'.$fuser->getLang().'/resetpassword_success.html.twig');
             $subject =  $this->trans->trans('changepass.success');
-             $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-             $smessage = $this->get('message_service')->sendMessageToUser($umessage,$fuser->getUserid(),$fuser->getLang());
+            $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+            $smessage = $this->get('message_service')->sendMessageToUser($umessage,$fuser->getUserid(),$fuser->getLang());
             return $this->redirect("/".$this->lang."/user/".$uid);
         }
         
@@ -206,23 +206,23 @@ class UserController extends Controller
         $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
         $subject =  $this->trans->trans('reregister');
         $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-         //$copyto = $this->container->getParameter('testemail');
+        //$copyto = $this->container->getParameter('testemail');
         // $umessage->setBcc( $copyto);
         $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
         
         return $this->redirect("/admin/user/".$uid);
     }
     
-     public function bulkUserRereg() 
+    public function bulkUserRereg() 
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-   
+        
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
         $destinataires = $session->get('selectedusers');
         //dump($destinataires);
-          $userlist = explode(",",$destinataires);
-          $numbertosend= count($userlist) - 1;
+        $userlist = explode(",",$destinataires);
+        $numbertosend= count($userlist) - 1;
         return $this->render('user/bulkrereg.html.twig', array(
             'lang'=>$this->lang,
             'destinataires' =>$destinataires,
@@ -233,13 +233,13 @@ class UserController extends Controller
     }
     
     
-       public function bulkUserReregSend()
+    public function bulkUserReregSend()
     {
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
         $destinataires = $session->get('selectedusers');
         $userlist = explode(",",$destinataires);
-      
+        
         foreach($userlist as $uid)
         {
             $user =  $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
@@ -248,11 +248,11 @@ class UserController extends Controller
                 $this-> SendUserRereg($user->getUserid());
             }
         }
-      
+        
         return $this->redirect("/admin/user/search");
     }
     
-     public function SendUserRereg($uid)
+    public function SendUserRereg($uid)
     {
         $request = $this->requestStack->getCurrentRequest();
         $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
@@ -364,7 +364,7 @@ class UserController extends Controller
         return $this->redirect("/".$this->lang."/user/".$uid);
     }
     
-      public function deleteallmessages($uid)
+    public function deleteallmessages($uid)
     {
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
         $this->getDoctrine()->getRepository('AppBundle:Message')->deleteallusermessages($user->getUsername());
@@ -378,24 +378,38 @@ class UserController extends Controller
         return $this->redirect("/admin/user/".$uid);
     }
     
-    public function UserSearch(Request $request)
+    public function UserSearch($search, Request $request)
     {
-       $selectedusers="";
+        $selectedusers="";
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        
-        $pfield = $request->query->get('searchfield');
-        $gfield = $request->query->get('searchfield');
-        
-        if (!$pfield) 
+  
+        if(isset($_GET['searchfield']))
+        {
+            $pfield = $_GET['searchfield'];
+            $this->mylib->setCookieFilter("user",$pfield);
+        }
+        else
+        {
+            if(strcmp($search, "=") == 0) 
+            {
+                $pfield = $this->mylib->getCookieFilter("user");
+            }
+            else
+            {
+               $pfield="*";
+               $this->mylib->clearCookieFilter("user");
+            }
+        }
+        if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $users = $this->getDoctrine()->getRepository("AppBundle:User")->findAll();
             $subheading =  'trouver.tout';
         }
         else
         {
-            $pfield = "%".$pfield."%";
-            $users = $this->getDoctrine()->getRepository("AppBundle:User")->findSearch($pfield);
+            $sfield = "%".$pfield."%";
+            $users = $this->getDoctrine()->getRepository("AppBundle:User")->findSearch($sfield);
             $subheading =  'trouver.avec';
         }
         if (count($users)<1) 
@@ -411,16 +425,16 @@ class UserController extends Controller
             }
         }
         
-       // dump($selectedusers);
-         $request = $this->requestStack->getCurrentRequest();
-          $session = $request->getSession();
-         $session->set('selectedusers', $selectedusers);
+        // dump($selectedusers);
+        $request = $this->requestStack->getCurrentRequest();
+        $session = $request->getSession();
+        $session->set('selectedusers', $selectedusers);
         return $this->render('user/usersearch.html.twig', 
         [ 
         'message' => $message,
         'heading' =>  'Gestion des Utilisateurs',
         'subheading' =>  $subheading,
-        'searchfield' =>$gfield,
+        'searchfield' =>$pfield,
         'users'=> $users,
         
         ]);

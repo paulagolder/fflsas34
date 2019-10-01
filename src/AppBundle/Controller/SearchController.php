@@ -130,9 +130,15 @@ class SearchController extends Controller
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
+                        $image =   $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($key);
                       $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$pid);
-                      $results['images'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang)['comment'];
-                    
+                    //  $results['images'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang)['comment'];
+                    $label = $this->mylib->getText($text_ar,'title',$this->lang);
+                    if(!$label || $label =="No text found")
+                    {
+                      $label= $image->getName();
+                      }
+                    $results['images'][$pid]['label'] = $label;
                        $results['images'][$pid]['link'] ="/".$this->lang."/image/".$pid;
                  }
               break;

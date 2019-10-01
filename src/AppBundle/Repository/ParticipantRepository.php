@@ -65,7 +65,7 @@ class ParticipantRepository extends EntityRepository
     
     public function findParticipants($eventid)
     {
-      $sql = " select p.personid,pl.surname,pl.forename  from AppBundle:participant p ";
+      $sql = " select p.personid,pl.surname,pl.forename  ,p.rank, p.role from AppBundle:participant p ";
       $sql .= " join AppBundle\Entity\Person pl WITH pl.personid = p.personid " ;
       $sql .= " where p.eventid = ".$eventid;
       $sql .= " order by pl.surname ASC ";
@@ -85,6 +85,8 @@ class ParticipantRepository extends EntityRepository
             $fname .= ", ".$participation['forename'] ;
          }
          $participants[$p]['label'] = $fname;
+         $participants[$p]['rank'] = $participation['rank'];
+         $participants[$p]['role'] = $participation['role'];;
          $p++;
        }
        return $participants;
@@ -97,10 +99,8 @@ class ParticipantRepository extends EntityRepository
       $sql = "select p from AppBundle:participant p ,AppBundle:Event e ";
       $sql .= " where p.personid = ".$personid." and p.eventid=e.eventid ";
       $sql .= " order by e.startdate ";
-      //dump($sql);
       $query = $this->getEntityManager()->createQuery($sql);
       $participations = $query->getResult();
-      # $participations =  $qb->getQuery()->getResult();
        
        foreach( $participations as $participation )
        {

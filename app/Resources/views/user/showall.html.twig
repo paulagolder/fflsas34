@@ -23,7 +23,7 @@
             <div>{{fuser.username}} </div>
              <div class="editbutton button1" > <a class="editbutton" href="/admin/showone/{{fuser.userid}}" >{{"user.show" | trans }} </a> </div>
              <div class="editbutton " > <a class="editbutton" href="{{fuser.link}}" >{{"view.user" | trans }} </a> </div>
-            <div class="deletebutton" > <a class="deletebutton" href="/admin/user/delete/{{fuser.userid}}" >{{"delete.user" | trans }} </a> </div>
+            <div class="deletebutton" > <a class="deletebutton" href="/admin/user/delete/{{fuser.userid}}" Onclick="return ConfirmDelete()"  >{{"delete.user" | trans }} </a> </div>
                  </div>
          {% endfor %}
 

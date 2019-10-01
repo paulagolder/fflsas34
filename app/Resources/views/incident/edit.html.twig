@@ -31,7 +31,7 @@
 <div class="heading">
  <div class="label" > {{'edit.incident' |trans }} </div>
  <div class="title" >{{personname}} : {{eventlabel}} </div>
- <div class="deletebutton button1" > <a class="deletebutton" href="/admin/incident/delete/{{incidentid}}">{{'delete'|trans}}</a></div>
+ <div class="deletebutton button1" > <a class="deletebutton" href="/admin/incident/delete/{{incidentid}}" Onclick="return ConfirmDelete()" >{{'delete'|trans}}</a></div>
  <div class="returnbutton"> <a href ="{{returnlink}}" >{{ 'retour' | trans }} </a> </div>
 </div>
 
@@ -56,8 +56,8 @@
     {{ form_row(form.namerecorded) }}
     {{ form_row(form.rank) }}
     {{ form_row(form.locid) }}
-    {{ form_row(form.comment) }}
     {{ form_row(form.role) }}
+    {{ form_row(form.comment) }}
     {{ form_row(form.sdate) }}
     {{ form_row(form.edate) }}
     {{ form_row(form.sequence) }}

@@ -52,7 +52,7 @@
       <div class="title">{{content.language}}</div> 
       <div class="editbutton button1" ><a class='editbutton' href="/admin/content/edit/{{content.contentid}}">{{'edit.content' |trans}}</a></div>
   
-      <div  ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}">{{'delete.content' |trans}}</a></div>      
+      <div  ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}" Onclick="return ConfirmDelete()" >{{'delete.content' |trans}}</a></div>      
     </div>
      
     <div class='maintext resizable'>

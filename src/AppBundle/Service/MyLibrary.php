@@ -151,15 +151,18 @@ class MyLibrary
        else
            setlocale (LC_TIME, 'fr_FR.utf-8','fr_FR'); 
            
-       if(substr($date,5,4)=="0000")
+       if(substr($date,4,4)=="0000")
            return substr($date,0,4);
        
-      else if(substr($date,7,2)=="00")
+      else if(substr($date,6,2)=="00")
       {
+        //dump("ici_".$date);
+        //dump("ici_".substr($date,6,2));
         $ddate = substr($date,0,6)."01";
         $dfdate = strtotime($ddate);
           return  strftime('%B %G', $dfdate);    
       }
+      //dump($date);
        if (($timestamp = strtotime($date)) === false) 
        {
          return " ".$date;
@@ -185,7 +188,44 @@ class MyLibrary
      }   
     }
     
+    public function setCookieFilter($key,$value)
+    {
+       $cookie = new Cookie
+       (
+            'FFLSAS_'.$key,    // Cookie name.
+            $value,    // Cookie value.
+           time() + ( 24 * 60 * 60)  // Expires 1 day .
+        );
+        $res = new Response();
+        $res->headers->setCookie( $cookie );
+        $res->send();
+    }
     
+    public function getCookieFilter($key)
+    {
+     $request = Request::createFromGlobals();
+     $cookies = $request->cookies;
+     $value="";
+     if ($cookies->has("FFLSAS_".$key))
+     {
+       $value = $_COOKIE["FFLSAS_".$key];
+     }
+      if($value) return $value;
+      else return '' ;
+    }
    
+   
+     public function clearCookieFilter($key)
+    {
+         $res = new Response();
+        $res->headers->clearCookie("FFLSAS_".$key);
+         $res->send();
+    }
+   
+   
+   
+   
+   
+
    
 }

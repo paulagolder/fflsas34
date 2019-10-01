@@ -22,12 +22,14 @@
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
    <input type="text" name="searchfield">
    <input type="submit" value="{{ 'chercher' | trans }}" >
+       <div class="editbutton"><a href="/admin/content/search/*">{{"reset" | trans}}</a></div>
    </div>
    </form>
    {% if contents is defined %}
      <div class="subheading">
      <div class="label">{{subheading | trans}}</div> 
      <div class="title">{{searchfield}}</div> 
+        <div class="title">(n={{contents | length }})</div>
      </div>
      <div class="searchlist" >
          {% for content in contents  %}

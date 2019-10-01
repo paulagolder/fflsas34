@@ -56,7 +56,10 @@ div#person div.text p
 }
 
 
-
+div#person div.eventtree ul li  span
+{
+    color: #09798c;
+}
 
 
 

@@ -120,7 +120,8 @@ class IncidentController extends Controller
     {
         
         $request = $this->requestStack->getCurrentRequest();
-         
+        $user = $this->getUser();
+        $time = new \DateTime();
         if($inid>0)
         {
             $incident = $this->getDoctrine()->getRepository('AppBundle:Incident')->findOne($inid);
@@ -136,7 +137,8 @@ class IncidentController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) 
             {
- 
+                $incident->setContributor($user->getUsername());
+                $incident->setUpdateDt($time);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($incident);
                 $entityManager->flush();

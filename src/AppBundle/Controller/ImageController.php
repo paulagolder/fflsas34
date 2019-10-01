@@ -180,22 +180,37 @@ class ImageController extends Controller
         ]);
     }
     
-    public function AdminSearch(Request $request)
+    public function AdminSearch($search, Request $request)
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $pfield = $request->query->get('searchfield');
-        $gfield = $request->query->get('searchfield');
-        
-        if (!$pfield) 
+          if(isset($_GET['searchfield']))
+        {
+            $pfield = $_GET['searchfield'];
+            $this->mylib->setCookieFilter("image",$pfield);
+        }
+        else
+        {
+            if(strcmp($search, "=") == 0) 
+            {
+                $pfield = $this->mylib->getCookieFilter("image");
+            }
+            else
+            {
+               $pfield="*";
+               $this->mylib->clearCookieFilter("image");
+            }
+        }
+
+         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findAll();
             $subheading =  'trouver.tout';
         }
         else
         {
-            $pfield = "%".$pfield."%";
-            $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findSearch($pfield);
+            $sfield = "%".$pfield."%";
+            $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findSearch($sfield);
             $subheading =  'trouver.avec';
         }
         
@@ -220,7 +235,7 @@ class ImageController extends Controller
         'message' => $message,
         'heading' =>  'Gestion des Images',
         'subheading' =>  $subheading,
-        'searchword' =>$gfield,
+        'searchword' =>$pfield,
         'images'=> $images,
         'ximagelist' => $imagelist,
         ]);
@@ -335,7 +350,7 @@ class ImageController extends Controller
         
         $image= new Image();
         
-        
+        $image->setCopyright("FFLSAS");
         $form = $this->createForm(ImageForm::class, $image);
         
         

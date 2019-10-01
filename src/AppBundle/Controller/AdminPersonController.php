@@ -157,7 +157,12 @@ class AdminPersonController extends Controller
         $person = new Person();
         $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $user = $this->getUser();
+            $time = new \DateTime();
+            $person->setContributor($user->getUsername());
+            $person->setUpdateDt($time);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($person);
             $entityManager->flush();
@@ -334,7 +339,11 @@ class AdminPersonController extends Controller
         $participations =  $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipationsbyEntityPerson($eid, $pid);
         if(count($participations)<1)
         {
+            $user = $this->getUser();
+            $time = new \DateTime();
             $part = new Participant();
+            $part->setContributor($user->getUsername());
+            $part->setUpdateDt($time);
             $part->setEventid((int)$eid);
             $part->setPersonid((int)$pid);
             $part->setNameRecorded(" new name");

@@ -45,7 +45,9 @@ class Image
      */
     private $copyright;
   
-  
+  /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
   private $access;
     
     /**

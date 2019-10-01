@@ -31,9 +31,9 @@
   <form  action="/admin/user/search">
   <div class="heading">
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
-   <input type="text" name="searchfield">
+   <input type="text" name="searchfield" value="{{searchfield}}">
    <input type="submit" value="{{ 'chercher' | trans }}" >
-    
+    <div class="editbutton"><a href="/admin/user/search/*">{{"reset" | trans}}</a></div>
    </div>
    </form>
    {% if users is defined %}
@@ -48,7 +48,7 @@
      <div class="searchlist" >
        <div >
          {% for user in users  %}
-            <div class="user row" >
+             <div class="user search row selectable" >
              <div><a href="{{user.link}}" >{{user.username}}({{user.email}})</a> </div>
              <div class="editbutton button1" ><a class="editbutton" href="/admin/user/{{user.userid}}">{{'see.user' |trans}}</a></div>
             </div>

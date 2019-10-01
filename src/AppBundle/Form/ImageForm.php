@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class ImageForm extends AbstractType
 {
@@ -20,23 +20,13 @@ class ImageForm extends AbstractType
     {
          $builder ->add('name', TextType::class);
         $builder ->add('path', TextType::class);
-     #   $builder ->add('width', TextType::class);
-     #   $builder ->add('height', TextType::class);
-     #   $builder ->add('orientation', TextType::class);
-     #   $builder ->add('date', TextType::class);
         $builder ->add('format', TextType::class);
-       # $builder ->add('doctype', TextType::class);
-        $builder ->add('access', TextType::class);
+        $builder ->add('access', NumberType::class);
          $builder ->add('copyright', TextType::class);
         $builder->add('imagefile', FileType::class, array('label' => 'Image.file(jpg)','required'=>false,  'data_class' => null));
-       # $builder->get('path')->setDisabled(true);
         $builder->get('path')->setRequired(false);
-      #  $builder->get('height')->setRequired(false);
-      #  $builder->get('width')->setRequired(false);
-      #  $builder->get('orientation')->setRequired(false);
-      #  $builder->get('date')->setRequired(false);
+        $builder->get('copyright')->setRequired(false);
         $builder->get('format')->setRequired(false);
-     #   $builder->get('doctype')->setRequired(false);
         $builder->get('access')->setRequired(false);
     }
 

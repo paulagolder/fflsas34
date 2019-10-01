@@ -21,6 +21,7 @@
    <div class="label"> {{ 'entrez.chercher' | trans }}</div>
    <input type="text" name="searchfield">
    <input type="submit" value="{{ 'chercher' | trans }}" >
+   <div class="editbutton"><a href="/admin/location/search/*">{{"reset" | trans}}</a></div>
    </div>
    </form>
 
@@ -28,7 +29,7 @@
      <div class="subheading">
      <div class="label">{{subheading | trans}}</div> 
      <div class="title">{{searchfield}}</div> 
-     <div class="title">{{locations | length }}</div>
+     <div class="title">(n={{locations | length }})</div>
      </div>
      <div class="searchlist" >
          {% for location in locations  %}

@@ -69,7 +69,7 @@
      <div class="editbutton " ><a href="/admin/event/addbookmark/{{event.eventid}}"> {{"bookmark.event" | trans }} </a></div>
      <div class="returnbutton" ><a href="{{returnlink}}"> {{"retour" | trans }} </a></div>
         {% if not event.children %}
-         <div class="deletebutton" ><a  href="/admin/event/delete/{{event.eventid}}"> {{"delete" | trans }} </a></div>
+         <div class="deletebutton" ><a  href="/admin/event/delete/{{event.eventid}}" Onclick="return ConfirmDelete()" > {{"delete" | trans }} </a></div>
         {% endif %}
    </div>
    
@@ -86,7 +86,7 @@
                  <div class= "subheading">
   
       <div ><a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
-         <div class="deletebutton button1" ><a href="/admin/event/deletelocation/{{event.eventid}}"> {{"delete" | trans }} </a></div>
+         <div class="deletebutton button1" ><a href="/admin/event/deletelocation/{{event.eventid}}" Onclick="return ConfirmDelete()" > {{"delete" | trans }} </a></div>
          </div>
           {% endif  %}
       </div>
@@ -133,7 +133,7 @@
          {% for ref in refs %}
          <div class="subsubheading">
                <div class="content" >{{ref.label}}</div>
-               <div class="deletebutton button1" ><a href="/admin/event/removelink/{{event.eventid}}/{{ref.id}}">{{ 'delete' | trans }}</a></div>
+               <div class="deletebutton button1" ><a href="/admin/event/removelink/{{event.eventid}}/{{ref.id}}" Onclick="return ConfirmDelete()" >{{ 'delete' | trans }}</a></div>
         </div>
            {% endfor %}
     </div>

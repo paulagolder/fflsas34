@@ -149,6 +149,11 @@ class EventController extends Controller
         {
             $participants[$key]['label'] = $aparticipant['label'];;
             $participants[$key]['link'] = "/".$this->lang."/person/".$aparticipant['personid'];
+            $participants[$key]['participantinfo'] = $aparticipant['rank'];
+            if($aparticipant['role'])
+            {
+             $participants[$key]['participantinfo'] .=  " (".$aparticipant['role'].")";
+             }
         }
         
         if($event->getLocid())

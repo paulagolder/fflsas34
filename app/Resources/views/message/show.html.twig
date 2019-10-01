@@ -17,7 +17,7 @@
   <div class="title" > {{message.id}}</div>
 
   <div class = "deletebutton button1">
-      <a class='deletebutton' href="/admin/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
+      <a class='deletebutton' href="/admin/message/delete/{{message.id}}"  Onclick="return ConfirmDelete()" >{{'delete.message' |trans}}</a>
  </div>
   <div class="returnbutton"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
 </div>

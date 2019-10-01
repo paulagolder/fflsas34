@@ -44,7 +44,7 @@ class ContentController extends Controller
        
     }
     
-    public function ShowContent($sid)
+    public function ShowContent($sid=201)
     {
         return $this->ShowContentLang($sid,$this->lang);
     }
@@ -355,15 +355,30 @@ class ContentController extends Controller
         ]);
     }
     
-    public function ContentSearch(Request $request)
+    public function ContentSearch($search,Request $request)
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        if(isset($_GET['searchfield']))
+        {
+            $pfield = $_GET['searchfield'];
+            $this->mylib->setCookieFilter("content",$pfield);
+        }
+        else
+        {
+            if(strcmp($search, "=") == 0) 
+            {
+                $pfield = $this->mylib->getCookieFilter("content");
+            }
+            else
+            {
+               $pfield="*";
+               $this->mylib->clearCookieFilter("content");
+            }
+        }
+   
         
-        $pfield = $request->query->get('searchfield');
-        $gfield = $request->query->get('searchfield');
-        
-        if (!$pfield) 
+        if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findAll();
             $subheading =  'trouver.tout';
@@ -371,8 +386,8 @@ class ContentController extends Controller
         }
         else
         {
-            $pfield = "%".$pfield."%";
-            $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
+            $sfield = "%".$pfield."%";
+            $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($sfield);
             $subheading =  'trouver.avec';
         }
         
@@ -397,7 +412,7 @@ class ContentController extends Controller
         'message' => $message,
         'heading' =>  'Gestion des Articles',
         'subheading' =>  $subheading,
-        'searchfield' =>$gfield,
+        'searchfield' =>$pfield,
         'contents'=> $contents,
         
         ]);

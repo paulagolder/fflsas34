@@ -21,19 +21,18 @@
 <div id="middle" >
 <div id="editimage"  >
  <div class="heading">
- <div class="label" > {{ 'edit.image' | trans }} </div>
- <div class="returnbutton"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
+ <div class="label" > {{ 'create.edit.image' | trans }} </div>
+ <div class="returnbutton"> <a href = {{returnlink}} >{{ 'retour' | trans }} </a> </div>
  </div>
  <div  class="form" >
    {{ form_start(form) }}
    {{ form_row(form.name) }}
     {{ form_row(form.path) }}
      {{ form_row(form.copyright) }}
-  
     {{ form_row(form.format) }}
     {{ form_row(form.access) }}
     {{ form_row(form.imagefile) }}
-    <button type="submit">Register!</button>
+    <button type="submit">{{ 'create.image' | trans }}</button>
    {{ form_end(form) }}
   </div>
 </div>

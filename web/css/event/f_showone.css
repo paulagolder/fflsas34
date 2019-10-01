@@ -83,7 +83,10 @@ div#event div.participant
   padding-top : 0.1em;
 }
 
-
+div#event div.participant span
+{
+ color: #09798c;
+}
 
 
 
@@ -194,3 +197,4 @@ div#event div.children div
 
 
 }
+

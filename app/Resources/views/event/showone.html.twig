@@ -104,7 +104,7 @@
      <div id="pdiv" >
      <div  class=participants>
         {% for  key in participants | keys %}
-         <div class=participant > <a href='{{participants[key].link}}' >{{participants[key].label}}</a>  </div>
+         <div class=participant > <a href='{{participants[key].link}}' >{{participants[key].label}}</a>  <span> {{participants[key].participantinfo}}</span> </div>
         {% endfor %}
         </div>
         </div>

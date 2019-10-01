@@ -2,7 +2,7 @@
 
 {% macro tree(child, incidents) %}
     {% import _self as m %}
-    <a href = "{{ child.getLink() }} " > {{ child.label("FR") }}</a>
+    <a href = "{{ child.getLink() }} " > {{ child.label("FR") }}  </a> <span> {{child.participantinfo}}</span>
     {% if incidents %}
     {% for incident in incidents %}
     {% if incident.eventid == child.eventid %}

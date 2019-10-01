@@ -1,4 +1,4 @@
-{# views/person/showone.html.twig #}
+{# views/person/editone.html.twig #}
 
 {% import 'macros.twig' as m %}
 
@@ -46,8 +46,8 @@
 {% block middle %}
 <div id="middle" >
 <div id="editperson">
-    <div class="newperson" >
-        <div class="editbutton" ><a href = "/admin/person/detail/0" >{{ 'new.person' | trans }}</a></div>
+    <div class="subheading" >
+        <div class="editbutton" ><a href = "/admin/person/detail/0" >{{'new.person'| trans }}</a></div>
     </div>
     <div class="person" >
         {% if message %}
@@ -63,8 +63,8 @@
             <div class="editbutton button1" ><a href="/admin/person/addbookmark/{{person.personid}}"> {{"bookmark.person" | trans }} </a></div>
             <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {{ 'edit.person' | trans }}</a></div>
             <div class="returnbutton"> <a href = "{{returnlink}}" >{{ 'retour' | trans }} </a></div>
-            {% if candelete %}
-                <div class="deletebutton"> <a href = "/admin/person/delete/{{person.personid}}" >{{ 'delete' | trans }} </a></div>
+             {% if is_granted('ROLE_ADMIN') %} 
+                <div class="deletebutton"> <a href = "/admin/person/delete/{{person.personid}}"  Onclick="return ConfirmDelete()"  >{{ 'delete' | trans }} </a></div>
              {% endif %}
           </div>
         {% endif %}
@@ -80,7 +80,7 @@
                 <div class="image">
                     <div class="imageimage" ><a href="{{image.link}}" ><img src="{{image.fullpath}}" /></a></div>
                     <div class="imagelabel" >{{image.title}}</div>
-                    <div class="imagedelete deletebutton" ><a href="/admin/person/removeimage/{{person.personid}}/{{image.imageid}}">{{ 'delete' | trans }}</a></div>
+                    <div class="imagedelete deletebutton" ><a href="/admin/person/removeimage/{{person.personid}}/{{image.imageid}}" Onclick="return ConfirmDelete()" >{{ 'delete' | trans }}</a></div>
                 </div>
                 {% endfor %}
              </div>
@@ -98,7 +98,7 @@
          {% for ref in refs %}
          <div class="subsubheading">
                <div class="refref" >{{ref.label}}</div>
-               <div class="deletebutton button1" ><a href="/admin/person/removelink/{{person.personid}}/{{ref.id}}">{{ 'delete' | trans }}</a></div>
+               <div class="deletebutton button1" ><a href="/admin/person/removelink/{{person.personid}}/{{ref.id}}" Onclick="return ConfirmDelete()" >{{ 'delete' | trans }}</a></div>
         </div>
            {% endfor %}
          </div>
@@ -137,8 +137,9 @@
                      <div > {{ participant.label}}</div>
                      <div class="editbutton button1" ><a href="{{participant.vue}}">{{ 'vue' | trans }}</a></div>
                       <div class="editbutton " ><a href="{{participant.link}}">{{ 'edit' | trans }}</a></div>
+                 
                     {% if(not participant.incidents )%}    
-                    <div class="deletebutton" ><a href="/admin/person/delete/{{person.personid}}/{{participant.id}}">{{ 'delete' | trans }}</a>
+                    <div class="deletebutton" ><a href="/admin/person/deleteparticipation/{{person.personid}}/{{participant.id}}" Onclick="return ConfirmDelete()" >{{ 'delete' | trans }}</a>
                     </div>
                     {% endif%}
                     </div>

@@ -25,7 +25,7 @@
           {% if is_granted('ROLE_ADMIN') %} 
   <div class="editbutton" ><a href="/admin/user/rereg/{{user.userid}}">{{'rereg.user' |trans}}</a></div>
   <div class="editbutton" ><a  href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
-   <div class="deletebutton "> <a href = {{deletelink}} >{{'delete' | trans }} </a> </div>
+   <div class="deletebutton "> <a href = {{deletelink}}  Onclick="return ConfirmDelete()"  >{{'delete' | trans }} </a> </div>
      {% endif %}
     </div>
     
@@ -55,7 +55,7 @@
         <div class="subheading" >
             <div class="label" > {{'message.list' | trans }}</div>
             <div class="editbutton button1" ><a  href="/admin/message/send/{{user.userid}}">{{'send.message' |trans}}</a></div>
-             <div class="deletebutton" ><a  href="/admin/user/deleteallmessages/{{user.userid}}">{{'delete.messages' |trans}}</a></div>
+             <div class="deletebutton" ><a  href="/admin/user/deleteallmessages/{{user.userid}}"  Onclick="return ConfirmDelete()" >{{'delete.messages' |trans}}</a></div>
         </div>
         <div class="messagelist" >
         {% for message in messages %}

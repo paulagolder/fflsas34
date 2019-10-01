@@ -43,7 +43,6 @@ twig:
         recaptcha_secret: '%recaptcha_secret%'
         maxlistuser: '%maxlistuser%'
         maxlistadmin: '%maxlistadmin%'
-        pdffunction: '%pdf-function%'
         versionname: '%version-name%'
         maxrecentchanges: '%maxrecentchanges%'
         defaultcontent: '%defaultcontent%'

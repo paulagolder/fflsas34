@@ -35,7 +35,7 @@
                 <a class= "editbutton" href="/admin/text/{{texts[attribute][lang]['id']}}" >{{ 'edit.this' | trans }} </a> 
                 </div>
                 <div class ="deletebutton">
-                <a href="/admin/text/delete/{{texts[attribute][lang]['id']}}" >{{ 'delete.this' | trans }} </a> 
+                <a href="/admin/text/delete/{{texts[attribute][lang]['id']}}"  Onclick="return ConfirmDelete()" >{{ 'delete.this' | trans }} </a> 
                 </div>
                </div>
                <div class="textpanel" > {{texts[attribute][lang]['comment']| raw }} </div>

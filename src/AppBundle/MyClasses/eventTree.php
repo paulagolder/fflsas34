@@ -83,6 +83,7 @@ class eventTree
          $newchild = new eventTreeNode($ev->getEventId());
          $newchild->setLabel($ev->title);
          $newchild->setLink($ev->link);
+         $newchild->setParticipantInfo($ev->participantinfo);
          $seq =$ev->getSequence();
          $sd = $ev->getStartdate();
           if($seq < 19390000 && $sd > 19390000 ) $seq = $sd;

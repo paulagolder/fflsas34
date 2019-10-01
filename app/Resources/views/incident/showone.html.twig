@@ -28,7 +28,7 @@
 
     <div class="heading" >
        <div class="label">{{'incident.to' |trans }} </div>
-       <div class="title"> {{personname}} </div>
+       <div class="title"> {{personname}} {{incident.rank}} </div>
        <div class="returnbutton" ><a href="{{returnlink}}">{{'retour'|trans}}</a></div>
     </div>
     <div class="heading" >
@@ -42,6 +42,11 @@
            {% if incident.namerecorded != "" %}
               <div class="subheading" >
                 <div class="label" > {{'under.the.name.of' | trans }} </div><div class="field"> {{incident.namerecorded}}</div>
+                    </div>  
+           {% endif %}
+            {% if incident.role != "" %}
+              <div class="subheading" >
+                <div class="label" > {{'with.the.role.of' | trans }} </div><div class="field"> {{incident.role}}</div>
                     </div>  
            {% endif %}
            {% if ( incident.locid > 1   ) %}

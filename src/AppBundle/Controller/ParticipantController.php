@@ -78,6 +78,10 @@ class ParticipantController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) 
             {
+                $user = $this->getUser();
+                $time = new \DateTime();
+                $participation->setContributor($user->getUsername());
+                $participation->setUpdateDt($time);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($participation);
                 $entityManager->flush();
@@ -112,6 +116,10 @@ class ParticipantController extends Controller
      $em = $this->getDoctrine()->getManager();
 
         $newp = new Participant();
+        $user = $this->getUser();
+        $time = new \DateTime();
+        $newp->setContributor($user->getUsername());
+        $newp->setUpdateDt($time);
         $newp->setEventid($eid);
         $newp->setPersonid($pid);
         $em->persist($newp);

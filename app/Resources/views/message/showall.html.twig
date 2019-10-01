@@ -37,7 +37,7 @@
                 <a class='editbutton' href="/admin/message/{{message.id}}">{{'view.message' |trans}}</a>
             </div>
             <div class = "deletebutton">
-                <a class='deletebutton' href="/admin/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
+                <a class='deletebutton' href="/admin/message/delete/{{message.id}}"  Onclick="return ConfirmDelete()" >{{'delete.message' |trans}}</a>
             </div>
         </div>
         {% endfor %}

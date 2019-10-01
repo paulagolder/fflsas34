@@ -146,11 +146,17 @@ class PersonController extends Controller
             $pevents[$i]->title = $this->mylib->selectText($etexts_ar,'title',$this->lang);
             if(   $pevents[$i]->title ==null) $pevents[$i]->title = "pas trouver";
             $pevents[$i]->link = "/".$this->lang."/event/".$ppid;
+            $pevents[$i]->participantinfo = $participation->getrank();
+            if($participation->getRole())
+            {
+              $pevents[$i]->participantinfo .= " (".$participation->getRole().")";
+            }
             $i++;
         }
         $topevent =  $this->getDoctrine()->getRepository("AppBundle:Event")->findTop();
         $topevent->title = " TOP ".  $topevent->getLabel();
         $topevent->link = "/".$this->lang."/event/".$topevent->getEventid();
+       // $topevent->particpantinfo = $participation->getrank()."(".$participation->getRole().")";
         $evt = new eventTree($topevent);
         $evt->buildTree($pevents);
         $evt->sortTree();
@@ -186,7 +192,7 @@ class PersonController extends Controller
 
         
         $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
-       // dump($linkrefs);
+        //dump($incidents);
         
         return $this->render('person/showone.html.twig', 
 
@@ -205,22 +211,31 @@ class PersonController extends Controller
     public function formatIncident($incident)
     {
         $text = $this->translator->trans($incident['label']);
+        $comment = $incident['comment'];
         if($incident['locid']>1  ) // not including world
         {
             $at = $this->translator->trans('at.place');
             $lid = $incident['locid'];
             $location =   $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($lid);
-            $text .= " $at ". $location->getName();
+           // $text .= " $at ". $location->getName();
+           $locname = $location->getName();
+           if(strpos($comment, $locname)===false)
+           {
+           $text .=  " ".$location->getName();
+           }
         }
-        elseif( $incident['comment']!= "")
+        //else
+        if( $incident['comment']!= "")
         {
             $at = $this->translator->trans('at.place');
-            $text .= " $at ". $incident['comment'];
+           // $text .= " $at ". $incident['comment'];
+           $text .= " ". $incident['comment'];
         }
         if( $incident['sdate'] >0 )
         {
             $on =  $this->translator->trans('on.date');
             $sdate= $incident['sdate'];
+            //dump($sdate);
             $sdate = $this->mylib->formatdate($sdate,$this->lang);
             $text .= " $on ". $sdate;
         }

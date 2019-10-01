@@ -1,5 +1,8 @@
-
 # config/routing.yml
+
+default _old: 
+ path: /index.php
+ defaults: {_controller:AppBundle\Controller\ContentController::ShowContent}
 
 imageroute : 
    path: /web/newimages
@@ -150,8 +153,10 @@ user_admin_new:
     controller:  AppBundle\Controller\UserController::newuser  
 
 user_admin_search:
-    path: /admin/user/search
+    path: /admin/user/search/{search}
     controller:  AppBundle\Controller\UserController::UserSearch   
+    defaults:
+        search: "="
     
 user_admin_bulk_rereg:
     path: /admin/user/bulkrereg
@@ -305,8 +310,7 @@ person_bookmark:
     controller: AppBundle\Controller\PersonController::addUserbookmark   
    
 person_removeparticipation:
-    path: /admin/person/delete/{pid}/{partid}
-   # controller: AppBundle\Controller\AdminPersonController::delete
+    path: /admin/person/deleteparticipation/{pid}/{partid}
     defaults: { _controller: AppBundle\Controller\AdminPersonController::deleteParticipation}
     requirements:
         partid:  \d+
@@ -423,9 +427,14 @@ text_edit_group:
 #==============================image=====================
    
 image_admin_asearch:
-    path : /admin/image/search 
+    path : /admin/image/search/{search}
     controller:  AppBundle\Controller\ImageController::Adminsearch      
-   
+    defaults:
+        search: "="
+    
+    
+    
+    
 image_user_all:
     path : /{_locale}/image/all 
     controller:  AppBundle\Controller\ImageController::Showall
@@ -623,8 +632,12 @@ admin_location_bookmark:
 
  
 admin_location_search:
-    path: /admin/location/search
+    path: /admin/location/search/{search}
     controller:  AppBundle\Controller\LocationController::LocationSearch
+    defaults:
+        search: "="
+    
+    
     
 admin_location_top:
     path: /admin/location/top
@@ -713,9 +726,11 @@ content_admin_process_edit:
     controller:  AppBundle\Controller\ContentController::process_edit   
     
 content_admin_search:
-    path: /admin/content/search
+    path: /admin/content/search/{search}
     controller:  AppBundle\Controller\ContentController::ContentSearch  
-
+    defaults:
+        search: "="
+        
 content_admin_edit:
     path: /admin/content/edit/{cid}  # note edit by contentid
     controller:  AppBundle\Controller\ContentController::Edit_quill   

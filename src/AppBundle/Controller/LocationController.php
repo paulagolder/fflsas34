@@ -407,15 +407,29 @@ class LocationController extends Controller
         
     }
     
-      public function LocationSearch(Request $request)
+      public function LocationSearch($search, Request $request)
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        
-        $pfield = $request->query->get('searchfield');
-        $gfield = $request->query->get('searchfield');
-        
-        if (!$pfield) 
+        if(isset($_GET['searchfield']))
+        {
+            $pfield = $_GET['searchfield'];
+            $this->mylib->setCookieFilter("location",$pfield);
+        }
+        else
+        {
+            if(strcmp($search, "=") == 0) 
+            {
+                $pfield = $this->mylib->getCookieFilter("location");
+            }
+            else
+            {
+               $pfield="*";
+               $this->mylib->clearCookieFilter("location");
+            }
+        }
+    
+        if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $locations = $this->getDoctrine()->getRepository("AppBundle:Location")->findAll();
             $subheading =  'trouver.tout';
@@ -423,10 +437,9 @@ class LocationController extends Controller
         }
         else
         {
-            $pfield = "%".$pfield."%";
-            $locations= $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($pfield);
+            $sfield = "%".$pfield."%";
+            $locations= $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($sfield);
             $subheading =  'trouver.avec';
-            //dump($locations);
         }
         
         
@@ -450,7 +463,7 @@ class LocationController extends Controller
         'message' => $message,
         'heading' =>  'Gestion des Locations',
         'subheading' =>  $subheading,
-        'searchfield' =>$gfield,
+        'searchfield' =>$pfield,
         'locations'=> $locations,
         
         ]);

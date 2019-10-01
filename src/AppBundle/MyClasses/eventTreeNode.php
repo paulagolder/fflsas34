@@ -11,6 +11,7 @@ class eventTreeNode
       private $children= array();
       private $label;
       private $link ;
+      private $participantinfo;
       private $sequence ;
       
 
@@ -36,6 +37,10 @@ class eventTreeNode
         $this->label= $text;
     }
 
+    public function setParticipantInfo($text="==")
+    {
+        $this->participantinfo = $text;
+    }
     public function getLink()
     {
         return $this->link;
@@ -60,6 +65,12 @@ class eventTreeNode
     {
         return $this->label;
     }
+    
+      public function getParticipantInfo()
+    {
+        return $this->participantinfo;
+    }
+    
     
     public function addChild(eventTreeNode $newchild )
     {

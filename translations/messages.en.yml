@@ -19,6 +19,7 @@ bienvenue.site: 'Welcome to the FFLSAS site'
 bienvenue.visiteur: 'Welcome Guest'
 bienvenue: Welcome
 blessé: wounded
+muté: transfered
 bookmark.event: bookmark
 bookmark: bookmark
 bookmarks: bookmarks
@@ -205,7 +206,6 @@ you.have.sucessfully.registered: 'You have registered sucessfully. '
 you.have.sucessfully.requested.change.password: 'You have requested to change your password.'
 you.must.reregister: 'You must reregister'
 you.have.sucessfully.completed: 'You have successfully completed the registration process. '
-to.complete.reply.to.email: 'To complete the registration process reply to the email you receive'
 to.complete.enter: 'To complete registration enter the following code'
 print.transcript: 'print copy'
 Path: Path
@@ -272,7 +272,6 @@ mot.de.pass.oublier: 'mot-de-pass oublier'
 a.link.to: 'Link To'
 tags: Tags
 unsucessful.rereg: 'Re-registration unsucessful'
-try.again: re-try
 rereg.user: 're-register user'
 reset.password: 'reset password'
 to.complete.reply.to.email: 'To complete the process reply to the email you will receive.'
@@ -292,7 +291,6 @@ message.bcc: Blind Copies
 many.users:  Many users
 Envoyer: Send
 a.copy.has.been.sent.to.your.email.address:  "A copy has been sent to your email address"
-send.message: 'Send message'
 bulk.message: 'Bulk message'
 to.send.bulk.email.use.bookmarks: 'To send bulk email use a bookmark'
 rereg.group:  "Reregister a group"
