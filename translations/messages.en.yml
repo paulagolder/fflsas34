@@ -200,6 +200,7 @@ Username: Username
 Email: 'Email Address'
 Password: Password
 Repeat.Password: 'Repeat Password'
+tell.us.your.interest.in.our.site: "Tell us why you are interested in our site"
 when.first.signing: 'When first signing in'
 registration.success: 'Registration is successfull'
 you.have.sucessfully.registered: 'You have registered sucessfully. '
@@ -212,7 +213,7 @@ Path: Path
 Copyright: Copyright
 Format: Format
 Access: Access
-Image.file(jpg): 'Image file(jpg)'
+Image.file: 'Image file(jpg or png)'
 content: content
 inEnglish: 'Show site in English'
 enFrancais: 'Afficher le site en français'

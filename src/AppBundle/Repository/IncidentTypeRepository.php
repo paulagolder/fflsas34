@@ -9,12 +9,7 @@ use Doctrine\ORM\EntityRepository;
 
 class IncidentTypeRepository extends EntityRepository
 {
-   # public function __construct(RegistryInterface $registry)
-   # {
-  #      parent::__construct($registry, IncidentType::class);
-  #  }
-
-    
+      
     public function findOne($typeid)
     {
        $qb = $this->createQueryBuilder("it");
@@ -24,4 +19,13 @@ class IncidentTypeRepository extends EntityRepository
        return $type;
     }
 
+    public function xgetMaxTypeid()
+    {
+        $sql = "select MAX(a.itypeid) from AppBundle:incidenttype a ";
+        $query = $this->getEntityManager()->createQuery($sql);
+        $maxitype = $query->getOneOrNullResult();
+        return $maxitype[1];
+    
+    }
+    
 }

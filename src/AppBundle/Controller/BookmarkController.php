@@ -44,17 +44,13 @@ class BookmarkController  extends Controller
         $session = $request->getSession();
         $ilist = $session->get($blt.'List');
         $ilist = array_values($ilist);
-       #dump($ilist);
-      # dump($key);
        if($ilist != null)
         {
          $k = count($ilist);
-       #  dump($k);
          for($j=0; $j<$k; $j++)
          {
             if(array_key_exists($j, $ilist))
             {
-         #      dump($ilist[$j]['id']);
              if($ilist[$j]['id']==$key)
             {
               unset($ilist[$j]);

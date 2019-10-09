@@ -60,7 +60,6 @@ class MessageController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() &&  $form->isValid())
         {
-          dump($message);
             $this->sendMessageToUserCopytoAdministrators($message,$user->getUserid(), $user->getLang());
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
@@ -82,7 +81,6 @@ class MessageController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() &&  $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')))
         {
-           dump($message);
             $this->sendMessageToUserCopytoAdministrators($message,0, $lang);
             return $this->render('message/usermessage.html.twig',array(
                 'message'=>$message,
@@ -177,7 +175,6 @@ class MessageController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
         $destinataires = $session->get('selectedusers');
-        //dump($destinataires);
         $userlist = explode(",",$destinataires);
         $numbertosend= count($userlist) - 1;
         return $this->render('message/bulkmessage.html.twig', array(
@@ -258,8 +255,7 @@ function makeSwiftMessageCopyToAdministrators($message,$formattedbody)
     $smessage = (new \Swift_Message('FFLSAS Email'));
     $smessage->setSubject($message->getSubject());
     $sender = $this->getParameter('admin-email');
-    $administrators = explode(",",$this->getParameter('administratorsemailsx'));
-    dump($administrators);
+    $administrators = explode(",",$this->getParameter('administratorsemails'));
     $sendername = $this->getParameter('admin-name');
     $smessage->setFrom($sender,$sendername);
     $smessage->setTo($administrators);

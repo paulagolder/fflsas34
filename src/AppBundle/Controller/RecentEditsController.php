@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
+use  AppBundle\Controller\Security;
 use AppBundle\Entity\Image;
 use AppBundle\Service\MyLibrary;
 
@@ -30,14 +31,17 @@ class RecentEditsController extends Controller
     
    
     public function recentedits()
-    {
+{
+   
+    $sec =0;
+   
       
       $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
      
      $max = 10;
         $platest =    $this->getDoctrine()->getRepository("AppBundle:Person")->findLatest($max);
          $elatest =    $this->getDoctrine()->getRepository("AppBundle:Event")->findLatest($max);
-           $ilatest =    $this->getDoctrine()->getRepository("AppBundle:Image")->findLatest($max);
+           $ilatest =    $this->getDoctrine()->getRepository("AppBundle:Image")->findLatest($max,$sec);
        
         $latest= array_merge($platest, $elatest,$ilatest);
       usort($latest, function($a, $b) {

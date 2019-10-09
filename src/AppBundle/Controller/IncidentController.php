@@ -163,7 +163,7 @@ class IncidentController extends Controller
             ));
     }
     
-      public function new($eid,$pid)
+     public function new($eid,$pid)
     {
         
         $request = $this->requestStack->getCurrentRequest();
@@ -198,8 +198,22 @@ class IncidentController extends Controller
             'eventlabel'=>$event->getLabel(),
             'personname'=> $person->getFullname(),
             'itypes'=>$incidenttypes,
+             'itypeid'=>1,
             'returnlink'=>'/admin/person/'.$pid,
             ));
+    }
+    
+     public function newtype($inid,Request $request)
+    {
+        $label = $request->query->get('_newlabel');
+        
+            $newtype = new IncidentType();
+            $newtype->setlabel($label);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($newtype);
+                $entityManager->flush();
+                return $this->redirect("/admin/incident/".$inid);
+           
     }
     
     public function delete($inid)
@@ -213,7 +227,7 @@ class IncidentController extends Controller
     }
      
      
-    function transformtoIncident($incident_ar)
+    function xtransformtoIncident($incident_ar)
     {
         $incident = new Incident();
          $incident->setIncidentid($incident_ar['incidentid']);

@@ -60,7 +60,7 @@
             <div class="mapandtext" >
                 {% if texts and texts["FR"] %}
                 <div class="text" >
-                    {{ texts["FR"] | raw }}
+                    {{ texts["FR"]["comment"] | raw }}
                 </div>
                 {% endif %}
                 

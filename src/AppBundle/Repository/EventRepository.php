@@ -37,19 +37,14 @@ class EventRepository extends EntityRepository
     }
     
     
-     public function findChildren($eid)
+    private function findChildren($eid)
     {
        $qb = $this->createQueryBuilder("e");
        $qb->andWhere('e.parent = :eid');
        $qb->orderBy('e.startdate');
-        $qb->addorderBy('e.sequence');
+       $qb->addorderBy('e.sequence');
        $qb->setParameter('eid', $eid);
        $events =  $qb->getQuery()->getResult();
-       foreach( $events as $event)
-       {
-       #   $url = "/event/".$event->getEventid();
-       #   $event->link = $url;
-       }
        return $events;
     
     }

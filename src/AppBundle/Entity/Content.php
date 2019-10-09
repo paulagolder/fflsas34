@@ -42,7 +42,10 @@ class Content
      */
     private $language;
       
-
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $access;
     
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
@@ -72,6 +75,8 @@ class Content
     }
     
     
+    
+    
      public function getSubjectid(): ?string
     {
         return $this->subjectid;
@@ -84,6 +89,18 @@ class Content
         return $this;
     }
 
+     public function getAccess(): ?int
+    {
+        return $this->access;
+    }
+
+    public function setAccess(int $int): self
+    {
+        $this->access = $int;
+
+        return $this;
+    }
+    
       public function getLabel(): ?string
     {
         return $this->title;

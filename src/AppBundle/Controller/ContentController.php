@@ -168,7 +168,6 @@ class ContentController extends Controller
                 $content->setLabel($title);
             else
                 $content->setLabel($content->getTitle());
-           //$content->setText( $this->cleanText($content->getText()));
         }
            $linkrefs = $this->get('linkref_service')->getLinksfrom("content",$sid);
 
@@ -187,6 +186,7 @@ class ContentController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         $contentid=$cid;
         $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
+
         $label = $content->getTitle();
         $sid = $content->getSubjectid();
         
@@ -194,7 +194,7 @@ class ContentController extends Controller
         $now = new \DateTime();
         $content ->setUpdateDt($now);
         $content->setText($this->cleanText($content->getText()));
-        
+
         
         return $this->render('content/edit_quill.html.twig', array(
             'content' =>$content,
@@ -206,26 +206,23 @@ class ContentController extends Controller
     public function process_edit($cid)
     {   
         $request = $this->requestStack->getCurrentRequest();
-        //  dump($request);
-        //  var_dump($request);
         $contentid=$cid;
         $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
-        //  $label = $content->getTitle();
         $sid = $content->getSubjectid();
-        
-        $content ->setContributor($this->getUser()->getUsername());
-        $now = new \DateTime();
-        $content ->setUpdateDt($now);
-        $content->setText($this->cleanText($content->getText()));
-        
+
         if ($request->getMethod() == 'POST') 
         {
             $content->setTitle($request->request->get('_title'));
+            $content->setAccess($request->request->get('_access'));
             $content->setText($request->request->get('_text'));
-            
+            $content->setText($this->cleanText($content->getText()));
+            $content ->setContributor($this->getUser()->getUsername());
+            $now = new \DateTime();
+            $content ->setUpdateDt($now);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($content);
             $entityManager->flush();
+ 
             return $this->redirect("/admin/content/".$sid);
             
         }
@@ -514,11 +511,8 @@ class ContentController extends Controller
         {
             $k2 = strpos ( $text , "]]",$k1 );
             $tokengroup = substr($text,$k1, $k2-$k1+2);
-            //dump($tokengroup);
             $tokens=substr($tokengroup,2,$k2-$k1-2);
-            // dump($tokens);
             $token_list=json_decode("{".$tokens."}",true);
-            //dump($token_list);
             $obj = array_keys($token_list)[0];
             if($obj=="image")
             {
@@ -529,7 +523,6 @@ class ContentController extends Controller
             {
              $replacementstring = $this->urlinsert($token_list);
              $text = str_replace ($tokengroup , $replacementstring , $text );   
-             // dump($text);
             }
             else
             {
@@ -546,9 +539,7 @@ class ContentController extends Controller
     {
     
                 $imageid =  $token_list['image'];
-           // dump( $imageid);
             $image =  $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
-            // dump( $image);
             if($image)
             {
                 $this->mylib->setFullpath($image);
@@ -572,7 +563,6 @@ class ContentController extends Controller
     {
             $urlid =  $token_list['url'];
             $url =  $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($urlid);
-            // dump( $url);
             if($url)
             {
                     $label= $url->getLabel();
@@ -583,10 +573,7 @@ class ContentController extends Controller
                     $label= $token_list['label'];
                     }
                 }
-               
-              
                  $replacementstring = "<a href='".$url->getUrl()."' target=/'_blank/' >".$label."</a>" ;
-                 //dump($replacementstring);
             }
             else  
                  $replacementstring = "<div>NO URL </div>" ;
@@ -597,9 +584,11 @@ class ContentController extends Controller
     
     public function cleanText($text)
     {
+    
+       // $text= str_ireplace( "ql-align-center","text-align-center", $text);
         $text= preg_replace('/(\*\*.+?)style=".+?"(\*\*.+?)/i', "", $text);
         $text= preg_replace('/(<p.+?)style=".+?"(>.+?)/i', "$1$2", $text);
-        $text= preg_replace('/(<p.+?)class=".+?"(>.+?)/i', "$1$2", $text);
+      //  $text= preg_replace('/(<p.+?)class=".+?"(>.+?)/i', "$1$2", $text);
         $text= preg_replace('/(<span.+?)style=".+?"(>.+?)/i', "$1$2", $text);
         $text= strip_tags($text,"<p><img><a><br><h1><b><i><h2><strong><em><u><ol><li><ul>");
         $text= str_ireplace("http://fflsas.org/images/stories/fflsas/", "/oldimages/",$text);

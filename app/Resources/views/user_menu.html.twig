@@ -3,11 +3,12 @@
 <div id="mainmenu"  class="mainmenu" >
  <div class="menuitem" > <a  href="/{{locale}}/menucontent/201"> {{ 'introduction' | trans }}</a></div>
   <div class="menuitem" > <a  href="/{{locale}}/menucontent/200"> {{ 'notre.site' | trans}}</a></div>
- <div class="menuitem" > <a  href="/{{locale}}/person/all"> {{ 'les.hommes' | trans}}</a></div>
- <div class="menuitem" > <a href="/{{locale}}/event/top"> {{ 'les.actions' | trans}}</a> </div>
+
 
 
 {% if is_granted('ROLE_USER') %}
+ <div class="menuitem" > <a  href="/{{locale}}/person/all"> {{ 'les.hommes' | trans}}</a></div>
+ <div class="menuitem" > <a href="/{{locale}}/event/top"> {{ 'les.actions' | trans}}</a> </div>
    <div class="menuitem" > <a href="/{{locale}}/url/show"> {{ 'voir.urls' | trans}}</a> </div>
    <div class="menuitem" > <a href="/{{locale}}/biblo/show/all"> {{ 'voir.biblo' | trans}}</a> </div>
    <div class="menuitem" > <a href="/{{locale}}/search/all"> {{ 'chercher.site' | trans}}</a> </div>

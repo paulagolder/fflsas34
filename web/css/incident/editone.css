@@ -27,6 +27,10 @@ div#editincident > div
     margin-top:20px;
 }
 
+div#editincident div.twocols
+{
+    display:flex;
+}
 
 div#editincident div.incident
 {

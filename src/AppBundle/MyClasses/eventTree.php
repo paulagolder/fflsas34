@@ -22,7 +22,6 @@ class eventTree
          $topid = $this->topNode->getEventid();
          foreach ($events as $event)
          {
-        // var_dump("adding ? ". $event->getEventid());
          if($event->getEventid()== $topid)
          {
            var_dump("not adding ". $event->getEventid());
@@ -59,7 +58,6 @@ class eventTree
              }
              else  if($currentnode->hasChild($peid))
              {
-                // var_dump(" already in tree ".$peid."----------------------");
                  $currentnode = $currentnode->findChild($peid);
              }
              else 

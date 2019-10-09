@@ -24,7 +24,6 @@ class ImageUploadListener
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
         $this->uploadFile($entity);
     }
     
@@ -37,7 +36,6 @@ class ImageUploadListener
         if (!$entity instanceof Image) {
             return;
         }
-
         // Check which fields were changes
         $changes = $args->getEntityChangeSet();
         
@@ -80,11 +78,9 @@ class ImageUploadListener
         }
 
         $file = $entity->getImagefile();
-
         // only upload new files
         if ($file instanceof UploadedFile) {
             $fileName = $this->uploader->upload($file);
-            
             $entity->setImagefile($fileName);
         }
     }

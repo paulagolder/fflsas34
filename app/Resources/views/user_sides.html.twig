@@ -9,11 +9,18 @@
   
    {% block left %}
        <div id="left" >
+         
+           
+           
+           
       {% include 'user_menu.html.twig' %}
         {% if is_granted('ROLE_ADMIN') %}
       {% include 'admin_menu.html.twig' %}
          {% endif %}
-      {{ render(controller('AppBundle\\Controller\\PersonController::showsidebar')) }} 
+         
+      {% if is_granted('ROLE_USER') %}
+         {{ render(controller('AppBundle\\Controller\\PersonController::showsidebar')) }} 
+      {% endif %}
         </div>
     {% endblock %}
    
@@ -22,9 +29,10 @@
     <div id="right" >
       {% if is_granted('ROLE_USER') %}
         {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-      {% endif %}
+
       {{ render(controller('AppBundle\\Controller\\RandomimageController::randomimage')) }}
       {{ render(controller('AppBundle\\Controller\\RecentEditsController::recentedits')) }}
+            {% endif %}
         </div>
     {% endblock %}
   

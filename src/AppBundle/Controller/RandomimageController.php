@@ -35,14 +35,13 @@ class RandomimageController extends Controller
       $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
       #  $request = new Request();
      
-        $images =    $this->getDoctrine()->getRepository("AppBundle:Image")->findAll();
+        $images =    $this->getDoctrine()->getRepository("AppBundle:Image")->findAllPublic();
         $icount = count($images);
         $number = mt_rand(0, $icount);
         $image =   $images[$number];
         $this->mylib->setFullpath($image);
         $image->link = "/".$this->lang."/image/".$image->getImageid();
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$image->getImageId());
-        //var_dump($text_ar);
         $title =  $this->mylib->selectText($text_ar,'title',$this->lang);
       
          return $this->render('randomimage/showone.html.twig', 

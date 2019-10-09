@@ -103,7 +103,6 @@ class UserController extends Controller
         {
             $entityManager = $this->getDoctrine()->getManager();
             $plainpassword = $fuser->getPlainPassword();
-            #dump("user PP:".$plainpassword).
             $hashpassword = $encoder->encodePassword($plainpassword,null);
             $fuser->setPassword($hashpassword);
             $entityManager->persist($fuser);
@@ -137,7 +136,6 @@ class UserController extends Controller
         {
             $entityManager = $this->getDoctrine()->getManager();
             $plainpassword = $fuser->getPlainPassword();
-            #dump("user PP:".$plainpassword).
             $hashpassword = $encoder->encodePassword($plainpassword,null);
             $fuser->setPassword($hashpassword);
             $entityManager->persist($fuser);
@@ -171,7 +169,6 @@ class UserController extends Controller
         {
             $entityManager = $this->getDoctrine()->getManager();
             $plainpassword = $fuser->getPlainPassword();
-            #dump("user PP:".$plainpassword).
             $hashpassword = $encoder->encodePassword($plainpassword,null);
             $fuser->setPassword($hashpassword);
             $entityManager->persist($fuser);
@@ -220,7 +217,6 @@ class UserController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
         $destinataires = $session->get('selectedusers');
-        //dump($destinataires);
         $userlist = explode(",",$destinataires);
         $numbertosend= count($userlist) - 1;
         return $this->render('user/bulkrereg.html.twig', array(
@@ -424,8 +420,6 @@ class UserController extends Controller
                 $selectedusers .= $user->getUserid().", ";
             }
         }
-        
-        // dump($selectedusers);
         $request = $this->requestStack->getCurrentRequest();
         $session = $request->getSession();
         $session->set('selectedusers', $selectedusers);

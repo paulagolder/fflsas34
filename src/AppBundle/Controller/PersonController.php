@@ -187,13 +187,7 @@ class PersonController extends Controller
             $incidents[$key]['link'] =  "/".$this->lang."/incident/".$incident['incidentid'];
         }
         $mess = '';
-        
-        // $refs = $this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup("person",$pid);
-
-        
         $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
-        //dump($incidents);
-        
         return $this->render('person/showone.html.twig', 
 
         [ 'lang' => $this->lang,
@@ -235,9 +229,8 @@ class PersonController extends Controller
         {
             $on =  $this->translator->trans('on.date');
             $sdate= $incident['sdate'];
-            //dump($sdate);
             $sdate = $this->mylib->formatdate($sdate,$this->lang);
-            $text .= " $on ". $sdate;
+            $text .= " ". $sdate;
         }
         return $text;
     }
@@ -412,7 +405,6 @@ class PersonController extends Controller
         {
             $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
             $subheading =  'trouver.tout';
-            //dump($people);
         }
         else
         {

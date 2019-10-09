@@ -35,6 +35,21 @@ class ImageRepository extends EntityRepository
     }
     
     
+      public function findAllPublic()
+    {
+       $qb = $this->createQueryBuilder("i");
+        $qb->where('i.access < 1 ');
+       $qb->orderBy("i.name", "ASC");
+       $images =  $qb->getQuery()->getResult();
+       foreach($images as $image)
+       {
+         $image->makeLabel();
+         
+         //   $image->setFullpath($this->getParameter('new-images-folder').$this->getPath());
+       }
+       return $images;
+    }
+    
     public function findOne($imageid)
     {
        $qb = $this->createQueryBuilder("i");
@@ -75,10 +90,12 @@ class ImageRepository extends EntityRepository
         return $numDeleted;
     }
     
-       public function findLatest($max)
+       public function findLatest($max, $sec)
     {
        $platest = array();
        $qb = $this->createQueryBuilder("p");
+       $qb->where ('p.access <= :sec ' );
+       $qb->setParameter('sec', $sec);
        $qb->orderBy("p.update_dt", "DESC");
        $qb->setMaxResults($max);
        $images =  $qb->getQuery()->getResult();

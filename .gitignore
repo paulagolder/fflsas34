@@ -3,6 +3,7 @@
 /composer.lock
 /tests/
 /app/config/parameters*.*
+/app/config/alt*.*
 /build/
 /phpunit.xml
 /var/*

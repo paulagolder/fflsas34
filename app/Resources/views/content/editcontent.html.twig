@@ -24,7 +24,7 @@
 
 {% block middle %}
   <div id="middle" >
-  <div id="editcontent" >
+  <div id="content" >
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
@@ -55,7 +55,7 @@
       <div  ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}" Onclick="return ConfirmDelete()" >{{'delete.content' |trans}}</a></div>      
     </div>
      
-    <div class='maintext resizable'>
+    <div class='textwindow resizable'>
         {{ content.text | raw}} 
     </div>
 
@@ -81,13 +81,11 @@
     </div>
    {% endif %}
     
-     
    <div class="refs">
    <div class="subheading">
        <div  class="label" >{{ 'linked.from' | trans }}</div>
        </div>
        {% for ref in refs %}
-         
         <div class="ref" > <a href="/fr/{{ref.objecttype}}/{{ref.objid}}">{{ref.objecttype}}/{{ref.objid}}</a> </div>
         {% endfor %}
     </div>

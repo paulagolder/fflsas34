@@ -202,6 +202,7 @@ Username: "Nom de l'utilisateur"
 Email: "Adresse email"
 Password: "Mot de passe"
 Repeat.Password: "Répéter le mot de passe"
+tell.us.your.interest.in.our.site: "dites-nous votre intérêt pour notre site"
 when.first.signing: "lors de la première connexion"
 registration.success: "l'inscription est réussie"
 you.have.sucessfully.completed: "Vous avez terminé le processus d'inscription avec succès. "
@@ -213,7 +214,7 @@ Path: Chemin
 Copyright: Copyright
 Format: Format
 Access: Access
-Image.file(jpg): "Image file(jpg)"
+Image.file: "fichier image(jpg ou png)"
 content: contenu
 enFrancais: "Afficher le site en français"
 inEnglish: "Show the site in English"

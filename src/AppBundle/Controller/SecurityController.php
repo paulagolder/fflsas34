@@ -32,10 +32,8 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
       $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
     // get the login error if there is one
     $error = $authenticationUtils->getLastAuthenticationError();
-
     // last username entered by the user
     $lastUsername = $authenticationUtils->getLastUsername();
-  //dump($authenticationUtils);
     return $this->render('security/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,
@@ -78,7 +76,6 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 
     // last username entered by the user
     $lastUsername = $authenticationUtils->getLastUsername();
-    //dump($authenticationUtils);
     return $this->render('security/login.html.twig', array(
         'last_username' => $lastUsername,
         'error'         => $error,

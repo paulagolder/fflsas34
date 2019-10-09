@@ -27,9 +27,12 @@ class EventController extends Controller
         $this->requestStack = $request_stack;;
     }
     
-    
-   
-    
+     public static function datecmp($a, $b) 
+     {
+         return strnatcmp($a['order'], $b['order']);
+     }
+
+ 
     
     public function Showall()
     {
@@ -107,6 +110,7 @@ class EventController extends Controller
                 
                 $children[$i]['startdate'] = $child->getStartdate();
                  $children[$i]['sequence'] = $child->getSequence();
+                 $children[$i]['order'] = trim($child->getStartdate().substr("000000".$child->getSequence(),-5));
                 $children[$i]['fstartdate'] = $lib->formatdate($child->getStartdate(),$this->lang);
                 
                 $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$pid);
@@ -118,16 +122,13 @@ class EventController extends Controller
                 $children[$i]['link'] =  $url ;
                 
             }
-          //  usort($children, function ($item1, $item2) {return $item1 <=> $item2;});
-             usort($children, function ($item1, $item2) {return $item1['sequence'] <=> $item2['sequence'];});
-            usort($children, function ($item1, $item2) {return $item1['startdate'] <=> $item2['startdate'];});
+            uasort($children,  array("AppBundle\Controller\EventController", 'datecmp'));
             $event->children = $children;
         }
         // this is a fix because title gets changed  and I cannot find out why 
         $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$eid);
         $event->title = $lib->selectText($text_ar, "title",$this->lang);
         $textcomment = $lib->selectText($text_ar,"comment", $this->lang);
-        #var_dump($textcomment);
         $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("event",$eid);
         $images= array();
         $i=0;
@@ -223,6 +224,6 @@ class EventController extends Controller
     }
      
 
-    
+  
     
 }

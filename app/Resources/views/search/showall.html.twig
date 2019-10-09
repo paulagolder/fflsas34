@@ -45,8 +45,11 @@
        </div>
            <ul>
              {% for subject in group %}
-          
+             {% if subject.label is iterable %}
+             <li><a href="{{subject.link}}" >{{ subject.label.comment}}</a> </li> 
+             {% else %}
               <li><a href="{{subject.link}}" >{{ subject.label}}</a> </li> 
+              {% endif%}
              {% endfor %}
            </ul>
            {% endif %}

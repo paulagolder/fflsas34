@@ -76,8 +76,8 @@ class ImageController extends Controller
                     $person =   $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pkey);
                     if($person)
                     {
-                    $refs_ar[$key][$pkey]['label'] = $person->getFullname();
-                    $refs_ar[$key][$pkey]['link'] = "/".$this->lang."/person/".$person->getPersonid();
+                        $refs_ar[$key][$pkey]['label'] = $person->getFullname();
+                        $refs_ar[$key][$pkey]['link'] = "/".$this->lang."/person/".$person->getPersonid();
                     }
                 }
             }
@@ -127,17 +127,14 @@ class ImageController extends Controller
             'image'=>null,
             ]);
         }
-        //dump($image->getPath());
-         $this->mylib->setFullpath($image);
-         // dump($image->getFullpath());
-       # $mess = $image->getFullpath();
-       $mess="";
+        $this->mylib->setFullpath($image);
+        $mess="";
         if(@getimagesize($image->getFullpath()))
         {
             //image exists!
         }else{
             // $image->setFullpath($this->getParameter('new-images-folder').$image->getPath());
-           // $image->setFullpath('/newimages/'.$image->getPath());
+            // $image->setFullpath('/newimages/'.$image->getPath());
         }
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$iid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
@@ -184,7 +181,7 @@ class ImageController extends Controller
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-          if(isset($_GET['searchfield']))
+        if(isset($_GET['searchfield']))
         {
             $pfield = $_GET['searchfield'];
             $this->mylib->setCookieFilter("image",$pfield);
@@ -197,12 +194,12 @@ class ImageController extends Controller
             }
             else
             {
-               $pfield="*";
-               $this->mylib->clearCookieFilter("image");
+                $pfield="*";
+                $this->mylib->clearCookieFilter("image");
             }
         }
-
-         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
+        
+        if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findAll();
             $subheading =  'trouver.tout';
@@ -216,7 +213,7 @@ class ImageController extends Controller
         
         if (count($images)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+            $subheading = 'rien.trouver.pour';
         }
         else
         {
@@ -298,17 +295,15 @@ class ImageController extends Controller
             {
                 
                 /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-                $file = $image->getImagefile();
+                // $file = $image->getImagefile();
                 $file = $form['imagefile']->getData();
                 
                 
                 
-                 if($file!= null)
+                if($file!= null)
                 {
                     $formname = $image->getName();
-                    
                     $fileName = $time->format('YmdHis').'.jpeg';
-                    
                     if($formname =="")
                     {
                         $image.setFormname($filename);
@@ -316,20 +311,18 @@ class ImageController extends Controller
                     $file->move( $this->getParameter('new-images-folder-long'), $fileName);
                     $image->setPath($fileName);
                     $image->setImagefile($fileName);
-             
-                
-                
-                $image->setContributor($user->getUsername());
-                $image->setUpdateDt($time);
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($image);
-                $entityManager->flush();
-                $niid = $image->getImageid();
-                return $this->redirect("/admin/image/".$niid);
+                    
+                    $image->setContributor($user->getUsername());
+                    $image->setUpdateDt($time);
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($image);
+                    $entityManager->flush();
+                    $niid = $image->getImageid();
+                    return $this->redirect("/admin/image/".$niid);
                 }
                 else
                 {
-                 return $this->redirect("/admin/image/search");
+                    return $this->redirect("/admin/image/search");
                 }
             }
         }
@@ -347,43 +340,35 @@ class ImageController extends Controller
         $time = new \DateTime();
         $time->setTimestamp($time->getTimestamp());
         #$request = $this->requestStack->getCurrentRequest();
-        
         $image= new Image();
-        
         $image->setCopyright("FFLSAS");
         $form = $this->createForm(ImageForm::class, $image);
-        
-        
-        
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            
             $file = $form['imagefile']->getData();
-            
-           # dump($file);
-            
             if($file!= null)
             {
                 $formname = $image->getName();
-                
-                $fileName = $time->format('YmdHis').'.jpeg';
+            
+                 $mtype =  $file->getClientMimeType(); 
+                 if($mtype=="image/png") $tag="png";
+                 else $tag="jpeg";
+                $fileName = $time->format('YmdHis').'.'.$tag;
                 
                 if($formname =="")
                 {
                     $image.setFormname($filename);
                 }  
-                $file->move( $this->getParameter('new-images-folder-long'), $fileName);
+                $file->move( $this->getParameter('new-images-folder'), $fileName);
                 $image->setPath($fileName);
                 $image->setImagefile("");
             }
             else
             {
-                //     $image->setImagefile($oldfileName);
-                //$image->setPath(" whoi is here ");
+            
                 $fileName = $fileUploader->upload($file);
-                
                 $image->setImagefile($fileName);
             }
             
@@ -421,18 +406,18 @@ class ImageController extends Controller
     
     public function delete($iid)
     {
-      $this->getDoctrine()->getRepository('AppBundle:Image')->delete($iid);
-      $this->getDoctrine()->getRepository('AppBundle:Imageref')->deleteAllImages($iid);
-      $this->getDoctrine()->getRepository('AppBundle:Text')->deleteTexts('image',$iid);
-    
-    
-    return $this->redirect("/admin/image/search");
-    
+        $this->getDoctrine()->getRepository('AppBundle:Image')->delete($iid);
+        $this->getDoctrine()->getRepository('AppBundle:Imageref')->deleteAllImages($iid);
+        $this->getDoctrine()->getRepository('AppBundle:Text')->deleteTexts('image',$iid);
+        
+        
+        return $this->redirect("/admin/image/search");
+        
     }
     
-  
-     
-        
+    
+    
+    
     
     
 }

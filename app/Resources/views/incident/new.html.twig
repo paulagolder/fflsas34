@@ -1,8 +1,6 @@
 {# views/incident/edit.html.twig #}
 
-
 {% import 'macros.twig' as m %}
-
 {% extends 'admin.html.twig' %}
 
 {% block stylesheets %}
@@ -35,31 +33,40 @@
  <div class="returnbutton"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
 </div>
 
-<div  class="form" >
-{{ form_start(form) }}
-
-    {{ form_row(form.personid)}}
-    {{ form_row(form.eventid) }}
-      {{ form_row(form.itypeid) }}
-     
-      <div class="itypelist" >
-        <select id="itypelist" onchange="seltype(this.value)" >
-         {% for itype in itypes %} 
-             <option value = "{{itype.itypeid}}">{{itype.label}}</option>
-     {% endfor %}
-    </select>
+    <div class="twocols">
+            <div class="colone">
+                <div  class="form" >
+                    {{ form_start(form) }}
+                    {{ form_row(form.personid)}}
+                    {{ form_row(form.eventid) }}
+                    <div class="itypeid" > {{ form_row(form.itypeid) }}
+                        
+                        <div class="itypelist" >
+                            <select id="itypelist" onchange="seltype(this.value)" >
+                                {% for itype in itypes %} 
+                                {% if (itype.itypeid ) == itypeid %}
+                                <option value = "{{itype.itypeid}}" selected="selected"  >{{itype.label}}</option>
+                                {% else %}
+                                <option value = "{{itype.itypeid}}">{{itype.label}}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                            </div> </div>
+                    {{ form_row(form.namerecorded) }}
+                    {{ form_row(form.rank) }}
+                    {{ form_row(form.locid) }}
+                    {{ form_row(form.role) }}
+                    {{ form_row(form.comment) }}
+                    {{ form_row(form.sdate) }}
+                    {{ form_row(form.edate) }}
+                    {{ form_row(form.sequence) }}
+                    
+                    <button type="submit">Register!</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
     </div>
-    {{ form_row(form.namerecorded)   }}
-    {{ form_row(form.rank) }}
-      {{ form_row(form.locid) }}
-    {{ form_row(form.role) }}
-    {{ form_row(form.sdate) }}
-    {{ form_row(form.edate) }}
-     {{ form_row(form.sequence) }}
-     
-    <button type="submit">Register!</button>
-{{ form_end(form) }}
-</div>
 </div>
 </div>
 {% endblock %}

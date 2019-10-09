@@ -44,9 +44,9 @@ services:
     #    class: 
     AppBundle\Service\MyLibrary:
         arguments:
-           $newimagepath : '%new-images-folder%'
-           $externalimagepath: '%external-images%'
-            
+           #$newimagepath : '%new-images-folder%'
+           $oldimagespath: '%old-images-path%'
+           $newimagespath : '%new-images-path%'
     
     
     linkref_service:

@@ -16,7 +16,7 @@ class IncidentType
      * @ORM\Column(type="integer")
      */
     private $itypeid;
-
+    
     /**
      * @ORM\Column(type="string", length=30)
      */

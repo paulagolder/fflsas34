@@ -8,6 +8,13 @@ imageroute :
    path: /web/newimages
 
 blog_index:
+    path: /{sid}/{_locale}
+    defaults: {_controller:  AppBundle\Controller\ContentController::ShowContent, _locale: fr, sid:201}
+    requirements:
+        _locale: en|fr|FR|EN
+        sid: \d+   
+   
+blog_index:
     path: /
     defaults: {_controller:AppBundle\Controller\AccueilController::ShowFrench}
     
@@ -599,7 +606,6 @@ admin_incident_new:
     path : /admin/incident/new/{eid}/{pid}
     controller:  AppBundle\Controller\IncidentController::new
     
-    
 admin_incidents_edit:
     path : /admin/incident/{inid} 
     controller:  AppBundle\Controller\IncidentController::edit
@@ -608,7 +614,9 @@ admin_incident_delete:
     path : /admin/incident/delete/{inid} 
     controller:  AppBundle\Controller\IncidentController::delete
 
-
+admin_incident_newtype:
+    path : /admin/incident/newtype/{inid}
+    controller:  AppBundle\Controller\IncidentController::newtype
 
 
 #=======================location===================

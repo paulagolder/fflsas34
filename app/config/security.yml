@@ -36,18 +36,15 @@ security:
              form_login: 
                login_path: login
                check_path: login
+            #   default_target_path: /201/fr
                default_target_path: /fr/person/all
     #            always_use_default_target_path: 1
         #secured_area:
             # ...
              logout:
                 path:   /logout
-                target: /fr/person/all                    
-            
-            # remember_me:
-             #   secret:   '%kernel.secret%'
-            #    lifetime: 604800 # 1 week in seconds
-            #    path:     /
+                target: /201/fr
+                #target: /fr/person/all                    
  
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
@@ -60,18 +57,25 @@ security:
          - { path: ^/remotederegister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/remotechangepassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/accueil, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/symfonyimages, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/register, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
-         - { path: ^/linkref/, roles: ROLE_USER } 
-         - { path: ^/(fr|en|FR|EN)/incident/, roles:  IS_AUTHENTICATED_ANONYMOUSLY} 
-         - { path: ^/(fr|en|FR|EN)/menucontent/, roles:  IS_AUTHENTICATED_ANONYMOUSLY} 
-         - { path: ^/(fr|en|FR|EN)/image, roles: ROLE_USER }  
-         - { path: ^/(fr|en|FR|EN)/content, roles: IS_AUTHENTICATED_ANONYMOUSLY }  
-         - { path: ^/(fr|en|FR|EN)/search, roles: ROLE_USER }
          - { path: ^/(fr|en|FR|EN)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/(fr|en|FR|EN)/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/accueil, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/resetpassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/(fr|en|FR|EN)/complete, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/(fr|en|FR|EN)/menucontent/, roles:  IS_AUTHENTICATED_ANONYMOUSLY} 
+         - { path: ^/(fr|en|FR|EN)/content, roles: IS_AUTHENTICATED_ANONYMOUSLY }    
+         - { path: ^/(fr|en|FR|EN)/mailto, roles: IS_AUTHENTICATED_ANONYMOUSLY }    
+         
+         - { path: ^/(fr|en|FR|EN)/, roles: ROLE_USER }      
+
          - { path: ^/(fr|en|FR|EN), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         
+         - { path: ^/(fr|en|FR|EN)/image, roles: ROLE_USER }  
+         - { path: ^/(fr|en|FR|EN)/incident/, roles:  roles: ROLE_USER} 
+         - { path: ^/(fr|en|FR|EN)/search, roles: ROLE_USER }
+
+   
          - { path: ^/admin/bookmark/edit, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/admin/bookmark/delete, roles:  IS_AUTHENTICATED_ANONYMOUSLY } 
          - { path: ^/admin/, roles: ROLE_ADMIN  }

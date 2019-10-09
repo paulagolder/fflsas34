@@ -22,6 +22,7 @@ class UserRegForm extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat.Password'),));
         $builder->add('email', TextType::class);
+        $builder->add('interet', TextType::class,array('label' => 'tell.us.your.interest.in.our.site') );
         #$builder->get('email')->setRequired(false);
     }
 

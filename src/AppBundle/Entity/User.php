@@ -64,7 +64,10 @@ class User implements UserInterface, \Serializable
      */
     private $registrationcode;
     
-    
+    /**
+     * @ORM\Column(name="interet", type="string", length = 200)
+     */
+    private $interet;
     
     private $plainPassword;
     private $newregistrationcode;
@@ -101,6 +104,16 @@ class User implements UserInterface, \Serializable
         return $this->username;
     }
 
+    public function getInteret()
+    {
+        return $this->interet;
+    }
+    
+    public function setInteret($text)
+    {
+        return $this->interet=$text;
+    }
+    
     public function getSalt()
     {
         // you *may* need a real salt depending on your encoder

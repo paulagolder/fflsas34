@@ -117,7 +117,7 @@ class AdminEventController extends Controller
         
              $children[$i]['startdate'] = $child->getStartdate();
                $children[$i]['fstartdate'] = $lib->formatdate($child->getStartdate(),$this->lang);
-                 
+                   $children[$i]['order'] = trim($child->getStartdate().substr("000000".$child->getSequence(),-5));
              $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$pid);
       
              $children[$i]['title'] =  $this->mylib->selectText($ptext_ar, "title", $this->lang );
@@ -127,9 +127,8 @@ class AdminEventController extends Controller
              $children[$i]['link'] =  $url ;
 
            }
-           usort($children, function ($item1, $item2) {return ($item1 <=> $item2);});
-           usort($children, function ($item1, $item2) {return ($item1['startdate'] <=> $item2['startdate']);});
-
+          // usort($children, function ($item1, $item2) {return ($item1['startdate'] <=> $item2['startdate']);});
+           uasort($children,  array("AppBundle\Controller\EventController", 'datecmp'));
            $event->children = $children;
         }
         
@@ -177,7 +176,7 @@ class AdminEventController extends Controller
          $event->location['link'] = "/admin/location/".$location->getLocid();
          }
          else
-              dump($event);
+              dump($event); //error condition
        }
         
        // $linkrefs =$this->getDoctrine()->getRepository("AppBundle:Linkref")->findGroup('event',$eid);

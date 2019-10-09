@@ -37,7 +37,7 @@
                 <input type="hidden" name="_text" value="{{ text.comment  }}" >
                     <button type="submit" id="submitbutton" style="display: none;"  >{{ ' enregistrer ' | trans }} </button> 
                 </form>
-                
+                <button onclick="saveform()">{{ 'Click.me' | trans }}</button>  
                 <div id="editortext"   >
                     {{ text.comment | raw }}
                 </div>
@@ -63,6 +63,7 @@
             [ 'blockquote'],
             [{ list: 'ordered' }, { list: 'bullet' }],
             [{ 'indent': '-1'}, { 'indent': '+1' }] ,
+            [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
             ]
             },
             placeholder: 'Votre contribution au FFLSAS site',

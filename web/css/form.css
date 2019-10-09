@@ -44,3 +44,9 @@ input#complete_reg_form_newregistrationcode
     -moz-appearance:textfield;
 }
 
+input#user_reg_form_interet
+{
+    
+height :4em;
+width:50em;
+}
