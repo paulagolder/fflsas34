@@ -314,8 +314,9 @@ function sendMessageToAdmin($message,$lang)
     $sn = $this->getDoctrine()->getManager();      
     $sn -> persist($message);
     $sn -> flush();
+    $adminfooter =  $this->renderView('message/template/'.$lang.'/adminemailfooter.html.twig',array(),'text/html');
     $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-        'message'=>$message,),'text/html');
+        'message'=>$message,'footer'=>$adminfooter,),'text/html');
         
         $smessage = $this->makeSwiftMessage($message, $formattedbody);
         $this->get('mailer')->send($smessage);

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class LocationForm extends AbstractType
 {
@@ -18,9 +19,9 @@ class LocationForm extends AbstractType
     {
        
         $builder ->add('name', TextType::class,array('label' => 'location.name'));
-        $builder ->add('region', TextType::class);
-        $builder ->add('latitude', TextType::class);
-        $builder ->add('longitude', TextType::class);
+        $builder ->add('region', IntegerType::class);
+        $builder ->add('latitude', NumberType::class);
+        $builder ->add('longitude', NumberType::class);
         $builder ->add('kml', TextType::class);
         $builder ->add('zoom', IntegerType::class);
         $builder->get('zoom')->setRequired(false);

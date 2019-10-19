@@ -90,9 +90,18 @@ complete_registration:
     requirements:
         _locale: en|fr|FR|EN
         
-remote_complete_registration:
-    path: /remotecompleteregistration/{uid}/{code}
-    controller:  AppBundle\Controller\RegistrationController::remotecompleteregistration   
+remote_confirm_email:
+    path: /confirmemailaddress/{uid}/{code}
+    controller:  AppBundle\Controller\RegistrationController::confirmemailaddress   
+    
+admin_approve_user:
+    path: /admin/approveuser/{uid}
+    controller:  AppBundle\Controller\RegistrationController::approveuser  
+    
+    
+admin_reject_user:
+    path: /admin/rejectuser/{uid}
+    controller:  AppBundle\Controller\RegistrationController::rejectuser  
     
 remote_request_password:
     path: /remotechangepassword/{uid}/{code}

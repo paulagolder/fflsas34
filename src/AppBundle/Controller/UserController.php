@@ -379,7 +379,7 @@ class UserController extends Controller
         $selectedusers="";
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-  
+         $usersforapproval = $this->getDoctrine()->getRepository("AppBundle:User")->findSearch("%ROLE_ADAP%");
         if(isset($_GET['searchfield']))
         {
             $pfield = $_GET['searchfield'];
@@ -430,6 +430,7 @@ class UserController extends Controller
         'subheading' =>  $subheading,
         'searchfield' =>$pfield,
         'users'=> $users,
+        'adapusers'=> $usersforapproval,
         
         ]);
     }

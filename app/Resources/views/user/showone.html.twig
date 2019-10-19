@@ -23,9 +23,16 @@
        
         <div class="returnbutton button1"> <a href = {{returnlink}} >{{ 'return' | trans }} </a> </div>
           {% if is_granted('ROLE_ADMIN') %} 
-  <div class="editbutton" ><a href="/admin/user/rereg/{{user.userid}}">{{'rereg.user' |trans}}</a></div>
+         {%  dump(user) %}
+          {% if user.rolestr =="ROLE_ADAP;" %}
+            <div class="editbutton" ><a href="/admin/approveuser/{{user.userid}}">{{'approve.user' |trans}}</a></div>
+            <div class="editbutton" ><a href="/admin/rejectuser/{{user.userid}}">{{'reject.user' |trans}}</a></div>
+            {% else %}
+              <div class="editbutton" ><a href="/admin/user/rereg/{{user.userid}}">{{'rereg.user' |trans}}</a></div>
   <div class="editbutton" ><a  href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
-   <div class="deletebutton "> <a href = {{deletelink}}  Onclick="return ConfirmDelete()"  >{{'delete' | trans }} </a> </div>
+          {% endif %}
+          <div class="deletebutton "> <a href = {{deletelink}}  Onclick="return ConfirmDelete()"  >{{'delete' | trans }} </a> </div>
+
      {% endif %}
     </div>
     
@@ -44,8 +51,9 @@
         </div>
          <div class="datarow">
             <div class="label" > {{ 'user.locale' | trans }}</div>
-             </div>
+           
          <div class="data" > {{user.locale }}</div>
+           </div>
          <div class="datarow">
             <div class="label" > {{ 'user.interet' | trans }}</div>
           <div class="data" > {{user.interet }}</div>

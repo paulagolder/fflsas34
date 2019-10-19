@@ -45,7 +45,11 @@ div#fuser div.messagelist div.message div.message
     display: block;
 }
 
-
+div#fuser div.userdata
+{
+    
+    margin-bottom: 2em;
+}
 div#fuser div.userdata div.datarow div.label
 {
     width: 9em;
