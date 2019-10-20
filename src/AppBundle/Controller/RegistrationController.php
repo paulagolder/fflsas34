@@ -159,8 +159,8 @@ class RegistrationController extends Controller
             $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$usubject, $ubody);
             $smessage = $this->get('message_service')->sendMessageToUser($umessage,$user->getUserid(), $user->getLang());
             // message to admin 
-              $baseurl = $this->container->getParameter('base-url');
-               $applink = "{$baseurl}admin/approveuser/{$user->getUserid()}";
+            $baseurl = $this->container->getParameter('base-url');
+            $applink = "{$baseurl}admin/approveuser/{$user->getUserid()}";
             $abody =  $this->renderView('message/template/'.$user->getLang().'/approbationrequest.html.twig',array('applink'=> $applink));
             $asubject =  $this->trans->trans('approbation.request',[],null,$user->getLang());
             $amessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$asubject, $abody);
@@ -169,10 +169,12 @@ class RegistrationController extends Controller
             $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
-            return $this->render('registration/stage2.html.twig',
+            return $this->render('registration/done.html.twig',
         array(
             'username' => $user->getUsername() ,
-            'email' => $user->getEmail()
+            'email' => $user->getEmail(),
+            'heading'=>$usubject,
+            'message'=>$ubody,
             
             ));
         }

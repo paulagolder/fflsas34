@@ -10,7 +10,13 @@
 {% block js %}
 {{ parent() }}
 <script type="text/javascript">
+     function myLoadFunction()
+     {
+     //active bookmarks in red 
     
+       document.getElementsByClassName("bookmarklocationlabel")[0].style.color = "#ff0000";
+
+     }
     function seltype(eid)
     {
     document.getElementById('incident_form_itypeid').value = eid;

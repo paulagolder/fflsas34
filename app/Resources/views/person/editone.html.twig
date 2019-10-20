@@ -12,6 +12,19 @@
 {% block js %}
  {{ parent() }}
  <script>
+     
+
+     function myLoadFunction()
+     {
+     //active bookmarks in red 
+       document.getElementsByClassName("bookmarkpersonlabel")[0].style.color = "#ff0000";
+       document.getElementsByClassName("bookmarklocationlabel")[0].style.color = "#ff0000";
+       document.getElementsByClassName("bookmarkimagelabel")[0].style.color = "#ff0000";
+       document.getElementsByClassName("bookmarkcontentlabel")[0].style.color = "#ff0000";
+       document.getElementsByClassName("bookmarkurllabel")[0].style.color = "#ff0000";
+       document.getElementsByClassName("bookmarkbiblolabel")[0].style.color = "#ff0000";
+     }
+     
   
      function clickevent(eid)
      {

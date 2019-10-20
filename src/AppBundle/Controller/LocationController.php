@@ -293,6 +293,24 @@ class LocationController extends Controller
             ));
     }
     
+     public function setparent($pid, $lid)
+    {
+        
+        if($lid>0)
+        {
+            $location = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($lid);
+           if(count($location->children) < 1)
+           {
+                $location->setRegion($pid);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($location);
+                $entityManager->flush();
+               
+            }
+        }
+         return $this->redirect("/admin/location/".$pid);
+    }
+
     
     public function new($rid)
     {

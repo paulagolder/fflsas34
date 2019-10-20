@@ -13,7 +13,7 @@
       <div class="label" > <a href ="/admin/bookmark/edit" >{{ 'bookmarks' | trans }}</a></div> 
      </div>
      {% for key1, blist in blists  %}
-        <div class="bookmark{{key1}}"> {{key1}}</div>
+        <div class="bookmark{{key1}}label"> {{key1}}</div>
        {% for key in blist | keys  %} 
      {% if   blist[key]['fullname'] is defined %}
         <div class="bookmarkdelete" >

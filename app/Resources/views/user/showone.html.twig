@@ -23,7 +23,6 @@
        
         <div class="returnbutton button1"> <a href = {{returnlink}} >{{ 'return' | trans }} </a> </div>
           {% if is_granted('ROLE_ADMIN') %} 
-         {%  dump(user) %}
           {% if user.rolestr =="ROLE_ADAP;" %}
             <div class="editbutton" ><a href="/admin/approveuser/{{user.userid}}">{{'approve.user' |trans}}</a></div>
             <div class="editbutton" ><a href="/admin/rejectuser/{{user.userid}}">{{'reject.user' |trans}}</a></div>

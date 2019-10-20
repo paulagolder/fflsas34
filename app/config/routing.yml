@@ -645,7 +645,11 @@ admin_location_upload:
 admin_location_bookmark:
     path: /admin/location/addbookmark/{lid}
     controller:  AppBundle\Controller\LocationController::addbookmark
+
     
+admin_location_setparent:
+    path: /admin/location/setparent/{pid}/{lid}
+    controller:  AppBundle\Controller\LocationController::setparent
 
  
 admin_location_search:
