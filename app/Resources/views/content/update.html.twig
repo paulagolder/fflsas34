@@ -24,9 +24,9 @@
 <div id="contentedit" >
 
 <div class="heading">
- <div class="label" >{{ 'edit.contents' | trans }} </div>
+ <div class="label" >{{'edit.contents'|trans }} </div>
   <div class="title" >{{ label}} : {{contentid}} </div>
-  <div class="returnbutton"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
+  <div class="returnbutton"> <a href = {{returnlink}} >{{'annuler'|trans }} </a> </div>
 </div> 
 {{ form_start(form) }}
 
@@ -37,14 +37,14 @@
     <div id="maintext">
 {{ form_row(form.text,{ 'attr': {'cols': '50'} }) }}
     </div>
-    <button type="submit">{{ ' enregistrer ' | trans }} </button>
+    <button type="submit">{{'enregistrer'|trans }} </button>
 {{ form_end(form) }}
 
 {% for  imagelink in imagelinks %}
 {% for  key , sublink in imagelink %}
 <div class="sub;link" >
 <div> {{ sublink }} </div>
-<div class="editbutton"> <a href = "/admin/content/deleteimage/{{cid}}/{{key}}" >{{ ' delete ' | trans }} </a> </di 
+<div class="editbutton"> <a href = "/admin/content/deleteimage/{{cid}}/{{key}}" >{{'delete'|trans }} </a> </di 
 {% endfor %}
 {% endfor %}
 </div>

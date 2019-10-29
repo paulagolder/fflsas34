@@ -12,9 +12,9 @@
 <div id="middle" >
 <div id="newperson"  >
  <div class="heading" > 
- <div class="label">{{ 'new.person' | trans }}</div>
+ <div class="label">{{'new.person'|trans }}</div>
  <div class="title" >{{ person.fullname}}</div>
- <div class="returnbutton button1"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
+ <div class="returnbutton button1"> <a href = {{returnlink}} >{{'retour'|trans }} </a> </div>
 </div>
 
 <div  class="form" >
@@ -24,7 +24,7 @@
     {{ form_row(form.forename) }}
     {{ form_row(form.alias) }}
 
-    <button type="submit">{{ 'Register!' | trans }}</button>
+    <button type="submit">{{'Register!'|trans }}</button>
 {{ form_end(form) }}
 
 </div>

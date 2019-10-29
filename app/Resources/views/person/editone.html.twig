@@ -60,7 +60,7 @@
 <div id="middle" >
 <div id="editperson">
     <div class="subheading" >
-        <div class="editbutton" ><a href = "/admin/person/detail/0" >{{'new.person'| trans }}</a></div>
+        <div class="editbutton" ><a href = "/admin/person/detail/0" >{{'new.person'|trans }}</a></div>
     </div>
     <div class="person" >
         {% if message %}
@@ -69,15 +69,15 @@
         
         {% if person is defined %}
           <div class="heading" >
-            <div class="label">  {{ 'person.a.editer' | trans }} : </div>
+            <div class="label">  {{'person.a.editer'|trans }} : </div>
             <div class="title">   {{ person.fullname}} </div>
            </div>
            <div class="heading" >
-            <div class="editbutton button1" ><a href="/admin/person/addbookmark/{{person.personid}}"> {{"bookmark.person" | trans }} </a></div>
-            <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {{ 'edit.person' | trans }}</a></div>
-            <div class="returnbutton"> <a href = "{{returnlink}}" >{{ 'retour' | trans }} </a></div>
+            <div class="editbutton button1" ><a href="/admin/person/addbookmark/{{person.personid}}"> {{"bookmark.person"|trans }} </a></div>
+            <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {{'edit.person'|trans }}</a></div>
+            <div class="returnbutton"> <a href = "{{returnlink}}" >{{'retour'|trans }} </a></div>
              {% if is_granted('ROLE_ADMIN') %} 
-                <div class="deletebutton"> <a href = "/admin/person/delete/{{person.personid}}"  Onclick="return ConfirmDelete()"  >{{ 'delete' | trans }} </a></div>
+                <div class="deletebutton"> <a href = "/admin/person/delete/{{person.personid}}"  Onclick="return ConfirmDelete()"  >{{'delete'|trans }} </a></div>
              {% endif %}
           </div>
         {% endif %}
@@ -85,7 +85,7 @@
         
            <div class="imagegroup heading" >
            
-           <div class="label" > {{ 'images' | trans }} </div>  <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
+           <div class="label" > {{'images'|trans }} </div>  <div class="tooltip">?  <span class="tooltiptext">{{'to.add.images.use.bookmarks'|trans }}</span>
               </div>
                 {% if images %}
              <div class="images">
@@ -93,7 +93,7 @@
                 <div class="image">
                     <div class="imageimage" ><a href="{{image.link}}" ><img src="{{image.fullpath}}" /></a></div>
                     <div class="imagelabel" >{{image.title}}</div>
-                    <div class="imagedelete deletebutton" ><a href="/admin/person/removeimage/{{person.personid}}/{{image.imageid}}" Onclick="return ConfirmDelete()" >{{ 'delete' | trans }}</a></div>
+                    <div class="imagedelete deletebutton" ><a href="/admin/person/removeimage/{{person.personid}}/{{image.imageid}}" Onclick="return ConfirmDelete()" >{{'delete'|trans }}</a></div>
                 </div>
                 {% endfor %}
              </div>
@@ -104,14 +104,14 @@
             
         <div class="refgroup" >
         <div class="heading" >
-           <div class="label"> {{'Liens'|trans}}</div>  <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.link.use.bookmarks' | trans }}</span>
+           <div class="label"> {{'Liens'|trans}}</div>  <div class="tooltip">?  <span class="tooltiptext">{{'to.add.link.use.bookmarks'|trans }}</span>
               </div>
          </div>
          <div class="reflist">
          {% for ref in refs %}
          <div class="subsubheading">
                <div class="refref" >{{ref.label}}</div>
-               <div class="deletebutton button1" ><a href="/admin/person/removelink/{{person.personid}}/{{ref.id}}" Onclick="return ConfirmDelete()" >{{ 'delete' | trans }}</a></div>
+               <div class="deletebutton button1" ><a href="/admin/person/removelink/{{person.personid}}/{{ref.id}}" Onclick="return ConfirmDelete()" >{{'delete'|trans }}</a></div>
         </div>
            {% endfor %}
          </div>
@@ -119,16 +119,16 @@
             
         {% if text  %}
            <div class="textpanel heading" >
-            <div class="label" > {{ 'texts' | trans }} </div>
+            <div class="label" > {{'texts'|trans }} </div>
                 <div class="edit editbutton button1">
-                   <a href = "/admin/text/person/{{person.personid}}"   > {{ 'edit.text' | trans }}</a>
+                   <a href = "/admin/text/person/{{person.personid}}"   > {{'edit.text'|trans }}</a>
                 </div>
           
             </div>
         {%else%}
             <div  class="notext heading" >
-                <div class="label red" >  {{ 'no.text' | trans }}  </div>
-                <div class="editbutton button1" ><a href = "/admin/text/person/{{person.personid}}"   >  {{ 'add.text' | trans }}</a></div>
+                <div class="label red" >  {{'no.text'|trans }}  </div>
+                <div class="editbutton button1" ><a href = "/admin/text/person/{{person.personid}}"   >  {{'add.text'|trans }}</a></div>
             </div>
         {% endif %}
             
@@ -138,9 +138,9 @@
           <div class="participants" >
           <div class="heading" > 
              <div class= 'label'>
-                 {{ 'participated.in.events' | trans }}
+                 {{'participated.in.events'|trans }}
               </div>
-              <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.participation.use.bookmarks' | trans }}</span>
+              <div class="tooltip">?  <span class="tooltiptext">{{'to.add.participation.use.bookmarks'|trans }}</span>
               </div>
               </div>
                 {% if participants %}
@@ -148,11 +148,11 @@
                 {% for participant in participants %}
                     <div class="participant selectable" >
                      <div > {{ participant.label}}</div>
-                     <div class="editbutton button1" ><a href="{{participant.vue}}">{{ 'vue' | trans }}</a></div>
-                      <div class="editbutton " ><a href="{{participant.link}}">{{ 'edit' | trans }}</a></div>
+                     <div class="editbutton button1" ><a href="{{participant.vue}}">{{'vue'|trans }}</a></div>
+                      <div class="editbutton " ><a href="{{participant.link}}">{{'edit'|trans }}</a></div>
                  
                     {% if(not participant.incidents )%}    
-                    <div class="deletebutton" ><a href="/admin/person/deleteparticipation/{{person.personid}}/{{participant.id}}" Onclick="return ConfirmDelete()" >{{ 'delete' | trans }}</a>
+                    <div class="deletebutton" ><a href="/admin/person/deleteparticipation/{{person.personid}}/{{participant.id}}" Onclick="return ConfirmDelete()" >{{'delete'|trans }}</a>
                     </div>
                     {% endif%}
                     </div>

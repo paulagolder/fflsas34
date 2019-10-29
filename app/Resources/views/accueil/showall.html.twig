@@ -18,7 +18,7 @@
    {% else %}
 
    
-     <h1>{{ 'bienvenue.page' | trans }}</h1> 
+     <h1>{{'bienvenue.page'|trans }}</h1> 
     
      
      {% if texts  %}  
@@ -35,7 +35,7 @@
     {% if counts  %} 
     <div class="counts" >
     {% for count in counts %}
-     <div class="count" > {{ 'compte.de' | trans }} {{count.label | trans}}   = {{ count.number}}</div>
+     <div class="count" > {{'compte.de'|trans }} {{count.label|trans}}   = {{ count.number}}</div>
      {% endfor %}
     </div>
     {% endif %}

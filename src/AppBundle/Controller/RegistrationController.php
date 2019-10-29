@@ -110,9 +110,10 @@ class RegistrationController extends Controller
         if ($form->isSubmitted() && $form->isValid() && $codeisvalid ) 
         {
             $user->setLastlogin( new \DateTime());
-            $user->setRolestr("ROLE_USER;");
+            $user->setRolestr("ROLE_ADAP;");
             $user->setRegistrationcode(null);
             $user->setUsername($uname);
+           // $user->setInteret($uname);
             $user->setEmail($uemail);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -121,7 +122,26 @@ class RegistrationController extends Controller
             $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
-            return $this->redirect("/".$user->getLang()."/person/all");
+            //message to user
+            $ubody =  $this->renderView('message/template/'.$user->getLang().'/emailvalidationcomplete.html.twig');
+            $usubject =  $this->trans->trans('email.confirmed',[],null,$user->getLang());
+            $umessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$usubject, $ubody);
+            $smessage = $this->get('message_service')->sendMessageToUser($umessage,$user->getUserid(), $user->getLang());
+            // message to admin 
+            $baseurl = $this->container->getParameter('base-url');
+            $applink = "{$baseurl}admin/approveuser/{$user->getUserid()}";
+            $abody =  $this->renderView('message/template/'.$user->getLang().'/approbationrequest.html.twig',array('applink'=> $applink));
+            $asubject =  $this->trans->trans('approbation.request',[],null,$user->getLang());
+            $amessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$asubject, $abody);
+            $asmessage = $this->get('message_service')->sendMessageToAdmin($amessage, $user->getLang());
+             return $this->render('registration/done.html.twig',
+        array(
+            'username' => $user->getUsername() ,
+            'email' => $user->getEmail(),
+            'heading'=>$usubject,
+            'message'=>$ubody,
+            
+            ));
         }
         
         return $this->render(
@@ -243,7 +263,7 @@ class RegistrationController extends Controller
     
 //======================================  reregistation forced by administrator  ===============================================
     
-    public function remotereregister($uid, $code, Request $request)
+    public function remotereregister($uid,  Request $request)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);

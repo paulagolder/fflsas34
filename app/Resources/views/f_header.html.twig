@@ -31,23 +31,23 @@
             {% if 'en' in ( locale | lower ) %}
             {% set cpath  = (cpath | replace({'/en/' :'/fr/'}) ) %}
             <div class="languagelink tooltip"><a href={{cpath}}  ><img src="{{asset('common/fr.gif')}}"/></a>
-                <span class="tooltiptext">{{ 'enFrancais' | trans }}</span>
+                <span class="tooltiptext">{{'enFrancais'|trans }}</span>
             </div>
             {% else %}
             {% set cpath  = (cpath | replace({'/fr/' :'/en/'}) ) %}
             {% set cpath  = (cpath | replace({'/FR/' :'/en/'}) ) %}
             <div class="languagelink tooltip"><a href ={{cpath}} ><img src="{{asset('common/en.gif')}}" /></a>
-                <span class="tooltiptext">{{ 'inEnglish' | trans }}</span>
+                <span class="tooltiptext">{{'inEnglish'|trans }}</span>
             </div>
             {% endif %}
           
             <div class="welcome">
                 {% if app.user  is null %}
-                {{ 'bienvenue.visiteur' | trans }}
+                {{'bienvenue.visiteur'|trans }}
                 {% else %}
-                {{ 'bienvenue' | trans }} {{ app.user.username }}
+                {{'bienvenue'|trans }} {{ app.user.username }}
                 ({% if is_granted('ROLE_ADMIN') %} Administrator
-                {% elseif is_granted('ROLE_USER') %} {{ 'friend' | trans }} {% endif %} )
+                {% elseif is_granted('ROLE_USER') %} {{'friend'|trans }} {% endif %} )
                 {% endif %}
             </div>
             <div class="status">
@@ -56,20 +56,20 @@
             <div class="filler"></div>
             {% if is_granted('ROLE_TEMP') or is_granted('ROLE_REREG') or is_granted('ROLE_REREG') or is_granted('ROLE_PWCH') %}
             <div class="complete messbutton">
-                <a href="/{{locale}}/complete/{{ app.user.userid }}" >{{ "complete.reg" | trans}}</a>
+                <a href="/{{locale}}/complete/{{ app.user.userid }}" >{{ "complete.reg"|trans}}</a>
             </div>
             {% endif %}
             {% if app.user  is null%}
             <div class="loginlink messbutton">
-                <a href="/{{locale}}/login" >{{ "log.in" | trans}}</a>
+                <a href="/{{locale}}/login" >{{ "log.in"|trans}}</a>
             </div>
             {% else %}
             <div class="logoutlink messbutton">
-                <a href="/logout"  >{{ "log.out" | trans}}</a>
+                <a href="/logout"  >{{ "log.out"|trans}}</a>
             </div>                
             {% endif %}
             <div class="contactlink messbutton">
-                <a href="/{{locale}}/mailto" >{{ "mail.us" | trans}}</a>
+                <a href="/{{locale}}/mailto" >{{ "mail.us"|trans}}</a>
             </div>
         </div>
       </div> 

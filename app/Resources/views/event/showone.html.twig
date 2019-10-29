@@ -58,7 +58,7 @@
     
      {% if event.locid %}
       <div class="subheading">
-         <div class="label" > {{ ' Endroit ' | trans }} : </div>
+         <div class="label" > {{'Endroit'|trans }} : </div>
          <div class= "title" >
            <a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> 
          </div>
@@ -80,7 +80,7 @@
     {% if refs %}
     <div class="refgroup" >
      <div class="heading">
-     <div class="label"> {{'liens' | trans}}</div>
+     <div class="label"> {{'liens'|trans}}</div>
      </div>
     {% for ref in refs %}
      <div class="ref">
@@ -100,7 +100,7 @@
    {% endif %}
    
    {% if participants %}
-     <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'participants' | trans }}</button></div>
+     <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'participants'|trans }}</button></div>
      <div id="pdiv" >
      <div  class=participants>
         {% for  key in participants | keys %}
@@ -112,7 +112,7 @@
     
     {% if event.children %}
        {% set children = event.children %}
-        <div class="hidebar" > <button onclick="HideMe('cdiv' )">{{'evenment.enfants' | trans}}</button></div>
+        <div class="hidebar" > <button onclick="HideMe('cdiv' )">{{'evenment.enfants'|trans}}</button></div>
         <div id="cdiv">
          <div class='children' >       
           {% for key in children | keys %}

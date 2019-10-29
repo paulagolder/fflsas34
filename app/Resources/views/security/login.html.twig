@@ -15,15 +15,15 @@
     <div id="loginerror" >{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 <div id="loginform" >
-<div class="headingmessage" >{{ 'login.message' |trans }}</div>
+<div class="headingmessage" >{{'login.message'|trans }}</div>
 <form action="{{ path('login') }}" method="post">
 <div class="form">
 <div class="username" >
-    <label for="username">{{'username' | trans }}:</label>
+    <label for="username">{{'username'|trans }}:</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
 </div>
 <div class="password">
-    <label for="password">{{'password' | trans }}:</label>
+    <label for="password">{{'password'|trans }}:</label>
     <input type="password" id="password" name="_password" />
 </div>
 </div>
@@ -41,12 +41,12 @@
 </div>
 
 <div class="heading">
- <div class="label" > {{ 'if.password.forgotten'| trans }}</div>
-<div class="returnbutton" > <a   href="/{{locale}}/resetpassword" > {{'reset.password' | trans }}</a></div>
+ <div class="label" > {{'if.password.forgotten'|trans }}</div>
+<div class="returnbutton" > <a   href="/{{locale}}/resetpassword" > {{'reset.password'|trans }}</a></div>
 </div>
 <div class="heading">
-    <div class="label" > {{ 'si.non.enregistre'| trans }}</div>
-    <div class="returnbutton"  > <a href="/{{locale}}/register" > {{'enregister' | trans }}</a></div>
+    <div class="label" > {{'si.non.enregistre'|trans }}</div>
+    <div class="returnbutton"  > <a href="/{{locale}}/register" > {{'enregister'|trans }}</a></div>
 </div>
 </div>
 </div>

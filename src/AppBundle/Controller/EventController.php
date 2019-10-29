@@ -165,6 +165,12 @@ class EventController extends Controller
             $event->location['name'] = $location->getName();
             $event->location['link'] = "/".$this->lang."/location/".$location->getLocid();
             }
+            else
+            {
+               $event->location['name'] = "inconnu";
+               $event->location['link'] = "";
+            
+            }
         
         }
         
@@ -221,6 +227,12 @@ class EventController extends Controller
      
         return $this->redirect('/'.$this->lang.'/event/'.$eid);
         
+    }
+    
+      public function Showactions()
+    {
+         $lang = $this->requestStack->getCurrentRequest()->getLocale();
+        return $this->render('/event/showactions.html.twig');
     }
      
 

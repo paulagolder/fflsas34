@@ -71,15 +71,15 @@
    {% endif %} 
   
    <div class="heading">
-     <div class="label"> {{'event.a.editer' | trans}}</div>
+     <div class="label"> {{'event.a.editer'|trans}}</div>
      <div class='title' >{{ event.title}}</div>
      </div>
     <div class= "heading">
-     <div class="editbutton button1" ><a href="/admin/event/detail/{{event.eventid}}"> {{"edit.event.detail" | trans }} </a></div>
-     <div class="editbutton " ><a href="/admin/event/addbookmark/{{event.eventid}}"> {{"bookmark.event" | trans }} </a></div>
-     <div class="returnbutton" ><a href="{{returnlink}}"> {{"retour" | trans }} </a></div>
+     <div class="editbutton button1" ><a href="/admin/event/detail/{{event.eventid}}"> {{"edit.event.detail"|trans }} </a></div>
+     <div class="editbutton " ><a href="/admin/event/addbookmark/{{event.eventid}}"> {{"bookmark.event"|trans }} </a></div>
+     <div class="returnbutton" ><a href="{{returnlink}}"> {{"retour"|trans }} </a></div>
         {% if not event.children %}
-         <div class="deletebutton" ><a  href="/admin/event/delete/{{event.eventid}}" Onclick="return ConfirmDelete()" > {{"delete" | trans }} </a></div>
+         <div class="deletebutton" ><a  href="/admin/event/delete/{{event.eventid}}" Onclick="return ConfirmDelete()" > {{"delete"|trans }} </a></div>
         {% endif %}
    </div>
    
@@ -89,14 +89,14 @@
    
    
       <div class="location heading" > 
-      <div class="label" >{{ 'Endroit' | trans }}</div>
-                <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.location.use.bookmarks' | trans }}</span>
+      <div class="label" >{{'Endroit'|trans }}</div>
+                <div class="tooltip">?  <span class="tooltiptext">{{'to.add.location.use.bookmarks'|trans }}</span>
               </div>
                 {% if event.locid %}
                  <div class= "subheading">
   
       <div ><a href ="{{ event.location['link'] }}"> {{ event.location['name'] }}</a> </div>
-         <div class="deletebutton button1" ><a href="/admin/event/deletelocation/{{event.eventid}}" Onclick="return ConfirmDelete()" > {{"delete" | trans }} </a></div>
+         <div class="deletebutton button1" ><a href="/admin/event/deletelocation/{{event.eventid}}" Onclick="return ConfirmDelete()" > {{"delete"|trans }} </a></div>
          </div>
           {% endif  %}
       </div>
@@ -107,15 +107,15 @@
         {% if images %}
         <div class="imagegroup" >
      <div class="heading">
-          <div class="label" > {{ 'images' | trans }} </div>  
-          <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
+          <div class="label" > {{'images'|trans }} </div>  
+          <div class="tooltip">?  <span class="tooltiptext">{{'to.add.images.use.bookmarks'|trans }}</span>
               </div>
          
             <div class="images">
                 {% for image in images %}
                 <div class="image">
                     <div class="imageimage" ><a href="{{image.link}}" ><img src="{{image.fullpath}}" /></a></div>
-                    <div class="imagedelete deletebutton" ><a href="/admin/event/removeimage/{{event.eventid}}/{{image.refid}}">{{ 'delete' | trans }}</a></div>
+                    <div class="imagedelete deletebutton" ><a href="/admin/event/removeimage/{{event.eventid}}/{{image.refid}}">{{'delete'|trans }}</a></div>
                 </div>
                 {% endfor %}
              </div>
@@ -123,8 +123,8 @@
              </div>
              {% else %}
                <div class="heading">
-          <div class="label" > {{ 'images' | trans }} </div>  
-          <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.images.use.bookmarks' | trans }}</span>
+          <div class="label" > {{'images'|trans }} </div>  
+          <div class="tooltip">?  <span class="tooltiptext">{{'to.add.images.use.bookmarks'|trans }}</span>
               </div>
           </div>
               {% endif %}  
@@ -133,8 +133,8 @@
             
      <div class="refgroup" >
      <div class="heading">
-     <div class="label"> {{'Liens' | trans}}</div>
-     <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.link.use.bookmarks' | trans }}</span>
+     <div class="label"> {{'Liens'|trans}}</div>
+     <div class="tooltip">?  <span class="tooltiptext">{{'to.add.link.use.bookmarks'|trans }}</span>
               </div>
     
      </div>
@@ -143,7 +143,7 @@
          {% for ref in refs %}
          <div class="subsubheading">
                <div class="content" >{{ref.label}}</div>
-               <div class="deletebutton button1" ><a href="/admin/event/removelink/{{event.eventid}}/{{ref.id}}" Onclick="return ConfirmDelete()" >{{ 'delete' | trans }}</a></div>
+               <div class="deletebutton button1" ><a href="/admin/event/removelink/{{event.eventid}}/{{ref.id}}" Onclick="return ConfirmDelete()" >{{'delete'|trans }}</a></div>
         </div>
            {% endfor %}
     </div>
@@ -151,28 +151,28 @@
  
            {% if text or title %}
            <div class="textpanel heading" >
-                  <div class="label" > {{ 'texts' | trans }} </div>  
+                  <div class="label" > {{'texts'|trans }} </div>  
                
                  <div class="edit editbutton first">
-                   <a href = "/admin/text/event/{{objid}}"   > {{ 'edit.text' | trans }}</a>
+                   <a href = "/admin/text/event/{{objid}}"   > {{'edit.text'|trans }}</a>
                 </div>
             </div>
         {%else%}
             <div  class="notext heading" >
-                <div class="label red" > {{ 'no.text' | trans }} </div>
-                <div  class="editbutton button1"><a href = "/admin/text/event/{{objid}}"  > {{ 'add.text' | trans }}</a></div>
+                <div class="label red" > {{'no.text'|trans }} </div>
+                <div  class="editbutton button1"><a href = "/admin/text/event/{{objid}}"  > {{'add.text'|trans }}</a></div>
             </div>
         {% endif %}
    
    
      
         <div class="heading" > 
-            <div class="label">{{'participants' |trans}}</div>
-         <div class="tooltip">?  <span class="tooltiptext">{{ 'to.add.participation.use.bookmarks' | trans }}</span>
+            <div class="label">{{'participants'|trans}}</div>
+         <div class="tooltip">?  <span class="tooltiptext">{{'to.add.participation.use.bookmarks'|trans }}</span>
        </div>
    </div>     
    {% if participants %}
-   <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'participants' |trans}}</button>
+   <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'participants'|trans}}</button>
        </div>
     <div id="pdiv" class="participants">
         {% for  key in participants | keys %}
@@ -182,13 +182,13 @@
     {% endif %}
     
     <div class="hidebar" > 
-        <button onclick="HideMe2('pdiv2' )">{{'evenment.enfants' | trans }}</button>
+        <button onclick="HideMe2('pdiv2' )">{{'evenment.enfants'|trans }}</button>
     </div>
   
     <div id="pdiv2" class="children">
     <div class= "subheading" >
       <div class="label"> {{'evenment.enfants'|trans}}</div>
-      <div class="editbutton first" >  <a href="/admin/event/detail/-{{event.eventid}}"> {{"edit.event.new" | trans }} </a></div>
+      <div class="editbutton first" >  <a href="/admin/event/detail/-{{event.eventid}}"> {{"edit.event.new"|trans }} </a></div>
     </div>
       {% if event.children %}
       {% set children = event.children %}

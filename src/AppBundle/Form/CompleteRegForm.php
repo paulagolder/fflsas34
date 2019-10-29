@@ -19,6 +19,7 @@ class CompleteRegForm extends AbstractType
         $builder->add('username', TextType::class);
         $builder->add('email', TextType::class);
         $builder->add('newregistrationcode', IntegerType::class);
+         $builder->add('interet', TextType::class);
       ##  $builder->get('email')->setRequired(false);
        # $builder->get('roles')->setRequired(false);
     }

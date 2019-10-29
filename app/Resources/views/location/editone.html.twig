@@ -74,11 +74,11 @@
     
     {% if location %}
     <div class="heading">
-        <div class="label"> {{'location.a.editer' | trans}}</div>
+        <div class="label"> {{'location.a.editer'|trans}}</div>
         <div class='title' >{{ location.name}}</div>
-        <div class='editbutton button1' ><a href="/admin/location/detail/{{location.locid}}">{{'edit' |trans}}</a></div>
-        <div class='editbutton' ><a href="/admin/location/addbookmark/{{location.locid}}">{{'bookmark' |trans}}</a></div>
-        <div class="returnbutton"> <a href = {{returnlink}} >{{ ' retour ' | trans }} </a> </div>
+        <div class='editbutton button1' ><a href="/admin/location/detail/{{location.locid}}">{{'edit'|trans}}</a></div>
+        <div class='editbutton' ><a href="/admin/location/addbookmark/{{location.locid}}">{{'bookmark'|trans}}</a></div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{{'retour'|trans }} </a> </div>
     </div>
     
     
@@ -92,7 +92,7 @@
     
     {% if texts and texts["FR"] %}
     <div class="text" >
-        {{ texts["FR"] | raw }}
+        {{ texts["FR"]['comment'] | raw }}
     </div>
     {% endif %}
     
@@ -112,7 +112,7 @@
     
     
     
-    <div class="editbutton"><a href="/admin/location/detail/new/{{location.locid}}" >{{'new.location' | trans}} </a> </div>
+    <div class="editbutton"><a href="/admin/location/detail/new/{{location.locid}}" >{{'new.location'|trans}} </a> </div>
     
     
     {% if location.children %}

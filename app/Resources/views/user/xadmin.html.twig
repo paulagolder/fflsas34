@@ -16,24 +16,24 @@
 <div id="fuser"  >
     
     <div class="heading">
-        <div class="label" > {{ 'profil.person' | trans }}</div>
+        <div class="label" > {{'profil.person'|trans }}</div>
         <div class="title" > {{user.username}}</div>
         
-        <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail' |trans}}</a></div>
-        <div class="returnbutton"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
+        <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail'|trans}}</a></div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{{'annuler'|trans }} </a> </div>
     </div>
     
     <div  class="userdata" >
         <div class="datarow">
-            <div class="label" > {{ 'user.email' | trans }}</div>
+            <div class="label" > {{'user.email'|trans }}</div>
             <div class="data" > {{user.email}}</div>
         </div>
         <div class="datarow">
-            <div class="label" > {{ 'user.roles' | trans }}</div>
+            <div class="label" > {{'user.roles'|trans }}</div>
             <div class="data" > {{user.rolestr}}</div>
         </div>
         <div class="datarow">
-            <div class="label" > {{ 'user.lastlogin' | trans }}</div>
+            <div class="label" > {{'user.lastlogin'|trans }}</div>
             <div class="data" > {{user.lastlogin | date("Y-m-d") }}</div>
         </div>
     </div>
@@ -43,8 +43,8 @@
     
     <div class="messagelist" >
         <div class="subheading" >
-            <div class="label" > {{'message.list' | trans }}</div>
-            <div class="editbutton button1" ><a class='editbutton' href="/admin/message/send/{{user.userid}}">{{'send.message' |trans}}</a></div>
+            <div class="label" > {{'message.list'|trans }}</div>
+            <div class="editbutton button1" ><a class='editbutton' href="/admin/message/send/{{user.userid}}">{{'send.message'|trans}}</a></div>
         </div>
         
         {% for message in messages %}
@@ -55,10 +55,10 @@
             <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
             <div class = "message" > {{ message.body|length > 20 ? message.body|slice(0, 20) ~ '...' : message.body  }}</div>
             <div class = "editbutton button1">
-                <a class='editbutton' href="/admin/user/{{user.userid}}/message/view/{{message.id}}">{{'view.message' |trans}}</a>
+                <a class='editbutton' href="/admin/user/{{user.userid}}/message/view/{{message.id}}">{{'view.message'|trans}}</a>
             </div>
             <div class = "deletebutton">
-                <a class='deletebutton' href="/admin/user/{{user.userid}}/message/delete/{{message.id}}">{{'delete.message' |trans}}</a>
+                <a class='deletebutton' href="/admin/user/{{user.userid}}/message/delete/{{message.id}}">{{'delete.message'|trans}}</a>
             </div>
         </div>
         {% endfor %}

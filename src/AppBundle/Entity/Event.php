@@ -65,6 +65,7 @@ class Event
     public $ancestors = array();
     public $children = array();
     public $participantinfo ;
+    public $location = array();
 
     public function getContributor(): ?string
     {

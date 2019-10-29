@@ -23,19 +23,19 @@
     
     {% if groups %}
     <div class="heading">
-        <div class="label" >{{'urlinks'| trans}} </div> 
+        <div class="label" >{{'urlinks'|trans}} </div> 
     </div>
     <div class="urllist">
         {% for tag,urls in groups %}
         <button class="collapsible"> 
-          {{ tag |trans({},'tags') }}
+          {{ tag|trans({},'tags') }}
             </button>
         <div class="content">
         {% for url in urls %}
         <div class="url row">
             <div  class="label" >{{url.label}} </div>
-            <div class="returnbutton button1" > <a class="editbutton" href="/{{lang}}/url/visit/{{url.id}}" >{{"link.visit" | trans }} </a> </div>
-            <div class="editbutton" > <a class="editbutton" href="/{{lang}}/url/addbookmark/{{url.id}}" >{{"bookmark.link" | trans }} </a> </div>
+            <div class="returnbutton button1" > <a class="editbutton" href="/{{lang}}/url/visit/{{url.id}}" >{{"link.visit"|trans }} </a> </div>
+            <div class="editbutton" > <a class="editbutton" href="/{{lang}}/url/addbookmark/{{url.id}}" >{{"bookmark.link"|trans }} </a> </div>
         </div>
         
         {% endfor %} 

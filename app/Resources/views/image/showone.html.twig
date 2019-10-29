@@ -22,12 +22,12 @@
      <div class="title">{{title}}</div> 
             {% if is_granted('ROLE_USER') %} 
         <div class="editbutton button1" >
-            <a class="editbutton" href = "/{{lang}}/image/addbookmark/{{image.imageid}}" >{{'bookmark.image' | trans}}</a>
+            <a class="editbutton" href = "/{{lang}}/image/addbookmark/{{image.imageid}}" >{{'bookmark.image'|trans}}</a>
        </div>
         {% endif %}
          {% if is_granted('ROLE_ADMIN') %} 
         <div class="editbutton ">
-            <a class="editbutton" href = "/admin/image/{{image.imageid}}" >{{'edit.image' | trans }}</a>
+            <a class="editbutton" href = "/admin/image/{{image.imageid}}" >{{'edit.image'|trans }}</a>
         </div>
         {% endif %}
     </div>
@@ -44,7 +44,7 @@
        
        {% for obtype , oref in refs %}
        {% set label = obtype ~ ".links" %}
-        <div  class="linkgroup" >{{  label | trans }}</div>
+        <div  class="linkgroup" >{{  label|trans }}</div>
          {% for obid , ref in oref %}       
      {#   <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a>  </div>#}
          <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a>  </div>

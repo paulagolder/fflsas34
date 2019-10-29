@@ -14,9 +14,9 @@
      <h1> {{message}}</h1>
    {% endif %}
   <form  action="/admin/image/search">
-   <span> {{ 'entrez.chercher' | trans }}</span>
+   <span> {{'entrez.chercher'|trans }}</span>
    <input type="text" name="searchfield">
-   <input type="submit" value="{{ 'chercher' | trans }}" >
+   <input type="submit" value="{{'chercher'|trans }}" >
    </form>
  
    {% if images is defined %}

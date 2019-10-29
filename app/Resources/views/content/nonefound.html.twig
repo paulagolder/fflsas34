@@ -24,12 +24,12 @@
        <div class="title">{{content.title}}</div> 
           {% if is_granted('ROLE_USER') %} 
         <div  class="editbutton button1 ">
-            <a class="editbutton" href = "/{{lang}}/content/addbookmark/{{content.subjectid}}" >{{'bookmark.content' | trans}}</a>
+            <a class="editbutton" href = "/{{lang}}/content/addbookmark/{{content.subjectid}}" >{{'bookmark.content'|trans}}</a>
         </div>
         {% endif %}
          {% if is_granted('ROLE_ADMIN') %} 
         <div  class="editbutton">
-            <a class="editbutton button1" href = "/admin/content/{{content.subjectid}}" >{{'edit.content' | trans }}</a>
+            <a class="editbutton button1" href = "/admin/content/{{content.subjectid}}" >{{'edit.content'|trans }}</a>
         </div>
          {% endif %}
        
@@ -41,9 +41,9 @@
 
     <div class="refs">
       {% if refs != null and (refs| length)>0 %}
-       <div  class="linksheading" >{{ 'liens.a' | trans }}</div>
+       <div  class="linksheading" >{{'liens.a'|trans }}</div>
        {% for obtype , oref in refs %}
-          <div class="linkgroup" >{{obtype  | trans}}</div>
+          <div class="linkgroup" >{{obtype|trans}}</div>
           {% for obid , ref in oref %}       
             <div class="ref" > <a href="{{ ref.link }}">{{ref.label}}</a> </div>
           {% endfor %}

@@ -108,7 +108,7 @@ remote_request_password:
     controller:  AppBundle\Controller\RegistrationController::remotechangepassword  
 
 remote reregistration:
-    path: /reregister/{uid}/{code}
+    path: /reregister/{uid}
     controller:  AppBundle\Controller\RegistrationController::remotereregister   
 
 remote_deregistration:
@@ -324,13 +324,25 @@ person_admin_bookmark:
 person_bookmark:
     path: /{_locale}/person/addbookmark/{pid}
     controller: AppBundle\Controller\PersonController::addUserbookmark   
-   
+    requirements:
+        _locale: en|fr|FR|EN
 person_removeparticipation:
     path: /admin/person/deleteparticipation/{pid}/{partid}
     defaults: { _controller: AppBundle\Controller\AdminPersonController::deleteParticipation}
     requirements:
         partid:  \d+
 
+person_personlist:
+    path: /admin/personlist
+    controller: AppBundle\Controller\AdminPersonController::personlist
+
+person_showroh:
+    path: /{_locale}/person/showroh
+    controller: AppBundle\Controller\PersonController::showroh
+    requirements:
+        _locale: en|fr|FR|EN
+        
+        
 #===================== Person routes  
         
 Person_all_locale:
@@ -574,6 +586,12 @@ event_top:
     path: /{_locale}/event/top
     controller:  AppBundle\Controller\EventController::Showtop
   
+event_showactions:
+    path: /{_locale}/event/showactions
+    controller: AppBundle\Controller\EventController::showactions
+    requirements:
+        _locale: en|fr|FR|EN
+        
 event_one:
     path:  /{_locale}/event/{eid}
     controller:  AppBundle\Controller\EventController::Showone    
@@ -596,6 +614,11 @@ event_admin_delete:
 event_admin_deletelocation:
     path:  /admin/event/deletelocation/{eid}
     controller: AppBundle\Controller\AdminEventController::DeleteLocation
+
+event_eventlist:
+    path: /admin/eventlist
+    controller: AppBundle\Controller\AdminEventController::eventlist
+
 
         
 #======================incidents
@@ -955,8 +978,25 @@ biblo_user_bookmark:
     path:  /{_locale}/biblo/addbookmark/{bid}
     controller:  AppBundle\Controller\BibloController::addUserBookmark  
     
+#==========================labels==========================
 
+label_admin_search:
+   path:  /admin/label/search/{search}
+   controller:  AppBundle\Controller\LabelController::LabelSearch  
+   defaults:
+        search: "="
     
+label_admin_edit:
+    path: admin/label/edit/{lid}
+    controller:  AppBundle\Controller\LabelController::edit 
+    
+label_admin_generate:
+    path: admin/label/generate/
+    controller:  AppBundle\Controller\LabelController::generate
+    
+label_admin_newtag:    
+     path: /admin/label/newtag   
+     controller:  AppBundle\Controller\LabelController::newtag
     
 #=========================================================
     

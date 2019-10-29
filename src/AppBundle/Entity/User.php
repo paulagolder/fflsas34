@@ -71,6 +71,7 @@ class User implements UserInterface, \Serializable
     
     private $plainPassword;
     private $newregistrationcode;
+    public $link;
 
     public function __construct()
     {

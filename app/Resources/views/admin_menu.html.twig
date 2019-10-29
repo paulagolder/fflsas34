@@ -4,19 +4,18 @@
 {% set locale =  app.request.getLocale() | lower %}
 <div id="adminmenu" class="mainmenu" >
  {% if is_granted('ROLE_ADMIN') %}  
-   <div class="menuitem" > <a href="/admin/image/search"> {{ 'admin.images' | trans}}</a> </div>
-   
-   <div class="menuitem" > <a href="/admin/location/top"> {{ 'browse.locations' | trans}}</a> </div>
-     <div class="menuitem" > <a href="/admin/location/search"> {{ 'admin.locations' | trans}}</a> </div>
- <div class="menuitem" > <a href="/admin/biblo/search"> {{ 'les.livres' | trans}}</a> </div>
-    <div class="menuitem" > <a href="/admin/url/search"> {{ 'les.liens' | trans}}</a> </div>
-   <div class="menuitem" > <a href="/admin/content/search"> {{ 'admin.content' | trans}}</a> </div>
-   <div class="menuitem" > <a href="/admin/user/search"> {{ 'admin.allusers' | trans}}</a> </div>
-   <div class="menuitem" > <a href="/admin/message/all"> {{ 'admin.messages' | trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/image/search"> {{'admin.images'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/location/top"> {{'browse.locations'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/location/search"> {{'admin.locations'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/biblo/search"> {{'les.livres'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/url/search"> {{'les.liens'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/content/search"> {{'admin.content'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/user/search"> {{'admin.allusers'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/message/all"> {{'admin.messages'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/label/search"> {{'admin.labels'|trans}}</a> </div>
 {% endif %}
- {% if is_granted('ROLE_BOSS') %}  
-  
- <div class="menuitem" > <a href="/admin/biblo/search"> {{ 'special.function' | trans}}</a> </div>
-  
+{% if is_granted('ROLE_BOSS') %}  
+   <div class="menuitem" > <a href="/admin/personlist"> {{'make.roh'|trans}}</a> </div>
+   <div class="menuitem" > <a href="/admin/eventlist"> {{'make.actions'|trans}}</a> </div>
 {% endif %}
 </div>

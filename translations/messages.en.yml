@@ -1,301 +1,297 @@
-Alias: Alias
-Endroit: Endroit
-Forename: Forename
-Name: Surname
-Toutes.Endroits: 'All Places'
+a.book: Book
+a.copy.has.been.sent to.your.email.address: A copy has been sent to your email address.
+a.copy.has.been.sent.to.your.email.address: A copy has been sent to your email address
+a.link.from: Link from
+a.link.to: Link To
+Access: Access
 accueil: Home
-add.new.linkref: 'Create new Link'
-add.participation: 'Create new participation'
-add.text: 'Add a new text'
-admin.content: 'Edit Content'
-admin.images: 'Edit images'
-admin.locations: 'Edit locations'
-admin.allusers: 'Edit Users'
+add.new.linkref: Create new Link
+add.participation: Create new participation
+add.text: Add a new text
+admin.allusers: Edit Users
+admin.content: Edit Content
+admin.copyright: Copyright
+admin.has.sent.a.message.to: Admin has sent a message to
+admin.images: Edit images
+admin.labels: Manage Labels
+admin.locations: Edit locations
+admin.messages: Message to ADMIN
+admin.privacy: Privacy
+admin.to.user: Admin to User
+Alias: Alias
 annuler: Cancel
-at.place: at
 at: at
-bienvenue.page: 'Welcome All'
-bienvenue.site: 'Welcome to the FFLSAS site'
-bienvenue.visiteur: 'Welcome Guest'
+at.place: at
+bibloLinks: Library
 bienvenue: Welcome
+bienvenue.page: Welcome All
+bienvenue.site: Welcome to the FFLSAS site
+bienvenue.visiteur: Welcome Guest
 blessé: wounded
-muté: transfered
-bookmark.event: bookmark
+Body: Message
+book: Book
+book.author: Author
+book.isbn: ISBN
+book.publisher: Publisher
+book.subtitle: Subtitle
+book.title: Title
+book.year: Year
 bookmark: bookmark
-bookmarks: bookmarks
+bookmark.content: bookmark content
+bookmark.event: bookmark
+bookmark.image: Bookmark image
+bookmark.link: Bookmark link
 bookmark.person: bookmark
-chercher.site: 'Search the database'
+bookmarks: bookmarks
+browse.locations: Browse locations
+bulk.message: Bulk message
+changepass.success: Password change, succesfull.
+cherche.des.hommes: Search the men
 chercher: Search
-child.of: 'Child of'
+chercher.content: Search Articles
+chercher.site: Search the database
+child.of: Child of
+Click.me: Send
 comment: Comment
-compte.de: 'Number of'
-contact.us: 'Send us a message or ask a question'
-contactez.nous: 'Contact Us All'
-create.incident: 'Create an incident'
-create.newperson: 'Create a Person'
-create.this: 'Create this'
+complete.reg: Complete registration
+complete.registration: Complete registration
+compte.de: Number of
+contact.list: message list
+contact.us: Send us a message or ask a question
+contactez.nous: Contact Us All
+content: content
+content.for.subject: subject
+Copyright: Copyright
+create.incident: Create an incident
+create.newperson: Create a Person
+create.this: Create this
+date: on the
 delete: Delete
+delete.contact: delete message
+delete.content: delete content
+delete.image: Delete Image
+delete.link: Delete Link
+delete.message: Delete message
+delete.messages: Delete messages
+delete.this: Delete
+delete.user: delete user
+disabled: Disabled
 during: during
-edit.content: 'Edit Content'
-edit.detail: 'Edit detail'
-edit.event.detail: 'Edit detail'
-edit.event.new: 'Create New Event'
-edit.event: 'Edit event'
-edit.image: 'Edit image'
-edit.images: 'Edit images'
-edit.incident: 'Edit incident'
-edit.links.for: 'Edit links'
-edit.location: 'Edit location'
+edit: Edit
+edit.book: Edit
+edit.book.detail: Edit Book
+edit.content: Edit Content
+edit.contents: edit contents
+edit.detail: Edit detail
+edit.event: Edit event
+edit.event.detail: Edit detail
+edit.event.new: Create New Event
+edit.image: Edit image
+edit.images: Edit images
+edit.incident: Edit incident
+edit.link: Edit Link
+edit.links.for: Edit links
+edit.location: Edit location
+edit.message: Edit message
 edit.participation: Edit
 edit.participations: Edit
 edit.person: Edit
 edit.refs: Edit
-edit.text: 'Edit texts'
-edit.texts: 'Edit texts'
+edit.text: Edit texts
+edit.texts: Edit texts
 edit.this: Edit
-edit: Edit
-email: Email
+edit.user: Edit user
+edit.user.detail: edit user
+Email: Email Address
+EN: EN
 endroit: location
+enFrancais: Afficher le site en français
 enregister: Register
 enregistrement: Register
 enregistrer: Save
-entrez.chercher: 'Enter Search Term'
+enter.new.password: Enter new password
+entrez.chercher: Enter Search Term
+Envoyer: Send
 evenement: event
 evenements: events
-event.a.editer: 'Edit Event'
+evenment.enfants: child events
 event: Event
-event.links: 'Links to Events'
+event.a.editer: Edit Event
+event.links: Links to Events
 events: Events
-found.too.many: 'Too many found'
+for: for
+forced.registration: Force re-registration
+Forename: Forename
+Format: Format
 found: Found
-he.was: 'he was'
+found.too.many: Too many found
+FR: FR
+fred: _fred
+friend: Friend
+from: from
+from.admin: From ADMIN
+from.admin.to: to
+Fromemail: Sender email
+Fromname: Sender
+he.was: he was
 homme: person
 hommes: People
-image.chance: 'Lucky Image'
+if.password.forgotten: Password Forgotten
+image.chance: Lucky Image
+Image.file: Image file(jpg or png)
 images: Images
-incident.rank: 'with the rank of'
+incident.rank: with the rank of
 incident.role: role
-incident.to: 'Incident in the service of :'
+incident.to: Incident in the service of =
 incidents: incidents
+inEnglish: Show site in English
 introduction: Introduction
+latest.edits: Latest Updates
 latitude: Latitudeen
-les.actions: 'The Action'
-les.hommes: 'The Men'
-liens.a: 'Links to'
-liens: Links
-location.a.editer: 'Edit location'
-location.name: Name
-log.in: 'Log In'
-log.out: 'Log Out'
-login.message: 'To access all of our site sign in.'
-mail.us: 'Send us a message'
-message: Message
-name: Name
-new.content: 'New Content'
-new.image: 'New Image'
-new.location: 'New Location'
-new.person: 'Create a new Man'
-no.text: 'No texts added yet'
-notre.site: 'Our Site'
-on.date: the
-participated.in.events: Participations
-password: Password
-people: People
-person.a.editer: Editing
-person: 'The Men'
-person.links: 'Links to People'
-ref.edit: 'Edit links'
-rejoint: rejoined
-retour: Cancel
-rien.a.chercher: 'No search term entered'
-search.results: 'Results of search for :'
-si.non.enregistre: 'To Register'
-sous.evenements: Sub-Events
-subject: Subject
-submit: Send
-textes: Texts
-the.campaign: 'the campaign'
-this.is.an.edit: 'This is an edit'
-toutes.endroits: 'All Places'
-transféré: transfered
-trouver.tout: 'All found'
-trouver.avec: 'Found with'
-tué: killed
-under.the.name.of: 'under the name of'
-username: Username
-for: for
-voir.user: 'see user'
-delete.user: 'delete user'
-edit.user.detail: 'edit user'
-user.email: 'user email'
-user.roles: 'user roles'
-user.lastlogin: 'User Last login'
-contact.list: 'message list'
-view.contact: 'see message'
-delete.contact: 'delete message'
-message.enyoyer: 'message sent'
-date: 'on the'
-from: from
-mail.from: 'message fropm'
-mail.subject: subject
-mail.body: message
-voir: see
-new.incident: 'New incident'
-a.link.from: 'Link from'
-participants: participants
-evenment.enfants: 'child events'
-mail.date.sent: 'message sent on'
-mail.sentby: 'message sent by'
-complete.reg: 'Complete registration'
-sucessful.completion: 'Registartion successful'
-welcome.to.our.site: 'Welcome to our site'
-edit.contents: 'edit contents'
-bookmark.content: 'bookmark content'
-delete.content: 'delete content'
-content.for.subject: subject
-message.forwarded.by.admin: 'forwarded by FFLSAS-admin'
-message.sent.by: 'sent by'
-message.to: 'sent to'
-message.date: 'date sent'
-message.subject: subject
-to.add.images.use.bookmarks: 'To add images use bookmarks.'
-to.add.participation.use.bookmarks: 'To add a participant use a bookmark'
-see.admin.messages: 'Admin messages'
-edit.message: 'Edit message'
-send.message: 'Send message'
-delete.message: 'Delete message'
-message.to.user: 'Message to USER'
-admin.messages: 'Message to ADMIN'
-users: users
-user.show: 'Shoe user'
-edit.user: 'Edit user'
-profil.person: 'User profile'
-message.list: 'List of messages'
-view.message: 'Read message'
-see.message: 'Read messagee'
-message.sentby: 'Message sent by'
-new.user: 'New user'
-register: Register
-bookmark.image: 'Bookmark image'
-see.image: 'See image'
-chercher.content: 'Search Articles'
-user.to.admin: 'User to Admin'
-admin.to.user: 'Admin to User'
-message.envoyer.a: Recipient
-Toname: Destination
-Toemail: 'Destination email'
-Fromname: Sender
-Fromemail: 'Sender email'
-Subject: Subject
-Body: Message
-parachuté: parachuted
-message.enyoyer.a: destination
-see.content: See
-Click.me: Send
-view.user: 'See user'
-return: return
-admin.copyright: Copyright
-admin.privacy: Privacy
-Username: Username
-Email: 'Email Address'
-Password: Password
-Repeat.Password: 'Repeat Password'
-tell.us.your.interest.in.our.site: "Tell us why you are interested in our site"
-when.first.signing: 'When first signing in'
-registration.success: 'Registration is successfull'
-you.have.sucessfully.registered: 'You have registered sucessfully. '
-you.have.sucessfully.requested.change.password: 'You have requested to change your password.'
-you.must.reregister: 'You must reregister'
-you.have.sucessfully.completed: 'You have successfully completed the registration process. '
-to.complete.enter: 'To complete registration enter the following code'
-print.transcript: 'print copy'
-Path: Path
-Copyright: Copyright
-Format: Format
-Access: Access
-Image.file: 'Image file(jpg or png)'
-content: content
-inEnglish: 'Show site in English'
-enFrancais: 'Afficher le site en français'
-texts: Texts
-complete.registration: 'Complete registration'
-delete.image: 'Delete Image'
-to.add.location.use.bookmarks: 'To add a location use a bookmark'
-Liens: Links
-to.add.link.use.bookmarks: 'To add a link use a bookmark'
-vue: View
-disabled: Disabled
-from.admin.to: to
-to.admin: 'To ADMIN'
-this.message.was.sent.by: 'This message was sent by'
-latest.edits: 'Latest Updates'
-remove.bookmarks: 'Remove .bookmarks'
-new.book: 'New Bookk'
-a.book: Book
-bibloLinks: Library
-link.visit: Visit
-bookmark.link: 'Bookmark link'
-book: Book
-edit.book.detail: 'Edit Book'
-book.title: Title
-book.subtitle: Subtitle
-book.author: Author
-book.publisher: Publisher
-book.year: Year
-book.isbn: ISBN
-new.url: 'New Url Link'
+les.actions: The Action
+les.hommes: The Men
 les.liens: Links
 les.livres: Books
-voir.urls: 'See Link'
-voir.biblo: 'See Book'
-urlinks: Links
-new.link: 'New Link'
-edit.link: 'Edit Link'
-delete.link: 'Delete Link'
-title: Title
-url: URL
-visit: Visit
-delete.this: Delete
-reconnect: 'Logout and Login again to continue as user'
-cherche.des.hommes: 'Search the men'
-Register!: Register!
-edit.book: Edit
-see.location: See
-browse.locations: 'Browse locations'
-special.function: 'Special Functions'
-enter.new.password: 'Enter new password'
-read.message: 'Read message'
-FR: FR
-EN: EN
-linked.from: 'Linked from'
-if.password.forgotten: 'Password Forgotten'
-mot.de.pass.oublier: 'mot-de-pass oublier'
-a.link.to: 'Link To'
-tags: Tags
-unsucessful.rereg: 'Re-registration unsucessful'
-rereg.user: 're-register user'
-reset.password: 'reset password'
-to.complete.reply.to.email: 'To complete the process reply to the email you will receive.'
-user.not.recognised: 'User not recognised'
-request.new.password: 'Request a new password'
-sucessfully.registered: 'Sucessfully registered'
-you.have.sent.a.message.to.FFLSAS.org: 'You have sent a message to FFLSAS.og'
-a.copy.has.been.sent to.your.email.address: 'A copy has been sent to your email address.'
-user.locale: 'Prefered language'
-changepass.success: 'Password change, succesfull.'
-try.again: 'Try again'
-admin.has.sent.a.message.to: "Admin has sent a message to"
-send.bulk.message: 'Send a message to multiple users'
-recepients: recepients
-send: send
+Liens: Links
+liens.a: Links to
+link.visit: Visit
+linked.from: Linked from
+location.a.editer: Edit location
+location.name: Name
+log.in: Log In
+log.out: Log Out
+login.message: To access all of our site sign in.
+mail.body: message
+mail.date.sent: message sent on
+mail.from: message fropm
+mail.sentby: message sent by
+mail.subject: subject
+mail.us: Send us a message
+make.actions: Export Actions
+make.roh: Export Role Of Honour
+many.users: Many users
+message: Message
 message.bcc: Blind Copies
-many.users:  Many users
-Envoyer: Send
-a.copy.has.been.sent.to.your.email.address:  "A copy has been sent to your email address"
-bulk.message: 'Bulk message'
-to.send.bulk.email.use.bookmarks: 'To send bulk email use a bookmark'
-rereg.group:  "Reregister a group"
-delete.messages: "Delete messages"
-from.admin:  "From ADMIN"
-forced.registration: "Force re-registration"
-friend: Friend
+message.date: date sent
+message.envoyer.a: Recipient
+message.enyoyer: message sent
+message.enyoyer.a: destination
+message.forwarded.by.admin: forwarded by FFLSAS-admin
+message.list: List of messages
+message.sent.by: sent by
+message.sentby: Message sent by
+message.subject: subject
+message.to: sent to
+message.to.user: Message to USER
+mot.de.pass.oublier: mot-de-pass oublier
+muté: transfered
+name: Name
+new.book: New Bookk
+new.content: New Content
+new.image: New Image
+new.incident: New incident
+new.link: New Link
+new.location: New Location
+new.person: Create a new Man
+new.url: New Url Link
+new.user: New user
+no.text: No texts added yet
+notre.site: Our Site
+on.date: the
+parachuté: parachuted
+participants: participants
+participated.in.events: Participations
+Password: Password
+Path: Path
+people: People
+person: The Men
+person.a.editer: Editing
+person.links: Links to People
+print.transcript: print copy
+profil.person: User profile
+read.message: Read message
+recepients: recepients
+reconnect: Logout and Login again to continue as user
+ref.edit: Edit links
+register: Register
+Register!: Register!
+registration.success: Registration is successfull
+rejoint: rejoined
+remove.bookmarks: Remove .bookmarks
+Repeat.Password: Repeat Password
+request.new.password: Request a new password
+rereg.group: Reregister a group
+rereg.user: re-register user
+reset.password: reset password
+retour: Cancel
+return: return
+rien.a.chercher: No search term entered
+search.results: Results of search for =
+see.admin.messages: Admin messages
+see.content: See
+see.image: See image
+see.location: See
+see.message: Read messagee
+send: send
+send.bulk.message: Send a message to multiple users
+send.message: Send message
+si.non.enregistre: To Register
+sous.evenements: Sub-Events
+special.function: Special Functions
+Subject: Subject
+submit: Send
+sucessful.completion: Registartion successful
+sucessfully.registered: Sucessfully registered
+tags: Tags
+tell.us.your.interest.in.our.site: Tell us why you are interested in our site
+textes: Texts
+texts: Texts
+the.campaign: the campaign
+this.is.an.edit: This is an edit
+this.message.was.sent.by: This message was sent by
+title: Title
+to.add.images.use.bookmarks: To add images use bookmarks.
+to.add.link.use.bookmarks: To add a link use a bookmark
+to.add.location.use.bookmarks: To add a location use a bookmark
+to.add.participation.use.bookmarks: To add a participant use a bookmark
+to.admin: To ADMIN
+to.complete.enter: To complete registration enter the following code
+to.complete.reply.to.email: To complete the process reply to the email you will receive.
+to.send.bulk.email.use.bookmarks: To send bulk email use a bookmark
+Toemail: Destination email
+Toname: Destination
+toutes.endroits: All Places
+transféré: transfered
+trouver.avec: Found with
+trouver.tout: All found
+try.again: Try again
+tué: killed
+under.the.name.of: under the name of
+unsucessful.rereg: Re-registration unsucessful
+url: URL
+urlinks: Links
+user.email: user email
+user.lastlogin: User Last login
+user.locale: Prefered language
+user.not.recognised: User not recognised
+user.roles: user roles
+user.show: Shoe user
+user.to.admin: User to Admin
+Username: Username
+users: users
+view.contact: see message
+view.message: Read message
+view.user: See user
+visit: Visit
+voir: see
+voir.biblo: See Book
+voir.urls: See Link
+voir.user: see user
+vue: View
+welcome.to.our.site: Welcome to our site
+when.first.signing: When first signing in
+you.have.sent.a.message.to.FFLSAS.org: You have sent a message to FFLSAS.og
+you.have.sucessfully.completed: You have successfully completed the registration process.
+you.have.sucessfully.registered: You have registered sucessfully.
+you.have.sucessfully.requested.change.password: You have requested to change your password.
+you.must.reregister: You must reregister

@@ -62,7 +62,20 @@ div#person div.eventtree ul li  span
 }
 
 
+div#person div.personlist 
+{
+ display:flex;
+ flex-wrap:wrap;
+}
 
+
+div#person div.personlist div.person
+{
+width: 12em;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
 
 div#person div.eventtree ul li div.incident
 {

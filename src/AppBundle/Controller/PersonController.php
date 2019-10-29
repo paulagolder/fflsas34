@@ -107,6 +107,13 @@ class PersonController extends Controller
                                 ]);
     }
     
+    
+    public function ShowRoH()
+    {
+        
+        return $this->render('person/showRoH.html.twig');
+    }
+    
     public function Showone($pid)
     {
         $lib =  $this->mylib ;

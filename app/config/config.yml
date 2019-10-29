@@ -49,6 +49,9 @@ twig:
         adminstratorsemails: '%administratorsemails%'
         baseurl: '%base-url%'
         
+    paths:
+        '%kernel.project_dir%/web': pathToWeb
+        
 # Doctrine Configuration
 doctrine:
     dbal:

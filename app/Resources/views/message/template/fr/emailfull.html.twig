@@ -36,7 +36,7 @@ div.body { padding:3em; }
 <tr><td class="label" >{{'Message envoyée a'}} </td><td class="title" > {{message.toname}} ({{message.toemail}})</td></tr>
 {% endif %}
 
-{# <tr><td class="label" >{{'Sujet'}}</td><td class="title"> {{ message.subject | trans ({}, 'messages', 'fr')   }}</td></tr> #}
+{# <tr><td class="label" >{{'Sujet'}}</td><td class="title"> {{ message.subject|trans ({}, 'messages', 'fr')   }}</td></tr> #}
 </table>
 <div class="body">
 {{ message.body | raw }}

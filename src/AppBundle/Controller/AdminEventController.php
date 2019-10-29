@@ -422,4 +422,47 @@ class AdminEventController extends Controller
         return $this->redirect('/admin/event/'.$eid);
         
     }
+    
+    public function eventlist()
+    {
+       $events = $this->getDoctrine()->getRepository("AppBundle:Event")->findAll();
+       $frevents= array();
+       $enevents= array();
+        foreach($events as $event)
+            {
+                $eventid = $event->getEventid();
+                $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$eventid);
+                $frtitle = $this->mylib->selectText($text_ar, "title","fr");
+                 $entitle = $this->mylib->selectText($text_ar, "title","en");
+                $frlink = "/fr/event/".$eventid;
+                 $enlink = "/en/event/".$eventid;
+                 $enevents[$entitle]=$enlink;
+                $frevents[$frtitle]=$frlink;
+            }
+            
+            ksort($enevents, 4);
+            ksort($frevents, 4);
+            
+            
+            
+            $fpfr = fopen("docs/fr/actions.htm","w");
+            foreach($frevents as $key=>$link)
+            {
+                fwrite($fpfr, "<div class='event' > <a href='".$link."'>".$key."</a></div>\n" );
+            }
+            fclose($fpfr);
+            
+            
+            $fpen = fopen("docs/en/actions.htm","w");
+            foreach($enevents as $key=>$event)
+            {
+                fwrite($fpen, "<div class='event' > <a href='".$link."'>".$key."</a></div>\n" );
+            }
+            fclose($fpen);
+            
+            $mess = "event.files.produced";
+            return $this->redirect('/accueil/message/'.$mess);
+        
+       
+    }
 }

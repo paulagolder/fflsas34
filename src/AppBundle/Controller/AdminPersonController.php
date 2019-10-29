@@ -397,6 +397,28 @@ class AdminPersonController extends Controller
         return $this->redirect('/accueil/message/'.$mess);
         
     }
+    
+    public function personlist()
+    {
+        $fp = fopen("docs/roleofhonour.htm","w");
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        
+
+            $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
+       
+    
+            foreach($people as $person)
+            {
+                $person->link = "/fr/person/".$person->getId();
+                fwrite($fp, "<div class='person' > <a href='".$person->link."'>".$person->getFullname()."</a></div>\n" );
+            }
+            
+            fclose($fp);
+         $mess = "person.file.produced";;
+           return $this->redirect('/accueil/message/'.$mess);
+        
+       
+    }
 }
 
 

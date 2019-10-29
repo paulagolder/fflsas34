@@ -260,7 +260,7 @@ class UserController extends Controller
         $entityManager->flush();
         $baseurl = $this->container->getParameter('base-url');
         $code = $fuser->getRegistrationcode();
-        $reglink = "{$baseurl}reregister/{$fuser->getUserid()}/{$code}";
+        $reglink = "{$baseurl}complete/{$fuser->getUserid()}";
         $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
         $subject =  $this->trans->trans('reregister');
         $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);

@@ -13,11 +13,11 @@
 <div id="middle" >
 <div id="message"  >
 <div class="heading">
-  <div class="label" > {{ 'send.bulk.message' | trans }}</div>
+  <div class="label" > {{'send.bulk.message'|trans }}</div>
   <div class="title" > {{message.id}}</div>
 
 
-  <div class="returnbutton"> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
+  <div class="returnbutton"> <a href = {{returnlink}} >{{'annuler'|trans }} </a> </div>
 </div>
 
 
@@ -38,7 +38,7 @@
 <div class= "subheading" >
    <div class= "label" >{{'message.to'|trans}}</div>
    <div class="title" >{{message.toname}} ({{message.toemail}}) </div>
-   <div class= "label" >{{'message.date' | trans}} </div>
+   <div class= "label" >{{'message.date'|trans}} </div>
    <div class="title"> {{message.date_sent  | date("Y-m-d")}}</div>
 </div>
 <div class= "subheading">

@@ -42,11 +42,11 @@
      <h1> {{message}} </h1>
    {% else %}
     <div class="heading" >
-      <div class="label" >{{"edit.links.for" |trans}}</div> 
+      <div class="label" >{{"edit.links.for"|trans}}</div> 
       <div class="title" >{{label}}</div> 
-      <div class="button1 editbutton">  <a class="editbutton" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/0 " > {{ 'add.new.linkref' | trans }}</a></div>
+      <div class="button1 editbutton">  <a class="editbutton" href= "/admin/linkref/edit/{{objecttype}}/{{objid}}/0 " > {{'add.new.linkref'|trans }}</a></div>
     
-      <div class="returnbutton">  <a class="returnbutton" href= "{{returnlink}}" > {{ 'retour' | trans }}</a></div>
+      <div class="returnbutton">  <a class="returnbutton" href= "{{returnlink}}" > {{'retour'|trans }}</a></div>
      </div>
 
    {% if refs %}
@@ -54,8 +54,8 @@
          {% for ref in refs %}
             <div class= "row" >
             <a href="{{ref.path}}" >{{ ref.label}}</a>
-            <div class="editbutton button1"><a class="editbutton" href= "/admin/linkref/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'edit' | trans}}</a></div>
-            <div class="deletebutton">  <a class="deletebutton" href= "/admin/linkref/delete/{{objecttype}}/{{objid}}/{{ref['linkid']}}" Onclick="return ConfirmDelete()"  > {{'delete' | trans}}</a></div>
+            <div class="editbutton button1"><a class="editbutton" href= "/admin/linkref/{{objecttype}}/{{objid}}/{{ref['linkid']}} " > {{'edit'|trans}}</a></div>
+            <div class="deletebutton">  <a class="deletebutton" href= "/admin/linkref/delete/{{objecttype}}/{{objid}}/{{ref['linkid']}}" Onclick="return ConfirmDelete()"  > {{'delete'|trans}}</a></div>
             </div>
          {% endfor %}
      </div>

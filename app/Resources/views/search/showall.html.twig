@@ -18,30 +18,30 @@
         {% endif %}
   <div id="search" class="search" >
    {% if message %}
-     <div class="pageheading"> {{message | trans }}</div>
+     <div class="pageheading"> {{message|trans }}</div>
    {% endif %}
 
    <form  action="/{{locale}}/search/all">
    <div class="heading">
-    <div class="label" > {{ 'entrez.chercher' | trans }}</div>
+    <div class="label" > {{'entrez.chercher'|trans }}</div>
    <input type="text" name="searchfield">
-   <input type="submit" value="{{ 'chercher' | trans }}" >
+   <input type="submit" value="{{'chercher'|trans }}" >
    </form>
    </div>
    {% if results is defined  %}
      {% if results %}
        <div class="subheading"> 
-       <div class="label">{{'search.results' | trans}} </div> 
+       <div class="label">{{'search.results'|trans}} </div> 
        <div class="title">{{searchkey}}</div> 
       </div> 
        {% for key, group in results %}
        {%if ( group | length ) > maxlist %}
        <div class="subheading">
-        <div class="label"> {{'found.too.many' | trans}} {{key |trans}} ( {{group | length}} )</div>
+        <div class="label"> {{'found.too.many'|trans}} {{key|trans}} ( {{group | length}} )</div>
         </div>
        {% else %}
          <div class="subheading" >
-         <div class="label" > {{'found' | trans}} {{key |trans}}</div>
+         <div class="label" > {{'found'|trans}} {{key|trans}}</div>
        </div>
            <ul>
              {% for subject in group %}

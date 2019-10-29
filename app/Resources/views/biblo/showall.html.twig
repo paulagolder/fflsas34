@@ -24,19 +24,19 @@
     
     {% if groups %}
     <div class="heading">
-        <div class="label" >{{'bibloLinks'| trans}} </div> 
+        <div class="label" >{{'bibloLinks'|trans}} </div> 
     </div>
     <div class="biblolist">
         {% for tag,biblos in groups %}
         <button class="collapsible">
-             {{ tag |trans({},'tags') }}
+             {{ tag|trans({},'tags') }}
             </button>
         <div class="content">
         {% for biblo in biblos %}
         <div class="biblo row">
             <div  class="label" >{{biblo.title}} </div>
-            <div class="returnbutton button1" > <a class="editbutton" href="/{{lang}}/biblo/show/{{biblo.bookid}}" >{{"link.visit" | trans }} </a> </div>
-            <div class="editbutton" > <a class="editbutton" href="/{{lang}}/biblo/addbookmark/{{biblo.bookid}}" >{{"bookmark.link" | trans }} </a> </div>
+            <div class="returnbutton button1" > <a class="editbutton" href="/{{lang}}/biblo/show/{{biblo.bookid}}" >{{"link.visit"|trans }} </a> </div>
+            <div class="editbutton" > <a class="editbutton" href="/{{lang}}/biblo/addbookmark/{{biblo.bookid}}" >{{"bookmark.link"|trans }} </a> </div>
         </div>
         
         {% endfor %} 

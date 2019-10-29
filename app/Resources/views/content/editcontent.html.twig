@@ -32,10 +32,10 @@
     {% set foundfr = false %}
    {% if contents %}
    <div class="heading">
-     <div class="label" >{{ 'content.for.subject' | trans }} </div>
+     <div class="label" >{{'content.for.subject'|trans }} </div>
      <div class="title" > {{subjectid}}</div>
-      <div class="returnbutton button1"> <a href = "/{{lang}}/content/{{subjectid}}" >{{ 'voir' | trans }} </a> </div>
-     <div class="returnbutton "> <a href = {{returnlink}} >{{ 'annuler' | trans }} </a> </div>
+      <div class="returnbutton button1"> <a href = "/{{lang}}/content/{{subjectid}}" >{{'voir'|trans }} </a> </div>
+     <div class="returnbutton "> <a href = {{returnlink}} >{{'annuler'|trans }} </a> </div>
    </div>
 
    {% for content in contents %}
@@ -50,9 +50,9 @@
     <div class="heading" >
       <div class="title">{{content.title}}</div> 
       <div class="title">{{content.language}}</div> 
-      <div class="editbutton button1" ><a class='editbutton' href="/admin/content/edit/{{content.contentid}}">{{'edit.content' |trans}}</a></div>
+      <div class="editbutton button1" ><a class='editbutton' href="/admin/content/edit/{{content.contentid}}">{{'edit.content'|trans}}</a></div>
   
-      <div  ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}" Onclick="return ConfirmDelete()" >{{'delete.content' |trans}}</a></div>      
+      <div  ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}" Onclick="return ConfirmDelete()" >{{'delete.content'|trans}}</a></div>      
     </div>
      
     <div class='textwindow resizable'>
@@ -68,7 +68,7 @@
     <div class="subheading" >
     <div class="label" > make.french.text</div>
      <div class="editbutton button1" >
-     <a href="/admin/content/new/{{subjectid}}/fr">{{'new.content' |trans}}</a>
+     <a href="/admin/content/new/{{subjectid}}/fr">{{'new.content'|trans}}</a>
     </div>
     </div>
    {% endif %}
@@ -76,14 +76,14 @@
     <div class="subheading" >
     <div class="label" > make.english.text </div>
      <div class="editbutton button1" >
-     <a  href="/admin/content/new/{{subjectid}}/en">{{'new.content' |trans}}</a>
+     <a  href="/admin/content/new/{{subjectid}}/en">{{'new.content'|trans}}</a>
     </div>
     </div>
    {% endif %}
     
    <div class="refs">
    <div class="subheading">
-       <div  class="label" >{{ 'linked.from' | trans }}</div>
+       <div  class="label" >{{'linked.from'|trans }}</div>
        </div>
        {% for ref in refs %}
         <div class="ref" > <a href="/fr/{{ref.objecttype}}/{{ref.objid}}">{{ref.objecttype}}/{{ref.objid}}</a> </div>

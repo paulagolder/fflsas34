@@ -32,9 +32,9 @@
         <div id="contentedit" >
             
             <div class="heading">
-                <div class="label" >{{ 'edit.contents' | trans }} </div>
+                <div class="label" >{{'edit.contents'|trans }} </div>
                 <div class="title" >{{ content.title}} : {{content.contentid}} </div>
-                <div class="returnbutton button1"> <a href ="{{returnlink}}" >{{ 'annuler' | trans }} </a> </div>
+                <div class="returnbutton button1"> <a href ="{{returnlink}}" >{{'annuler'|trans }} </a> </div>
             </div> 
             <div class="form">
                 <form action="/admin/content/process_edit/{{content.contentid}}" method="post" >
@@ -82,14 +82,14 @@
                           </label>
                     </div>
                     <input type="hidden" name="_text" value="{{ content.text  }}" >
-                         <button type="submit" id="submitbutton" style="display: none;"  >{{ ' enregistrer ' | trans }} </button> 
+                         <button type="submit" id="submitbutton" style="display: none;"  >{{'enregistrer'|trans }} </button> 
                 </form>
-                <button onclick="saveform()">{{ 'Click.me' | trans }}</button>  
+                <button onclick="saveform()">{{'Click.me'|trans }}</button>  
                 <div id="editortext"   >
                     {{ content.text | raw }}
                 </div>
             </div>
-                <button onclick="saveform()">{{ 'Click.me' | trans }}</button>  
+                <button onclick="saveform()">{{'Click.me'|trans }}</button>  
         </div>
     </div>
     {% endblock %}

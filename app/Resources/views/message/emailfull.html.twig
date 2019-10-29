@@ -11,11 +11,11 @@
 <div class="mailmessage">
 <table  >
 <tr><td >{{'message.enyoyer.a'|trans }} </td><td> {{message.toname}}</td></tr>
-<tr><td >{{'mail.date.sent'| trans}} </td><td> {{ message.date_sent  | date("Y-m-d h:m:s")}}</td></tr>
-<tr><td >{{'mail.sentby'| trans}} </td><td> {{ message.fromname }}</td></tr>
-<tr><td> {{'mail.from' |trans }}</td><td>{{message.fromemail}} </td></tr>
-<tr><td>{{'mail.subject'| trans}} </td><td> {{ message.subject }}</td></tr>
-<tr><td column-span:all>{{ message.subject | trans}}  </td><td></td><tr>
+<tr><td >{{'mail.date.sent'|trans}} </td><td> {{ message.date_sent  | date("Y-m-d h:m:s")}}</td></tr>
+<tr><td >{{'mail.sentby'|trans}} </td><td> {{ message.fromname }}</td></tr>
+<tr><td> {{'mail.from'|trans }}</td><td>{{message.fromemail}} </td></tr>
+<tr><td>{{'mail.subject'|trans}} </td><td> {{ message.subject }}</td></tr>
+<tr><td column-span:all>{{ message.subject|trans}}  </td><td></td><tr>
 <tr><td column-span:all>{{ message.body | raw }}</td></tr>
 </table>
 </div>

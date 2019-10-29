@@ -9,7 +9,7 @@
  
    <div id="bookmarks" >
  
-     <h1 class="heading">{{ 'bookmarks' | trans }}</h1> 
+     <h1 class="heading">{{'bookmarks'|trans }}</h1> 
      {% for key1, blist in blists  %}
         <div class="bookmarkheading"> {{key1}}</div>
        {% for key in blist | keys  %} 

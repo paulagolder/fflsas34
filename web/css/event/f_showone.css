@@ -12,6 +12,21 @@ xdiv#event div.breadcrumbs  a
   text-decoration:none;
 }
 
+div#event div.actionlist 
+{
+ display:flex;
+ flex-wrap:wrap;
+}
+
+div#event div.actionlist div.event
+{
+width: 12em;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+
 div#event a
 {
   color:blue;

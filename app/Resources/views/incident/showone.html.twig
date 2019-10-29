@@ -27,37 +27,37 @@
    {% if incident is defined  %}
 
     <div class="heading" >
-       <div class="label">{{'incident.to' |trans }} </div>
-       <div class="title"> {{personname}} {{incident.rank}} </div>
+       <div class="label">{{'incident.to'|trans }} </div>
+       <div class="title">{{personname}} {{incident.rank}} </div>
        <div class="returnbutton" ><a href="{{returnlink}}">{{'retour'|trans}}</a></div>
     </div>
     <div class="heading" >
-       <div class="label"> {{'during' |trans}} {{'the.campaign' |trans}}</div>
-       <div class="title">  {{eventlabel}}</div> 
+       <div class="label">{{'during'|trans}} {{'the.campaign'|trans}}</div>
+       <div class="title">{{eventlabel}}</div> 
     </div>
     <div class="incident">
        <div class="subheading" >
-            <div class="label" >{{'he.was' | trans}} </div><div class="field"> {{label | trans}} </div>
+            <div class="label" >{{'he.was'|trans}} </div><div class="field"> {{label|trans}} </div>
          </div>  
            {% if incident.namerecorded != "" %}
               <div class="subheading" >
-                <div class="label" > {{'under.the.name.of' | trans }} </div><div class="field"> {{incident.namerecorded}}</div>
+                <div class="label" >{{'under.the.name.of'|trans }}</div><div class="field"> {{incident.namerecorded}}</div>
                     </div>  
            {% endif %}
             {% if incident.role != "" %}
               <div class="subheading" >
-                <div class="label" > {{'with.the.role.of' | trans }} </div><div class="field"> {{incident.role}}</div>
+                <div class="label" >{{'with.the.role.of'|trans }}</div><div class="field"> {{incident.role}}</div>
                     </div>  
            {% endif %}
            {% if ( incident.locid > 1   ) %}
               <div class="subheading" >
-               <div class="label"  >{{'at' |trans}}</div><div class="field">  {{location.name}} </div>
+               <div class="label"  >{{'at'|trans}}</div><div class="field">  {{location.name}} </div>
                <div class="returnbutton"><a href="{{location.link}}">{{'voir'|trans}}</a></div>
                    </div>  
            {% endif %}
             {% if (incident.comment !="" and  incident.locid < 1) %}
               <div class="subheading" >
-               <div class="label"  >{{'at' |trans}}</div><div class="field">  {{incident.comment}}</div>
+               <div class="label"  >{{'at'|trans}}</div><div class="field">  {{incident.comment}}</div>
                    </div>  
            {% endif %}
            {% if incident.sdate != "" %}
@@ -67,12 +67,12 @@
            {% endif %}
            {% if incident.rank != "" %}
               <div class="subheading" >
-              <div class="label"  >{{'incident.rank' | trans }} </div><div class="field">  {{incident.rank}}</div>
+              <div class="label"  >{{'incident.rank'|trans }} </div><div class="field">{{incident.rank}}</div>
                   </div>  
            {% endif %}
            {% if incident.role != "" %}
            <div class="subheading" >
-              <div class="label" >{{'incident.role' | trans }} </div><div class="field"> {{incident.role}}</div>
+              <div class="label" >{{'incident.role'|trans }} </div><div class="field">{{incident.role}}</div>
                   </div>  
            {% endif %}
        </div>
