@@ -64,7 +64,7 @@
                 <a href="/{{locale}}/confirmemail/{{app.user.userid}}" >{{"complete.reg"|trans}}</a>
             </div>
             {% endif %}
-             {% if  is_granted('ROLE_APWC') %}
+             {% if  is_granted('ROLE_zAPWC') %}
             <div class="complete messbutton">
                 <a href="/{{locale}}/changepassword/{{app.user.userid}}" >{{"reset.password"|trans}}</a>
             </div>

@@ -109,15 +109,15 @@ class RegistrationController extends Controller
         $uname = $user->getUsername();
         $uemail = $user->getEmail();
         
-        $form = $this->createForm(CompleteRegForm::class, $user);
+        $form = $this->createForm(ConfirmEmailForm::class, $user);
         $form->handleRequest($request);
         $codeisvalid= $user->codeisvalid();
-        if ($form->isSubmitted() && $form->isValid() && $codeisvalid ) 
+        $temp = $user->hasRole("ROLE_AEMC");
+        if ($form->isSubmitted() && $form->isValid() && $codeisvalid && $temp ) 
         {
             $user->setLastlogin( new \DateTime());
             $user->updateRole("emailconfirmed");
             $user->setUsername($uname);
-            // $user->setInteret($uname);
             $user->setEmail($uemail);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -164,7 +164,6 @@ class RegistrationController extends Controller
                 {
                     $user->setLastlogin( new \DateTime());
                     $user->updateRole("emailconfirmed");
-                    # $lang = $user->getLang();
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($user);
                     $entityManager->flush(); 

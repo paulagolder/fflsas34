@@ -354,18 +354,19 @@ function sendConfidentialMessageToUser($message,$userid,$lang)
 
 function sendUserMessage($subjecttag,$bodytag,$user)
 {
+     $adminlang = $this->requestStack->getCurrentRequest()->getLocale();
      $body =  $this->renderView('message/template/'.$user->getLang().'/'.$bodytag.'.html.twig',array('user'=> $user));
      $subject = $this->trans->trans($subjecttag,[],"messages",$user->getLang());
      $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-     if(substr_compare(message.toemail,".free.fr", -strlen(".free.fr")) === 0)
+     if(substr_compare($message->getToEmail(),".free.fr", -strlen(".free.fr")) === 0)
      {
        $message->setSubject ( "REDIRECTED+".$message->getSubject());
-     $sentmessage = $this->get('message_service')->sendMessageToUser($message,$user->getUserid(), $user->getLang());
+       $sentmessage = $this->get('message_service')->sendMessageToUser($message,$user->getUserid(), $user->getLang());
      }
      else
      {
    
-      $sentmessage = $this->get('message_service')->sendMessageToAdmin($message, $lang);
+      $sentmessage = $this->get('message_service')->sendMessageToAdmin($message, $adminlang);
      }
 }
 

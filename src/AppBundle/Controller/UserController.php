@@ -202,22 +202,13 @@ class UserController extends Controller
         public function userRereg($uid)
         {
             $request = $this->requestStack->getCurrentRequest();
-            $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
-            $fuser->setLastlogin( new \DateTime());
-            $fuser->updateRole("forcereregistration");
+            $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+            $user->setLastlogin( new \DateTime());
+            $user->updateRole("forcereregistration");
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($fuser);
+            $entityManager->persist($user);
             $entityManager->flush();
-            $baseurl = $this->container->getParameter('base-url');
-            $code = $fuser->getRegistrationcode();
-            $reglink = "{$baseurl}remotereregister/{$fuser->getUserid()}/{$code}";
-            $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
-            $subject =  $this->trans->trans('reregister');
-            $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-            //$copyto = $this->container->getParameter('testemail');
-            // $umessage->setBcc( $copyto);
-            $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
-            
+            $smessage = $this->get('message_service')->sendConfidentialUserMessage('reregister','rereg_notice',$user);
             return $this->redirect("/admin/user/".$uid);
         }
         
@@ -262,36 +253,36 @@ class UserController extends Controller
         public function SendUserRereg($uid)
         {
             $request = $this->requestStack->getCurrentRequest();
-            $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
-            $fuser->setLastlogin( new \DateTime());
-            $fuser->updateRole("forcereregistration");
+            $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+            $user->setLastlogin( new \DateTime());
+            $user->updateRole("forcereregistration");
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($fuser);
+            $entityManager->persist($user);
             $entityManager->flush();
             $baseurl = $this->container->getParameter('base-url');
-            $code = $fuser->getRegistrationcode();
-            $reglink = "{$baseurl}complete/{$fuser->getUserid()}";
-            $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
-            $subject =  $this->trans->trans('reregister');
-            $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-            $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
-           //  return $this->redirect("/".$fuser->getLang()."/user/".$uid);
+          #  $code = $fuser->getRegistrationcode();
+           # $reglink = "{$baseurl}complete/{$fuser->getUserid()}";
+          #  $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
+          #  $subject =  $this->trans->trans('reregister');
+          #  $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+          #  $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
+               $smessage = $this->get('message_service')->sendConfidentialUserMessage('reregister','rereg_notice',$user);
         }
         
         public function userDereg($uid)
         {
             $request = $this->requestStack->getCurrentRequest();
-            $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
-            $fuser->setLastlogin( new \DateTime());
-             $fuser->updateRole("deregistration");
+            $user = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+            $user->setLastlogin( new \DateTime());
+             $user->updateRole("deregistration");
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($fuser);
+            $entityManager->persist($user);
             $entityManager->flush();
-            $body =  $this->renderView('message/template/'.$fuser->getLang().'/dereg_notice.html.twig');
-            $subject =  $this->trans->trans('deregister');
-            $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-            $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
-            
+          #  $body =  $this->renderView('message/template/'.$fuser->getLang().'/dereg_notice.html.twig');
+          #  $subject =  $this->trans->trans('deregister');
+           # $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+          #  $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
+            $smessage = $this->get('message_service')->sendConfidentialUserMessage('deregister','dereg_notice',$user);
             return $this->redirect("/".$fuser->getLang()."/user/".$uid);
         }
         
@@ -306,14 +297,12 @@ class UserController extends Controller
             $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
             $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
             $email= $fuser->getEmail();
-            
             $messages = $this->getDoctrine()->getRepository('AppBundle:Message')->findbyname($fuser->getUserName());
             return $this->render('user/show.html.twig', array(
                 'lang'=>$this->lang,
                 'user' => $fuser,
                 'messages' =>$messages,
                 'returnlink'=> "/".$this->lang."/person/all",
-                
                 ));
         }
         

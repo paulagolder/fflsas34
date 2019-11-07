@@ -56,8 +56,8 @@ security:
     access_control:
          - { path: ^/web/newimages, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/logout, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/remotecompleteregistration, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/reregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/xxremotecompleteregistration, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/xxreregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/deregister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/remotederegister, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/remotechangepassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
@@ -66,6 +66,7 @@ security:
          - { path: ^/(fr|en|FR|EN)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/accueil, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/(fr|en|FR|EN)/changepassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/resetpassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/confirmemail, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/complete, roles:  IS_AUTHENTICATED_ANONYMOUSLY }

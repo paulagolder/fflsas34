@@ -362,7 +362,8 @@ class User implements UserInterface, \Serializable
            $this->rolestr="ROLE_USER";
         elseif($this->membership =="ADMIN" )
            $this->rolestr="ROLE_ADMIN";
-        else $this->rolestr="ROLE_AADA";
+        else 
+           $this->rolestr="ROLE_AADA";
      }
      
      if($action == "createuser")
@@ -376,20 +377,23 @@ class User implements UserInterface, \Serializable
      if($action=="userapproved")
      {
          $this->setRolestr("ROLE_USER");
-        $this->setMembership("USER");
+         $this->setMembership("USER");
      }
      
      if($action=="userrejected")
      {
-         $this->setRolestr("ROLE_DELL");
+        $this->setRolestr("ROLE_DELL");
         $this->setMembership("DELL");
      }
      
      
-     if ($action ==  "newpasswordrequest")
+     if ($action == "newpasswordrequest")
      {
-         $this->setRegistrationcode( mt_rand(100000, 999999));
-        $this->setRolestr("ROLE_APWC;");
+        if($this->membership == "USER" or $this->membership == "ADMIN" or $this->membership == "TEMP"  )
+        {
+          $this->setRegistrationcode( mt_rand(100000, 999999));
+          $this->setRolestr("ROLE_APWC;");
+        }
      }
      
      if ($action=="passwordchanged")
@@ -399,7 +403,8 @@ class User implements UserInterface, \Serializable
           $this->rolestr="ROLE_USER";
         elseif($this->membership =="ADMIN" )
           $this->rolestr="ROLE_ADMIN";
-        else $this->rolestr="ROLE_AADA";
+        else if($this->membership =="TEMP" )
+          $this->rolestr="ROLE_AADA";
      }
      
      if ($action=="forcereregistration")
@@ -418,9 +423,9 @@ class User implements UserInterface, \Serializable
      
      if ($action=="deregistration")
      {
-         $this->setRegistrationcode( null);
-         $this->membership == "DELL";
-         $this->rolestr="ROLE_TEMP";
+         $this->setRegistrationcode(null);
+         $this->membership = "DELL";
+         $this->rolestr="ROLE_DELL";
      }
      
      }

@@ -1,6 +1,6 @@
 <?php
 
-// src/Forms/CompleteRegForm.php
+// src/Forms/ConfirmEmailForm.php
 namespace AppBundle\Form;
 
 use  AppBundle\Entity\User;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 
-class CompleteRegForm extends AbstractType
+class ConfirmEmailForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

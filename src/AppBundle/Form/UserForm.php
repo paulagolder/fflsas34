@@ -23,10 +23,11 @@ class UserForm extends AbstractType
                 'second_options' => array('label' => 'repeat.password'),));
         $builder->add('email', TextType::class,['label' => '.email']);
         $builder->add('rolestr', TextType::class,['label' => '.rolestr']);
+        $builder->add('membership', TextType::class,['label' => '.membership']);
         $builder->add('locale', TextType::class,['label' => '.locale']);
         $builder->get('email')->setRequired(false);
-         $builder->get('plainPassword')->setRequired(false);
-         $builder->get('locale')-> setRequired(false);
+        $builder->get('plainPassword')->setRequired(false);
+        $builder->get('locale')-> setRequired(false);
     }
 
     public function configureOptions(OptionsResolver $resolver)
