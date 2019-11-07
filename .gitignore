@@ -15,6 +15,7 @@
 /web/bundles/*
 /web/common/*.xcf
 /web/newimages/*
+/web/oldimages/*
 /bin/*
 /recapture.txt
 /app/config/*parameters*.*
