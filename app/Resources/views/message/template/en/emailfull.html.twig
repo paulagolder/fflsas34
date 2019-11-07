@@ -28,15 +28,13 @@ div.body { padding:3em; }
 
 <div class="mailmessage">
 <table  >
-<tr><td class="label" >{{'Sent To' }} </td><td class="title" > {{message.toname}}</td></tr>
-<tr><td class="label" >{{'Date Sent'}} </td><td class="title"> {{ message.date_sent  | date("Y-m-d h:m:s")}}</td></tr>
+<tr><td class="label" >Sent To</td><td class="title" > {{message.toname}}</td></tr>
+<tr><td class="label" >Date Sent</td><td class="title"> {{ message.date_sent  | date("Y-m-d H:i:s")}}</td></tr>
 {% if message.bcc is iterable %}
-    <tr><td class="label" >{{'Sent by'}} </td><td class="title"> {{ message.fromname }} </td></tr>
+    <tr><td class="label" >Sent by</td><td class="title"> {{ message.fromname }} </td></tr>
 {% else %}
-    <tr><td class="label" >{{'Sent by'}} </td><td class="title"> {{ message.fromname }} ({{message.fromemail}}) </td></tr>
+    <tr><td class="label" >Sent by</td><td class="title"> {{ message.fromname }} ({{message.fromemail}}) </td></tr>
 {% endif %}
-
-
 
 </table>
 <div class="body">

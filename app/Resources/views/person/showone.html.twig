@@ -54,7 +54,7 @@
             
             {% if refs %}
               <div class="refgroup" >
-                <div class="reflabel">{{'liens'|trans }} : </div>
+                <div class="reflabel">{{'.links'|trans }} : </div>
                 <div class="reflist">
                     {% for ref in refs %}
                     <div class="ref" ><a href="{{ref.path}}"> {{ref.label}}</a></div>

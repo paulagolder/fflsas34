@@ -37,7 +37,7 @@
      <div class="editbutton" ><a class='editbutton' href="/admin/image/edit/{{image.imageid}}">{{'edit.image'|trans}}</a></div>
       <div class="editbutton" ><a class='editbutton' href="/admin/text/image/{{image.imageid}}">{{'edit.texts'|trans}}</a></div>
        <div class="deletebutton" ><a class='deletebutton' href="/admin/image/delete/{{image.imageid}}" Onclick="return ConfirmDelete()" >{{'delete.image'|trans}}</a></div>
-      <div class="returnbutton"> <a href ='/admin/image/search' >{{'retour'|trans }} </a> </div>
+      <div class="returnbutton"> <a href ='/admin/image/search' >{{'.back'|trans }} </a> </div>
       
      </div>
      <div class='path'>
@@ -52,7 +52,7 @@
      </div>
      
      <div class="refs">
-       <div  class="linksheading" >{{'liens.a'|trans }}</div>
+       <div  class="linksheading" >{{'links.to'|trans }}</div>
        {% for obtype , oref in refs %}
         <div class="linkgroup" >{{obtype|trans}}</div>
          {% for obid , ref in oref %}       

@@ -311,6 +311,13 @@ div#middle div.subheading div.label
   margin-right:1em;
 }
 
+div#middle div.subheading div.label.red
+{
+    color:red;
+}
+
+
+
 div#middle div.subheading div.title
 {
   color:maroon;

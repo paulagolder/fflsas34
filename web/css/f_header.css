@@ -89,6 +89,8 @@ div#header.header div.messagebar div.languagelink.tooltip
     padding-left: 5px;
 }
 
+
+
 @keyframes flasher {
     from {background-color: red;}
     to {background-color: yellow;}
@@ -103,7 +105,11 @@ div#header.header div.messagebar div.languagelink.tooltip
     animation-iteration-count: infinite;
 }
 
-
+ div#header.header div.messagebar div.complete.messbutton div
+ {
+     color:red;
+     margin-right:20px;
+ }
 
 #header.header div.messagebar div.complete
 {

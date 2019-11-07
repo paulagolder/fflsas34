@@ -21,14 +21,15 @@
         <div class="title" > {{user.username}}</div>
         
        
-        <div class="returnbutton button1"> <a href = {{returnlink}} >{{'return'|trans }} </a> </div>
+        <div class="returnbutton button1"> <a href = {{returnlink}} >{{'.back'|trans }} </a> </div>
           {% if is_granted('ROLE_ADMIN') %} 
-          {% if user.rolestr =="ROLE_ADAP;" %}
+          {% if user.rolestr =="ROLE_AADA" or user.membership =="" or user.membership is null %}
             <div class="editbutton" ><a href="/admin/approveuser/{{user.userid}}">{{'approve.user'|trans}}</a></div>
             <div class="editbutton" ><a href="/admin/rejectuser/{{user.userid}}">{{'reject.user'|trans}}</a></div>
+            <div class="editbutton" ><a href="/admin/user/rereg/{{user.userid}}">{{'rereg.user'|trans}}</a></div>
             {% else %}
               <div class="editbutton" ><a href="/admin/user/rereg/{{user.userid}}">{{'rereg.user'|trans}}</a></div>
-  <div class="editbutton" ><a  href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail'|trans}}</a></div>
+              <div class="editbutton" ><a  href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail'|trans}}</a></div>
           {% endif %}
           <div class="deletebutton "> <a href = {{deletelink}}  Onclick="return ConfirmDelete()"  >{{'delete'|trans }} </a> </div>
 
@@ -44,18 +45,29 @@
             <div class="label" > {{'user.roles'|trans }}</div>
             <div class="data" > {{user.rolestr}}</div>
         </div>
+         <div class="datarow">
+            <div class="label" > {{'user.membership'|trans }}</div>
+            <div class="data" > {{user.membership}}</div>
+        </div>
         <div class="datarow">
             <div class="label" > {{'user.lastlogin'|trans }}</div>
             <div class="data" > {{user.lastlogin | date("Y-m-d") }}</div>
         </div>
          <div class="datarow">
             <div class="label" > {{'user.locale'|trans }}</div>
-           
-         <div class="data" > {{user.locale }}</div>
-           </div>
+           <div class="data" > {{user.locale }}</div>
+         </div>
          <div class="datarow">
             <div class="label" > {{'user.interet'|trans }}</div>
-          <div class="data" > {{user.interet }}</div>
+            <div class="data" > {{user.interet }}</div>
+                    </div>
+          <div class="datarow">
+            <div class="label" > {{'.contributor'|trans }}</div>
+          <div class="data" > {{user.contributor }}</div>
+                  </div>
+          <div class="datarow">
+            <div class="label" > {{'user.update_dt'|trans }}</div>
+          <div class="data" > {{user.update_dt | date("Y-m-d") }}</div>
         </div>
     </div>
     
@@ -72,7 +84,7 @@
          {% else %}
           <div class="name" > {{"from.admin"|trans }}</div>
          {% endif %}
-           <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
+           <div class= "date" > {{message.date_sent | date("Y-m-d H:i:s") }}</div>
             <div class="subject" > {{message.subject}}</div>
             
             {% set  body = ( message.body | raw ) %}

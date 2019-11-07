@@ -1,12 +1,17 @@
 security:
-
+    access_denied_url: /login
     role_hierarchy:
         ROLE_ADMIN:      ROLE_USER
-        ROLE_BOSS:       ROLE_ADMIN
-        ROLE_PWCH:       ROLE_USER
-       # ROLE_REREG:      ROLE_USER
-        ROLE_TEMP:       ROLE_USER
-
+        ROLE_CHEF:       ROLE_ADMIN
+        #ROLE_PWCH:       ROLE_USER
+    
+        #ROLE_TEMP  initial status
+        #ROLE_APWC  awaiting password change
+        #ROLE_AEMC  awaiting email confirmation
+        #ROLE_AADA  awaiting administrator approval
+        #ROLE_DELL  refected 
+         
+         
     encoders:
       #Symfony\Component\Security\Core\User\User:
          AppBundle\Entity\User:  
@@ -31,13 +36,13 @@ security:
              anonymous: ~
             # http_basic: ~
              provider: our_db_provider
-             #access_denied_handler: AppBundle\Security\AccessDeniedHandler
+             ##access_denied_handler: AppBundle\Security\AccessDeniedHandler
              logout_on_user_change: true 
              form_login: 
                login_path: login
                check_path: login
-            #   default_target_path: /201/fr
-               default_target_path: /fr/person/all
+               default_target_path: /201/fr
+               #default_target_path: /fr/person/all
     #            always_use_default_target_path: 1
         #secured_area:
             # ...
@@ -62,6 +67,7 @@ security:
          - { path: ^/(fr|en|FR|EN)/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/accueil, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/resetpassword, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/(fr|en|FR|EN)/confirmemail, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/complete, roles:  IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/(fr|en|FR|EN)/menucontent/, roles:  IS_AUTHENTICATED_ANONYMOUSLY} 
          - { path: ^/(fr|en|FR|EN)/content, roles: IS_AUTHENTICATED_ANONYMOUSLY }    

@@ -38,7 +38,7 @@
             <div class="label" > {{'edit.incident'|trans }} </div>
             <div class="title" >{{personname}} : {{eventlabel}} </div>
             <div class="deletebutton button1" > <a class="deletebutton" href="/admin/incident/delete/{{incidentid}}" Onclick="return ConfirmDelete()" >{{'delete'|trans}}</a></div>
-            <div class="returnbutton"> <a href ="{{returnlink}}" >{{'retour'|trans }} </a> </div>
+            <div class="returnbutton"> <a href ="{{returnlink}}" >{{'.back'|trans }} </a> </div>
         </div>
         <div class="twocols">
             <div class="colone">
@@ -76,7 +76,7 @@
                 <form name="incidenttype_form" method="get" action="/admin/incident/newtype/{{incidentid}}">
                     
                     <div class="subheading" >
-                        <div class="label"> {{'create new incident type'|trans}}</div>
+                        <div class="label"> {{'create.new.incident.type'|trans}}</div>
                     </div>
                     New Label: <input type="text" name="_newlabel"><br>
                       <input type="submit" value="Submit New Type">

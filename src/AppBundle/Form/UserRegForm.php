@@ -16,11 +16,11 @@ class UserRegForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username', TextType::class);
+        $builder->add('username', TextType::class,array('label' => '.username'));
         $builder->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat.Password'),));
+                'first_options'  => array('label' => '.password'),
+                'second_options' => array('label' => 'repeat.password'),));
         $builder->add('email', TextType::class);
         $builder->add('interet', TextType::class,array('label' => 'tell.us.your.interest.in.our.site') );
         #$builder->get('email')->setRequired(false);

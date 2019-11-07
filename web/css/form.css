@@ -5,7 +5,7 @@ margin-top:20px;
 div.form div label.required {
 color:red;
 font-size:1em;
-width:10em;
+width:12em;
 }
 
 div.form form div {
@@ -25,7 +25,7 @@ color:#FF0;
 display:block;
 font-size:1em;
 padding-right:9px;
-width:10em;
+width:12em;
 }
 
 div.form form row {
@@ -33,9 +33,10 @@ display:flex;
 }
 
 div.form form row label,div.form form div label.required {
-color:#FF0;
+
+color:red;
 font-size:1em;
-width:10em;
+width:12em;
 }
 
 input#complete_reg_form_newregistrationcode

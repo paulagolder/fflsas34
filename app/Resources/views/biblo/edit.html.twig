@@ -37,13 +37,13 @@
      <div class="title">
       {{ biblo.title}}({{biblo.author}})
      </div>
-      <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{'retour'|trans }} </a> </div>
+      <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{'.back'|trans }} </a> </div>
        <div class="deletebutton"> <a href = "/admin/biblo/delete/{{biblo.bookid}}" >{{'delete'|trans }} </a> </div>
     {% else %}
       <div class="label">
       {{'new.book'|trans}}
      </div>
-        <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{'retour'|trans }} </a> </div>
+        <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{'.back'|trans }} </a> </div>
         {% endif %}
   </div>
 

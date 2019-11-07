@@ -1,10 +1,10 @@
-{# views/accuiel/showall.html.twig #}
+{# views/accueil/showall.html.twig #}
 
 {% extends 'user.html.twig' %}
 
 {% block stylesheets %}
       {{ parent() }}
-   <link href="{{ asset('css/accueil/showall.css') }}" rel="stylesheet" />
+   <link href="{{ asset('css/accueil/accueil.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block myheader %} {{ parent() }}{% endblock %}
@@ -14,7 +14,7 @@
 <div id="middle" >
   <div class="accueil">
    {% if message %}
-     <h1> {{message}}</h1>
+     <h1> {{message|trans }}</h1>
    {% else %}
 
    

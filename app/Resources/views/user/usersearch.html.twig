@@ -37,7 +37,6 @@
          {% for user in adapusers  %}
              <div class="user search row selectable" >
              <div><a href="{{user.link}}" >{{user.username}}({{user.email}})</a> </div>
-               <input type="text" name="newtag" value="">
              <div class="editbutton button1" ><a class="editbutton" href="/admin/user/{{user.userid}}">{{'see.user'|trans}}</a></div>
             </div>
          {% endfor %}
@@ -66,7 +65,11 @@
      <div class="searchlist" >
        <div >
          {% for user in users  %}
-             <div class="user search row selectable" >
+          {% if user.membership =="" %}
+           <div class="user search row selectable red" >
+           {% else %}
+             <div class="user search row selectable " >
+           {% endif %}
              <div><a href="{{user.link}}" >{{user.username}}({{user.email}})</a> </div>
              <div class="editbutton button1" ><a class="editbutton" href="/admin/user/{{user.userid}}">{{'see.user'|trans}}</a></div>
             </div>

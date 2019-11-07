@@ -41,7 +41,7 @@
 
     <div class="refs">
       {% if refs != null and (refs| length)>0 %}
-       <div  class="linksheading" >{{'liens.a'|trans }}</div>
+       <div  class="linksheading" >{{'links.to'|trans }}</div>
        {% for obtype , oref in refs %}
           <div class="linkgroup" >{{obtype|trans}}</div>
           {% for obid , ref in oref %}       

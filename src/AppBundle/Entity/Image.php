@@ -47,6 +47,9 @@ class Image
   
   /**
      * @ORM\Column(type="integer", nullable=true)
+     *   'Public' => 0,
+     *   'Admin' => 1,
+      *  'Private' => 2,   
      */
   private $access;
     
@@ -243,6 +246,24 @@ class Image
        {  
          $this->label = $this->name;
        }
+    }
+    
+     public function makeFilename()
+    {
+       $filename="";
+       if($this->name == null)
+       {
+         $filename="no_name";
+       }
+       else
+       {  
+         $filename= trim($this->name);
+       }
+       $filename = str_replace (' ' , '_' , $filename);  
+       $filename = str_replace ('__' , '_' , $filename);  
+       $filename = preg_replace( '/[\W]/', '', $filename);
+       $filename = $filename."_".$this->imageid;
+       return $filename;
     }
     
      public function isTemp()

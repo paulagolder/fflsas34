@@ -29,7 +29,7 @@
     <div class="heading" >
        <div class="label">{{'incident.to'|trans }} </div>
        <div class="title">{{personname}} {{incident.rank}} </div>
-       <div class="returnbutton" ><a href="{{returnlink}}">{{'retour'|trans}}</a></div>
+       <div class="returnbutton" ><a href="{{returnlink}}">{{'.back'|trans}}</a></div>
     </div>
     <div class="heading" >
        <div class="label">{{'during'|trans}} {{'the.campaign'|trans}}</div>
@@ -37,7 +37,7 @@
     </div>
     <div class="incident">
        <div class="subheading" >
-            <div class="label" >{{'he.was'|trans}} </div><div class="field"> {{label|trans}} </div>
+            <div class="label" >{{'he.was'|trans}} </div><div class="field"> {{label|trans({},'itypes')}} </div>
          </div>  
            {% if incident.namerecorded != "" %}
               <div class="subheading" >

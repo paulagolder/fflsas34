@@ -34,28 +34,24 @@
             <div class="heading">
                 <div class="label" >{{'edit.contents'|trans }} </div>
                 <div class="title" >{{ content.title}} : {{content.contentid}} </div>
-                <div class="returnbutton button1"> <a href ="{{returnlink}}" >{{'annuler'|trans }} </a> </div>
+                <div class="returnbutton button1"> <a href ="{{returnlink}}" >{{'.back'|trans }} </a> </div>
             </div> 
             <div class="form">
                 <form action="/admin/content/process_edit/{{content.contentid}}" method="post" >
                     <div  >
-                        <label for="subjectid">SubjectId:</label>
-                        <input type="text" id="subjectid" name="_subjectid" value="{{ content.subjectid }}" disabled="disabled" />
+                        <label for="subjectid">{{'.subjectid'|trans }}</label>
+                        <input type="text" id="subjectid" name="_subjectid" value="{{content.subjectid }}" disabled="disabled" />
                     </div>
                     <div  >
-                        <label for="language">Language:</label>
-                        <input type="text" id="username" name="_language" value="{{ content.language}}" disabled="disabled" />
+                        <label for="language">{{'.language'|trans }}</label>
+                        <input type="text" id="username" name="_language" value="{{content.language}}" disabled="disabled" />
                     </div>
                     <div  >
-                        <label for="title">Title:</label>
-                        <input type="text" id="title" name="_title" value="{{ content.title }}" />
-                    </div>
-                    <div >
-                        <label for="access">Access:</label>
-                        <input type="text" id="access" name="_xaccess" value="{{ content.access }}" />
+                        <label for="title">{{'.title'|trans }}</label>
+                        <input type="text" id="title" name="_title" value="{{content.title }}" />
                     </div>
                     <div>
-                        <label class="container">Public
+                        <label class="container">{{'.public'|trans }}
                             {% if content.access == 0 %}
                                 <input type="radio" checked="checked" name="_access" id="public"  value="0" >
                             {% else %}
@@ -63,7 +59,7 @@
                             {% endif%}
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container">Administrators
+                        <label class="container">{{'.admin'|trans }}
                                 {% if content.access == 1 %}
                                 <input type="radio" checked="checked" name="_access" id="admin"  value="1" >
                             {% else %}
@@ -71,7 +67,7 @@
                             {% endif%}
                            <span class="checkmark"></span>
                          </label>
-                         <label class="container">Private
+                         <label class="container">{{'.private'|trans }}
                                   {% if content.access == 2 %}
                                 <input type="radio" checked="checked" name="_access" id="private"  value="2" >
                             {% else %}
@@ -84,12 +80,12 @@
                     <input type="hidden" name="_text" value="{{ content.text  }}" >
                          <button type="submit" id="submitbutton" style="display: none;"  >{{'enregistrer'|trans }} </button> 
                 </form>
-                <button onclick="saveform()">{{'Click.me'|trans }}</button>  
+                <button onclick="saveform()">{{'click.me'|trans }}</button>  
                 <div id="editortext"   >
                     {{ content.text | raw }}
                 </div>
             </div>
-                <button onclick="saveform()">{{'Click.me'|trans }}</button>  
+                <button onclick="saveform()">{{'click.me'|trans }}</button>  
         </div>
     </div>
     {% endblock %}

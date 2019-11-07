@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Encoder;
+#use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+#use Symfony\Component\Security\Core\Encoder;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
@@ -168,7 +168,7 @@ class UrlController extends Controller
         
         if (count($urls)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+             $subheading = 'nothing.found.for';
         }
         else
         {
@@ -184,7 +184,7 @@ class UrlController extends Controller
         [ 
         'lang'=>$this->lang,
         'message' => $message,
-        'heading' =>  'Gestion des Liens',
+        'heading' =>  'manage.links',
         'subheading' =>  $subheading,
         'searchfield' =>$gfield,
         'urls'=> $urls,

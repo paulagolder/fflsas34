@@ -1,0 +1,90 @@
+
+    role_hierarchy:
+        ROLE_ADMIN:      ROLE_USER
+        ROLE_CHEF:       ROLE_ADMIN
+  
+    #dummy roles for managing registration password change processes
+    # anyone with a dummy rolle has no privileges
+        #ROLE_TEMP  initial status
+        #ROLE_APWC  awaiting password change
+        #ROLE_AEMC  awaiting email confirmation
+        #ROLE_AADA  awaiting administrator approval
+        #ROLE_DELL  rejected 
+         
+    # $user->rolestr contains current user access  anny of the ROLE_ above
+    # $user->membership defines permitted memebership level   "TEMP, USER, ADMIN, CHEF, DELL "
+
+   # the following function in user class controls changes in access and membership.
+   
+     public function updateRole($action)
+     {
+         
+     if($action =="emailconfirmed")
+     {
+        $this->setRegistrationcode(null);
+        if($this->membership == "USER")
+           $this->rolestr="ROLE_USER";
+        elseif($this->membership =="ADMIN" )
+           $this->rolestr="ROLE_ADMIN";
+        else $this->rolestr="ROLE_AADA";
+     }
+     
+     if($action == "createuser")
+     {
+         $this->setRegistrationcode( mt_rand(100000, 999999));
+         $this->rolestr="ROLE_AEMC";
+         $this->membership ="TEMP";
+     }
+     
+     
+     if($action=="userapproved")
+     {
+        $this->setRolestr("ROLE_USER");
+        $this->setMembership("USER");
+     }
+     
+     if($action=="userrejected")
+     {
+        $this->setRolestr("ROLE_DELL");
+        $this->setMembership("DELL");
+     }
+     
+     
+     if ($action ==  "newpasswordrequest")
+     {
+         $this->setRegistrationcode( mt_rand(100000, 999999));
+         $this->setRolestr("ROLE_APWC;");
+     }
+     
+     if ($action=="passwordchanged")
+     {
+        $this->setRegistrationcode(null);
+        if($this->membership == "USER")
+          $this->rolestr="ROLE_USER";
+        elseif($this->membership =="ADMIN" )
+          $this->rolestr="ROLE_ADMIN";
+        else $this->rolestr="ROLE_AADA";
+     }
+     
+     if ($action=="forcereregistration")
+     {
+         $this->setRegistrationcode( mt_rand(100000, 999999));
+         $this->membership = "TEMP";
+         $this->rolestr="ROLE_APWC";
+     }
+     
+     if ($action=="reregistration")
+     {
+         $this->setRegistrationcode(null);
+         $this->membership = "TEMP";
+         $this->rolestr="ROLE_AADA";
+     }
+     
+     if ($action=="deregistration")
+     {
+         $this->setRegistrationcode(null);
+         $this->membership ="DELL";
+         $this->rolestr="ROLE_TEMP";
+     }
+     
+     }

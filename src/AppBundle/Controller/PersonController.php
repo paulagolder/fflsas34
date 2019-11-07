@@ -211,7 +211,7 @@ class PersonController extends Controller
     
     public function formatIncident($incident)
     {
-        $text = $this->translator->trans($incident['label']);
+        $text = $this->translator->trans($incident['label'], [], 'itypes');
         $comment = $incident['comment'];
         if($incident['locid']>1  ) // not including world
         {
@@ -423,7 +423,7 @@ class PersonController extends Controller
         
         if (count($people)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+             $subheading = 'nothing.found.for';
         }
         else
         {

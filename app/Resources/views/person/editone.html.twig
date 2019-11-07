@@ -75,7 +75,7 @@
            <div class="heading" >
             <div class="editbutton button1" ><a href="/admin/person/addbookmark/{{person.personid}}"> {{"bookmark.person"|trans }} </a></div>
             <div class="editbutton"><a href = "/admin/person/detail/{{person.personid}}" > {{'edit.person'|trans }}</a></div>
-            <div class="returnbutton"> <a href = "{{returnlink}}" >{{'retour'|trans }} </a></div>
+            <div class="returnbutton"> <a href = "{{returnlink}}" >{{'.back'|trans }} </a></div>
              {% if is_granted('ROLE_ADMIN') %} 
                 <div class="deletebutton"> <a href = "/admin/person/delete/{{person.personid}}"  Onclick="return ConfirmDelete()"  >{{'delete'|trans }} </a></div>
              {% endif %}
@@ -104,7 +104,7 @@
             
         <div class="refgroup" >
         <div class="heading" >
-           <div class="label"> {{'Liens'|trans}}</div>  <div class="tooltip">?  <span class="tooltiptext">{{'to.add.link.use.bookmarks'|trans }}</span>
+           <div class="label"> {{'.links'|trans}}</div>  <div class="tooltip">?  <span class="tooltiptext">{{'to.add.link.use.bookmarks'|trans }}</span>
               </div>
          </div>
          <div class="reflist">

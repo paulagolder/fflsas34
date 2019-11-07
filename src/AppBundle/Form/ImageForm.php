@@ -19,16 +19,12 @@ class ImageForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-         $builder ->add('name', TextType::class);
-        $builder ->add('path', TextType::class);
-        $builder ->add('format', TextType::class);
-        $builder->add('access', ChoiceType::class, [
-    'choices'  => [
-        'Public' => 0,
-        'Admin' => 1,
-        'Private' => 2,    ],
-]);
-         $builder ->add('copyright', TextType::class);
+        $builder ->add('name', TextType::class,['label' => '.imagename',]);
+        $builder ->add('path', TextType::class,['label' => '.path',]);
+        $builder ->add('format', TextType::class,['label' => '.format',]);
+        $builder->add('access', ChoiceType::class, ['label' => '.access',
+        'choices'  => ['Public' => 0,'Admin' => 1, 'Private' => 2, ],]);
+        $builder ->add('copyright', TextType::class,['label' => '.copyright',]);
         $builder->add('imagefile', FileType::class, array('label' => 'Image.file','required'=>false,  'data_class' => null));
         $builder->get('path')->setRequired(false);
         $builder->get('copyright')->setRequired(false);

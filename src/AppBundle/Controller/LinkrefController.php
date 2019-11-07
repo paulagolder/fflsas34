@@ -44,7 +44,7 @@ class LinkrefController extends Controller
         }
         
         
-        return $this->render('linkref/showall.html.twig', [ 'message' =>  '' ,'heading' =>  'Les Liens','refs'=> $linkrefs,]);
+        return $this->render('linkref/showall.html.twig', [ 'message' =>  '' ,'heading' =>  'the.links','refs'=> $linkrefs,]);
     }
     
     public function Showone($rid)

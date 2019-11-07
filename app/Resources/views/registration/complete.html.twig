@@ -14,10 +14,11 @@
 </div>
 <div class="form">
 {{ form_start(form) }}
-    {{ form_row(form.username, { 'attr':{'disabled':'disabled'|trans }}) }}
-    {{ form_row(form.email, { 'attr':{'disabled':'disabled'|trans }}) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.interet) }}
     {{ form_row(form.newregistrationcode) }}
-    <button type="submit">Register!</button>
+    <button type="submit">{{'.submit'|trans}}!</button>
 {{ form_end(form) }}
 </div>
 </div>

@@ -1,0 +1,37 @@
+fr 	messages 	1 	awaiting.approval 	awaiting.approval
+fr 	messages 	1 	email.confirmed 	email.confirmed
+fr 	messages 	1 	user.membership 	user.membership
+fr 	messages 	1 	user.interet 	user.interet
+fr 	messages 	1 	contributor 	contributor
+
+
+fr 	messages 	1 	contributor 	contributor
+fr 	messages 	1 	user.update_dt 	user.update_dt
+fr  messages 	1 	user.update_dt 	user.update_dt
+fr 	messages 	1 	user.profile 	user.profile
+fr 	messages 	1 	user.membership 	user.membership
+fr 	messages 	1 	user.interet 	user.interet
+fr 	messages 	1 	contributor 	contributor
+fr 	messages 	1 	.email 	.email
+fr 	messages 	1 	.interet 	.interet
+fr 	messages 	1 	.newregistrationcode 	.newregistrationcode
+fr 	messages 	1 	.submit 	.submit 	1 	user.update_dt 	
+fr 	messages 	1 	user.u2 	email.confirmed 	email.confirmed
+fr 	messages 	1 	approbation.request 	approbation.request
+fr 	messages 	1 	awaiting.approval 	awaiting.approval
+fr 	messages 	1 	.email 	.emailpdate_dt
+fr 	messages 	1 	.email 	.email
+fr 	messages 	1 	.interet 	.interet
+fr 	messages 	1 	.newregistrationcode 	.newregistrationcode
+fr 	messages 	1 	.submit 	.submit
+fr 	messages 	2 	email.confirmed 	email.confirmed
+fr 	messages 	1 	approbation.request 	approbation.request
+fr 	messages 	1 	awaiting.approval 	awaiting.approval
+fr 	messages 	1 	.email 	.email
+fr 	messages 	1 	.inenglish 	.inenglish
+fr 	messages 	1 	.welcome 	.welcome
+fr 	messages 	1 	.introduction 	.introduction
+fr 	messages 	1 	see.links 	see.links
+fr 	messages 	1 	see.books 	see.books
+fr 	messages 	1 	search.site 	search.site
+fr 	messages 	1 	.bookmarks 	.bookmarks

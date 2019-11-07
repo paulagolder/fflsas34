@@ -43,7 +43,10 @@ class Content
     private $language;
       
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
+     *   'Public' => 0,
+     *   'Admin' => 1,
+     *   'Private' => 2,  
      */
     private $access;
     

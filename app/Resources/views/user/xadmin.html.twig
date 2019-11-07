@@ -20,7 +20,7 @@
         <div class="title" > {{user.username}}</div>
         
         <div class="editbutton button1" ><a class='editbutton' href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail'|trans}}</a></div>
-        <div class="returnbutton"> <a href = {{returnlink}} >{{'annuler'|trans }} </a> </div>
+        <div class="returnbutton"> <a href = {{returnlink}} >{{'.back'|trans }} </a> </div>
     </div>
     
     <div  class="userdata" >
@@ -52,7 +52,7 @@
           <div class="subject" > {{message.fromname}}</div>
             <div class="subject" > {{message.toname}}</div>
             <div class="subject" > {{message.subject}}</div>
-            <div class= "date" > {{message.date_sent | date("Y-m-d h:m:s") }}</div>
+            <div class= "date" > {{message.date_sent | date("Y-m-d H:i:s") }}</div>
             <div class = "message" > {{ message.body|length > 20 ? message.body|slice(0, 20) ~ '...' : message.body  }}</div>
             <div class = "editbutton button1">
                 <a class='editbutton' href="/admin/user/{{user.userid}}/message/view/{{message.id}}">{{'view.message'|trans}}</a>

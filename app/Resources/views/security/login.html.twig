@@ -19,11 +19,11 @@
 <form action="{{ path('login') }}" method="post">
 <div class="form">
 <div class="username" >
-    <label for="username">{{'username'|trans }}:</label>
+    <label for="username">{{'.username'|trans }}:</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
 </div>
 <div class="password">
-    <label for="password">{{'password'|trans }}:</label>
+    <label for="password">{{'.password'|trans }}:</label>
     <input type="password" id="password" name="_password" />
 </div>
 </div>

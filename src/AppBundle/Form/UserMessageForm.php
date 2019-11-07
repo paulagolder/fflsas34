@@ -16,16 +16,16 @@ class UserMessageForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-         $builder->add('fromname', TextType::class);
-         $builder->add('fromemail', TextType::class);
-         $builder->add('toname', TextType::class);
-         $builder->add('toemail',HiddenType::class );
-         $builder->add('subject', TextType::class);
-         $builder->add('body', TextareaType::class);
+         $builder->add('fromname', TextType::class,['label' => '.fromname']);
+         $builder->add('fromemail', TextType::class,['label' => '.fromemail']);
+         $builder->add('toname', TextType::class,['label' => '.toname']);
+         $builder->add('toemail', HiddenType::class,['label' => '.toemail']);
+         $builder->add('subject', TextType::class,['label' => '.subject']);
+         $builder->add('body', TextareaType::class,['label' => '.body']);
          $builder->get('toname')->setDisabled(true);
          $builder->get('toemail')->setDisabled(true);
-         $builder->get('fromname')->setDisabled(true);
-         $builder->get('fromemail')->setDisabled(true);
+         #$builder->get('fromname')->setDisabled(true);
+         #$builder->get('fromemail')->setDisabled(true);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -33,7 +33,7 @@
    <div class="heading" >
     <div class="heading">{{content.title}}</div> 
      <div class="editbutton" ><a class='editbutton' href="/admin/content/edit/{{content.contentid}}">{{'edit.content'|trans}}</a></div>
-       <div class="returnbutton"> <a href = {{returnlink}} >{{'annuler'|trans }} </a> </div>
+       <div class="returnbutton"> <a href = {{returnlink}} >{{'.back'|trans }} </a> </div>
       <div class="deletebutton" ><a class='deletebutton' href="/admin/content/delete/{{content.contentid}}" Onclick="return ConfirmDelete()" >{{'delete.content'|trans}}</a></div>
      </div>
      
@@ -42,7 +42,7 @@
      </div>
 
      <div class="refs">
-       <div  class="linksheading" >{{'liens.a'|trans }}</div>
+       <div  class="linksheading" >{{'links.to'|trans }}</div>
        {% for obtype , oref in refs %}
         <div class="linkgroup" >{{obtype|trans}}</div>
          {% for obid , ref in oref %}       

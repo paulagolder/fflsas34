@@ -90,7 +90,7 @@ class ImageRepository extends EntityRepository
         return $numDeleted;
     }
     
-       public function findLatest($max, $sec)
+     public function findLatest($max, $sec)
     {
        $platest = array();
        $qb = $this->createQueryBuilder("p");
@@ -110,5 +110,18 @@ class ImageRepository extends EntityRepository
           $n++;
        }
        return $platest;
+    }
+    
+     public function findNew()
+    {
+       
+       $qb = $this->createQueryBuilder("p");
+       $qb->where ('p.path LIKE :new ' );
+       $qb->setParameter('new', "201%");
+       $qb->orderBy("p.update_dt", "DESC");
+
+       $images =  $qb->getQuery()->getResult();
+       
+       return $images;
     }
 }

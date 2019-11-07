@@ -13,17 +13,28 @@
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
+  
     <div class="heading">
-      <div class="label"> {{ heading|trans }}</div>
-      <div class="editbutton button1"><a class="editbutton" href ="/admin/label/generate">{{'update.translation.files'|trans}}</a></div>
-               
-               <form action="/admin/label/newtag" >
-               <input type="text" name="newtag" id="newtag" value="">
-      <div class="editbutton button1">  <input type="submit" value="{{'new.label'|trans}}"></div>
-      </form>
+   
+       <div class="label">{{ heading|trans }}</div>
+  
+       
+         <div class="editbutton button1"><a class="editbutton" href ="/admin/label/generate/{{mode}}">{{'update.translation.files'|trans}}</a></div>
+           <form action="/admin/label/newtag" >   
+          <input type="text" name="newtag" id="newtag" value="">
+         <div class="editbutton button1">  <input type="submit" value="{{'new.label'|trans}}"></div>
+        </form>
    </div>
+ 
   <form  action="/admin/label/search">
   <div class="heading">
+  {% if mode== 'itype' %}
+       <input type="radio" name="_mode" value="message"> Messages<br>
+      <input type="radio" name="_mode" value="itype"  checked >Incidents<br>
+{% else %}
+      <input type="radio" name="_mode" value="message"  checked> Messages<br>
+      <input type="radio" name="_mode" value="itype">Incidents<br>
+{% endif %}
    <div class="label"> {{'entrez.chercher'|trans }}</div>
    <input type="text" name="searchfield">
    <input type="submit" value="{{'chercher'|trans }}" >
@@ -44,6 +55,7 @@
                <div class="lang">{{label.lang}}</div> 
                 <input class="text"  id="t{{label.id}}" name="t{{label.id}}" type="text" value="{{label.text}}">
               <input type="submit" formaction="/admin/label/edit/{{label.id}}" value="EDIT">
+              <div class="editbutton"><a href="/admin/label/delete/{{label.id}}">{{".delete"|trans}}</a></div>
             </div>
          {% endfor %}
      </div>

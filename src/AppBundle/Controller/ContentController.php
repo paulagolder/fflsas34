@@ -186,7 +186,7 @@ class ContentController extends Controller
         $request = $this->requestStack->getCurrentRequest();
         $contentid=$cid;
         $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
-
+        if($content == null) return $this->redirect("/admin/content/search");
         $label = $content->getTitle();
         $sid = $content->getSubjectid();
         
@@ -275,11 +275,6 @@ class ContentController extends Controller
     }
     
     
-    
-    
-   
-    
-    
     public function newContentLang($sid,$lang)
     {   
         $content = new Content();
@@ -287,6 +282,7 @@ class ContentController extends Controller
         $content->setSubjectid($sid);
         $content->setTitle("?");
         $content->setText("?");
+        $content->setAccess("2");
         $content ->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
         $content ->setUpdateDt($now);
@@ -329,7 +325,7 @@ class ContentController extends Controller
         
         if (count($contents)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+             $subheading = 'nothing.found.for';
         }
         else
         {
@@ -391,7 +387,7 @@ class ContentController extends Controller
         
         if (count($contents)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+             $subheading = 'nothing.found.for';
         }
         else
         {

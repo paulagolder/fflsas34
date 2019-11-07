@@ -175,7 +175,7 @@ class BibloController extends Controller
         
         if (count($biblos)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+             $subheading = 'nothing.found.for';
         }
         else
         {

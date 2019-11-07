@@ -97,23 +97,13 @@ class AccueilController  extends Controller
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
       
-       
-        return $this->render('accueil/showall.html.twig', 
+        return $this->render('accueil/showmessage.html.twig', 
         [ 
         'lang' => $this->lang,
         'message' =>  $mess,
         'heading' => '',
-        'counts'=> '', 
-        'texts'=> '',
         ]);
     }
     
-     public function Showtest()
-    {
-        
-       return new Response(
-            '<html><body>Accueil test </body></html>'
-        );
      
-    }
 }

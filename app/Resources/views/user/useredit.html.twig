@@ -1,4 +1,4 @@
-{# views/user/edit.html.twig #}
+{# views/user/useredit.html.twig #}
 
 
 {% extends 'admin.html.twig' %}
@@ -15,12 +15,13 @@
 <div class="heading">
  <div class="label" > {{'edit.user'|trans }}</div>
 
- <div class="returnbutton"> <a href = {{returnlink}} >{{'retour'|trans }} </a> </div>
+ <div class="returnbutton"> <a href = {{returnlink}} >{{'.back'|trans }} </a> </div>
  </div>
 <div  class="form" >
-{{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.plainPassword) }}
+    {{ form_start(form)}} 
+  
+    {{ form_row(form.username  ) }}
+    {{ form_row(form.plainPassword)}}
     {{ form_row(form.rolestr) }}
     {{ form_row(form.email) }}
 

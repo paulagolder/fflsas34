@@ -18,17 +18,15 @@ class LocationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
        
-        $builder ->add('name', TextType::class,array('label' => 'location.name'));
-        $builder ->add('region', IntegerType::class);
-        $builder ->add('latitude', NumberType::class);
-        $builder ->add('longitude', NumberType::class);
-        $builder ->add('kml', TextType::class);
-        $builder ->add('zoom', IntegerType::class);
+        $builder ->add('name', TextType::class,['label' => 'location.name']);
+        $builder ->add('region', IntegerType::class,['label' => '.region']);
+        $builder ->add('latitude', NumberType::class,['label' => '.latitude']);
+        $builder ->add('longitude', NumberType::class,['label' => '.longitude']);
+        $builder ->add('kml', TextType::class,['label' => '.kml']);
+        $builder ->add('zoom', IntegerType::class,['label' => '.zoom']);
         $builder->get('zoom')->setRequired(false);
         $builder->get('kml')->setRequired(false);
-        $builder->add('showchildren', CheckboxType::class, array(
-    'label'    => 'Show the children?',
-    'required' => false,));
+        $builder->add('showchildren', CheckboxType::class,['label' => 'show.the.children?','required' => false,]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

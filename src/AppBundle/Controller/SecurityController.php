@@ -44,18 +44,8 @@ public function loginAction(Request $request, AuthenticationUtils $authenticatio
 
     public function loginCheckAction()
     {
-       
           $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-    
-       return $this->render('accueil/showall.html.twig', 
-        [ 
-           'lang' => $this->lang,
-           'message' =>  '',
-           'heading' => '',
-           'counts'=> '', 
-           'texts'=> '',
-        ]);
-   
+          return $this->redirect('/accueil/message/'." Login check action");
     }
 
 

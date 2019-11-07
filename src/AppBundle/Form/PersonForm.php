@@ -16,9 +16,9 @@ class PersonForm extends AbstractType
     {
         
             
-        $builder ->add('surname', TextType::class);
-        $builder ->add('forename', TextType::class);
-        $builder ->add('alias', TextType::class,['required' => false]);
+        $builder ->add('surname', TextType::class ,['label' => '.surname',]);
+        $builder ->add('forename', TextType::class,['label' => '.forename',]);
+        $builder ->add('alias', TextType::class,['required' => false,'label' => '.alias',]);
             
     }
 

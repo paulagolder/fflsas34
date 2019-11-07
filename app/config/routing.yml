@@ -78,21 +78,21 @@ register:
     requirements:
         _locale: en|fr|FR|EN
         
-password_forgottenr:
+password_forgotten:
     path: /{_locale}/resetpassword
     controller:  AppBundle\Controller\RegistrationController::resetpasswordrequest    
     requirements:
         _locale: en|fr|FR|EN
         
-complete_registration:
-    path: /{_locale}/complete/{uid}
-    controller:  AppBundle\Controller\RegistrationController::complete   
+registration_confirmemail:
+    path: /{_locale}/confirmemail/{uid}
+    controller:  AppBundle\Controller\RegistrationController::confirmemail   
     requirements:
         _locale: en|fr|FR|EN
         
 remote_confirm_email:
-    path: /confirmemailaddress/{uid}/{code}
-    controller:  AppBundle\Controller\RegistrationController::confirmemailaddress   
+    path: /remoteconfirmemail/{uid}/{code}
+    controller:  AppBundle\Controller\RegistrationController::remoteconfirmemail   
     
 admin_approve_user:
     path: /admin/approveuser/{uid}
@@ -105,10 +105,10 @@ admin_reject_user:
     
 remote_request_password:
     path: /remotechangepassword/{uid}/{code}
-    controller:  AppBundle\Controller\RegistrationController::remotechangepassword  
+    controller:  AppBundle\Controller\UserController::remotechangepassword  
 
 remote reregistration:
-    path: /reregister/{uid}
+    path: /remotereregister/{uid}/{code}
     controller:  AppBundle\Controller\RegistrationController::remotereregister   
 
 remote_deregistration:
@@ -218,8 +218,8 @@ user_editdetail:
         _locale: en|fr|FR|EN
         
 user_editpassword:
-     path: /{_locale}/userpassword/{uid}
-     controller:  AppBundle\Controller\UserController:editpassword
+     path: /{_locale}/changepassword/{uid}
+     controller:  AppBundle\Controller\UserController:changepassword
      requirements:
         _locale: en|fr|FR|EN
         
@@ -268,7 +268,7 @@ bookmark_edit:
  
 person_new:
     path: /admin/person/register
-    controller: AppBundle\Controller\AdminPersonController::register  
+    controller: AppBundle\Controller\AdminPersonController::xregister  
 
 person_admin_edit_detail:
     path: /admin/person/detail/{pid}
@@ -487,7 +487,10 @@ image_admin_addref:
 image_admin_new:
     path: /admin/image/new
     controller:  AppBundle\Controller\ImageController::newimage         
-    
+
+image_admin_move:
+    path: /admin/image/move
+    controller:  AppBundle\Controller\ImageController::move
         
 image_admin_showone:
     path: /admin/image/{iid}
@@ -991,8 +994,12 @@ label_admin_edit:
     controller:  AppBundle\Controller\LabelController::edit 
     
 label_admin_generate:
-    path: admin/label/generate/
+    path: admin/label/generate/{mode}
     controller:  AppBundle\Controller\LabelController::generate
+    
+label_admin_delete:
+    path: admin/label/delete/{lid}
+    controller:  AppBundle\Controller\LabelController::delete
     
 label_admin_newtag:    
      path: /admin/label/newtag   

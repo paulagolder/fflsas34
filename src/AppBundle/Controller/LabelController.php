@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Encoder;
+#use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+#use Symfony\Component\Security\Core\Encoder;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
@@ -24,7 +24,7 @@ class LabelController extends Controller
     private $mylib;
     private $requestStack ;
     
-
+    
     
     
     public function __construct( MyLibrary $mylib ,RequestStack $request_stack)
@@ -33,24 +33,26 @@ class LabelController extends Controller
         $this->requestStack = $request_stack;
     }
     
-   
     
-     public function Delete($lid)
+    
+    public function Delete($lid)
     {
-        $this->getDoctrine()->getRepository("AppBundle:Url")->delete($lid);
-         return $this->redirect("/admin/label/search");
+            $label = $this->getDoctrine()->getRepository('AppBundle:Label')->findOne($lid);
+          $this->getDoctrine()->getRepository("AppBundle:Label")->deletebytag($label->gettag(),$label->getMode());
+        return $this->redirect("/admin/label/search");
     }
     
-     public function show($tag)
+    public function show($tag)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $labels= $this->getDoctrine()->getRepository("AppBundle:Url")->findByTags($tags);
+       
+        $labels= $this->getDoctrine()->getRepository("AppBundle:Label")->findByTags($tag);
         if(!labels)
         {
-          $mess = "tags not found";
+            $mess = "tags not found";
         } else
         {
-          $mess = '';
+            $mess = '';
         }
         return $this->render('label/show.html.twig', 
         [ 
@@ -62,7 +64,7 @@ class LabelController extends Controller
     }
     
     
-      public function edit($lid)
+    public function edit($lid)
     {
         $request = $this->requestStack->getCurrentRequest();
         $linkref=null;
@@ -70,44 +72,62 @@ class LabelController extends Controller
         {
             $label = $this->getDoctrine()->getRepository('AppBundle:Label')->findOne($lid);
             $nlab =  $request->query->get("t".$lid);
+            if($nlab=="")
+            {
+            
+            }
+            else
+            {
             $label->setText( $this->formatlabels($nlab));
-       
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($label);
-                $entityManager->flush();
-                $lid = $label->getId();
-                return $this->redirect('/admin/label/search');
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($label);
+            $entityManager->flush();
+            $lid = $label->getId();
+            }
+            return $this->redirect('/admin/label/search');
         }    
     }
     
     
-      public function newtag()
+    public function newtag()
     {
-             $request = $this->requestStack->getCurrentRequest();
-             $entityManager = $this->getDoctrine()->getManager();
-            $nlab =  $request->query->get("newtag");
-            $tag = $this->formatlabels($nlab);
-            if($tag =="")    return $this->redirect('/admin/label/search');
-            $labelf= new Label();
-            $labelf->setTag($tag);
-            $labelf->setLang("fr");
-            $labelf->setMode("message");
-            $labelf->setText("_".$tag);
-             $labele= new Label();
-            $labele->setTag($tag);
-            $labele->setLang("en");
-            $labele->setMode("message");
-            $labele->setText("_".$tag);
-                $entityManager->persist($labelf);
-                
-                     $entityManager->persist($labele);
-                $entityManager->flush();
-                return $this->redirect('/admin/label/search');
+        $request = $this->requestStack->getCurrentRequest();
+        $entityManager = $this->getDoctrine()->getManager();
+        $nlab =  $request->query->get("newtag");
+        $tag = $this->formattag($nlab);
+        if($tag =="")    return $this->redirect('/admin/label/search');
+        $labelf= new Label();
+        $labelf->setTag($tag);
+        $labelf->setLang("fr");
+        $labelf->setMode("message");
+        $labelf->setText("_".$tag);
+        $labele= new Label();
+        $labele->setTag($tag);
+        $labele->setLang("en");
+        $labele->setMode("message");
+        $labele->setText("_".$tag);
+        $entityManager->persist($labelf);
+        
+        $entityManager->persist($labele);
+        $entityManager->flush();
+        return $this->redirect('/admin/label/search');
     }
     
-     public function LabelSearch($search, Request $request)
+    public function LabelSearch($search, Request $request)
     {
         $message="";
+        if(isset($_GET['_mode']))
+        {
+          $mode = $_GET['_mode'];
+          $this->mylib->setCookieFilter("mode",$mode);
+        }
+        else
+        {
+            $mode=$this->mylib->getCookieFilter("mode"); 
+        }
+        if($mode=="")
+            $mode="message";
         if(isset($_GET['searchfield']))
         {
             $pfield = $_GET['searchfield'];
@@ -118,34 +138,36 @@ class LabelController extends Controller
             if(strcmp($search, "=") == 0) 
             {
                 $pfield = $this->mylib->getCookieFilter("label");
+                 $mode=$this->mylib->getCookieFilter("mode"); 
             }
             else
             {
-               $pfield="*";
-               $this->mylib->clearCookieFilter("label");
+                $pfield="*";
+                $this->mylib->clearCookieFilter("label");
+                
             }
         }
         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
-            $labels = $this->getDoctrine()->getRepository("AppBundle:Label")->findAll("message");
+            $labels = $this->getDoctrine()->getRepository("AppBundle:Label")->findmode($mode);
             $subheading =  'trouver.tout';
         }
         else
         {
             $sfield = "%".$pfield."%";
-            $labels = $this->getDoctrine()->getRepository("AppBundle:Label")->findSearch($sfield,"message");
+            $labels = $this->getDoctrine()->getRepository("AppBundle:Label")->findSearch($sfield,$mode);
             $subheading =  'trouver.avec';
         }
         
         if (count($labels)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+            $subheading = 'nothing.found.for';
         }
         else
         {
             foreach($labels as $label)
             {
-               
+                
             }
             
         }
@@ -159,43 +181,44 @@ class LabelController extends Controller
         'subheading' =>  $subheading,
         'searchfield' =>$pfield,
         'labels'=> $labels,
+        'mode'=>$mode,
         
         ]);
     }
     
-    public function generate()
+    public function generate($mode)
     {
-    
-    
-        $fpfr = fopen("../translations/messages.fr.yml","w");
-        $fpen = fopen("../translations/messages.en.yml","w");
         
-
-            $labels = $this->getDoctrine()->getRepository("AppBundle:Label")->findAll("message");
-       
-            
-            foreach($labels as $label)
-            {
-             $outlabel = $this->formatlabels($label->getText());
+        
+        $fpfr = fopen("../translations/".$mode."s.fr.yml","w");
+        $fpen = fopen("../translations/".$mode."s.en.yml","w");
+        
+        
+        $labels = $this->getDoctrine()->getRepository("AppBundle:Label")->findMode($mode);
+        
+        
+        foreach($labels as $label)
+        {
+            $outlabel = $this->formatlabels($label->getText());
             if($label->getLang() == "en")
             {
-              fwrite($fpen, $label->getTag().": ". $outlabel."\n");
+                fwrite($fpen, $label->getTag().": \"". $outlabel."\"\n");
             }
             elseif($label->getLang() == "fr")
             {
-              fwrite($fpfr, $label->getTag().': "'. $outlabel.'"'."\n");
+                fwrite($fpfr, $label->getTag().": \"". $outlabel."\"\n");
             }
-            }
-            fclose($fpen);
-            fclose($fpfr);
-            $mess = "translation.files.produced";;
-            return $this->redirect('/accueil/message/'.$mess);
+        }
+        fclose($fpen);
+        fclose($fpfr);
+        $mess = "translation.files.produced";
+        return $this->redirect('/accueil/message/'.$mess);
         
-       
+        
     }
-   
-   private function formatlabels($intext)
-   {
+    
+    private function formatlabels($intext)
+    {
         $text = trim($intext);
         $text =  strip_tags($text);
         $text =  preg_replace("/^'/", '', $text);
@@ -205,4 +228,22 @@ class LabelController extends Controller
         return $text;
     }
     
+    private function formattag($intext)
+    {
+        $text = trim($intext);
+        $text =  strip_tags($text);
+        $text =  preg_replace("/^'/", '', $text);
+        $text =  preg_replace('/^"/', '', $text);
+        $text =  rtrim($text, "'");
+        $text =  rtrim($text, '"');
+        $text =  str_replace('  ', ' ', $text);
+        $text =  str_replace(' ', '.', $text);
+        $text =  str_replace('..', '.', $text);
+         if(strpos($text,'.') !== false) return $text;
+         else
+         {
+             $text = '.'.$text;
+         }
+         return $text;
+    }
 }

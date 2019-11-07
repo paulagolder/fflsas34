@@ -27,16 +27,13 @@ div.body { padding:3em; }
 
 <div class="mailmessage">
 <table  >
-
- <tr><td class="label" >{{'Envoyée par'}} </td><td class="title"> {{ message.fromname }} ({{message.fromemail}})</td></tr>
-<tr><td class="label" >{{'Date envoyée '}} </td><td class="title"> {{ message.date_sent  | date("Y-m-d h:m:s")}}</td></tr>
+ <tr><td class="label" >Envoyée par</td><td class="title"> {{ message.fromname }} ({{message.fromemail}})</td></tr>
+<tr><td class="label" >Date envoyée</td><td class="title"> {{ message.date_sent  | date("Y-m-d H:i:s")}}</td></tr>
 {% if message.bcc is iterable %}
-   <tr><td class="label" >{{'Message envoyée a'}} </td><td class="title" > {{message.toname}} </td></tr>
+   <tr><td class="label" >Message envoyée a</td><td class="title" > {{message.toname}} </td></tr>
 {% else %}
-<tr><td class="label" >{{'Message envoyée a'}} </td><td class="title" > {{message.toname}} ({{message.toemail}})</td></tr>
+<tr><td class="label" >Message envoyée a</td><td class="title" > {{message.toname}} ({{message.toemail}})</td></tr>
 {% endif %}
-
-{# <tr><td class="label" >{{'Sujet'}}</td><td class="title"> {{ message.subject|trans ({}, 'messages', 'fr')   }}</td></tr> #}
 </table>
 <div class="body">
 {{ message.body | raw }}

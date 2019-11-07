@@ -463,7 +463,7 @@ class LocationController extends Controller
         
         if (count($locations)<1) 
         {
-             $subheading = 'rien.trouver.pour';
+             $subheading = 'nothing.found.for';
         }
         else
         {

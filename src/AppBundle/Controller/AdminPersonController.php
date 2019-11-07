@@ -151,7 +151,7 @@ class AdminPersonController extends Controller
     }
     
     
-    public function register(Request $request)
+    public function new(Request $request)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $person = new Person();

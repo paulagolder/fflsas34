@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\SwiftmailerBundle\Swift_SmtpTransport;
+use Symfony\Component\Translation\TranslatorInterface;
 #use AppBundle\MyClasses\EMail;
 
 use AppBundle\Entity\Message;
@@ -29,13 +30,14 @@ class MessageController extends Controller
     private $requestStack ;
     private $lang="fr";
     private $mylib;
+    private $trans;
     
     
-    
-    public function __construct( MyLibrary $mylib,RequestStack $request_stack )
+    public function __construct( MyLibrary $mylib,RequestStack $request_stack,TranslatorInterface $translator )
     {
         $this->mylib = $mylib;
         $this->requestStack = $request_stack;
+        $this->trans =$translator;
         
     }
     
@@ -272,11 +274,9 @@ function sendMessage($message)
     $sn = $this->getDoctrine()->getManager();      
     $sn -> persist($message);
     $sn -> flush();
-    $formattedbody =    $this->renderView('message/emailbody.html.twig',array(
-        'message'=>$message,),'text/html');
-        
-        $smessage = $this->makeSwiftMessage($message, $formattedbody);
-        $this->get('mailer')->send($smessage);
+    $formattedbody =    $this->renderView('message/emailbody.html.twig',array('message'=>$message,),'text/html');
+    $smessage = $this->makeSwiftMessage($message, $formattedbody);
+    $this->get('mailer')->send($smessage);
 } 
 
 function sendMessageToUserCopytoAdministrators($message,$userid,$lang)
@@ -329,13 +329,12 @@ function sendMessageToUser($message,$userid,$lang)
     $sn = $this->getDoctrine()->getManager();      
     $sn -> persist($message);
     $sn -> flush();
-    $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
-        'userid'=>$userid,),'text/html');
-        $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-            'message'=>$message,'footer'=>$userfooter,),'text/html');
-            
-            $smessage = $this->makeSwiftMessage($message, $formattedbody);
-            $this->get('mailer')->send($smessage);
+    $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',
+           array('userid'=>$userid,),'text/html');
+    $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',
+           array('message'=>$message,'footer'=>$userfooter,),'text/html');
+    $smessage = $this->makeSwiftMessage($message, $formattedbody);
+    $this->get('mailer')->send($smessage);
 } 
 
 function sendConfidentialMessageToUser($message,$userid,$lang)
@@ -346,14 +345,49 @@ function sendConfidentialMessageToUser($message,$userid,$lang)
     $sn = $this->getDoctrine()->getManager();      
     $sn -> persist($message);
     $sn -> flush();
-    $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array(
-        'userid'=>$userid,),'text/html');
-    $formattedbody =    $this->renderView('message/template/'.$lang.'/emailfull.html.twig',array(
-            'message'=>$message,'footer'=>$userfooter,),'text/html');
-            
+    $userfooter =  $this->renderView('message/template/'.$lang.'/useremailfooter.html.twig',array('userid'=>$userid,),'text/html');
+    $formattedbody = $this->renderView('message/template/'.$lang.'/emailfull.html.twig',
+                  array('message'=>$message,'footer'=>$userfooter,),'text/html');
     $smessage = $this->makeSwiftMessage($message, $formattedbody);
     $this->get('mailer')->send($smessage);
 } 
+
+function sendUserMessage($subjecttag,$bodytag,$user)
+{
+     $body =  $this->renderView('message/template/'.$user->getLang().'/'.$bodytag.'.html.twig',array('user'=> $user));
+     $subject = $this->trans->trans($subjecttag,[],"messages",$user->getLang());
+     $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+     if(substr_compare(message.toemail,".free.fr", -strlen(".free.fr")) === 0)
+     {
+       $message->setSubject ( "REDIRECTED+".$message->getSubject());
+     $sentmessage = $this->get('message_service')->sendMessageToUser($message,$user->getUserid(), $user->getLang());
+     }
+     else
+     {
+   
+      $sentmessage = $this->get('message_service')->sendMessageToAdmin($message, $lang);
+     }
+}
+
+function sendConfidentialUserMessage($subjecttag,$bodytag,$user)
+{
+     $body =  $this->renderView('message/template/'.$user->getLang().'/'.$bodytag.'.html.twig',array('user'=> $user));
+       $subject = $this->trans->trans($subjecttag,[],"messages",$user->getLang());
+     $message = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
+     $sentmessage = $this->get('message_service')->sendConfidentialMessageToUser($message,$user->getUserid(), $user->getLang());
+}
+
+function sendAdminMessage($subjecttag,$bodytag,$user,$lang)
+{
+      $abody =  $this->renderView('message/template/'.$lang.'/'.$bodytag.'.html.twig',array('user'=> $user));
+      $subject = $this->trans->trans($subjecttag,[],"messages",$lang);
+      $amessage = new message($user->getUsername(),$user->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $abody);
+      $asmessage = $this->get('message_service')->sendMessageToAdmin($amessage, $lang);
+}
+
+
+
+  
 
 
 function captchaverify($recaptcha)

@@ -16,12 +16,12 @@ class CompleteRegForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username', TextType::class);
-        $builder->add('email', TextType::class);
-        $builder->add('newregistrationcode', IntegerType::class);
-         $builder->add('interet', TextType::class);
-      ##  $builder->get('email')->setRequired(false);
-       # $builder->get('roles')->setRequired(false);
+        $builder->add('username', TextType::class,['label' => '.username',]);
+        $builder->add('email', TextType::class,['label' => '.email',]);
+        $builder->add('newregistrationcode', IntegerType::class,['label' => '.newregistrationcode',]);
+        $builder->add('interet', TextType::class,['label' => '.interet',]);
+        $builder->get('username')-> setDisabled(true);
+        $builder->get('email')-> setDisabled(true);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -10,9 +10,11 @@ class LabelRepository extends EntityRepository
    
     
     
-     public function findAll()
+     public function findmode($mode)
     {
        $qb = $this->createQueryBuilder("l");
+       $qb->andWhere('l.mode = :mode   ');
+       $qb->setParameter('mode', $mode);
        $qb->orderBy("l.tag", "ASC");
        $labels =  $qb->getQuery()->getResult();
       
@@ -35,6 +37,16 @@ class LabelRepository extends EntityRepository
         $qd->delete();
         $qd->where('l.id = :lid');
         $qd->setParameter('lid',$lid);
+        $query = $qd->getQuery()->getResult();
+    }
+    
+       public function deletebytag($tag,$mode)
+    {
+        $qd = $this->createQueryBuilder('l');
+        $qd->delete();
+        $qd->where('l.tag = :tag and l.mode = :mode ');
+        $qd->setParameter('tag',$tag);
+        $qd->setParameter('mode',$mode);
         $query = $qd->getQuery()->getResult();
     }
     

@@ -213,7 +213,7 @@ class ImageController extends Controller
         
         if (count($images)<1) 
         {
-            $subheading = 'rien.trouver.pour';
+            $subheading = 'nothing.found.for';
         }
         else
         {
@@ -230,7 +230,7 @@ class ImageController extends Controller
         [ 
         'lang'=>$this->lang,
         'message' => $message,
-        'heading' =>  'Gestion des Images',
+        'heading' =>  'manage.images',
         'subheading' =>  $subheading,
         'searchword' =>$pfield,
         'images'=> $images,
@@ -412,6 +412,45 @@ class ImageController extends Controller
         
         
         return $this->redirect("/admin/image/search");
+        
+    }
+    
+    public function move()
+    {
+        $errorlist =array();
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findNew();
+        
+        if (!$images) {
+            return $this->render('image/showall.html.twig', [ 'message' =>  'Images not Found',]);
+        }
+        
+        foreach($images as $image)
+        {
+        $filepath =  $this->getParameter('new-images-folder'). $image->getPath();
+
+        try {
+          $myfile = fopen($filepath, "r");
+          $newname = $image->makeFilename();
+          $image->setpath($newname);
+          $newpath = $this->getParameter('old-images-folder'). $newname;
+          rename($filepath,$newpath );
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->persist($image);
+          $entityManager->flush();
+         } catch (\Throwable $error) {
+
+           $errorlist[] = $image; 
+          }
+       
+        }
+        return $this->render('image/showall.html.twig', 
+        [
+        'lang' => $this->lang,
+        'images'=> $errorlist,
+        'message'=> 'error.images',
+        'heading'=> 'new.images',
+        ]);
         
     }
     
