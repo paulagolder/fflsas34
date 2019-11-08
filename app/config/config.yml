@@ -48,6 +48,7 @@ twig:
         defaultcontent: '%defaultcontent%'
         adminstratorsemails: '%administratorsemails%'
         baseurl: '%base-url%'
+        languages: '%languages%'
         
     paths:
         '%kernel.project_dir%/web': pathToWeb

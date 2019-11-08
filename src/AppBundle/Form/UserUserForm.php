@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 class UserUserForm extends AbstractType
 {
@@ -22,11 +23,16 @@ class UserUserForm extends AbstractType
         $builder->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => '.password',),
-                'second_options' => array('label' => 'repeat.password' ,),));
-        $builder->add('rolestr', TextType::class,['label' => '.rolestr']);
+                'second_options' => array('label' => 'repeat.password' ,),'empty_data' => 'Default value'));
+        $builder->add('membership', TextType::class,['label' => '.membership']);
+         $builder->add('locale', ChoiceType::class, [
+           'choices'  => [
+             'FR' => 'fr',
+             'EN' => 'en',
+           ],]);
         $builder->add('email', TextType::class,['label' => '.email']);
         $builder->get('plainPassword')->setRequired(false);
-        $builder->get('rolestr')->setDisabled(true);
+        $builder->get('membership')->setDisabled(true);
         $builder->get('email')->setDisabled(true);
     }
 

@@ -9,6 +9,7 @@
 .path: "Chemin du fichier"
 .send: "Envoyer"
 .subject: "Subject"
+.temporary: "provisoire"
 .toname: "Nom de la réception"
 .username: "Nom d'utilisateur"
 a.book: "Livre"

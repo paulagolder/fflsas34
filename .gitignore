@@ -23,11 +23,11 @@
 /*.sh
 /*.tar
 /*.tar.gz
-/translations/*.*~
+/translations/*
 /*/x*
 */x*
 /web/css/x*
 /*/*/*/x*
 *.yaml
 x*
-/translations/*.kate-swp
+

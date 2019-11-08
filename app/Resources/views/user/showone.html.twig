@@ -26,11 +26,10 @@
           {% if user.rolestr =="ROLE_AADA" or user.membership =="" or user.membership is null %}
             <div class="editbutton" ><a href="/admin/approveuser/{{user.userid}}">{{'approve.user'|trans}}</a></div>
             <div class="editbutton" ><a href="/admin/rejectuser/{{user.userid}}">{{'reject.user'|trans}}</a></div>
-            <div class="editbutton" ><a href="/admin/user/rereg/{{user.userid}}">{{'rereg.user'|trans}}</a></div>
-            {% else %}
+              {% endif %}
               <div class="editbutton" ><a href="/admin/user/rereg/{{user.userid}}">{{'rereg.user'|trans}}</a></div>
               <div class="editbutton" ><a  href="/admin/user/edit/{{user.userid}}">{{'edit.user.detail'|trans}}</a></div>
-          {% endif %}
+      
           <div class="deletebutton "> <a href = {{deletelink}}  Onclick="return ConfirmDelete()"  >{{'delete'|trans }} </a> </div>
 
      {% endif %}
