@@ -41,7 +41,13 @@ div.search div.searchlist div div.search a.editbutton
          background: rgba(80, 0, 0, 0.1);
  }
  
- 
+div#label  div.searchlist.labellist div.label.row div.editbutton a
+{
+     
+    line-height: 34px;
+    margin: 0 10px;
+    padding: 7px;
+}
  
 
  div.search div.searchlist div.row:nth-child(2n+2)

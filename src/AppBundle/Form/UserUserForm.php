@@ -33,6 +33,7 @@ class UserUserForm extends AbstractType
         $builder->add('email', TextType::class,['label' => '.email']);
         $builder->get('plainPassword')->setRequired(false);
         $builder->get('membership')->setDisabled(true);
+        $builder->get('username')->setDisabled(true);
         $builder->get('email')->setDisabled(true);
     }
 

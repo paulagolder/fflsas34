@@ -33,10 +33,6 @@ class SearchController extends Controller
        $pfield = $request->query->get('searchfield');
        $gfield = $request->query->get('searchfield');
    
-       // $speople = array();
-       // $sevents = array();
-       // $simages= array();
-      
         if (!$pfield) 
         {
             return $this->render('search/showall.html.twig', 
@@ -61,9 +57,14 @@ class SearchController extends Controller
         $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
         foreach($contents as $key => $content)
         {
-          $sid = $content->getSubjectid();
-          $results['content'][$sid]['label'] = $content->getLabel();
-          $results['content'][$sid]['link'] ="/".$this->lang."/content/".$sid;
+         $cid = $content->getContentid();
+          $content =   $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
+          if($content->getAccess()<2)
+          {
+            $sid = $content->getSubjectid();
+            $results['content'][$sid]['label'] = $content->getLabel();
+           $results['content'][$sid]['link'] ="/".$this->lang."/content/".$sid;
+          }
         }
         
         $locations = $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($pfield);
@@ -82,7 +83,7 @@ class SearchController extends Controller
           $results['url'][$lid]['link'] ="/".$this->lang."/url/".$lid;
         }
          
-         $biblos = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findSearch($pfield);
+        $biblos = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findSearch($pfield);
         foreach($biblos as $key => $biblo)
         {
           $lid = $biblo->getBookId();
@@ -94,7 +95,6 @@ class SearchController extends Controller
          foreach($ref_ar as $key => $oref_ar)
          {
            $obtype = $key;
-          // $lib = $this->get('library_service');
            switch ($obtype) 
            {
               case "person":
@@ -130,7 +130,12 @@ class SearchController extends Controller
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
-                        $image =   $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($key);
+                      dump($oref_ar);
+                      dump($key);
+                      $image =   $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($key);
+                      ##ignore images with access > public 
+                      if($image  && $image->getAccess()<2)
+                      {
                       $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('image',$pid);
                     //  $results['images'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang)['comment'];
                     $label = $this->mylib->getText($text_ar,'title',$this->lang);
@@ -140,15 +145,20 @@ class SearchController extends Controller
                       }
                     $results['images'][$pid]['label'] = $label;
                        $results['images'][$pid]['link'] ="/".$this->lang."/image/".$pid;
+                     }
                  }
               break;
                case "content":
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
+                       $content =   $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($pid);
+                       if($content->getAccess()<2)
+                       {
                       $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$pid);
                       $results['content'][$pid]['label'] = $this->mylib->getText($text_ar,'title',$this->lang);
                       $results['content'][$pid]['link'] ="/".$this->lang."/content/".$pid;
+                      }
                  }
               break;
                case "location":

@@ -25,7 +25,7 @@ class ImageForm extends AbstractType
         $builder->add('access', ChoiceType::class, ['label' => '.access',
         'choices'  => ['Public' => 0,'Admin' => 1, 'Private' => 2, ],]);
         $builder ->add('copyright', TextType::class,['label' => '.copyright',]);
-        $builder->add('imagefile', FileType::class, array('label' => 'Image.file','required'=>false,  'data_class' => null));
+        $builder->add('imagefile', FileType::class, array('label' => 'image.file','required'=>false,  'data_class' => null));
         $builder->get('path')->setRequired(false);
         $builder->get('copyright')->setRequired(false);
         $builder->get('format')->setRequired(false);

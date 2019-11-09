@@ -48,6 +48,8 @@ class UserForm extends AbstractType
              'EN' => 'en',
         ],'label' => '.language']);
         $builder->get('email')->setRequired(false);
+        $builder->get('email')->setDisabled(true);
+        $builder->get('username')->setDisabled(true);
         $builder->get('plainPassword')->setRequired(false);
         $builder->get('locale')-> setRequired(false);
     }
