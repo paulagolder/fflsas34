@@ -69,11 +69,8 @@ class RegistrationController extends Controller
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
-                $baseurl = $this->container->getParameter('base-url');
-                
                 //message to user
-                #  $smessage = $this->get('message_service')->sendUserMessage('registration.success','cond_reg_notice',$user);
-                $smessage = $this->get('message_service')->sendConfidentialUserMessage('registration.success.c','cond_reg_notice',$user);
+                $smessage = $this->get('message_service')->sendConfidentialUserMessage('registration.success','cond_reg_notice',$user);
                 //notice to screen
                 $message = array();
                 $message[] = 'you.have.commenced.registration';

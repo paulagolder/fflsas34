@@ -165,7 +165,9 @@ class UserController extends Controller
         
         $usercode = $user->getRegistrationCode();
         $temp = $user->hasRole("ROLE_APWC");
-        if($code == $usercode && $temp )
+        if( $temp )
+        {
+        if($code == $usercode )
         {
             $form = $this->createForm(UserPasswordForm::class, $user);
             $form->handleRequest($request);
@@ -195,8 +197,9 @@ class UserController extends Controller
                 'returnlink'=> "/".$this->lang."/user/".$uid,
                 ));
         }
-        return $this->redirect('/accueil/message/'."E194");
-        
+        return $this->redirect('/accueil/message/'."password.change.failed");
+        }
+        return $this->redirect('/accueil/message/'."password.already.changed");
     }
     
     public function userRereg($uid)
@@ -208,7 +211,7 @@ class UserController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
-        $smessage = $this->get('message_service')->sendConfidentialUserMessage('reregister','rereg_notice',$user);
+        $smessage = $this->get('message_service')->sendConfidentialUserMessage('reregister','rereg.notice',$user);
         return $this->redirect("/admin/user/".$uid);
     }
     
@@ -259,14 +262,7 @@ class UserController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
-        $baseurl = $this->container->getParameter('base-url');
-        #  $code = $fuser->getRegistrationcode();
-        # $reglink = "{$baseurl}complete/{$fuser->getUserid()}";
-        #  $body =  $this->renderView('message/template/'.$fuser->getLang().'/rereg_notice.html.twig', array('reglink'=>$reglink,'code'=>$code,'username'=>$fuser->getUsername()));
-        #  $subject =  $this->trans->trans('reregister');
-        #  $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-        #  $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
-        $smessage = $this->get('message_service')->sendConfidentialUserMessage('reregister','rereg_notice',$user);
+        $smessage = $this->get('message_service')->sendConfidentialUserMessage('reregister','rereg.notice',$user);
     }
     
     public function userDereg($uid)
@@ -278,11 +274,7 @@ class UserController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
-        #  $body =  $this->renderView('message/template/'.$fuser->getLang().'/dereg_notice.html.twig');
-        #  $subject =  $this->trans->trans('deregister');
-        # $umessage = new message($fuser->getUsername(),$fuser->getEmail(),$this->getParameter('admin-name'), $this->getParameter('admin-email'),$subject, $body);
-        #  $smessage = $this->get('message_service')->sendConfidentialMessageToUser($umessage,$uid,$fuser->getLang());
-        $smessage = $this->get('message_service')->sendConfidentialUserMessage('deregister','dereg_notice',$user);
+        $smessage = $this->get('message_service')->sendConfidentialUserMessage('deregister','dereg.notice',$user);
         return $this->redirect("/".$fuser->getLang()."/user/".$uid);
     }
     

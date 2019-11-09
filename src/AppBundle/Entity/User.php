@@ -389,7 +389,7 @@ class User implements UserInterface, \Serializable
      
      if ($action == "newpasswordrequest")
      {
-        if($this->membership == "USER" or $this->membership == "ADMIN" or $this->membership == "TEMP"  )
+        if($this->membership == "USER" or $this->membership == "ADMIN" or $this->membership == "TEMP"  or $this->membership == "CHEF" )
         {
           $this->setRegistrationcode( mt_rand(100000, 999999));
           $this->setRolestr("ROLE_APWC;");
@@ -402,7 +402,9 @@ class User implements UserInterface, \Serializable
         if($this->membership == "USER")
           $this->rolestr="ROLE_USER";
         elseif($this->membership =="ADMIN" )
-          $this->rolestr="ROLE_ADMIN";
+            $this->rolestr="ROLE_ADMIN";
+       elseif($this->membership =="CHEF" )
+          $this->rolestr="ROLE_CHEF";
         else if($this->membership =="TEMP" )
           $this->rolestr="ROLE_AADA";
      }
