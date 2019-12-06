@@ -45,6 +45,15 @@ class Image
      */
     private $copyright;
   
+   /**
+     * @ORM\Column(type="integer", nullable=true)
+     *   '0' => 0,
+     *   '90' => 1,
+      *  '180' => 2, 
+      * '270' => 3, 
+     */
+  private $rotation;
+  
   /**
      * @ORM\Column(type="integer", nullable=true)
      *   'Public' => 0,
@@ -195,6 +204,18 @@ class Image
         return $this;
     }
 
+    public function getRotation(): ?int
+    {
+        return $this->rotation;
+    }
+
+    public function setRotation(?int $anint): self
+    {
+        $this->rotation = $anint;
+
+        return $this;
+    }
+    
     public function getAccess(): ?int
     {
         return $this->access;

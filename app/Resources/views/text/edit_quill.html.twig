@@ -20,29 +20,29 @@
         <div class="heading">
             <div class="label" >{{'edit.text'|trans }} </div>
             <div class="title" >{{ text.attribute}} : {{text.id}} </div>
-             <div class="label" >{{'for'|trans }}  </div>
-              <div class="title" >{{ source}}  </div>
+             <div class="label" >{{'.for'|trans }}  </div>
+              <div class="title" >{{source}}  </div>
             <div class="returnbutton button1"> <a href = "{{returnlink}}" >{{'.back'|trans }} </a> </div>
         </div> 
         <div class="form">
             <form action="/admin/text/process_edit/{{text.id}}" method="post" >
                 <div  >
-                    <label for="language">Language:</label>
+                    <label for="language">{{'.language'|trans}}:</label>
                     <input type="text" id="username" name="_language" value="{{ text.language}}" disabled="disabled" />
                 </div>
                 <div  >
-                    <label for="attribute">Attribute:</label>
+                    <label for="attribute">{{'.attribute'|trans}}:</label>
                     <input type="text" id="attribute name="_subjectid" value="{{ text.attribute }}" disabled="disabled"d />
                 </div>
                 <input type="hidden" name="_text" value="{{ text.comment  }}" >
-                    <button type="submit" id="submitbutton" style="display: none;"  >{{'enregistrer'|trans }} </button> 
+                    <button type="submit" id="submitbutton" style="display: none;"  >{{'.register'|trans }} </button> 
                 </form>
-                <button onclick="saveform()">{{'Click.me'|trans }}</button>  
+                <button onclick="saveform()">{{'click.me'|trans}}</button>  
                 <div id="editortext"   >
                     {{ text.comment | raw }}
                 </div>
             </div>
-            <button onclick="saveform()">{{'Click.me'|trans }}</button>  
+            <button onclick="saveform()">{{'click.me'|trans}}</button>  
         </div>
       </div>  
         {% endblock %}

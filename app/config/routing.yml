@@ -966,6 +966,10 @@ biblo_edit:
     path: /admin/biblo/edit/{bkid}
     controller:  AppBundle\Controller\BibloController::edit 
     
+biblo_editdetail:        
+    path: /admin/biblo/editdetail/{bkid}
+    controller:  AppBundle\Controller\BibloController::editdetail 
+    
     
 biblo_visit:        
     path:  /{_locale}/biblo/visit/{bkid}
@@ -980,6 +984,15 @@ biblo_admin_bookmark:
 biblo_user_bookmark:    
     path:  /{_locale}/biblo/addbookmark/{bid}
     controller:  AppBundle\Controller\BibloController::addUserBookmark  
+    
+biblo_admin_addimage:
+   path: /admin/biblo/addimage/{bid}/{iid}
+   controller:  AppBundle\Controller\BibloController::addimageref  
+   
+biblo_admin_removeimageref:
+   path: /admin/biblo/removeimageref/{bid}/{iid}
+   controller:  AppBundle\Controller\BibloController::removeimageref  
+    
     
 #==========================labels==========================
 

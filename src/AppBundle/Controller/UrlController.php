@@ -155,14 +155,14 @@ class UrlController extends Controller
         if (!$pfield) 
         {
             $urls = $this->getDoctrine()->getRepository("AppBundle:Url")->findAll();
-            $subheading =  'trouver.tout';
+            $subheading =  'found.all';
             
         }
         else
         {
             $pfield = "%".$pfield."%";
             $urls = $this->getDoctrine()->getRepository("AppBundle:Url")->findSearch($pfield);
-            $subheading =  'trouver.avec';
+            $subheading =  'found.with';
         }
         
         

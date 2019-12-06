@@ -450,14 +450,14 @@ class LocationController extends Controller
         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $locations = $this->getDoctrine()->getRepository("AppBundle:Location")->findAll();
-            $subheading =  'trouver.tout';
+            $subheading =  'found.all';
             
         }
         else
         {
             $sfield = "%".$pfield."%";
             $locations= $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($sfield);
-            $subheading =  'trouver.avec';
+            $subheading =  'found.with';
         }
         
         

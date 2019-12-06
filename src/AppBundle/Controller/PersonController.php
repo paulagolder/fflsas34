@@ -80,7 +80,7 @@ class PersonController extends Controller
                               [ 
                                 'lang' => $this->lang,
                                 'message' =>  '' ,
-                                'heading' => 'les.hommes',
+                                'heading' => 'the.men',
                                 'people'=> $people,
                                 ]);
 
@@ -102,7 +102,7 @@ class PersonController extends Controller
                               [ 
                                 'lang' => $this->lang,
                                  'message' =>  '' ,
-                                 'heading' =>  'les.hommes',
+                                 'heading' =>  'the.men',
                                  'people'=> $people,
                                 ]);
     }
@@ -411,13 +411,13 @@ class PersonController extends Controller
         if (!$pfield) 
         {
             $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
-            $subheading =  'trouver.tout';
+            $subheading =  'found.all';
         }
         else
         {
             $pfield = "%".$pfield."%";
             $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findSearch($pfield);
-            $subheading =  'trouver.avec';
+            $subheading =  'found.with';
         }
         
         
@@ -439,7 +439,7 @@ class PersonController extends Controller
         [ 
         'lang'=>$this->lang,
         'message' => $message,
-        'heading' =>  'cherche.des.hommes',
+        'heading' =>  'search.the.men',
         'subheading' =>  $subheading,
         'searchfield' =>$gfield,
         'people'=> $people,

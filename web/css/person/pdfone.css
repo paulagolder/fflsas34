@@ -82,21 +82,12 @@ div#pdf_person div.eventtree ul li div.incident > a:hover
     color: blue;
 }
 
-div.image
-{
-    max-width: 138px;
-    flex-grow: 1;
-    
-    
-}
+
 
 div#pdf_person div.imagegroup
 {
     display: table;
-    xflex-direction: row;
-   xflex-wrap: wrap;
-    xjustify-content: space-evenly;
-    border: 0px solid red;
+    xborder: 1px solid red;
     width : 100%;
 }
 
@@ -107,30 +98,46 @@ div#pdf_person div.imagegroup div.imagerow
    
 }
 
-div#pdf_person div.imagegroup div.image 
+div#pdf_person div.imagegroup div.imagerow div.image 
 {
-   display:table-cell;
-   
+       display:table-cell;
+       xborder: 2px solid green;
+       height:200px;
+       width: 33%;
+     
 }
 
 
-div#pdf_person div.imagegroup div.image img
-{
-    margin:10px;
-    max-width:150px;
-    max-height:150px;
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-}
 
 
-div#pdf_person div.imagegroup div.imagelabel
+
+div#pdf_person div.imagegroup div.image div.imageimage
 {
+    xborder: 4px solid orange;
+    height: 150px;
     text-align: center;
     vertical-align: middle;
-    color:blue;
-    font-size:1em;
+}
+
+
+div#pdf_person div.imagegroup div.image div.imageimage img
+{
+  
+    max-width: 150px;
+    max-height: 150px;
+
+}
+
+
+div#pdf_person div.imagegroup div.image div.imagelabel
+{
+   
+    text-align: center;
+    vertical-align: middle;
+    color: blue;
+    font-size: 1em;
+    height: 50px;
+    xborder: 4px solid green;
 }
 
 

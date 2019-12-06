@@ -10,3 +10,43 @@ div#biblo div.datarow div.label
 {
     width: 4em;
 }
+
+
+
+
+div#biblo div.colone div.image div.imageimage img
+{
+     width:200px;
+     margin: 20px;
+}
+
+div#biblo div.twocols
+{
+     display: flex;
+}
+
+
+
+ div#biblo div.otherimages div.image
+ {
+    
+     padding: 10px;
+     margin: 20px;
+} 
+
+div#biblo div.otherimages
+{
+     display: flex;
+}
+
+
+    
+div#biblo div.otherimages div.image img
+{
+    width:100px;
+}
+
+ div#biblo div.imagegroup
+ {
+     display: flex;
+}

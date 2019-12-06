@@ -18,10 +18,10 @@
    </div>
   <form  action="/admin/location/search">
   <div class="heading">
-   <div class="label"> {{'entrez.chercher'|trans }}</div>
+   <div class="label"> {{'enter.search'|trans }}</div>
    <input type="text" name="searchfield">
-   <input type="submit" value="{{'chercher'|trans }}" >
-   <div class="editbutton"><a href="/admin/location/search/*">{{"reset"|trans}}</a></div>
+   <input type="submit" value="{{'.search'|trans }}" >
+   <div class="editbutton"><a href="/admin/location/search/*">{{'.reset'|trans}}</a></div>
    </div>
    </form>
 
@@ -35,7 +35,7 @@
          {% for location in locations  %}
             <div class="search row" >
              <div>{{location.name}}</div> 
-             <div class="editbutton button1"><a class="editbutton" href="/admin/location/addbookmark/{{location.locid}}">{{'bookmark'|trans}}</a></div>
+             <div class="editbutton button1"><a class="editbutton" href="/admin/location/addbookmark/{{location.locid}}">{{'.bookmark'|trans}}</a></div>
              <div class="editbutton "><a class="editbutton" href="/{{lang}}/location/{{location.locid}}">{{'see.location'|trans}}</a></div>
              <div class="editbutton "><a class="editbutton" href="/admin/location/edit/{{location.locid}}">{{'edit.location'|trans}}</a></div>
             </div>

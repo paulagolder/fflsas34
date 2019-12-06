@@ -32,7 +32,7 @@
        <div class="returnbutton" ><a href="{{returnlink}}">{{'.back'|trans}}</a></div>
     </div>
     <div class="heading" >
-       <div class="label">{{'during'|trans}} {{'the.campaign'|trans}}</div>
+       <div class="label">{{'.during'|trans}} {{'the.campaign'|trans}}</div>
        <div class="title">{{eventlabel}}</div> 
     </div>
     <div class="incident">
@@ -51,13 +51,13 @@
            {% endif %}
            {% if ( incident.locid > 1   ) %}
               <div class="subheading" >
-               <div class="label"  >{{'at'|trans}}</div><div class="field">  {{location.name}} </div>
-               <div class="returnbutton"><a href="{{location.link}}">{{'voir'|trans}}</a></div>
+               <div class="label"  >{{'.at'|trans}}</div><div class="field">  {{location.name}} </div>
+               <div class="returnbutton"><a href="{{location.link}}">{{'.view'|trans}}</a></div>
                    </div>  
            {% endif %}
             {% if (incident.comment !="" and  incident.locid < 1) %}
               <div class="subheading" >
-               <div class="label"  >{{'at'|trans}}</div><div class="field">  {{incident.comment}}</div>
+               <div class="label"  >{{'.at'|trans}}</div><div class="field">  {{incident.comment}}</div>
                    </div>  
            {% endif %}
            {% if incident.sdate != "" %}

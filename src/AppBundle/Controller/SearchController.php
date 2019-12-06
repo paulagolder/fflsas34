@@ -38,7 +38,7 @@ class SearchController extends Controller
             return $this->render('search/showall.html.twig', 
             [ 
               'lang' => $this->lang,
-               'message' =>  'rien.a.chercher',
+               'message' =>  'nothing.to.find',
             ]);
         }
         
@@ -130,8 +130,8 @@ class SearchController extends Controller
                  foreach($oref_ar as $key => $ref)
                  {
                       $pid = $key;
-                      dump($oref_ar);
-                      dump($key);
+                      //dump($oref_ar);
+                     //dump($key);
                       $image =   $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($key);
                       ##ignore images with access > public 
                       if($image  && $image->getAccess()<2)

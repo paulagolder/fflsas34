@@ -18,9 +18,9 @@
    </div>
   <form  action="/{{lang}}/person/all">
   <div class="row">
-   <div class="label"> {{'entrez.chercher'|trans }}</div>
+   <div class="label"> {{'enter.search'|trans }}</div>
    <input type="text" name="searchfield">
-   <input type="submit" value="{{'chercher'|trans }}" >
+   <input type="submit" value="{{'.search'|trans }}" >
    </div>
    </form>
    {% if people is defined %}
@@ -34,7 +34,7 @@
              <div>{{person.fullname}}</div> 
              <div class="editbutton button1"><a class="editbutton" href="/{{lang}}/person/{{person.id}}">{{'see.content'|trans}}</a></div>
               {% if is_granted('ROLE_USER') %}
-               <div class="editbutton "><a class="editbutton" href="/{{lang}}/person/addbookmark/{{person.id}}">{{'bookmark'|trans}}</a></div>
+               <div class="editbutton "><a class="editbutton" href="/{{lang}}/person/addbookmark/{{person.id}}">{{'.bookmark'|trans}}</a></div>
               {% endif %}
             </div>
          {% endfor %}

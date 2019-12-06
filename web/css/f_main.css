@@ -4,6 +4,21 @@
   font-family:"helvetica neue", helvetica, arial, sans-serif;
 }
 
+.rotate_1 {
+  transform: rotate(90deg); 
+  
+}
+
+.rotation_2 {
+  transform: rotate(180deg); 
+  
+}
+
+.rotation_3 {
+  transform: rotate(270deg); 
+ 
+}
+
 .button
 {
   -webkit-box-shadow:inset 0 0 1px 1px #f6f6f6;
@@ -76,7 +91,7 @@ body
   font-weight:300;
   margin:0;
   padding:0;
-  xbackground-image:url(/common/skybig.jpg);
+  background-image:url(/common/skybig.jpg);
 }
 
 div#left

@@ -57,7 +57,7 @@
     {{ form_row(form.zoom) }}
     {{ form_row(form.showchildren) }}
   <div class="subheading" >  
-    <div> <button type="submit">Register!</button></div>
+    <div> <button type="submit">{{'.submit'|trans}}</button></div>
   </div>
     {{ form_end(form) }}
     <form action="/admin/location/upload/{{location.locid}}" method="post" enctype="multipart/form-data">

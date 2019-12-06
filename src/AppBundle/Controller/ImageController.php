@@ -202,13 +202,13 @@ class ImageController extends Controller
         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findAll();
-            $subheading =  'trouver.tout';
+            $subheading =  'found.all';
         }
         else
         {
             $sfield = "%".$pfield."%";
             $images = $this->getDoctrine()->getRepository("AppBundle:Image")->findSearch($sfield);
-            $subheading =  'trouver.avec';
+            $subheading =  'found.with';
         }
         
         if (count($images)<1) 
@@ -308,7 +308,7 @@ class ImageController extends Controller
                     {
                         $image.setFormname($filename);
                     }  
-                    $file->move( $this->getParameter('new-images-folder-long'), $fileName);
+                    $file->move( $this->getParameter('new-images-folder'), $fileName);
                     $image->setPath($fileName);
                     $image->setImagefile($fileName);
                     

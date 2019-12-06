@@ -23,22 +23,25 @@ class BibloForm extends AbstractType
        
         $builder->add('bookid', TextType::class);
         $builder->add('title', null, array(
-           'label' => 'title', 
+           'label' => '.title', 
            'attr' => array('style' => 'width: 400px')));
         $builder->add('subtitle', TextType::class,[
           'empty_data' => '',
           'required' => false,
+          'label' => '.subtitle', 
           'attr' => array('style' => 'width: 400px')
            ]);
-        $builder->add('author', TextType::class);
-        $builder->add('publisher', TextType::class);
-        $builder->add('year', TextType::class);
+        $builder->add('author', TextType::class,['label' => '.author', ]);
+        $builder->add('publisher', TextType::class,['label' => '.publisher', ]);
+        $builder->add('year', TextType::class,['label' => '.year', ]);
         $builder->add('isbn', TextType::class,[
           'empty_data' => '',
           'required' => false,
+          'label' => '.isbn',
            ]);
         $builder->add('tags', TextType::class,[
          'empty_data' => '',
+         'label' => '.tags',
           'required' => false,
            ]);
 

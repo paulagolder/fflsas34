@@ -1,4 +1,4 @@
-{# views/message/makebulkmessage.html.twig #}
+{# views/message/makebulkrereg.html.twig#}
 
 {% extends 'admin.html.twig' %}
 
@@ -39,7 +39,7 @@
    <div class= "label" >{{'message.to'|trans}}</div>
    <div class="title" >{{message.toname}} ({{message.toemail}}) </div>
    <div class= "label" >{{'message.date'|trans}} </div>
-   <div class="title"> {{message.date_sent  | date("Y-m-d")}}</div>
+   <div class="title"> {{message.date_sent| date("Y-m-d")}}</div>
 </div>
 <div class= "subheading">
    <div class= "label" >{{'message.subject'|trans }}</div>

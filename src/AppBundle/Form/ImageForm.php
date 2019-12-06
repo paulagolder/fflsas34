@@ -22,6 +22,7 @@ class ImageForm extends AbstractType
         $builder ->add('name', TextType::class,['label' => '.imagename',]);
         $builder ->add('path', TextType::class,['label' => '.path',]);
         $builder ->add('format', TextType::class,['label' => '.format',]);
+          $builder ->add('rotation', ChoiceType::class,['label' => '.rotation', 'choices'  => ['None' => 0,'90' => 1, '180' => 2, '270' => 3, ],]);
         $builder->add('access', ChoiceType::class, ['label' => '.access',
         'choices'  => ['Public' => 0,'Admin' => 1, 'Private' => 2, ],]);
         $builder ->add('copyright', TextType::class,['label' => '.copyright',]);

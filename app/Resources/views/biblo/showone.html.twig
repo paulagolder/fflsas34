@@ -1,4 +1,4 @@
-{# views/biblo/showall.html.twig #}
+{# views/biblo/showone.html.twig #}
 
 {% extends 'user.html.twig' %}
 
@@ -16,17 +16,26 @@
 
    {% if book %}
      <div class="heading">
-        <div class="label" > {{'book'|trans }}</div>
+        <div class="label" > {{'.book'|trans }}</div>
          
        
         <div class="returnbutton button1"> <a href = "/{{lang}}/biblo/show/all" >{{'.back'|trans }} </a> </div>
           {% if is_granted('ROLE_ADMIN') %} 
           <div class="editbutton" ><a class='editbutton' href="/admin/biblo/edit/{{book.bookid}}">{{'edit.book.detail'|trans}}</a></div>
-        <div class="deletebutton"> <a class='deletebutton' href ="/admin/biblo/delete/{{book.bookid}}">{{'delete'|trans }} </a> </div>
+        <div class="deletebutton"> <a class='deletebutton' href ="/admin/biblo/delete/{{book.bookid}}">{{'.delete'|trans }} </a> </div>
          
         {% endif %}
     </div>
-<div class="datatable"  >
+    <div class="twocols">
+    <div class="colone">
+     {% if images %}
+                <div class="image">
+                    <div class="imageimage rotation_{{images[0].rotation}}" ><img src="{{images[0].fullpath}}" /></div>
+                </div>
+     {% endif %}
+     </div>
+    <div class="coltwo">
+<div class="datatable" >
         <div class="datarow">
             <div class="label" > {{'book.title'|trans }}</div>
             <div class="data" > {{book.title}}</div>
@@ -52,9 +61,22 @@
             <div class="data" > {{book.isbn}}</div>
         </div>
     </div>
+    </div>
 </div>
-
+<div class="otherimages">
+{% if images %}
+                {% for image in images %}
+                {% if not loop.first %}
+                <div class="image  rotation_{{image.rotation}}">
+                  <img src="{{image.fullpath}}" />
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
   {% endif %}
+    </div>
+  {% endif %}
+
   </div>
   </div>
 {% endblock %}

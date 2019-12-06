@@ -126,7 +126,7 @@ class LabelController extends Controller
         {
             $mode=$this->mylib->getCookieFilter("mode"); 
         }
-        if($mode=="")
+        if($mode=="" )
             $mode="message";
         if(isset($_GET['searchfield']))
         {
@@ -150,13 +150,13 @@ class LabelController extends Controller
         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $labels = $this->getDoctrine()->getRepository("AppBundle:Label")->findmode($mode);
-            $subheading =  'trouver.tout';
+            $subheading =  'found.all';
         }
         else
         {
             $sfield = "%".$pfield."%";
             $labels = $this->getDoctrine()->getRepository("AppBundle:Label")->findSearch($sfield,$mode);
-            $subheading =  'trouver.avec';
+            $subheading =  'found.with';
         }
         
         if (count($labels)<1) 
@@ -171,8 +171,9 @@ class LabelController extends Controller
             }
             
         }
-        
-        
+          
+         if($mode=="" )
+            $mode="message";
         return $this->render('label/labelsearch.html.twig', 
         [ 
         'lang'=>$this->lang,

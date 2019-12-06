@@ -37,14 +37,14 @@
     <div id="maintext">
 {{ form_row(form.text,{ 'attr': {'cols': '50'} }) }}
     </div>
-    <button type="submit">{{'enregistrer'|trans }} </button>
+    <button type="submit">{{'.submit'|trans }} </button>
 {{ form_end(form) }}
 
 {% for  imagelink in imagelinks %}
 {% for  key , sublink in imagelink %}
 <div class="sub;link" >
 <div> {{ sublink }} </div>
-<div class="editbutton"> <a href = "/admin/content/deleteimage/{{cid}}/{{key}}" >{{'delete'|trans }} </a> </di 
+<div class="editbutton"> <a href = "/admin/content/deleteimage/{{cid}}/{{key}}" >{{'.delete'|trans }} </a> </di 
 {% endfor %}
 {% endfor %}
 </div>

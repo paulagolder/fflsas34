@@ -46,11 +46,11 @@
             <div class= "editbutton button1">
             {% if is_granted('ROLE_USER') %} 
         
-                <a c href = "/{{lang}}/location/addbookmark/{{location.locid}}" >{{'bookmark'|trans}}</a>
+                <a c href = "/{{lang}}/location/addbookmark/{{location.locid}}" >{{'.bookmark'|trans}}</a>
        
               {% endif %}
               {% if is_granted('ROLE_ADMIN') %} 
-            <a  href="/admin/location/{{location.locid}}">{{'edit'|trans}}</a>
+            <a  href="/admin/location/{{location.locid}}">{{'.edit'|trans}}</a>
             {% endif %}
             </div>
         </div>

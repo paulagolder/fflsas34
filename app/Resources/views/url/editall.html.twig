@@ -16,7 +16,7 @@
 
    {% if furls %}
    <div class="heading">
-     <div class="label" >{{'urlinks'|trans}} </div> 
+     <div class="label" >{{'.urlinks'|trans}} </div> 
      {% if is_granted('ROLE_ADMIN') %}  
        <div class="editbutton button1" > <a class="editbutton"  href="/admin/url/edit/0" >{{"new.link"|trans }} </a> </div>
               {% endif %}

@@ -100,7 +100,7 @@
    {% endif %}
    
    {% if participants %}
-     <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'participants'|trans }}</button></div>
+     <div class="hidebar" > <button onclick="HideMe('pdiv' )">{{'.participants'|trans }}</button></div>
      <div id="pdiv" >
      <div  class=participants>
         {% for  key in participants | keys %}
@@ -112,7 +112,7 @@
     
     {% if event.children %}
        {% set children = event.children %}
-        <div class="hidebar" > <button onclick="HideMe('cdiv' )">{{'evenment.enfants'|trans}}</button></div>
+        <div class="hidebar" > <button onclick="HideMe('cdiv' )">{{'child.events'|trans}}</button></div>
         <div id="cdiv">
          <div class='children' >       
           {% for key in children | keys %}

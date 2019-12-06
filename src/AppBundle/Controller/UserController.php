@@ -89,7 +89,7 @@ class UserController extends Controller
             ));
     }
     
-    public function xnewuser()
+    public function newuser()
     {
         
         $request = $this->requestStack->getCurrentRequest();
@@ -388,13 +388,13 @@ class UserController extends Controller
         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $users = $this->getDoctrine()->getRepository("AppBundle:User")->findAll();
-            $subheading =  'trouver.tout';
+            $subheading =  'found.all';
         }
         else
         {
             $sfield = "%".$pfield."%";
             $users = $this->getDoctrine()->getRepository("AppBundle:User")->findSearch($sfield);
-            $subheading =  'trouver.avec';
+            $subheading =  'found.with';
         }
         if (count($users)<1) 
         {

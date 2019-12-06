@@ -1,68 +1,86 @@
-{# views/biblo/edit.html.twig #}
+{# views/biblo/showone.html.twig #}
 
-{% extends 'admin.html.twig' %}
+{% extends 'user.html.twig' %}
 
 {% block stylesheets %}
       {{ parent() }}
    <link href="{{ asset('css/biblo/biblo.css') }}" rel="stylesheet" />
 {% endblock %}
-{% block js %}
+ {% block js %}
  {{ parent() }}
  <script>
-  
-     function clickevent(eid)
-     {
-       
-     }
      function clickimage(iid)
      {
-       
+           window.location.href = '/admin/biblo/addimage/{{book.bookid}}/'+iid;
      }
-     
    </script>
-{%endblock%}
-
-
+   {% endblock %}
 {% block middle %}
 <div id="middle" >
-  <div id="biblo" >
+  <div id="biblo">
    {% if message %}
      <h1> {{message}}</h1>
    {% endif %}
-   <div class="heading">
-   {% if biblo.bookid >0 %}
-     <div class="label">
-      {{'edit.book'|trans}}
-     </div>
-     <div class="title">
-      {{ biblo.title}}({{biblo.author}})
-     </div>
-      <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{'.back'|trans }} </a> </div>
-       <div class="deletebutton"> <a href = "/admin/biblo/delete/{{biblo.bookid}}" >{{'delete'|trans }} </a> </div>
-    {% else %}
-      <div class="label">
-      {{'new.book'|trans}}
-     </div>
-        <div class="returnbutton button1"> <a href = "/admin/biblo/search" >{{'.back'|trans }} </a> </div>
+
+   {% if book %}
+     <div class="heading">
+        <div class="label" > {{'.book'|trans }}</div>
+         
+       
+        <div class="returnbutton button1"> <a href = "/{{lang}}/biblo/show/all" >{{'.back'|trans }} </a> </div>
+          {% if is_granted('ROLE_ADMIN') %} 
+          <div class="editbutton" ><a class='editbutton' href="/admin/biblo/editdetail/{{book.bookid}}">{{'edit.book.detail'|trans}}</a></div>
+        <div class="deletebutton"> <a class='deletebutton' href ="/admin/biblo/delete/{{book.bookid}}">{{'.delete'|trans }} </a> </div>
+         
         {% endif %}
+    </div>
+    <div class="otherimages">
+          <div class="label" > {{'.images'|trans }} </div>  
+          <div class="tooltip">?  <span class="tooltiptext">{{'to.add.images.use.bookmarks'|trans }}</span>
+              </div>
+     {% if images %}
+                {% for image in images %}
+                <div class="image">
+                    <div class="imageimage rotation_{{image.rotation}}" ><img src="{{image.fullpath}}" /></div>
+                    <div class="imagelabel">
+                    <div class=deletebutton"><a  class='deletebutton' href ="/admin/biblo/removeimageref/{{book.bookid}}/{{image.imageid}}">{{'.remove'|trans }} </a> </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+<div class="datatable"  >
+        <div class="datarow">
+            <div class="label" > {{'book.title'|trans }}</div>
+            <div class="data" > {{book.title}}</div>
+        </div>
+        <div class="datarow">
+            <div class="label" > {{'book.subtitle'|trans }}</div>
+            <div class="data" > {{book.subtitle}}</div>
+        </div>
+        <div class="datarow">
+            <div class="label" > {{'book.author'|trans }}</div>
+            <div class="data" > {{book.author}}</div>
+        </div>
+        <div class="datarow">
+            <div class="label" > {{'book.publisher'|trans }}</div>
+            <div class="data" > {{book.publisher}}</div>
+        </div>
+        <div class="datarow">
+            <div class="label" > {{'book.year'|trans }}</div>
+            <div class="data" > {{book.year}}</div>
+        </div>
+        <div class="datarow">
+            <div class="label" > {{'book.isbn'|trans }}</div>
+            <div class="data" > {{book.isbn}}</div>
+        </div>
+    </div>
+    </div>
+</div>
+
+  {% endif %}
   </div>
-
-<div  class="form" >
-{{ form_start(form) }}
-    {{ form_row(form.bookid) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.subtitle) }}
-    {{ form_row(form.author) }}
-    {{ form_row(form.publisher) }}
-    {{ form_row(form.year) }}
-    {{ form_row(form.isbn) }}
-     {{ form_row(form.tags) }}
-    <button type="submit">Register!</button>
-{{ form_end(form) }}
-</div>
-</div>
-</div>
+  </div>
 {% endblock %}
-
 
 

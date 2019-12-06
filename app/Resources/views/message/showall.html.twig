@@ -27,7 +27,7 @@
         {% if message.fromname == 'FFLSAS-admin' or message.fromname == 'FFLSAS75-admin' or message.fromname == 'ADMIN75' %}
            <div class="name" > {{'from.admin.to'|trans }} {{message.toname}}</div>
         {% else %}
-           <div class="name" > {{'from'|trans }} {{message.fromname}} </div>
+           <div class="name" > {{'.from'|trans }} {{message.fromname}} </div>
         {% endif %}
             <div class= "date" > {{message.date_sent | date("Y-m-d") }}</div>
             <div class="subject" > {{message.subject}}</div>

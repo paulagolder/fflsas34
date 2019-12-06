@@ -14,10 +14,10 @@
 <div id="middle" >
   <div class="accueil">
    {% if heading %}
-         <div class="heading" > {{heading }}</div>
+         <div class="heading" > {{heading|trans }}</div>
    {% endif %}
    {% if message %}
-      <div class="bobytext"> {{message| raw }}</div>
+      <div class="bobytext"> {{message| trans }}</div>
    {% else %}
 
      <h1> no news</h1>

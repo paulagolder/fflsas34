@@ -19,7 +19,10 @@
         {
         putImage(Iid);
         }
-        
+        function clickcontent(Cid,label)
+        {
+        putContent(Cid);
+        }
         function clickurl(Uid,label)
         {
         putUrl(Uid);
@@ -78,7 +81,7 @@
                           </label>
                     </div>
                     <input type="hidden" name="_text" value="{{ content.text  }}" >
-                         <button type="submit" id="submitbutton" style="display: none;"  >{{'enregistrer'|trans }} </button> 
+                         <button type="submit" id="submitbutton" style="display: none;"  >{{'.submit'|trans }} </button> 
                 </form>
                 <button onclick="saveform()">{{'click.me'|trans }}</button>  
                 <div id="editortext"   >
@@ -131,6 +134,18 @@
                         if (range.length == 0) 
                         { 
                         quill.insertText(range.index, '[["image":'+imageid+',"width":200]]', 'bold', true); 
+                        }
+                        }     
+                        }
+                        
+                        function putContent(contentid)
+                        {
+                        var range = quill.getSelection(true);
+                        if (range) 
+                        {
+                        if (range.length == 0) 
+                        { 
+                        quill.insertText(range.index, '[["content":'+contentid+',"width":200]]', 'bold', true); 
                         }
                         }     
                         }

@@ -312,14 +312,14 @@ class ContentController extends Controller
         if (!$pfield) 
         {
             $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findAll();
-            $heading =  'trouver.tout';
+            $heading =  'found.all';
             
         }
         else
         {
             $pfield = "%".$pfield."%";
             $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($pfield);
-            $heading =  'trouver.avec';
+            $heading =  'found.with';
         }
         
         
@@ -374,14 +374,14 @@ class ContentController extends Controller
         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
             $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findAll();
-            $subheading =  'trouver.tout';
+            $subheading =  'found.all';
             
         }
         else
         {
             $sfield = "%".$pfield."%";
             $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findSearch($sfield);
-            $subheading =  'trouver.avec';
+            $subheading =  'found.with';
         }
         
         
@@ -520,6 +520,11 @@ class ContentController extends Controller
              $replacementstring = $this->urlinsert($token_list);
              $text = str_replace ($tokengroup , $replacementstring , $text );   
             }
+             elseif($obj=="content")
+            {
+             $replacementstring = $this->contentinsert($token_list);
+             $text = str_replace ($tokengroup , $replacementstring , $text );   
+            }
             else
             {
             $replacementstring = "<div>NOT FOUND </div>";
@@ -573,6 +578,21 @@ class ContentController extends Controller
             }
             else  
                  $replacementstring = "<div>NO URL </div>" ;
+            return $replacementstring;   
+    }
+    
+      public function contentinsert($token_list)
+    {
+            $contentid =  $token_list['content'];
+            $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($contentid);
+            if($content)
+            {
+                    $label= $content->getLabel();
+                
+                 $replacementstring = "<a href='/fr/content/".$contentid."' target=/'_blank/' >".$label."</a>" ;
+            }
+            else  
+                 $replacementstring = "<div>NO content </div>" ;
             return $replacementstring;   
     }
     

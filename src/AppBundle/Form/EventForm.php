@@ -18,11 +18,11 @@ class EventForm extends AbstractType
     {
         
             
-        $builder   ->add('label', TextType::class);
-        $builder   ->add('parent', TextType::class);
-        $builder   ->add('locid', TextType::class);
-        $builder   ->add('startdate', TextType::class);
-        $builder   ->add('enddate', TextType::class);
+        $builder   ->add('label', TextType::class,['label' => '.label',]);
+        $builder   ->add('parent', TextType::class,['label' => '.parent',]);
+        $builder   ->add('locid', TextType::class,['label' => '.locid',]);
+        $builder   ->add('startdate', TextType::class,['label' => '.startdate',]);
+        $builder   ->add('enddate', TextType::class,['label' => '.enddate',]);
         $builder->get('startdate')->setRequired(false);
         $builder->get('enddate')->setRequired(false);
         $builder->get('locid')->setRequired(false);

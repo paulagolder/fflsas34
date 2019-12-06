@@ -27,6 +27,8 @@ class Biblo
      */
     private $subtitle;
     
+  
+    
     /**
      * @ORM\Column(type="string", length=300)
      */
@@ -119,6 +121,8 @@ class Biblo
 
         return $this;
     }
+    
+   
     
       public function getYear(): ?string
     {

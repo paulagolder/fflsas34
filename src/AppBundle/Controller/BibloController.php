@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 use AppBundle\Entity\Biblo;
+use AppBundle\Entity\Image;
+use AppBundle\Entity\ImageRef;
 
 use AppBundle\Form\BibloForm;
 use AppBundle\Service\MyLibrary;
@@ -83,8 +85,29 @@ class BibloController extends Controller
      public function Showone ($bid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $lib = $this->mylib;
         $book = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findOne($bid);
-        
+        $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("biblo",$bid);
+        $images= array();
+        $i=0;
+        foreach($ref_ar as $key => $ref)
+        {
+
+            $imageid = $ref_ar[$key]['imageid'];
+            $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+            
+            if($image)
+            {
+                $this->mylib->setFullpath($image);
+                $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
+                $images[$i]['fullpath']= $image->fullpath;
+                $images[$i]['rotation']= $image->getRotation();
+                $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
+                $images[$i]['link'] = "/".$this->lang."/image/".$imageid;
+                $i++;
+            }
+
+        }
         
         return $this->render('biblo/showone.html.twig', 
         [ 
@@ -92,6 +115,46 @@ class BibloController extends Controller
         'message' =>  '' ,
         'heading' => 'book',
         'book'=> $book,
+        'images'=>$images,
+        ]);
+    }
+    
+    
+      public function edit ($bkid)
+    {
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $lib = $this->mylib;
+        $book = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findOne($bkid);
+        $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("biblo",$bkid);
+        $images= array();
+        $i=0;
+        foreach($ref_ar as $key => $ref)
+        {
+
+            $imageid = $ref_ar[$key]['imageid'];
+            $image = $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+            
+            if($image)
+            {
+                $this->mylib->setFullpath($image);
+                $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
+                $images[$i]['imageid']= $imageid;
+                $images[$i]['rotation']= $image->getRotation();
+                $images[$i]['fullpath']= $image->fullpath;
+                $images[$i]['title'] = $lib->selectText($text_ar,'title',$this->lang);
+                $images[$i]['link'] = "/".$this->lang."/image/".$imageid;
+                $i++;
+            }
+
+        }
+        
+        return $this->render('biblo/edit.html.twig', 
+        [ 
+        'lang' => $this->lang,
+        'message' =>  '' ,
+        'heading' => 'book',
+        'book'=> $book,
+        'images'=>$images,
         ]);
     }
     
@@ -112,7 +175,7 @@ class BibloController extends Controller
         return $this->redirect("/".$this->lang.'/url/show/'.$bkid);
     }
     
-      public function edit($bkid)
+      public function editdetail($bkid)
     {
          $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         
@@ -144,11 +207,11 @@ class BibloController extends Controller
             }
         }
         
-        return $this->render('biblo/edit.html.twig', array(
+        return $this->render('biblo/editdetail.html.twig', array(
             'form' => $form->createView(),
             'message' =>  '',
             'biblo' => $biblo,
-            'returnlink'=>'/'.$this->lang.'/biblo/show'   ///admin/linkref/event/272/8
+            'returnlink'=>'/'.$this->lang.'/biblo/edit/'.$bkid    ///admin/linkref/event/272/8
             ));
     }
     
@@ -163,13 +226,13 @@ class BibloController extends Controller
         if (!$pfield) 
         {
             $biblos = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findAll();
-            $subheading =  'trouver.tout';
+            $subheading =  'found.all';
         }
         else
         {
             $pfield = "%".$pfield."%";
             $biblos = $this->getDoctrine()->getRepository("AppBundle:Biblo")->findSearch($pfield);
-            $subheading =  'trouver.avec';
+            $subheading =  'found.with';
         }
         
         
@@ -238,4 +301,29 @@ class BibloController extends Controller
         return $this->redirect("/".$this->lang."/biblo/show/all");
     }
    
+     public function addimageref($bid,$iid)
+    {
+       $lref = $this->getDoctrine()->getRepository('AppBundle:Imageref')->findMatch('biblo',$bid,$iid);
+       if(!$lref)
+       {
+        $imageref = new Imageref();
+        $imageref->setImageid($iid);
+        $imageref->setObjecttype("biblo");
+        $imageref->setObjid($bid);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($imageref);
+        $entityManager->flush();
+        }
+        return $this->redirect("/fr/biblo/".$bid);
+    }
+   
+    public function removeimageref($bid,$iid)
+    {
+     $iref = $this->getDoctrine()->getRepository('AppBundle:Imageref')->findMatch('biblo',$bid,$iid);
+     $em = $this->getDoctrine()->getManager();
+      $em->remove($iref);
+     $em->flush();
+        return $this->redirect('/fr/biblo/'.$bid);
+    }
+    
 }
