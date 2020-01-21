@@ -318,7 +318,16 @@ class UserController extends Controller
     
     public function deleteuser($uid)
     {
-        $this->getDoctrine()->getRepository('AppBundle:User')->delete($uid);
+       // $this->getDoctrine()->getRepository('AppBundle:User')->deactivate($uid);
+        $fuser = $this->getDoctrine()->getRepository('AppBundle:User')->findOne($uid);
+        $fuser->updateRole("deregistration");
+        $entityManager = $this->getDoctrine()->getManager();
+        $adminuser = $this->getUser();
+        $time = new \DateTime();
+        $fuser->setContributor($adminuser->getUsername());
+        $fuser->setUpdate_dt($time);
+        $entityManager->persist($fuser);
+        $entityManager->flush();
         return $this->redirect("/admin/user/search");
     }
     

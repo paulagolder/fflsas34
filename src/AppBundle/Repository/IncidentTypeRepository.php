@@ -19,13 +19,6 @@ class IncidentTypeRepository extends EntityRepository
        return $type;
     }
 
-    public function xgetMaxTypeid()
-    {
-        $sql = "select MAX(a.itypeid) from AppBundle:incidenttype a ";
-        $query = $this->getEntityManager()->createQuery($sql);
-        $maxitype = $query->getOneOrNullResult();
-        return $maxitype[1];
-    
-    }
+   
     
 }
