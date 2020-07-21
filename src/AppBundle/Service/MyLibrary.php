@@ -192,7 +192,8 @@ class MyLibrary
         (
             'FFLSAS_'.$key,    // Cookie name.
             $value,    // Cookie value.
-            time() + ( 24 * 60 * 60)  // Expires 1 day .
+            time() + ( 24 * 60 * 60) ,// Expires 1 day .
+            "", FALSE, FALSE, ['samesite'=>'Strict']
             );
             $res = new Response();
             $res->headers->setCookie( $cookie );

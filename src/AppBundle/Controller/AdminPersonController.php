@@ -35,9 +35,6 @@ class AdminPersonController extends Controller
         $this->requestStack = $request_stack;
     }
     
-    
-    
-    
     public function Editone($pid)
     {
         $lib =  $this->mylib ;
@@ -357,7 +354,6 @@ class AdminPersonController extends Controller
     
     public function deleteParticipation($pid,$partid)
     {
-        
         $this->getDoctrine()->getRepository("AppBundle:Participant")->deleteOne($partid);
         return $this->redirect("/admin/person/".$pid);
     }
@@ -382,15 +378,17 @@ class AdminPersonController extends Controller
             $session->set('personList', $plist);
         }
         return $this->redirect("/admin/person/".$pid);
-        
     }
     
      public function delete($pid)
     {
          $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
          $mess = "person ". $person->getFullname()." deleted";
+         $this->getDoctrine()->getRepository('AppBundle:Text')->deleteTexts("person", $pid);
          $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteGroup("person",$pid);
          $this->getDoctrine()->getRepository("AppBundle:Imageref")->deleteGroup("person",$pid);
+         $this->getDoctrine()->getRepository('AppBundle:Participant')->deletePersonGroup( $pid);
+         $this->getDoctrine()->getRepository('AppBundle:Incident')->deletePersonGroup( $pid);
          $em = $this->getDoctrine()->getManager();
          $em->remove($person);
          $em->flush();

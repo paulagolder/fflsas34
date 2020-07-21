@@ -4,10 +4,11 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\incident;
 use AppBundle\Entity\incidenttype;
-use Doctrine\ORM\EntityManagerInterface;
+//use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-#use Doctrine\Bundle\DoctrineBundle\Repository\EntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+///use Symfony\Bridge\Doctrine\RegistryInterface;
+//use Doctrine\DBAL\DriverManager;
+//use Doctrine\DBAL\Driver\Connection;
 
 class IncidentRepository extends EntityRepository
 {
@@ -42,7 +43,7 @@ class IncidentRepository extends EntityRepository
         $sql .= " order by i.sdate ASC  ";
         $query = $this->getEntityManager()->createQuery($sql);
         $incidents = $query->getResult();
-     
+    
         $incid_ar = array();
         foreach( $incidents as $incident)
         {
@@ -80,13 +81,13 @@ class IncidentRepository extends EntityRepository
     public function findOne($incidentid)
     {
         
-         $qb = $this->createQueryBuilder("i");
+        $qb = $this->createQueryBuilder("i");
         $qb->andWhere(" i.incidentid = :iid ");
-          $qb->setParameter('iid', $incidentid);
-         $qbq = $qb->getQuery();
+        $qb->setParameter('iid', $incidentid);
+        $qbq = $qb->getQuery();
         $incidents =  $qbq->getResult();
-         
-       return $incidents[0];
+        
+    return $incidents[0];
     }
     
     public function findLocations($locid)
@@ -96,8 +97,6 @@ class IncidentRepository extends EntityRepository
         $sql .= " order by i.sdate ASC  ";
         $query = $this->getEntityManager()->createQuery($sql);
         $incidents = $query->getResult();
-        
-        
         return $incidents;
     }
     
@@ -112,5 +111,21 @@ class IncidentRepository extends EntityRepository
         $query = $qd->getQuery()->getResult();
     }
     
+    public function deleteEventGroup($eventid)
+    {
+        $qd = $this->createQueryBuilder('i');
+        $qd->delete();
+        $qd->where('i.eventid = :eid');
+        $qd->setParameter('eid',$eventid);
+        $query = $qd->getQuery()->getResult();
+    }
     
+    public function deletePersonGroup($personid)
+    {
+        $qd = $this->createQueryBuilder('i');
+        $qd->delete();
+        $qd->where('i.personid = :pid');
+        $qd->setParameter('pid',$personid);
+        $query = $qd->getQuery()->getResult();
+    }
 }

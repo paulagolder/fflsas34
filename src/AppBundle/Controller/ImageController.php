@@ -407,7 +407,7 @@ class ImageController extends Controller
     public function delete($iid)
     {
         $this->getDoctrine()->getRepository('AppBundle:Image')->delete($iid);
-        $this->getDoctrine()->getRepository('AppBundle:Imageref')->deleteAllImages($iid);
+        $this->getDoctrine()->getRepository('AppBundle:Imageref')->deleteAllImageRef($iid);
         $this->getDoctrine()->getRepository('AppBundle:Text')->deleteTexts('image',$iid);
         
         

@@ -40,6 +40,7 @@
   
       <div class="returnbutton button1"> <a href = "/{{lang}}/url/show/all">{{'.back'|trans }} </a> </div>
                  {% if is_granted('ROLE_ADMIN') %}  
+                    <div class="deletebutton" > <a class="deletebutton" href="/admin/url/delete/{{url.id}}" >{{"delete.link"|trans }} </a> </div>
              <div class="editbutton" > <a class="editbutton" href="/admin/url/edit/{{url.id}}" >{{"edit.link"|trans }} </a> </div>
             {% endif %}
   </div>

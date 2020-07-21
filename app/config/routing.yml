@@ -826,7 +826,14 @@ content_all:
     controller:  AppBundle\Controller\ContentController::Showall  
     requirements:
         _locale: en|fr|FR|EN
-
+ 
+ 
+content_news:
+     path: /{_locale}/content/newsitems
+     controller:  AppBundle\Controller\ContentController::ShowNews 
+     requirements:
+        _locale: en|fr|FR|EN
+        
 content_user_showlang:
     path: /{_locale}/content/{sid}/{lang}
     controller:  AppBundle\Controller\ContentController::ShowcontentLang

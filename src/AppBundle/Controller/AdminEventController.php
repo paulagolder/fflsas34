@@ -366,6 +366,7 @@ class AdminEventController extends Controller
         return $this->redirect('/admin/event/'.$eid);
         
     }
+    
       public function removeimageref($eid,$irid)
     {
      $image = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findOne($irid);
@@ -393,7 +394,11 @@ class AdminEventController extends Controller
      $em = $this->getDoctrine()->getManager();
       $em->remove($event);
      $em->flush();
-     // remove image links, reflinkk, participants, texts paul to fix
+         $this->getDoctrine()->getRepository('AppBundle:Text')->deleteTexts("event", $eid);
+         $this->getDoctrine()->getRepository('AppBundle:Imageref')->deleteGroup("event", $eid);
+         $this->getDoctrine()->getRepository('AppBundle:Linkref')->deleteGroup("event", $eid);
+         $this->getDoctrine()->getRepository('AppBundle:Incident')->deleteEventGroup( $eid);
+         $this->getDoctrine()->getRepository('AppBundle:Participant')->deleteEventGroup( $eid);
         return $this->redirect('/admin/event/'.$peid);
         
     }

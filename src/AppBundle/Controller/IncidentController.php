@@ -181,6 +181,10 @@ class IncidentController extends Controller
             if ($form->isValid()) 
             {
                 // perform some action, such as save the object to the database
+                $user = $this->getUser();
+                $time = new \DateTime();
+                $incident->setContributor($user->getUsername());
+                $incident->setUpdateDt($time);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($incident);
                 $entityManager->flush();

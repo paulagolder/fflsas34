@@ -37,11 +37,11 @@ class ContentController extends Controller
         ]);
     }
     
-      public function ShowCatchAll()
+    public function ShowCatchAll()
     {
-       $def = $this->container->getParameter('defaultcontent');
-       return $this->ShowContent($def);
-       
+        $def = $this->container->getParameter('defaultcontent');
+        return $this->ShowContent($def);
+        
     }
     
     public function ShowContent($sid=201)
@@ -49,7 +49,7 @@ class ContentController extends Controller
         return $this->ShowContentLang($sid,$this->lang);
     }
     
-     public function ShowContentLang($sid,$lang)
+    public function ShowContentLang($sid,$lang)
     {
         $content=null;
         $content_ar = $this->getDoctrine()->getRepository("AppBundle:Content")->findSubject($sid);
@@ -57,7 +57,7 @@ class ContentController extends Controller
         {
             return $this->render('content/showone.html.twig', 
             [
-            'message' =>  'contenu non trouver',
+            'message' =>  'contenu non trouver '.$sid,
             'lang'=>$lang,
             'content'=> null,
             'refs'=> null,
@@ -88,9 +88,9 @@ class ContentController extends Controller
         $langlist = array();
         foreach($content_ar as $lcont)
         {
-          
+            
             $langlist[$lcont->getLanguage()]=$lcont->getSubjectId();
-          
+            
         }
         return $this->render('content/showone.html.twig', 
         [
@@ -108,28 +108,28 @@ class ContentController extends Controller
         $content= $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
         if(is_null($content))
         {
-        
-           return $this->render('content/showone.html.twig',
+            
+            return $this->render('content/showone.html.twig',
             [
-        'message' =>  'content not found ',
-        'lang'=>$this->lang,
-        'content'=> '',
-        'title'=>'',
-        'refs'=>'',
-        ]);
-     
+            'message' =>  'content not found ',
+            'lang'=>$this->lang,
+            'content'=> '',
+            'title'=>'',
+            'refs'=>'',
+            ]);
+            
         }
         $content->setText( $this->insertInsertions($content->getText()));
         $text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
-
-           $linkrefs = $this->get('linkref_service')->getLinks("subject",$content->getSubjectid(), $this->lang);
+        
+        $linkrefs = $this->get('linkref_service')->getLinks("subject",$content->getSubjectid(), $this->lang);
         return $this->render('content/showone.html.twig', 
         [
         'message' =>  '',
         'lang'=>$this->lang,
         'altlang'=>"27",
         'content'=> $content,
-       
+        
         'refs'=>$linkrefs,
         ]);
     }
@@ -139,7 +139,7 @@ class ContentController extends Controller
         $content = $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($cid);
         $text = $content->getText();
         $text = $this->insertImages($text);
-      //  $content->setText(  $this->cleanText($text));
+        //  $content->setText(  $this->cleanText($text));
         #$text_ar =  $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('content',$cid);
         $title = $this->mylib->selectText($text_ar,'title',$this->lang);
         $comment =  $this->mylib->selectText($text_ar,'comment',$this->lang);
@@ -169,8 +169,8 @@ class ContentController extends Controller
             else
                 $content->setLabel($content->getTitle());
         }
-           $linkrefs = $this->get('linkref_service')->getLinksfrom("content",$sid);
-
+        $linkrefs = $this->get('linkref_service')->getLinksfrom("content",$sid);
+        
         return $this->render('content/editcontent.html.twig', 
         ['lang'=>$this->lang, 
         'message' =>  '',
@@ -187,14 +187,14 @@ class ContentController extends Controller
         $contentid=$cid;
         $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
         if($content == null) return $this->redirect("/admin/content/search");
-        $label = $content->getTitle();
-        $sid = $content->getSubjectid();
+        //  $label = $content->getTitle();
+        // $sid = $content->getSubjectid();
         
         $content ->setContributor($this->getUser()->getUsername());
         $now = new \DateTime();
         $content ->setUpdateDt($now);
         $content->setText($this->cleanText($content->getText()));
-
+        
         
         return $this->render('content/edit_quill.html.twig', array(
             'content' =>$content,
@@ -209,20 +209,22 @@ class ContentController extends Controller
         $contentid=$cid;
         $content= $this->getDoctrine()->getRepository('AppBundle:Content')->findOne($contentid);
         $sid = $content->getSubjectid();
-
+        
         if ($request->getMethod() == 'POST') 
         {
             $content->setTitle($request->request->get('_title'));
             $content->setAccess($request->request->get('_access'));
-            $content->setText($request->request->get('_text'));
-            $content->setText($this->cleanText($content->getText()));
+            $content->setTags($request->request->get('_tags'));
+            // $request->request->get('_tags'))
+            $content->setText($this->cleanText( $request->request->get('_text')));
+            //  $content->setText($this->cleanText($content->getText()));
             $content ->setContributor($this->getUser()->getUsername());
             $now = new \DateTime();
             $content ->setUpdateDt($now);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($content);
             $entityManager->flush();
- 
+            
             return $this->redirect("/admin/content/".$sid);
             
         }
@@ -294,10 +296,10 @@ class ContentController extends Controller
         return $this->redirect("/admin/content/edit/".$cid);
     }
     
-     public function newContent()
+    public function newContent()
     {   
         $sid = $this->newSubjectId();
-       return $this->EditContent($sid);
+        return $this->EditContent($sid);
     }
     
     public function Showall(Request $request)
@@ -325,17 +327,12 @@ class ContentController extends Controller
         
         if (count($contents)<1) 
         {
-             $subheading = 'nothing.found.for';
+            $subheading = 'nothing.found.for';
         }
         else
         {
-           // foreach($contents as $content)
-          //  {
-           //     $content->link = "/".$this->lang."/xzxcontent/addbookmark/".$content->getContentid();
-           // }
             
         }
-        
         
         return $this->render('content/showall.html.twig', 
         [ 
@@ -347,6 +344,66 @@ class ContentController extends Controller
         
         ]);
     }
+    
+    public function ShowNews()
+    {
+        
+        $message="";
+        $subjects = array();
+        $latest=null;
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findNews();
+        if (count($contents)<1) 
+        {
+            $message = 'no.news';
+        }
+        else
+        {
+            
+            foreach($contents  as $content)
+            {
+                $sid = $content->getSubjectId();
+                if (!in_array($sid, $subjects)) 
+                {
+                    
+                    $subjects[]= $sid;
+                }
+            }
+            $contents = array();
+            foreach($subjects as $subjectid)
+            {
+              $content  =  $this->getDoctrine()->getRepository("AppBundle:Content")->findContentLang($subjectid,$this->lang);
+              $text = $content->getText();
+              $text = $this->insertInsertions($text);
+              $content->setText( $text);
+              $contents[] = $content;
+            }
+        }
+        return $this->render('content/shownews.html.twig', 
+        [ 
+        'lang'=> $this->lang,
+        'message' => $message,
+        'contents'=> $contents,        
+        ]);
+    }
+    
+    public function ShowNewsMenu()
+    {
+        
+        $message="";
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $contents = $this->getDoctrine()->getRepository("AppBundle:Content")->findNews();
+        if (count($contents)<1) 
+        {
+            return $this->render('dummy.html.twig');
+        }
+        
+        else{
+            
+            return $this->render('content/newsmenuitem.html.twig');
+        }
+    }
+    
     
     public function ContentSearch($search,Request $request)
     {
@@ -365,11 +422,11 @@ class ContentController extends Controller
             }
             else
             {
-               $pfield="*";
-               $this->mylib->clearCookieFilter("content");
+                $pfield="*";
+                $this->mylib->clearCookieFilter("content");
             }
         }
-   
+        
         
         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
         {
@@ -387,7 +444,7 @@ class ContentController extends Controller
         
         if (count($contents)<1) 
         {
-             $subheading = 'nothing.found.for';
+            $subheading = 'nothing.found.for';
         }
         else
         {
@@ -414,7 +471,7 @@ class ContentController extends Controller
     
     public function addBookmark($sid)
     {
-    $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+        $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findContentLang($sid,$this->lang);
         $session = $this->requestStack->getCurrentRequest()->getSession();
         $ilist = $session->get('contentList');
@@ -428,10 +485,7 @@ class ContentController extends Controller
         $ilist[$sid]= $newcontent;
         $session->set('contentList', $ilist);
         
-        //return $this->redirect($uri);
-        
         return $this->redirect("/admin/content/search");
-        
     }
     
     public function addUserBookmark($sid)
@@ -451,27 +505,9 @@ class ContentController extends Controller
         $ilist[$sid]= $newcontent;
         $session->set('contentList', $ilist);
         
-        // return $this->redirect($uri);
-        
         return $this->redirect("/".$this->lang."/content/".$sid);
-        
     }
     
-    
-    
-    
-    public function xaddref($otype,$oid,$iid)
-    {
-        
-        $imageref = new Imageref();
-        $imageref->setImageid($iid);
-        $imageref->setObjecttype($otype);
-        $imageref->setObjid((int)$oid);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($imageref);
-        $entityManager->flush();
-        return $this->redirect("/admin/image/".$iid);
-    }
     
     public function Deleteimage($cid,$isn)
     {
@@ -512,23 +548,23 @@ class ContentController extends Controller
             $obj = array_keys($token_list)[0];
             if($obj=="image")
             {
-             $replacementstring = $this->imageinsert($token_list);
-             $text = str_replace ($tokengroup , $replacementstring , $text );   
+                $replacementstring = $this->imageinsert($token_list);
+                $text = str_replace ($tokengroup , $replacementstring , $text );   
             }
             elseif($obj=="url")
             {
-             $replacementstring = $this->urlinsert($token_list);
-             $text = str_replace ($tokengroup , $replacementstring , $text );   
+                $replacementstring = $this->urlinsert($token_list);
+                $text = str_replace ($tokengroup , $replacementstring , $text );   
             }
-             elseif($obj=="content")
+            elseif($obj=="content")
             {
-             $replacementstring = $this->contentinsert($token_list);
-             $text = str_replace ($tokengroup , $replacementstring , $text );   
+                $replacementstring = $this->contentinsert($token_list);
+                $text = str_replace ($tokengroup , $replacementstring , $text );   
             }
             else
             {
-            $replacementstring = "<div>NOT FOUND </div>";
-               $text = str_replace ($tokengroup , $replacementstring , $text );   
+                $replacementstring = "<div>NOT FOUND </div>";
+                $text = str_replace ($tokengroup , $replacementstring , $text );   
             }
             $k1 = strpos ( $text , "[[" );   
         }
@@ -538,73 +574,73 @@ class ContentController extends Controller
     
     public function imageinsert($token_list)
     {
-    
-                $imageid =  $token_list['image'];
-            $image =  $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
-            if($image)
+        
+        $imageid =  $token_list['image'];
+        $image =  $this->getDoctrine()->getRepository("AppBundle:Image")->findOne($imageid);
+        if($image)
+        {
+            $this->mylib->setFullpath($image);
+            $style="";
+            if(array_key_exists ('width' , $token_list))
             {
-                $this->mylib->setFullpath($image);
-                $style="";
-                if(array_key_exists ('width' , $token_list))
-                {
-                    $style .= "width:".$token_list['width'].";";
-                }
-                if(strlen($style)>0 )
-                    $inlinestyle = " style=\"".$style."\" ";
-                else
-                    $inlinestyle="";
-                 $replacementstring =  "<img src='".$image->getFullPath()."'".$inlinestyle.">" ;
+                $style .= "width:".$token_list['width'].";";
             }
-            else  
-                $replacementstring = "<div>NO IMAGE </div>";
-            return $replacementstring;    
+            if(strlen($style)>0 )
+                $inlinestyle = " style=\"".$style."\" ";
+            else
+                $inlinestyle="";
+            $replacementstring =  "<img src='".$image->getFullPath()."'".$inlinestyle.">" ;
+        }
+        else  
+            $replacementstring = "<div>NO IMAGE </div>";
+        return $replacementstring;    
     }
     
     public function urlinsert($token_list)
     {
-            $urlid =  $token_list['url'];
-            $url =  $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($urlid);
-            if($url)
+        $urlid =  $token_list['url'];
+        $url =  $this->getDoctrine()->getRepository("AppBundle:Url")->findOne($urlid);
+        if($url)
+        {
+            $label= $url->getLabel();
+            if(array_key_exists ('label' , $token_list))
             {
-                    $label= $url->getLabel();
-                  if(array_key_exists ('label' , $token_list))
+                if($token_list['label']!="")
                 {
-                   if($token_list['label']!="")
-                   {
                     $label= $token_list['label'];
-                    }
                 }
-                 $replacementstring = "<a href='".$url->getUrl()."' target=/'_blank/' >".$label."</a>" ;
             }
-            else  
-                 $replacementstring = "<div>NO URL </div>" ;
-            return $replacementstring;   
+            $replacementstring = "<a href='".$url->getUrl()."' target=/'_blank/' >".$label."</a>" ;
+        }
+        else  
+            $replacementstring = "<div>NO URL </div>" ;
+        return $replacementstring;   
     }
     
-      public function contentinsert($token_list)
+    public function contentinsert($token_list)
     {
-            $contentid =  $token_list['content'];
-            $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($contentid);
-            if($content)
-            {
-                    $label= $content->getLabel();
-                
-                 $replacementstring = "<a href='/fr/content/".$contentid."' target=/'_blank/' >".$label."</a>" ;
-            }
-            else  
-                 $replacementstring = "<div>NO content </div>" ;
-            return $replacementstring;   
+        $contentid =  $token_list['content'];
+        $content =  $this->getDoctrine()->getRepository("AppBundle:Content")->findOne($contentid);
+        if($content)
+        {
+            $label= $content->getLabel();
+            
+            $replacementstring = "<a href='/fr/content/".$contentid."' target=/'_blank/' >".$label."</a>" ;
+        }
+        else  
+            $replacementstring = "<div>NO content </div>" ;
+        return $replacementstring;   
     }
     
     
     
     public function cleanText($text)
     {
-    
-       // $text= str_ireplace( "ql-align-center","text-align-center", $text);
+        
+        // $text= str_ireplace( "ql-align-center","text-align-center", $text);
         $text= preg_replace('/(\*\*.+?)style=".+?"(\*\*.+?)/i', "", $text);
         $text= preg_replace('/(<p.+?)style=".+?"(>.+?)/i', "$1$2", $text);
-      //  $text= preg_replace('/(<p.+?)class=".+?"(>.+?)/i', "$1$2", $text);
+        //  $text= preg_replace('/(<p.+?)class=".+?"(>.+?)/i', "$1$2", $text);
         $text= preg_replace('/(<span.+?)style=".+?"(>.+?)/i', "$1$2", $text);
         $text= strip_tags($text,"<p><img><a><br><h1><b><i><h2><strong><em><u><ol><li><ul>");
         $text= str_ireplace("http://fflsas.org/images/stories/fflsas/", "/oldimages/",$text);
@@ -613,7 +649,7 @@ class ContentController extends Controller
         $text= str_ireplace("\"http://www.lerot.net/safedocs/images/","\"/oldimages/images/", $text);
         $text= str_ireplace("\"http://www.lerot.net/fflsasdocs/images/","\"/oldimages/images/", $text);
         $text= str_ireplace("\"http://lerot.org/joomla/images/stories/fflsas/images/","\"/oldimages/images/", $text);
-         $text= str_ireplace("\"http://lerot.org/joomla/images/stories/fflsas/newimages/","\"/oldimages/images/", $text);
+        $text= str_ireplace("\"http://lerot.org/joomla/images/stories/fflsas/newimages/","\"/oldimages/images/", $text);
         $text= str_ireplace("<p>&nbsp;</p>","<p></p>", $text);
         $text= str_ireplace("<p><br></p>","<p></p>", $text);
         $text= str_ireplace("<p></p><p></p>","<p></p>", $text);
@@ -622,8 +658,8 @@ class ContentController extends Controller
     
     public function newSubjectID()
     {
-      $osida = $this->getDoctrine()->getRepository("AppBundle:Content")->findMaxSid();
-      $osidint = $osida[0][1];
-      return $osidint + 1;
+        $osida = $this->getDoctrine()->getRepository("AppBundle:Content")->findMaxSid();
+        $osidint = $osida[0][1];
+        return $osidint + 1;
     }
 }

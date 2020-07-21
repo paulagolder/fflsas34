@@ -50,6 +50,11 @@ class Content
      */
     private $access;
     
+        /**
+     * @ORM\Column(type="string", length=40, nullable=true)
+     */
+    private $tags;
+    
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
      */
@@ -157,6 +162,18 @@ class Content
         return $this;
     }
 
+    
+      public function getTags(): ?string
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?string $text): self
+    {
+        $this->tags = $text;
+
+        return $this;
+    }
 
     public function getContributor(): ?string
     {

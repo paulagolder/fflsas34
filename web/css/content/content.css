@@ -139,6 +139,12 @@ div#content  h2
      margin-bottom: 40px;
  }
  
+div#content div.news  div.heading div.date
+{
+    font-size: 0.7em;
+    
+}
+ 
 
 #dont know what these are for
 

@@ -80,6 +80,10 @@
                              <span class="checkmark"></span>
                           </label>
                     </div>
+                     <div  >
+                        <label for="tags">{{'.tags'|trans }}</label>
+                        <input type="text" id="tags" name="_tags" value="{{content.tags }}" />
+                    </div>
                     <input type="hidden" name="_text" value="{{ content.text  }}" >
                          <button type="submit" id="submitbutton" style="display: none;"  >{{'.submit'|trans }} </button> 
                 </form>

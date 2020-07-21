@@ -133,4 +133,15 @@ class LinkrefRepository extends EntityRepository
       $query->getResult();
  
     }
+    
+     public function deleteRefs($refid)
+    {
+      
+      $sql = "delete  AppBundle:linkref  r ";
+      $sql .= " where r.refide  = '".$refid."' ";
+ // opaulk to fix link ref table
+     // $query = $this->getEntityManager()->createQuery($sql);
+     // $query->getResult();
+ 
+    }
 }

@@ -26,6 +26,10 @@ class ContentForm extends AbstractType
          'en' => 'en',
         '*' => '*', ),
             ));
+       $builder->add('tags', CheckboxType::class, [
+    'label'    => 'Include in news?',
+    'required' => false,
+]);
         $builder->add('title', TextType::class, array('attr' => array('style' => 'width: 400px'),));
         #$builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),));
         #   $builder->add('text', CKEditorType::class, array( 'config'=>array('config_name'=> 'my_config',),'attr' => array('style' => 'width: 400px ;height:400px;'),));

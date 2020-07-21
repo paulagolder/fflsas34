@@ -117,33 +117,35 @@ class LabelController extends Controller
     public function LabelSearch($search, Request $request)
     {
         $message="";
+        $mode=null;
         if(isset($_GET['_mode']))
         {
           $mode = $_GET['_mode'];
-          $this->mylib->setCookieFilter("mode",$mode);
+       //   $this->mylib->setCookieFilter("mode",$mode);
         }
         else
         {
-            $mode=$this->mylib->getCookieFilter("mode"); 
+          //  $mode=$this->mylib->getCookieFilter("mode"); 
         }
+        $pfield=null;
         if($mode=="" )
             $mode="message";
         if(isset($_GET['searchfield']))
         {
             $pfield = $_GET['searchfield'];
-            $this->mylib->setCookieFilter("label",$pfield);
+          //  $this->mylib->setCookieFilter("label",$pfield);
         }
         else
         {
             if(strcmp($search, "=") == 0) 
             {
-                $pfield = $this->mylib->getCookieFilter("label");
-                 $mode=$this->mylib->getCookieFilter("mode"); 
+              //  $pfield = $this->mylib->getCookieFilter("label");
+              //   $mode=$this->mylib->getCookieFilter("mode"); 
             }
             else
             {
                 $pfield="*";
-                $this->mylib->clearCookieFilter("label");
+               // $this->mylib->clearCookieFilter("label");
                 
             }
         }

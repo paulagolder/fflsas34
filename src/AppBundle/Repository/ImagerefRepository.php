@@ -89,7 +89,7 @@ class ImagerefRepository extends EntityRepository
         return $numDeleted;
     }
     
-      public function deleteGroup($objecttype, $objid)
+    public function deleteGroup($objecttype, $objid)
     {
         $sql = "delete FROM  AppBundle\Entity\Imageref p where p.objecttype = '".$objecttype."'";
         $sql .= ' and p.objid = '.$objid;
@@ -98,7 +98,7 @@ class ImagerefRepository extends EntityRepository
         return $numDeleted;
     }
     
-    public function deleteAllImages( $imageid)
+    public function deleteAllImageRef( $imageid)
     {
         $sql = "delete FROM  AppBundle\Entity\Imageref p where  p.imageid = ".$imageid;
         $query = $this->getEntityManager()->createQuery($sql);

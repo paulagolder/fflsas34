@@ -23,6 +23,18 @@ class ContentRepository extends EntityRepository
        return $contents;
     }
     
+    
+    public function findNews()
+    {
+       $sql = "select c from AppBundle:content c ";
+       $sql .= " where c.tags LIKE '%news%'  ";
+       $sql .= " order by c.update_dt DESC ";
+       //dump ($sql);
+       $query = $this->getEntityManager()->createQuery($sql);
+       $contents = $query->getResult();
+      // dump($contents);
+       return $contents;
+    }
     public function findOne($contentid)
     {
        $sql = "select c from AppBundle:content c ";

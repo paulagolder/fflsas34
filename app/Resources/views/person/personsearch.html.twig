@@ -16,6 +16,11 @@
     <div class="heading">
       <div class="label"> {{ heading|trans }}</div>
    </div>
+       {% if is_granted('ROLE_ADMIN') %} 
+   <div class="subheading" >
+        <div class="editbutton button1" ><a href = "/admin/person/detail/0" >{{'new.person'|trans }}</a></div>
+    </div>
+       {% endif %}
   <form  action="/{{lang}}/person/all">
   <div class="row">
    <div class="label"> {{'enter.search'|trans }}</div>
@@ -44,11 +49,6 @@
   </div>
 {% endblock %}
 
-
 {% block right %}
-
-
-
    {{ render(controller('AppBundle\\Controller\\BookmarkController::setfield'))}}
-
 {% endblock%}

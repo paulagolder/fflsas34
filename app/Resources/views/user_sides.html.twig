@@ -2,17 +2,9 @@
 
 {# a editer pour le presentation du user site  #}
 
-
-
-
- 
-  
    {% block left %}
        <div id="left" >
-         
-           
-           
-           
+   {{ render(controller('AppBundle\\Controller\\ContentController::ShowNewsMenu')) }}
       {% include 'user_menu.html.twig' %}
         {% if is_granted('ROLE_ADMIN') %}
       {% include 'admin_menu.html.twig' %}

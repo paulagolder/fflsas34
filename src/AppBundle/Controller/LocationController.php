@@ -7,18 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-
-
 use AppBundle\Form\LocationForm;
-
 use AppBundle\Service\MyLibrary;
 use AppBundle\Entity\location;
 use AppBundle\Service\KMLFileUploader;
 
 class LocationController extends Controller
 {
-    
-    
     private $lang="fr";
     private $mylib;
     private $requestStack ;
@@ -29,7 +24,6 @@ class LocationController extends Controller
         $this->requestStack = $request_stack;;
     }
     
-     
     public function Showall()
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -64,8 +58,6 @@ class LocationController extends Controller
         return $this->Editone($world->getLocid());
     }
     
-    
-    
     public function Showone($lid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -75,9 +67,7 @@ class LocationController extends Controller
             return $this->render('location/showone.html.twig', [ 'message' =>  'location '+$lid+' not Found',]);
         }
         
-        
         $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("location",$lid);
-        
         $parents= $location->ancestors;
         if(count($parents))
         {
@@ -95,7 +85,6 @@ class LocationController extends Controller
             {
                 $location->setZoom($z);
             }
-            
         }
         $kml = $location->getKml();
         
@@ -293,22 +282,20 @@ class LocationController extends Controller
             ));
     }
     
-     public function setparent($pid, $lid)
+    public function setparent($pid, $lid)
     {
-        
         if($lid>0)
         {
-            $location = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($lid);
+           $location = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($lid);
            if(count($location->children) < 1)
            {
                 $location->setRegion($pid);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($location);
                 $entityManager->flush();
-               
             }
         }
-         return $this->redirect("/admin/location/".$pid);
+        return $this->redirect("/admin/location/".$pid);
     }
 
     
@@ -320,14 +307,11 @@ class LocationController extends Controller
         {
             $region = $this->getDoctrine()->getRepository('AppBundle:Location')->findOne($rid);
         }
-        
         $location = new location();
         $location->setRegion($rid);
         $location->setLatitude( 46.63874 );
         $location->setLongitude(4.86918);
-        
         $form = $this->createForm(LocationForm::class, $location);
-        
         if ($request->getMethod() == 'POST') 
         {
             
@@ -367,7 +351,6 @@ class LocationController extends Controller
             $session->set('locationList', $llist);
         }
         return $this->redirect('/admin/location/'.$lid);
-        
     }
     
     
@@ -415,35 +398,34 @@ class LocationController extends Controller
             #     'file_id' => $file_entity->getFileId () 
             # );
             return $this->redirect('/admin/location/'.$lid);
-            
         } catch ( Exception $e ) {
             $array = array('status'=> 0 );
             $response = new JsonResponse($array, 400);
             return $response;
         }
-        
-        
     }
     
-      public function LocationSearch($search, Request $request)
+    public function LocationSearch($search, Request $request)
     {
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+     //   $pfield = null;
+        $pfield = $search;
         if(isset($_GET['searchfield']))
         {
             $pfield = $_GET['searchfield'];
-            $this->mylib->setCookieFilter("location",$pfield);
+           // $this->mylib->setCookieFilter("location",$pfield);
         }
         else
         {
             if(strcmp($search, "=") == 0) 
             {
-                $pfield = $this->mylib->getCookieFilter("location");
+               // $pfield = $this->mylib->getCookieFilter("location");
             }
             else
             {
-               $pfield="*";
-               $this->mylib->clearCookieFilter("location");
+             //  $pfield="*";
+            //   $this->mylib->clearCookieFilter("location");
             }
         }
     
@@ -451,7 +433,6 @@ class LocationController extends Controller
         {
             $locations = $this->getDoctrine()->getRepository("AppBundle:Location")->findAll();
             $subheading =  'found.all';
-            
         }
         else
         {
@@ -459,7 +440,6 @@ class LocationController extends Controller
             $locations= $this->getDoctrine()->getRepository("AppBundle:Location")->findSearch($sfield);
             $subheading =  'found.with';
         }
-        
         
         if (count($locations)<1) 
         {
@@ -471,9 +451,7 @@ class LocationController extends Controller
             {
                 $location->link = "/admin/url/addbookmark/".$location->getLocId();
             }
-            
         }
-        
         
         return $this->render('location/locationsearch.html.twig', 
         [ 
@@ -483,7 +461,6 @@ class LocationController extends Controller
         'subheading' =>  $subheading,
         'searchfield' =>$pfield,
         'locations'=> $locations,
-        
         ]);
     }
     

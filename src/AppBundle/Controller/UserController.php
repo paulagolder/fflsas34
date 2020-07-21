@@ -377,21 +377,22 @@ class UserController extends Controller
         $message="";
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $usersforapproval = $this->getDoctrine()->getRepository("AppBundle:User")->findSearch("%ROLE_AADA%");
+         $pfield = null;
         if(isset($_GET['searchfield']))
         {
             $pfield = $_GET['searchfield'];
-            $this->mylib->setCookieFilter("user",$pfield);
+        //   $this->mylib->setCookieFilter("user",$pfield);
         }
         else
         {
             if(strcmp($search, "=") == 0) 
             {
-                $pfield = $this->mylib->getCookieFilter("user");
+        //        $pfield = $this->mylib->getCookieFilter("user");
             }
             else
             {
                 $pfield="*";
-                $this->mylib->clearCookieFilter("user");
+      //         $this->mylib->clearCookieFilter("user");
             }
         }
         if (is_null($pfield) || $pfield=="" || !$pfield || $pfield=="*") 
