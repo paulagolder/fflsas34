@@ -30,4 +30,6 @@
 /*/*/*/x*
 *.yaml
 x*
+/developer docs/db*
+
 
