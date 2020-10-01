@@ -17,40 +17,40 @@ use AppBundle\Service\MyLibrary;
 
 class RecentEditsController extends Controller
 {
-    private $lang="fr";
-    private $mylib;
-    private $requestStack ;
-    
-    public function __construct( MyLibrary $mylib ,RequestStack $request_stack)
-    {
-        $this->mylib = $mylib;
-        $this->requestStack = $request_stack;;
-    }
+  private $lang="fr";
+  private $mylib;
+  private $requestStack ;
 
-    
-    
-   
-    public function recentedits()
-{
-   
+  public function __construct( MyLibrary $mylib ,RequestStack $request_stack)
+  {
+    $this->mylib = $mylib;
+    $this->requestStack = $request_stack;;
+  }
+
+
+
+
+  public function recentedits()
+  {
+
     $sec =0;
-   
-      
-      $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-     
-     $max = 10;
-        $platest =    $this->getDoctrine()->getRepository("AppBundle:Person")->findLatest($max);
-         $elatest =    $this->getDoctrine()->getRepository("AppBundle:Event")->findLatest($max);
-           $ilatest =    $this->getDoctrine()->getRepository("AppBundle:Image")->findLatest($max,$sec);
-       
-        $latest= array_merge($platest, $elatest,$ilatest);
-      usort($latest, function($a, $b) {
-    return $b['date'] <=> $a['date'];
-});
-$output = array_slice($latest, 0, $max); 
-         return $this->render('recentedits/show.html.twig', 
-                   ['lang'=>$this->lang, 
-                     'edits'=> $output,
-                     ]);
-    }
+
+
+    $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
+
+    $max = $this->container->getParameter("maxrecentchanges");
+    $platest =    $this->getDoctrine()->getRepository("AppBundle:Person")->findLatest($max);
+    $elatest =    $this->getDoctrine()->getRepository("AppBundle:Event")->findLatest($max);
+    $ilatest =    $this->getDoctrine()->getRepository("AppBundle:Image")->findLatest($max,$sec);
+
+    $latest= array_merge($platest, $elatest,$ilatest);
+    usort($latest, function($a, $b) {
+      return $b['date'] <=> $a['date'];
+    });
+    $output = array_slice($latest, 0, $max);
+    return $this->render('recentedits/show.html.twig',
+    ['lang'=>$this->lang,
+    'edits'=> $output,
+    ]);
+  }
 }

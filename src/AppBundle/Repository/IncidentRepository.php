@@ -4,19 +4,13 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\incident;
 use AppBundle\Entity\incidenttype;
-//use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-///use Symfony\Bridge\Doctrine\RegistryInterface;
-//use Doctrine\DBAL\DriverManager;
-//use Doctrine\DBAL\Driver\Connection;
 
 class IncidentRepository extends EntityRepository
 {
-    
-    
+
     public function findAll()
     {
-        
         $qb = $this->createQueryBuilder("i");
         $qb->select('i.incidentid','i.personid','i.eventid','i.itypeid','i.name_recorded', 'i.sdate', 'i.edate', 'i.locid','i.comment','pl.surname','pl.forename' , 'it.label as typename');
         $qb->join(' AppBundle\Entity\Person', 'pl', 'WITH', 'pl.personid = i.personid');
@@ -32,9 +26,8 @@ class IncidentRepository extends EntityRepository
             #echo( $incident['surname'].", ".$incident['forename']);
         }
         return $incidents;
-        
     }
-    
+
     public function seekByPerson($personid)
     {
         $sql = "select i.incidentid,i.personid,i.eventid,i.itypeid,i.name_recorded, i.sdate, i.edate, i.locid,i.comment,it.label from AppBundle:Incident i ";
@@ -43,7 +36,6 @@ class IncidentRepository extends EntityRepository
         $sql .= " order by i.sdate ASC  ";
         $query = $this->getEntityManager()->createQuery($sql);
         $incidents = $query->getResult();
-    
         $incid_ar = array();
         foreach( $incidents as $incident)
         {
@@ -52,9 +44,8 @@ class IncidentRepository extends EntityRepository
             $incid_ar[] = $incident;
         }
         return $incid_ar;
-        
     }
-    
+
     public function findbyParticipation($eventid,$personid)
     {
         $qb = $this->createQueryBuilder("i");
@@ -76,20 +67,18 @@ class IncidentRepository extends EntityRepository
         }
         return $incid_ar;
     }
-    
-    
+
+
     public function findOne($incidentid)
     {
-        
         $qb = $this->createQueryBuilder("i");
         $qb->andWhere(" i.incidentid = :iid ");
         $qb->setParameter('iid', $incidentid);
         $qbq = $qb->getQuery();
         $incidents =  $qbq->getResult();
-        
-    return $incidents[0];
+        return $incidents[0];
     }
-    
+
     public function findLocations($locid)
     {
         $sql = "select i from AppBundle:incident i ";
@@ -99,18 +88,18 @@ class IncidentRepository extends EntityRepository
         $incidents = $query->getResult();
         return $incidents;
     }
-    
-    
+
+
     public function delete($incidentid)
     {
-        
+
         $qd = $this->createQueryBuilder('i');
         $qd->delete();
         $qd->where('i.incidentid = :uid');
         $qd->setParameter('uid',$incidentid);
         $query = $qd->getQuery()->getResult();
     }
-    
+
     public function deleteEventGroup($eventid)
     {
         $qd = $this->createQueryBuilder('i');
@@ -119,7 +108,7 @@ class IncidentRepository extends EntityRepository
         $qd->setParameter('eid',$eventid);
         $query = $qd->getQuery()->getResult();
     }
-    
+
     public function deletePersonGroup($personid)
     {
         $qd = $this->createQueryBuilder('i');

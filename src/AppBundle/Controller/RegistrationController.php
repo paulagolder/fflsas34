@@ -28,13 +28,13 @@ use AppBundle\Service\MyLibrary;
 
 class RegistrationController extends Controller
 {
-    
+
     private $lang="fr";
     private $mylib;
     private $requestStack ;
     private $encoderFactory;
     private $trans;
-    
+
     public function __construct( MyLibrary $mylib ,RequestStack $request_stack,EncoderFactoryInterface $encoderFactory,TranslatorInterface $translator)
     {
         $this->mylib = $mylib;
@@ -42,11 +42,11 @@ class RegistrationController extends Controller
         $this->encoderFactory = $encoderFactory;
         $this->trans =$translator;
     }
-    
+
     //======================================  registation stage 1  ===============================================
-    // user registers creates user record and recieves email to confirm email address  
-    // user confirms email address either by clicking on link or by logging in 
-    
+    // user registers creates user record and recieves email to confirm email address
+    // user confirms email address either by clicking on link or by logging in
+
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -57,7 +57,7 @@ class RegistrationController extends Controller
         $form->handleRequest($request);
         if($this->getDoctrine()->getRepository("AppBundle:User")->isUniqueName($user->getUsername()))
         {
-            if ($form->isSubmitted() && $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')) ) 
+            if ($form->isSubmitted() && $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')) )
             {
                 $encoder = $this->encoderFactory->getEncoder($user);
                 $plainpassword = $user->getPlainPassword();
@@ -65,6 +65,9 @@ class RegistrationController extends Controller
                 $user->setPassword($hashpassword);
                 $user->setLastlogin( new \DateTime());
                 $user->updateRole("createuser");
+                $time = new \DateTime();
+                $user->setContributor("system");
+                $user->setUpdate_Dt($time);
                 $user->setLocale( $lang );
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
@@ -88,40 +91,43 @@ class RegistrationController extends Controller
         }
         return $this->render(
             'registration/register.html.twig',
-            array('form' => $form->createView() , 
+            array('form' => $form->createView() ,
             'lang'=>$this->lang,
             'message'=>$message,
             ));
     }
-    
-    
-    
+
+
+
     //======================================  registation stage 2  ===============================================
     // user validates email then  admin is sent request for approval  and message to user saying to await admin approval
-    
+
     public function confirmemail(Request $request, $uid)
     {
         $lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user =   $this->getDoctrine()->getRepository("AppBundle:User")->findOne($uid);
         $uname = $user->getUsername();
         $uemail = $user->getEmail();
-        
+
         $form = $this->createForm(ConfirmEmailForm::class, $user);
         $form->handleRequest($request);
         $codeisvalid= $user->codeisvalid();
         $temp = $user->hasRole("ROLE_AEMC");
-        if ($form->isSubmitted() && $form->isValid() && $codeisvalid && $temp ) 
+        if ($form->isSubmitted() && $form->isValid() && $codeisvalid && $temp )
         {
             $user->setLastlogin( new \DateTime());
             $user->updateRole("emailconfirmed");
             $user->setUsername($uname);
             $user->setEmail($uemail);
+            $time = new \DateTime();
+            $user->setContributor("system");
+            $user->setUpdate_Dt($time);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             //message to user
             $smessage = $this->get('message_service')->sendUserMessage('email.confirmed','emailvalidationcomplete',$user);
-            // message to admin 
+            // message to admin
             $amessage = $this->get('message_service')->sendAdminMessage('approbation.request','approbationrequest',$user,$lang);
             //clear token
             $this->get('session')->invalidate();
@@ -133,20 +139,20 @@ class RegistrationController extends Controller
                 'user' => $user ,
                 'heading'=>'email.confirmed',
                 'messages'=>'',
-                
+
                 ));
         }
-        
+
         return $this->render(
             'registration/complete.html.twig',
             array('form' => $form->createView() , 'lang'=>$lang,)
             );
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     public function remoteconfirmemail($uid, $code)
     {
         $lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -161,12 +167,15 @@ class RegistrationController extends Controller
                 {
                     $user->setLastlogin( new \DateTime());
                     $user->updateRole("emailconfirmed");
+                    $time = new \DateTime();
+                    $user->setContributor("system");
+                    $user->setUpdate_Dt($time);
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($user);
-                    $entityManager->flush(); 
+                    $entityManager->flush();
                     //message to user
                     $smessage = $this->get('message_service')->sendUserMessage('email.confirmed','emailvalidationcomplete',$user);
-                    // message to admin 
+                    // message to admin
                     $amessage = $this->get('message_service')->sendAdminMessage('approbation.request','approbationrequest',$user,$lang);
                     //clear token
                     $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
@@ -177,7 +186,7 @@ class RegistrationController extends Controller
                         'user' => $user,
                         'heading'=>'email.confirmed',
                         'messages'=>"",
-                        
+
                         ));
                 }
                 return $this->render('registration/done.html.twig',
@@ -185,9 +194,9 @@ class RegistrationController extends Controller
                     'user' => $user,
                     'heading'=>'failed.to.confirm.email',
                     'messages'=>'',
-                    
+
                     ));
-                    
+
             }
             else
             {
@@ -196,17 +205,17 @@ class RegistrationController extends Controller
                 'user' => $user,
                 'heading'=>'already.confirmed.email',
                 'messages'=>'',
-                
+
                 ));
             }
-                
+
         }
-        
+
         return $this->redirect('/accueil/message/'.'user.error');
-        
+
     }
-    
-    
+
+
     public function approveuser($uid)
     {
         $lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -228,9 +237,9 @@ class RegistrationController extends Controller
             return $this->redirect("/admin/user/".$uid);
         }
         return $this->redirect("/admin/user/".$uid);
-        
+
     }
-    
+
     public function rejectuser($uid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -252,13 +261,13 @@ class RegistrationController extends Controller
             return $this->redirect("/admin/user/".$uid);
         }
         return $this->redirect("/admin/user/".$uid);
-        
+
     }
-    
-    
-    
+
+
+
     //======================================  reregistation forced by administrator  ===============================================
-    
+
     public function remotereregister($uid, $code, Request $request)
     {
         $lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -270,12 +279,15 @@ class RegistrationController extends Controller
         {
             $user->setLastlogin( new \DateTime());
             $user->updateRole("reregistration");
+            $time = new \DateTime();
+            $user->setContributor("system");
+            $user->setUpdate_Dt($time);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             //message to user
             $smessage = $this->get('message_service')->sendUserMessage('email.confirmed','emailvalidationcomplete',$user);
-            // message to admin 
+            // message to admin
             $amessage = $this->get('message_service')->sendAdminMessage('approbation.request','approbationrequest',$user,$lang);
             //clear token
             $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
@@ -286,47 +298,50 @@ class RegistrationController extends Controller
                 'user' => $user ,
                 'heading'=>'email.confirmed',
                 'messages'=>'',
-                
+
                 ));
-                
-                
+
+
         }
-        
+
         return $this->render('registration/reregfail.html.twig',
         array(
             'username' => $user->getUsername() ,
             'email' => $user->getEmail()
-            
+
             ));
     }
-    
-    
-    
-    
+
+
+
+
     //====================================== password reset ===============================================
-    
-    
+
+
     public function resetpasswordrequest(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $user = new User();
         $form = $this->createForm(ResetForm::class, $user);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')) ) 
+        if ($form->isSubmitted() && $form->isValid()  && $this->captchaverify($request->get('g-recaptcha-response')) )
         {
             $email = $user->getEmail();
             $ouser =   $this->getDoctrine()->getRepository("AppBundle:User")->loadUserbyUsername($email);
-            if(!$ouser) 
+            if(!$ouser)
             {
                 return $this->render(
                     'registration/reset.html.twig',
-                    array('form' => $form->createView() , 
+                    array('form' => $form->createView() ,
                     'lang'=>$this->lang,
                     'message' => "user.not.recognised",)
                     );
             }
             $ouser->setLastlogin( new \DateTime());
             $ouser->updateRole("newpasswordrequest");
+            $time = new \DateTime();
+            $ouser->setContributor("system");
+            $ouser->setUpdate_Dt($time);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($ouser);
             $entityManager->flush();
@@ -341,14 +356,14 @@ class RegistrationController extends Controller
                 'heading'=> 'request.new.password',
                 ));
         }
-        
+
         return $this->render('registration/reset.html.twig',
         array(
-            'form' => $form->createView() , 
+            'form' => $form->createView() ,
             'lang'=>$this->lang,
             'message'=>null,));
     }
-    
+
     public function remotechangepassword($uid, $code, Request $request)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -359,6 +374,9 @@ class RegistrationController extends Controller
         {
             $user->setLastlogin( new \DateTime());
             $user->updateRole("passwordchanged");
+            $time = new \DateTime();
+            $user->setContributor("system");
+            $user->setUpdate_Dt($time);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -366,52 +384,52 @@ class RegistrationController extends Controller
             if (!$user) {
                 return $this->render(
                     'registration/reset.html.twig',
-                    array('form' => $form->createView() , 
+                    array('form' => $form->createView() ,
                     'lang'=>$this->lang,
                     'message' => "user.not.recognised",)
                     );
             } else {
-                
+
                 $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
                 $this->get('security.token_storage')->setToken($token);
                 $this->get('session')->set('_security_main', serialize($token));
                 return $this->redirect("/".$user->getlang()."/userpassword/".$uid);
             }
-            
+
         }
-        
+
         return $this->render('registration/reregfail.html.twig',
         array(
             'username' => $user->getUsername() ,
             'email' => $user->getEmail()
-            
+
             ));
     }
-    
-    
-    
-    
-    //====================================== captcha verify  ===============================================   
-    
-    
+
+
+
+
+    //====================================== captcha verify  ===============================================
+
+
     function captchaverify($recaptcha)
     {
-        
+
         $secret = $this->container->getParameter('recaptcha_secret');
         $url = "https://www.google.com/recaptcha/api/siteverify";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, array(
             "secret"=>$secret,"response"=>$recaptcha));
             $response = curl_exec($ch);
             curl_close($ch);
-            $data = json_decode($response);     
-            
-            return $data->success;   
+            $data = json_decode($response);
+
+            return $data->success;
             // return true;
     }
-    
+
 }

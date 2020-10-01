@@ -17,34 +17,34 @@ use AppBundle\Form\IncidentForm;
 
 class IncidentController extends Controller
 {
-    
-    
-    
+
+
+
     private $lang="fr";
     private $mylib;
     private $requestStack ;
-    
+
     public function __construct( MyLibrary $mylib ,RequestStack $request_stack)
     {
         $this->mylib = $mylib;
         $this->requestStack = $request_stack;;
     }
-    
-    
+
+
     public function index()
     {
         return $this->render('incident/index.html.twig', [
         'controller_name' => 'IncidentController',
         ]);
     }
-    
-    
+
+
     public function Showall()
     {
         $lib =  $this->mylib ;
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $incidents = $this->getDoctrine()->getRepository("AppBundle:Incident")->findAll();
-        if (!$incidents ) 
+        if (!$incidents )
         {
             return $this->render('incident/showall.html.twig', [ 'message' =>  'Incidents not Found',]);
         }
@@ -60,65 +60,75 @@ class IncidentController extends Controller
             $incidents[$key]['label'] = $personname.":".$etitle.":".$incident['typename'];
             $incidents[$key]['link'] ="/admin/incident/".$incident['incidentid'];
         }
-        
-        return $this->render('incident/showall.html.twig', 
+
+        return $this->render('incident/showall.html.twig',
         [
         'lang'=>$this->lang,
         'message' =>  '',
         'heading' =>  'all.incidents',
         'incidents'=> $incidents,
         ]);
-        
+
     }
-    
-    public function Showone($inid)
-    {
-        $lib =  $this->mylib ;
+
+          public function Showone($inid)
+     {
+      $lib =  $this->mylib ;
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        $incident = $this->getDoctrine()->getRepository("AppBundle:Incident")->findOne($inid);
-        if (!$incident ) 
+         $incident = $this->getDoctrine()->getRepository("App:Incident")->findOne($inid);
+        if (!$incident )
         {
-            return $this->render('incident/showone.html.twig', 
+            return $this->render('incident/showone.html.twig',
             [
-            'lang'=>$this->lang,
-            'message' =>  'Incident '.$inid. ' not Found',
-            ]);
+             'lang'=>$this->lang,
+             'message' =>  'Incident '.$inid. ' not Found',
+             ]);
         }
         if($incident->getSdate()>0)
         {
-            $incident->setSdate( $this->mylib->formatDate($incident->getSdate(),$this->lang));
+          $incident->setSdate( $this->mylib->formatDate($incident->getSdate(),$this->lang));
         }
         else
         {
-            $incident->setSdate( "");
+           $incident->setSdate( "");
         }
-        $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($incident->getPersonid());
-        $event =  $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($incident->getEventid());
-        $eventlabel=$event->getLabel();
-        $etext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup('event',$incident->getEventid());
-        $eventlabel= $lib->selectText( $etext_ar,"title",$this->lang);
-        $itype = $this->getDoctrine()->getRepository("AppBundle:IncidentType")->findOne($incident->getItypeid());
-        $location = $this->getDoctrine()->getRepository("AppBundle:Location")->findOne($incident->getLocid());
+        $person =  $this->getDoctrine()->getRepository("App:Person")->findOne($incident->getPersonid());
+        if($person)
+        {
+        $pname = $person->getFullname();
+        $pid = $person->getPersonid();
+        }
+        else
+        {
+         $pname =" Unknown participant ";
+         $pid = 0;
+        }
+        $event =  $this->getDoctrine()->getRepository("App:Event")->findOne($incident->getEventid());
+         $eventlabel=$event->getLabel();
+        $etext_ar = $this->getDoctrine()->getRepository("App:Text")->findGroup('event',$incident->getEventid());
+          $eventlabel= $lib->selectText( $etext_ar,"title",$this->lang);
+        $itype = $this->getDoctrine()->getRepository("App:IncidentType")->findOne($incident->getItypeid());
+        $location = $this->getDoctrine()->getRepository("App:Location")->findOne($incident->getLocid());
         if($location)
-            $location->link = "/".$this->lang."/location/".$incident->getLocid();
+           $location->link = "/".$this->lang."/location/".$incident->getLocid();
         $ilabel = $itype->getLabel();
-        return $this->render('incident/showone.html.twig', 
-        [ 
-        'lang'=>$this->lang,
-        'message' =>  '',
-        'eventlabel'=>$eventlabel,
-        'personname' => $person->getFullname(),
-        'incident'=> $incident,
-        'location'=>$location,
-        'label'=>$ilabel,
-        'returnlink'=>"/".$this->lang."/person/".$person->getPersonid(),
-        ]);
-        
-    }
-    
+        return $this->render('incident/showone.html.twig',
+                [
+                   'lang'=>$this->lang,
+                   'message' =>  '',
+                   'eventlabel'=>$eventlabel,
+                   'personname' => $pname,
+                   'incident'=> $incident,
+                   'location'=>$location,
+                   'label'=>$ilabel,
+                   'returnlink'=>"/".$this->lang."/person/".$pid,
+                ]);
+
+     }
+
     public function edit($inid)
     {
-        
+
         $request = $this->requestStack->getCurrentRequest();
         $user = $this->getUser();
         $time = new \DateTime();
@@ -131,11 +141,11 @@ class IncidentController extends Controller
             $incident = new Incident();
         }
         $form = $this->createForm(IncidentForm::class, $incident);
-        
-        if ($request->getMethod() == 'POST') 
+
+        if ($request->getMethod() == 'POST')
         {
             $form->handleRequest($request);
-            if ($form->isValid()) 
+            if ($form->isValid())
             {
                 $incident->setContributor($user->getUsername());
                 $incident->setUpdateDt($time);
@@ -162,23 +172,23 @@ class IncidentController extends Controller
             'returnlink'=>'/admin/participant/'.$participations[0]->getParticipationid(),
             ));
     }
-    
+
     public function new($eid,$pid)
     {
-        
+
         $request = $this->requestStack->getCurrentRequest();
-        
+
         $incident = new Incident();
         $incident->setEventid($eid);
         $incident->setPersonid($pid);
-        
+
         $form = $this->createForm(IncidentForm::class, $incident);
-        
-        if ($request->getMethod() == 'POST') 
+
+        if ($request->getMethod() == 'POST')
         {
             #$form->bindRequest($request);
             $form->handleRequest($request);
-            if ($form->isValid()) 
+            if ($form->isValid())
             {
                 // perform some action, such as save the object to the database
                 $user = $this->getUser();
@@ -206,20 +216,20 @@ class IncidentController extends Controller
             'returnlink'=>'/admin/person/'.$pid,
             ));
     }
-    
+
     public function newtype($inid,Request $request)
     {
         $label = $request->query->get('_newlabel');
-        
+
         $newtype = new IncidentType();
         $newtype->setlabel($label);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($newtype);
         $entityManager->flush();
         return $this->redirect("/admin/incident/".$inid);
-        
+
     }
-    
+
     public function delete($inid)
     {
         $incident = $this->getDoctrine()->getRepository('AppBundle:Incident')->findOne($inid);
@@ -229,5 +239,5 @@ class IncidentController extends Controller
         $this->getDoctrine()->getRepository("AppBundle:Incident")->delete($inid);
         return $this->redirect("/admin/participant/".$participations[0]->getParticipationId());
     }
-      
+
 }

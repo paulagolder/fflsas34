@@ -9,12 +9,12 @@ use AppBundle\Entity\person;
 
 class PersonRepository extends EntityRepository
 {
-   
 
-    
+
+
     public function findAll()
     {
-      
+
        $qb = $this->createQueryBuilder("p");
        $qb->orderBy("p.surname", "ASC");
        $people =  $qb->getQuery()->getResult();
@@ -22,12 +22,12 @@ class PersonRepository extends EntityRepository
        {
           $person->fixperson();
        }
-     
+
        return $people;
     }
-    
-    
-    
+
+
+
     public function findOne($personid)
     {
        $qb = $this->createQueryBuilder("p");
@@ -36,10 +36,10 @@ class PersonRepository extends EntityRepository
        $person =  $qb->getQuery()->getOneOrNullResult();
        if($person)
            $person->fixperson();
-     
+
        return $person;
     }
-    
+
      public function findSearch($sfield)
     {
        $qb = $this->createQueryBuilder("p");
@@ -53,7 +53,7 @@ class PersonRepository extends EntityRepository
        }
        return $people;
     }
-    
+
      public function findLatest($max)
     {
        $platest = array();
@@ -74,17 +74,22 @@ class PersonRepository extends EntityRepository
        }
        return $platest;
     }
-    
+
     public function getLabel($personid)
     {
-    
+
        $qb = $this->createQueryBuilder("p");
        $qb->andWhere('p.personid = :pid');
        $qb->setParameter('pid', $personid);
        $person =  $qb->getQuery()->getOneOrNullResult();
        if($person)
+       {
            $person->fixperson();
-     
-       return $person->getLabel();
+           return $person->getLabel();
        }
+       else
+       {
+          return " Person non trouvee ";
+       }
+    }
 }

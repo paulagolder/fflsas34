@@ -28,29 +28,29 @@ class AdminPersonController extends Controller
     private $lang="fr";
     private $mylib;
     private $requestStack ;
-    
+
     public function __construct( MyLibrary $mylib ,RequestStack $request_stack)
     {
         $this->mylib = $mylib;
         $this->requestStack = $request_stack;
     }
-    
+
     public function Editone($pid)
     {
         $lib =  $this->mylib ;
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $person = $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
-        
-        if (!$person) 
+
+        if (!$person)
         {
             return $this->render('person/showone.html.twig', [ 'lang'=>$this->lang,  'message' =>  'Person '.$pid.' not Found',]);
         }
         $person->link = "/".$this->lang."/person/".$person->getPersonid();
         $text_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("person",$pid);
         $textcomment = $lib->selectText($text_ar,"comment",$this->lang);
-        
+
         $participations = $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipations($pid);
-        
+
         $i=0;
         $incidents =  $this->getDoctrine()->getRepository("AppBundle:Incident")->seekByPerson($pid);
         $participation_ar = array();
@@ -63,7 +63,7 @@ class AdminPersonController extends Controller
             {
                 if($incident['eventid'] == $ppid)
                 {
-                    $pincidents[$pi]=$incident; 
+                    $pincidents[$pi]=$incident;
                     $pi++;
                 }
             }
@@ -71,16 +71,16 @@ class AdminPersonController extends Controller
             {
                 $participation_ar[$i]['incidents']=$pincidents;
             }
-            else 
+            else
             {
                 $participation_ar[$i]['incidents'] = null;
-            }  
+            }
             $participation_ar[$i]['id']= $participation->getparticipationid();
             $participation_ar[$i]['eventid']= $participation->getEventid();
             $participation_ar[$i]['link']= "/admin/participant/".$participation->getparticipationid();
             $label ="";
             $pevents = $this->getDoctrine()->getRepository("AppBundle:Event")->findOne($ppid);
-            
+
             $parents= $pevents->ancestors;
             if(count($parents))
             {
@@ -91,7 +91,7 @@ class AdminPersonController extends Controller
                     $ptext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$psid);
                     $label .= $lib->selectText( $ptext_ar,"title",$this->lang).":";
                 }
-                
+
             }
             $etexts_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("event",$ppid);
             $label = $this->mylib->selectText($etexts_ar,'title',$this->lang)." : ".$label;
@@ -99,7 +99,7 @@ class AdminPersonController extends Controller
             $participation_ar[$i]['vue'] ="/".$this->lang."/event/".$participation->getEventid();
             $i++;
         }
-        
+
         $ref_ar = $this->getDoctrine()->getRepository("AppBundle:Imageref")->findGroup("person",$pid);
         $images= array();
         $i=0;
@@ -110,7 +110,7 @@ class AdminPersonController extends Controller
             if($image )
             {
                 $this->mylib->setFullpath($image);
-            
+
                 $itext_ar = $this->getDoctrine()->getRepository("AppBundle:Text")->findGroup("image",$imageid);
                 $images[$i]['imageid']= $imageid;
                 $images[$i]['fullpath']= $image->getFullpath();
@@ -127,17 +127,17 @@ class AdminPersonController extends Controller
                 $i++;
             }
         }
-        
+
         $mess = '';
         $candelete = false;
         if(! $participation_ar && ! $text_ar) $candelete= true;
         $linkrefs = $this->get('linkref_service')->getLinks("person",$pid, $this->lang);
-        
-        return $this->render('person/editone.html.twig', 
+
+        return $this->render('person/editone.html.twig',
         [ 'lang' => $this->lang,
         'message' =>  $mess,
         'candelete' => $candelete,
-        'person'=> $person, 
+        'person'=> $person,
         'text'=> $textcomment,
         'images'=> $images,
         'participants'=>$participation_ar,
@@ -146,15 +146,15 @@ class AdminPersonController extends Controller
         'source'=>"/admin/person/".$pid,
         ]);
     }
-    
-    
+
+
     public function new(Request $request)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
         $person = new Person();
         $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) 
+        if ($form->isSubmitted() && $form->isValid())
         {
             $user = $this->getUser();
             $time = new \DateTime();
@@ -165,20 +165,20 @@ class AdminPersonController extends Controller
             $entityManager->flush();
             return $this->redirectToRoute('index');
         }
-        
+
         return $this->render(
             'person/register.html.twig',
-            array('form' => $form->createView() , 
+            array('form' => $form->createView() ,
             'lang'=>$this->lang,
             'returnlink'=>'person/all',
             )
             );
     }
-    
-    
+
+
     public function edit($pid)
     {
-        
+
         $request = $this->requestStack->getCurrentRequest();
         $user = $this->getUser();
         $time = new \DateTime();
@@ -191,11 +191,11 @@ class AdminPersonController extends Controller
             $person = new Person();
         }
         $form = $this->createForm(PersonForm::class, $person);
-        if ($request->getMethod() == 'POST') 
+        if ($request->getMethod() == 'POST')
         {
             #$form->bindRequest($request);
             $form->handleRequest($request);
-            if ($form->isValid()) 
+            if ($form->isValid())
             {
                 $person->setContributor($user->getUsername());
                 $person->setUpdateDt($time);
@@ -206,7 +206,7 @@ class AdminPersonController extends Controller
                 return $this->redirect("/admin/person/".$pid);
             }
         }
-        
+
         return $this->render('person/edit.html.twig', array(
             'form' => $form->createView(),
             'objid'=>$pid,
@@ -214,9 +214,9 @@ class AdminPersonController extends Controller
             'returnlink'=>'/admin/person/'.$pid,
             ));
     }
-    
-    
-    
+
+
+
     public function addimage($pid,$iid)
     {
        $lref = $this->getDoctrine()->getRepository('AppBundle:Imageref')->findMatch('person',$pid,$iid);
@@ -232,8 +232,8 @@ class AdminPersonController extends Controller
         }
         return $this->redirect("/admin/person/".$pid);
     }
-    
-    
+
+
     public function addContent($pid,$cid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -254,8 +254,8 @@ class AdminPersonController extends Controller
         }
         return $this->redirect("/admin/person/".$pid);
     }
-    
-    
+
+
     public function addBiblo($pid,$bid)
     {
         $path = "/biblo/".$bid;
@@ -275,8 +275,8 @@ class AdminPersonController extends Controller
         }
         return $this->redirect("/admin/person/".$pid);
     }
-    
-      
+
+
     public function addUrl($pid,$uid)
     {
         $path = "/url/".$uid;
@@ -296,7 +296,7 @@ class AdminPersonController extends Controller
         }
         return $this->redirect("/admin/person/".$pid);
     }
-    
+
     public function addLocation($pid,$lid)
     {
         $path = "/location/".$lid;
@@ -316,21 +316,21 @@ class AdminPersonController extends Controller
         }
         return $this->redirect("/admin/person/".$pid);
     }
-    
+
     public function removeimage($pid,$iid)
     {
         $this->getDoctrine()->getRepository("AppBundle:Imageref")->delete('person',$pid,$iid);
         return $this->redirect("/admin/person/".$pid);
     }
-    
-    
+
+
      public function removelink($pid,$lid)
     {
         $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteOne($lid);
         return $this->redirect("/admin/person/".$pid);
     }
-    
-    
+
+
     public function addevent($pid,$eid)
     {
         $participations =  $this->getDoctrine()->getRepository("AppBundle:Participant")->findParticipationsbyEntityPerson($eid, $pid);
@@ -350,15 +350,15 @@ class AdminPersonController extends Controller
         }
         return $this->redirect("/admin/person/".$pid);
     }
-    
-    
+
+
     public function deleteParticipation($pid,$partid)
     {
         $this->getDoctrine()->getRepository("AppBundle:Participant")->deleteOne($partid);
         return $this->redirect("/admin/person/".$pid);
     }
-    
-    
+
+
     public function addbookmark($pid)
     {
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
@@ -379,43 +379,44 @@ class AdminPersonController extends Controller
         }
         return $this->redirect("/admin/person/".$pid);
     }
-    
+
      public function delete($pid)
     {
-         $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
-         $mess = "person ". $person->getFullname()." deleted";
+
          $this->getDoctrine()->getRepository('AppBundle:Text')->deleteTexts("person", $pid);
          $this->getDoctrine()->getRepository("AppBundle:Linkref")->deleteGroup("person",$pid);
          $this->getDoctrine()->getRepository("AppBundle:Imageref")->deleteGroup("person",$pid);
-         $this->getDoctrine()->getRepository('AppBundle:Participant')->deletePersonGroup( $pid);
          $this->getDoctrine()->getRepository('AppBundle:Incident')->deletePersonGroup( $pid);
+       //  $this->getDoctrine()->getRepository("AppBundle:Participant")->deletePersonGroup( $pid);
+         $person =  $this->getDoctrine()->getRepository("AppBundle:Person")->findOne($pid);
+         $mess = "person ". $person->getFullname()." deleted";
          $em = $this->getDoctrine()->getManager();
          $em->remove($person);
          $em->flush();
         return $this->redirect('/accueil/message/'.$mess);
-        
+
     }
-    
+
     public function personlist()
     {
         $fp = fopen("docs/roleofhonour.htm","w");
         $this->lang = $this->requestStack->getCurrentRequest()->getLocale();
-        
+
 
             $people = $this->getDoctrine()->getRepository("AppBundle:Person")->findAll();
-       
-    
+
+
             foreach($people as $person)
             {
                 $person->link = "/fr/person/".$person->getId();
                 fwrite($fp, "<div class='person' > <a href='".$person->link."'>".$person->getFullname()."</a></div>\n" );
             }
-            
+
             fclose($fp);
          $mess = "person.file.produced";;
            return $this->redirect('/accueil/message/'.$mess);
-        
-       
+
+
     }
 }
 
